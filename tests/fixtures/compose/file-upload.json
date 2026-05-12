@@ -1,0 +1,102 @@
+[
+    {
+        "name": "default — outline neutral md (inline)",
+        "props": {},
+        "expected": {
+            "wrapper": "flex flex-col gap-1.5",
+            "labelText": "text-base-content text-[length:var(--text-field-sm)] font-medium",
+            "field": "flex items-stretch overflow-clip transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
+            "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none cursor-pointer pr-3 placeholder:text-base-content/40 text-base-content text-[length:var(--text-field-md)] file:mr-3 file:border-0 file:bg-base-200 file:text-base-content file:font-medium file:cursor-pointer hover:file:bg-base-300 transition-colors file:px-4 file:py-2",
+            "dropzoneIcon": "",
+            "browseLink": "font-semibold text-primary hover:underline",
+            "progressFill": "h-full bg-primary transition-[width] duration-300 ease-out",
+            "hint": "text-[length:var(--text-field-xs)] text-base-content/50"
+        }
+    },
+    {
+        "name": "soft primary",
+        "props": { "appearance": "soft", "color": "primary" },
+        "expected": {
+            "field": "flex items-stretch overflow-clip transition-colors rounded-[var(--radius-field)] bg-primary/10 tune-border border-transparent focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
+            "browseLink": "font-semibold text-primary hover:underline",
+            "progressFill": "h-full bg-primary transition-[width] duration-300 ease-out"
+        }
+    },
+    {
+        "name": "dropzone primary md",
+        "props": { "appearance": "dropzone", "color": "primary" },
+        "expected": {
+            "field": "flex flex-col items-center justify-center gap-2 text-center rounded-[var(--radius-box)] tune-border border-dashed border-base-300 bg-base-100 transition-colors cursor-pointer hover:border-primary focus-within:border-primary focus-within:ring-1 focus-within:ring-primary px-6 py-8",
+            "inputClass": "sr-only",
+            "dropzoneIcon": "size-10 text-base-content/40",
+            "browseLink": "font-semibold text-primary hover:underline"
+        }
+    },
+    {
+        "name": "dropzone success size lg",
+        "props": { "appearance": "dropzone", "color": "success", "size": "lg" },
+        "expected": {
+            "field": "flex flex-col items-center justify-center gap-2 text-center rounded-[var(--radius-box)] tune-border border-dashed border-base-300 bg-base-100 transition-colors cursor-pointer hover:border-success focus-within:border-success focus-within:ring-1 focus-within:ring-success px-10 py-12",
+            "dropzoneIcon": "size-14 text-base-content/40",
+            "browseLink": "font-semibold text-success hover:underline",
+            "progressFill": "h-full bg-success transition-[width] duration-300 ease-out"
+        }
+    },
+    {
+        "name": "error overrides color",
+        "props": { "color": "primary", "error": "Required" },
+        "expected": {
+            "labelText": "text-error text-[length:var(--text-field-sm)] font-medium",
+            "field": "flex items-stretch overflow-clip transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-error focus-within:ring-1 focus-within:ring-error h-[var(--h-field-md)]",
+            "browseLink": "font-semibold text-error hover:underline",
+            "progressFill": "h-full bg-error transition-[width] duration-300 ease-out",
+            "hint": "text-[length:var(--text-field-xs)] text-error"
+        }
+    },
+    {
+        "name": "size=sm outline neutral",
+        "props": { "size": "sm" },
+        "expected": {
+            "field": "flex items-stretch overflow-clip transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-sm)]",
+            "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none cursor-pointer pr-3 placeholder:text-base-content/40 text-base-content text-[length:var(--text-field-sm)] file:mr-3 file:border-0 file:bg-base-200 file:text-base-content file:font-medium file:cursor-pointer hover:file:bg-base-300 transition-colors file:px-3 file:py-1"
+        }
+    },
+    {
+        "name": "dropzone disabled",
+        "props": { "appearance": "dropzone", "color": "primary", "disabled": true },
+        "expected": {
+            "wrapper": "flex flex-col gap-1.5 opacity-60 [&_*]:cursor-not-allowed [&_*]:pointer-events-none",
+            "field": "flex flex-col items-center justify-center gap-2 text-center rounded-[var(--radius-box)] tune-border border-dashed border-base-300 bg-base-100 transition-colors cursor-pointer hover:border-primary focus-within:border-primary focus-within:ring-1 focus-within:ring-primary px-6 py-8",
+            "inputClass": "sr-only"
+        }
+    },
+    {
+        "name": "previewLayout horizontal — default thumbnail / icon classes",
+        "props": {},
+        "expected": {
+            "previewList": "mt-2 flex flex-col gap-1.5 empty:hidden",
+            "previewItem": "flex flex-col gap-1.5 px-3 py-2 rounded-[var(--radius-field)] tune-border border-base-300 bg-base-100 text-base-content text-[length:var(--text-field-sm)]",
+            "previewThumb": "size-10 shrink-0 rounded object-cover bg-base-200",
+            "previewIconBox": "size-10 shrink-0 flex items-center justify-center rounded bg-base-200 text-base-content/40",
+            "previewIconSize": "size-5",
+            "previewName": "truncate",
+            "previewRemove": "shrink-0 text-base-content/50 hover:text-error transition-colors cursor-pointer",
+            "progressTrack": "h-1 w-full bg-base-300/60 rounded-full overflow-hidden"
+        }
+    },
+    {
+        "name": "previewLayout grid — square card classes",
+        "props": { "previewLayout": "grid", "color": "primary" },
+        "expected": {
+            "previewList": "mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 empty:hidden",
+            "previewItem": "group relative aspect-square rounded-[var(--radius-field)] overflow-hidden tune-border border-base-300 bg-base-100",
+            "previewThumb": "absolute inset-0 w-full h-full object-cover",
+            "previewIconBox": "absolute inset-0 flex items-center justify-center bg-base-200 text-base-content/40",
+            "previewIconSize": "size-10",
+            "previewName": "absolute inset-x-0 bottom-0 px-2 pt-6 pb-2 bg-gradient-to-t from-black/70 via-black/40 to-transparent text-white text-[length:var(--text-field-xs)] truncate",
+            "previewRemove": "absolute top-1.5 right-1.5 size-6 inline-flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-error transition-colors cursor-pointer",
+            "progressTrack": "absolute bottom-0 inset-x-0 h-1 bg-black/30 overflow-hidden",
+            "progressFill": "h-full bg-primary transition-[width] duration-300 ease-out"
+        }
+    }
+]

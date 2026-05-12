@@ -1,0 +1,83 @@
+[
+    {
+        "name": "default — outline neutral md",
+        "props": {},
+        "expected": {
+            "wrapper": "relative flex items-center transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
+            "selectClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none appearance-none leading-tight text-[length:var(--text-field-md)] pl-[var(--px-input-md)] pr-9",
+            "labelColor": "text-base-content",
+            "hintColor": "text-base-content/50"
+        }
+    },
+    {
+        "name": "error overrides color",
+        "props": { "color": "primary", "error": "required" },
+        "expected": {
+            "wrapper": "relative flex items-center transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-error focus-within:ring-1 focus-within:ring-error h-[var(--h-field-md)]",
+            "labelColor": "text-error",
+            "hintColor": "text-error"
+        }
+    },
+    {
+        "name": "list mode (multiple) — block layout, no fixed height, no chevron",
+        "props": { "isList": true },
+        "expected": {
+            "wrapper": "relative block transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary",
+            "selectClass": "block w-full bg-transparent border-0 outline-none appearance-none leading-tight text-[length:var(--text-field-md)] pl-[var(--px-input-md)] py-[var(--py-input-md)]"
+        }
+    },
+    {
+        "name": "floating md with label",
+        "props": { "floating": true, "hasLabel": true },
+        "expected": {
+            "wrapper": "relative flex items-stretch transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
+            "selectClass": "flex-1 min-w-0 w-full h-full bg-transparent border-0 outline-none appearance-none leading-none text-[length:var(--text-field-md)] pl-[var(--px-input-md)] pr-9 pt-4 pb-0.5",
+            "floatingLabel": "absolute left-[var(--px-input-md)] top-1 text-[length:var(--text-field-xs)] text-base-content/60 pointer-events-none"
+        }
+    },
+    {
+        "name": "floating sm bumps wrapper to h-field-md",
+        "props": { "floating": true, "hasLabel": true, "size": "sm" },
+        "expected": {
+            "wrapper": "relative flex items-stretch transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]"
+        }
+    },
+    {
+        "name": "underline sm — no radius",
+        "props": { "appearance": "underline", "size": "sm" },
+        "expected": {
+            "wrapper": "relative flex items-center transition-colors bg-transparent border-b border-base-300 focus-within:border-primary h-[var(--h-field-sm)]"
+        }
+    },
+    {
+        "name": "disabled",
+        "props": { "disabled": true },
+        "expected": {
+            "wrapper": "relative flex items-center transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary opacity-60 cursor-not-allowed h-[var(--h-field-md)]"
+        }
+    },
+    {
+        "name": "custom mode — single — outline neutral md",
+        "props": { "custom": true },
+        "expected": {
+            "trigger": "relative w-full flex items-center gap-2 text-left transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)] px-[var(--px-input-md)] py-1 cursor-pointer",
+            "triggerInner": "flex-1 min-w-0 flex items-center flex-wrap gap-1",
+            "triggerText": "truncate text-[length:var(--text-field-md)] text-base-content",
+            "placeholder": "text-base-content/40",
+            "chip": "inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[length:var(--text-field-xs)] bg-base-200 text-base-content border-base-300",
+            "dropdown": "absolute z-40 mt-1 w-full max-h-72 overflow-auto bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-lg p-1",
+            "optionSelected": "bg-base-200 font-medium",
+            "optionCheck": "shrink-0 size-4 text-base-content"
+        }
+    },
+    {
+        "name": "custom mode — multi primary — chip uses primary tint",
+        "props": { "custom": true, "multiple": true, "color": "primary" },
+        "expected": {
+            "trigger": "relative w-full flex items-center gap-2 text-left transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-primary focus-within:ring-1 focus-within:ring-primary min-h-[var(--h-field-md)] px-[var(--px-input-md)] py-1 cursor-pointer",
+            "chip": "inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[length:var(--text-field-xs)] bg-primary/10 text-primary border-primary/30",
+            "optionSelected": "bg-primary/10 text-primary",
+            "optionCheck": "shrink-0 size-4 text-primary"
+        }
+    }
+]

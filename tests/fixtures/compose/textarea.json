@@ -1,0 +1,50 @@
+[
+    {
+        "name": "default — outline neutral md",
+        "props": {},
+        "expected": {
+            "wrapper": "block transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary",
+            "textareaClass": "block w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 tune-textarea-md resize-y",
+            "labelColor": "text-base-content",
+            "hintColor": "text-base-content/50"
+        }
+    },
+    {
+        "name": "error overrides color",
+        "props": { "error": "too long" },
+        "expected": {
+            "wrapper": "block transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-error focus-within:ring-1 focus-within:ring-error",
+            "labelColor": "text-error",
+            "hintColor": "text-error"
+        }
+    },
+    {
+        "name": "autoresize disables manual resize",
+        "props": { "autoresize": true },
+        "expected": {
+            "textareaClass": "block w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 tune-textarea-md resize-none overflow-hidden"
+        }
+    },
+    {
+        "name": "soft primary sm",
+        "props": { "appearance": "soft", "color": "primary", "size": "sm" },
+        "expected": {
+            "wrapper": "block transition-colors rounded-[var(--radius-field)] bg-primary/10 tune-border border-transparent focus-within:ring-1 focus-within:ring-primary",
+            "textareaClass": "block w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 tune-textarea-sm resize-y"
+        }
+    },
+    {
+        "name": "underline — no radius",
+        "props": { "appearance": "underline" },
+        "expected": {
+            "wrapper": "block transition-colors bg-transparent border-b border-base-300 focus-within:border-primary"
+        }
+    },
+    {
+        "name": "disabled",
+        "props": { "disabled": true },
+        "expected": {
+            "wrapper": "block transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary opacity-60 cursor-not-allowed"
+        }
+    }
+]

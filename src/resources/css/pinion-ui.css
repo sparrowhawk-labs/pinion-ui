@@ -1,0 +1,89 @@
+/* ========================================
+   pinion-ui v2 — drop-in CSS preset for consumers
+   ========================================
+   Single import that wires:
+     - Tailwind @source globs for Blade components and Compose PHP
+       (paths resolve relative to THIS file, so they keep working
+        regardless of where the consumer's app.css lives — including
+        symlinked vendor paths)
+     - Tune token system (shape / spacing / font / sizing)
+
+   Consumer usage (Laravel app, demo, or future framework target):
+
+     @import "tailwindcss";
+     @plugin "daisyui";
+     @import "<vendor>/pinion-ui/src/resources/css/pinion-ui.css";
+
+   That's it — adding new components inside this package no longer
+   requires consumers to update their @source list.
+   ======================================== */
+
+/* Blade components shipped with the package */
+@source "../views/**/*.blade.php";
+
+/* Compose layer holds class strings inside PHP — must be scanned too,
+   otherwise opacity modifiers and color permutations land in the bundle
+   only by accident (silent miss → "色がおかしい"). */
+@source "../../Compose/**/*.php";
+
+/* ==========================================
+   Safelist for Composer-driven combinations
+   ==========================================
+   Allows Composer PHP to use $color interpolation ("bg-{$color}/10") freely
+   instead of enumerating every color × appearance × state permutation as a
+   literal string. Tailwind JIT can't see through interpolation; @source inline
+   tells it upfront which classes to generate.
+
+   Bundle cost: ~5 KB for ~150 utilities — most of which the design system
+   uses anyway across solid / soft / base-N appearances. */
+
+/* Solid: full color bg/border + contrast text. Both unchecked and peer-checked. */
+@source inline("{,peer-checked:}{bg,border}-{primary,secondary,accent,neutral,info,success,warning,error}");
+@source inline("text-{primary,secondary,accent,neutral,info,success,warning,error}-content");
+
+/* Soft: tinted bg (/10, /15) + softened border (/30) + readable dot (/80).
+   'neutral' is represented via base-content on soft & base-N (more elegant on surfaces). */
+@source inline("{,peer-checked:}bg-{primary,secondary,accent,info,success,warning,error,base-content}/{10,15}");
+@source inline("peer-checked:border-{primary,secondary,accent,info,success,warning,error,base-content}/30");
+@source inline("text-{primary,secondary,accent,info,success,warning,error,base-content}/80");
+
+/* Base-N: surface bg + faint outline + colored checked-border (/70). */
+@source inline("bg-base-{100,200,300}");
+@source inline("border-base-content/{10,15}");
+@source inline("peer-checked:border-{primary,secondary,accent,info,success,warning,error,base-content}/70");
+
+/* Toggle soft variant — thumb takes full colour on check (descendant of
+   track, see ToggleComposer). Solid keeps the thumb at bg-base-100 so no
+   recolour utility is needed for it. */
+@source inline("peer-checked:[&_.xy-thumb]:bg-{primary,secondary,accent,neutral,info,success,warning,error}");
+
+/* Misc: transparent border (soft unchecked), muted label/description text */
+@source inline("border-transparent");
+@source inline("text-base-content/60");
+
+/* Tune design token system (data-tune attribute) */
+@import "./tune.css";
+
+/* ==========================================
+   daisyUI default `dark` theme — `*-content` patches
+   ==========================================
+   daisyUI's stock `dark` theme inherits `*-content` from the default palette,
+   which were tuned for *light* themes (low-lightness saturated colours like
+   `success-content: oklch(37% .077 168)`). Painted on the `dark` theme's still-
+   bright `bg-{success|warning|error|accent}` rails, that produces muddy / khaki
+   text that the user described as "dark theme で不自然".
+
+   daisyUI's purpose-built dark themes (`dim`, `night`, `business`, …) ship
+   their own `*-content` so we leave them alone. We only override the four
+   colours that misbehave in the *default* `dark` theme; `primary`, `secondary`,
+   `neutral`, and `info` already render acceptably (high hue separation or
+   already-light content tokens) and are intentionally untouched.
+
+   Values: high-lightness (L≈95 %) with low chroma (~.04) — same recipe as
+   daisyUI's `primary-content` / `secondary-content`, which already work. */
+[data-theme=dark] {
+    --color-accent-content:  oklch(95% .03 188);
+    --color-success-content: oklch(95% .04 168);
+    --color-warning-content: oklch(95% .05 80);
+    --color-error-content:   oklch(95% .04 12);
+}

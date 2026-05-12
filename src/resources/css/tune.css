@@ -1,0 +1,855 @@
+/* ========================================
+   pinion-ui Tune v2: Shape + Spacing + Font + Component Size Token System
+   ========================================
+   Apply via data-tune attribute: <html data-tune="default">
+   Orthogonal to daisyUI themes (data-theme) — controls shape, spacing, font & sizing, not color.
+   Load this CSS AFTER daisyUI to ensure tune overrides take effect.
+
+   Token categories:
+     Shape:   --radius-*, --border, --depth, --noise
+     Spacing: --space-*
+     Font:    --font-heading, --font-body, --font-mono, --font-weight-heading
+     Size:    --h-field-*, --px-field-*, --text-field-* (component heights/paddings)
+   ======================================== */
+
+/* --- Self-hosted Pixel Fonts (PixelMplus by itouhiroki, free for any use) ---
+   Coarser Japanese pixel alternative to Google's DotGothic16. Used by the
+   pixel tune when data-ja is on (default). PixelMplus10 = 10px grid (coarser);
+   PixelMplus12 = 12px grid (slightly finer but more readable).
+   --------------------------------------------------- */
+
+@font-face {
+    font-family: 'PixelMplus10';
+    src: url('../fonts/pixelmplus/PixelMplus10-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PixelMplus10';
+    src: url('../fonts/pixelmplus/PixelMplus10-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PixelMplus12';
+    src: url('../fonts/pixelmplus/PixelMplus12-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PixelMplus12';
+    src: url('../fonts/pixelmplus/PixelMplus12-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- Tune Presets --- */
+
+[data-tune="default"] {
+    /* Shape */
+    --radius-box: 0.5rem;
+    --radius-field: 0.25rem;
+    --radius-selector: 1rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    /* Spacing */
+    --space-section: 5rem;
+    --space-section-inner: 3rem;
+    --space-element: 1.5rem;
+    --space-compact: 0.75rem;
+    --space-text: 1rem;
+    --space-inline: 0.5rem;
+    /* Font */
+    --font-heading: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", monospace;
+    --font-weight-heading: 700;
+    /* Component size — xs / sm / md / lg
+       --px-field-* : btn / alert / accordion / tab など click/container 系
+       --px-input-* : text input / textarea / select など text-entry 系（より tight）
+       --py-input-* : textarea など height-fluid な text-entry の縦 padding */
+    --h-field-xs: 1.75rem;
+    --h-field-sm: 2rem;
+    --h-field-md: 2.5rem;
+    --h-field-lg: 3rem;
+    --px-field-xs: 0.625rem;
+    --px-field-sm: 0.75rem;
+    --px-field-md: 1rem;
+    --px-field-lg: 1.5rem;
+    --px-input-xs: 0.5rem;
+    --px-input-sm: 0.5rem;
+    --px-input-md: 0.75rem;
+    --px-input-lg: 1rem;
+    --py-input-xs: 0.25rem;
+    --py-input-sm: 0.375rem;
+    --py-input-md: 0.5rem;
+    --py-input-lg: 0.75rem;
+    --text-field-xs: 0.75rem;
+    --text-field-sm: 0.875rem;
+    --text-field-md: 0.875rem;
+    --text-field-lg: 1rem;
+}
+
+[data-tune="sharp"] {
+    --radius-box: 0;
+    --radius-field: 0;
+    --radius-selector: 0;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --space-section: 4rem;
+    --space-section-inner: 2.5rem;
+    --space-element: 1.25rem;
+    --space-compact: 0.625rem;
+    --space-text: 0.875rem;
+    --space-inline: 0.375rem;
+    --font-heading: "Instrument Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Instrument Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", monospace;
+    --font-weight-heading: 700;
+    --h-field-xs: 1.625rem;
+    --h-field-sm: 1.875rem;
+    --h-field-md: 2.375rem;
+    --h-field-lg: 2.875rem;
+    --px-field-xs: 0.5rem;
+    --px-field-sm: 0.625rem;
+    --px-field-md: 0.875rem;
+    --px-field-lg: 1.25rem;
+    --px-input-xs: 0.375rem;
+    --px-input-sm: 0.5rem;
+    --px-input-md: 0.625rem;
+    --px-input-lg: 0.875rem;
+    --py-input-xs: 0.25rem;
+    --py-input-sm: 0.25rem;
+    --py-input-md: 0.375rem;
+    --py-input-lg: 0.5rem;
+    --text-field-xs: 0.75rem;
+    --text-field-sm: 0.8125rem;
+    --text-field-md: 0.8125rem;
+    --text-field-lg: 0.9375rem;
+}
+
+[data-tune="soft"] {
+    --radius-box: 1rem;
+    --radius-field: 0.5rem;
+    --radius-selector: 1rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --space-section: 6rem;
+    --space-section-inner: 3.5rem;
+    --space-element: 2rem;
+    --space-compact: 1rem;
+    --space-text: 1.25rem;
+    --space-inline: 0.625rem;
+    --font-heading: "Quicksand", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Nunito", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", monospace;
+    --font-weight-heading: 800;
+    --h-field-xs: 1.875rem;
+    --h-field-sm: 2.125rem;
+    --h-field-md: 2.625rem;
+    --h-field-lg: 3.25rem;
+    --px-field-xs: 0.75rem;
+    --px-field-sm: 0.875rem;
+    --px-field-md: 1.125rem;
+    --px-field-lg: 1.75rem;
+    --px-input-xs: 0.5rem;
+    --px-input-sm: 0.625rem;
+    --px-input-md: 0.75rem;
+    --px-input-lg: 1.125rem;
+    --py-input-xs: 0.375rem;
+    --py-input-sm: 0.5rem;
+    --py-input-md: 0.625rem;
+    --py-input-lg: 0.875rem;
+    --text-field-xs: 0.75rem;
+    --text-field-sm: 0.875rem;
+    --text-field-md: 0.875rem;
+    --text-field-lg: 1rem;
+}
+
+[data-tune="playful"] {
+    --radius-box: 2rem;
+    --radius-field: 1rem;
+    --radius-selector: 2rem;
+    --border: 1.5px;
+    --depth: 1;
+    --noise: 1;
+    --size-selector: 0.3125rem;
+    --size-field: 0.3125rem;
+    --space-section: 6rem;
+    --space-section-inner: 4rem;
+    --space-element: 2rem;
+    --space-compact: 1rem;
+    --space-text: 1.25rem;
+    --space-inline: 0.75rem;
+    --font-heading: "Fredoka", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Quicksand", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", monospace;
+    --font-weight-heading: 600;
+    --h-field-xs: 2rem;
+    --h-field-sm: 2.25rem;
+    --h-field-md: 2.75rem;
+    --h-field-lg: 3.5rem;
+    --px-field-xs: 0.875rem;
+    --px-field-sm: 1rem;
+    --px-field-md: 1.25rem;
+    --px-field-lg: 2rem;
+    --px-input-xs: 0.625rem;
+    --px-input-sm: 0.75rem;
+    --px-input-md: 0.875rem;
+    --px-input-lg: 1.25rem;
+    --py-input-xs: 0.375rem;
+    --py-input-sm: 0.5rem;
+    --py-input-md: 0.625rem;
+    --py-input-lg: 0.875rem;
+    --text-field-xs: 0.8125rem;
+    --text-field-sm: 0.875rem;
+    --text-field-md: 0.9375rem;
+    --text-field-lg: 1.0625rem;
+}
+
+[data-tune="corporate"] {
+    --radius-box: 0.25rem;
+    --radius-field: 0.25rem;
+    --radius-selector: 0.25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --space-section: 4rem;
+    --space-section-inner: 2.5rem;
+    --space-element: 1.25rem;
+    --space-compact: 0.625rem;
+    --space-text: 0.875rem;
+    --space-inline: 0.375rem;
+    --font-heading: "Libre Franklin", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Libre Franklin", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Source Code Pro", ui-monospace, monospace;
+    --font-weight-heading: 600;
+    --h-field-xs: 1.5rem;
+    --h-field-sm: 1.75rem;
+    --h-field-md: 2.25rem;
+    --h-field-lg: 2.75rem;
+    --px-field-xs: 0.5rem;
+    --px-field-sm: 0.625rem;
+    --px-field-md: 0.75rem;
+    --px-field-lg: 1.25rem;
+    --px-input-xs: 0.375rem;
+    --px-input-sm: 0.375rem;
+    --px-input-md: 0.5rem;
+    --px-input-lg: 0.75rem;
+    --py-input-xs: 0.25rem;
+    --py-input-sm: 0.25rem;
+    --py-input-md: 0.375rem;
+    --py-input-lg: 0.5rem;
+    --text-field-xs: 0.6875rem;
+    --text-field-sm: 0.75rem;
+    --text-field-md: 0.8125rem;
+    --text-field-lg: 0.9375rem;
+}
+
+[data-tune="brutal"] {
+    --radius-box: 0;
+    --radius-field: 0;
+    --radius-selector: 0;
+    --border: 2px;
+    --depth: 0;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --space-section: 4rem;
+    --space-section-inner: 2rem;
+    --space-element: 1.5rem;
+    --space-compact: 0.75rem;
+    --space-text: 1rem;
+    --space-inline: 0.5rem;
+    --font-heading: "Space Grotesk", "M PLUS 1p", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Space Mono", "M PLUS 1p", ui-monospace, monospace;
+    --font-mono: "Space Mono", ui-monospace, monospace;
+    --font-weight-heading: 700;
+    --h-field-xs: 1.75rem;
+    --h-field-sm: 2.125rem;
+    --h-field-md: 2.625rem;
+    --h-field-lg: 3.25rem;
+    --px-field-xs: 0.75rem;
+    --px-field-sm: 0.875rem;
+    --px-field-md: 1rem;
+    --px-field-lg: 1.5rem;
+    --px-input-xs: 0.5rem;
+    --px-input-sm: 0.5rem;
+    --px-input-md: 0.75rem;
+    --px-input-lg: 1rem;
+    --py-input-xs: 0.25rem;
+    --py-input-sm: 0.375rem;
+    --py-input-md: 0.5rem;
+    --py-input-lg: 0.75rem;
+    --text-field-xs: 0.75rem;
+    --text-field-sm: 0.875rem;
+    --text-field-md: 0.875rem;
+    --text-field-lg: 1rem;
+}
+
+[data-tune="elegant"] {
+    --radius-box: 0.5rem;
+    --radius-field: 0.25rem;
+    --radius-selector: 0.5rem;
+    --border: 0.5px;
+    --depth: 1;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --space-section: 6rem;
+    --space-section-inner: 4rem;
+    --space-element: 2rem;
+    --space-compact: 1rem;
+    --space-text: 1.25rem;
+    --space-inline: 0.625rem;
+    --font-heading: "Playfair Display", "Shippori Mincho", ui-serif, Georgia, serif;
+    --font-body: "Lora", "Shippori Mincho", ui-serif, Georgia, serif;
+    --font-mono: ui-monospace, "SFMono-Regular", monospace;
+    --font-weight-heading: 700;
+    --h-field-xs: 1.75rem;
+    --h-field-sm: 2rem;
+    --h-field-md: 2.5rem;
+    --h-field-lg: 3rem;
+    --px-field-xs: 0.75rem;
+    --px-field-sm: 1rem;
+    --px-field-md: 1.25rem;
+    --px-field-lg: 2rem;
+    --px-input-xs: 0.5rem;
+    --px-input-sm: 0.625rem;
+    --px-input-md: 0.875rem;
+    --px-input-lg: 1.25rem;
+    --py-input-xs: 0.375rem;
+    --py-input-sm: 0.5rem;
+    --py-input-md: 0.625rem;
+    --py-input-lg: 0.875rem;
+    --text-field-xs: 0.75rem;
+    --text-field-sm: 0.8125rem;
+    --text-field-md: 0.875rem;
+    --text-field-lg: 1rem;
+}
+
+[data-tune="bold"] {
+    --radius-box: 0.5rem;
+    --radius-field: 0.5rem;
+    --radius-selector: 1rem;
+    --border: 1.5px;
+    --depth: 1;
+    --noise: 0;
+    --size-selector: 0.3125rem;
+    --size-field: 0.3125rem;
+    --space-section: 5rem;
+    --space-section-inner: 3rem;
+    --space-element: 1.5rem;
+    --space-compact: 0.75rem;
+    --space-text: 1rem;
+    --space-inline: 0.5rem;
+    --font-heading: "Montserrat", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Outfit", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", monospace;
+    --font-weight-heading: 900;
+    --h-field-xs: 1.875rem;
+    --h-field-sm: 2.125rem;
+    --h-field-md: 2.75rem;
+    --h-field-lg: 3.25rem;
+    --px-field-xs: 0.75rem;
+    --px-field-sm: 0.875rem;
+    --px-field-md: 1.125rem;
+    --px-field-lg: 1.75rem;
+    --px-input-xs: 0.5rem;
+    --px-input-sm: 0.625rem;
+    --px-input-md: 0.75rem;
+    --px-input-lg: 1.125rem;
+    --py-input-xs: 0.375rem;
+    --py-input-sm: 0.5rem;
+    --py-input-md: 0.625rem;
+    --py-input-lg: 0.875rem;
+    --text-field-xs: 0.75rem;
+    --text-field-sm: 0.875rem;
+    --text-field-md: 0.9375rem;
+    --text-field-lg: 1.0625rem;
+}
+
+[data-tune="pixel"] {
+    --radius-box: 0;
+    --radius-field: 0;
+    --radius-selector: 0;
+    --border: 3px;
+    --font-size-base: 1.125rem;
+    --depth: 0;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --space-section: 4rem;
+    --space-section-inner: 2.5rem;
+    --space-element: 1.5rem;
+    --space-compact: 0.75rem;
+    --space-text: 1rem;
+    --space-inline: 0.5rem;
+    --font-heading: "PixelMplus10", "DotGothic16", "Press Start 2P", cursive;
+    --font-body: "PixelMplus12", "DotGothic16", "Press Start 2P", cursive;
+    --font-mono: "PixelMplus12", "DotGothic16", "Press Start 2P", monospace;
+    --font-weight-heading: 400;
+    --h-field-xs: 2rem;
+    --h-field-sm: 2.25rem;
+    --h-field-md: 2.75rem;
+    --h-field-lg: 3.25rem;
+    --px-field-xs: 0.75rem;
+    --px-field-sm: 0.875rem;
+    --px-field-md: 1rem;
+    --px-field-lg: 1.5rem;
+    --px-input-xs: 0.5rem;
+    --px-input-sm: 0.5rem;
+    --px-input-md: 0.75rem;
+    --px-input-lg: 1rem;
+    --py-input-xs: 0.25rem;
+    --py-input-sm: 0.375rem;
+    --py-input-md: 0.5rem;
+    --py-input-lg: 0.75rem;
+    --text-field-xs: 0.625rem;
+    --text-field-sm: 0.6875rem;
+    --text-field-md: 0.75rem;
+    --text-field-lg: 0.8125rem;
+}
+
+[data-tune="tech"] {
+    --radius-box: 0.25rem;
+    --radius-field: 0.1875rem;
+    --radius-selector: 0.25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --space-section: 4rem;
+    --space-section-inner: 2.5rem;
+    --space-element: 1.25rem;
+    --space-compact: 0.5rem;
+    --space-text: 0.75rem;
+    --space-inline: 0.375rem;
+    --font-heading: "JetBrains Mono", "M PLUS 1 Code", ui-monospace, monospace;
+    --font-body: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "M PLUS 1 Code", ui-monospace, monospace;
+    --font-weight-heading: 700;
+    /* Compact: buttons/inputs are subtly shorter & tighter than default */
+    --h-field-xs: 1.5rem;
+    --h-field-sm: 1.75rem;
+    --h-field-md: 2.25rem;
+    --h-field-lg: 2.75rem;
+    --px-field-xs: 0.5rem;
+    --px-field-sm: 0.625rem;
+    --px-field-md: 0.75rem;
+    --px-field-lg: 1rem;
+    --px-input-xs: 0.375rem;
+    --px-input-sm: 0.375rem;
+    --px-input-md: 0.5rem;
+    --px-input-lg: 0.75rem;
+    --py-input-xs: 0.25rem;
+    --py-input-sm: 0.25rem;
+    --py-input-md: 0.375rem;
+    --py-input-lg: 0.5rem;
+    --text-field-xs: 0.6875rem;
+    --text-field-sm: 0.75rem;
+    --text-field-md: 0.8125rem;
+    --text-field-lg: 0.875rem;
+}
+
+/* --- Japanese Support Toggle ---
+   Default (no attribute): each tune's font stack includes a Japanese
+   fallback — content that mixes Japanese and English renders cohesively.
+   data-ja="off": drop Japanese fonts for an English-only aesthetic
+   (cleaner look, no CJK fallback mixing).
+   --------------------------------------------------- */
+
+[data-tune="default"][data-ja="off"] {
+    --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="sharp"][data-ja="off"] {
+    --font-heading: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="soft"][data-ja="off"] {
+    --font-heading: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="playful"][data-ja="off"] {
+    --font-heading: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="corporate"][data-ja="off"] {
+    --font-heading: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="brutal"][data-ja="off"] {
+    --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Space Mono", ui-monospace, monospace;
+}
+
+[data-tune="elegant"][data-ja="off"] {
+    --font-heading: "Playfair Display", ui-serif, Georgia, serif;
+    --font-body: "Lora", ui-serif, Georgia, serif;
+}
+
+[data-tune="bold"][data-ja="off"] {
+    --font-heading: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Outfit", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* pixel: ja default uses self-hosted PixelMplus for a coarser dot-matrix
+   feel across Japanese + English; en-only flips to Press Start 2P for the
+   iconic arcade heading aesthetic (PixelMplus remains as CJK fallback). */
+[data-tune="pixel"][data-ja="off"] {
+    --font-heading: "Press Start 2P", "PixelMplus10", cursive;
+    --font-body: "Press Start 2P", "PixelMplus12", cursive;
+    --font-mono: "Press Start 2P", "PixelMplus12", monospace;
+}
+
+[data-tune="tech"][data-ja="off"] {
+    --font-heading: "JetBrains Mono", ui-monospace, monospace;
+    --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* --- Font Application --- */
+
+[data-tune] {
+    font-family: var(--font-body);
+    font-size: var(--font-size-base, 1rem);
+}
+
+[data-tune] :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+}
+
+/* Optical-centering helper for small capital labels (avatar initials, chips).
+   PixelMplus has asymmetric side-bearings that make glyphs sit left of the
+   text-box center; nudge horizontally when flex-centering is visibly off. */
+[data-tune="pixel"] .tune-optical-center {
+    transform: translateX(0.08em);
+}
+
+
+/* --- Shape Utility Classes --- */
+
+@utility radius-box {
+    border-radius: var(--radius-box);
+}
+
+@utility radius-field {
+    border-radius: var(--radius-field);
+}
+
+@utility radius-selector {
+    border-radius: var(--radius-selector);
+}
+
+@utility tune-border {
+    border-width: var(--border);
+}
+
+/* --- Compound Component Size Utilities --- */
+
+@utility tune-btn-xs {
+    height: var(--h-field-xs);
+    padding-inline: var(--px-field-xs);
+    font-size: var(--text-field-sm);
+}
+
+@utility tune-btn-sm {
+    height: var(--h-field-sm);
+    padding-inline: var(--px-field-sm);
+    font-size: var(--text-field-sm);
+}
+
+@utility tune-btn-md {
+    height: var(--h-field-md);
+    padding-inline: var(--px-field-md);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-btn-lg {
+    height: var(--h-field-lg);
+    padding-inline: var(--px-field-lg);
+    font-size: var(--text-field-lg);
+}
+
+@utility tune-input-sm {
+    height: var(--h-field-sm);
+    padding-inline: var(--px-input-sm);
+    font-size: var(--text-field-sm);
+}
+
+@utility tune-input-md {
+    height: var(--h-field-md);
+    padding-inline: var(--px-input-md);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-input-lg {
+    height: var(--h-field-lg);
+    padding-inline: var(--px-input-lg);
+    font-size: var(--text-field-lg);
+}
+
+@utility tune-textarea-sm {
+    padding-inline: var(--px-input-sm);
+    padding-block: var(--py-input-sm);
+    font-size: var(--text-field-sm);
+}
+
+@utility tune-textarea-md {
+    padding-inline: var(--px-input-md);
+    padding-block: var(--py-input-md);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-textarea-lg {
+    padding-inline: var(--px-input-lg);
+    padding-block: var(--py-input-lg);
+    font-size: var(--text-field-lg);
+}
+
+@utility tune-tab-sm {
+    height: var(--h-field-sm);
+    padding-inline: var(--px-field-sm);
+    font-size: var(--text-field-sm);
+}
+
+@utility tune-tab-md {
+    height: var(--h-field-md);
+    padding-inline: var(--px-field-md);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-tab-lg {
+    height: var(--h-field-lg);
+    padding-inline: var(--px-field-lg);
+    font-size: var(--text-field-lg);
+}
+
+@utility tune-alert-md {
+    min-height: var(--h-field-md);
+    padding: var(--px-field-md);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-accordion-header {
+    min-height: var(--h-field-md);
+    padding-inline: var(--px-field-md);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-accordion-body {
+    padding-inline: var(--px-field-md);
+    padding-block: var(--space-compact);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-dropdown-trigger {
+    height: var(--h-field-md);
+    padding-inline: var(--px-field-md);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-menu-item {
+    min-height: var(--h-field-sm);
+    padding-inline: var(--px-field-md);
+    font-size: var(--text-field-md);
+}
+
+@utility tune-card-pad {
+    padding: var(--px-field-lg);
+}
+
+@utility tune-modal-body {
+    font-size: var(--text-field-md);
+}
+
+@utility tune-modal-title {
+    font-size: var(--text-field-lg);
+}
+
+/* --- Spacing Utility Classes --- */
+
+@utility space-section {
+    padding-block: var(--space-section);
+}
+
+@utility space-section-inner {
+    padding: var(--space-section-inner);
+}
+
+@utility gap-section-inner {
+    gap: var(--space-section-inner);
+}
+
+@utility gap-element {
+    gap: var(--space-element);
+}
+
+@utility gap-compact {
+    gap: var(--space-compact);
+}
+
+@utility gap-text {
+    gap: var(--space-text);
+}
+
+@utility gap-inline {
+    gap: var(--space-inline);
+}
+
+@utility space-x-inline {
+    & > :not(:last-child) {
+        margin-inline-end: var(--space-inline);
+    }
+}
+
+@utility mt-text {
+    margin-top: var(--space-text);
+}
+
+@utility mb-text {
+    margin-bottom: var(--space-text);
+}
+
+@utility mt-element {
+    margin-top: var(--space-element);
+}
+
+@utility p-element {
+    padding: var(--space-element);
+}
+
+@utility p-compact {
+    padding: var(--space-compact);
+}
+
+@utility px-compact {
+    padding-inline: var(--space-compact);
+}
+
+@utility py-compact {
+    padding-block: var(--space-compact);
+}
+
+/* --- Font Utility Classes --- */
+
+@utility font-heading {
+    font-family: var(--font-heading);
+}
+
+@utility font-body {
+    font-family: var(--font-body);
+}
+
+@utility font-mono-tune {
+    font-family: var(--font-mono);
+}
+
+@utility font-weight-heading {
+    font-weight: var(--font-weight-heading);
+}
+
+/* --- Component Size Utility Classes --- */
+
+@utility h-field-xs {
+    height: var(--h-field-xs);
+}
+
+@utility h-field-sm {
+    height: var(--h-field-sm);
+}
+
+@utility h-field-md {
+    height: var(--h-field-md);
+}
+
+@utility h-field-lg {
+    height: var(--h-field-lg);
+}
+
+@utility px-field-xs {
+    padding-inline: var(--px-field-xs);
+}
+
+@utility px-field-sm {
+    padding-inline: var(--px-field-sm);
+}
+
+@utility px-field-md {
+    padding-inline: var(--px-field-md);
+}
+
+@utility px-field-lg {
+    padding-inline: var(--px-field-lg);
+}
+
+@utility px-input-xs {
+    padding-inline: var(--px-input-xs);
+}
+
+@utility px-input-sm {
+    padding-inline: var(--px-input-sm);
+}
+
+@utility px-input-md {
+    padding-inline: var(--px-input-md);
+}
+
+@utility px-input-lg {
+    padding-inline: var(--px-input-lg);
+}
+
+@utility py-input-xs {
+    padding-block: var(--py-input-xs);
+}
+
+@utility py-input-sm {
+    padding-block: var(--py-input-sm);
+}
+
+@utility py-input-md {
+    padding-block: var(--py-input-md);
+}
+
+@utility py-input-lg {
+    padding-block: var(--py-input-lg);
+}
+
+@utility text-field-xs {
+    font-size: var(--text-field-xs);
+}
+
+@utility text-field-sm {
+    font-size: var(--text-field-sm);
+}
+
+@utility text-field-md {
+    font-size: var(--text-field-md);
+}
+
+@utility text-field-lg {
+    font-size: var(--text-field-lg);
+}

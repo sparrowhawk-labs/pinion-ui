@@ -1,0 +1,39 @@
+{
+    "name": "sparrowhawk-labs/pinion-ui",
+    "description": "Blade UI component system for Laravel — daisyUI semantic colors, Alpine.js interactivity, and Tune design tokens. Pairs with sparrowhawk-labs/pinion-icons.",
+    "keywords": ["laravel", "blade", "components", "ui", "daisyui", "alpinejs", "tailwindcss", "sparrowhawk-labs", "pinion"],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://sparrowhawk-labs.dev",
+    "support": {
+        "issues": "https://github.com/sparrowhawk-labs/pinion-ui/issues",
+        "source": "https://github.com/sparrowhawk-labs/pinion-ui"
+    },
+    "authors": [
+        {
+            "name": "Akihiko Takai",
+            "email": "akihiko.takai@yakaze.com",
+            "homepage": "https://sparrowhawk-labs.dev",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SparrowhawkLabs\\PinionUi\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "sparrowhawk-labs/pinion-icons": "^1.0|dev-main"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SparrowhawkLabs\\PinionUi\\PinionUiServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

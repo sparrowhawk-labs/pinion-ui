@@ -1,0 +1,51 @@
+[
+    {
+        "name": "default — solid primary md",
+        "props": {},
+        "expected": {
+            "wrapper": "block cursor-pointer",
+            "row": "flex items-center gap-2",
+            "input": "peer sr-only",
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-base-100 border-base-content/10 text-primary-content peer-checked:bg-primary peer-checked:border-primary",
+            "dot": "xy-dot size-2 rounded-full bg-current scale-0 transition-transform",
+            "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
+            "description": "ml-6 mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
+        }
+    },
+    {
+        "name": "soft success",
+        "props": { "appearance": "soft", "color": "success" },
+        "expected": {
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-success/10 border-transparent text-success/80 peer-checked:bg-success/15 peer-checked:border-success/30"
+        }
+    },
+    {
+        "name": "base-100 accent size lg",
+        "props": { "appearance": "base-100", "color": "accent", "size": "lg" },
+        "expected": {
+            "visualBox": "size-5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-base-100 border-base-content/15 text-accent/80 peer-checked:border-accent/70",
+            "dot": "xy-dot size-2.5 rounded-full bg-current scale-0 transition-transform",
+            "label": "text-[length:var(--text-field-md)] text-base-content select-none leading-snug",
+            "description": "ml-7 mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
+        }
+    },
+    {
+        "name": "base-300 neutral disabled",
+        "props": { "appearance": "base-300", "color": "neutral", "disabled": true },
+        "expected": {
+            "wrapper": "block cursor-not-allowed opacity-60",
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-base-300 border-base-content/15 text-base-content/80 peer-checked:border-base-content/70",
+            "label": "text-[length:var(--text-field-sm)] text-base-content/60 select-none leading-snug"
+        }
+    },
+    {
+        "name": "size=sm error overrides color",
+        "props": { "color": "info", "size": "sm", "error": "x" },
+        "expected": {
+            "visualBox": "size-3.5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-base-100 border-base-content/10 text-error-content peer-checked:bg-error peer-checked:border-error",
+            "dot": "xy-dot size-1.5 rounded-full bg-current scale-0 transition-transform",
+            "label": "text-[length:var(--text-field-xs)] text-error select-none leading-snug",
+            "description": "ml-[22px] mt-1 text-[length:var(--text-field-xs)] text-error leading-snug"
+        }
+    }
+]
