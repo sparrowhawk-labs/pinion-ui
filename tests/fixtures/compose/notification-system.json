@@ -1,15 +1,15 @@
 [
     {
-        "name": "default — soft, md, bottom-right",
+        "name": "default — bordered-left, md, bottom-right",
         "props": {},
         "expected": {
             "wrapper": "fixed z-50 flex flex-col gap-3 max-w-sm w-full px-4 py-4 pointer-events-none bottom-0 right-0 items-end",
             "item": "pointer-events-auto flex items-start rounded-[var(--radius-box)] tune-border shadow-lg min-h-[var(--h-field-md)] px-[var(--px-field-md)] py-2.5 text-[length:var(--text-field-md)] gap-3",
             "iconSize": "w-5 h-5",
-            "variantInfo": "bg-info/15 text-base-content border-info/40",
-            "variantSuccess": "bg-success/15 text-base-content border-success/40",
-            "variantWarning": "bg-warning/15 text-base-content border-warning/40",
-            "variantError": "bg-error/15 text-base-content border-error/40",
+            "variantInfo": "bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-info",
+            "variantSuccess": "bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-success",
+            "variantWarning": "bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-warning",
+            "variantError": "bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-error",
             "iconColorInfo": "text-info"
         }
     },
