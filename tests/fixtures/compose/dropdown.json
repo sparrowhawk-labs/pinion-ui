@@ -1,0 +1,77 @@
+[
+    {
+        "name": "default — bottom-end, md, w-52",
+        "props": {},
+        "expected": {
+            "root": "relative inline-block",
+            "trigger": "inline-flex items-center justify-center gap-1.5 font-medium transition-colors rounded-[var(--radius-field)] border-[length:var(--border)] border-base-300 bg-base-100 text-base-content hover:bg-base-200 cursor-pointer h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
+            "menu": "absolute z-40 right-0 top-full mt-1 w-52 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden",
+            "icon": "w-4 h-4 transition-transform"
+        }
+    },
+    {
+        "name": "position=bottom-start",
+        "props": { "position": "bottom-start" },
+        "expected": {
+            "menu": "absolute z-40 left-0 top-full mt-1 w-52 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden"
+        }
+    },
+    {
+        "name": "position=top-end",
+        "props": { "position": "top-end" },
+        "expected": {
+            "menu": "absolute z-40 right-0 bottom-full mb-1 w-52 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden"
+        }
+    },
+    {
+        "name": "position=top-start",
+        "props": { "position": "top-start" },
+        "expected": {
+            "menu": "absolute z-40 left-0 bottom-full mb-1 w-52 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden"
+        }
+    },
+    {
+        "name": "size=sm",
+        "props": { "size": "sm" },
+        "expected": {
+            "trigger": "inline-flex items-center justify-center gap-1.5 font-medium transition-colors rounded-[var(--radius-field)] border-[length:var(--border)] border-base-300 bg-base-100 text-base-content hover:bg-base-200 cursor-pointer h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)]"
+        }
+    },
+    {
+        "name": "size=lg",
+        "props": { "size": "lg" },
+        "expected": {
+            "trigger": "inline-flex items-center justify-center gap-1.5 font-medium transition-colors rounded-[var(--radius-field)] border-[length:var(--border)] border-base-300 bg-base-100 text-base-content hover:bg-base-200 cursor-pointer h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)]"
+        }
+    },
+    {
+        "name": "width=w-64",
+        "props": { "width": "w-64" },
+        "expected": {
+            "menu": "absolute z-40 right-0 top-full mt-1 w-64 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden"
+        }
+    },
+    {
+        "name": "width=w-96 (wide menu)",
+        "props": { "width": "w-96" },
+        "expected": {
+            "menu": "absolute z-40 right-0 top-full mt-1 w-96 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden"
+        }
+    },
+    {
+        "name": "combo: top-start + sm + w-40",
+        "props": { "position": "top-start", "size": "sm", "width": "w-40" },
+        "expected": {
+            "trigger": "inline-flex items-center justify-center gap-1.5 font-medium transition-colors rounded-[var(--radius-field)] border-[length:var(--border)] border-base-300 bg-base-100 text-base-content hover:bg-base-200 cursor-pointer h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)]",
+            "menu": "absolute z-40 left-0 bottom-full mb-1 w-40 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden"
+        }
+    },
+    {
+        "name": "combo: bottom-start + lg + w-72",
+        "props": { "position": "bottom-start", "size": "lg", "width": "w-72" },
+        "expected": {
+            "trigger": "inline-flex items-center justify-center gap-1.5 font-medium transition-colors rounded-[var(--radius-field)] border-[length:var(--border)] border-base-300 bg-base-100 text-base-content hover:bg-base-200 cursor-pointer h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)]",
+            "menu": "absolute z-40 left-0 top-full mt-1 w-72 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden"
+        }
+    }
+]

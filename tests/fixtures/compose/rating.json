@@ -1,0 +1,99 @@
+[
+    {
+        "name": "default — md warning star, no half",
+        "props": {},
+        "expected": {
+            "root": "rating rating-md",
+            "item": "mask mask-star bg-warning",
+            "itemHalf1": "mask mask-star mask-half-1 bg-warning",
+            "itemHalf2": "mask mask-star mask-half-2 bg-warning",
+            "hidden": "rating-hidden"
+        }
+    },
+    {
+        "name": "value=3 (no class effect — composer is class-only)",
+        "props": { "value": 3 },
+        "expected": {
+            "root": "rating rating-md",
+            "item": "mask mask-star bg-warning"
+        }
+    },
+    {
+        "name": "value=5 (no class effect)",
+        "props": { "value": 5 },
+        "expected": {
+            "root": "rating rating-md",
+            "item": "mask mask-star bg-warning"
+        }
+    },
+    {
+        "name": "size=lg",
+        "props": { "size": "lg" },
+        "expected": {
+            "root": "rating rating-lg",
+            "item": "mask mask-star bg-warning"
+        }
+    },
+    {
+        "name": "size=xs",
+        "props": { "size": "xs" },
+        "expected": {
+            "root": "rating rating-xs",
+            "item": "mask mask-star bg-warning"
+        }
+    },
+    {
+        "name": "color=primary",
+        "props": { "color": "primary" },
+        "expected": {
+            "root": "rating rating-md",
+            "item": "mask mask-star bg-primary",
+            "itemHalf1": "mask mask-star mask-half-1 bg-primary",
+            "itemHalf2": "mask mask-star mask-half-2 bg-primary"
+        }
+    },
+    {
+        "name": "half=true + value=2.5 → rating-half + explicit rating-md on root",
+        "props": { "half": true, "value": 2.5 },
+        "expected": {
+            "root": "rating rating-md rating-half",
+            "itemHalf1": "mask mask-star mask-half-1 bg-warning",
+            "itemHalf2": "mask mask-star mask-half-2 bg-warning"
+        }
+    },
+    {
+        "name": "readonly=true + value=4 (no class effect — readonly is rendered via disabled attr)",
+        "props": { "readonly": true, "value": 4 },
+        "expected": {
+            "root": "rating rating-md",
+            "item": "mask mask-star bg-warning"
+        }
+    },
+    {
+        "name": "shape=heart + color=error + size=lg + value=3",
+        "props": { "shape": "heart", "color": "error", "size": "lg", "value": 3 },
+        "expected": {
+            "root": "rating rating-lg",
+            "item": "mask mask-heart bg-error",
+            "itemHalf1": "mask mask-heart mask-half-1 bg-error",
+            "itemHalf2": "mask mask-heart mask-half-2 bg-error"
+        }
+    },
+    {
+        "name": "shape=circle + size=xl",
+        "props": { "shape": "circle", "size": "xl" },
+        "expected": {
+            "root": "rating rating-xl",
+            "item": "mask mask-circle bg-warning"
+        }
+    },
+    {
+        "name": "size=sm + color=secondary + half=true",
+        "props": { "size": "sm", "color": "secondary", "half": true },
+        "expected": {
+            "root": "rating rating-sm rating-half",
+            "itemHalf1": "mask mask-star mask-half-1 bg-secondary",
+            "itemHalf2": "mask mask-star mask-half-2 bg-secondary"
+        }
+    }
+]

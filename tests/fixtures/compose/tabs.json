@@ -1,0 +1,84 @@
+[
+    {
+        "name": "default — underline, md",
+        "props": {},
+        "expected": {
+            "root": "w-full",
+            "tabList": "flex border-b border-base-300 gap-0",
+            "tabBase": "relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
+            "tabActive": "text-primary border-b-2 border-primary",
+            "tabIdle": "text-base-content/60 hover:text-base-content border-b-2 border-transparent",
+            "iconWrap": "inline-flex items-center gap-inline",
+            "panels": "mt-[var(--space-compact)]"
+        }
+    },
+    {
+        "name": "variant=boxed — active is filled primary chip, idle hovers to base-200",
+        "props": { "variant": "boxed" },
+        "expected": {
+            "tabList": "flex bg-base-200/50 p-1 rounded-[var(--radius-box)] gap-1",
+            "tabActive": "bg-primary text-primary-content rounded-[var(--radius-field)]",
+            "tabIdle": "text-base-content/60 hover:text-base-content hover:bg-base-200/50 rounded-[var(--radius-field)]"
+        }
+    },
+    {
+        "name": "variant=pill — softer than boxed, base-200 chip + selector radius",
+        "props": { "variant": "pill" },
+        "expected": {
+            "tabList": "flex gap-1",
+            "tabActive": "bg-base-200 text-base-content rounded-[var(--radius-selector)]",
+            "tabIdle": "text-base-content/60 hover:text-base-content hover:bg-base-200/50 rounded-[var(--radius-selector)]"
+        }
+    },
+    {
+        "name": "variant=underline explicit — same as default",
+        "props": { "variant": "underline" },
+        "expected": {
+            "tabList": "flex border-b border-base-300 gap-0",
+            "tabActive": "text-primary border-b-2 border-primary",
+            "tabIdle": "text-base-content/60 hover:text-base-content border-b-2 border-transparent"
+        }
+    },
+    {
+        "name": "size=sm",
+        "props": { "size": "sm" },
+        "expected": {
+            "tabBase": "relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)]"
+        }
+    },
+    {
+        "name": "size=lg",
+        "props": { "size": "lg" },
+        "expected": {
+            "tabBase": "relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)]"
+        }
+    },
+    {
+        "name": "boxed + lg — combined variant and size",
+        "props": { "variant": "boxed", "size": "lg" },
+        "expected": {
+            "tabList": "flex bg-base-200/50 p-1 rounded-[var(--radius-box)] gap-1",
+            "tabBase": "relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)]",
+            "tabActive": "bg-primary text-primary-content rounded-[var(--radius-field)]"
+        }
+    },
+    {
+        "name": "pill + sm — combined variant and size",
+        "props": { "variant": "pill", "size": "sm" },
+        "expected": {
+            "tabList": "flex gap-1",
+            "tabBase": "relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)]",
+            "tabActive": "bg-base-200 text-base-content rounded-[var(--radius-selector)]",
+            "tabIdle": "text-base-content/60 hover:text-base-content hover:bg-base-200/50 rounded-[var(--radius-selector)]"
+        }
+    },
+    {
+        "name": "unknown variant falls through to underline default",
+        "props": { "variant": "weirdo" },
+        "expected": {
+            "tabList": "flex border-b border-base-300 gap-0",
+            "tabActive": "text-primary border-b-2 border-primary",
+            "tabIdle": "text-base-content/60 hover:text-base-content border-b-2 border-transparent"
+        }
+    }
+]

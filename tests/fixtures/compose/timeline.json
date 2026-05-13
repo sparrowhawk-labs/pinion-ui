@@ -1,0 +1,76 @@
+[
+    {
+        "name": "default — vertical, no compact, no snap",
+        "props": {},
+        "expected": {
+            "root": "timeline timeline-vertical",
+            "orientation": "vertical",
+            "middle": "timeline-middle",
+            "box": "timeline-box"
+        }
+    },
+    {
+        "name": "orientation=horizontal",
+        "props": { "orientation": "horizontal" },
+        "expected": {
+            "root": "timeline timeline-horizontal",
+            "orientation": "horizontal"
+        }
+    },
+    {
+        "name": "compact=true (vertical default)",
+        "props": { "compact": true },
+        "expected": {
+            "root": "timeline timeline-vertical timeline-compact",
+            "orientation": "vertical"
+        }
+    },
+    {
+        "name": "snap=true (vertical default)",
+        "props": { "snap": true },
+        "expected": {
+            "root": "timeline timeline-vertical timeline-snap-icon",
+            "orientation": "vertical"
+        }
+    },
+    {
+        "name": "orientation=horizontal + compact=true",
+        "props": { "orientation": "horizontal", "compact": true },
+        "expected": {
+            "root": "timeline timeline-horizontal timeline-compact",
+            "orientation": "horizontal"
+        }
+    },
+    {
+        "name": "orientation=vertical + snap=true (explicit)",
+        "props": { "orientation": "vertical", "snap": true },
+        "expected": {
+            "root": "timeline timeline-vertical timeline-snap-icon",
+            "orientation": "vertical"
+        }
+    },
+    {
+        "name": "full combo — horizontal + compact + snap",
+        "props": { "orientation": "horizontal", "compact": true, "snap": true },
+        "expected": {
+            "root": "timeline timeline-horizontal timeline-compact timeline-snap-icon",
+            "orientation": "horizontal"
+        }
+    },
+    {
+        "name": "unknown orientation falls back to vertical",
+        "props": { "orientation": "diagonal" },
+        "expected": {
+            "root": "timeline timeline-vertical",
+            "orientation": "vertical"
+        }
+    },
+    {
+        "name": "compact=false + snap=false explicit (default-equivalent)",
+        "props": { "compact": false, "snap": false },
+        "expected": {
+            "root": "timeline timeline-vertical",
+            "orientation": "vertical"
+        }
+    }
+]

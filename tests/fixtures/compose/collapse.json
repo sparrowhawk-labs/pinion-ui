@@ -1,0 +1,67 @@
+[
+    {
+        "name": "default — no props (icon=arrow, bordered=true)",
+        "props": {},
+        "expected": {
+            "root": "collapse collapse-arrow border border-base-300 bg-base-100",
+            "title": "collapse-title font-semibold",
+            "content": "collapse-content text-sm"
+        }
+    },
+    {
+        "name": "icon=plus (bordered default true)",
+        "props": { "icon": "plus" },
+        "expected": {
+            "root": "collapse collapse-plus border border-base-300 bg-base-100"
+        }
+    },
+    {
+        "name": "icon=null — no icon modifier",
+        "props": { "icon": null },
+        "expected": {
+            "root": "collapse border border-base-300 bg-base-100"
+        }
+    },
+    {
+        "name": "bordered=false (icon default arrow)",
+        "props": { "bordered": false },
+        "expected": {
+            "root": "collapse collapse-arrow bg-base-100"
+        }
+    },
+    {
+        "name": "open=true — does not affect class output (composer is class-only)",
+        "props": { "open": true },
+        "expected": {
+            "root": "collapse collapse-arrow border border-base-300 bg-base-100"
+        }
+    },
+    {
+        "name": "title prop + open=true — composer ignores title/open, root stays default",
+        "props": { "title": "What is this?", "open": true },
+        "expected": {
+            "root": "collapse collapse-arrow border border-base-300 bg-base-100"
+        }
+    },
+    {
+        "name": "icon=arrow + bordered=true (explicit defaults)",
+        "props": { "icon": "arrow", "bordered": true },
+        "expected": {
+            "root": "collapse collapse-arrow border border-base-300 bg-base-100"
+        }
+    },
+    {
+        "name": "icon=plus + bordered=false",
+        "props": { "icon": "plus", "bordered": false },
+        "expected": {
+            "root": "collapse collapse-plus bg-base-100"
+        }
+    },
+    {
+        "name": "icon=null + bordered=false — minimal root",
+        "props": { "icon": null, "bordered": false },
+        "expected": {
+            "root": "collapse bg-base-100"
+        }
+    }
+]

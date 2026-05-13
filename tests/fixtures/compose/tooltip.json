@@ -1,0 +1,93 @@
+[
+    {
+        "name": "default — position=top, color=null (→ tooltip-light), open=false",
+        "props": {},
+        "expected": {
+            "root": "tooltip tooltip-top tooltip-light"
+        }
+    },
+    {
+        "name": "position=right (default color → tooltip-light)",
+        "props": { "position": "right" },
+        "expected": {
+            "root": "tooltip tooltip-right tooltip-light"
+        }
+    },
+    {
+        "name": "position=bottom (default color → tooltip-light)",
+        "props": { "position": "bottom" },
+        "expected": {
+            "root": "tooltip tooltip-bottom tooltip-light"
+        }
+    },
+    {
+        "name": "position=left (default color → tooltip-light)",
+        "props": { "position": "left" },
+        "expected": {
+            "root": "tooltip tooltip-left tooltip-light"
+        }
+    },
+    {
+        "name": "color=primary — position default top",
+        "props": { "color": "primary" },
+        "expected": {
+            "root": "tooltip tooltip-top tooltip-primary"
+        }
+    },
+    {
+        "name": "color=success + position=bottom",
+        "props": { "color": "success", "position": "bottom" },
+        "expected": {
+            "root": "tooltip tooltip-bottom tooltip-success"
+        }
+    },
+    {
+        "name": "open=true (default color → tooltip-light)",
+        "props": { "open": true },
+        "expected": {
+            "root": "tooltip tooltip-top tooltip-light tooltip-open"
+        }
+    },
+    {
+        "name": "color=error + position=left + open=true",
+        "props": { "color": "error", "position": "left", "open": true },
+        "expected": {
+            "root": "tooltip tooltip-left tooltip-error tooltip-open"
+        }
+    },
+    {
+        "name": "color=info (no position override → top)",
+        "props": { "color": "info" },
+        "expected": {
+            "root": "tooltip tooltip-top tooltip-info"
+        }
+    },
+    {
+        "name": "color=neutral — emits no color class (daisyUI stock dark-neutral)",
+        "props": { "color": "neutral" },
+        "expected": {
+            "root": "tooltip tooltip-top"
+        }
+    },
+    {
+        "name": "color=base-100 — surface-tinted bubble with hairline ring",
+        "props": { "color": "base-100" },
+        "expected": {
+            "root": "tooltip tooltip-top tooltip-base-100"
+        }
+    },
+    {
+        "name": "color=base-200 — alias of tooltip-light",
+        "props": { "color": "base-200" },
+        "expected": {
+            "root": "tooltip tooltip-top tooltip-base-200"
+        }
+    },
+    {
+        "name": "color=base-300 — higher-contrast surface bubble",
+        "props": { "color": "base-300", "position": "bottom" },
+        "expected": {
+            "root": "tooltip tooltip-bottom tooltip-base-300"
+        }
+    }
+]

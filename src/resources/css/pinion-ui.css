@@ -65,6 +65,57 @@
 @import "./tune.css";
 
 /* ==========================================
+   pinion-ui — base-N tooltip variants
+   ==========================================
+   daisyUI's bare `.tooltip` defaults to a dark `--color-neutral` bubble, which
+   reads heavy on light surfaces. pinion-ui adds three surface-tinted variants
+   that flip the bubble to a `base-N` fill with `base-content` text:
+
+     - tooltip-light    → base-200 (default, soft btn-style — see TooltipComposer)
+     - tooltip-base-100 → base-100 (matches the page surface; gets a hairline ring
+                          so the bubble does not vanish into the background)
+     - tooltip-base-200 → base-200 (alias of tooltip-light, exposed for symmetry
+                          when callers explicitly want the surface name)
+     - tooltip-base-300 → base-300 (more contrast than the default)
+
+   Because the arrow is a CSS mask filled with `--tt-bg`, sharing the same flat
+   tint with the bubble means there is no seam between them — the arrow inherits
+   the fill automatically with zero extra CSS.
+
+   `color="neutral"` opts back into daisyUI's stock dark-neutral bubble (no class
+   emitted). */
+.tooltip-light,
+.tooltip-base-200 {
+    --tt-bg: var(--color-base-200);
+}
+.tooltip-light > .tooltip-content,
+.tooltip-light[data-tip]:before,
+.tooltip-base-200 > .tooltip-content,
+.tooltip-base-200[data-tip]:before {
+    color: var(--color-base-content);
+}
+
+.tooltip-base-100 {
+    --tt-bg: var(--color-base-100);
+}
+.tooltip-base-100 > .tooltip-content,
+.tooltip-base-100[data-tip]:before {
+    color: var(--color-base-content);
+    /* base-100 bubble blends into the typical page surface, so we add a hairline
+       ring to keep it readable. Inset shadow is invisible on the arrow's mask,
+       so the arrow remains a clean flat shape — acceptable trade-off. */
+    box-shadow: 0 0 0 1px var(--color-base-300);
+}
+
+.tooltip-base-300 {
+    --tt-bg: var(--color-base-300);
+}
+.tooltip-base-300 > .tooltip-content,
+.tooltip-base-300[data-tip]:before {
+    color: var(--color-base-content);
+}
+
+/* ==========================================
    daisyUI default `dark` theme — `*-content` patches
    ==========================================
    daisyUI's stock `dark` theme inherits `*-content` from the default palette,

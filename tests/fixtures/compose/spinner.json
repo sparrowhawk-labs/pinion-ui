@@ -1,0 +1,58 @@
+[
+    {
+        "name": "default — no props (variant=spinner, size=md)",
+        "props": {},
+        "expected": {
+            "root": "loading loading-spinner loading-md"
+        }
+    },
+    {
+        "name": "variant=dots",
+        "props": { "variant": "dots" },
+        "expected": {
+            "root": "loading loading-dots loading-md"
+        }
+    },
+    {
+        "name": "variant=ring + size=lg",
+        "props": { "variant": "ring", "size": "lg" },
+        "expected": {
+            "root": "loading loading-ring loading-lg"
+        }
+    },
+    {
+        "name": "variant=bars + size=sm",
+        "props": { "variant": "bars", "size": "sm" },
+        "expected": {
+            "root": "loading loading-bars loading-sm"
+        }
+    },
+    {
+        "name": "variant=ball",
+        "props": { "variant": "ball" },
+        "expected": {
+            "root": "loading loading-ball loading-md"
+        }
+    },
+    {
+        "name": "variant=infinity",
+        "props": { "variant": "infinity" },
+        "expected": {
+            "root": "loading loading-infinity loading-md"
+        }
+    },
+    {
+        "name": "color=primary",
+        "props": { "color": "primary" },
+        "expected": {
+            "root": "loading loading-spinner loading-md text-primary"
+        }
+    },
+    {
+        "name": "color=success + variant=ring + size=xl",
+        "props": { "color": "success", "variant": "ring", "size": "xl" },
+        "expected": {
+            "root": "loading loading-ring loading-xl text-success"
+        }
+    }
+]
