@@ -1,0 +1,84 @@
+[
+    {
+        "name": "default — soft, md, bottom-right",
+        "props": {},
+        "expected": {
+            "wrapper": "fixed z-50 flex flex-col gap-3 max-w-sm w-full px-4 py-4 pointer-events-none bottom-0 right-0 items-end",
+            "item": "pointer-events-auto flex items-start rounded-[var(--radius-box)] tune-border shadow-lg min-h-[var(--h-field-md)] px-[var(--px-field-md)] py-2.5 text-[length:var(--text-field-md)] gap-3",
+            "iconSize": "w-5 h-5",
+            "variantInfo": "bg-info/15 text-base-content border-info/40",
+            "variantSuccess": "bg-success/15 text-base-content border-success/40",
+            "variantWarning": "bg-warning/15 text-base-content border-warning/40",
+            "variantError": "bg-error/15 text-base-content border-error/40",
+            "iconColorInfo": "text-info"
+        }
+    },
+    {
+        "name": "top-right position",
+        "props": { "position": "top-right" },
+        "expected": {
+            "wrapper": "fixed z-50 flex flex-col gap-3 max-w-sm w-full px-4 py-4 pointer-events-none top-0 right-0 items-end"
+        }
+    },
+    {
+        "name": "top-center position",
+        "props": { "position": "top-center" },
+        "expected": {
+            "wrapper": "fixed z-50 flex flex-col gap-3 max-w-sm w-full px-4 py-4 pointer-events-none top-0 left-1/2 -translate-x-1/2 items-center"
+        }
+    },
+    {
+        "name": "bottom-left position",
+        "props": { "position": "bottom-left" },
+        "expected": {
+            "wrapper": "fixed z-50 flex flex-col gap-3 max-w-sm w-full px-4 py-4 pointer-events-none bottom-0 left-0 items-start"
+        }
+    },
+    {
+        "name": "appearance=solid — icon color flips to *-content to stay visible on bg-color",
+        "props": { "appearance": "solid" },
+        "expected": {
+            "variantInfo": "bg-info text-info-content border-info",
+            "variantSuccess": "bg-success text-success-content border-success",
+            "variantWarning": "bg-warning text-warning-content border-warning",
+            "variantError": "bg-error text-error-content border-error",
+            "iconColorInfo": "text-info-content",
+            "iconColorSuccess": "text-success-content",
+            "iconColorWarning": "text-warning-content",
+            "iconColorError": "text-error-content"
+        }
+    },
+    {
+        "name": "appearance=outline",
+        "props": { "appearance": "outline" },
+        "expected": {
+            "variantInfo": "bg-base-100 text-base-content border-info",
+            "variantError": "bg-base-100 text-base-content border-error"
+        }
+    },
+    {
+        "name": "appearance=bordered-left",
+        "props": { "appearance": "bordered-left" },
+        "expected": {
+            "variantInfo": "bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-info",
+            "variantSuccess": "bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-success"
+        }
+    },
+    {
+        "name": "size=sm",
+        "props": { "size": "sm" },
+        "expected": {
+            "item": "pointer-events-auto flex items-start rounded-[var(--radius-box)] tune-border shadow-lg min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] py-2 text-[length:var(--text-field-sm)] gap-2",
+            "iconSize": "w-4 h-4",
+            "closeBtn": "shrink-0 inline-flex items-center justify-center rounded-[var(--radius-field)] opacity-60 hover:opacity-100 transition-opacity cursor-pointer leading-none w-5 h-5 text-base"
+        }
+    },
+    {
+        "name": "size=lg",
+        "props": { "size": "lg" },
+        "expected": {
+            "iconSize": "w-6 h-6",
+            "closeBtn": "shrink-0 inline-flex items-center justify-center rounded-[var(--radius-field)] opacity-60 hover:opacity-100 transition-opacity cursor-pointer leading-none w-7 h-7 text-2xl"
+        }
+    }
+]
