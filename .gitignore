@@ -5,3 +5,13 @@
 
 # Claude Code session state (not tracked)
 /.claude
+
+# Local-only debug artifacts (browser automation traces, design screenshots)
+/.playwright-cli
+/.screenshots
+
+# Local-only reference: third-party UI library docs (site2md output).
+# Each subdirectory is a separate library (daisyui, preline, penguinui, …) copied
+# for LLM/agent reference during component design. Not redistributable, so the
+# entire docs/ tree stays out of the published repo.
+/docs/*/

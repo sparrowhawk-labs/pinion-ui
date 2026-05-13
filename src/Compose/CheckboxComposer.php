@@ -7,7 +7,7 @@ class CheckboxComposer
     public static function compose(array $props): array
     {
         $color = $props['color'] ?? 'primary';
-        $appearance = $props['appearance'] ?? 'solid';
+        $appearance = $props['appearance'] ?? 'soft';
         $size = $props['size'] ?? 'md';
         $error = $props['error'] ?? null;
         $disabled = $props['disabled'] ?? false;

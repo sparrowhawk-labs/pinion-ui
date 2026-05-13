@@ -1,0 +1,58 @@
+[
+    {
+        "name": "default — no props (size=md, appearance=default)",
+        "props": {},
+        "expected": {
+            "root": "kbd"
+        }
+    },
+    {
+        "name": "size=xs",
+        "props": { "size": "xs" },
+        "expected": {
+            "root": "kbd kbd-xs"
+        }
+    },
+    {
+        "name": "size=sm",
+        "props": { "size": "sm" },
+        "expected": {
+            "root": "kbd kbd-sm"
+        }
+    },
+    {
+        "name": "size=md — same as default (no size class)",
+        "props": { "size": "md" },
+        "expected": {
+            "root": "kbd"
+        }
+    },
+    {
+        "name": "size=lg",
+        "props": { "size": "lg" },
+        "expected": {
+            "root": "kbd kbd-lg"
+        }
+    },
+    {
+        "name": "size=xl",
+        "props": { "size": "xl" },
+        "expected": {
+            "root": "kbd kbd-xl"
+        }
+    },
+    {
+        "name": "appearance=soft + size=md — base-200 bg, no border",
+        "props": { "appearance": "soft", "size": "md" },
+        "expected": {
+            "root": "kbd bg-base-200 text-base-content border-0"
+        }
+    },
+    {
+        "name": "appearance=outline + size=lg — transparent bg with border",
+        "props": { "appearance": "outline", "size": "lg" },
+        "expected": {
+            "root": "kbd kbd-lg border border-base-content/30 bg-transparent"
+        }
+    }
+]

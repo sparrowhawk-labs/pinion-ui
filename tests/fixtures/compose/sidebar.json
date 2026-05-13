@@ -1,0 +1,112 @@
+[
+    {
+        "name": "default — side=left, size=md, backdrop=true",
+        "props": {},
+        "expected": {
+            "overlay": "fixed inset-0 z-50",
+            "backdrop": "absolute inset-0 bg-black/50",
+            "sizeWidth": "w-80",
+            "sideAnchor": "left-0",
+            "enterFrom": "translate-x-[-100%]",
+            "enterTo": "translate-x-0",
+            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto",
+            "closeBtnFloat": "absolute top-[var(--space-element)] right-[var(--space-element)] z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200",
+            "closeIcon": "w-5 h-5"
+        }
+    },
+    {
+        "name": "side=right + size=md",
+        "props": { "side": "right", "size": "md" },
+        "expected": {
+            "overlay": "fixed inset-0 z-50",
+            "sizeWidth": "w-80",
+            "sideAnchor": "right-0",
+            "enterFrom": "translate-x-[100%]",
+            "enterTo": "translate-x-0",
+            "panel": "absolute top-0 right-0 h-full w-80 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto",
+            "closeBtnFloat": "absolute top-[var(--space-element)] right-[var(--space-element)] z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200"
+        }
+    },
+    {
+        "name": "side=left + size=sm",
+        "props": { "side": "left", "size": "sm" },
+        "expected": {
+            "sizeWidth": "w-64",
+            "sideAnchor": "left-0",
+            "enterFrom": "translate-x-[-100%]",
+            "panel": "absolute top-0 left-0 h-full w-64 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto"
+        }
+    },
+    {
+        "name": "side=left + size=lg",
+        "props": { "side": "left", "size": "lg" },
+        "expected": {
+            "sizeWidth": "w-96",
+            "sideAnchor": "left-0",
+            "enterFrom": "translate-x-[-100%]",
+            "panel": "absolute top-0 left-0 h-full w-96 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto"
+        }
+    },
+    {
+        "name": "side=right + size=sm",
+        "props": { "side": "right", "size": "sm" },
+        "expected": {
+            "sizeWidth": "w-64",
+            "sideAnchor": "right-0",
+            "enterFrom": "translate-x-[100%]",
+            "panel": "absolute top-0 right-0 h-full w-64 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto",
+            "closeBtnFloat": "absolute top-[var(--space-element)] right-[var(--space-element)] z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200"
+        }
+    },
+    {
+        "name": "side=right + size=lg",
+        "props": { "side": "right", "size": "lg" },
+        "expected": {
+            "sizeWidth": "w-96",
+            "sideAnchor": "right-0",
+            "enterFrom": "translate-x-[100%]",
+            "panel": "absolute top-0 right-0 h-full w-96 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto"
+        }
+    },
+    {
+        "name": "backdrop=false + side=left — overlay gets pointer-events-none, panel gets pointer-events-auto",
+        "props": { "side": "left", "size": "md", "backdrop": false },
+        "expected": {
+            "overlay": "fixed inset-0 z-50 pointer-events-none",
+            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto pointer-events-auto",
+            "sideAnchor": "left-0",
+            "enterFrom": "translate-x-[-100%]"
+        }
+    },
+    {
+        "name": "backdrop=false + side=right",
+        "props": { "side": "right", "size": "md", "backdrop": false },
+        "expected": {
+            "overlay": "fixed inset-0 z-50 pointer-events-none",
+            "panel": "absolute top-0 right-0 h-full w-80 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto pointer-events-auto",
+            "sideAnchor": "right-0",
+            "enterFrom": "translate-x-[100%]"
+        }
+    },
+    {
+        "name": "unknown size → md fallback (w-80)",
+        "props": { "side": "left", "size": "huge" },
+        "expected": {
+            "sizeWidth": "w-80",
+            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto"
+        }
+    },
+    {
+        "name": "full combo — side=right + size=lg + backdrop=false",
+        "props": { "side": "right", "size": "lg", "backdrop": false },
+        "expected": {
+            "overlay": "fixed inset-0 z-50 pointer-events-none",
+            "sizeWidth": "w-96",
+            "sideAnchor": "right-0",
+            "enterFrom": "translate-x-[100%]",
+            "enterTo": "translate-x-0",
+            "panel": "absolute top-0 right-0 h-full w-96 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto pointer-events-auto",
+            "closeBtnFloat": "absolute top-[var(--space-element)] right-[var(--space-element)] z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200"
+        }
+    }
+]

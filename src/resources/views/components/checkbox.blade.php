@@ -4,7 +4,7 @@
     'label' => null,
     'description' => null,
     'color' => 'primary',
-    'appearance' => 'solid',
+    'appearance' => 'soft',
     'size' => 'md',
     'error' => null,
     'indeterminate' => false,

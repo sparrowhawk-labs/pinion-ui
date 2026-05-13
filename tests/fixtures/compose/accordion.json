@@ -1,0 +1,75 @@
+[
+    {
+        "name": "default — size=md",
+        "props": {},
+        "expected": {
+            "root": "w-full divide-y divide-base-300 radius-box tune-border border-base-300 overflow-hidden",
+            "header": "w-full flex items-center justify-between min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] py-0 font-medium text-base-content hover:bg-base-200/50 transition-colors cursor-pointer",
+            "sizeClasses": "min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
+            "icon": "w-4 h-4 shrink-0 transition-transform duration-200",
+            "content": "min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] py-[var(--space-compact)] text-base-content/70"
+        }
+    },
+    {
+        "name": "size=sm",
+        "props": { "size": "sm" },
+        "expected": {
+            "sizeClasses": "min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)]",
+            "header": "w-full flex items-center justify-between min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)] py-0 font-medium text-base-content hover:bg-base-200/50 transition-colors cursor-pointer",
+            "content": "min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)] py-[var(--space-compact)] text-base-content/70"
+        }
+    },
+    {
+        "name": "size=lg",
+        "props": { "size": "lg" },
+        "expected": {
+            "sizeClasses": "min-h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)]",
+            "header": "w-full flex items-center justify-between min-h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)] py-0 font-medium text-base-content hover:bg-base-200/50 transition-colors cursor-pointer",
+            "content": "min-h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)] py-[var(--space-compact)] text-base-content/70"
+        }
+    },
+    {
+        "name": "size=md explicit",
+        "props": { "size": "md" },
+        "expected": {
+            "sizeClasses": "min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]"
+        }
+    },
+    {
+        "name": "unknown size falls back to md",
+        "props": { "size": "xxl" },
+        "expected": {
+            "sizeClasses": "min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
+            "icon": "w-4 h-4 shrink-0 transition-transform duration-200"
+        }
+    },
+    {
+        "name": "root is divider/border container regardless of size — sm",
+        "props": { "size": "sm" },
+        "expected": {
+            "root": "w-full divide-y divide-base-300 radius-box tune-border border-base-300 overflow-hidden"
+        }
+    },
+    {
+        "name": "root is divider/border container regardless of size — lg",
+        "props": { "size": "lg" },
+        "expected": {
+            "root": "w-full divide-y divide-base-300 radius-box tune-border border-base-300 overflow-hidden"
+        }
+    },
+    {
+        "name": "icon classes are size-invariant",
+        "props": { "size": "lg" },
+        "expected": {
+            "icon": "w-4 h-4 shrink-0 transition-transform duration-200"
+        }
+    },
+    {
+        "name": "multiple/items props are ignored by composer (Blade-level concerns)",
+        "props": { "size": "md", "multiple": true, "items": [{"title":"a","content":"b"}] },
+        "expected": {
+            "sizeClasses": "min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
+            "root": "w-full divide-y divide-base-300 radius-box tune-border border-base-300 overflow-hidden"
+        }
+    }
+]

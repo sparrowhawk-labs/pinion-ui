@@ -1,0 +1,74 @@
+[
+    {
+        "name": "default — position=top-end, dot=false, color=error",
+        "props": {},
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-error"
+        }
+    },
+    {
+        "name": "dot=true (defaults: top-end, error)",
+        "props": { "dot": true },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-error badge-xs"
+        }
+    },
+    {
+        "name": "position=top-start (badge text, default color=error)",
+        "props": { "position": "top-start" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-start badge badge-error"
+        }
+    },
+    {
+        "name": "position=middle-center + dot=true",
+        "props": { "position": "middle-center", "dot": true },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-middle indicator-center badge badge-error badge-xs"
+        }
+    },
+    {
+        "name": "position=bottom-end + color=primary",
+        "props": { "position": "bottom-end", "color": "primary" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-bottom indicator-end badge badge-primary"
+        }
+    },
+    {
+        "name": "color=success (default position top-end, badge text)",
+        "props": { "color": "success" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-success"
+        }
+    },
+    {
+        "name": "position=middle-end + color=warning + dot=true",
+        "props": { "position": "middle-end", "color": "warning", "dot": true },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-middle indicator-end badge badge-warning badge-xs"
+        }
+    },
+    {
+        "name": "position=bottom-start (default color=error, badge text)",
+        "props": { "position": "bottom-start" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-bottom indicator-start badge badge-error"
+        }
+    },
+    {
+        "name": "position=top-center + dot=true (default color=error)",
+        "props": { "position": "top-center", "dot": true },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-center badge badge-error badge-xs"
+        }
+    }
+]

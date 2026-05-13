@@ -1,0 +1,58 @@
+[
+    {
+        "name": "default — horizontal, no color, center",
+        "props": {},
+        "expected": {
+            "root": "divider"
+        }
+    },
+    {
+        "name": "direction=vertical — daisyUI divider-horizontal (in-flex vertical bar)",
+        "props": { "direction": "vertical" },
+        "expected": {
+            "root": "divider divider-horizontal"
+        }
+    },
+    {
+        "name": "color=primary",
+        "props": { "color": "primary" },
+        "expected": {
+            "root": "divider divider-primary"
+        }
+    },
+    {
+        "name": "color=success + direction=vertical",
+        "props": { "color": "success", "direction": "vertical" },
+        "expected": {
+            "root": "divider divider-horizontal divider-success"
+        }
+    },
+    {
+        "name": "position=start",
+        "props": { "position": "start" },
+        "expected": {
+            "root": "divider divider-start"
+        }
+    },
+    {
+        "name": "position=end",
+        "props": { "position": "end" },
+        "expected": {
+            "root": "divider divider-end"
+        }
+    },
+    {
+        "name": "color=accent + position=start",
+        "props": { "color": "accent", "position": "start" },
+        "expected": {
+            "root": "divider divider-accent divider-start"
+        }
+    },
+    {
+        "name": "full combo — color=error + direction=vertical + position=end",
+        "props": { "color": "error", "direction": "vertical", "position": "end" },
+        "expected": {
+            "root": "divider divider-horizontal divider-error divider-end"
+        }
+    }
+]

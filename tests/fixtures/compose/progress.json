@@ -1,0 +1,60 @@
+[
+    {
+        "name": "default — no props (indeterminate, neutral grey, md)",
+        "props": {},
+        "expected": {
+            "root": "w-full flex flex-col gap-1",
+            "bar": "progress w-full h-3 progress-indeterminate",
+            "label": "flex items-center justify-end text-xs text-base-content/60 tabular-nums"
+        }
+    },
+    {
+        "name": "value=50/max=100 — determinate, neutral, md",
+        "props": { "value": 50 },
+        "expected": {
+            "bar": "progress w-full h-3"
+        }
+    },
+    {
+        "name": "value=3/max=10 — custom max",
+        "props": { "value": 3, "max": 10 },
+        "expected": {
+            "bar": "progress w-full h-3"
+        }
+    },
+    {
+        "name": "color=primary — adds progress-primary",
+        "props": { "value": 40, "color": "primary" },
+        "expected": {
+            "bar": "progress w-full progress-primary h-3"
+        }
+    },
+    {
+        "name": "color=success + size=lg + showLabel + labelFormat=fraction",
+        "props": { "value": 7, "max": 10, "color": "success", "size": "lg", "showLabel": true, "labelFormat": "fraction" },
+        "expected": {
+            "bar": "progress w-full progress-success h-4"
+        }
+    },
+    {
+        "name": "size=xs — thinnest bar",
+        "props": { "value": 25, "size": "xs" },
+        "expected": {
+            "bar": "progress w-full h-1"
+        }
+    },
+    {
+        "name": "indeterminate — value=null explicit",
+        "props": { "value": null },
+        "expected": {
+            "bar": "progress w-full h-3 progress-indeterminate"
+        }
+    },
+    {
+        "name": "color=error + size=sm",
+        "props": { "value": 90, "color": "error", "size": "sm" },
+        "expected": {
+            "bar": "progress w-full progress-error h-2"
+        }
+    }
+]

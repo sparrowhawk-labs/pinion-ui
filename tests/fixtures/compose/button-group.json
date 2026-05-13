@@ -1,0 +1,44 @@
+[
+    {
+        "name": "default — no props (orientation=horizontal, no extra class)",
+        "props": {},
+        "expected": {
+            "root": "join"
+        }
+    },
+    {
+        "name": "orientation=horizontal (explicit) — same as default",
+        "props": { "orientation": "horizontal" },
+        "expected": {
+            "root": "join"
+        }
+    },
+    {
+        "name": "orientation=vertical",
+        "props": { "orientation": "vertical" },
+        "expected": {
+            "root": "join join-vertical"
+        }
+    },
+    {
+        "name": "unknown orientation → fallback to horizontal",
+        "props": { "orientation": "diagonal" },
+        "expected": {
+            "root": "join"
+        }
+    },
+    {
+        "name": "orientation=vertical (duplicate confirm)",
+        "props": { "orientation": "vertical" },
+        "expected": {
+            "root": "join join-vertical"
+        }
+    },
+    {
+        "name": "empty string orientation → fallback to horizontal",
+        "props": { "orientation": "" },
+        "expected": {
+            "root": "join"
+        }
+    }
+]

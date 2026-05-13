@@ -1,0 +1,37 @@
+[
+    {
+        "name": "default — spacing=normal (-space-x-4)",
+        "props": {},
+        "expected": {
+            "root": "avatar-group -space-x-4"
+        }
+    },
+    {
+        "name": "spacing=tight — avatars overlap more (-space-x-6)",
+        "props": { "spacing": "tight" },
+        "expected": {
+            "root": "avatar-group -space-x-6"
+        }
+    },
+    {
+        "name": "spacing=loose — avatars overlap less (-space-x-2)",
+        "props": { "spacing": "loose" },
+        "expected": {
+            "root": "avatar-group -space-x-2"
+        }
+    },
+    {
+        "name": "spacing=unknown — falls back to normal (-space-x-4)",
+        "props": { "spacing": "wat" },
+        "expected": {
+            "root": "avatar-group -space-x-4"
+        }
+    },
+    {
+        "name": "spacing=normal (explicit) — same as default",
+        "props": { "spacing": "normal" },
+        "expected": {
+            "root": "avatar-group -space-x-4"
+        }
+    }
+]

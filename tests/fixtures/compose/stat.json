@@ -1,0 +1,99 @@
+[
+    {
+        "name": "default — wrapped=true, no color, no trend",
+        "props": {},
+        "expected": {
+            "root": "stats shadow",
+            "inner": "stat",
+            "figure": "stat-figure text-base-content/60",
+            "title": "stat-title",
+            "value": "stat-value",
+            "desc": "stat-desc",
+            "arrow": ""
+        }
+    },
+    {
+        "name": "+ desc — no trend, base desc class only",
+        "props": { "desc": "since last month" },
+        "expected": {
+            "root": "stats shadow",
+            "value": "stat-value",
+            "desc": "stat-desc",
+            "arrow": ""
+        }
+    },
+    {
+        "name": "+ valueColor=primary — value gets text-primary, figure tracks color",
+        "props": { "valueColor": "primary" },
+        "expected": {
+            "value": "stat-value text-primary",
+            "figure": "stat-figure text-primary"
+        }
+    },
+    {
+        "name": "+ trend=up + trendValue — desc text-success, arrow ↑",
+        "props": { "trend": "up", "trendValue": "+12%" },
+        "expected": {
+            "desc": "stat-desc text-success",
+            "arrow": "↑"
+        }
+    },
+    {
+        "name": "+ trend=down + trendValue — desc text-error, arrow ↓",
+        "props": { "trend": "down", "trendValue": "-3%" },
+        "expected": {
+            "desc": "stat-desc text-error",
+            "arrow": "↓"
+        }
+    },
+    {
+        "name": "trend=flat — desc text-base-content/50, arrow →",
+        "props": { "trend": "flat" },
+        "expected": {
+            "desc": "stat-desc text-base-content/50",
+            "arrow": "→"
+        }
+    },
+    {
+        "name": "wrapped=false — root empty (no stats wrapper class)",
+        "props": { "wrapped": false },
+        "expected": {
+            "root": "",
+            "inner": "stat"
+        }
+    },
+    {
+        "name": "all props — valueColor=success + trend=up + trendValue + desc",
+        "props": {
+            "valueColor": "success",
+            "trend": "up",
+            "trendValue": "+24%",
+            "desc": "vs last week"
+        },
+        "expected": {
+            "root": "stats shadow",
+            "value": "stat-value text-success",
+            "figure": "stat-figure text-success",
+            "desc": "stat-desc text-success",
+            "arrow": "↑"
+        }
+    },
+    {
+        "name": "valueColor=error — error tone on value/figure",
+        "props": { "valueColor": "error" },
+        "expected": {
+            "value": "stat-value text-error",
+            "figure": "stat-figure text-error"
+        }
+    },
+    {
+        "name": "valueColor=secondary + wrapped=false — inner only, no root wrapper",
+        "props": { "valueColor": "secondary", "wrapped": false },
+        "expected": {
+            "root": "",
+            "inner": "stat",
+            "value": "stat-value text-secondary",
+            "figure": "stat-figure text-secondary"
+        }
+    }
+]
