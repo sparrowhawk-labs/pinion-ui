@@ -1,0 +1,122 @@
+[
+    {
+        "name": "default — md soft primary, single page",
+        "props": { "current": 1, "last": 1 },
+        "expected": {
+            "wrapper": "flex flex-col sm:flex-row items-center justify-between gap-4 py-4 w-full",
+            "nav": "join shadow-sm",
+            "itemBase": "join-item inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-md)] min-w-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2",
+            "itemActive": "bg-primary/15 text-primary border-primary/40 focus-visible:ring-primary cursor-default relative z-10",
+            "itemIdle": "bg-base-100 text-base-content border-base-content/10 hover:bg-base-200 focus-visible:ring-base-content cursor-pointer",
+            "itemDisabled": "bg-base-100 text-base-content/30 border-base-content/10 cursor-not-allowed pointer-events-none",
+            "pages": "1",
+            "showFirst": "0",
+            "showLast": "0",
+            "showDotsLeft": "0",
+            "showDotsRight": "0"
+        }
+    },
+    {
+        "name": "size sm",
+        "props": { "current": 1, "last": 1, "size": "sm" },
+        "expected": {
+            "itemBase": "join-item inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-sm)] min-w-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)] gap-1"
+        }
+    },
+    {
+        "name": "size lg",
+        "props": { "current": 1, "last": 1, "size": "lg" },
+        "expected": {
+            "itemBase": "join-item inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-lg)] min-w-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)] gap-2.5"
+        }
+    },
+    {
+        "name": "outline accent",
+        "props": { "current": 1, "last": 5, "appearance": "outline", "color": "accent" },
+        "expected": {
+            "itemActive": "bg-base-100 text-accent border-accent focus-visible:ring-accent cursor-default relative z-10"
+        }
+    },
+    {
+        "name": "soft success",
+        "props": { "current": 1, "last": 5, "appearance": "soft", "color": "success" },
+        "expected": {
+            "itemActive": "bg-success/15 text-success border-success/40 focus-visible:ring-success cursor-default relative z-10"
+        }
+    },
+    {
+        "name": "window — middle page with both dots",
+        "props": { "current": 5, "last": 10, "onEachSide": 1 },
+        "expected": {
+            "pages": "4,5,6",
+            "showFirst": "1",
+            "showLast": "1",
+            "showDotsLeft": "1",
+            "showDotsRight": "1"
+        }
+    },
+    {
+        "name": "window — near start, no left dots",
+        "props": { "current": 2, "last": 10, "onEachSide": 1 },
+        "expected": {
+            "pages": "1,2,3",
+            "showFirst": "0",
+            "showLast": "1",
+            "showDotsLeft": "0",
+            "showDotsRight": "1"
+        }
+    },
+    {
+        "name": "window — near end, no right dots",
+        "props": { "current": 9, "last": 10, "onEachSide": 1 },
+        "expected": {
+            "pages": "8,9,10",
+            "showFirst": "1",
+            "showLast": "0",
+            "showDotsLeft": "1",
+            "showDotsRight": "0"
+        }
+    },
+    {
+        "name": "window — onEachSide=2 wider, both dots when 1 page hidden each side",
+        "props": { "current": 6, "last": 10, "onEachSide": 2 },
+        "expected": {
+            "pages": "4,5,6,7,8",
+            "showFirst": "1",
+            "showLast": "1",
+            "showDotsLeft": "1",
+            "showDotsRight": "1"
+        }
+    },
+    {
+        "name": "window — onEachSide=2 covers end exactly, no right dots",
+        "props": { "current": 7, "last": 10, "onEachSide": 2 },
+        "expected": {
+            "pages": "5,6,7,8,9",
+            "showFirst": "1",
+            "showLast": "1",
+            "showDotsLeft": "1",
+            "showDotsRight": "0"
+        }
+    },
+    {
+        "name": "window — last=1 single page edge",
+        "props": { "current": 1, "last": 1, "onEachSide": 1 },
+        "expected": {
+            "pages": "1",
+            "showFirst": "0",
+            "showLast": "0",
+            "showDotsLeft": "0",
+            "showDotsRight": "0"
+        }
+    },
+    {
+        "name": "invalid current clamped to 1",
+        "props": { "current": 0, "last": 5 },
+        "expected": {
+            "pages": "1,2",
+            "showFirst": "0",
+            "showLast": "1"
+        }
+    }
+]
