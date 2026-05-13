@@ -2,3 +2,6 @@
 /.idea
 .DS_Store
 .phpunit.result.cache
+
+# Claude Code session state (not tracked)
+/.claude
