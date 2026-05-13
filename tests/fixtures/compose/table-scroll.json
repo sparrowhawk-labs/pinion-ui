@@ -1,0 +1,31 @@
+[
+    {
+        "name": "default — circle button, base-100 fade",
+        "props": {},
+        "expected": {
+            "wrapper": "relative",
+            "scrollContainer": "overflow-x-auto",
+            "leftFade": "absolute top-0 bottom-0 w-10 pointer-events-none bg-gradient-to-r from-base-100 via-base-100/90 to-transparent",
+            "rightFade": "absolute top-0 bottom-0 w-10 pointer-events-none bg-gradient-to-l from-base-100 via-base-100/90 to-transparent",
+            "buttonOuterLeft": "absolute top-0 bottom-0 left-0 z-10 flex items-center justify-center w-10 cursor-pointer focus:outline-none",
+            "buttonOuterRight": "absolute top-0 bottom-0 right-0 z-10 flex items-center justify-center w-10 cursor-pointer focus:outline-none",
+            "buttonInner": "inline-flex items-center justify-center w-7 h-7 rounded-full bg-base-100 hover:bg-base-200 transition-colors shadow border border-base-content/10",
+            "iconSize": "w-4 h-4 text-base-content/70"
+        }
+    },
+    {
+        "name": "fadeColor=base-200 — fade matches surface",
+        "props": { "fadeColor": "base-200" },
+        "expected": {
+            "leftFade": "absolute top-0 bottom-0 w-10 pointer-events-none bg-gradient-to-r from-base-200 via-base-200/90 to-transparent",
+            "rightFade": "absolute top-0 bottom-0 w-10 pointer-events-none bg-gradient-to-l from-base-200 via-base-200/90 to-transparent"
+        }
+    },
+    {
+        "name": "buttonStyle=flat — squared button using radius-field",
+        "props": { "buttonStyle": "flat" },
+        "expected": {
+            "buttonInner": "inline-flex items-center justify-center w-7 h-7 rounded-[var(--radius-field)] bg-base-200 hover:bg-base-300 transition-colors shadow-sm"
+        }
+    }
+]
