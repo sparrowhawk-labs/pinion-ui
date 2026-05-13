@@ -1,6 +1,6 @@
 @props([
     'position' => 'bottom-right',
-    'appearance' => 'soft',
+    'appearance' => 'bordered-left',
     'size' => 'md',
     'duration' => 3000,
     'eventName' => 'notify',

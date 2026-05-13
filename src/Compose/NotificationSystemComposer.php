@@ -7,7 +7,7 @@ class NotificationSystemComposer
     public static function compose(array $props): array
     {
         $position   = $props['position'] ?? 'bottom-right';
-        $appearance = $props['appearance'] ?? 'soft';
+        $appearance = $props['appearance'] ?? 'bordered-left';
         $size       = $props['size'] ?? 'md';
 
         return [
@@ -126,7 +126,7 @@ class NotificationSystemComposer
             'bordered-left-warning' => 'bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-warning',
             'bordered-left-error'   => 'bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-error',
 
-            default => 'bg-info/15 text-base-content border-info/40',
+            default => 'bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-info',
         };
     }
 }
