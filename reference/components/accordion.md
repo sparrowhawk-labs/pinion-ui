@@ -65,7 +65,7 @@ See [`src/Compose/AccordionComposer.php`](../../src/Compose/AccordionComposer.ph
 
 ## Notes
 
-- `content` is rendered as raw HTML (`{!! !!}`) so you can pass markup. **Escape user input before passing it in** — the wrapper does not sanitize.
+- **Security: `content` is rendered raw** via `{!! !!}` so you can pass markup. The rule: **never interpolate untrusted input into `content`**. If you need user-supplied text, escape it before passing (e.g. `'content' => e($userText)`), or stitch via `view('partial', [...])->render()` so Blade handles escaping inside the partial. The wrapper does not sanitize.
 - The component generates a unique `accordion_<uniqid>` per instance, but state is local to that Alpine `x-data` scope — opening an item in one accordion does not affect others on the page.
 - Header height tracks `--h-field-*` from the active tune; that's why `size` uses the same `sm/md/lg` token names as form fields.
 - `multiple=false` toggles with `open = open === '<key>' ? null : '<key>'`, so clicking the open item closes it (no always-one-open enforcement).

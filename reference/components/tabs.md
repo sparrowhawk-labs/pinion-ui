@@ -83,7 +83,7 @@ Class strings are built by [`TabsComposer::compose($props)`](../../src/Compose/T
 
 ## Notes
 
-- Tab content is interpolated with `{!! !!}` — never pass user input directly into `content`.
+- **Security: `content` is rendered raw** via `{!! !!}` so you can pass HTML / Blade-rendered partials. The rule: **never interpolate untrusted input into `content`**. If you need user-supplied text, escape it before passing (e.g. `'content' => e($userText)`), or stitch via `view('partial', [...])->render()` so Blade handles escaping inside the partial. The same rule applies to `icon` (raw inline SVG).
 - Tab keys must be unique per `<x-tabs>` instance; duplicates collapse to the same panel.
 - Panels use `x-show` + `x-cloak`, so include `[x-cloak]{display:none}` in your CSS to avoid a flash of all panels on first paint.
 - The underline variant draws the active indicator with a `border-b-2` on the button itself — no separate moving indicator element.

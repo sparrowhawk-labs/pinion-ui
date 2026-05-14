@@ -74,7 +74,7 @@ All other attributes pass through to the root element.
 
 ## Class composition
 
-See [`src/Compose/StatComposer.php`](../../src/Compose/StatComposer.php). Returns `root` (`stats shadow` or empty), `inner` (`stat`), `figure`, `title`, `value`, `desc`, `arrow`. The arrow character (`↑` / `↓` / `→`) is returned as a literal string by the composer and rendered inline before the description.
+See [`src/Compose/StatComposer.php`](../../src/Compose/StatComposer.php). The `compose()` dict returns class strings only: `root` (`stats shadow` or empty), `inner` (`stat`), `figure`, `title`, `value`, `desc`. The trend arrow character (`↑` / `↓` / `→`) is **not** in the dict — it lives in a separate `StatComposer::arrowChar($trend): string` static helper that the Blade view calls directly (since v0.3.1). This keeps the Compose-pattern invariant clean (class strings only — no markup, no literal text) per [CLAUDE.md](../../CLAUDE.md).
 
 ## Related
 
