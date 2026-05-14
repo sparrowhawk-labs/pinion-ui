@@ -67,6 +67,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 |---|---|
 | [`<x-modal>`](./modal.md) | Dialog with backdrop, sizes, title/footer slots, optional floating close button for titleless layouts, ESC + click-outside dismiss. |
 | [`<x-tooltip>`](./tooltip.md) | Hover/focus tooltip — placements, sizes, surface variants (`tooltip-light` default, `base-100/200/300`, `color="<semantic>"` for daisyUI native dark bubble). |
+| [`<x-popover>`](./popover.md) | Click (or hover) panel hosting arbitrary content — info card, mini form, confirmation prompt. 4 placements, optional arrow, `'click'` (default) / `'hover'` trigger. |
 
 ## Section
 
