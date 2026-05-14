@@ -26,7 +26,7 @@ composer require sparrowhawk-labs/pinion-ui
 php artisan ui:install --ai
 ```
 
-`ui:install` adds the required npm dependencies (`daisyui ^5`, `alpinejs ^3`), wires up `resources/css/app.css` and `resources/js/app.js`, and with `--ai` appends a `## pinion-ui (AI agents)` block to your project's `CLAUDE.md` pointing at `vendor/sparrowhawk-labs/pinion-ui/AGENTS.md`. Drop `--ai` to skip the AI snippet — you can re-run later, or copy the contents of `vendor/sparrowhawk-labs/pinion-ui/CLAUDE_SNIPPET.md` into your own `AGENTS.md` if you prefer that convention.
+`ui:install` adds the required npm dependencies (`daisyui ^5`, `alpinejs ^3`, `@alpinejs/focus ^3` — needed by `<x-sidebar>` and any focus-trap UI), wires up `resources/css/app.css` (single `@import` of the pinion-ui preset) and `resources/js/app.js` (Alpine + focus plugin), and with `--ai` appends a `## pinion-ui (AI agents)` block to your project's `CLAUDE.md` pointing at `vendor/sparrowhawk-labs/pinion-ui/AGENTS.md`. Drop `--ai` to skip the AI snippet — you can re-run later, or copy the contents of `vendor/sparrowhawk-labs/pinion-ui/CLAUDE_SNIPPET.md` into your own `AGENTS.md` if you prefer that convention.
 
 Then build:
 

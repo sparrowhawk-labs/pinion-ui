@@ -83,6 +83,7 @@ class UiInstall extends Command
         $modified = false;
 
         $dependencies = [
+            '@alpinejs/focus' => '^3.14.0',
             'alpinejs' => '^3.14.0',
             'daisyui' => '^5.0.0',
         ];
@@ -134,12 +135,35 @@ class UiInstall extends Command
             $this->line('    + Added @plugin "daisyui"');
         }
 
-        // Add @source for vendor component views
-        $sourceLine = '@source "../../vendor/sparrowhawk-labs/pinion-ui/src/resources/views/**/*.blade.php";';
-        if (!str_contains($content, 'sparrowhawk-labs/pinion-ui')) {
-            $content .= "\n" . $sourceLine . "\n";
+        // Import the pinion-ui preset. The preset wires:
+        //   • @source for Blade views AND Compose PHP (both must be scanned
+        //     — Composer files emit class strings that won't appear in any
+        //     blade source)
+        //   • safelist for the color × appearance × state permutations the
+        //     Composers build via interpolation (Tailwind JIT can't see
+        //     through "bg-{$color}/10")
+        //   • @import "./tune.css" for the data-tune token system
+        //   • custom CSS rules (tooltip-light, base-N tooltip variants,
+        //     dark theme *-content patches)
+        // Skipping the preset = ~half the design system silently missing
+        // from the bundle, which is what the v0.3.17 bug report uncovered.
+        $presetImport = '@import "../../vendor/sparrowhawk-labs/pinion-ui/src/resources/css/pinion-ui.css";';
+        if (!str_contains($content, 'sparrowhawk-labs/pinion-ui/src/resources/css/pinion-ui.css')) {
+            // Drop any v0.3.16-and-earlier piecemeal lines so we don't end
+            // up with both the old @source and the new preset import.
+            $content = preg_replace(
+                '/^@source\s+"[^"]*sparrowhawk-labs\/pinion-ui[^"]*";\s*\n?/m',
+                '',
+                $content
+            );
+            $content = preg_replace(
+                '/^@import\s+"\.\/pinion-tune\.css";\s*\n?/m',
+                '',
+                $content
+            );
+            $content .= "\n" . $presetImport . "\n";
             $modified = true;
-            $this->line('    + Added @source for pinion-ui components');
+            $this->line('    + Added @import for pinion-ui preset');
         }
 
         if ($modified) {
@@ -147,38 +171,13 @@ class UiInstall extends Command
             $this->info('  ✓ Updated resources/css/app.css');
         }
 
-        // Generate tune CSS file
-        $this->generateTuneCss();
-    }
-
-    protected function generateTuneCss(): void
-    {
-        $tuneCssPath = resource_path('css/pinion-tune.css');
-
-        if (File::exists($tuneCssPath)) {
-            $this->line('    - pinion-tune.css already exists');
-            return;
+        // Clean up the stale pinion-tune.css copy from earlier install
+        // versions — the preset imports tune.css internally now.
+        $staleTune = resource_path('css/pinion-tune.css');
+        if (File::exists($staleTune)) {
+            File::delete($staleTune);
+            $this->line('    - Removed legacy resources/css/pinion-tune.css (preset bundles tune.css)');
         }
-
-        $sourceTuneCss = dirname(__DIR__) . '/resources/css/tune.css';
-        if (!File::exists($sourceTuneCss)) {
-            $this->warn('  tune.css source not found in package.');
-            return;
-        }
-
-        File::copy($sourceTuneCss, $tuneCssPath);
-
-        // Add import to app.css
-        $appCssPath = resource_path('css/app.css');
-        if (File::exists($appCssPath)) {
-            $content = File::get($appCssPath);
-            if (!str_contains($content, 'pinion-tune.css')) {
-                $content .= "\n@import \"./pinion-tune.css\";\n";
-                File::put($appCssPath, $content);
-            }
-        }
-
-        $this->info('  ✓ Created resources/css/pinion-tune.css');
     }
 
     protected function setupAlpineJs(): void
@@ -191,15 +190,40 @@ class UiInstall extends Command
         }
 
         $content = File::get($appJsPath);
+        $hasAlpine = str_contains($content, 'alpinejs') || str_contains($content, 'Alpine');
+        $hasFocus  = str_contains($content, '@alpinejs/focus');
 
-        if (str_contains($content, 'alpinejs') || str_contains($content, 'Alpine')) {
-            $this->line('    - Alpine.js already configured');
+        if ($hasAlpine && $hasFocus) {
+            $this->line('    - Alpine.js + focus plugin already configured');
+            return;
+        }
+
+        if ($hasAlpine && !$hasFocus) {
+            // Alpine is already wired; just insert the focus plugin lines.
+            // This handles upgrades from earlier ui:install runs that didn't
+            // know about the focus plugin (needed by <x-sidebar> x-trap).
+            $content = preg_replace(
+                '/(import Alpine from \'alpinejs\';)/',
+                "$1\nimport focus from '@alpinejs/focus';",
+                $content,
+                1
+            );
+            $content = preg_replace(
+                '/(window\.Alpine = Alpine;)/',
+                "Alpine.plugin(focus);\n$1",
+                $content,
+                1
+            );
+            File::put($appJsPath, $content);
+            $this->info('  ✓ Wired @alpinejs/focus plugin into resources/js/app.js');
             return;
         }
 
         $alpineSetup = <<<'JS'
 import Alpine from 'alpinejs';
+import focus from '@alpinejs/focus';
 
+Alpine.plugin(focus);
 window.Alpine = Alpine;
 Alpine.start();
 
