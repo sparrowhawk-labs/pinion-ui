@@ -17,6 +17,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-toggle>`](./toggle.md) | iOS-style switch for boolean state. |
 | [`<x-file-upload>`](./file-upload.md) | File input with drag-and-drop affordance and selected-file preview. |
 | [`<x-rating>`](./rating.md) | Star rating input — supports half-star granularity via `rating-half`. |
+| [`<x-range-slider>`](./range-slider.md) | `<input type="range">` with label / hint / error chrome, 8 colours × 5 sizes. Optional live `showValue` via Alpine. |
 
 ## Data display
 
