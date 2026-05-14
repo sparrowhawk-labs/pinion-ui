@@ -1,44 +1,37 @@
 [
     {
-        "name": "default — no props (orientation=horizontal, no extra class)",
+        "name": "default — horizontal: inline-flex + radii zeroed except ends + soft hover override",
         "props": {},
         "expected": {
-            "root": "join"
+            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     },
     {
         "name": "orientation=horizontal (explicit) — same as default",
         "props": { "orientation": "horizontal" },
         "expected": {
-            "root": "join"
+            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     },
     {
-        "name": "orientation=vertical",
+        "name": "orientation=vertical — flex-col + radii on top/bottom + bottom border collapse",
         "props": { "orientation": "vertical" },
         "expected": {
-            "root": "join join-vertical"
+            "root": "inline-flex flex-col [&>*]:rounded-none [&>*:first-child]:rounded-t-[var(--radius-field)] [&>*:last-child]:rounded-b-[var(--radius-field)] [&>*:not(:last-child)]:border-b-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     },
     {
         "name": "unknown orientation → fallback to horizontal",
         "props": { "orientation": "diagonal" },
         "expected": {
-            "root": "join"
-        }
-    },
-    {
-        "name": "orientation=vertical (duplicate confirm)",
-        "props": { "orientation": "vertical" },
-        "expected": {
-            "root": "join join-vertical"
+            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     },
     {
         "name": "empty string orientation → fallback to horizontal",
         "props": { "orientation": "" },
         "expected": {
-            "root": "join"
+            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     }
 ]
