@@ -16,10 +16,10 @@ No-JS hover/focus tooltip built on daisyUI 5's `tooltip` class. Trigger goes in 
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `text` | `string` | `''` | Tooltip label. Set on the root as `data-tip` — daisyUI renders it via `::before`. |
-| `position` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'` | Where the bubble appears relative to the trigger (`tooltip-{position}`). |
-| `color` | `null \| 'neutral' \| 'primary' \| 'secondary' \| 'accent' \| 'info' \| 'success' \| 'warning' \| 'error' \| 'base-100' \| 'base-200' \| 'base-300'` | `null` | `null` (default) → `tooltip-light` (soft base-200 fill, no border) — the package's house style. `neutral` → no modifier class, falls through to daisyUI's stock dark grey bubble. `base-100` / `base-200` / `base-300` → explicit surface-tinted variants. The eight semantic colors map to daisyUI's `tooltip-{color}`. |
-| `open` | `bool` | `false` | When `true`, adds `tooltip-open` to keep the bubble visible regardless of hover/focus. Useful for onboarding tours and highlighting. |
+| `text` | `string` | `''` | Tooltip label rendered inside the bubble. Plain text only (escaped by Blade). |
+| `position` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'` | Where the bubble appears relative to the trigger. CSS-positioned; no auto-flip on viewport collision. |
+| `color` | `null \| 'neutral' \| 'primary' \| 'secondary' \| 'accent' \| 'info' \| 'success' \| 'warning' \| 'error' \| 'base-100' \| 'base-200' \| 'base-300'` | `null` | `null` (default) → soft `bg-base-200` bubble. `neutral` → daisyUI's `bg-neutral` dark bubble. `base-100` / `base-200` / `base-300` → surface variants — **all render a visible arrow** since v0.3.11 (the rewrite). Eight semantic colours map to `bg-{color} text-{color}-content border-{color}` on both bubble and arrow. |
+| `open` | `bool` | `false` | When `true`, the tooltip stays open regardless of hover / focus — useful for onboarding tours and highlighting. |
 
 All other attributes pass through to the root wrapper `<div>`.
 
@@ -95,7 +95,11 @@ All other attributes pass through to the root wrapper `<div>`.
 
 ## Class composition
 
-Class strings come from [`SparrowhawkLabs\PinionUi\Compose\TooltipComposer`](../../src/Compose/TooltipComposer.php) — a single `root` key combining `tooltip` + position + color + optional `tooltip-open`. The blade puts the label on `data-tip`; daisyUI's CSS does the rest.
+See [`src/Compose/TooltipComposer.php`](../../src/Compose/TooltipComposer.php). Returns `root` (`relative inline-block`), `bubble` (absolute + placement + bg/text/border + radius + shadow), `arrow` (rotated diamond with two visible borders matching the bubble's border colour), `placement` (normalised string), `forceOpen` (bool from the `open` prop).
+
+The blade wires Alpine `x-on:mouseenter` / `mouseleave` / `focusin` / `focusout` to a local `open` boolean. When `forceOpen` is true, the wiring is skipped and the bubble stays visible.
+
+**v0.3.11 rewrite**: prior versions used daisyUI's `tooltip` + `data-tip` system (CSS-only, no JS). That arrow uses a `mask-image` whose fill is `--tt-bg` only — when bg was `base-100` (page-coloured), the arrow vanished. The custom diamond arrow used by [`<x-popover>`](./popover.md) renders cleanly for every bg, so tooltip was rewritten to mirror it. Surface props (`text`, `position`, `color`, `open`) are unchanged; internal DOM and classes are different.
 
 ## Related
 
@@ -105,7 +109,9 @@ Class strings come from [`SparrowhawkLabs\PinionUi\Compose\TooltipComposer`](../
 
 ## Notes
 
-- The default `tooltip-light` is a project-level override (not a stock daisyUI class) — it renders a soft `base-200` bubble. The CSS hooks `--tt-bg` to `var(--color-base-200)` so the arrow inherits the same color as the body, avoiding the "border-on-arrow" rendering glitch that stock daisyUI tooltips show under custom borders.
-- `color="neutral"` is the explicit opt-out: it adds no `tooltip-*` class so the bubble falls through to daisyUI's stock dark-grey behavior. Use it when you specifically want the classic look.
-- Tooltips are pure CSS — no JS, no ARIA-live, no focus trap. They are decorative; **always** keep an `aria-label` (or visible text) on the trigger for assistive tech.
-- The wrapper is `display: block` by default (daisyUI's `tooltip` is `display: inline-block` once daisyUI loads). If layout shifts, wrap the trigger in a sized container or set `class="inline-block"` on the tooltip itself.
+- The default (`color=null`) is a soft `bg-base-200` bubble — the package's house style. All four `base-*` surface variants now ship a visible arrow (v0.3.11 fix).
+- **`color="neutral"`** uses daisyUI's `bg-neutral` semantic colour (typically dark on light themes, near-black) — the classic dark-tooltip look.
+- **Alpine required**: the rewrite swapped daisyUI's CSS-only hover for Alpine handlers. Pinion-ui already requires Alpine (`ui:install` wires it), so this is essentially free.
+- **No viewport collision detection**: same trade-off as [`<x-popover>`](./popover.md) — pick the placement that fits where the trigger lives. For auto-flip, integrate Floating UI separately.
+- Tooltips are decorative — **always** keep an `aria-label` (or visible text) on the trigger for assistive tech. The bubble has `role="tooltip"` but a screen reader only picks it up reliably when the trigger has `aria-describedby` pointing at the bubble's ID (not done automatically — wire it yourself for critical labels).
+- The wrapper is `inline-block` so it doesn't break inline flow. If you need block layout for the trigger, override with `class="block"` on the tooltip.
