@@ -58,5 +58,20 @@
             "placement": "bottom",
             "panel": "absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-lg p-element"
         }
+    },
+    {
+        "name": "padding=p-1 — tight menu-style panel (for context menus with their own item paddings)",
+        "props": { "padding": "p-1" },
+        "expected": {
+            "panel": "absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-lg p-1"
+        }
+    },
+    {
+        "name": "padding=p-0 — borderless flush content",
+        "props": { "padding": "p-0", "arrow": false },
+        "expected": {
+            "panel": "absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-lg p-0",
+            "showArrow": false
+        }
     }
 ]
