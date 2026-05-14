@@ -5,7 +5,7 @@
         "expected": {
             "wrapper": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0",
             "button": "shrink-0 inline-flex items-center justify-center bg-base-100 tune-border border-base-300 text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:z-10 disabled:opacity-50 disabled:cursor-not-allowed w-[var(--h-field-md)] h-[var(--h-field-md)]",
-            "input": "min-w-0 text-center tabular-nums bg-base-100 tune-border border-base-300 focus:outline-none focus:ring-2 focus:ring-primary focus:z-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] disabled:opacity-50 disabled:cursor-not-allowed h-[var(--h-field-md)] text-[length:var(--text-field-md)]",
+            "input": "min-w-[3rem] text-center tabular-nums bg-base-100 tune-border border-base-300 focus:outline-none focus:ring-2 focus:ring-primary focus:z-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] disabled:opacity-50 disabled:cursor-not-allowed h-[var(--h-field-md)] text-[length:var(--text-field-md)]",
             "labelColor": "text-base-content",
             "hintColor": "text-base-content/50"
         }
@@ -15,7 +15,7 @@
         "props": { "size": "xs" },
         "expected": {
             "button": "shrink-0 inline-flex items-center justify-center bg-base-100 tune-border border-base-300 text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:z-10 disabled:opacity-50 disabled:cursor-not-allowed w-[var(--h-field-xs)] h-[var(--h-field-xs)]",
-            "input": "min-w-0 text-center tabular-nums bg-base-100 tune-border border-base-300 focus:outline-none focus:ring-2 focus:ring-primary focus:z-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] disabled:opacity-50 disabled:cursor-not-allowed h-[var(--h-field-xs)] text-[length:var(--text-field-xs)]"
+            "input": "min-w-[3rem] text-center tabular-nums bg-base-100 tune-border border-base-300 focus:outline-none focus:ring-2 focus:ring-primary focus:z-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] disabled:opacity-50 disabled:cursor-not-allowed h-[var(--h-field-xs)] text-[length:var(--text-field-xs)]"
         }
     },
     {
@@ -23,7 +23,7 @@
         "props": { "size": "sm" },
         "expected": {
             "button": "shrink-0 inline-flex items-center justify-center bg-base-100 tune-border border-base-300 text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:z-10 disabled:opacity-50 disabled:cursor-not-allowed w-[var(--h-field-sm)] h-[var(--h-field-sm)]",
-            "input": "min-w-0 text-center tabular-nums bg-base-100 tune-border border-base-300 focus:outline-none focus:ring-2 focus:ring-primary focus:z-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] disabled:opacity-50 disabled:cursor-not-allowed h-[var(--h-field-sm)] text-[length:var(--text-field-sm)]"
+            "input": "min-w-[3rem] text-center tabular-nums bg-base-100 tune-border border-base-300 focus:outline-none focus:ring-2 focus:ring-primary focus:z-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] disabled:opacity-50 disabled:cursor-not-allowed h-[var(--h-field-sm)] text-[length:var(--text-field-sm)]"
         }
     },
     {
@@ -31,7 +31,7 @@
         "props": { "size": "lg" },
         "expected": {
             "button": "shrink-0 inline-flex items-center justify-center bg-base-100 tune-border border-base-300 text-base-content/70 hover:bg-base-200 hover:text-base-content transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:z-10 disabled:opacity-50 disabled:cursor-not-allowed w-[var(--h-field-lg)] h-[var(--h-field-lg)]",
-            "input": "min-w-0 text-center tabular-nums bg-base-100 tune-border border-base-300 focus:outline-none focus:ring-2 focus:ring-primary focus:z-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] disabled:opacity-50 disabled:cursor-not-allowed h-[var(--h-field-lg)] text-[length:var(--text-field-lg)]"
+            "input": "min-w-[3rem] text-center tabular-nums bg-base-100 tune-border border-base-300 focus:outline-none focus:ring-2 focus:ring-primary focus:z-10 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [appearance:textfield] disabled:opacity-50 disabled:cursor-not-allowed h-[var(--h-field-lg)] text-[length:var(--text-field-lg)]"
         }
     },
     {

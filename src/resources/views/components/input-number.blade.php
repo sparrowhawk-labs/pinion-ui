@@ -24,11 +24,9 @@
     $minJs  = $min !== null ? (string) $min : 'null';
     $maxJs  = $max !== null ? (string) $max : 'null';
     $stepJs = (string) $step;
+    $disabledJs = $disabled ? 'true' : 'false';
 
-    // Auto-width: pick the longest of max / min / current value so the input
-    // visually fits its widest possible content. +1 for cursor padding.
-    // Fall back to 3 digits when no bounds are set, so a freeform quantity
-    // selector still looks deliberate.
+    // Digit width: longest of max / min / current value (min 2). +1 for cursor padding.
     $widths = array_filter([
         $max   !== null ? strlen((string) $max)   : null,
         $min   !== null ? strlen((string) $min)   : null,
@@ -38,29 +36,38 @@
     $digitCount = max(2, (int) $digitCount);
     $inputSize  = $digitCount + 1;
 
+    // When the user passes an explicit `width` (e.g. "w-full", "w-64"), the
+    // wrapper stretches and the input must `flex-1` to fill the new space.
+    // Default (null) uses w-fit + the input's natural HTML `size` width.
+    $widthClass    = $width ?? 'w-fit';
+    $stretchInput  = $width !== null;
+
     $c = InputNumberComposer::compose([
         'size'  => $size,
         'error' => $error,
     ]);
 @endphp
 
-<div class="{{ $width ?? 'w-fit' }}"
+<div class="{{ $widthClass }}"
     x-data="{
         v: '{{ $value }}',
         min: {{ $minJs }},
         max: {{ $maxJs }},
         step: {{ $stepJs }},
+        disabled: {{ $disabledJs }},
         clamp(n) {
             if (this.min !== null && n < this.min) n = this.min;
             if (this.max !== null && n > this.max) n = this.max;
             return n;
         },
         inc() {
+            if (this.disabled) return;
             const n = parseFloat(this.v);
             const next = isNaN(n) ? (this.min ?? 0) : n + this.step;
             this.v = String(this.clamp(next));
         },
         dec() {
+            if (this.disabled) return;
             const n = parseFloat(this.v);
             const next = isNaN(n) ? (this.min ?? 0) : n - this.step;
             this.v = String(this.clamp(next));
@@ -79,8 +86,7 @@
                 aria-label="Decrease"
                 tabindex="-1"
                 x-on:click="dec()"
-                x-bind:disabled="atMin()"
-                @if($disabled) disabled @endif>
+                x-bind:disabled="disabled || atMin()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
                 <path d="M5 12h14" />
             </svg>
@@ -90,16 +96,16 @@
             type="number"
             id="{{ $inputId }}"
             x-model="v"
-            size="{{ $inputSize }}"
+            x-bind:disabled="disabled"
+            @if(!$stretchInput) size="{{ $inputSize }}" @endif
             @if($name) name="{{ $name }}" @endif
             @if($min !== null) min="{{ $min }}" @endif
             @if($max !== null) max="{{ $max }}" @endif
             step="{{ $step }}"
             inputmode="numeric"
             {{ $attributes->whereStartsWith('wire:') }}
-            {{ $attributes->whereDoesntStartWith('wire:')->merge(['class' => $c['input']]) }}
+            {{ $attributes->whereDoesntStartWith('wire:')->merge(['class' => $c['input'] . ($stretchInput ? ' flex-1' : '')]) }}
             @if($required) required @endif
-            @if($disabled) disabled @endif
             @if($readonly) readonly @endif
         />
 
@@ -107,8 +113,7 @@
                 aria-label="Increase"
                 tabindex="-1"
                 x-on:click="inc()"
-                x-bind:disabled="atMax()"
-                @if($disabled) disabled @endif>
+                x-bind:disabled="disabled || atMax()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5">
                 <path d="M5 12h14" />
                 <path d="M12 5v14" />
