@@ -193,7 +193,13 @@
             @click="show = false"
             aria-label="Close"
         >
-            <x-i type="close-circle" variant="linear" class="w-[1em] h-[1em]" />
+            {{-- Plain X close glyph. Solar icons only ship close-{circle,square}
+                 variants — the user-facing close affordance reads better as
+                 a bare X without a surrounding shape, so we inline a small SVG. --}}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-[1em] h-[1em]" aria-hidden="true">
+                <path d="M18 6L6 18" />
+                <path d="M6 6l12 12" />
+            </svg>
         </button>
     @endif
 </div>
