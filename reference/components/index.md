@@ -74,6 +74,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | Component | Description |
 |---|---|
 | [`<x-pn::section.hero>`](./section-hero.md) | Hero section — two variants (`centered`, `split`), title/subtitle, primary/secondary actions, `size` (`md`/`lg`/`xl`) for title scale. `split` accepts an `image` prop / `media` slot for image layouts. |
+| [`<x-stepper>`](./stepper.md) | Multi-step process indicator — sign-up flow, checkout, wizard. Numbered or dotted circles + connectors, per-item `state` (`done`/`current`/`upcoming`), horizontal or vertical. |
 
 ## Theme / Tune
 
