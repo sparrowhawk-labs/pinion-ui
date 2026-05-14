@@ -72,5 +72,39 @@
             "root": "timeline timeline-vertical",
             "orientation": "vertical"
         }
+    },
+    {
+        "name": "appearance=soft (default) — done icon text-primary/70, hr bg-primary/30",
+        "props": {},
+        "expected": {
+            "stateColors": "done=text-primary/70|current=text-base-content|upcoming=text-base-content/40|default=text-primary/70",
+            "hrColors": "done=bg-primary/30|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-primary/30"
+        }
+    },
+    {
+        "name": "appearance=solid — done icon text-primary, hr bg-primary (pre-v0.3 behaviour)",
+        "props": { "appearance": "solid" },
+        "expected": {
+            "stateColors": "done=text-primary|current=text-base-content|upcoming=text-base-content/40|default=text-primary",
+            "hrColors": "done=bg-primary|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-primary"
+        }
+    },
+    {
+        "name": "appearance=solid + horizontal + compact",
+        "props": { "appearance": "solid", "orientation": "horizontal", "compact": true },
+        "expected": {
+            "root": "timeline timeline-horizontal timeline-compact",
+            "stateColors": "done=text-primary|current=text-base-content|upcoming=text-base-content/40|default=text-primary",
+            "hrColors": "done=bg-primary|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-primary"
+        }
+    },
+    {
+        "name": "appearance=soft + snap=true (defaults co-emit muted colours)",
+        "props": { "appearance": "soft", "snap": true },
+        "expected": {
+            "root": "timeline timeline-vertical timeline-snap-icon",
+            "stateColors": "done=text-primary/70|current=text-base-content|upcoming=text-base-content/40|default=text-primary/70",
+            "hrColors": "done=bg-primary/30|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-primary/30"
+        }
     }
 ]

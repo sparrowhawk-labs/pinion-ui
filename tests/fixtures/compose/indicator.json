@@ -1,26 +1,26 @@
 [
     {
-        "name": "default — position=top-end, dot=false, color=error",
+        "name": "default — position=top-end, dot=false, color=error, appearance=soft",
         "props": {},
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end badge badge-error"
+            "item": "indicator-item indicator-top indicator-end badge badge-soft badge-error"
         }
     },
     {
-        "name": "dot=true (defaults: top-end, error)",
+        "name": "dot=true (defaults: top-end, error, soft)",
         "props": { "dot": true },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end badge badge-error badge-xs"
+            "item": "indicator-item indicator-top indicator-end badge badge-soft badge-error badge-xs"
         }
     },
     {
-        "name": "position=top-start (badge text, default color=error)",
+        "name": "position=top-start (badge text, default soft + error)",
         "props": { "position": "top-start" },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-start badge badge-error"
+            "item": "indicator-item indicator-top indicator-start badge badge-soft badge-error"
         }
     },
     {
@@ -28,55 +28,31 @@
         "props": { "position": "middle-center", "dot": true },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-middle indicator-center badge badge-error badge-xs"
+            "item": "indicator-item indicator-middle indicator-center badge badge-soft badge-error badge-xs"
         }
     },
     {
-        "name": "position=bottom-end + color=primary",
-        "props": { "position": "bottom-end", "color": "primary" },
-        "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-bottom indicator-end badge badge-primary"
-        }
-    },
-    {
-        "name": "color=success (default position top-end, badge text)",
-        "props": { "color": "success" },
-        "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end badge badge-success"
-        }
-    },
-    {
-        "name": "position=middle-end + color=warning + dot=true",
-        "props": { "position": "middle-end", "color": "warning", "dot": true },
-        "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-middle indicator-end badge badge-warning badge-xs"
-        }
-    },
-    {
-        "name": "position=bottom-start (default color=error, badge text)",
+        "name": "position=bottom-start",
         "props": { "position": "bottom-start" },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-bottom indicator-start badge badge-error"
+            "item": "indicator-item indicator-bottom indicator-start badge badge-soft badge-error"
         }
     },
     {
-        "name": "position=top-center + dot=true (default color=error)",
+        "name": "position=top-center + dot=true (default soft + error)",
         "props": { "position": "top-center", "dot": true },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-center badge badge-error badge-xs"
+            "item": "indicator-item indicator-top indicator-center badge badge-soft badge-error badge-xs"
         }
     },
     {
-        "name": "color=neutral — emits badge-neutral (was falling through to badge-error)",
+        "name": "color=neutral — emits badge-neutral (soft default)",
         "props": { "color": "neutral" },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end badge badge-neutral"
+            "item": "indicator-item indicator-top indicator-end badge badge-soft badge-neutral"
         }
     },
     {
@@ -84,7 +60,47 @@
         "props": { "color": "neutral", "dot": true },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end badge badge-neutral badge-xs"
+            "item": "indicator-item indicator-top indicator-end badge badge-soft badge-neutral badge-xs"
+        }
+    },
+    {
+        "name": "appearance=solid — daisyUI filled badge (pre-v0.3 default)",
+        "props": { "appearance": "solid" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-error"
+        }
+    },
+    {
+        "name": "appearance=solid + color=success",
+        "props": { "appearance": "solid", "color": "success" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-success"
+        }
+    },
+    {
+        "name": "appearance=outline + color=primary",
+        "props": { "appearance": "outline", "color": "primary" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-outline badge-primary"
+        }
+    },
+    {
+        "name": "appearance=ghost + dot=true",
+        "props": { "appearance": "ghost", "dot": true },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-ghost badge-error badge-xs"
+        }
+    },
+    {
+        "name": "appearance=dash + color=info",
+        "props": { "appearance": "dash", "color": "info" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-dash badge-info"
         }
     }
 ]

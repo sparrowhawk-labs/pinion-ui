@@ -31,9 +31,9 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-divider>`](./divider.md) | Horizontal or vertical separator with optional label. (daisyUI `divider-horizontal` ↔ vertical naming inverted; this wrapper normalizes.) |
 | [`<x-kbd>`](./kbd.md) | Keyboard-key display (`<kbd>`) — sizes, color variants, often nested in buttons for shortcuts. |
 | [`<x-table-scroll>`](./table-scroll.md) | Overflow-x wrapper for tables that keeps the page from flexing on narrow viewports. |
-| [`<x-timeline>`](./timeline.md) | Vertical timeline of events — start/middle/end slots per item, optional icon/color per node. |
+| [`<x-timeline>`](./timeline.md) | Vertical timeline of events — per-item `state` (`done`/`current`/`upcoming`), `appearance="soft"` default (v0.3) for muted connector colours, `'solid'` for the pre-v0.3 saturated look. |
 | [`<x-stat>`](./stat.md) | Single statistic block — label / value / change indicator. Group via flex/grid. |
-| [`<x-indicator>`](./indicator.md) | Positions a badge/dot at a corner of arbitrary child content (notification counters, status dots). |
+| [`<x-indicator>`](./indicator.md) | Positions a badge/dot at a corner of arbitrary child content (notification counters, status dots). `appearance="soft"` default (v0.3) with `'solid'`/`'outline'`/`'ghost'`/`'dash'` opt-ins. |
 
 ## Feedback
 

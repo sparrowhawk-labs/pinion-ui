@@ -10,7 +10,7 @@ While in `0.x`, the API surface is stable in spirit but **not yet under a 1.0 co
 - **Minor (`0.X.0` → `0.X+1.0`)** — new components, new props, default-behaviour changes that improve the common case. May break consumers who relied on a specific default value or class string. Read the release notes before upgrading.
 - **Major (`0.x` → `1.0`)** — declared once the API is considered stable. After 1.0, breaking changes live in major versions only.
 
-In `0.x`, we err toward **adding new opt-in props** rather than silently flipping defaults. When we do flip a default — e.g. `<x-checkbox appearance>` `'solid'` → `'soft'` in v0.2.0, `<x-collapse icon>` `'arrow'` → `null` in v0.2.1 — it is called out in the release notes and the previous behaviour remains opt-in via the original value.
+In `0.x`, we err toward **adding new opt-in props** rather than silently flipping defaults. When we do flip a default — e.g. `<x-checkbox appearance>` `'solid'` → `'soft'` in v0.2.0, `<x-collapse icon>` `'arrow'` → `null` in v0.2.1, `<x-indicator appearance>` and `<x-timeline appearance>` introduced as `'soft'` in v0.3.0 (effectively flipping the prior implicit `'solid'`) — it is called out in the release notes and the previous behaviour remains opt-in via the original value (`appearance="solid"`).
 
 ## What counts as a BC break
 

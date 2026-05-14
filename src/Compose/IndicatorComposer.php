@@ -6,22 +6,23 @@ class IndicatorComposer
 {
     public static function compose(array $props): array
     {
-        $position = $props['position'] ?? 'top-end';
-        $dot      = array_key_exists('dot', $props) ? (bool) $props['dot'] : false;
-        $color    = $props['color']    ?? 'error';
+        $position   = $props['position']   ?? 'top-end';
+        $dot        = array_key_exists('dot', $props) ? (bool) $props['dot'] : false;
+        $color      = $props['color']      ?? 'error';
+        $appearance = $props['appearance'] ?? 'soft';
 
         return [
             'root' => 'indicator',
-            'item' => self::item($position, $dot, $color),
+            'item' => self::item($position, $dot, $color, $appearance),
         ];
     }
 
-    private static function item(string $position, bool $dot, ?string $color): string
+    private static function item(string $position, bool $dot, ?string $color, string $appearance): string
     {
         $parts = array_filter([
             'indicator-item',
             self::positionClass($position),
-            self::badgeClasses($color, $dot),
+            self::badgeClasses($color, $dot, $appearance),
         ], fn ($s) => $s !== '');
 
         return implode(' ', $parts);
@@ -42,7 +43,7 @@ class IndicatorComposer
         };
     }
 
-    private static function badgeClasses(?string $color, bool $dot): string
+    private static function badgeClasses(?string $color, bool $dot, string $appearance): string
     {
         $colorClass = match ($color) {
             'primary'   => 'badge-primary',
@@ -56,7 +57,20 @@ class IndicatorComposer
             default     => 'badge-error',
         };
 
-        $parts = ['badge', $colorClass];
+        $appearanceClass = match ($appearance) {
+            'soft'    => 'badge-soft',
+            'outline' => 'badge-outline',
+            'ghost'   => 'badge-ghost',
+            'dash'    => 'badge-dash',
+            default   => '', // 'solid' or unknown — daisyUI's filled default
+        };
+
+        $parts = array_filter([
+            'badge',
+            $appearanceClass,
+            $colorClass,
+        ], fn ($s) => $s !== '');
+
         if ($dot) {
             $parts[] = 'badge-xs';
         }
