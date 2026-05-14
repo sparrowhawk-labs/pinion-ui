@@ -14,6 +14,7 @@ class UiInstall extends Command
         {--skip-npm : Skip adding npm dependencies}
         {--skip-css : Skip CSS file modifications}
         {--skip-alpine : Skip Alpine.js setup in app.js}
+        {--skip-layout : Skip patching the consumer layout <html> data-theme}
         {--tune-only= : Only include specific tune presets (comma-separated)}';
 
     protected $description = 'Install pinion-ui v2 components with required dependencies';
@@ -45,6 +46,13 @@ class UiInstall extends Command
             $this->setupAlpineJs();
         }
 
+        // Patch the consumer's root layout <html ...> tag so the pinion theme
+        // is explicit. The theme is also `default: true` in pinion-ui.css, so
+        // missing the patch only loses discoverability, not functionality.
+        if (!$this->option('skip-layout')) {
+            $this->setupLayout();
+        }
+
         // Add AI-agent reference to CLAUDE.md
         $addToClaude = $this->option('ai') || $this->option('claude');
         if (!$addToClaude) {
@@ -60,8 +68,10 @@ class UiInstall extends Command
         $this->line('  Next steps:');
         $this->line('    1. Run: npm install');
         $this->line('    2. Run: npm run build');
-        $this->line('    3. Set <html data-theme="light" data-tune="default"> in your layout');
-        $this->line('    4. Use: <x-button color="primary">Click</x-button>');
+        $this->line('    3. Use: <x-button color="primary">Click</x-button>');
+        $this->newLine();
+        $this->line('  Theme: pinion (warm cream + amber accent) is shipped as the default.');
+        $this->line('  Switch with <html data-theme="pinion-dark"> or any other daisyUI theme.');
         $this->newLine();
         $this->line('  Documentation:');
         $this->line('    - README:     vendor/sparrowhawk-labs/pinion-ui/README.md');
@@ -267,6 +277,103 @@ JS;
         $content = $alpineSetup . $content;
         File::put($appJsPath, $content);
         $this->info('  ✓ Added Alpine.js + plugins to resources/js/app.js');
+    }
+
+    protected function setupLayout(): void
+    {
+        // Search standard layout locations in order. Most Laravel apps put
+        // the root <html> in one of these; the first hit wins. If the
+        // consumer's app uses a non-standard layout, they get a warning
+        // and a manual instruction.
+        $candidates = [
+            resource_path('views/components/layouts/app.blade.php'),
+            resource_path('views/layouts/app.blade.php'),
+            resource_path('views/app.blade.php'),
+        ];
+
+        $layoutPath = null;
+        foreach ($candidates as $candidate) {
+            if (File::exists($candidate)) {
+                $layoutPath = $candidate;
+                break;
+            }
+        }
+
+        if ($layoutPath === null) {
+            $this->warn('  No standard layout found (looked for components/layouts/app, layouts/app, app).');
+            $this->line('    Manually add data-theme="pinion" data-tune="default" to your <html> tag.');
+            return;
+        }
+
+        $relative = $this->relativeLayoutPath($layoutPath);
+        $content = File::get($layoutPath);
+
+        // Blade-aware <html ...> match. The naive `[^>]*` breaks on layouts
+        // like `<html lang="{{ ... app()->getLocale() ... }}">` because the
+        // `>` inside `app()->` ends the match prematurely. So we explicitly
+        // skip over `{{ ... }}` (and `{!! ... !!}`) blocks before consuming
+        // any other non-`>` char. The `s` modifier lets the html tag span
+        // multiple lines, which a few Laravel skeletons do.
+        $htmlPattern = '/<html\b((?:\{\{(?:(?!\}\}).)*?\}\}|\{!!(?:(?!!!\}).)*?!!\}|[^>])*?)>/si';
+        if (!preg_match($htmlPattern, $content, $matches)) {
+            $this->warn("  No <html> tag found in {$relative}. Skipping.");
+            return;
+        }
+
+        $attrs = $matches[1];
+
+        // Three cases:
+        //   1. data-theme="pinion"        → idempotent no-op
+        //   2. data-theme="something-else" → migrate with confirmation
+        //      (v0.4.0 ships pinion as the brand default; the previous
+        //       ui:install recommendation was data-theme="light", so most
+        //       existing consumers will hit this path)
+        //   3. no data-theme              → append data-theme="pinion"
+        //      (+ data-tune="default" if missing too)
+        if (preg_match('/data-theme\s*=\s*["\']pinion["\']/', $attrs)) {
+            $this->line("    - {$relative}: <html data-theme=\"pinion\"> already present");
+            return;
+        }
+
+        if (preg_match('/data-theme\s*=\s*["\']([^"\']+)["\']/', $attrs, $themeMatch)) {
+            $currentTheme = $themeMatch[1];
+            $migrate = $this->confirm(
+                "  {$relative} has data-theme=\"{$currentTheme}\". Switch to \"pinion\" (v0.4.0 brand default)?",
+                true
+            );
+            if (!$migrate) {
+                $this->line("    - {$relative}: kept data-theme=\"{$currentTheme}\"");
+                return;
+            }
+            $newAttrs = preg_replace(
+                '/data-theme\s*=\s*["\'][^"\']*["\']/',
+                'data-theme="pinion"',
+                $attrs,
+                1
+            );
+            $newTag = '<html' . $newAttrs . '>';
+            $content = preg_replace($htmlPattern, $newTag, $content, 1);
+            File::put($layoutPath, $content);
+            $this->info("  ✓ {$relative}: data-theme=\"{$currentTheme}\" → \"pinion\"");
+            return;
+        }
+
+        // No data-theme — append. Also append data-tune="default" if it's
+        // missing, since the tune system is part of the bundle and a blank
+        // <html> with no data-tune renders the implicit `default` tune anyway.
+        $additions = ' data-theme="pinion"';
+        if (!preg_match('/data-tune\s*=/', $attrs)) {
+            $additions .= ' data-tune="default"';
+        }
+        $newTag = '<html' . rtrim($attrs) . $additions . '>';
+        $content = preg_replace($htmlPattern, $newTag, $content, 1);
+        File::put($layoutPath, $content);
+        $this->info("  ✓ {$relative}: added data-theme=\"pinion\"");
+    }
+
+    protected function relativeLayoutPath(string $absolute): string
+    {
+        return ltrim(str_replace(base_path(), '', $absolute), '/');
     }
 
     protected function addToClaudeMd(): void
