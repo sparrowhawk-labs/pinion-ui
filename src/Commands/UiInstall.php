@@ -9,7 +9,8 @@ use SparrowhawkLabs\PinionUi\PinionUiServiceProvider;
 class UiInstall extends Command
 {
     protected $signature = 'ui:install
-        {--claude : Add reference to CLAUDE.md}
+        {--ai : Add AI-agent reference to CLAUDE.md (points at AGENTS.md)}
+        {--claude : Alias of --ai (kept for compatibility)}
         {--skip-npm : Skip adding npm dependencies}
         {--skip-css : Skip CSS file modifications}
         {--skip-alpine : Skip Alpine.js setup in app.js}
@@ -44,10 +45,10 @@ class UiInstall extends Command
             $this->setupAlpineJs();
         }
 
-        // Add to CLAUDE.md
-        $addToClaude = $this->option('claude');
+        // Add AI-agent reference to CLAUDE.md
+        $addToClaude = $this->option('ai') || $this->option('claude');
         if (!$addToClaude) {
-            $addToClaude = $this->confirm('Add component reference to CLAUDE.md?', true);
+            $addToClaude = $this->confirm('Add pinion-ui AI-agent reference to CLAUDE.md? (so Claude Code / other agents pick up AGENTS.md)', true);
         }
         if ($addToClaude) {
             $this->addToClaudeMd();
@@ -220,7 +221,7 @@ JS;
         }
 
         $snippet = File::get($snippetPath);
-        $marker = '## pinion-ui Components';
+        $marker = '## pinion-ui (AI agents)';
 
         if (File::exists($claudeMdPath)) {
             $existing = File::get($claudeMdPath);

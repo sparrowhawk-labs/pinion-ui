@@ -17,15 +17,16 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
 - **Compose-layer architecture** — class strings live in typed PHP composers (`InputComposer`, `SelectComposer`, etc.), not scattered in Blade. Variants/sizes/states stay testable and refactor-safe.
 - **Dual-use output** — render via `<x-button>` or copy the rendered HTML; it's plain Tailwind + daisyUI + Alpine.
+- **LLM-native docs** — ships with [`AGENTS.md`](./AGENTS.md) and per-component reference pages under [`reference/components/`](./reference/components/index.md). `php artisan ui:install --ai` wires the entry pointer into your project's `CLAUDE.md` so Claude Code / Cursor / Aider can look up props and gotchas in one place — no hallucinated props, no class-name guesses.
 
 ## Installation
 
 ```bash
 composer require sparrowhawk-labs/pinion-ui
-php artisan ui:install
+php artisan ui:install --ai
 ```
 
-`ui:install` adds the required npm dependencies (`daisyui ^5`, `alpinejs ^3`), wires up `resources/css/app.css` and `resources/js/app.js`, and (optionally) writes a `## pinion-ui` reference block into your project's `CLAUDE.md`.
+`ui:install` adds the required npm dependencies (`daisyui ^5`, `alpinejs ^3`), wires up `resources/css/app.css` and `resources/js/app.js`, and with `--ai` appends a `## pinion-ui (AI agents)` block to your project's `CLAUDE.md` pointing at `vendor/sparrowhawk-labs/pinion-ui/AGENTS.md`. Drop `--ai` to skip the AI snippet — you can re-run later, or copy the contents of `vendor/sparrowhawk-labs/pinion-ui/CLAUDE_SNIPPET.md` into your own `AGENTS.md` if you prefer that convention.
 
 Then build:
 
