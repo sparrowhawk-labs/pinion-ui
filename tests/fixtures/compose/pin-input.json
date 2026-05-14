@@ -1,0 +1,56 @@
+[
+    {
+        "name": "default — size=md, no error",
+        "props": {},
+        "expected": {
+            "wrapper": "flex items-center gap-2",
+            "box": "rounded-[var(--radius-field)] bg-base-100 text-center font-semibold tabular-nums focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed w-12 h-[var(--h-field-md)] text-xl tune-border border-base-300 focus:border-primary focus:ring-2 focus:ring-primary/30",
+            "labelColor": "text-base-content",
+            "hintColor": "text-base-content/50"
+        }
+    },
+    {
+        "name": "size=xs — smallest box w-8 + xs height",
+        "props": { "size": "xs" },
+        "expected": {
+            "box": "rounded-[var(--radius-field)] bg-base-100 text-center font-semibold tabular-nums focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed w-8 h-[var(--h-field-xs)] text-base tune-border border-base-300 focus:border-primary focus:ring-2 focus:ring-primary/30"
+        }
+    },
+    {
+        "name": "size=sm",
+        "props": { "size": "sm" },
+        "expected": {
+            "box": "rounded-[var(--radius-field)] bg-base-100 text-center font-semibold tabular-nums focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed w-10 h-[var(--h-field-sm)] text-lg tune-border border-base-300 focus:border-primary focus:ring-2 focus:ring-primary/30"
+        }
+    },
+    {
+        "name": "size=lg — w-14 + 2xl text",
+        "props": { "size": "lg" },
+        "expected": {
+            "box": "rounded-[var(--radius-field)] bg-base-100 text-center font-semibold tabular-nums focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed w-14 h-[var(--h-field-lg)] text-2xl tune-border border-base-300 focus:border-primary focus:ring-2 focus:ring-primary/30"
+        }
+    },
+    {
+        "name": "error state — box gets error border + ring; label/hint flip",
+        "props": { "error": "Code expired" },
+        "expected": {
+            "box": "rounded-[var(--radius-field)] bg-base-100 text-center font-semibold tabular-nums focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed w-12 h-[var(--h-field-md)] text-xl tune-border border-error focus:border-error focus:ring-2 focus:ring-error/30",
+            "labelColor": "text-error",
+            "hintColor": "text-error"
+        }
+    },
+    {
+        "name": "wrapper is stable across sizes",
+        "props": { "size": "lg" },
+        "expected": {
+            "wrapper": "flex items-center gap-2"
+        }
+    },
+    {
+        "name": "unknown size falls back to md",
+        "props": { "size": "huge" },
+        "expected": {
+            "box": "rounded-[var(--radius-field)] bg-base-100 text-center font-semibold tabular-nums focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed w-12 h-[var(--h-field-md)] text-xl tune-border border-base-300 focus:border-primary focus:ring-2 focus:ring-primary/30"
+        }
+    }
+]
