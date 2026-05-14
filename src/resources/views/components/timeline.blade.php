@@ -3,7 +3,7 @@
     'orientation' => 'vertical',
     'compact' => false,
     'snap' => false,
-    'appearance' => 'soft',
+    'appearance' => 'solid',
 ])
 
 @php

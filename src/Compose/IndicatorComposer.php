@@ -9,7 +9,7 @@ class IndicatorComposer
         $position   = $props['position']   ?? 'top-end';
         $dot        = array_key_exists('dot', $props) ? (bool) $props['dot'] : false;
         $color      = $props['color']      ?? 'error';
-        $appearance = $props['appearance'] ?? 'soft';
+        $appearance = $props['appearance'] ?? 'solid';
 
         return [
             'root' => 'indicator',
