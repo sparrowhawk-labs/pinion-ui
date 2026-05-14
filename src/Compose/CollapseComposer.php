@@ -6,7 +6,7 @@ class CollapseComposer
 {
     public static function compose(array $props): array
     {
-        $icon     = array_key_exists('icon', $props) ? $props['icon'] : 'arrow';
+        $icon     = array_key_exists('icon', $props) ? $props['icon'] : null;
         $bordered = array_key_exists('bordered', $props) ? (bool) $props['bordered'] : true;
 
         return [

@@ -1,50 +1,57 @@
 [
     {
-        "name": "default — no props (icon=arrow, bordered=true)",
+        "name": "default — no props (no icon, bordered=true)",
         "props": {},
         "expected": {
-            "root": "collapse collapse-arrow border border-base-300 bg-base-100",
+            "root": "collapse border border-base-300 bg-base-100",
             "title": "collapse-title font-semibold",
             "content": "collapse-content text-sm"
         }
     },
     {
-        "name": "icon=plus (bordered default true)",
+        "name": "icon=arrow (opt-in)",
+        "props": { "icon": "arrow" },
+        "expected": {
+            "root": "collapse collapse-arrow border border-base-300 bg-base-100"
+        }
+    },
+    {
+        "name": "icon=plus (opt-in)",
         "props": { "icon": "plus" },
         "expected": {
             "root": "collapse collapse-plus border border-base-300 bg-base-100"
         }
     },
     {
-        "name": "icon=null — no icon modifier",
+        "name": "icon=null — explicit no icon (same as default)",
         "props": { "icon": null },
         "expected": {
             "root": "collapse border border-base-300 bg-base-100"
         }
     },
     {
-        "name": "bordered=false (icon default arrow)",
+        "name": "bordered=false (no icon default)",
         "props": { "bordered": false },
         "expected": {
-            "root": "collapse collapse-arrow bg-base-100"
+            "root": "collapse bg-base-100"
         }
     },
     {
         "name": "open=true — does not affect class output (composer is class-only)",
         "props": { "open": true },
         "expected": {
-            "root": "collapse collapse-arrow border border-base-300 bg-base-100"
+            "root": "collapse border border-base-300 bg-base-100"
         }
     },
     {
         "name": "title prop + open=true — composer ignores title/open, root stays default",
         "props": { "title": "What is this?", "open": true },
         "expected": {
-            "root": "collapse collapse-arrow border border-base-300 bg-base-100"
+            "root": "collapse border border-base-300 bg-base-100"
         }
     },
     {
-        "name": "icon=arrow + bordered=true (explicit defaults)",
+        "name": "icon=arrow + bordered=true",
         "props": { "icon": "arrow", "bordered": true },
         "expected": {
             "root": "collapse collapse-arrow border border-base-300 bg-base-100"
