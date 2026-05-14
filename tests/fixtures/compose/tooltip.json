@@ -1,93 +1,94 @@
 [
     {
-        "name": "default — position=top, color=null (→ tooltip-light), open=false",
+        "name": "default — position=top, color=null (light = bg-base-200 soft)",
         "props": {},
         "expected": {
-            "root": "tooltip tooltip-top tooltip-light"
+            "root": "relative inline-block",
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-base-200 text-base-content border-base-300",
+            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-base-200 border-base-300",
+            "placement": "top",
+            "forceOpen": false
         }
     },
     {
-        "name": "position=right (default color → tooltip-light)",
+        "name": "position=right",
         "props": { "position": "right" },
         "expected": {
-            "root": "tooltip tooltip-right tooltip-light"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border left-full top-1/2 -translate-y-1/2 ml-2 bg-base-200 text-base-content border-base-300",
+            "arrow": "absolute w-2 h-2 rotate-45 left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 border-l border-b bg-base-200 border-base-300",
+            "placement": "right"
         }
     },
     {
-        "name": "position=bottom (default color → tooltip-light)",
+        "name": "position=bottom",
         "props": { "position": "bottom" },
         "expected": {
-            "root": "tooltip tooltip-bottom tooltip-light"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border top-full left-1/2 -translate-x-1/2 mt-2 bg-base-200 text-base-content border-base-300",
+            "arrow": "absolute w-2 h-2 rotate-45 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 border-l border-t bg-base-200 border-base-300",
+            "placement": "bottom"
         }
     },
     {
-        "name": "position=left (default color → tooltip-light)",
+        "name": "position=left",
         "props": { "position": "left" },
         "expected": {
-            "root": "tooltip tooltip-left tooltip-light"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border right-full top-1/2 -translate-y-1/2 mr-2 bg-base-200 text-base-content border-base-300",
+            "arrow": "absolute w-2 h-2 rotate-45 right-0 top-1/2 translate-x-1/2 -translate-y-1/2 border-r border-t bg-base-200 border-base-300",
+            "placement": "left"
         }
     },
     {
-        "name": "color=primary — position default top",
+        "name": "color=primary — bg-primary, primary-content text, primary border on bubble + arrow",
         "props": { "color": "primary" },
         "expected": {
-            "root": "tooltip tooltip-top tooltip-primary"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-primary-content border-primary",
+            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-primary border-primary"
         }
     },
     {
-        "name": "color=success + position=bottom",
-        "props": { "color": "success", "position": "bottom" },
-        "expected": {
-            "root": "tooltip tooltip-bottom tooltip-success"
-        }
-    },
-    {
-        "name": "open=true (default color → tooltip-light)",
-        "props": { "open": true },
-        "expected": {
-            "root": "tooltip tooltip-top tooltip-light tooltip-open"
-        }
-    },
-    {
-        "name": "color=error + position=left + open=true",
-        "props": { "color": "error", "position": "left", "open": true },
-        "expected": {
-            "root": "tooltip tooltip-left tooltip-error tooltip-open"
-        }
-    },
-    {
-        "name": "color=info (no position override → top)",
-        "props": { "color": "info" },
-        "expected": {
-            "root": "tooltip tooltip-top tooltip-info"
-        }
-    },
-    {
-        "name": "color=neutral — emits no color class (daisyUI stock dark-neutral)",
+        "name": "color=neutral — daisyUI native dark bubble",
         "props": { "color": "neutral" },
         "expected": {
-            "root": "tooltip tooltip-top"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-neutral text-neutral-content border-neutral",
+            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-neutral border-neutral"
         }
     },
     {
-        "name": "color=base-100 — surface-tinted bubble with hairline ring",
+        "name": "color=base-100 — surface bubble with visible arrow (the v0.3.11 fix)",
         "props": { "color": "base-100" },
         "expected": {
-            "root": "tooltip tooltip-top tooltip-base-100"
-        }
-    },
-    {
-        "name": "color=base-200 — alias of tooltip-light",
-        "props": { "color": "base-200" },
-        "expected": {
-            "root": "tooltip tooltip-top tooltip-base-200"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-base-100 text-base-content border-base-300",
+            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-base-100 border-base-300"
         }
     },
     {
         "name": "color=base-300 — higher-contrast surface bubble",
-        "props": { "color": "base-300", "position": "bottom" },
+        "props": { "color": "base-300" },
         "expected": {
-            "root": "tooltip tooltip-bottom tooltip-base-300"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-base-300 text-base-content border-base-content/20",
+            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-base-300 border-base-content/20"
+        }
+    },
+    {
+        "name": "color=error + position=left",
+        "props": { "color": "error", "position": "left" },
+        "expected": {
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] shadow-md tune-border right-full top-1/2 -translate-y-1/2 mr-2 bg-error text-error-content border-error",
+            "arrow": "absolute w-2 h-2 rotate-45 right-0 top-1/2 translate-x-1/2 -translate-y-1/2 border-r border-t bg-error border-error"
+        }
+    },
+    {
+        "name": "open=true — forceOpen flips true (tooltip stays open regardless of hover)",
+        "props": { "open": true },
+        "expected": {
+            "forceOpen": true
+        }
+    },
+    {
+        "name": "unknown position falls back to top",
+        "props": { "position": "diagonal" },
+        "expected": {
+            "placement": "top"
         }
     }
 ]
