@@ -61,7 +61,7 @@ class UiInstall extends Command
         $this->line('    1. Run: npm install');
         $this->line('    2. Run: npm run build');
         $this->line('    3. Set <html data-theme="light" data-tune="default"> in your layout');
-        $this->line('    4. Use: <x-pn::button variant="primary">Click</x-pn::button>');
+        $this->line('    4. Use: <x-button color="primary">Click</x-button>');
         $this->newLine();
         $this->line('  Documentation:');
         $this->line('    - README:     vendor/sparrowhawk-labs/pinion-ui/README.md');
