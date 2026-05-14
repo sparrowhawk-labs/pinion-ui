@@ -9,14 +9,15 @@ class TimelineComposer
         $orientation = $props['orientation'] ?? 'vertical';
         $compact     = (bool) ($props['compact'] ?? false);
         $snap        = (bool) ($props['snap'] ?? false);
+        $appearance  = $props['appearance'] ?? 'soft';
 
         return [
             'root'        => self::root($orientation, $compact, $snap),
             'orientation' => self::orientationKey($orientation),
             'middle'      => 'timeline-middle',
             'box'         => 'timeline-box',
-            'stateColors' => self::stateColors(),
-            'hrColors'    => self::hrColors(),
+            'stateColors' => self::stateColors($appearance),
+            'hrColors'    => self::hrColors($appearance),
         ];
     }
 
@@ -49,31 +50,42 @@ class TimelineComposer
     }
 
     /**
-     * State → middle-icon color class. `done` uses primary, `current` uses
-     * full base-content (no fade), `upcoming` fades the icon. Default
-     * (no state) renders as `done` so a plain item still looks complete.
+     * State → middle-icon color class.
+     *
+     * `appearance='soft'` (default since v0.3.0): done/default segments use
+     * `text-primary/70` so a list of many done items reads as a calm gradient
+     * rather than a saturated wall of colour.
+     * `appearance='solid'`: pre-v0.3 behaviour, done/default use full `text-primary`.
+     * `current` and `upcoming` are independent of appearance.
      */
-    private static function stateColors(): string
+    private static function stateColors(string $appearance): string
     {
+        $done = $appearance === 'solid' ? 'text-primary' : 'text-primary/70';
+
         return implode('|', [
-            'done=text-primary',
+            "done={$done}",
             'current=text-base-content',
             'upcoming=text-base-content/40',
-            'default=text-primary',
+            "default={$done}",
         ]);
     }
 
     /**
-     * State → connector (<hr>) color class. Done segments use primary;
-     * everything else stays subdued.
+     * State → connector (<hr>) color class.
+     *
+     * `appearance='soft'` (default since v0.3.0): done segments use
+     * `bg-primary/30` for a muted connector. `appearance='solid'` keeps
+     * the pre-v0.3 full `bg-primary` line.
      */
-    private static function hrColors(): string
+    private static function hrColors(string $appearance): string
     {
+        $done = $appearance === 'solid' ? 'bg-primary' : 'bg-primary/30';
+
         return implode('|', [
-            'done=bg-primary',
+            "done={$done}",
             'current=bg-base-content/30',
             'upcoming=bg-base-content/15',
-            'default=bg-primary',
+            "default={$done}",
         ]);
     }
 

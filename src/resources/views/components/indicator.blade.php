@@ -2,6 +2,7 @@
     'position' => 'top-end',
     'dot' => false,
     'color' => 'error',
+    'appearance' => 'soft',
 ])
 
 @php
@@ -9,6 +10,7 @@
         'position' => $position,
         'dot' => $dot,
         'color' => $color,
+        'appearance' => $appearance,
     ]);
 @endphp
 

@@ -3,6 +3,7 @@
     'orientation' => 'vertical',
     'compact' => false,
     'snap' => false,
+    'appearance' => 'soft',
 ])
 
 @php
@@ -10,6 +11,7 @@
         'orientation' => $orientation,
         'compact' => $compact,
         'snap' => $snap,
+        'appearance' => $appearance,
     ]);
     $itemList = is_array($items) ? array_values($items) : [];
     $count = count($itemList);

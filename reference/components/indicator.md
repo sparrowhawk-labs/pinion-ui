@@ -17,6 +17,7 @@ Positions a badge or a small dot at a corner (or midpoint) of arbitrary child co
 | `position` | `'top-start' \| 'top-center' \| 'top-end' \| 'middle-start' \| 'middle-center' \| 'middle-end' \| 'bottom-start' \| 'bottom-center' \| 'bottom-end'` | `'top-end'` | Corner / midpoint anchor for the indicator. Maps to daisyUI's two-class pair (`indicator-top indicator-end`, etc.). |
 | `dot` | `bool` | `false` | If `true`, renders a small colored dot (`badge-xs`, no slot content). If `false`, renders a normal badge using the `badge` slot. |
 | `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'error'` | Indicator color. Drives `badge-{color}`. Defaults to `error` because the most common use case is unread / alert counts. |
+| `appearance` | `'soft' \| 'solid' \| 'outline' \| 'ghost' \| 'dash'` | `'soft'` | daisyUI badge style. `'soft'` (default since v0.3.0) renders a tinted bubble — easier on the eye than full saturated colour, especially when several indicators sit close together. `'solid'` matches pre-v0.3 default (full daisyUI badge fill). |
 
 All other attributes pass through to the root `<div>`.
 
@@ -67,9 +68,18 @@ All other attributes pass through to the root `<div>`.
 </x-indicator>
 ```
 
+### Pre-v0.3 saturated fill
+
+```blade
+<x-indicator appearance="solid" color="error">
+    <x-slot:badge>3</x-slot:badge>
+    <x-button appearance="ghost"><x-i type="bell" class="w-5 h-5" /></x-button>
+</x-indicator>
+```
+
 ## Class composition
 
-See [`src/Compose/IndicatorComposer.php`](../../src/Compose/IndicatorComposer.php). Returns `root` (`indicator`) and `item` (`indicator-item` + position pair + `badge` + `badge-{color}` + optional `badge-xs` when `dot=true`). Per `docs/daisyui/pages/indicator.md`, the daisyUI `indicator` utility positions absolute children relative to a wrapper that auto-sizes to its non-indicator child.
+See [`src/Compose/IndicatorComposer.php`](../../src/Compose/IndicatorComposer.php). Returns `root` (`indicator`) and `item` (`indicator-item` + position pair + `badge` + optional `badge-{soft|outline|ghost|dash}` appearance modifier + `badge-{color}` + optional `badge-xs` when `dot=true`). Per `docs/daisyui/pages/daisyui-5-components.md`, daisyUI's `badge` supports `soft / outline / dash / ghost` style modifiers natively in v5 — no custom tailwind utilities involved.
 
 ## Related
 
@@ -81,4 +91,5 @@ See [`src/Compose/IndicatorComposer.php`](../../src/Compose/IndicatorComposer.ph
 - The wrapper itself sizes to its child (the default slot), so position anchors are relative to the child's edges, not the page.
 - `dot=true` hides any content passed to the `badge` slot — the indicator becomes purely decorative.
 - `neutral` is supported as of v0.2.3 (was previously falling through to `badge-error` — a real bug). Use it for low-key indicator dots where the alert-feel of `error` is too loud.
+- **v0.3.0 default flip**: `appearance` now defaults to `'soft'` (was effectively `'solid'` before — there was no prop). Pass `appearance="solid"` to restore pre-v0.3 saturated fills. The visual difference is largest on `color="error"` notifications: solid bright red vs. soft rose tint.
 - For dynamic counts that may hit zero, conditionally render `<x-indicator>` outside the markup — there is no `hideOnZero` prop.

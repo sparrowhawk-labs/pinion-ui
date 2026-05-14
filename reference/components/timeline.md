@@ -18,6 +18,7 @@ Vertical (default) or horizontal timeline of events, built on daisyUI's `timelin
 | `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | `vertical` → `timeline-vertical`. `horizontal` → `timeline-horizontal` (events laid out left-to-right). |
 | `compact` | `bool` | `false` | Adds `timeline-compact` for tighter spacing — drops every item to the start side. |
 | `snap` | `bool` | `false` | Adds `timeline-snap-icon` so middle icons align to the start of the box rather than the centerline. |
+| `appearance` | `'soft' \| 'solid'` | `'soft'` | Saturation of the done/default state. `'soft'` (default since v0.3.0) uses `text-primary/70` for icons and `bg-primary/30` for connector lines — calmer when many items stack. `'solid'` restores pre-v0.3 full `text-primary` / `bg-primary` for stronger visual hierarchy. `current` and `upcoming` states are unaffected. |
 
 All other attributes pass through to the root `<ul>`.
 
@@ -68,6 +69,16 @@ This component is array-driven; it does not accept a default slot.
 ]" />
 ```
 
+### Pre-v0.3 solid saturation
+
+```blade
+<x-timeline appearance="solid" :items="[
+    ['time' => 'Step 1', 'title' => 'Sign up', 'state' => 'done'],
+    ['time' => 'Step 2', 'title' => 'Verify email', 'state' => 'done'],
+    ['time' => 'Step 3', 'title' => 'Invite team', 'state' => 'current'],
+]" />
+```
+
 ## Class composition
 
 See [`src/Compose/TimelineComposer.php`](../../src/Compose/TimelineComposer.php). Returns `root`, `orientation`, `middle`, `box`, `stateColors`, `hrColors`. State → color maps are pipe-joined strings consumed by the static helper `TimelineComposer::pick($map, $key)` (used inside the Blade view to look up per-item icon + connector colors without per-item PHP arrays). Missing or unknown `state` falls back to `done` (primary tint).
@@ -79,6 +90,7 @@ See [`src/Compose/TimelineComposer.php`](../../src/Compose/TimelineComposer.php)
 
 ## Notes
 
+- **v0.3.0 default flip**: `appearance` defaults to `'soft'` (was effectively `'solid'` before — there was no prop). Pass `appearance="solid"` for the previous full-saturation look. Most noticeable on dense logs where many `done` items would stack as a saturated wall of primary; soft reads as a calm vertical gradient.
 - Default item state is `done` (primary-tinted icon + connector). Pass `state="upcoming"` to fade items still ahead.
 - The middle icon is a hardcoded check-circle SVG; to customise per item, fork the blade view — there is currently no `icon` field on the item array.
 - Per `docs/daisyui/pages/timeline.md`, `timeline-compact` collapses all items onto the start side regardless of the per-item `side` field — pair it with consistent left-aligned items.
