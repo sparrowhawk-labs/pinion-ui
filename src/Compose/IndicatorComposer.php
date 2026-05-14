@@ -48,6 +48,7 @@ class IndicatorComposer
             'primary'   => 'badge-primary',
             'secondary' => 'badge-secondary',
             'accent'    => 'badge-accent',
+            'neutral'   => 'badge-neutral',
             'info'      => 'badge-info',
             'success'   => 'badge-success',
             'warning'   => 'badge-warning',

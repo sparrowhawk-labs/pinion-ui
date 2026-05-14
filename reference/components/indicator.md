@@ -16,7 +16,7 @@ Positions a badge or a small dot at a corner (or midpoint) of arbitrary child co
 |------|------|---------|-------------|
 | `position` | `'top-start' \| 'top-center' \| 'top-end' \| 'middle-start' \| 'middle-center' \| 'middle-end' \| 'bottom-start' \| 'bottom-center' \| 'bottom-end'` | `'top-end'` | Corner / midpoint anchor for the indicator. Maps to daisyUI's two-class pair (`indicator-top indicator-end`, etc.). |
 | `dot` | `bool` | `false` | If `true`, renders a small colored dot (`badge-xs`, no slot content). If `false`, renders a normal badge using the `badge` slot. |
-| `color` | `'primary' \| 'secondary' \| 'accent' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'error'` | Indicator color. Drives `badge-{color}`. Defaults to `error` because the most common use case is unread / alert counts. |
+| `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'error'` | Indicator color. Drives `badge-{color}`. Defaults to `error` because the most common use case is unread / alert counts. |
 
 All other attributes pass through to the root `<div>`.
 
@@ -80,5 +80,5 @@ See [`src/Compose/IndicatorComposer.php`](../../src/Compose/IndicatorComposer.ph
 
 - The wrapper itself sizes to its child (the default slot), so position anchors are relative to the child's edges, not the page.
 - `dot=true` hides any content passed to the `badge` slot — the indicator becomes purely decorative.
-- `neutral` is not a valid `color` for this component — the badge color list omits it because daisyUI's `badge-neutral` does not provide the high-contrast notification feel typically wanted here. Use a different color or extend with `class="badge-neutral"` if you really want it.
+- `neutral` is supported as of v0.2.3 (was previously falling through to `badge-error` — a real bug). Use it for low-key indicator dots where the alert-feel of `error` is too loud.
 - For dynamic counts that may hit zero, conditionally render `<x-indicator>` outside the markup — there is no `hideOnZero` prop.

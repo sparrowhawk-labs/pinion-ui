@@ -168,6 +168,10 @@ Pinion UI is part of the [Sparrowhawk Labs](https://sparrowhawk-labs.dev) `pinio
 - **`sparrowhawk-labs/pinion-ui`** *(this package)*
 - `sparrowhawk-labs/sparrowhawk` *(framework core, in design)*
 
+## Versioning
+
+Semantic versioning with BC discipline — see [SEMVER.md](./SEMVER.md). TL;DR while in `0.x`: patches are safe to bump, minors may flip defaults (always called out in the release notes), and breaking removals only happen at minor or major boundaries — never in a patch.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
