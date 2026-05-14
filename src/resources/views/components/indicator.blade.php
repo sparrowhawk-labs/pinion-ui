@@ -2,7 +2,7 @@
     'position' => 'top-end',
     'dot' => false,
     'color' => 'error',
-    'appearance' => 'soft',
+    'appearance' => 'solid',
 ])
 
 @php

@@ -17,7 +17,7 @@ Positions a badge or a small dot at a corner (or midpoint) of arbitrary child co
 | `position` | `'top-start' \| 'top-center' \| 'top-end' \| 'middle-start' \| 'middle-center' \| 'middle-end' \| 'bottom-start' \| 'bottom-center' \| 'bottom-end'` | `'top-end'` | Corner / midpoint anchor for the indicator. Maps to daisyUI's two-class pair (`indicator-top indicator-end`, etc.). |
 | `dot` | `bool` | `false` | If `true`, renders a small colored dot (`badge-xs`, no slot content). If `false`, renders a normal badge using the `badge` slot. |
 | `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'error'` | Indicator color. Drives `badge-{color}`. Defaults to `error` because the most common use case is unread / alert counts. |
-| `appearance` | `'soft' \| 'solid' \| 'outline' \| 'ghost' \| 'dash'` | `'soft'` | daisyUI badge style. `'soft'` (default since v0.3.0) renders a tinted bubble — easier on the eye than full saturated colour, especially when several indicators sit close together. `'solid'` matches pre-v0.3 default (full daisyUI badge fill). |
+| `appearance` | `'solid' \| 'soft' \| 'outline' \| 'ghost' \| 'dash'` | `'solid'` | daisyUI badge style. `'solid'` (default — daisyUI's full filled badge) keeps the alert-feel of a notification dot strong. Opt into `'soft'` for a tinted bubble when indicators stack close together and the saturated fill feels heavy; `'outline'` / `'ghost'` / `'dash'` are also daisyUI 5 natives. |
 
 All other attributes pass through to the root `<div>`.
 
@@ -68,10 +68,10 @@ All other attributes pass through to the root `<div>`.
 </x-indicator>
 ```
 
-### Pre-v0.3 saturated fill
+### Soft variant (tinted bubble)
 
 ```blade
-<x-indicator appearance="solid" color="error">
+<x-indicator appearance="soft" color="error">
     <x-slot:badge>3</x-slot:badge>
     <x-button appearance="ghost"><x-i type="bell" class="w-5 h-5" /></x-button>
 </x-indicator>
@@ -91,5 +91,5 @@ See [`src/Compose/IndicatorComposer.php`](../../src/Compose/IndicatorComposer.ph
 - The wrapper itself sizes to its child (the default slot), so position anchors are relative to the child's edges, not the page.
 - `dot=true` hides any content passed to the `badge` slot — the indicator becomes purely decorative.
 - `neutral` is supported as of v0.2.3 (was previously falling through to `badge-error` — a real bug). Use it for low-key indicator dots where the alert-feel of `error` is too loud.
-- **v0.3.0 default flip**: `appearance` now defaults to `'soft'` (was effectively `'solid'` before — there was no prop). Pass `appearance="solid"` to restore pre-v0.3 saturated fills. The visual difference is largest on `color="error"` notifications: solid bright red vs. soft rose tint.
+- **v0.3.4 default reverted**: `appearance` defaults to `'solid'` again. v0.3.0 briefly flipped this to `'soft'` for the calmer stack-of-badges case, but in practice the saturated fill is what reads as "notification needs attention" — the soft tint was too quiet. Pass `appearance="soft"` to opt back into the muted bubble per call site.
 - For dynamic counts that may hit zero, conditionally render `<x-indicator>` outside the markup — there is no `hideOnZero` prop.

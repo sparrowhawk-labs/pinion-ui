@@ -9,7 +9,7 @@ class TimelineComposer
         $orientation = $props['orientation'] ?? 'vertical';
         $compact     = (bool) ($props['compact'] ?? false);
         $snap        = (bool) ($props['snap'] ?? false);
-        $appearance  = $props['appearance'] ?? 'soft';
+        $appearance  = $props['appearance'] ?? 'solid';
 
         return [
             'root'        => self::root($orientation, $compact, $snap),
