@@ -52,17 +52,19 @@ The wrapper softens hover. To keep the **active** button fully saturated, use `!
 <div x-data="{ active: 'center' }">
     <x-button-group>
         <x-button appearance="outline" color="neutral"
-                  :class="active === 'left'   && '!bg-primary !text-primary-content !border-primary'"
-                  @click="active = 'left'">Left</x-button>
+                  x-bind:class="active === 'left'   && '!bg-primary !text-primary-content !border-primary'"
+                  x-on:click="active = 'left'">Left</x-button>
         <x-button appearance="outline" color="neutral"
-                  :class="active === 'center' && '!bg-primary !text-primary-content !border-primary'"
-                  @click="active = 'center'">Center</x-button>
+                  x-bind:class="active === 'center' && '!bg-primary !text-primary-content !border-primary'"
+                  x-on:click="active = 'center'">Center</x-button>
         <x-button appearance="outline" color="neutral"
-                  :class="active === 'right'  && '!bg-primary !text-primary-content !border-primary'"
-                  @click="active = 'right'">Right</x-button>
+                  x-bind:class="active === 'right'  && '!bg-primary !text-primary-content !border-primary'"
+                  x-on:click="active = 'right'">Right</x-button>
     </x-button-group>
 </div>
 ```
+
+> ⚠ **Inside `<x-...>` Blade components, use `x-bind:class` / `x-on:click` — not `:class` / `@click`.** Blade's anonymous-component compiler treats `:`-prefixed attributes as PHP expressions ("pass this PHP value to the prop"), so `:class="active === 'left'"` evaluates `active` as a PHP variable and crashes with `Undefined constant`. The full Alpine prefixes `x-bind:` and `x-on:` bypass Blade's interpretation and reach Alpine untouched. On a plain HTML element (`<button>`, `<div>`) the shorthand is fine.
 
 ### Icon-only toolbar
 

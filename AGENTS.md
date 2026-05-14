@@ -61,6 +61,22 @@ For any component, read `reference/components/{name}.md`:
 
 `sparrowhawk-labs/pinion-icons` — every component that renders icons (`icon=`, `iconRight=`, internal `<x-i>`) needs it installed. The `pinion-ui` package hard-requires it.
 
+## Alpine inside `<x-...>` components — use the full prefix
+
+Blade's anonymous-component compiler treats `:prop="..."` and `@event="..."` as **PHP expressions** ("pass this PHP value to the prop / event"). Alpine's shorthand `:class` / `:value` / `@click` therefore breaks at runtime when used on `<x-button>`, `<x-input>`, or any other `<x-...>` element — typically with `Undefined constant "..."`.
+
+Use the full Alpine prefix on `<x-...>` elements:
+
+```blade
+{{-- ✗ breaks: Blade evaluates `active === 'left'` as PHP --}}
+<x-button :class="active === 'left' && '!bg-primary'" @click="active = 'left'">Left</x-button>
+
+{{-- ✓ works: full Alpine prefix bypasses Blade --}}
+<x-button x-bind:class="active === 'left' && '!bg-primary'" x-on:click="active = 'left'">Left</x-button>
+```
+
+Shorthand `:class` / `@click` is fine on plain HTML elements (`<button>`, `<div>`, `<input>`) — Blade only intercepts when the tag starts with `<x-`.
+
 ## When in doubt
 
 1. Read the component's reference doc under `reference/components/`.
