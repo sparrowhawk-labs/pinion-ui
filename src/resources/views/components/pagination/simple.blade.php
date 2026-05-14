@@ -16,12 +16,16 @@
     'color' => 'primary',
     'appearance' => 'soft',
 
-    'prevLabel' => '前へ',
-    'nextLabel' => '次へ',
-    'infoTemplate' => '全 :total 件中 :first - :last 件',
+    'prevLabel' => null,
+    'nextLabel' => null,
+    'infoTemplate' => null,
 ])
 
 @php
+    $prevLabel    ??= pn_trans('pagination.prev', '前へ');
+    $nextLabel    ??= pn_trans('pagination.next', '次へ');
+    $infoTemplate ??= pn_trans('pagination.info', '全 :total 件中 :first - :last 件');
+
     if ($paginator) {
         $current = $paginator->currentPage();
         $last = $paginator->lastPage();
@@ -89,7 +93,7 @@
     }"
     {{ $attributes->class([$c['wrapperSimple']]) }}
 >
-    <nav aria-label="ページネーション" class="{{ $c['nav'] }}">
+    <nav aria-label="{{ pn_trans('pagination.aria', 'ページネーション') }}" class="{{ $c['nav'] }}">
         {{-- Prev --}}
         @if($onFirstPage)
             <button type="button" class="{{ $c['itemBase'] }} {{ $c['itemDisabled'] }}" disabled aria-label="{{ $prevLabel }}">

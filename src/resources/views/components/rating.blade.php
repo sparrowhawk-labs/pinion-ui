@@ -46,7 +46,7 @@
         class="{{ $c['hidden'] }}"
         @if($checkedStep === 0) checked @endif
         @if($readonly) disabled @endif
-        aria-label="評価なし"
+        aria-label="{{ pn_trans('rating.none', '評価なし') }}"
     />
 
     @if($half)

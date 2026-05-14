@@ -10,7 +10,7 @@ class PinionUiServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        //
+        $this->mergeConfigFrom(__DIR__ . '/../config/pinion-ui.php', 'pinion-ui');
     }
 
     public function boot()
@@ -22,11 +22,15 @@ class PinionUiServiceProvider extends ServiceProvider
         // Keep namespaced version as fallback: <x-pn::button>
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'pn');
 
-        // Commands
+        // Commands + config publishing
         if ($this->app->runningInConsole()) {
             $this->commands([
                 UiInstall::class,
             ]);
+
+            $this->publishes([
+                __DIR__ . '/../config/pinion-ui.php' => config_path('pinion-ui.php'),
+            ], 'pinion-ui-config');
         }
     }
 

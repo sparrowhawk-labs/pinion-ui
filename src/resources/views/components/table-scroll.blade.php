@@ -3,11 +3,13 @@
     'buttonStyle' => 'circle',
     'scrollAmount' => 0.6,
     'showButtons' => true,
-    'prevLabel' => '前へスクロール',
-    'nextLabel' => '次へスクロール',
+    'prevLabel' => null,
+    'nextLabel' => null,
 ])
 
 @php
+    $prevLabel ??= pn_trans('table_scroll.prev', '前へスクロール');
+    $nextLabel ??= pn_trans('table_scroll.next', '次へスクロール');
     $c = \SparrowhawkLabs\PinionUi\Compose\TableScrollComposer::compose([
         'fadeColor' => $fadeColor,
         'buttonStyle' => $buttonStyle,
