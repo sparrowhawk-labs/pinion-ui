@@ -70,5 +70,21 @@
             "root": "indicator",
             "item": "indicator-item indicator-top indicator-center badge badge-error badge-xs"
         }
+    },
+    {
+        "name": "color=neutral — emits badge-neutral (was falling through to badge-error)",
+        "props": { "color": "neutral" },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-neutral"
+        }
+    },
+    {
+        "name": "color=neutral + dot=true",
+        "props": { "color": "neutral", "dot": true },
+        "expected": {
+            "root": "indicator",
+            "item": "indicator-item indicator-top indicator-end badge badge-neutral badge-xs"
+        }
     }
 ]

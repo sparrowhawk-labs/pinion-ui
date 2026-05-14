@@ -70,6 +70,22 @@ $tunes = [
         'space-element' => '1.5rem', 'space-compact' => '0.75rem',
         'space-text' => '1rem', 'space-inline' => '0.5rem',
     ],
+    'pixel' => [
+        'radius-box' => '0', 'radius-field' => '0', 'radius-selector' => '0',
+        'border' => '3px', 'depth' => '0', 'noise' => '0',
+        'size-selector' => '0.25rem', 'size-field' => '0.25rem',
+        'space-section' => '4rem', 'space-section-inner' => '2.5rem',
+        'space-element' => '1.5rem', 'space-compact' => '0.75rem',
+        'space-text' => '1rem', 'space-inline' => '0.5rem',
+    ],
+    'tech' => [
+        'radius-box' => '0.25rem', 'radius-field' => '0.1875rem', 'radius-selector' => '0.25rem',
+        'border' => '1px', 'depth' => '0', 'noise' => '0',
+        'size-selector' => '0.25rem', 'size-field' => '0.25rem',
+        'space-section' => '4rem', 'space-section-inner' => '2.5rem',
+        'space-element' => '1.25rem', 'space-compact' => '0.5rem',
+        'space-text' => '0.75rem', 'space-inline' => '0.375rem',
+    ],
 ];
 
 if ($only !== null) {
