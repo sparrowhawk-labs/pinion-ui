@@ -30,18 +30,32 @@ class InputGroupComposer
 
     private static function wrapperClass(): string
     {
+        // Joining heterogeneous children is tricky because <x-input> /
+        // <x-select> render as `<div class="w-full"> <div class="wrapper-with-border+radius"> <input> </div> </div>` —
+        // the visible border + radius lives on the INNER wrapper, not the
+        // outer div. We zero radii at both levels and restore on the ends
+        // using `:has()` so the rule only kicks in on form-containing wrappers
+        // (skipping label / hint divs the wrapped components might also emit).
         return FieldVariants::join(
             'inline-flex w-full',
-            // zero radii on every direct child, restore on the two ends
-            '[&>*]:rounded-none',
-            '[&>*:first-child]:rounded-l-[var(--radius-field)]',
-            '[&>*:last-child]:rounded-r-[var(--radius-field)]',
-            // collapse the adjacent border so two children show one rule
-            '[&>*:not(:last-child)]:border-r-0',
-            // direct <input> / <select> / <textarea> children stretch
+            // Stretch interactive children. Spans (text addons) and buttons keep natural width.
             '[&>input]:flex-1 [&>input]:min-w-0',
             '[&>select]:flex-1 [&>select]:min-w-0',
             '[&>textarea]:flex-1 [&>textarea]:min-w-0',
+            '[&>div]:flex-1 [&>div]:min-w-0',
+            // Zero radii on direct children AND on the inner wrappers of x-input / x-select.
+            '[&>*]:rounded-none',
+            '[&>div>div]:rounded-none',
+            // Restore radii on the two ends — direct children (bare input/select/button/span).
+            '[&>*:first-child]:rounded-l-[var(--radius-field)]',
+            '[&>*:last-child]:rounded-r-[var(--radius-field)]',
+            // Restore radii on the inner wrapper of x-input / x-select at the ends.
+            '[&>div:first-child>div:has(input,select,textarea)]:rounded-l-[var(--radius-field)]',
+            '[&>div:last-child>div:has(input,select,textarea)]:rounded-r-[var(--radius-field)]',
+            // Collapse inner border (right edge) — direct children.
+            '[&>*:not(:last-child)]:border-r-0',
+            // Collapse inner border — inner wrapper of x-input / x-select.
+            '[&>div:not(:last-child)>div:has(input,select,textarea)]:border-r-0',
         );
     }
 

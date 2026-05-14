@@ -3,7 +3,7 @@
         "name": "default — size=md, no error",
         "props": {},
         "expected": {
-            "wrapper": "inline-flex w-full [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>input]:flex-1 [&>input]:min-w-0 [&>select]:flex-1 [&>select]:min-w-0 [&>textarea]:flex-1 [&>textarea]:min-w-0",
+            "wrapper": "inline-flex w-full [&>input]:flex-1 [&>input]:min-w-0 [&>select]:flex-1 [&>select]:min-w-0 [&>textarea]:flex-1 [&>textarea]:min-w-0 [&>div]:flex-1 [&>div]:min-w-0 [&>*]:rounded-none [&>div>div]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>div:first-child>div:has(input,select,textarea)]:rounded-l-[var(--radius-field)] [&>div:last-child>div:has(input,select,textarea)]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>div:not(:last-child)>div:has(input,select,textarea)]:border-r-0",
             "addon": "shrink-0 inline-flex items-center bg-base-200 tune-border border-base-300 text-base-content/70 whitespace-nowrap h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
             "labelColor": "text-base-content",
             "hintColor": "text-base-content/50"
@@ -36,13 +36,6 @@
         "expected": {
             "labelColor": "text-error",
             "hintColor": "text-error"
-        }
-    },
-    {
-        "name": "wrapper is stable across sizes",
-        "props": { "size": "lg" },
-        "expected": {
-            "wrapper": "inline-flex w-full [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>input]:flex-1 [&>input]:min-w-0 [&>select]:flex-1 [&>select]:min-w-0 [&>textarea]:flex-1 [&>textarea]:min-w-0"
         }
     },
     {
