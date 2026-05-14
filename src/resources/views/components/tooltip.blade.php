@@ -1,7 +1,7 @@
 @props([
     'text' => '',
     'position' => 'top',
-    'color' => null,
+    'color' => 'base-100',
     'open' => false,
 ])
 

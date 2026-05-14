@@ -20,7 +20,7 @@ class TooltipComposer
     public static function compose(array $props): array
     {
         $position = $props['position'] ?? 'top';
-        $color    = $props['color']    ?? null;
+        $color    = $props['color']    ?? 'base-100';
         $open     = array_key_exists('open', $props) ? (bool) $props['open'] : false;
 
         $position = self::normalisedPosition($position);

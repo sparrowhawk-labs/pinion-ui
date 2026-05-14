@@ -18,7 +18,7 @@ No-JS hover/focus tooltip built on daisyUI 5's `tooltip` class. Trigger goes in 
 |------|------|---------|-------------|
 | `text` | `string` | `''` | Tooltip label rendered inside the bubble. Plain text only (escaped by Blade). |
 | `position` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'` | Where the bubble appears relative to the trigger. CSS-positioned; no auto-flip on viewport collision. |
-| `color` | `null \| 'neutral' \| 'primary' \| 'secondary' \| 'accent' \| 'info' \| 'success' \| 'warning' \| 'error' \| 'base-100' \| 'base-200' \| 'base-300'` | `null` | `null` (default) → soft `bg-base-200` bubble. `neutral` → daisyUI's `bg-neutral` dark bubble. `base-100` / `base-200` / `base-300` → surface variants — **all render a visible arrow** since v0.3.11 (the rewrite). Eight semantic colours map to `bg-{color} text-{color}-content border-{color}` on both bubble and arrow. |
+| `color` | `'base-100' \| 'base-200' \| 'base-300' \| 'neutral' \| 'primary' \| 'secondary' \| 'accent' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'base-100'` | Bubble background and content tone. Default `'base-100'` (since v0.3.14) renders as a page-surface card with subtle `base-300` border — the lightest, most readable variant. `'base-200'` / `'base-300'` step the surface darker; `'neutral'` is daisyUI's stock dark bubble for the classic look. Eight semantic colours map to `bg-{color} text-{color}-content border-{color}` on both bubble and arrow. |
 | `open` | `bool` | `false` | When `true`, the tooltip stays open regardless of hover / focus — useful for onboarding tours and highlighting. |
 
 All other attributes pass through to the root wrapper `<div>`.
