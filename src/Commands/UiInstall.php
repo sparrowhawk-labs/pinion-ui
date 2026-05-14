@@ -60,9 +60,11 @@ class UiInstall extends Command
         $this->line('    1. Run: npm install');
         $this->line('    2. Run: npm run build');
         $this->line('    3. Set <html data-theme="light" data-tune="default"> in your layout');
-        $this->line('    4. Use: <x-pinion-ui::button variant="primary">Click</x-pinion-ui::button>');
+        $this->line('    4. Use: <x-pn::button variant="primary">Click</x-pn::button>');
         $this->newLine();
-        $this->line('  Documentation: vendor/sparrowhawk-labs/pinion-ui/REFERENCE.md');
+        $this->line('  Documentation:');
+        $this->line('    - README:     vendor/sparrowhawk-labs/pinion-ui/README.md');
+        $this->line('    - Components: vendor/sparrowhawk-labs/pinion-ui/reference/components/index.md');
 
         return Command::SUCCESS;
     }
@@ -269,7 +271,7 @@ JS;
             $this->line("    - resources/views/components/{$conflict}.blade.php");
         }
         $this->newLine();
-        $this->info('  To resolve, use namespaced syntax: <x-pinion-ui::component> instead of <x-component>');
+        $this->info('  To resolve, use namespaced syntax: <x-pn::component> instead of <x-component>');
         $this->newLine();
 
         return $this->confirm('Continue installation anyway?', false);

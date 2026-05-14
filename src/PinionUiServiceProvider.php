@@ -19,8 +19,8 @@ class PinionUiServiceProvider extends ServiceProvider
         // Usage: <x-button>, <x-input>, <x-card>, etc.
         Blade::anonymousComponentPath(__DIR__ . '/resources/views/components');
 
-        // Keep namespaced version as fallback: <x-pinion-ui::button>
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'pinion-ui');
+        // Keep namespaced version as fallback: <x-pn::button>
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'pn');
 
         // Commands
         if ($this->app->runningInConsole()) {

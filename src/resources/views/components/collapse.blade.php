@@ -1,7 +1,7 @@
 @props([
     'title' => null,
     'open' => false,
-    'icon' => 'arrow',
+    'icon' => null,
     'bordered' => true,
 ])
 

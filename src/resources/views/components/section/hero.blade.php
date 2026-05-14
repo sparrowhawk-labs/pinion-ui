@@ -50,14 +50,14 @@
                             {{ $actions }}
                         @else
                             @if($primaryAction)
-                                <x-pinion-ui::button variant="primary" size="lg" :href="$primaryAction['href'] ?? null">
+                                <x-pn::button color="primary" size="lg" :href="$primaryAction['href'] ?? null">
                                     {{ $primaryAction['label'] }}
-                                </x-pinion-ui::button>
+                                </x-pn::button>
                             @endif
                             @if($secondaryAction)
-                                <x-pinion-ui::button variant="ghost" size="lg" :href="$secondaryAction['href'] ?? null">
+                                <x-pn::button appearance="ghost" size="lg" :href="$secondaryAction['href'] ?? null">
                                     {{ $secondaryAction['label'] }}
-                                </x-pinion-ui::button>
+                                </x-pn::button>
                             @endif
                         @endif
                     </div>
@@ -95,14 +95,14 @@
                                 {{ $actions }}
                             @else
                                 @if($primaryAction)
-                                    <x-pinion-ui::button variant="primary" size="lg" :href="$primaryAction['href'] ?? null">
+                                    <x-pn::button color="primary" size="lg" :href="$primaryAction['href'] ?? null">
                                         {{ $primaryAction['label'] }}
-                                    </x-pinion-ui::button>
+                                    </x-pn::button>
                                 @endif
                                 @if($secondaryAction)
-                                    <x-pinion-ui::button variant="ghost" size="lg" :href="$secondaryAction['href'] ?? null">
+                                    <x-pn::button appearance="ghost" size="lg" :href="$secondaryAction['href'] ?? null">
                                         {{ $secondaryAction['label'] }}
-                                    </x-pinion-ui::button>
+                                    </x-pn::button>
                                 @endif
                             @endif
                         </div>

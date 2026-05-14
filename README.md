@@ -5,13 +5,13 @@
 [![License](https://img.shields.io/packagist/l/sparrowhawk-labs/pinion-ui.svg?style=flat-square)](LICENSE)
 [![PHP Version](https://img.shields.io/packagist/php-v/sparrowhawk-labs/pinion-ui.svg?style=flat-square)](composer.json)
 
-A Blade UI component library for Laravel built on **Tailwind v4 + daisyUI v5 + Alpine.js**. Ships 21 ready-to-use components and a 10-preset *Tune* token system that lets you reshape spacing, radii, and typography with a single attribute swap — without touching component code.
+A Blade UI component library for Laravel built on **Tailwind v4 + daisyUI v5 + Alpine.js**. Ships 40 ready-to-use components and a 10-preset *Tune* token system that lets you reshape spacing, radii, and typography with a single attribute swap — without touching component code.
 
 By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` series. Hard-requires [`sparrowhawk-labs/pinion-icons`](https://github.com/sparrowhawk-labs/pinion-icons).
 
 ## Features
 
-- **21 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, dropdowns, modals, tabs, accordions, alerts, badges, avatars, cards, theme-switcher, menu-item, hero section, and more.
+- **40 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, dropdowns, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, tune-styles, and more.
 - **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="dracula" data-tune="playful"`).
 - **10 Tune presets** — `default`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`. Each preset bundles ~30 CSS custom properties.
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
@@ -80,13 +80,13 @@ npm install && npm run build
 <x-tabs :tabs="$tabs" variant="underline" />
 
 {{-- Hero section --}}
-<x-pinion-ui::section.hero
+<x-pn::section.hero
     variant="centered"
     title="Build faster with Pinion"
     :primaryAction="['label' => 'Get started', 'href' => '/docs']" />
 ```
 
-Components are registered as **anonymous components** (no prefix needed) for the common case. The fully-qualified `<x-pinion-ui::button>` form is also available if you need to disambiguate.
+Components are registered as **anonymous components** (no prefix needed) for the common case. The fully-qualified `<x-pn::button>` form is also available if you need to disambiguate.
 
 ## The three style layers
 
@@ -122,28 +122,30 @@ Each preset writes CSS custom properties across four categories:
 
 ## Components
 
-### Form
-`button`, `input`, `select`, `textarea`, `checkbox`, `radio`, `radio-group`, `toggle`, `file-upload`
+40 components organised into 7 groups. See [`reference/components/index.md`](./reference/components/index.md) for the full API reference (props, slots, examples) per component.
 
-### Data display
-`card`, `badge`, `avatar`, `accordion`
+### Form (11)
+`button`, `button-group`, `input`, `textarea`, `select`, `checkbox`, `radio`, `radio-group`, `toggle`, `file-upload`, `rating`
 
-### Feedback
-`alert`
+### Data display (12)
+`card`, `badge`, `avatar`, `avatar-group`, `accordion`, `collapse`, `divider`, `kbd`, `table-scroll`, `timeline`, `stat`, `indicator`
 
-### Navigation
-`tabs`, `menu-item`, `dropdown`
+### Feedback (5)
+`alert`, `progress`, `skeleton`, `spinner`, `notification-system`
 
-### Overlay
-`modal`
+### Navigation (7)
+`tabs`, `menu-item`, `dropdown`, `breadcrumb`, `sidebar`, `pagination`, `pagination-simple`
 
-### Action
-`theme-switcher`, `tune-styles`
+### Overlay (2)
+`modal`, `tooltip`
 
-### Section
+### Section (1)
 `section.hero`
 
-All form components share a `Compose` layer (`src/Compose/*Composer.php`) that centralises variant / size / state class composition — making behaviour testable and easy to extend.
+### Theme / Tune (2)
+`theme-switcher`, `tune-styles`
+
+Most components share a `Compose` layer (`src/Compose/*Composer.php`) that centralises variant / size / state class composition — making behaviour testable and easy to extend. A handful of simple components (button, alert, card, badge, avatar, menu-item, section.hero, theme-switcher, tune-styles) compose their classes inline in the Blade file.
 
 ## Pairs with Pinion Icons
 
