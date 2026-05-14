@@ -83,6 +83,7 @@ class UiInstall extends Command
         $modified = false;
 
         $dependencies = [
+            '@alpinejs/collapse' => '^3.14.0',
             '@alpinejs/focus' => '^3.14.0',
             'alpinejs' => '^3.14.0',
             'daisyui' => '^5.0.0',
@@ -117,14 +118,18 @@ class UiInstall extends Command
         $content = File::get($appCssPath);
         $modified = false;
 
-        // Add daisyUI plugin (Tailwind v4 syntax)
-        if (!str_contains($content, '@plugin "daisyui"')) {
+        // Add daisyUI plugin (Tailwind v4 syntax). Detect regardless of quote
+        // style — Laravel's default app.css uses single quotes (`@plugin 'daisyui'`)
+        // and earlier versions of this command emitted double quotes, so a
+        // strict double-quote check missed the existing block and produced a
+        // duplicate on re-install.
+        if (!preg_match('/@plugin\s+["\']daisyui["\']/', $content)) {
             $pluginLine = '@plugin "daisyui" {' . "\n" . '  themes: all;' . "\n" . '}';
 
-            // Insert after @import "tailwindcss" if present
-            if (str_contains($content, '@import "tailwindcss"')) {
+            // Insert after @import "tailwindcss" (any quote style) if present
+            if (preg_match('/@import\s+["\']tailwindcss["\']/', $content)) {
                 $content = preg_replace(
-                    '/(@import\s+"tailwindcss"[^;]*;?)/',
+                    '/(@import\s+["\']tailwindcss["\'][^;]*;?)/',
                     "$1\n" . $pluginLine,
                     $content
                 );
@@ -189,40 +194,70 @@ class UiInstall extends Command
             return;
         }
 
-        $content = File::get($appJsPath);
-        $hasAlpine = str_contains($content, 'alpinejs') || str_contains($content, 'Alpine');
-        $hasFocus  = str_contains($content, '@alpinejs/focus');
+        $content    = File::get($appJsPath);
+        $hasAlpine  = str_contains($content, 'alpinejs') || str_contains($content, 'Alpine');
+        $hasFocus   = str_contains($content, '@alpinejs/focus');
+        $hasCollapse = str_contains($content, '@alpinejs/collapse');
 
-        if ($hasAlpine && $hasFocus) {
-            $this->line('    - Alpine.js + focus plugin already configured');
+        if ($hasAlpine && $hasFocus && $hasCollapse) {
+            $this->line('    - Alpine.js + focus + collapse plugins already configured');
             return;
         }
 
-        if ($hasAlpine && !$hasFocus) {
-            // Alpine is already wired; just insert the focus plugin lines.
-            // This handles upgrades from earlier ui:install runs that didn't
-            // know about the focus plugin (needed by <x-sidebar> x-trap).
-            $content = preg_replace(
-                '/(import Alpine from \'alpinejs\';)/',
-                "$1\nimport focus from '@alpinejs/focus';",
-                $content,
-                1
-            );
-            $content = preg_replace(
-                '/(window\.Alpine = Alpine;)/',
-                "Alpine.plugin(focus);\n$1",
-                $content,
-                1
-            );
+        if ($hasAlpine) {
+            // Alpine already wired — surgically insert any missing plugin
+            // lines. Handles upgrades from earlier ui:install versions:
+            //   v0.3.16 and earlier: no plugins
+            //   v0.3.17: focus wired, collapse missing
+            //   v0.3.19+: both wired
+            // pinion-ui blade components use:
+            //   <x-sidebar>  → @alpinejs/focus (x-trap.inert.noscroll)
+            //   <x-accordion> → @alpinejs/collapse (x-collapse for height anim)
+            $added = [];
+
+            if (!$hasFocus) {
+                $content = preg_replace(
+                    '/(import Alpine from \'alpinejs\';)/',
+                    "$1\nimport focus from '@alpinejs/focus';",
+                    $content,
+                    1
+                );
+                $content = preg_replace(
+                    '/(window\.Alpine = Alpine;)/',
+                    "Alpine.plugin(focus);\n$1",
+                    $content,
+                    1
+                );
+                $added[] = '@alpinejs/focus';
+            }
+
+            if (!$hasCollapse) {
+                $content = preg_replace(
+                    '/(import Alpine from \'alpinejs\';)/',
+                    "$1\nimport collapse from '@alpinejs/collapse';",
+                    $content,
+                    1
+                );
+                $content = preg_replace(
+                    '/(window\.Alpine = Alpine;)/',
+                    "Alpine.plugin(collapse);\n$1",
+                    $content,
+                    1
+                );
+                $added[] = '@alpinejs/collapse';
+            }
+
             File::put($appJsPath, $content);
-            $this->info('  ✓ Wired @alpinejs/focus plugin into resources/js/app.js');
+            $this->info('  ✓ Wired ' . implode(' + ', $added) . ' into resources/js/app.js');
             return;
         }
 
         $alpineSetup = <<<'JS'
 import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse';
 import focus from '@alpinejs/focus';
 
+Alpine.plugin(collapse);
 Alpine.plugin(focus);
 window.Alpine = Alpine;
 Alpine.start();
@@ -231,7 +266,7 @@ JS;
 
         $content = $alpineSetup . $content;
         File::put($appJsPath, $content);
-        $this->info('  ✓ Added Alpine.js to resources/js/app.js');
+        $this->info('  ✓ Added Alpine.js + plugins to resources/js/app.js');
     }
 
     protected function addToClaudeMd(): void
