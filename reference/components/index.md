@@ -19,6 +19,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-rating>`](./rating.md) | Star rating input — supports half-star granularity via `rating-half`. |
 | [`<x-range-slider>`](./range-slider.md) | `<input type="range">` with label / hint / error chrome, 8 colours × 5 sizes. Optional live `showValue` via Alpine. |
 | [`<x-input-number>`](./input-number.md) | Quantity selector — `<input type="number">` flanked by joined ± buttons. min/max/step clamped both in HTML attrs and Alpine inc/dec logic. Native spinner arrows hidden. |
+| [`<x-input-group>`](./input-group.md) | Generic horizontal joiner for form-shaped children — select+input, input+button, multi-input rows. Self-contained Tailwind join (no daisyUI `.join`). Exposes an `addon` helper class for text decorators. |
 
 ## Data display
 

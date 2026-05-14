@@ -1,0 +1,55 @@
+[
+    {
+        "name": "default — size=md, no error",
+        "props": {},
+        "expected": {
+            "wrapper": "inline-flex w-full [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>input]:flex-1 [&>input]:min-w-0 [&>select]:flex-1 [&>select]:min-w-0 [&>textarea]:flex-1 [&>textarea]:min-w-0",
+            "addon": "shrink-0 inline-flex items-center bg-base-200 tune-border border-base-300 text-base-content/70 whitespace-nowrap h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
+            "labelColor": "text-base-content",
+            "hintColor": "text-base-content/50"
+        }
+    },
+    {
+        "name": "size=xs — addon adopts xs height/padding/text tokens",
+        "props": { "size": "xs" },
+        "expected": {
+            "addon": "shrink-0 inline-flex items-center bg-base-200 tune-border border-base-300 text-base-content/70 whitespace-nowrap h-[var(--h-field-xs)] px-[var(--px-field-xs)] text-[length:var(--text-field-xs)]"
+        }
+    },
+    {
+        "name": "size=sm",
+        "props": { "size": "sm" },
+        "expected": {
+            "addon": "shrink-0 inline-flex items-center bg-base-200 tune-border border-base-300 text-base-content/70 whitespace-nowrap h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)]"
+        }
+    },
+    {
+        "name": "size=lg",
+        "props": { "size": "lg" },
+        "expected": {
+            "addon": "shrink-0 inline-flex items-center bg-base-200 tune-border border-base-300 text-base-content/70 whitespace-nowrap h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)]"
+        }
+    },
+    {
+        "name": "error state — label/hint colours flip",
+        "props": { "error": "Required" },
+        "expected": {
+            "labelColor": "text-error",
+            "hintColor": "text-error"
+        }
+    },
+    {
+        "name": "wrapper is stable across sizes",
+        "props": { "size": "lg" },
+        "expected": {
+            "wrapper": "inline-flex w-full [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>input]:flex-1 [&>input]:min-w-0 [&>select]:flex-1 [&>select]:min-w-0 [&>textarea]:flex-1 [&>textarea]:min-w-0"
+        }
+    },
+    {
+        "name": "unknown size falls back to md",
+        "props": { "size": "huge" },
+        "expected": {
+            "addon": "shrink-0 inline-flex items-center bg-base-200 tune-border border-base-300 text-base-content/70 whitespace-nowrap h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]"
+        }
+    }
+]
