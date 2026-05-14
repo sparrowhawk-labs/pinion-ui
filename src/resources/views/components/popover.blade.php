@@ -3,6 +3,7 @@
     'width' => 'w-72',
     'arrow' => true,
     'trigger' => 'click', // 'click' | 'hover'
+    'padding' => 'p-element', // pass 'p-1' / 'p-compact' / 'p-0' for menu-style panels
 ])
 
 @php
@@ -12,6 +13,7 @@
         'placement' => $placement,
         'width'     => $width,
         'arrow'     => $arrow,
+        'padding'   => $padding,
     ]);
 
     $alpineOpen  = $trigger === 'hover'

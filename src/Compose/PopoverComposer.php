@@ -22,10 +22,11 @@ class PopoverComposer
         $placement = $props['placement'] ?? 'bottom';
         $width     = $props['width']     ?? 'w-72';
         $arrow     = (bool) ($props['arrow'] ?? true);
+        $padding   = $props['padding']   ?? 'p-element';
 
         return [
             'root'      => 'relative inline-block',
-            'panel'     => self::panelClass($placement, $width),
+            'panel'     => self::panelClass($placement, $width, $padding),
             'arrow'     => self::arrowClass($placement),
             'showArrow' => $arrow,
             'placement' => self::normalisedPlacement($placement),
@@ -37,7 +38,7 @@ class PopoverComposer
         return in_array($placement, ['top', 'right', 'bottom', 'left'], true) ? $placement : 'bottom';
     }
 
-    private static function panelClass(string $placement, string $width): string
+    private static function panelClass(string $placement, string $width, string $padding): string
     {
         $position = match (self::normalisedPlacement($placement)) {
             'top'    => 'bottom-full left-1/2 -translate-x-1/2 mb-2',
@@ -51,7 +52,7 @@ class PopoverComposer
             $position,
             $width,
             'rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-lg',
-            'p-element',
+            $padding,
         );
     }
 
