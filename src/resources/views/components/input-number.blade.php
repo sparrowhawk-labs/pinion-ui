@@ -38,8 +38,10 @@
 
     // When the user passes an explicit `width` (e.g. "w-full", "w-64"), the
     // wrapper stretches and the input must `flex-1` to fill the new space.
-    // Default (null) uses w-fit + the input's natural HTML `size` width.
-    $widthClass    = $width ?? 'w-fit';
+    // Default (null) uses `inline-flex flex-col` so the wrapper reliably
+    // shrinks to the inner row's natural width — `w-fit` alone gets pushed
+    // wider by the block-level <label> child on some layouts.
+    $widthClass    = $width ?? 'inline-flex flex-col';
     $stretchInput  = $width !== null;
 
     $c = InputNumberComposer::compose([

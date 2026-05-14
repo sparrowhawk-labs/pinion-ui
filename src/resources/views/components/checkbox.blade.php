@@ -15,7 +15,8 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\CheckboxComposer;
 
-    $checkboxId = $attributes->get('id', ($name ? $name . '_' : 'checkbox_') . uniqid());
+    $idBase = $name ? preg_replace('/[^A-Za-z0-9_-]/', '_', $name) : 'checkbox';
+    $checkboxId = $attributes->get('id', $idBase . '_' . uniqid());
 
     $c = CheckboxComposer::compose([
         'color' => $color,

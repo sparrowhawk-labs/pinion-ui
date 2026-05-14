@@ -13,7 +13,7 @@
     'floating' => false,
     'required' => false,
     'disabled' => false,
-    'custom' => false,
+    'custom' => true,
 ])
 
 @php
