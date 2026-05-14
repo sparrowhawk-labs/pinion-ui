@@ -4,7 +4,7 @@
 
 ## What this package is
 
-A Laravel Blade component library (Tailwind v4 + daisyUI v5 + Alpine.js). 45 components — see [`reference/components/index.md`](./reference/components/index.md).
+A Laravel Blade component library (Tailwind v4 + daisyUI v5 + Alpine.js). 46 components — see [`reference/components/index.md`](./reference/components/index.md).
 
 ## Calling convention
 
