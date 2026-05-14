@@ -165,45 +165,45 @@
     --noise:           0;
 }
 
-/* pinion-dark — Warm Onyx (espresso-leather), NOT a mechanical inversion of
-   pinion light. Designed as its own elegant dark with restrained luminance and
-   a touch of warm chroma in the neutrals so the surface reads as roasted
-   coffee / aged leather rather than flat black.
+/* pinion-dark — Xylph Studio dark, shared identity. Replaces the prior
+   Warm Onyx (espresso-leather) palette with xylph-studio-v1's cool
+   blue-charcoal base + vibrant magenta brand. Token values are copied
+   verbatim from xylph-studio-v1/resources/css/app.css :: [data-theme=
+   "xylph-dark"] so both products read as a single brand at dark mode.
 
-   Primary is **deep amethyst** (oklch 0.49 0.120 300) — a cool jewel tone
-   placed against the warm onyx base for dramatic chromatic tension. Distinct
-   from the light theme's near-black CTA, distinct from the amber accent
-   (which stays the "fire / glow"), and far from any other palette hue so it
-   reads as the dominant brand mark of the dark theme. Aligns with the
-   Sparrowhawk metaphor of the falconer's bird against the twilight sky.
+   Base : cool blue-charcoal (hue ~252°), low chroma, three-step layered
+   Brand: magenta primary `oklch(65% .30 346)` + magenta secondary
+          `oklch(55% .20 346)` + pink-magenta accent `oklch(70% .25 330)`
+   Status: standard saturated cool/warm tones with black `*-content` for
+          the bright fills (info/success/warning/error/accent) — matches
+          xylph's pattern.
 
-   Accent (amber) is bumped in chroma + lightness vs light theme so it stays
-   visibly luminous against the deeper base. base-content / neutral / etc are
-   warm-tinted near-cream rather than pure white to keep the surface refined. */
+   When updating, mirror xylph-studio first and copy here; do not drift
+   independently. */
 @plugin 'daisyui/theme' {
     name: 'pinion-dark';
     prefersdark: true;
     color-scheme: 'dark';
-    --color-base-100:          oklch(0.165 0.008 50);
-    --color-base-200:          oklch(0.205 0.008 50);
-    --color-base-300:          oklch(0.255 0.009 50);
-    --color-base-content:      oklch(0.870 0.015 75);
-    --color-primary:           oklch(0.490 0.120 300);
-    --color-primary-content:   oklch(0.960 0.012 300);
-    --color-secondary:         oklch(0.680 0.075 250);
-    --color-secondary-content: oklch(0.165 0.008 50);
-    --color-accent:            oklch(0.780 0.180 58);
-    --color-accent-content:    oklch(0.165 0.008 50);
-    --color-neutral:           oklch(0.290 0.010 50);
-    --color-neutral-content:   oklch(0.870 0.015 75);
-    --color-info:              oklch(0.720 0.105 235);
-    --color-info-content:      oklch(0.165 0.040 235);
-    --color-success:           oklch(0.730 0.125 145);
-    --color-success-content:   oklch(0.165 0.045 145);
-    --color-warning:           oklch(0.810 0.130 80);
-    --color-warning-content:   oklch(0.165 0.040 50);
-    --color-error:             oklch(0.680 0.170 25);
-    --color-error-content:     oklch(0.165 0.040 25);
+    --color-base-100:          oklch(25.33% 0.016 252.42);
+    --color-base-200:          oklch(23.26% 0.014 253.1);
+    --color-base-300:          oklch(21.15% 0.012 254.09);
+    --color-base-content:      oklch(97.807% 0.029 256.848);
+    --color-primary:           oklch(65% 0.30 346);
+    --color-primary-content:   oklch(100% 0 0);
+    --color-secondary:         oklch(55% 0.20 346);
+    --color-secondary-content: oklch(100% 0 0);
+    --color-accent:            oklch(70% 0.25 330);
+    --color-accent-content:    oklch(0% 0 0);
+    --color-neutral:           oklch(31.3% 0.021 254.53);
+    --color-neutral-content:   oklch(98.51% 0.002 247.84);
+    --color-info:              oklch(70.31% 0.143 215.15);
+    --color-info-content:      oklch(0% 0 0);
+    --color-success:           oklch(76.81% 0.185 147.36);
+    --color-success-content:   oklch(0% 0 0);
+    --color-warning:           oklch(82.57% 0.169 83.87);
+    --color-warning-content:   oklch(0% 0 0);
+    --color-error:             oklch(64.53% 0.222 20.78);
+    --color-error-content:     oklch(0% 0 0);
     --radius-selector: 0.5rem;
     --radius-field:    0.375rem;
     --radius-box:      0.5rem;
