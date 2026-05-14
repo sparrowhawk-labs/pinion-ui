@@ -9,6 +9,7 @@
     'step' => 1,
     'size' => 'md',
     'width' => null,
+    'digits' => null,
     'disabled' => false,
     'readonly' => false,
     'required' => false,
@@ -24,13 +25,26 @@
     $maxJs  = $max !== null ? (string) $max : 'null';
     $stepJs = (string) $step;
 
+    // Auto-width: pick the longest of max / min / current value so the input
+    // visually fits its widest possible content. +1 for cursor padding.
+    // Fall back to 3 digits when no bounds are set, so a freeform quantity
+    // selector still looks deliberate.
+    $widths = array_filter([
+        $max   !== null ? strlen((string) $max)   : null,
+        $min   !== null ? strlen((string) $min)   : null,
+        $value !== null ? strlen((string) $value) : null,
+    ], fn ($v) => $v !== null);
+    $digitCount = $digits ?? (empty($widths) ? 3 : max($widths));
+    $digitCount = max(2, (int) $digitCount);
+    $inputSize  = $digitCount + 1;
+
     $c = InputNumberComposer::compose([
         'size'  => $size,
         'error' => $error,
     ]);
 @endphp
 
-<div class="{{ $width ?? 'w-full max-w-[10rem]' }}"
+<div class="{{ $width ?? 'w-fit' }}"
     x-data="{
         v: '{{ $value }}',
         min: {{ $minJs }},
@@ -76,6 +90,7 @@
             type="number"
             id="{{ $inputId }}"
             x-model="v"
+            size="{{ $inputSize }}"
             @if($name) name="{{ $name }}" @endif
             @if($min !== null) min="{{ $min }}" @endif
             @if($max !== null) max="{{ $max }}" @endif
