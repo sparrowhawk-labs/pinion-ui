@@ -4,8 +4,10 @@
     'size' => 'md',
     'duration' => 3000,
     'eventName' => 'notify',
-    'closeLabel' => '閉じる',
+    'closeLabel' => null,
 ])
+
+@php $closeLabel ??= pn_trans('notification.close', '閉じる'); @endphp
 
 @php
     $c = \SparrowhawkLabs\PinionUi\Compose\NotificationSystemComposer::compose([

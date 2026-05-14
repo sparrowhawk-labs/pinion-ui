@@ -61,7 +61,7 @@
              x-data="{
                  open: false,
                  multi: {{ $multiple ? 'true' : 'false' }},
-                 placeholder: @js($placeholder ?? '選択'),
+                 placeholder: @js($placeholder ?? pn_trans('select.placeholder', '選択')),
                  values: [],
                  options: [],
                  init() {
