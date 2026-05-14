@@ -69,10 +69,12 @@ class InputNumberComposer
         };
 
         return FieldVariants::join(
-            // Width comes from the `size` HTML attribute (computed from
-            // max/min/value digit count) — let the input render at its
-            // natural size and the surrounding `w-fit` wrapper hugs it.
-            'min-w-0 text-center tabular-nums',
+            // Default width comes from the `size` HTML attribute (digit
+            // count + 1). The blade adds `flex-1` instead when the user
+            // overrides `width`, so the input stretches inside the wider
+            // wrapper. `min-w-[3rem]` is a comfortable visual floor so
+            // 2-digit inputs don't squeeze against the buttons.
+            'min-w-[3rem] text-center tabular-nums',
             'bg-base-100 tune-border border-base-300',
             'focus:outline-none focus:ring-2 focus:ring-primary focus:z-10',
             // strip the native spinner arrows in WebKit + Firefox
