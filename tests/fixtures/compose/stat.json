@@ -8,8 +8,7 @@
             "figure": "stat-figure text-base-content/60",
             "title": "stat-title",
             "value": "stat-value",
-            "desc": "stat-desc",
-            "arrow": ""
+            "desc": "stat-desc"
         }
     },
     {
@@ -18,8 +17,7 @@
         "expected": {
             "root": "stats shadow",
             "value": "stat-value",
-            "desc": "stat-desc",
-            "arrow": ""
+            "desc": "stat-desc"
         }
     },
     {
@@ -31,27 +29,24 @@
         }
     },
     {
-        "name": "+ trend=up + trendValue — desc text-success, arrow ↑",
+        "name": "+ trend=up + trendValue — desc text-success (arrow lives in blade helper)",
         "props": { "trend": "up", "trendValue": "+12%" },
         "expected": {
-            "desc": "stat-desc text-success",
-            "arrow": "↑"
+            "desc": "stat-desc text-success"
         }
     },
     {
-        "name": "+ trend=down + trendValue — desc text-error, arrow ↓",
+        "name": "+ trend=down + trendValue — desc text-error",
         "props": { "trend": "down", "trendValue": "-3%" },
         "expected": {
-            "desc": "stat-desc text-error",
-            "arrow": "↓"
+            "desc": "stat-desc text-error"
         }
     },
     {
-        "name": "trend=flat — desc text-base-content/50, arrow →",
+        "name": "trend=flat — desc text-base-content/50",
         "props": { "trend": "flat" },
         "expected": {
-            "desc": "stat-desc text-base-content/50",
-            "arrow": "→"
+            "desc": "stat-desc text-base-content/50"
         }
     },
     {
@@ -74,8 +69,7 @@
             "root": "stats shadow",
             "value": "stat-value text-success",
             "figure": "stat-figure text-success",
-            "desc": "stat-desc text-success",
-            "arrow": "↑"
+            "desc": "stat-desc text-success"
         }
     },
     {

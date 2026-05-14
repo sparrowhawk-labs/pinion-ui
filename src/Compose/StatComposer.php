@@ -17,8 +17,22 @@ class StatComposer
             'title'  => 'stat-title',
             'value'  => self::valueClass($valueColor),
             'desc'   => self::descClass($trend),
-            'arrow'  => self::arrowChar($trend),
         ];
+    }
+
+    /**
+     * Trend → arrow character. NOT part of the compose() dict — kept as a
+     * separate helper so the dict stays class-strings-only per the Compose
+     * invariant (see CLAUDE.md). The Blade view calls this directly.
+     */
+    public static function arrowChar(?string $trend): string
+    {
+        return match ($trend) {
+            'up'    => '↑',
+            'down'  => '↓',
+            'flat'  => '→',
+            default => '',
+        };
     }
 
     private static function valueClass(?string $color): string
@@ -65,13 +79,4 @@ class StatComposer
         };
     }
 
-    private static function arrowChar(?string $trend): string
-    {
-        return match ($trend) {
-            'up'   => '↑',
-            'down' => '↓',
-            'flat' => '→',
-            default => '',
-        };
-    }
 }

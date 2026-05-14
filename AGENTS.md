@@ -36,7 +36,13 @@ Themes and Tunes mix freely. Both are activated by `<x-tune-styles />` injecting
 - `rating-half` requires the explicit `rating-{size}` class even at default size, or half-star widths collapse. `RatingComposer` always emits it.
 - `<x-collapse>` defaults to **no icon** since v0.2.1 — opt in with `icon="arrow"` or `icon="plus"`.
 - `tooltip`'s stock daisyUI bubble is heavy on light surfaces; the default is `tooltip-light` (base-200 soft fill, arrow same colour to avoid the border-on-arrow problem). Use `color="<semantic>"` to opt back into daisyUI's native dark bubble.
-- Several composers emit Japanese aria/label defaults (`closeLabel`/`prev`/`next` etc.) — override them when shipping non-Japanese UI.
+- Several components ship **Japanese aria/label defaults** that you should override for non-Japanese UI. Known hardcodes today:
+  - `<x-notification-system>` — `closeLabel='閉じる'` (toast dismiss button)
+  - `<x-rating>` — clear-radio `aria-label='評価なし'`
+  - `<x-pagination>` / `<x-pagination-simple>` — `prev='前へ'`, `next='次へ'`
+  - `<x-table-scroll>` — scroll buttons `aria-label='前へスクロール'` / `'次へスクロール'`
+
+  Override pattern: pass the prop explicitly per call site (`<x-pagination :prev="__('Previous')" :next="__('Next')" />`), or wrap each component in your own thin shim that pulls from `__()` / `config()`. A package-wide locale config is on the roadmap; for now treat the defaults as Japanese.
 
 For class names not covered above, always grep `docs/{daisyui,preline,penguinui}/` (local third-party docs, gitignored) before claiming a class behaviour.
 

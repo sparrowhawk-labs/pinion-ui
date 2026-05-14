@@ -14,6 +14,7 @@
         'trend' => $trend,
         'wrapped' => $wrapped,
     ]);
+    $arrow = \SparrowhawkLabs\PinionUi\Compose\StatComposer::arrowChar($trend);
     $hasFigure = isset($slot) && trim((string) $slot) !== '';
     $hasDesc = $desc !== null || $trend !== null || $trendValue !== null;
 @endphp
@@ -30,7 +31,7 @@
         @endif
         @if($hasDesc)
             <div class="{{ $c['desc'] }}">
-                @if($c['arrow'] !== '')<span class="mr-1">{{ $c['arrow'] }}</span>@endif
+                @if($arrow !== '')<span class="mr-1">{{ $arrow }}</span>@endif
                 @if($desc !== null){{ $desc }}@endif
                 @if($trendValue !== null)@if($desc !== null) @endif<span class="font-medium">{{ $trendValue }}</span>@endif
             </div>
@@ -48,7 +49,7 @@
     @endif
     @if($hasDesc)
         <div class="{{ $c['desc'] }}">
-            @if($c['arrow'] !== '')<span class="mr-1">{{ $c['arrow'] }}</span>@endif
+            @if($arrow !== '')<span class="mr-1">{{ $arrow }}</span>@endif
             @if($desc !== null){{ $desc }}@endif
             @if($trendValue !== null)@if($desc !== null) @endif<span class="font-medium">{{ $trendValue }}</span>@endif
         </div>
