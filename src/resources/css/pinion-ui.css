@@ -116,18 +116,20 @@
 }
 
 /* ==========================================
-   pinion themes — light + dark (v0.4.0)
+   pinion theme (v0.4.0) — light only
    ==========================================
-   Warm-cream surface + near-black ink + amber-550 accent, inspired by
-   beck-server. `pinion` is the default theme shipped by this preset — consumers
-   who do not set `data-theme` will get pinion automatically. `pinion-dark`
-   auto-activates on OS `prefers-color-scheme: dark`.
+   Warm-cream surface + near-black ink + amber-550 accent + teal-petrol
+   secondary, inspired by beck-server. `pinion` is the default theme shipped
+   by this preset — consumers who do not set `data-theme` will get pinion
+   automatically. There is no bundled dark companion; consumers who want a
+   dark mode can pick any of daisyUI's standard dark themes (`dark`, `dim`,
+   `night`, `business`, …) via `<html data-theme="…">`.
 
    Picked tones (decided in playground /theme-preview):
-     primary  = oklch(0.30 0.005 50)  ≈ very dark charcoal
-     accent   = oklch(0.75 0.165 58)  ≈ amber-550 (#E58A0E, between 500/600)
-     base-100 = oklch(0.985 0.005 75) warm off-white cream
-     ink      = oklch(0.18 0.005 50)  near-black with a 50° hue (warmth)
+     primary   = oklch(0.18 0.005 50)  near-black ink (50° warmth)
+     secondary = oklch(0.45 0.10 200)  teal-petrol
+     accent    = oklch(0.75 0.165 58)  amber-550 (#E58A0E, between 500/600)
+     base-100  = oklch(0.985 0.005 75) warm off-white cream
 
    Tune tokens (--radius-*, --border, etc.) are intentionally NOT redefined
    here — the tune.css cascade owns those. */
@@ -163,77 +165,4 @@
     --border:          1px;
     --depth:           1;
     --noise:           0;
-}
-
-/* pinion-dark — Xylph Studio dark, shared identity. Replaces the prior
-   Warm Onyx (espresso-leather) palette with xylph-studio-v1's cool
-   blue-charcoal base + vibrant magenta brand. Token values are copied
-   verbatim from xylph-studio-v1/resources/css/app.css :: [data-theme=
-   "xylph-dark"] so both products read as a single brand at dark mode.
-
-   Base : cool blue-charcoal (hue ~252°), low chroma, three-step layered
-   Brand: magenta primary `oklch(65% .30 346)` + magenta secondary
-          `oklch(55% .20 346)` + pink-magenta accent `oklch(70% .25 330)`
-   Status: standard saturated cool/warm tones with black `*-content` for
-          the bright fills (info/success/warning/error/accent) — matches
-          xylph's pattern.
-
-   When updating, mirror xylph-studio first and copy here; do not drift
-   independently. */
-@plugin 'daisyui/theme' {
-    name: 'pinion-dark';
-    prefersdark: true;
-    color-scheme: 'dark';
-    --color-base-100:          oklch(25.33% 0.016 252.42);
-    --color-base-200:          oklch(23.26% 0.014 253.1);
-    --color-base-300:          oklch(21.15% 0.012 254.09);
-    --color-base-content:      oklch(97.807% 0.029 256.848);
-    --color-primary:           oklch(65% 0.30 346);
-    --color-primary-content:   oklch(100% 0 0);
-    --color-secondary:         oklch(55% 0.20 346);
-    --color-secondary-content: oklch(100% 0 0);
-    --color-accent:            oklch(70% 0.25 330);
-    --color-accent-content:    oklch(0% 0 0);
-    --color-neutral:           oklch(31.3% 0.021 254.53);
-    --color-neutral-content:   oklch(98.51% 0.002 247.84);
-    --color-info:              oklch(70.31% 0.143 215.15);
-    --color-info-content:      oklch(0% 0 0);
-    --color-success:           oklch(76.81% 0.185 147.36);
-    --color-success-content:   oklch(0% 0 0);
-    --color-warning:           oklch(82.57% 0.169 83.87);
-    --color-warning-content:   oklch(0% 0 0);
-    --color-error:             oklch(64.53% 0.222 20.78);
-    --color-error-content:     oklch(0% 0 0);
-    --radius-selector: 0.5rem;
-    --radius-field:    0.375rem;
-    --radius-box:      0.5rem;
-    --size-selector:   0.25rem;
-    --size-field:      0.25rem;
-    --border:          1px;
-    --depth:           1;
-    --noise:           0;
-}
-
-/* ==========================================
-   daisyUI default `dark` theme — `*-content` patches
-   ==========================================
-   daisyUI's stock `dark` theme inherits `*-content` from the default palette,
-   which were tuned for *light* themes (low-lightness saturated colours like
-   `success-content: oklch(37% .077 168)`). Painted on the `dark` theme's still-
-   bright `bg-{success|warning|error|accent}` rails, that produces muddy / khaki
-   text that the user described as "dark theme で不自然".
-
-   daisyUI's purpose-built dark themes (`dim`, `night`, `business`, …) ship
-   their own `*-content` so we leave them alone. We only override the four
-   colours that misbehave in the *default* `dark` theme; `primary`, `secondary`,
-   `neutral`, and `info` already render acceptably (high hue separation or
-   already-light content tokens) and are intentionally untouched.
-
-   Values: high-lightness (L≈95 %) with low chroma (~.04) — same recipe as
-   daisyUI's `primary-content` / `secondary-content`, which already work. */
-[data-theme=dark] {
-    --color-accent-content:  oklch(95% .03 188);
-    --color-success-content: oklch(95% .04 168);
-    --color-warning-content: oklch(95% .05 80);
-    --color-error-content:   oklch(95% .04 12);
 }
