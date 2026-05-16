@@ -126,3 +126,38 @@ Decided 2026-05-14. Anchor here when planning beyond v0.4.0 — do not re-litiga
 **Why this works**: theme × tune is already pure CSS (framework-agnostic at birth). Composer is already a pure function (PHP-implementation-incidental). Web Components are a browser primitive both Blade SSR and JS frameworks consume natively. So the multi-framework story is **convergence, not translation** — no DSL, no compiler, no per-framework rewrite.
 
 See auto-memory `project_multi_framework_strategy.md` and `feedback_codegen_over_ai_for_mechanical_translation.md` for the discussion that produced these constraints.
+
+## Multi-stack docs strategy (LLM coding)
+
+Decided 2026-05-16. Anchor here when planning how AI agents consume Pinion UI across stacks.
+
+**Rule**: one package = one stack adapter = its own self-contained `AGENTS.md` + `reference/components/` + `CLAUDE_SNIPPET.md`. No shared docs directory. No copy-into-consumer-app. Cross-package navigation is *not* required for the consumer's LLM.
+
+**Why this shape over the alternatives**:
+
+| Alternative | Why rejected |
+|---|---|
+| Single `AGENTS.md` with `## Laravel` / `## React` / `## Vue` sections | LLM has to skim irrelevant content per call; doc bloats linearly with stack count |
+| Shared `pinion-ui-docs` package consumed by every stack | Adds a dep, cross-package nav, version pinning fights — none of this earns its complexity |
+| Copy `.md` into the consumer app at install (shadcn-style) | Version drift, consumer-repo bloat, no advantage over reading from `vendor/` / `node_modules/` |
+| One repo, sub-folders per stack | Couples release cadence; React breaking change forces a Laravel re-tag |
+
+**Per-package contents** (each package is independently consumable):
+- `AGENTS.md` — entry doc. Top line declares the stack (e.g. "Laravel Blade adapter"). Covers calling convention for THIS stack, traps specific to this stack, lookup workflow.
+- `reference/components/{name}.md` — per-component API for this stack's syntax. Synced from the central source of truth (Composer fixtures + manifests) at build time once `pinion-ui-core` exists (v0.6+); hand-maintained until then.
+- `CLAUDE_SNIPPET.md` — 1-paragraph snippet that `ui:install --ai` (or the equivalent CLI in JS-land) appends to the consumer's `CLAUDE.md`. Points at this package's `AGENTS.md` and `reference/`. Stack-identified so the consumer's LLM knows which one applies.
+
+**Phasing aligned with v0.5+ runtime plan**:
+
+| Phase | Stack | Package | Docs source-of-truth |
+|---|---|---|---|
+| Now (v0.4) | Laravel Blade | `sparrowhawk-labs/pinion-ui` (this) | Hand-maintained reference/, hand-maintained AGENTS.md |
+| v0.5 | Vanilla CSS users (any framework, hand-rolled HTML) | `pinion-ui-css` NPM | Class-composition tables generated from `pinion-ui-core` |
+| v0.7 | Vanilla JS / Web Components | `pinion-ui-elements` NPM | reference/ synced from manifests |
+| v1.0 | React / Vue / Solid | `@pinion-ui/{react,vue,solid}` NPM | reference/ + AGENTS.md generated from manifests during codegen of the wrappers |
+
+**Hard rules** (do not revisit unless the conclusion specifically becomes wrong):
+- **Do not** create an `agents/<stack>.md` subdirectory inside a single package. One package = one adapter.
+- **Do not** copy reference/component docs into the consumer app. Vendor/node_modules reads are sufficient — Claude Code's Read tool handles this fine.
+- **Do not** centralize docs in a shared package. Sync references from the manifest/IR at build time once that IR exists; until then hand-maintain per package.
+- **Do** stack-mark the entry doc (AGENTS.md top line, CLAUDE_SNIPPET.md title) so the consumer's LLM sees immediately which adapter it's looking at.
