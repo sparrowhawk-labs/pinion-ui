@@ -10,29 +10,28 @@ class TabsComposer
         $size    = $props['size']    ?? 'md';
 
         return [
-            'root'      => 'w-full',
-            'tabList'   => self::tabList($variant),
+            'root'      => self::root($variant),
             'tabBase'   => self::tabBase($size),
             'tabActive' => self::tabActive($variant),
             'tabIdle'   => self::tabIdle($variant),
             'iconWrap'  => 'inline-flex items-center gap-inline',
-            'panels'    => 'mt-[var(--space-compact)]',
+            'panel'     => 'order-1 basis-full mt-[var(--space-compact)]',
         ];
     }
 
-    private static function tabList(string $variant): string
+    private static function root(string $variant): string
     {
-        $list = match ($variant) {
-            'boxed' => 'bg-base-200/50 p-1 rounded-[var(--radius-box)] gap-1',
-            'pill'  => 'gap-1',
-            default => 'border-b border-base-300 gap-0',
+        $base = 'w-full flex flex-wrap items-stretch';
+        return match ($variant) {
+            'boxed' => $base.' gap-1',
+            'pill'  => $base.' gap-1',
+            default => $base.' gap-0 after:content-[""] after:order-0 after:flex-1 after:border-b after:border-base-300 after:self-stretch',
         };
-        return 'flex '.$list;
     }
 
     private static function tabBase(string $size): string
     {
-        $base = 'relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap';
+        $base = 'order-0 relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap';
         return FieldVariants::join($base, self::sizeClasses($size));
     }
 
