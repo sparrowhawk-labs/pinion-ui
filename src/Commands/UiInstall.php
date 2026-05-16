@@ -71,7 +71,7 @@ class UiInstall extends Command
         $this->line('    3. Use: <x-button color="primary">Click</x-button>');
         $this->newLine();
         $this->line('  Theme: pinion (warm cream + amber accent) is shipped as the default.');
-        $this->line('  Switch with <html data-theme="pinion-dark"> or any other daisyUI theme.');
+        $this->line('  For dark mode or other looks, set <html data-theme="dark"> (or dim/night/…).');
         $this->newLine();
         $this->line('  Documentation:');
         $this->line('    - README:     vendor/sparrowhawk-labs/pinion-ui/README.md');

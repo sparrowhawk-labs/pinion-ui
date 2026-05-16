@@ -10,7 +10,7 @@
 - **46 anonymous components** (`<x-button>`, `<x-modal>`, `<x-tabs>`, …); index in [`reference/components/index.md`](./reference/components/index.md)
 - **Compose layer** (PHP class-string generators) keeps Blade render-only
 - **Namespace**: `pn::` (e.g. `<x-pn::button>`) for disambiguation; anonymous `<x-button>` is the default. Old `<x-pinion-ui::…>` is gone (v0.2.1).
-- **Theme**: ships `pinion` (warm cream + amber-550 accent + slate-indigo secondary, near-black ink) as default in v0.4.0+, plus `pinion-dark`. All 35 daisyUI v5 themes remain available.
+- **Theme**: ships `pinion` only (warm cream + amber-550 accent + teal-petrol secondary, near-black ink) as default in v0.4.0+. No bundled dark companion — consumers who want dark mode pick any of daisyUI's standard dark themes (`dark`, `dim`, `night`, …) via `<html data-theme="…">`. All 35 daisyUI v5 themes remain available.
 - **Tune**: `tune.css` (855 lines) provides orthogonal shape/spacing/font/size tokens via `<html data-tune="…">` — 10 presets (`default`, `sharp`, `elegant`, `playful`, `bold`, `pixel`, etc.). Theme and tune mix freely.
 - **Icons**: companion package `sparrowhawk-labs/pinion-icons` (separate repo, also stable on Packagist as of v0.1.0). Bundles Solar (1,234 names) + `solar-extra` (plain `close` / `check` / `plus` / `minus` glyphs Solar lacks).
 
@@ -39,7 +39,7 @@ src/
     css/
       pinion-ui.css       — preset (v0.3.17 root fix). Consumers `@import` THIS, not piecemeal @source.
                             Bundles @source globs (Blade + Compose PHP), safelist, tooltip patches,
-                            tune.css, and the `pinion` + `pinion-dark` theme definitions.
+                            tune.css, and the `pinion` theme definition.
       tune.css            — 855-line shape/spacing/font/size token system, 10 tune presets,
                             self-hosted PixelMplus fonts.
     views/components/     — 45 Blade anonymous components (1 nested = 46 total per AGENTS.md count)
