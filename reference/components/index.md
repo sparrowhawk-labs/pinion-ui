@@ -30,7 +30,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-badge>`](./badge.md) | Small inline label — color, appearance (`soft` / `solid` / `outline` / `ghost`), pill, and optional icon. |
 | [`<x-avatar>`](./avatar.md) | User avatar — image, initials, or icon fallback in priority order. |
 | [`<x-avatar-group>`](./avatar-group.md) | Stacked / overlapping avatars with optional `+N` overflow badge. |
-| [`<x-accordion>`](./accordion.md) | Collapsible item group built on `<details>` for no-JS expand/collapse. |
+| [`<x-accordion>`](./accordion.md) | Collapsible item group — parent `<x-accordion>` + nested `<x-accordion-item title>` children, Alpine `x-collapse` animation, single-open by default or `multiple`. |
 | [`<x-collapse>`](./collapse.md) | Single collapsible disclosure region — daisyUI `collapse` (checkbox-based, no-JS). Minimal by default; opt in to `icon="arrow"` or `icon="plus"` affordance. |
 | [`<x-divider>`](./divider.md) | Horizontal or vertical separator with optional label. (daisyUI `divider-horizontal` ↔ vertical naming inverted; this wrapper normalizes.) |
 | [`<x-kbd>`](./kbd.md) | Keyboard-key display (`<kbd>`) — sizes, color variants, often nested in buttons for shortcuts. |
@@ -53,7 +53,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 
 | Component | Description |
 |---|---|
-| [`<x-tabs>`](./tabs.md) | Tabbed content with `underline` / `lift` / `box` / `border` variants and `:tabs` prop API. |
+| [`<x-tabs>`](./tabs.md) | Tabbed content — parent `<x-tabs>` + nested `<x-tab name label :icon>` children, `underline` / `boxed` / `pill` variants, Alpine-driven panel switching. |
 | [`<x-menu-item>`](./menu-item.md) | Single nav item — active/disabled states, optional icon, renders `<a>` when `href` is set. |
 | [`<x-dropdown>`](./dropdown.md) | Trigger + panel menu built on Alpine — placements, hover/click open, keyboard nav. |
 | [`<x-breadcrumb>`](./breadcrumb.md) | Path-style nav from an `$items` array — separators, current-page highlight. |

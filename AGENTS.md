@@ -14,6 +14,30 @@ A Laravel Blade component library (Tailwind v4 + daisyUI v5 + Alpine.js). 46 com
 - **Namespaced (disambiguation)**: `<x-pn::button>` — use only when a consumer app has its own `<x-button>` that conflicts.
 - **Never use the old `<x-pinion-ui::xxx>` prefix** — it was renamed to `pn::` in v0.2.1.
 
+### Nested parent + children (v0.4.0+)
+
+Two components compose as a parent with nested children rather than driven by a single array prop:
+
+| Parent | Child | What the child carries |
+|---|---|---|
+| `<x-tabs>` | `<x-tab name label :icon>{{ slot }}</x-tab>` | One tab button + one panel. |
+| `<x-accordion>` | `<x-accordion-item title :name>{{ slot }}</x-accordion-item>` | One header + one disclosure region. |
+
+```blade
+<x-tabs variant="boxed">
+    <x-tab name="overview" label="Overview"><p>…</p></x-tab>
+    <x-tab name="specs"    label="Specs"><p>…</p></x-tab>
+</x-tabs>
+```
+
+How it works under the hood (so the pattern doesn't surprise you):
+
+- **Shared props via `@aware`**: parent props (`variant`, `size`, `multiple`) flow into children through Blade `@aware`. Don't declare them again on the child call site — they're inherited.
+- **Shared state via Alpine scope**: the parent owns the only `x-data` (`activeTab` / `open`); children read and write it via Alpine's normal scope chain. Don't add a new `x-data` on a child.
+- **Composer is called from both Blades**: parent and child each call the same `Composer::compose()` so the class strings line up. This stays consistent with the rest of the architecture rules below.
+
+Per-component docs cover the full prop tables and slot contracts: [`reference/components/tabs.md`](./reference/components/tabs.md), [`reference/components/accordion.md`](./reference/components/accordion.md). The previous array-driven shape (`:tabs="[…]"` / `:items="[…]"`) was removed in v0.4.0 — see [`SEMVER.md`](./SEMVER.md).
+
 ## Architecture rules (do not violate)
 
 1. **Compose pattern**: For most components, class strings live in `src/Compose/{Name}Composer.php`, not the Blade. Each composer has a static `compose(array $props): array` that returns a flat dict of class strings. The Blade reads `$c['root']`, `$c['title']`, etc. — it is render-only.

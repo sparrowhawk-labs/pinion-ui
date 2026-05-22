@@ -48,6 +48,59 @@ Each tagged release on GitHub has notes covering:
 
 If you depend on this package in a production app, pin to a specific patch (`^0.2.3`) until 1.0; review the release notes before bumping the minor.
 
+## Past version BC notes
+
+A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
+
+### v0.4.0 — 2026-05
+
+- **`<x-tabs>` API: array → nested anonymous components.** The previous `:tabs="[key => [label, content, icon?]]"` array prop was removed in favour of nested children. New form:
+
+    ```blade
+    {{-- before (≤ v0.3.x) --}}
+    <x-tabs :tabs="[
+        'overview' => ['label' => 'Overview', 'content' => '<p>...</p>'],
+        'specs'    => ['label' => 'Specs',    'content' => '<p>...</p>'],
+    ]" />
+
+    {{-- after (v0.4.0+) --}}
+    <x-tabs>
+        <x-tab name="overview" label="Overview"><p>...</p></x-tab>
+        <x-tab name="specs"    label="Specs"><p>...</p></x-tab>
+    </x-tabs>
+    ```
+
+    Migration: split each `$tabs` entry into an `<x-tab>` element, move `content` HTML into the child slot (Blade-escaped by default), lift `default` to the `<x-tabs default="…">` prop unchanged. `variant` and `size` remain on the parent. The nested form lets panels carry arbitrary Blade markup (other components, partials, multi-paragraph content) without going through `{!! !!}`.
+
+    Composer keys: `tabList` and `panels` removed; `panel` added. Each `<x-tab>` emits its own button + panel sibling inside the parent's `flex-wrap` container, with CSS `order` keeping panels after the button row. No separate tablist wrapper exists.
+
+- **`<x-accordion>` API: array → nested anonymous components.** The previous `:items="[[title, content], …]"` array prop was removed.
+
+    ```blade
+    {{-- before (≤ v0.3.x) --}}
+    <x-accordion :items="[
+        ['title' => 'Privacy', 'content' => '<p>...</p>'],
+        ['title' => 'Cookies', 'content' => '<p>...</p>'],
+    ]" />
+
+    {{-- after (v0.4.0+) --}}
+    <x-accordion>
+        <x-accordion-item title="Privacy"><p>...</p></x-accordion-item>
+        <x-accordion-item title="Cookies"><p>...</p></x-accordion-item>
+    </x-accordion>
+    ```
+
+    Migration: move each `$items` entry into an `<x-accordion-item>`. Pass an explicit `name` if you need open-state stability across renders (e.g. Livewire), otherwise an auto `item_<hex>` is generated per render. `size` and `multiple` remain on the parent.
+
+- **`pinion-dark` theme removed.** Pinion now ships only the `pinion` (light) theme. Consumers who want dark mode pick any daisyUI standard dark theme (`dark`, `dim`, `night`, `business`, …) via `<html data-theme>`. All 35 daisyUI v5 themes remain available unchanged.
+
+### Earlier 0.x flips (already mentioned above)
+
+- v0.2.0 — `<x-checkbox appearance>` default `'solid'` → `'soft'`. Opt back in with `appearance="solid"`.
+- v0.2.1 — `<x-collapse icon>` default `'arrow'` → `null`. Opt back in with `icon="arrow"` or `icon="plus"`.
+- v0.2.1 — namespace `<x-pinion-ui::…>` → `<x-pn::…>`. No alias was kept; this was a one-time rename.
+- v0.3.0 → v0.3.4 — `<x-indicator>` / `<x-timeline>` default `appearance="soft"` reverted to `'solid'` after user testing. The `appearance` prop remains, so `appearance="soft"` is still a one-keyword opt-in.
+
 ## What's stable today, even pre-1.0
 
 - The set of components and their prop names — additions only, no silent renames.
