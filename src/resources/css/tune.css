@@ -468,6 +468,53 @@
     --text-field-lg: 0.875rem;
 }
 
+[data-tune="minimal"] {
+    /* Shape — quiet, near-flat (no shadows) */
+    --radius-box: 0.25rem;
+    --radius-field: 0.25rem;
+    --radius-selector: 0.25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    /* Spacing — the airiest preset: generous whitespace is the whole point */
+    --space-section: 7rem;
+    --space-section-inner: 4.5rem;
+    --space-element: 2.25rem;
+    --space-compact: 1rem;
+    --space-text: 1.25rem;
+    --space-inline: 0.625rem;
+    /* Font — restrained neutral sans, base nudged slightly smaller so the
+       whitespace (not the type) carries the page. */
+    --font-size-base: 0.9375rem;
+    --font-heading: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", monospace;
+    --font-weight-heading: 600;
+    /* Component size — slightly smaller text; roomy px keeps controls airy. */
+    --h-field-xs: 1.75rem;
+    --h-field-sm: 2rem;
+    --h-field-md: 2.5rem;
+    --h-field-lg: 3rem;
+    --px-field-xs: 0.75rem;
+    --px-field-sm: 1rem;
+    --px-field-md: 1.25rem;
+    --px-field-lg: 1.75rem;
+    --px-input-xs: 0.5rem;
+    --px-input-sm: 0.625rem;
+    --px-input-md: 0.875rem;
+    --px-input-lg: 1.125rem;
+    --py-input-xs: 0.25rem;
+    --py-input-sm: 0.375rem;
+    --py-input-md: 0.5rem;
+    --py-input-lg: 0.75rem;
+    --text-field-xs: 0.6875rem;
+    --text-field-sm: 0.75rem;
+    --text-field-md: 0.8125rem;
+    --text-field-lg: 0.9375rem;
+}
+
 /* --- Japanese Support Toggle ---
    Default (no attribute): each tune's font stack includes a Japanese
    fallback — content that mixes Japanese and English renders cohesively.
@@ -528,6 +575,11 @@
     --font-heading: "JetBrains Mono", ui-monospace, monospace;
     --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+[data-tune="minimal"][data-ja="off"] {
+    --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* --- Font Application --- */
