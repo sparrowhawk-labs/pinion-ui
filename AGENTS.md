@@ -51,7 +51,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 | Layer | Where it lives | Examples |
 |---|---|---|
 | **Theme** (color palette) | `<html data-theme="...">` | `light`, `dark`, `dracula`, any daisyUI theme |
-| **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `tech`, `elegant`, `playful` (10 presets) |
+| **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `elegant`, `playful` (11 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
 Themes and Tunes mix freely. Both are activated by `<x-tune-styles />` injecting the `data-tune="*"` CSS once into the layout `<head>`.

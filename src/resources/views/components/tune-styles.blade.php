@@ -86,6 +86,14 @@ $tunes = [
         'space-element' => '1.25rem', 'space-compact' => '0.5rem',
         'space-text' => '0.75rem', 'space-inline' => '0.375rem',
     ],
+    'minimal' => [
+        'radius-box' => '0.25rem', 'radius-field' => '0.25rem', 'radius-selector' => '0.25rem',
+        'border' => '1px', 'depth' => '0', 'noise' => '0',
+        'size-selector' => '0.25rem', 'size-field' => '0.25rem',
+        'space-section' => '7rem', 'space-section-inner' => '4.5rem',
+        'space-element' => '2.25rem', 'space-compact' => '1rem',
+        'space-text' => '1.25rem', 'space-inline' => '0.625rem',
+    ],
 ];
 
 if ($only !== null) {
