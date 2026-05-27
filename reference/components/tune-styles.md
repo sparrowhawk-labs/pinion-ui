@@ -45,7 +45,7 @@ None.
 ### Ship only the tunes you actually use
 
 ```blade
-{{-- App only uses default + tech — strip the other 8 presets from the inline CSS --}}
+{{-- App only uses default + tech — strip the other 9 presets from the inline CSS --}}
 <x-pn::tune-styles only="default,tech" />
 ```
 
@@ -72,7 +72,7 @@ Tune-styles has **no classes** to compose — it renders a sequence of `<style>`
 ## Notes
 
 - **Place once.** Multiple `<x-pn::tune-styles>` instances on a page will emit duplicate `<style>` blocks. The browser will deduplicate the effect but you pay the bytes twice — keep it in the layout `<head>`.
-- All 10 presets (`default`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`) ship in the inline `$tunes` map as of v0.2.3. Shape, border, depth, and spacing tokens render correctly from the Blade fallback alone. Full font fidelity (custom typefaces like Press Start 2P or JetBrains Mono) still requires importing `tune.css` via the CSS pipeline — the inline fallback does not assign `--font-heading` / `--font-body` / `--font-mono`.
+- All 11 presets (`default`, `minimal`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`) ship in the inline `$tunes` map (the original ten since v0.2.3, `minimal` added later). Shape, border, depth, and spacing tokens render correctly from the Blade fallback alone. Full font fidelity (custom typefaces like Press Start 2P or JetBrains Mono) still requires importing `tune.css` via the CSS pipeline — the inline fallback does not assign `--font-heading` / `--font-body` / `--font-mono`.
 - Each preset sets: `--radius-box`, `--radius-field`, `--radius-selector`, `--border`, `--depth`, `--noise`, `--size-selector`, `--size-field`, `--space-section`, `--space-section-inner`, `--space-element`, `--space-compact`, `--space-text`, `--space-inline`.
 - Font-family variables (`--font-heading`, `--font-body`, `--font-mono`) are part of the broader Tune system but are loaded from the imported `tune.css` / font CSS, not from this Blade fallback. Use the CSS pipeline path if you need the full font-stack swap.
 - This component is **load-bearing for the whole design system** — strip it without an equivalent `tune.css` import and every component silently falls back to daisyUI / Tailwind defaults (square radii, no section spacing, etc.).
