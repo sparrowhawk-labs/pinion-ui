@@ -790,6 +790,18 @@
     margin-top: var(--space-element);
 }
 
+@utility mb-element {
+    margin-bottom: var(--space-element);
+}
+
+@utility mt-section-inner {
+    margin-top: var(--space-section-inner);
+}
+
+@utility mb-section-inner {
+    margin-bottom: var(--space-section-inner);
+}
+
 @utility p-element {
     padding: var(--space-element);
 }
