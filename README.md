@@ -104,6 +104,7 @@ Theme and Tune are fully orthogonal — any combination works.
 | Tune | Shape | Font (heading / body) | Sizing | Character |
 |------|-------|-----------------------|--------|-----------|
 | **default** | standard radius | Inter / Inter + Noto Sans JP | standard | Neutral, all-purpose |
+| **minimal** | small radius, no shadow | Inter / Inter + Noto Sans JP | airy spacing, smaller text | Clean, restrained |
 | **sharp** | no radius | DM Sans + Noto Sans JP | slightly smaller | Geometric, precise |
 | **soft** | large radius | Nunito + Zen Maru Gothic | slightly larger | Soft, rounded |
 | **playful** | maximum radius | Fredoka / Quicksand + Zen Maru Gothic | larger | Playful, pop |
