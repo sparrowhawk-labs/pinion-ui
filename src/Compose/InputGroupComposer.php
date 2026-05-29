@@ -31,17 +31,16 @@ class InputGroupComposer
     private static function wrapperClass(): string
     {
         // Joining heterogeneous children is tricky because the visible
-        // border + radius live one (or two) levels deep — not on the direct
-        // child div. Three child shapes coexist:
+        // border + radius live at varying depths.  Three child shapes coexist:
         //   (a) bare <input>/<select>/<textarea>/<button>/<span addon> as
-        //       direct children — handled by [&>*:...] rules.
+        //       direct children (depth 1) — handled by [&>*:...] rules.
         //   (b) <x-input> / native <x-select> →
-        //       div.w-full > div.flex.items-stretch[border+radius] > <input|select>
-        //       Inner div is targeted via :has(input,select,textarea).
+        //         div.w-full > div.flex.items-stretch[border+radius] > <input|select>
+        //       depth 2 inner div. Targeted via :has(input,select,textarea).
         //   (c) custom <x-select> (default mode) →
-        //       div.w-full > div.relative.w-full[no border] > <button>[border+radius]
-        //       The visible element is a <button>, not a bordered inner div.
-        //       Dedicated rules below target >button.
+        //         div.w-full > div.relative.w-full[no border] > <button>[border+radius]
+        //       depth 3 button. The visible element is a <button>, not a
+        //       bordered inner div. Targeted via dedicated >div>div>button rules.
         return FieldVariants::join(
             'inline-flex w-full',
             // Stretch interactive children. Spans (text addons) and buttons keep natural width.
@@ -49,38 +48,50 @@ class InputGroupComposer
             '[&>select]:flex-1 [&>select]:min-w-0',
             '[&>textarea]:flex-1 [&>textarea]:min-w-0',
             '[&>div]:flex-1 [&>div]:min-w-0',
-            // Zero radii on direct children AND on the inner wrappers of x-input / x-select.
+            // (a/b) Zero radii on direct children + the depth-2 inner wrapper.
             '[&>*]:rounded-none',
             '[&>div>div]:rounded-none',
-            // Zero radii on the trigger <button> of custom x-select (shape (c)).
-            '[&>div>button]:rounded-none',
-            // Restore radii on the two ends — direct children (bare input/select/button/span).
+            // (c) Zero radii on the depth-3 trigger <button> of custom x-select.
+            '[&>div>div>button]:rounded-none',
+            // (a) Restore radii on the two ends — direct children.
             '[&>*:first-child]:rounded-l-[var(--radius-field)]',
             '[&>*:last-child]:rounded-r-[var(--radius-field)]',
-            // Restore radii on the inner wrapper of x-input / native x-select at the ends.
+            // (b) Restore radii on the depth-2 inner wrapper at the ends.
             '[&>div:first-child>div:has(input,select,textarea)]:rounded-l-[var(--radius-field)]',
             '[&>div:last-child>div:has(input,select,textarea)]:rounded-r-[var(--radius-field)]',
-            // Restore radii on the trigger <button> of custom x-select at the ends.
-            '[&>div:first-child>button]:rounded-l-[var(--radius-field)]',
-            '[&>div:last-child>button]:rounded-r-[var(--radius-field)]',
+            // (c) Restore radii on the depth-3 custom-select <button> at the ends.
+            '[&>div:first-child>div>button]:rounded-l-[var(--radius-field)]',
+            '[&>div:last-child>div>button]:rounded-r-[var(--radius-field)]',
             // Collapse inner border (right edge) — direct children.
             '[&>*:not(:last-child)]:border-r-0',
-            // Collapse inner border — inner wrapper of x-input / native x-select.
+            // (b) Collapse — depth-2 inner wrapper of x-input / native x-select.
             '[&>div:not(:last-child)>div:has(input,select,textarea)]:border-r-0',
-            // Collapse inner border — trigger <button> of custom x-select.
-            '[&>div:not(:last-child)>button]:border-r-0',
-            // Focus visibility: when any child is focus-within, bring it above
-            // its siblings so the 1px focus ring (drawn as box-shadow on the
-            // inner wrapper of x-input / native select, or on the custom-select
-            // trigger button, or on bare children) isn't occluded by the
-            // adjacent sibling's border on the joined edge. Without this, a
-            // focused LEFT child shows no visible focus indicator on its right
-            // edge (border-r is already 0 from the collapse rules above) — the
-            // focused element appears 3-sided. relative + z-10 raises only the
-            // focused element; idle siblings stay at z=auto so their borders
-            // still form the joined divider line.
+            // (c) Collapse — depth-3 custom-select <button>.
+            '[&>div:not(:last-child)>div>button]:border-r-0',
+            // Focus visibility — three layered fixes are required.
+            //
+            // 1. Raise the focused outer wrapper above its siblings so any
+            //    box-shadow on its descendant can paint over the adjacent
+            //    border at the joined seam.
             '[&>*:focus-within]:relative',
             '[&>*:focus-within]:z-10',
+            //
+            // 2. Force the ring colour to FULL primary inside this group.
+            //    Tailwind v4's default --tw-ring-color is
+            //      color-mix(in oklab, var(--color-primary) 30%, transparent)
+            //    a 30 %-opacity tint that vanishes when overlaid on the
+            //    neighbour's grey 1px border at the seam. Override it so the
+            //    seam reads as solid primary when focused.
+            '[&_*:focus-within]:[--tw-ring-color:var(--color-primary)]',
+            //
+            // 3. Cover the seam with a one-sided right shadow on the depth-2
+            //    inner wrapper AND the depth-3 trigger button when they sit
+            //    in a non-last-child position. The shadow is layout-neutral
+            //    (does not push siblings) and paints the missing right edge
+            //    in solid primary so the joined row reads as a single bordered
+            //    field with the focused field highlighted on all four sides.
+            '[&>div:not(:last-child):focus-within>div:has(input,select,textarea)]:[box-shadow:1px_0_0_0_var(--color-primary)]',
+            '[&>div:not(:last-child):focus-within>div>button]:[box-shadow:1px_0_0_0_var(--color-primary)]',
         );
     }
 
