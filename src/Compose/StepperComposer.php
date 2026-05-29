@@ -25,7 +25,7 @@ class StepperComposer
             'root'            => self::rootClass($orientation),
             'item'            => self::itemClass($orientation),
             'circle'          => self::circleClass($variant),
-            'connector'       => self::connectorClass($orientation),
+            'connector'       => self::connectorClass($orientation, $variant),
             'label'           => 'text-sm font-medium',
             'desc'            => 'text-xs text-base-content/60 mt-0.5',
             'stateColors'     => self::stateColors(),
@@ -56,10 +56,28 @@ class StepperComposer
             : 'w-9 h-9 rounded-full border-2 shrink-0 flex items-center justify-center text-sm font-semibold transition-colors';
     }
 
-    private static function connectorClass(string $orientation): string
+    /**
+     * Connector geometry is variant-aware. The offset that places the bar
+     * at the circle's centre depends on the circle's diameter:
+     *   - numbered : w-9/h-9 (36px) → center 18px → use mt-4 / ml-4 (16px,
+     *     close enough that 1px-2px drift is invisible at the bar's stroke)
+     *   - dotted   : w-3/h-3 (12px) → center 6px → mt-4 / ml-4 leaves the
+     *     bar 10px BELOW (or to the right of) the dot, so the dotted row
+     *     reads as "dots floating above a disconnected line" instead of a
+     *     joined progress. Use mt-[5px] / ml-[5px] so the bar's 2px stroke
+     *     centres on the dot's 6px centre.
+     * Also tighten min-w-* / h-* so dotted reads as the compact pager
+     * variant the user expects (carousel position etc.).
+     */
+    private static function connectorClass(string $orientation, string $variant = 'numbered'): string
     {
-        return $orientation === 'vertical'
-            ? 'w-0.5 h-6 ml-4 shrink-0'
+        if ($orientation === 'vertical') {
+            return $variant === 'dotted'
+                ? 'w-0.5 h-3 ml-[5px] shrink-0'
+                : 'w-0.5 h-6 ml-4 shrink-0';
+        }
+        return $variant === 'dotted'
+            ? 'flex-1 h-0.5 mt-[5px] min-w-3'
             : 'flex-1 h-0.5 mt-4 min-w-6';
     }
 

@@ -30,12 +30,18 @@ class InputGroupComposer
 
     private static function wrapperClass(): string
     {
-        // Joining heterogeneous children is tricky because <x-input> /
-        // <x-select> render as `<div class="w-full"> <div class="wrapper-with-border+radius"> <input> </div> </div>` —
-        // the visible border + radius lives on the INNER wrapper, not the
-        // outer div. We zero radii at both levels and restore on the ends
-        // using `:has()` so the rule only kicks in on form-containing wrappers
-        // (skipping label / hint divs the wrapped components might also emit).
+        // Joining heterogeneous children is tricky because the visible
+        // border + radius live one (or two) levels deep — not on the direct
+        // child div. Three child shapes coexist:
+        //   (a) bare <input>/<select>/<textarea>/<button>/<span addon> as
+        //       direct children — handled by [&>*:...] rules.
+        //   (b) <x-input> / native <x-select> →
+        //       div.w-full > div.flex.items-stretch[border+radius] > <input|select>
+        //       Inner div is targeted via :has(input,select,textarea).
+        //   (c) custom <x-select> (default mode) →
+        //       div.w-full > div.relative.w-full[no border] > <button>[border+radius]
+        //       The visible element is a <button>, not a bordered inner div.
+        //       Dedicated rules below target >button.
         return FieldVariants::join(
             'inline-flex w-full',
             // Stretch interactive children. Spans (text addons) and buttons keep natural width.
@@ -46,16 +52,35 @@ class InputGroupComposer
             // Zero radii on direct children AND on the inner wrappers of x-input / x-select.
             '[&>*]:rounded-none',
             '[&>div>div]:rounded-none',
+            // Zero radii on the trigger <button> of custom x-select (shape (c)).
+            '[&>div>button]:rounded-none',
             // Restore radii on the two ends — direct children (bare input/select/button/span).
             '[&>*:first-child]:rounded-l-[var(--radius-field)]',
             '[&>*:last-child]:rounded-r-[var(--radius-field)]',
-            // Restore radii on the inner wrapper of x-input / x-select at the ends.
+            // Restore radii on the inner wrapper of x-input / native x-select at the ends.
             '[&>div:first-child>div:has(input,select,textarea)]:rounded-l-[var(--radius-field)]',
             '[&>div:last-child>div:has(input,select,textarea)]:rounded-r-[var(--radius-field)]',
+            // Restore radii on the trigger <button> of custom x-select at the ends.
+            '[&>div:first-child>button]:rounded-l-[var(--radius-field)]',
+            '[&>div:last-child>button]:rounded-r-[var(--radius-field)]',
             // Collapse inner border (right edge) — direct children.
             '[&>*:not(:last-child)]:border-r-0',
-            // Collapse inner border — inner wrapper of x-input / x-select.
+            // Collapse inner border — inner wrapper of x-input / native x-select.
             '[&>div:not(:last-child)>div:has(input,select,textarea)]:border-r-0',
+            // Collapse inner border — trigger <button> of custom x-select.
+            '[&>div:not(:last-child)>button]:border-r-0',
+            // Focus visibility: when any child is focus-within, bring it above
+            // its siblings so the 1px focus ring (drawn as box-shadow on the
+            // inner wrapper of x-input / native select, or on the custom-select
+            // trigger button, or on bare children) isn't occluded by the
+            // adjacent sibling's border on the joined edge. Without this, a
+            // focused LEFT child shows no visible focus indicator on its right
+            // edge (border-r is already 0 from the collapse rules above) — the
+            // focused element appears 3-sided. relative + z-10 raises only the
+            // focused element; idle siblings stay at z=auto so their borders
+            // still form the joined divider line.
+            '[&>*:focus-within]:relative',
+            '[&>*:focus-within]:z-10',
         );
     }
 
