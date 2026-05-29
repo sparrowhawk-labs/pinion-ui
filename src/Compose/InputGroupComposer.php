@@ -71,25 +71,32 @@ class InputGroupComposer
             // Focus visibility — three layered fixes are required.
             //
             // 1. Raise the focused outer wrapper above its siblings so any
-            //    box-shadow on its descendant can paint over the adjacent
-            //    border at the joined seam.
+            //    seam-fill shadow can paint over the adjacent border at the
+            //    joined seam.
             '[&>*:focus-within]:relative',
             '[&>*:focus-within]:z-10',
             //
-            // 2. Force the ring colour to FULL primary inside this group.
-            //    Tailwind v4's default --tw-ring-color is
-            //      color-mix(in oklab, var(--color-primary) 30%, transparent)
-            //    a 30 %-opacity tint that vanishes when overlaid on the
-            //    neighbour's grey 1px border at the seam. Override it so the
-            //    seam reads as solid primary when focused.
-            '[&_*:focus-within]:[--tw-ring-color:var(--color-primary)]',
+            // 2. KILL the focus ring inside this group. The field's default
+            //    focus pattern is `focus-within:border-primary
+            //    focus-within:ring-1 focus-within:ring-primary` — a 1px
+            //    colour-change border PLUS a 1px outset ring. The outset ring
+            //    grows the focused element's visual outline by 1px on every
+            //    side, so a joined row reads as "the focused field is fatter
+            //    than its neighbours and the outer frame bulges around it".
+            //    Inside an input-group every child must share the same visual
+            //    width; only the colour should change on focus. Zero out the
+            //    ring shadow contribution; the border-colour change still
+            //    fires for top / left / bottom, and the seam-fill shadow
+            //    below handles the right edge.
+            '[&_*:focus-within]:[--tw-ring-shadow:0_0_transparent]',
             //
-            // 3. Cover the seam with a one-sided right shadow on the depth-2
-            //    inner wrapper AND the depth-3 trigger button when they sit
-            //    in a non-last-child position. The shadow is layout-neutral
-            //    (does not push siblings) and paints the missing right edge
-            //    in solid primary so the joined row reads as a single bordered
-            //    field with the focused field highlighted on all four sides.
+            // 3. Paint the missing right seam with a layout-neutral one-sided
+            //    shadow on the focused, non-last-child inner wrapper (b) AND
+            //    the depth-3 trigger button (c). 1px solid primary, sits
+            //    exactly over the next sibling's grey left border at the
+            //    seam — the joined row reads as one bordered field with the
+            //    focused part highlighted, all four edges at the same 1px
+            //    width.
             '[&>div:not(:last-child):focus-within>div:has(input,select,textarea)]:[box-shadow:1px_0_0_0_var(--color-primary)]',
             '[&>div:not(:last-child):focus-within>div>button]:[box-shadow:1px_0_0_0_var(--color-primary)]',
         );
