@@ -62,13 +62,14 @@ Themes and Tunes mix freely. Both are activated by `<x-tune-styles />` injecting
 - `rating-half` requires the explicit `rating-{size}` class even at default size, or half-star widths collapse. `RatingComposer` always emits it.
 - `<x-collapse>` defaults to **no icon** since v0.2.1 — opt in with `icon="arrow"` or `icon="plus"`.
 - `tooltip`'s stock daisyUI bubble is heavy on light surfaces; the default is `tooltip-light` (base-200 soft fill, arrow same colour to avoid the border-on-arrow problem). Use `color="<semantic>"` to opt back into daisyUI's native dark bubble.
-- Several components ship **Japanese aria/label defaults** that you should override for non-Japanese UI. Known hardcodes today:
-  - `<x-notification-system>` — `closeLabel='閉じる'` (toast dismiss button)
-  - `<x-rating>` — clear-radio `aria-label='評価なし'`
-  - `<x-pagination>` / `<x-pagination-simple>` — `prev='前へ'`, `next='次へ'`
-  - `<x-table-scroll>` — scroll buttons `aria-label='前へスクロール'` / `'次へスクロール'`
+- Several components ship **locale-aware aria/label defaults** resolved through `pn_trans()` → `config('pinion-ui.locale')` (default `ja`; an `en` bucket also ships). Components that pull defaults this way:
+  - `<x-notification-system>` — toast dismiss button (`notification.close`)
+  - `<x-rating>` — clear-radio aria-label (`rating.none`)
+  - `<x-pagination>` / `<x-pagination-simple>` — `prev` / `next` / info template / aria (`pagination.*`)
+  - `<x-table-scroll>` — scroll buttons aria-label (`table_scroll.prev` / `.next`)
+  - `<x-select>` — placeholder (`select.placeholder`)
 
-  Override pattern: pass the prop explicitly per call site (`<x-pagination :prev="__('Previous')" :next="__('Next')" />`), or wrap each component in your own thin shim that pulls from `__()` / `config()`. A package-wide locale config is on the roadmap; for now treat the defaults as Japanese.
+  **To switch the whole app's component strings to English**: set `PINION_UI_LOCALE=en` (or `config('pinion-ui.locale')` directly). This is intentionally independent of Laravel's `config('app.locale')`. **Per-call override still wins**: pass the prop explicitly (`<x-pagination prevLabel="Older" nextLabel="Newer" />`). **Add a locale**: extend the `translations` array in the published `config/pinion-ui.php`. Missing locale/key falls back to the literal Japanese string baked into the component as `pn_trans()`'s second argument.
 
 For class names not covered above, always grep `docs/{daisyui,preline,penguinui}/` (local third-party docs, gitignored) before claiming a class behaviour.
 
@@ -102,6 +103,43 @@ Use the full Alpine prefix on `<x-...>` elements:
 ```
 
 Shorthand `:class` / `@click` is fine on plain HTML elements (`<button>`, `<div>`, `<input>`) — Blade only intercepts when the tag starts with `<x-`.
+
+## Livewire integration
+
+pinion-ui is a **Blade-only library** (no Livewire components inside). Components work inside Livewire component Blade trees without any special setup. The notes below document what works, what doesn't, and why.
+
+### wire:model compatibility matrix
+
+| Component(s) | wire:model support | Notes |
+|---|---|---|
+| `input`, `textarea`, `select`, `checkbox`, `radio`, `toggle`, `range-slider`, `input-number`, `file-upload` | ✅ Full — direct passthrough | `wire:` attrs forwarded via `$attributes->whereStartsWith('wire:')` to the native form element |
+| `rating` | ✅ Full — native radio | `wire:model` is forwarded to each `<input type="radio">` with the correct `value=` attr. `.live` works. |
+| `pin-input` | ✅ Supported (dispatch pattern) | `wire:model` goes on a dedicated hidden `<input>`. An Alpine `$watch` on `combined` dispatches a native `input` event → Livewire is notified on every digit change. |
+| `radio-group` | ❌ Not supported on wrapper | Do **not** put `wire:model` on `<x-radio-group>`. Apply it to each child `<x-radio wire:model="field" value="x">` directly. |
+| `input-number` | ⚠️ Partial | User-typed changes notify Livewire (native `input` event). Clicking the **+/−** buttons changes Alpine's `v` programmatically — no native `input` event fires, so Livewire is **not** notified. Add an `x-effect` / `$watch` at the call site if you need button-click sync. |
+
+### Detecting wire:model in Blade (UI library pattern)
+
+Always use `$attributes->whereStartsWith('wire:model')` — **not** `$attributes->wire('model')`. The `wire()` macro is registered by Livewire at runtime; pinion-ui must work in apps without Livewire installed.
+
+### Loops: always add wire:key
+
+Morphdom needs a stable key on every repeated Livewire-rendered component:
+
+```blade
+@foreach($items as $item)
+    <x-card wire:key="item-{{ $item->id }}">…</x-card>
+@endforeach
+```
+
+### wire:loading on buttons
+
+```blade
+{{-- spinner while any Livewire request is in-flight --}}
+<x-button wire:loading.attr="disabled" wire:target="save">Save</x-button>
+```
+
+`$attributes` on `button` is merged at the root `<button>` element, so `wire:loading` / `wire:target` / `wire:click` all work as expected.
 
 ## When in doubt
 

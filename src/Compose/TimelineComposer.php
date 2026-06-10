@@ -52,10 +52,11 @@ class TimelineComposer
     /**
      * State → middle-icon color class.
      *
-     * `appearance='soft'` (default since v0.3.0): done/default segments use
-     * `text-primary/70` so a list of many done items reads as a calm gradient
-     * rather than a saturated wall of colour.
-     * `appearance='solid'`: pre-v0.3 behaviour, done/default use full `text-primary`.
+     * `appearance='solid'` (default; reverted from the v0.3.0 soft default in
+     * v0.3.4): done/default segments use full `text-primary` so the done-chain
+     * keeps a clear visual hierarchy.
+     * `appearance='soft'` (opt-in): done/default use `text-primary/70` so a list
+     * of many done items reads as a calm gradient rather than a saturated wall.
      * `current` and `upcoming` are independent of appearance.
      */
     private static function stateColors(string $appearance): string
@@ -73,9 +74,9 @@ class TimelineComposer
     /**
      * State → connector (<hr>) color class.
      *
-     * `appearance='soft'` (default since v0.3.0): done segments use
-     * `bg-primary/30` for a muted connector. `appearance='solid'` keeps
-     * the pre-v0.3 full `bg-primary` line.
+     * `appearance='solid'` (default since the v0.3.4 revert): done segments keep
+     * the full `bg-primary` line. `appearance='soft'` (opt-in) uses
+     * `bg-primary/30` for a muted connector.
      */
     private static function hrColors(string $appearance): string
     {

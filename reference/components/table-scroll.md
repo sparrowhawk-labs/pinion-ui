@@ -80,7 +80,7 @@ All other attributes pass through to the outer wrapper `<div>`.
 
 ## Class composition
 
-See [`src/Compose/TableScrollComposer.php`](../../src/Compose/TableScrollComposer.php). Returns `wrapper`, `scrollContainer`, `leftFade`, `rightFade`, `buttonOuterLeft`, `buttonOuterRight`, `buttonInner`, `iconSize`. The fade gradients are built from `bg-gradient-to-{r,l} from-{fadeColor} via-{fadeColor}/90 to-transparent` — so `fadeColor` is concatenated into a Tailwind class at compile time and must be a token the Tailwind safelist knows about (`base-100` / `base-200` / `base-300` are safe; arbitrary hex values won't survive purging).
+See [`src/Compose/TableScrollComposer.php`](../../src/Compose/TableScrollComposer.php). Returns `wrapper`, `scrollContainer`, `leftFade`, `rightFade`, `buttonOuter`, `buttonOuterLeft`, `buttonOuterRight`, `buttonInner`, `iconSize`. The fade gradients are built from `bg-gradient-to-{r,l} from-{fadeColor} via-{fadeColor}/90 to-transparent` — so `fadeColor` is concatenated into a Tailwind class at compile time and must be a token the Tailwind safelist knows about (`base-100` / `base-200` / `base-300` are safe; arbitrary hex values won't survive purging).
 
 ## Related
 

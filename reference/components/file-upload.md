@@ -22,7 +22,7 @@ File input with two presentation modes — `inline` (looks like a standard text 
 | `description` | `string \| null` | `null` | Helper text — rendered inside the dropzone, or below the inline field. Hidden while `error` is set. |
 | `helper` | `string \| null` | `null` | Small helper text below the preview list. Hidden while `error` is set. |
 | `placeholder` | `string` | `'Drop a file here or browse'` | Reserved placeholder string (the inline input uses the browser-native chooser button text). |
-| `color` | `'neutral' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'neutral'` | Drives focus / hover / link / progress-bar color. |
+| `color` | `'neutral' \| 'primary' \| 'secondary' \| 'accent' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'neutral'` | Drives focus / hover / link / progress-bar color. |
 | `appearance` | `'outline' \| 'soft' \| 'underline' \| 'ghost' \| 'dropzone'` | `'outline'` | Shell style. The first four match `<x-input>`; `'dropzone'` switches to the large dashed-border drop zone. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Field height / padding / icon size. |
 | `previewLayout` | `'horizontal' \| 'grid'` | `'horizontal'` | Layout for the selected-files preview. `horizontal` = stacked rows; `grid` = responsive image-card grid. |

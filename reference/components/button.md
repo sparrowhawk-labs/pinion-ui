@@ -1,6 +1,6 @@
 # x-button
 
-Primary interactive control for actions. Renders `<button>` by default; pass `href` to render as `<a>`. Eight semantic colors × seven appearances × four sizes, plus loading/disabled states and optional left/right icons.
+Primary interactive control for actions. Renders `<button>` by default; pass `href` to render as `<a>`. Eight semantic colors × eight appearances × four sizes, plus loading/disabled states and optional left/right icons.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/button.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/button.blade.php) — full variant matrix and live demos.
 

@@ -24,7 +24,7 @@ Quantity selector — a numeric `<input type="number">` flanked by joined decrem
 | `max` | `int \| float \| null` | `null` | Upper bound. Symmetric to `min`. |
 | `step` | `int \| float` | `1` | Increment / decrement amount per button click. |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Drives both the button box (`w-[var(--h-field-{size})] h-[var(--h-field-{size})]`) and the input height/text-size. |
-| `width` | `string \| null` | `null` (= `'w-fit'`) | Override the outer wrapper's width utility — e.g. `'w-32'`, `'w-full'`. The default fits the natural width derived from `digits` (or auto-computed from min/max/value digit count). |
+| `width` | `string \| null` | `null` (= `'inline-flex flex-col'`) | Override the outer wrapper's width utility — e.g. `'w-32'`, `'w-full'`. The default fits the natural width derived from `digits` (or auto-computed from min/max/value digit count). |
 | `digits` | `int \| null` | `null` (auto) | Explicit digit-width override. When `null` (default), the input's HTML `size` attribute is computed as `max(strlen(max), strlen(min), strlen(value), 2) + 1` so the row visually fits its widest possible content. Pass a number to override (e.g. `digits=6` for a fixed 6-character cell). |
 | `disabled` | `bool` | `false` | Disables input and both buttons. |
 | `readonly` | `bool` | `false` | Input is readonly; buttons still work (so users can click +/− but not type). |
@@ -102,6 +102,6 @@ See [`src/Compose/InputNumberComposer.php`](../../src/Compose/InputNumberCompose
 
 - The Alpine `x-data` block lives inside the component — no global JS needed. Buttons clamp to `min` / `max` and the decrement / increment buttons auto-disable when the value is at the bound.
 - `tabindex="-1"` on both buttons keeps keyboard focus on the input — tab and shift-tab move you to the next field, not into the ± buttons. Use the input itself plus its native ↑ / ↓ keys (still wired) for keyboard adjustment.
-- The default `width="w-fit"` fits the row to its natural width — the input's HTML `size` attribute (`{digits}+1`) is the dominant width driver. This means a `min=1 max=9` quantity selector ends up visibly narrower than a `min=0 max=10000` price input, without having to hand-tune widths. Pass `width="w-full"` to stretch the row, or `digits=N` to fix the cell width regardless of bounds.
+- The default (`width` unset → `inline-flex flex-col` wrapper) fits the row to its natural width — the input's HTML `size` attribute (`{digits}+1`) is the dominant width driver. This means a `min=1 max=9` quantity selector ends up visibly narrower than a `min=0 max=10000` price input, without having to hand-tune widths. Pass `width="w-full"` to stretch the row, or `digits=N` to fix the cell width regardless of bounds.
 - Decimal `step` values are stored as strings in the Alpine `v` model — `parseFloat()` is called every inc/dec. Watch out for floating-point drift over many clicks (e.g. `0.1 * 7 → 0.7000000000000001`); set `step` precision deliberately.
 - `inputmode="numeric"` is always emitted to surface the numeric keypad on mobile.

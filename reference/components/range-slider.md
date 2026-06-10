@@ -7,7 +7,7 @@ Styled `<input type="range">` with label, value display, and helper/error chrome
 ## When to use
 
 - Bounded numeric inputs where the user benefits from seeing the magnitude visually (volume, brightness, price ceiling).
-- Settings that don't need a precise number — for exact entry pair with `<x-input type="number">` (or the upcoming `<x-input-number>`).
+- Settings that don't need a precise number — for exact entry pair with `<x-input type="number">` (or `<x-input-number>`).
 - For star-rating input use `<x-rating>` instead.
 
 ## Props

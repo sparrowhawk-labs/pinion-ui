@@ -1,6 +1,6 @@
 # x-avatar
 
-User avatar with priority fallback chain: `src` (image) → `initials` → `icon` → default slot. Five sizes × three shapes × eight colors × four appearances, plus an optional presence dot in the bottom-right corner.
+User avatar with priority fallback chain: `src` (image) → `initials` → `icon` → default slot. Five sizes × three shapes × eight colors × three appearances, plus an optional presence dot in the bottom-right corner.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/avatar.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/avatar.blade.php) — full variant matrix and live demos.
 

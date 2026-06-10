@@ -1,6 +1,6 @@
 # x-card
 
-Surface container for grouped content. Renders `<div>` by default with optional `header` and `footer` slots that are visually separated by either a divider line (`divider=true`, the default) or section spacing (`divider=false`). Ten appearance variants pair with eight semantic colors to drive bg/border/text tone.
+Surface container for grouped content. Renders `<div>` by default with optional `header` and `footer` slots that are visually separated by either a divider line (`divider=true`, the default) or section spacing (`divider=false`). Eleven appearance variants pair with eight semantic colors to drive bg/border/text tone.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/card.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/card.blade.php) — full variant matrix and live demos.
 

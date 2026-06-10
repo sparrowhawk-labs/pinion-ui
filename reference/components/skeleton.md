@@ -16,7 +16,7 @@ Animated placeholder for content that hasn't loaded yet. Three shapes — `rect`
 |------|------|---------|-------------|
 | `shape` | `'rect' \| 'circle' \| 'text'` | `'rect'` | `rect` general block; `circle` forces `rounded-full` and defaults to `w-12 h-12`; `text` defaults to `w-full h-4` and supports multi-line via `lines`. |
 | `width` | `string \| null` | shape-dependent | Tailwind width class — `'w-32'`, `'w-1/2'`, `'w-full'`. Defaults: `circle` → `w-12`, others → `w-full`. |
-| `height` | `string \| null` | shape-dependent | Tailwind height class — `'h-4'`, `'h-24'`. Defaults: `circle` → `h-12`, others → `h-4`. Ignored for the last line of a multi-line `text` block (forced to `h-4 w-2/3`). |
+| `height` | `string \| null` | shape-dependent | Tailwind height class — `'h-4'`, `'h-24'`. Defaults: `circle` → `h-12`, others → `h-4`. Ignored entirely for a multi-line `text` block (every line is forced to `h-4`; the last line is also shortened to `w-2/3`). |
 | `lines` | `int` | `1` | Only honored when `shape="text"`. With `lines > 1` renders a stack of bars (vertical `space-y-2`); the last line is shortened to `w-2/3` for typographic realism. |
 | `radius` | `'default' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'default'` | Corner radius (Tailwind `rounded-*`). Ignored for `shape="circle"` (always `rounded-full`). |
 | `animated` | `bool` | `true` | When `true` uses daisyUI's `skeleton` class (shimmer animation); when `false` falls back to a static `bg-base-300` block — useful in tests / motion-sensitive contexts. |

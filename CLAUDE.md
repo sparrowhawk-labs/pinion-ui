@@ -11,8 +11,8 @@
 - **Compose layer** (PHP class-string generators) keeps Blade render-only
 - **Namespace**: `pn::` (e.g. `<x-pn::button>`) for disambiguation; anonymous `<x-button>` is the default. Old `<x-pinion-ui::…>` is gone (v0.2.1).
 - **Theme**: ships `pinion` only (warm cream + amber-550 accent + teal-petrol secondary, near-black ink) as default in v0.4.0+. No bundled dark companion — consumers who want dark mode pick any of daisyUI's standard dark themes (`dark`, `dim`, `night`, …) via `<html data-theme="…">`. All 35 daisyUI v5 themes remain available.
-- **Tune**: `tune.css` (907 lines) provides orthogonal shape/spacing/font/size tokens via `<html data-tune="…">` — 11 presets (`default`, `minimal`, `sharp`, `elegant`, `playful`, `bold`, `pixel`, etc.). Theme and tune mix freely.
-- **Icons**: companion package `sparrowhawk-labs/pinion-icons` (separate repo, also stable on Packagist as of v0.1.0). Bundles Solar (1,234 names) + `solar-extra` (plain `close` / `check` / `plus` / `minus` glyphs Solar lacks).
+- **Tune**: `tune.css` (919 lines) provides orthogonal shape/spacing/font/size tokens via `<html data-tune="…">` — 11 presets (`default`, `minimal`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`). Theme and tune mix freely.
+- **Icons**: companion package `sparrowhawk-labs/pinion-icons` (separate repo, stable on Packagist as of v0.1.0). Bundles Solar (1,234 concept names × 6 stroke variants = 7,404) + `solar-extra` (plain `close` / `check` / `plus` / `minus` glyphs Solar lacks) + virtual `fluent-emoji` and `pixelarticons` libraries that resolve the same concept names.
 
 ## Architecture invariants
 
@@ -40,9 +40,11 @@ src/
       pinion-ui.css       — preset (v0.3.17 root fix). Consumers `@import` THIS, not piecemeal @source.
                             Bundles @source globs (Blade + Compose PHP), safelist, tooltip patches,
                             tune.css, and the `pinion` theme definition.
-      tune.css            — 907-line shape/spacing/font/size token system, 11 tune presets,
+      tune.css            — 919-line shape/spacing/font/size token system, 11 tune presets,
                             self-hosted PixelMplus fonts.
-    views/components/     — 45 Blade anonymous components (1 nested = 46 total per AGENTS.md count)
+    views/components/     — 46 documented anonymous components across 48 .blade.php files
+                            (accordion-item + tab are nested children of accordion/tabs;
+                             pagination/full, pagination/simple, section/hero live in subdirs)
   PinionUiServiceProvider.php
 
 reference/components/     — Per-component API docs (46 files + index.md)
@@ -61,7 +63,7 @@ docs/                     — Third-party UI docs copied locally (gitignored). S
 | Repo | Path | Role |
 |---|---|---|
 | `pinion-ui-playground` | `../pinion-ui-playground/` | Showcase Laravel app. Each component has `resources/views/pages/{slug}.blade.php` with the "default" demo first, variants below, `@verbatim`-wrapped code examples. Sidebar groups: **Static** (no Alpine), **Dynamic** (Alpine state), **Icons**, **Theme** (preview). Layout is `resources/views/layouts/playground.blade.php` (single source of truth for nav). Served at `http://pinion-ui-playground.pizza/`. |
-| `pinion-icons` | `../pinion-icons/` | Solar + solar-extra icon set. Sibling Packagist release (v0.1.0+ stable). `INDEX.md` lists the 1,234 Solar names plus the solar-extra glyphs. |
+| `pinion-icons` | `../pinion-icons/` | 4-library icon set: Solar (1,234 names × 6 variants) + solar-extra + virtual `fluent-emoji` + `pixelarticons`. Sibling Packagist release (v0.1.0 stable; no v1.0 tag yet — see composer constraint note in AGENTS.md / Phase-2 backlog). `INDEX.md` lists the 1,234 Solar names plus the solar-extra glyphs. |
 | `pinion-ui-llm-test` | `~/project/pinion-ui-llm-test/` | Private, fresh Laravel app for LLM-style end-to-end verification of `ui:install --ai`. Path-repo symlinked to local pinion-ui / pinion-icons. Served at `http://pinion-ui-llm-test.pizza/`. |
 
 ## Local reference docs (gitignored)

@@ -62,7 +62,7 @@ npm install && npm run build
 
 ```blade
 {{-- Primary action button --}}
-<x-button variant="primary" size="md">Save</x-button>
+<x-button color="primary" size="md">Save</x-button>
 
 {{-- Form field with label + error --}}
 <x-input label="Email" type="email" error="Required" />
@@ -77,8 +77,11 @@ npm install && npm run build
     {{-- modal body --}}
 </x-modal>
 
-{{-- Tabs --}}
-<x-tabs :tabs="$tabs" variant="underline" />
+{{-- Tabs (nested children since v0.4.0) --}}
+<x-tabs variant="underline">
+    <x-tab name="overview" label="Overview"><p>…</p></x-tab>
+    <x-tab name="specs"    label="Specs"><p>…</p></x-tab>
+</x-tabs>
 
 {{-- Hero section --}}
 <x-pn::section.hero
