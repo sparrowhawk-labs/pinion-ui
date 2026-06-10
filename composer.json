@@ -28,7 +28,10 @@
     "require": {
         "php": "^8.2",
         "illuminate/support": "^11.0|^12.0|^13.0",
-        "sparrowhawk-labs/pinion-icons": "^1.0|dev-main"
+        "sparrowhawk-labs/pinion-icons": "^1.0"
+    },
+    "scripts": {
+        "test": "@php tests/Compose/run.php"
     },
     "extra": {
         "laravel": {
@@ -37,6 +40,6 @@
             ]
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
