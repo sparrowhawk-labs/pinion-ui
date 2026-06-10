@@ -37,7 +37,7 @@
         "expected": {
             "root": "flex flex-col gap-1",
             "circle": "w-3 h-3 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors",
-            "connector": "w-0.5 h-6 ml-4 shrink-0",
+            "connector": "w-0.5 h-3 ml-[5px] shrink-0",
             "orientation": "vertical",
             "variant": "dotted"
         }
