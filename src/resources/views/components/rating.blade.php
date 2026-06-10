@@ -36,15 +36,22 @@
     } else {
         $checkedStep = (int) round($value);
     }
+
+    // Livewire: detect wire:model (pure Blade — works without Livewire installed).
+    // When present we bind natively: each radio carries a `value` + the forwarded
+    // wire:model bag, and Livewire (not our server-rendered `checked`) drives the
+    // selection. Gated so non-Livewire output stays byte-identical.
+    $wireModel = $attributes->whereStartsWith('wire:model');
+    $hasWire   = $wireModel->isNotEmpty();
 @endphp
 
-<div {{ $attributes->class([$c['root']]) }}>
+<div {{ $attributes->whereDoesntStartWith('wire:model')->class([$c['root']]) }}>
     {{-- Hidden "no rating" radio (value=0). Always present so users can clear. --}}
     <input
         type="radio"
         name="{{ $name }}"
         class="{{ $c['hidden'] }}"
-        @if($checkedStep === 0) checked @endif
+        @if($hasWire) value="0" {{ $wireModel }} @elseif($checkedStep === 0) checked @endif
         @if($readonly) disabled @endif
         aria-label="{{ pn_trans('rating.none', '評価なし') }}"
     />
@@ -59,7 +66,7 @@
                 type="radio"
                 name="{{ $name }}"
                 class="{{ $c['itemHalf1'] }}"
-                @if($checkedStep === $step1) checked @endif
+                @if($hasWire) value="{{ $i - 0.5 }}" {{ $wireModel }} @elseif($checkedStep === $step1) checked @endif
                 @if($readonly) disabled @endif
                 aria-label="{{ ($i - 0.5) }} star"
             />
@@ -67,7 +74,7 @@
                 type="radio"
                 name="{{ $name }}"
                 class="{{ $c['itemHalf2'] }}"
-                @if($checkedStep === $step2) checked @endif
+                @if($hasWire) value="{{ $i }}" {{ $wireModel }} @elseif($checkedStep === $step2) checked @endif
                 @if($readonly) disabled @endif
                 aria-label="{{ $i }} star"
             />
@@ -78,7 +85,7 @@
                 type="radio"
                 name="{{ $name }}"
                 class="{{ $c['item'] }}"
-                @if($checkedStep === $i) checked @endif
+                @if($hasWire) value="{{ $i }}" {{ $wireModel }} @elseif($checkedStep === $i) checked @endif
                 @if($readonly) disabled @endif
                 aria-label="{{ $i }} star"
             />

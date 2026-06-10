@@ -26,6 +26,8 @@
     $allowJs   = $type === 'numeric' ? '/[0-9]/' : '/[0-9a-zA-Z]/';
     $initial   = json_encode(str_split((string) $value));
     $length    = max(1, (int) $length);
+    $wireModel    = $attributes->whereStartsWith('wire:model');
+    $hasWireModel = $wireModel->isNotEmpty();
 @endphp
 
 <div class="w-full"
@@ -97,7 +99,15 @@
         @endfor
     </div>
 
-    @if($name)
+    @if($hasWireModel)
+        <input type="hidden"
+            {{ $wireModel }}
+            x-init="$watch('combined', v => {
+                $el.value = v;
+                $el.dispatchEvent(new Event('input', { bubbles: true }));
+            })"
+        />
+    @elseif($name)
         <input type="hidden" name="{{ $name }}" x-bind:value="combined" />
     @endif
 
