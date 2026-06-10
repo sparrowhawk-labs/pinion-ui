@@ -26,7 +26,7 @@
 
 <fieldset {{ $attributes->merge(['class' => 'block']) }}>
     @if($label)
-        <legend class="block text-[length:var(--text-field-sm)] font-medium {{ $labelColor }} mb-1.5">
+        <legend id="{{ $groupId }}" class="block text-[length:var(--text-field-sm)] font-medium {{ $labelColor }} mb-1.5">
             {{ $label }}
             @if($required)<span class="text-error ml-0.5">*</span>@endif
         </legend>
@@ -36,7 +36,7 @@
         <p class="text-[length:var(--text-field-xs)] text-base-content/60 mb-2 leading-snug">{{ $description }}</p>
     @endif
 
-    <div class="{{ $orientationClass }}" role="radiogroup" aria-labelledby="{{ $groupId }}">
+    <div class="{{ $orientationClass }}" role="radiogroup" @if($label) aria-labelledby="{{ $groupId }}" @endif>
         @if(is_array($options))
             @foreach($options as $optValue => $optLabel)
                 <x-radio
