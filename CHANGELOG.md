@@ -9,6 +9,12 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [Unreleased]
 
+### Added
+- **`reactive` theme** — GitHub-Light-adjacent light palette (pure-white canvas, cool
+  gray surfaces, blue/green/purple semantic set), ported from the `/visualize` report
+  tooling so HTML reports and pinion-ui apps share one color system. Opt-in via
+  `data-theme="reactive"`; `pinion` remains the default.
+
 ## [0.4.1] — 2026-06
 
 ### Added

@@ -10,7 +10,7 @@
 - **46 anonymous components** (`<x-button>`, `<x-modal>`, `<x-tabs>`, …); index in [`reference/components/index.md`](./reference/components/index.md)
 - **Compose layer** (PHP class-string generators) keeps Blade render-only
 - **Namespace**: `pn::` (e.g. `<x-pn::button>`) for disambiguation; anonymous `<x-button>` is the default. Old `<x-pinion-ui::…>` is gone (v0.2.1).
-- **Theme**: ships `pinion` only (warm cream + amber-550 accent + teal-petrol secondary, near-black ink) as default in v0.4.0+. No bundled dark companion — consumers who want dark mode pick any of daisyUI's standard dark themes (`dark`, `dim`, `night`, …) via `<html data-theme="…">`. All 35 daisyUI v5 themes remain available.
+- **Theme**: ships `pinion` (warm cream + amber-550 accent + teal-petrol secondary, near-black ink) as default in v0.4.0+, plus opt-in `reactive` (GitHub-Light-adjacent, shared with the `/visualize` report tooling). No bundled dark companion — consumers who want dark mode pick any of daisyUI's standard dark themes (`dark`, `dim`, `night`, …) via `<html data-theme="…">`. All 35 daisyUI v5 themes remain available.
 - **Tune**: `tune.css` (919 lines) provides orthogonal shape/spacing/font/size tokens via `<html data-tune="…">` — 11 presets (`default`, `minimal`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`). Theme and tune mix freely.
 - **Icons**: companion package `sparrowhawk-labs/pinion-icons` (separate repo, stable on Packagist as of v0.1.0). Bundles Solar (1,234 concept names × 6 stroke variants = 7,404) + `solar-extra` (plain `close` / `check` / `plus` / `minus` glyphs Solar lacks) + virtual `fluent-emoji` and `pixelarticons` libraries that resolve the same concept names.
 
