@@ -166,3 +166,51 @@
     --depth:           1;
     --noise:           0;
 }
+
+/* ==========================================
+   reactive theme — light only, opt-in
+   ==========================================
+   GitHub-Light-adjacent "clean technical document" palette, ported from the
+   /visualize report tooling so HTML reports and pinion-ui apps can share one
+   color system. Pure white canvas, cool gray surfaces, the familiar
+   blue / green / purple semantic set.
+
+     primary   = #0969da  link blue (GitHub accent.fg)
+     secondary = #1f883d  CTA green (GitHub btn-primary)
+     accent    = #8250df  conclusion purple (GitHub done.fg)
+     base-100  = #ffffff  pure white canvas
+
+   Opt-in via <html data-theme="reactive">. `pinion` stays the default. */
+@plugin 'daisyui/theme' {
+    name: 'reactive';
+    default: false;
+    color-scheme: 'light';
+    --color-base-100:          #ffffff;
+    --color-base-200:          #f6f8fa;
+    --color-base-300:          #d0d7de;
+    --color-base-content:      #1f2328;
+    --color-primary:           #0969da;
+    --color-primary-content:   #ffffff;
+    --color-secondary:         #1f883d;
+    --color-secondary-content: #ffffff;
+    --color-accent:            #8250df;
+    --color-accent-content:    #ffffff;
+    --color-neutral:           #2d333b;
+    --color-neutral-content:   #ffffff;
+    --color-info:              #0969da;
+    --color-info-content:      #ffffff;
+    --color-success:           #1a7f37;
+    --color-success-content:   #ffffff;
+    --color-warning:           #9a6700;
+    --color-warning-content:   #ffffff;
+    --color-error:             #cf222e;
+    --color-error-content:     #ffffff;
+    --radius-selector: 0.375rem;
+    --radius-field:    0.375rem;
+    --radius-box:      0.5rem;
+    --size-selector:   0.25rem;
+    --size-field:      0.25rem;
+    --border:          1px;
+    --depth:           1;
+    --noise:           0;
+}
