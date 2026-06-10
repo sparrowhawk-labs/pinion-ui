@@ -28,7 +28,7 @@ Picker for one or more values. Renders a native `<select>` by default — same f
 | `floating` | `bool` | `false` | Floating-label mode. Ignored in listbox or `custom` mode. |
 | `required` | `bool` | `false` | Native `required` attribute. Adds a red `*` next to the label. |
 | `disabled` | `bool` | `false` | Native `disabled` + visual dim. |
-| `custom` | `bool` | `false` | Replace the native trigger with an Alpine-driven UI (chips for multi-select, themed dropdown). The native `<select>` stays in the DOM (`sr-only`) so form submission and screen readers continue to work. |
+| `custom` | `bool` | `true` | Replace the native trigger with an Alpine-driven UI (chips for multi-select, themed dropdown). The native `<select>` stays in the DOM (`sr-only`) so form submission and screen readers continue to work. |
 
 All other attributes pass through to the `<select>` (e.g. `wire:model`, `x-model`, `data-*`).
 

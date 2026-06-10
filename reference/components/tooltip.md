@@ -1,6 +1,6 @@
 # x-tooltip
 
-No-JS hover/focus tooltip built on daisyUI 5's `tooltip` class. Trigger goes in the slot, label text goes in `text`. Four positions, ten color choices (light default + nine daisyUI variants), and an `open` prop for always-shown onboarding callouts.
+No-JS hover/focus tooltip built on daisyUI 5's `tooltip` class. Trigger goes in the slot, label text goes in `text`. Four positions, eleven color choices (three `base-*` surfaces + eight daisyUI semantic variants), and an `open` prop for always-shown onboarding callouts.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/tooltip.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/tooltip.blade.php) — position / surface / color matrix plus icon-button / disabled-explanation / form-helper patterns.
 
@@ -49,7 +49,7 @@ All other attributes pass through to the root wrapper `<div>`.
 ### Colors
 
 ```blade
-{{-- light (default) — soft base-200 fill --}}
+{{-- base-100 (default) — page-surface fill --}}
 <x-tooltip text="Default">…</x-tooltip>
 
 {{-- neutral — daisyUI stock dark grey bubble --}}
@@ -109,7 +109,7 @@ The blade wires Alpine `x-on:mouseenter` / `mouseleave` / `focusin` / `focusout`
 
 ## Notes
 
-- The default (`color=null`) is a soft `bg-base-200` bubble — the package's house style. All four `base-*` surface variants now ship a visible arrow (v0.3.11 fix).
+- The default (`color="base-100"`) is a page-surface `bg-base-100` bubble with a subtle `base-300` border — the package's house style. All three `base-*` surface variants now ship a visible arrow (v0.3.11 fix).
 - **`color="neutral"`** uses daisyUI's `bg-neutral` semantic colour (typically dark on light themes, near-black) — the classic dark-tooltip look.
 - **Alpine required**: the rewrite swapped daisyUI's CSS-only hover for Alpine handlers. Pinion-ui already requires Alpine (`ui:install` wires it), so this is essentially free.
 - **No viewport collision detection**: same trade-off as [`<x-popover>`](./popover.md) — pick the placement that fits where the trigger lives. For auto-flip, integrate Floating UI separately.

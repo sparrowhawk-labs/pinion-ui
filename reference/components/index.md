@@ -6,7 +6,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 
 | Component | Description |
 |---|---|
-| [`<x-button>`](./button.md) | Primary action control. 8 colors × 7 appearances, sizes, loading/disabled, icons, renders as `<a>` when `href` is set. |
+| [`<x-button>`](./button.md) | Primary action control. 8 colors × 8 appearances, sizes, loading/disabled, icons, renders as `<a>` when `href` is set. |
 | [`<x-button-group>`](./button-group.md) | Joined row of buttons that share borders — toolbars, segmented controls. |
 | [`<x-input>`](./input.md) | Text input with label, error, prefix/suffix slots, and all native `type` values. |
 | [`<x-textarea>`](./textarea.md) | Multi-line text input. Same field-token system as `<x-input>`. |

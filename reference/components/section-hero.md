@@ -21,8 +21,8 @@ Top-of-page hero section with `centered` and `split` layouts, title/subtitle, op
 | `size` | `'md' \| 'lg' \| 'xl'` | `'lg'` | Title size scale. `md` → `text-3xl→4xl`, `lg` → `text-4xl→6xl`, `xl` → `text-5xl→7xl`. |
 | `image` | `string \| null` | `null` | Image URL for the `split` variant's media column. Ignored when the `media` slot is provided. |
 | `imageAlt` | `string` | `''` | `alt` text for `image`. |
-| `primaryAction` | `array \| null` | `null` | Shape: `['label' => string, 'href' => ?string]`. Rendered as `<x-pn::button variant="primary" size="lg">`. |
-| `secondaryAction` | `array \| null` | `null` | Same shape as `primaryAction`; rendered as `variant="ghost"`. |
+| `primaryAction` | `array \| null` | `null` | Shape: `['label' => string, 'href' => ?string]`. Rendered as `<x-pn::button color="primary" size="lg">`. |
+| `secondaryAction` | `array \| null` | `null` | Same shape as `primaryAction`; rendered as `appearance="ghost"`. |
 | `bgClass` | `string` | `'bg-base-100'` | Background utility for the outer `<section>`. Pass any Tailwind / daisyUI class (e.g. `bg-gradient-to-br from-primary/10`). |
 
 All other attributes pass through to the root `<section>` (merged with `bgClass` and `space-section`).
@@ -71,9 +71,9 @@ All other attributes pass through to the root `<section>` (merged with `bgClass`
     </x-slot:heading>
 
     <x-slot:actions>
-        <x-pn::button variant="primary" size="lg" icon="rocket">Launch</x-pn::button>
-        <x-pn::button variant="outline" size="lg">Watch demo</x-pn::button>
-        <x-pn::button variant="ghost" size="lg" href="/pricing">Pricing</x-pn::button>
+        <x-pn::button color="primary" size="lg" icon="rocket">Launch</x-pn::button>
+        <x-pn::button appearance="outline" size="lg">Watch demo</x-pn::button>
+        <x-pn::button appearance="ghost" size="lg" href="/pricing">Pricing</x-pn::button>
     </x-slot:actions>
 </x-pn::section.hero>
 ```

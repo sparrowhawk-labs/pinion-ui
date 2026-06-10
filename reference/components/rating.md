@@ -22,7 +22,7 @@ Star rating input built on daisyUI's `rating` + `mask` system. Renders a set of 
 | `readonly` | `bool` | `false` | Disables all radios so the value is displayed but not editable. |
 | `shape` | `'star' \| 'heart' \| 'circle'` | `'star'` | Mask shape: `mask-star`, `mask-heart`, or `mask-circle`. |
 
-All other attributes pass through to the root `<div>` (e.g. `class`, `aria-label`).
+All other attributes pass through to the root `<div>` (e.g. `class`, `aria-label`) — **except `wire:model`**, which is detected and forwarded onto the individual radio inputs (with native `value` attributes) for Livewire two-way binding, and stripped from the root `<div>`. The component itself ships no Alpine/JS runtime; `wire:model` is handled entirely by Livewire.
 
 ## Slots
 

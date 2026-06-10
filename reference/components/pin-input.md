@@ -90,4 +90,3 @@ The Alpine `x-data` lives in the Blade — it holds `digits` as an array of stri
 - **`autocomplete="one-time-code"`** is set on the first box only — modern iOS / Android offer the SMS code suggestion above the keyboard when this attribute is present.
 - **Form submission**: the visible boxes have no `name` attribute. Only the combined hidden input is submitted, so server-side you receive a single concatenated string.
 - The `masked` mode uses `type="password"` — browsers may suppress the SMS-code suggestion in this case. Use `masked` only when the code shouldn't be shoulder-surfable; for normal OTP entry leave it false.
-- Decimal `step` is irrelevant — every box accepts exactly one character regardless of `step`.
