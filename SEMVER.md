@@ -52,7 +52,11 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
-### v0.4.2 (unreleased) — 2026-06
+### v0.4.3 (unreleased) — 2026-06
+
+- **`ui:install` no longer overwrites a custom `data-theme` when run non-interactively.** The layout-patching confirm ("Switch to pinion?") defaulted to *yes*, and Laravel's `confirm()` returns the default in non-interactive runs (CI, agents, `-n`) — so every `ui:install` re-run silently stomped a host's custom theme (found via NADI's `data-theme="nadi"` → `"pinion"`). The default is now *yes* only when the current theme is `light` (the pre-v0.4.0 recommendation the migration was aimed at); any other value defaults to *keep*. Interactive behaviour is unchanged apart from the default answer.
+
+### v0.4.2 — 2026-06
 
 - **daisyUI component classes are no longer generated in consumer builds.** The pinion-ui preset (`pinion-ui.css`) now loads the daisyUI plugin itself with an `exclude:` list, and `ui:install` removes any standalone `@plugin "daisyui"` from the host `app.css` instead of adding one. Consumers keep daisyUI's full color/theme layer (`bg-primary`-style utilities, `data-theme`, all 35 themes) plus only the component CSS pinion-ui's own output references (avatar, breadcrumbs, collapse, divider, indicator, kbd, loading, mask, progress, range, rating, skeleton, stat, timeline, `join`).
 
