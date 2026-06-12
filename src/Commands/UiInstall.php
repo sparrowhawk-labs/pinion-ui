@@ -331,9 +331,15 @@ JS;
 
         if (preg_match('/data-theme\s*=\s*["\']([^"\']+)["\']/', $attrs, $themeMatch)) {
             $currentTheme = $themeMatch[1];
+            // Default to migrating only from "light" (the pre-v0.4.0 ui:install
+            // recommendation). Any other value — a daisyUI stock theme or the
+            // host's own custom theme — is a deliberate choice, so the default
+            // is "keep". confirm() returns the default when the command runs
+            // non-interactively, which is what used to silently stomp custom
+            // themes on every re-run (v0.4.2 regression, found via NADI).
             $migrate = $this->confirm(
                 "  {$relative} has data-theme=\"{$currentTheme}\". Switch to \"pinion\" (v0.4.0 brand default)?",
-                true
+                $currentTheme === 'light'
             );
             if (!$migrate) {
                 $this->line("    - {$relative}: kept data-theme=\"{$currentTheme}\"");
