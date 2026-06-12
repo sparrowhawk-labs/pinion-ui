@@ -38,9 +38,9 @@ npm install && npm run build
 
 ```css
 @import "tailwindcss";
-@plugin "daisyui" { themes: all; }
 
-/* Pinion UI preset — wires @source globs and Tune tokens.
+/* Pinion UI preset — loads daisyUI (themes + only the component CSS
+   Pinion UI itself uses) and wires @source globs and Tune tokens.
    Path is resolved relative to your app.css. */
 @import "../../vendor/sparrowhawk-labs/pinion-ui/src/resources/css/pinion-ui.css";
 
@@ -48,6 +48,8 @@ npm install && npm run build
 @source "../**/*.blade.php";
 @source "../**/*.js";
 ```
+
+> **Do not add your own `@plugin "daisyui";` line** (remove it if an earlier setup added one — `ui:install` does this for you). The preset loads daisyUI with an exclude list: daisyUI *color/theme tokens* stay fully available (`bg-primary`, `data-theme`, all 35 themes), but daisyUI *component classes* (`.btn`, `.card`, `.alert`, …) are not generated. Components come from Pinion UI; daisyUI supplies the color system. A standalone full plugin would silently re-enable every daisyUI component class.
 
 > **Why a preset?**
 > Pinion UI's Compose layer keeps class strings inside PHP (e.g. `bg-primary text-primary-content peer-checked:border-primary/70`). Tailwind v4's default scan only sees `*.blade.php` / `*.js`, so without the preset's `@source` rules those classes are silently dropped from the build. The preset's `@source` paths resolve from the preset file's own location — add a new component in the package and consumer apps keep working, no `app.css` re-edit needed.

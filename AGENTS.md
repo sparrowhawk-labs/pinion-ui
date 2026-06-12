@@ -58,10 +58,11 @@ Themes and Tunes mix freely. Both are activated by `<x-tune-styles />` injecting
 
 ## daisyUI v5 gotchas (verified — do not "fix")
 
+- **daisyUI component classes don't exist in your build.** The pinion-ui preset loads daisyUI with an exclude list: you get the full color/theme layer (`bg-primary`, `text-base-content`, `data-theme`, all 35 themes) but `.btn`, `.card`, `.alert`, `.input`, `.menu`, `.modal`, etc. produce **no styling**. Never write daisyUI component markup (`<button class="btn btn-primary">`) — use the pinion-ui component (`<x-button color="primary">`). Do not "fix" this by adding `@plugin "daisyui"` to app.css; that re-enables everything and breaks the design boundary.
 - `divider-horizontal` renders a **vertical** line inside a flex row (daisyUI naming is inverted). The `<x-divider>` wrapper normalizes: `direction="vertical"` does what you expect.
 - `rating-half` requires the explicit `rating-{size}` class even at default size, or half-star widths collapse. `RatingComposer` always emits it.
 - `<x-collapse>` defaults to **no icon** since v0.2.1 — opt in with `icon="arrow"` or `icon="plus"`.
-- `tooltip`'s stock daisyUI bubble is heavy on light surfaces; the default is `tooltip-light` (base-200 soft fill, arrow same colour to avoid the border-on-arrow problem). Use `color="<semantic>"` to opt back into daisyUI's native dark bubble.
+- `<x-tooltip>` no longer uses daisyUI's CSS `tooltip` / `data-tip` system (dropped in v0.3.11 for an Alpine + custom-arrow approach; daisyUI's `tooltip` CSS is excluded from the build). The `text` / `position` / `color` / `open` props are unchanged.
 - Several components ship **locale-aware aria/label defaults** resolved through `pn_trans()` → `config('pinion-ui.locale')` (default `ja`; an `en` bucket also ships). Components that pull defaults this way:
   - `<x-notification-system>` — toast dismiss button (`notification.close`)
   - `<x-rating>` — clear-radio aria-label (`rating.none`)

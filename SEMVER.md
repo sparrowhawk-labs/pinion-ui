@@ -52,6 +52,16 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.4.2 (unreleased) — 2026-06
+
+- **daisyUI component classes are no longer generated in consumer builds.** The pinion-ui preset (`pinion-ui.css`) now loads the daisyUI plugin itself with an `exclude:` list, and `ui:install` removes any standalone `@plugin "daisyui"` from the host `app.css` instead of adding one. Consumers keep daisyUI's full color/theme layer (`bg-primary`-style utilities, `data-theme`, all 35 themes) plus only the component CSS pinion-ui's own output references (avatar, breadcrumbs, collapse, divider, indicator, kbd, loading, mask, progress, range, rating, skeleton, stat, timeline, `join`).
+
+    Migration: re-run `php artisan ui:install` (or delete the `@plugin "daisyui" { … }` block from `resources/css/app.css`) and rebuild. If your app hand-wrote daisyUI component markup (`<button class="btn">`, `<span class="badge badge-primary">`, …) those elements lose styling — replace them with the pinion-ui component (`<x-button>`, `<x-badge>`). Apps that don't re-run the installer keep their full plugin line and continue to work unchanged (the boundary is simply not enforced yet).
+
+- **Dead `tooltip-light` / `tooltip-base-*` CSS removed from the preset.** These patched daisyUI's CSS tooltip, which `<x-tooltip>` stopped emitting in v0.3.11. No component output changes.
+
+- **`<x-indicator>` no longer emits daisyUI `badge badge-*` classes.** The indicator chip is now utility-composed (same appearance × color grammar as `<x-badge>`), which let `badge` join the preset's exclude list — `.badge` no longer exists in consumer builds. Props (`position` / `dot` / `color` / `appearance`) are unchanged; `appearance="outline"` / `"dash"` chips now sit on an opaque `base-100` fill instead of transparent so they stay readable over the decorated content, and `dot` renders a fixed 12px circle instead of an empty `badge-xs`. Composer `item` strings changed accordingly (fixtures updated).
+
 ### v0.4.0 — 2026-05
 
 - **`<x-tabs>` API: array → nested anonymous components.** The previous `:tabs="[key => [label, content, icon?]]"` array prop was removed in favour of nested children. New form:
