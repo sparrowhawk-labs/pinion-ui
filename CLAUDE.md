@@ -25,6 +25,7 @@ These are load-bearing. Do not violate without explicit discussion:
 3. **Fixture tests** — `tests/fixtures/compose/{name}.json` with `props` → `expected` class dict. Run `php tests/Compose/run.php`. Comparison is **subset** (only listed `expected` keys are checked). Add cases when you add props.
 4. **Backwards compatibility** — never rename props or change their defaults silently. New props are opt-in (default preserves previous behavior). `SEMVER.md` documents the policy and tracks the few intentional default flips (v0.2.0 checkbox, v0.2.1 collapse, v0.3.0 / v0.3.4 indicator+timeline soft↔solid).
 5. **Three style layers stay orthogonal** — theme (color, via `data-theme`) × tune (shape/space/font, via `data-tune`) × component (variant/size, via Blade props). Never collapse axes.
+6. **daisyUI exposure stays on a leash** — the preset (`pinion-ui.css`) loads the daisyUI plugin itself with an `exclude:` list; hosts never add their own `@plugin "daisyui"` (ui:install removes one if found). Hosts get daisyUI's color layer (theme tokens, `bg-primary`-style utilities — unaffected by include/exclude) plus ONLY the component CSS pinion-ui's own output references (avatar, breadcrumbs, collapse, divider, indicator, kbd, loading, mask, progress, range, rating, skeleton, stat, timeline + `join` utility). `.btn`/`.card`/`.alert`/`.badge` etc. do not exist in a consumer build — components are single-sourced in pinion-ui. When a component starts/stops using a daisyUI class, update the exclude list in `pinion-ui.css` in the same commit.
 
 ## Repo layout
 
@@ -38,7 +39,8 @@ src/
   resources/
     css/
       pinion-ui.css       — preset (v0.3.17 root fix). Consumers `@import` THIS, not piecemeal @source.
-                            Bundles @source globs (Blade + Compose PHP), safelist, tooltip patches,
+                            Loads the daisyUI plugin (themes: all + component exclude list — see
+                            invariant 6), bundles @source globs (Blade + Compose PHP), safelist,
                             tune.css, and the `pinion` theme definition.
       tune.css            — 919-line shape/spacing/font/size token system, 11 tune presets,
                             self-hosted PixelMplus fonts.

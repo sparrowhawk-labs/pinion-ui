@@ -128,29 +128,24 @@ class UiInstall extends Command
         $content = File::get($appCssPath);
         $modified = false;
 
-        // Add daisyUI plugin (Tailwind v4 syntax). Detect regardless of quote
-        // style — Laravel's default app.css uses single quotes (`@plugin 'daisyui'`)
-        // and earlier versions of this command emitted double quotes, so a
-        // strict double-quote check missed the existing block and produced a
-        // duplicate on re-install.
-        if (!preg_match('/@plugin\s+["\']daisyui["\']/', $content)) {
-            $pluginLine = '@plugin "daisyui" {' . "\n" . '  themes: all;' . "\n" . '}';
-
-            // Insert after @import "tailwindcss" (any quote style) if present
-            if (preg_match('/@import\s+["\']tailwindcss["\']/', $content)) {
-                $content = preg_replace(
-                    '/(@import\s+["\']tailwindcss["\'][^;]*;?)/',
-                    "$1\n" . $pluginLine,
-                    $content
-                );
-            } else {
-                $content = $pluginLine . "\n" . $content;
-            }
+        // The pinion-ui preset (imported below) loads daisyUI itself, with an
+        // exclude list that limits the host to color/theme tokens plus the
+        // component CSS pinion-ui's own output references. A standalone full
+        // `@plugin "daisyui"` in the host app.css (written by ui:install
+        // ≤ v0.4.1, a Laravel starter, or by hand — any quote style) would
+        // regenerate every daisyUI component class (`.btn`, `.card`, …) and
+        // defeat that boundary, so remove it. `@plugin "daisyui/theme"`
+        // blocks are left alone — consumer theme definitions are legitimate.
+        $standalonePlugin = '/^[ \t]*@plugin\s+["\']daisyui["\']\s*(?:\{[^}]*\}|;)[ \t]*\n?/m';
+        if (preg_match($standalonePlugin, $content)) {
+            $content = preg_replace($standalonePlugin, '', $content);
             $modified = true;
-            $this->line('    + Added @plugin "daisyui"');
+            $this->line('    - Removed standalone @plugin "daisyui" (the pinion-ui preset loads daisyUI itself: colors/themes + only the component CSS pinion-ui uses)');
         }
 
         // Import the pinion-ui preset. The preset wires:
+        //   • the daisyUI plugin itself (themes: all + component exclude
+        //     list — see pinion-ui.css for the rationale)
         //   • @source for Blade views AND Compose PHP (both must be scanned
         //     — Composer files emit class strings that won't appear in any
         //     blade source)
@@ -158,8 +153,7 @@ class UiInstall extends Command
         //     Composers build via interpolation (Tailwind JIT can't see
         //     through "bg-{$color}/10")
         //   • @import "./tune.css" for the data-tune token system
-        //   • custom CSS rules (tooltip-light, base-N tooltip variants,
-        //     dark theme *-content patches)
+        //   • the `pinion` default theme definition
         // Skipping the preset = ~half the design system silently missing
         // from the bundle, which is what the v0.3.17 bug report uncovered.
         $presetImport = '@import "../../vendor/sparrowhawk-labs/pinion-ui/src/resources/css/pinion-ui.css";';
