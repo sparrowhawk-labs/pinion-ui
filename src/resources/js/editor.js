@@ -95,6 +95,34 @@ function unwrap(value) {
 
 const EMPTY_DOC = { type: 'doc', content: [{ type: 'paragraph' }] };
 
+// East-Asian width classification for character counting. Returns the count of
+// full-width (CJK ideographs, kana, hangul, full-width forms, CJK punctuation)
+// vs. half-width (ASCII, half-width kana, etc.) code points, excluding newlines.
+// From these we derive 半角換算 (half-width equivalent: half=1, full=2) and
+// 全角換算 (full-width equivalent: full=1, half=0.5 rounded up).
+function countWidths(text) {
+  let half = 0, full = 0;
+  for (const ch of text) {
+    const c = ch.codePointAt(0);
+    if (c === 0x0a || c === 0x0d) continue; // ignore line breaks
+    const isFull =
+      (c >= 0x1100 && c <= 0x115f) ||  // Hangul Jamo
+      (c >= 0x2e80 && c <= 0x303e) ||  // CJK radicals · Kangxi · CJK punctuation
+      (c >= 0x3041 && c <= 0x33ff) ||  // Hiragana · Katakana · CJK symbols
+      (c >= 0x3400 && c <= 0x4dbf) ||  // CJK Ext A
+      (c >= 0x4e00 && c <= 0x9fff) ||  // CJK Unified
+      (c >= 0xa000 && c <= 0xa4cf) ||
+      (c >= 0xac00 && c <= 0xd7a3) ||  // Hangul Syllables
+      (c >= 0xf900 && c <= 0xfaff) ||  // CJK Compatibility
+      (c >= 0xfe30 && c <= 0xfe4f) ||  // CJK Compat Forms
+      (c >= 0xff00 && c <= 0xff60) ||  // Full-width ASCII · punctuation
+      (c >= 0xffe0 && c <= 0xffe6) ||  // Full-width signs
+      (c >= 0x20000 && c <= 0x3fffd);  // CJK Ext B+
+    if (isFull) full++; else half++;
+  }
+  return { half, full };
+}
+
 /**
  * Alpine component factory.
  *
@@ -119,8 +147,16 @@ export function pinionEditor(opts = {}) {
   return {
     // Plain serializable state exposed to Alpine / the template.
     json: null,   // live ProseMirror doc JSON (bare doc)
-    chars: 0,
+    chars: 0,      // total characters (each code point = 1, newlines excluded)
+    charsHalf: 0,  // 半角換算 (half-width equivalent: half=1, full=2)
+    charsFull: 0,  // 全角換算 (full-width equivalent: full=1, half=0.5 ⌈⌉)
     _tick: 0,     // bumped on selection/transaction so isActive() re-evals in templates
+    // Floating toolbox (Notion-style): appears on a non-empty text selection or
+    // right-click, positioned by the closure below. Pure serializable state.
+    // `mode` distinguishes a selection bubble (closes when the selection
+    // collapses) from a context menu (right-click; stays until an explicit
+    // dismiss, so the caret-move selectionUpdate can't close it on open).
+    menu: { open: false, mode: null, top: 0, left: 0 },
 
     get editor() { return editor; },
 
@@ -174,7 +210,7 @@ export function pinionEditor(opts = {}) {
           }
           // 'blur' and 'manual' do not flush on update.
         },
-        onSelectionUpdate: () => { this._tick++; },
+        onSelectionUpdate: () => { this._tick++; this.refreshMenu(); },
         onBlur: () => {
           // Guaranteed flush on blur for blur AND debounce modes (so a pending
           // debounce can't be lost when focus leaves). 'manual' never auto-flushes.
@@ -185,6 +221,24 @@ export function pinionEditor(opts = {}) {
         },
       });
 
+      // Floating-toolbox triggers: right-click anywhere in the editor, and
+      // reposition/hide on scroll or resize while open.
+      this._onContext = (e) => this.onContextMenu(e);
+      this._onScroll = () => { if (this.menu.open) this.refreshMenu(); };
+      // Dismiss: a mousedown outside the toolbox, or Escape. Capture phase so we
+      // see it before the toolbox's own mousedown.prevent. The opening
+      // right-click's mousedown fires while the menu is still closed, so it
+      // never self-dismisses.
+      this._onDocDown = (e) => {
+        if (this.menu.open && this.$refs.menu && !this.$refs.menu.contains(e.target)) this.closeMenu();
+      };
+      this._onKey = (e) => { if (e.key === 'Escape' && this.menu.open) this.closeMenu(); };
+      this.$refs.editor?.addEventListener('contextmenu', this._onContext);
+      window.addEventListener('scroll', this._onScroll, true);
+      window.addEventListener('resize', this._onScroll);
+      document.addEventListener('mousedown', this._onDocDown, true);
+      document.addEventListener('keydown', this._onKey);
+
       // Seed wire:model on mount so the server has the initial value even before
       // any edit (e.g. a fresh empty doc).
       this.flush();
@@ -193,7 +247,10 @@ export function pinionEditor(opts = {}) {
     // Pull plain state out of the editor (no wire:model write).
     read(editor) {
       this.json = editor.getJSON();
-      this.chars = editor.getText().length;
+      const { half, full } = countWidths(editor.getText());
+      this.chars = half + full;
+      this.charsHalf = half + full * 2;            // 半角換算
+      this.charsFull = full + Math.ceil(half / 2);  // 全角換算
       this._tick++;
     },
 
@@ -226,6 +283,60 @@ export function pinionEditor(opts = {}) {
       this.cmd(c => c.extendMarkRange('link').setLink({ href: url }));
     },
 
+    // ── Floating toolbox (Notion-style bubble) ──────────────────────────────
+    // Shown on a non-empty text selection; hidden when the selection collapses.
+    refreshMenu() {
+      if (!this.$refs.menu) return;
+      const sel = editor?.state.selection;
+      if (!editor?.isEditable) { this.closeMenu(); return; }
+      if (sel && !sel.empty) {
+        // A real text selection always (re)opens as a selection bubble.
+        this.menu.mode = 'selection';
+        this.menu.open = true;
+        // position after render so offsetWidth/Height are real (centering needs them)
+        this.$nextTick(() => this.positionFromSelection());
+      } else if (this.menu.mode !== 'context') {
+        // Collapsed selection closes a selection bubble, but NOT a context menu
+        // (whose open is the side effect of the very caret move we'd react to).
+        this.closeMenu();
+      }
+    },
+    // Position the toolbox centered above the selection, flipping below and
+    // clamping to the viewport so it's always fully visible at a sane size.
+    positionFromSelection() {
+      const dsel = window.getSelection();
+      if (!dsel || dsel.rangeCount === 0) return;
+      const rect = dsel.getRangeAt(0).getBoundingClientRect();
+      if (!rect || (rect.width === 0 && rect.height === 0)) return;
+      this.placeAt(rect.left + rect.width / 2, rect.top, rect.bottom);
+    },
+    placeAt(centerX, anchorTop, anchorBottom) {
+      const el = this.$refs.menu;
+      const mw = el?.offsetWidth || 320;
+      const mh = el?.offsetHeight || 40;
+      let top = anchorTop - mh - 8;
+      if (top < 8) top = (anchorBottom ?? anchorTop) + 8;       // flip below
+      let left = centerX - mw / 2;
+      left = Math.max(8, Math.min(left, window.innerWidth - mw - 8));
+      this.menu.top = Math.round(top);
+      this.menu.left = Math.round(left);
+    },
+    // Right-click: show the same toolbox (over the selection, or at the pointer).
+    onContextMenu(e) {
+      if (!this.$refs.menu || !editor?.isEditable) return;
+      e.preventDefault();
+      const empty = editor.state.selection.empty;
+      const px = e.clientX, py = e.clientY;
+      this.menu.mode = 'context';
+      this.menu.open = true;
+      this.$nextTick(() => {
+        if (!empty) this.positionFromSelection();
+        else this.placeAt(px, py, py);
+      });
+    },
+    closeMenu() { this.menu.open = false; this.menu.mode = null; },
+    hideMenu() { this.closeMenu(); },
+
     // The current envelope as a pretty string (for demo JSON panels).
     get envelopeString() {
       return JSON.stringify(wrap(this.json ?? EMPTY_DOC), null, 2);
@@ -233,6 +344,11 @@ export function pinionEditor(opts = {}) {
 
     destroy() {
       clearTimeout(debounceTimer);
+      this.$refs.editor?.removeEventListener('contextmenu', this._onContext);
+      window.removeEventListener('scroll', this._onScroll, true);
+      window.removeEventListener('resize', this._onScroll);
+      document.removeEventListener('mousedown', this._onDocDown, true);
+      document.removeEventListener('keydown', this._onKey);
       editor?.destroy();
       editor = null;
     },

@@ -6,125 +6,224 @@
    nodes: h1/h2/h3, lists, taskList, blockquote, code, the custom pn-highlight
    mark, the placeholder pseudo-element).
 
-   Promoted here verbatim from the W0 spike's app.css so the production
-   component is styled identically. Every value is composed ONLY from:
-     - plain CSS,
+   Aesthetic: "Notion's quiet page" — a borderless reading surface with a
+   comfortable measure, generous typographic rhythm, and restraint. Every value
+   is composed ONLY from:
+     - plain CSS + em-relative rhythm (typographic, scales with font-size),
      - daisyUI *color* tokens (var(--color-*) → tracks data-theme),
-     - pinion-ui tune tokens (var(--radius-box), var(--space-*) → tracks data-tune).
-   No hard-coded colors. The editor breathes with the same theme × tune cascade
-   as the rest of a pinion-ui page.
-
-   Bundled by the preset (pinion-ui.css `@import "./editor.css"`). The cost is a
-   few hundred bytes of CSS for every consumer; the JS engine (Tiptap) stays
-   opt-in so non-editor apps pay zero *bundle* (JS) cost — see editor.js. The
-   tune-aware base text size + min-height live on the Composer's `prose` key
-   (utility classes), not here. */
+     - pinion-ui tune tokens (var(--radius-box) → tracks data-tune).
+   No hard-coded colors. Chrome padding/radius lives on the Composer (tune
+   tokens); prose *internal* rhythm is typographic (em) so text breathes the
+   same at any tune. Bundled by the preset (pinion-ui.css @import "./editor.css").
+   The JS engine (Tiptap) stays opt-in so non-editor apps pay zero JS cost. */
 
 @layer components {
+    /* A comfortable reading measure, centered like a document page. Caps the
+       line length and centers when the host is wider; full-width when narrower.
+       Roomy leading + an elegant serif display for headings give it an
+       unhurried, editorial feel. `--pn-editor-heading-font` is overridable per
+       theme/consumer. */
+    .pn-prose {
+        /* Japanese-first type: a clean gothic body, an elegant mincho display
+           for headings (Latin falls to Palatino/Iowan, JP to Hiragino Mincho).
+           Both overridable per theme/consumer. */
+        --pn-editor-body-font: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', YuGothic, 'Noto Sans JP', 'Segoe UI', Roboto, sans-serif;
+        --pn-editor-heading-font: 'Iowan Old Style', Palatino, 'Hiragino Mincho ProN', 'Yu Mincho', YuMincho, 'Noto Serif JP', Georgia, serif;
+        max-width: 44rem;
+        margin-inline: auto;
+        font-family: var(--pn-editor-body-font);
+        /* Japanese reads best with roomy leading + a touch of tracking; `palt`
+           proportionally tightens full-width punctuation so kana/kanji breathe
+           evenly. */
+        line-height: 1.95;
+        letter-spacing: 0.035em;
+        font-feature-settings: "palt" 1;
+        line-break: strict;
+        overflow-wrap: anywhere;
+        color: var(--color-base-content);
+        caret-color: var(--color-primary);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
     .pn-prose:focus {
         outline: none;
     }
 
-    /* Block rhythm follows the tune spacing scale, so the editor breathes the
-       same as the rest of a pinion-ui page and reflows when data-tune changes. */
-    .pn-prose > * + * {
-        margin-top: var(--space-text);
+    /* Selection picks up the theme accent, softly. */
+    .pn-prose ::selection {
+        background: color-mix(in oklab, var(--color-primary) 22%, transparent);
     }
 
+    /* Typographic rhythm: airy between siblings, even more breathing room ABOVE
+       headings (the cadence that makes long docs feel unhurried). em-based so it
+       tracks the font size at every size variant. */
+    .pn-prose > * + * { margin-top: 0.9em; }
+    .pn-prose > h1 + *,
+    .pn-prose > h2 + *,
+    .pn-prose > h3 + * { margin-top: 0.5em; }
+    .pn-prose h1 { margin-top: 2.2em; }
+    .pn-prose h2 { margin-top: 2em; }
+    .pn-prose h3 { margin-top: 1.7em; }
+    .pn-prose > :first-child { margin-top: 0; }
+
+    /* Elegant serif display for headings against the sans body — an editorial
+       pairing. Lighter weights + relaxed tracking read refined, not heavy. */
+    .pn-prose h1,
+    .pn-prose h2,
+    .pn-prose h3 {
+        font-family: var(--pn-editor-heading-font);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        font-feature-settings: "palt" 1;
+    }
     .pn-prose h1 {
-        font-size: 1.75rem;
-        font-weight: 700;
-        line-height: 1.2;
-        color: var(--color-base-content, currentColor);
+        font-size: 1.95em;
+        line-height: 1.35;
     }
     .pn-prose h2 {
-        font-size: 1.375rem;
-        font-weight: 650;
-        line-height: 1.25;
+        font-size: 1.5em;
+        line-height: 1.4;
     }
     .pn-prose h3 {
-        font-size: 1.125rem;
-        font-weight: 600;
+        font-size: 1.2em;
+        font-weight: 650;
+        line-height: 1.45;
     }
+
+    .pn-prose p { line-height: 1.95; }
 
     .pn-prose ul,
     .pn-prose ol {
-        padding-left: 1.5rem;
+        padding-left: 1.45em;
     }
     .pn-prose ul { list-style: disc; }
     .pn-prose ol { list-style: decimal; }
-    .pn-prose li > * + * { margin-top: 0.25rem; }
+    .pn-prose li::marker { color: color-mix(in oklab, currentColor 45%, transparent); }
+    .pn-prose li > * + * { margin-top: 0.3em; }
+    .pn-prose li + li { margin-top: 0.25em; }
 
     /* Task list (checkbox) — taskList/taskItem nodes from
-       @tiptap/extension-task-list (NOT in StarterKit). */
+       @tiptap/extension-task-list (NOT in StarterKit). Checked items mute and
+       strike through, the way a done to-do should read. */
     .pn-prose ul[data-type="taskList"] {
         list-style: none;
-        padding-left: 0.25rem;
+        padding-left: 0.1em;
     }
     .pn-prose ul[data-type="taskList"] li {
         display: flex;
         align-items: flex-start;
-        gap: 0.5rem;
+        gap: 0.6em;
     }
+    /* Center the checkbox on the FIRST text line: a label box exactly one
+       line-height tall, with the input centered inside it. `1lh` tracks the
+       prose line-height, so it stays centered at any size/tune. */
     .pn-prose ul[data-type="taskList"] li > label {
-        margin-top: 0.15rem;
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        height: 1lh;
+        margin: 0;
+        user-select: none;
     }
     .pn-prose ul[data-type="taskList"] li > div {
         flex: 1 1 auto;
         min-width: 0;
     }
     .pn-prose ul[data-type="taskList"] input[type="checkbox"] {
-        accent-color: var(--color-primary);
-        width: 1rem;
-        height: 1rem;
+        appearance: none;
+        -webkit-appearance: none;
+        width: 1.05em;
+        height: 1.05em;
+        margin: 0;
+        border: 1.5px solid color-mix(in oklab, currentColor 35%, transparent);
+        border-radius: calc(var(--radius-box) * 0.4);
+        background: transparent;
+        cursor: pointer;
+        display: grid;
+        place-content: center;
+        transition: background-color 0.12s ease, border-color 0.12s ease;
+    }
+    .pn-prose ul[data-type="taskList"] input[type="checkbox"]:hover {
+        border-color: var(--color-primary);
+    }
+    .pn-prose ul[data-type="taskList"] input[type="checkbox"]:checked {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+    .pn-prose ul[data-type="taskList"] input[type="checkbox"]:checked::after {
+        content: "";
+        width: 0.32em;
+        height: 0.58em;
+        margin-top: -0.06em;
+        border: solid var(--color-primary-content, #fff);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+    .pn-prose ul[data-type="taskList"] li[data-checked="true"] > div {
+        color: color-mix(in oklab, currentColor 45%, transparent);
+        text-decoration: line-through;
+        text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
     }
 
+    /* Blockquote — upright, neutral left rule (modern; not the dated colored
+       italic). Quiet, like a Notion callout's spine. */
     .pn-prose blockquote {
-        border-left: 3px solid var(--color-primary);
-        padding-left: 1rem;
-        color: color-mix(in oklab, currentColor 70%, transparent);
-        font-style: italic;
+        border-left: 2.5px solid color-mix(in oklab, currentColor 22%, transparent);
+        padding-left: 1em;
+        color: color-mix(in oklab, currentColor 78%, transparent);
     }
 
     .pn-prose code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.875em;
-        background: var(--color-base-200);
-        padding: 0.1rem 0.35rem;
-        border-radius: calc(var(--radius-box) * 0.5);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+        font-size: 0.87em;
+        background: color-mix(in oklab, var(--color-base-content) 7%, transparent);
+        color: color-mix(in oklab, var(--color-base-content) 92%, var(--color-primary));
+        padding: 0.12em 0.36em;
+        border-radius: calc(var(--radius-box) * 0.45);
     }
     .pn-prose pre {
         background: var(--color-base-200);
+        border: 1px solid color-mix(in oklab, var(--color-base-content) 8%, transparent);
         border-radius: var(--radius-box);
-        padding: var(--space-compact);
+        padding: 0.85em 1em;
         overflow-x: auto;
+        line-height: 1.55;
     }
     .pn-prose pre code {
         background: transparent;
+        color: inherit;
         padding: 0;
+        font-size: 0.86em;
     }
 
     .pn-prose a {
         color: var(--color-primary);
         text-decoration: underline;
-        text-underline-offset: 2px;
+        text-decoration-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+        text-underline-offset: 3px;
+        transition: text-decoration-color 0.12s ease;
+    }
+    .pn-prose a:hover {
+        text-decoration-color: var(--color-primary);
     }
 
     /* Custom mark added in editor.js (bespoke schema extension). */
     .pn-prose mark.pn-highlight {
-        background: color-mix(in oklab, var(--color-warning) 35%, transparent);
-        border-radius: calc(var(--radius-box) * 0.35);
-        padding: 0 0.15rem;
+        background: color-mix(in oklab, var(--color-warning) 32%, transparent);
+        border-radius: calc(var(--radius-box) * 0.3);
+        padding: 0.05em 0.18em;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
     }
 
     /* Placeholder / slash-hint — driven by the Placeholder extension config.
-       Shows different copy on an empty doc vs. an empty block. */
+       Whisper-quiet so an empty page invites rather than shouts. */
     .pn-prose p.is-editor-empty:first-child::before,
     .pn-prose h1.is-empty::before,
     .pn-prose h2.is-empty::before,
     .pn-prose h3.is-empty::before {
         content: attr(data-placeholder);
-        color: color-mix(in oklab, currentColor 40%, transparent);
+        color: color-mix(in oklab, currentColor 32%, transparent);
         float: left;
         height: 0;
         pointer-events: none;

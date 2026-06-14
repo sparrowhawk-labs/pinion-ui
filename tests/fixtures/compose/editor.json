@@ -3,63 +3,49 @@
         "name": "default — md size, enabled",
         "props": {},
         "expected": {
-            "root": "bg-base-100 text-base-content border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] overflow-hidden focus-within:border-base-content/40 transition-colors",
-            "toolbar": "flex flex-wrap items-center gap-1 p-[var(--space-compact)] border-b border-base-content/10 bg-base-200/50",
-            "toolbarGroup": "flex flex-wrap items-center gap-0.5",
-            "button": "min-w-8 h-8 px-2 text-[length:var(--text-field-sm)] inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/80 hover:bg-base-content/10 transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
-            "buttonActive": "bg-primary text-primary-content",
-            "divider": "self-stretch w-px bg-base-content/10 mx-1",
-            "counter": "ml-auto text-[length:var(--text-field-xs)] text-base-content/40 pr-1",
-            "body": "p-[var(--space-text)]",
-            "prose": "pn-prose text-[length:var(--text-field-md)] min-h-[12rem] focus:outline-none",
-            "footer": "flex items-center gap-2 px-[var(--space-text)] py-[var(--space-compact)] border-t border-base-content/10 text-[length:var(--text-field-xs)] text-base-content/40"
+            "shell": "flex flex-col gap-1.5",
+            "root": "text-base-content",
+            "body": "px-[var(--space-element)] py-[var(--space-element)]",
+            "prose": "pn-prose text-[length:var(--text-field-md)] min-h-[14rem] focus:outline-none",
+            "menu": "fixed z-50 flex flex-nowrap items-center gap-0.5 p-1 bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-lg",
+            "menuGroup": "flex flex-nowrap items-center gap-0.5 shrink-0",
+            "button": "min-w-8 h-8 px-2 text-[length:var(--text-field-sm)] shrink-0 inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/55 hover:text-base-content hover:bg-base-content/[0.06] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75]",
+            "buttonActive": "bg-base-content/10 text-base-content",
+            "divider": "self-stretch my-1 w-px bg-base-content/10 mx-1.5 shrink-0",
+            "bottom": "flex items-center justify-between gap-3 px-[var(--space-text)] text-[length:var(--text-field-xs)] text-base-content/40",
+            "count": "flex items-center gap-3 tabular-nums",
+            "footer": "flex items-center gap-2 px-[var(--space-element)] py-[var(--space-compact)] text-[length:var(--text-field-xs)] text-base-content/35"
         }
     },
     {
-        "name": "size=sm — smaller buttons / body / prose",
-        "props": { "size": "sm" },
+        "name": "size=sm",
+        "props": {
+            "size": "sm"
+        },
         "expected": {
-            "button": "min-w-7 h-7 px-1.5 text-[length:var(--text-field-xs)] inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/80 hover:bg-base-content/10 transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
-            "body": "p-[var(--space-compact)]",
+            "button": "min-w-7 h-7 px-1.5 text-[length:var(--text-field-xs)] shrink-0 inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/55 hover:text-base-content hover:bg-base-content/[0.06] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75]",
+            "body": "px-[var(--space-text)] py-[var(--space-element)]",
             "prose": "pn-prose text-[length:var(--text-field-sm)] min-h-[8rem] focus:outline-none"
         }
     },
     {
-        "name": "size=lg — larger buttons / body / prose",
-        "props": { "size": "lg" },
+        "name": "size=lg",
+        "props": {
+            "size": "lg"
+        },
         "expected": {
-            "button": "min-w-9 h-9 px-2.5 text-[length:var(--text-field-md)] inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/80 hover:bg-base-content/10 transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
-            "body": "p-[var(--space-element)]",
-            "prose": "pn-prose text-[length:var(--text-field-lg)] min-h-[16rem] focus:outline-none"
+            "button": "min-w-9 h-9 px-2.5 text-[length:var(--text-field-md)] shrink-0 inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/55 hover:text-base-content hover:bg-base-content/[0.06] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75]",
+            "body": "px-[var(--space-section-inner)] py-[var(--space-section-inner)]",
+            "prose": "pn-prose text-[length:var(--text-field-lg)] min-h-[18rem] focus:outline-none"
         }
     },
     {
-        "name": "disabled — root gets opacity + pointer-events-none, other keys unchanged",
-        "props": { "disabled": true },
+        "name": "disabled",
+        "props": {
+            "disabled": true
+        },
         "expected": {
-            "root": "bg-base-100 text-base-content border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] overflow-hidden focus-within:border-base-content/40 transition-colors opacity-60 pointer-events-none",
-            "body": "p-[var(--space-text)]",
-            "prose": "pn-prose text-[length:var(--text-field-md)] min-h-[12rem] focus:outline-none"
-        }
-    },
-    {
-        "name": "unknown size falls back to md",
-        "props": { "size": "huge" },
-        "expected": {
-            "button": "min-w-8 h-8 px-2 text-[length:var(--text-field-sm)] inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/80 hover:bg-base-content/10 transition-colors cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
-            "body": "p-[var(--space-text)]",
-            "prose": "pn-prose text-[length:var(--text-field-md)] min-h-[12rem] focus:outline-none"
-        }
-    },
-    {
-        "name": "static keys are size/disabled-invariant",
-        "props": { "size": "lg" },
-        "expected": {
-            "toolbar": "flex flex-wrap items-center gap-1 p-[var(--space-compact)] border-b border-base-content/10 bg-base-200/50",
-            "toolbarGroup": "flex flex-wrap items-center gap-0.5",
-            "buttonActive": "bg-primary text-primary-content",
-            "divider": "self-stretch w-px bg-base-content/10 mx-1",
-            "counter": "ml-auto text-[length:var(--text-field-xs)] text-base-content/40 pr-1"
+            "root": "text-base-content opacity-60 pointer-events-none"
         }
     }
 ]

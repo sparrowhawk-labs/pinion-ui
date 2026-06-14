@@ -10,6 +10,14 @@ run `ui:install --editor` pull zero Tiptap bundle.
 task/checkbox list, blockquote, code (inline + fenced), link; marks
 bold / italic / code / highlight. Tables / images / columns are deferred.
 
+**Interaction** — there is **no persistent toolbar**; the editor reads as the
+page (no card, no chrome). Formatting appears in a **floating toolbox** on a
+text selection or on **right-click**, positioned over the selection (flips /
+clamps to the viewport). A bottom row holds a keyboard-shortcuts popover and a
+dual character count (半角換算 / 全角換算). Headings render in an elegant mincho
+serif, body in a gothic sans (overridable via `--pn-editor-heading-font` /
+`--pn-editor-body-font`); spacing/leading are tuned for Japanese.
+
 ## Install
 
 `<x-editor>` needs its JS module wired into the consumer's `resources/js/app.js`
@@ -52,12 +60,12 @@ The `.pn-prose` block styles ship in the CSS preset (`pinion-ui.css` imports
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Toolbar button size, body padding, base prose text size, min editable height. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Toolbox button size, body padding, base prose text size, min editable height. |
 | `placeholder` | `string \| null` | `null` | Empty-paragraph hint. Empty headings always show `Heading…`. |
 | `sync` | `'blur' \| 'debounce:NNN' \| 'manual'` | `'debounce:800'` | When the body JSON is flushed to `wire:model`. `blur` = on focus-out only; `debounce:800` = ~800ms after the last keystroke **plus** a guaranteed flush on blur; `manual` = never automatically — call `flush()` from your own Save control. |
-| `disabled` | `bool` | `false` | Dims the surface, blocks pointer events, hides the toolbar. |
-| `editable` | `bool` | `true` | When `false`, renders read-only (no toolbar, content not editable). |
-| `toolbar` | `bool` | `true` | Show the formatting toolbar. Ignored (hidden) when not editable. |
+| `disabled` | `bool` | `false` | Dims the surface, blocks pointer events, suppresses the floating toolbox. |
+| `editable` | `bool` | `true` | When `false`, renders read-only (no toolbox, content not editable). |
+| `shortcuts` | `bool` | `true` | Show the bottom “ショートカット” button (a popover listing keyboard shortcuts). Hidden when not editable. |
 | `content` | `array \| null` | `null` | Initial value. Accepts the **envelope**, a bare ProseMirror doc, or `null` (empty doc). Usually you omit this and let `wire:model` hydrate. |
 
 All other attributes pass through to the outer Alpine host `<div>`, **except**
@@ -154,8 +162,8 @@ sync cadence (default: 800ms debounce + flush on blur).
 
 Class strings come from
 [`SparrowhawkLabs\PinionUi\Compose\EditorComposer`](../../src/Compose/EditorComposer.php).
-Keys: `root`, `toolbar`, `toolbarGroup`, `button`, `buttonActive`, `divider`,
-`counter`, `body`, `prose`, `footer`. The `.pn-prose` descendant rules (lists,
+Keys: `shell`, `root`, `body`, `prose`, `menu`, `menuGroup`, `button`,
+`buttonActive`, `divider`, `bottom`, `count`, `footer`. The `.pn-prose` descendant rules (lists,
 taskList, blockquote, code, the `pn-highlight` mark, the placeholder
 pseudo-element) live in the bundled
 [`editor.css`](../../src/resources/css/editor.css) because they can't be utility
@@ -165,9 +173,16 @@ classes. Behavior is in
 ## Notes
 
 - **The Tiptap instance is not in Alpine reactive data.** It lives in the
-  module's closure; only `json` / `chars` are exposed to Alpine. A proxied
-  `EditorView` corrupts ProseMirror transactions. Do not "fix" this by moving the
-  editor onto `x-data`.
+  module's closure; only serializable state (`json`, `chars`, `charsHalf`,
+  `charsFull`, `menu`) is exposed to Alpine. A proxied `EditorView` corrupts
+  ProseMirror transactions. Do not "fix" this by moving the editor onto `x-data`.
+- **Floating toolbox.** `editor.js` shows the toolbox on a non-empty selection
+  (`mode: 'selection'`, closes when the selection collapses) and on right-click
+  (`mode: 'context'`, stays until an outside-click / `Escape` / new selection, so
+  the caret-move `selectionUpdate` can't close it on open). The toolbox host must
+  carry `x-on:mousedown.prevent` so clicking a button keeps the editor selection.
+- **Character counts** are East-Asian-width aware: `charsHalf` = 半角換算
+  (half=1, full=2), `charsFull` = 全角換算 (full=1, half=0.5 ⌈⌉), newlines excluded.
 - **Custom extensions** ship in `editor.js`: the `pnHighlight` mark
   (`⌘⇧H` / `==text==`), a `⌘↵` → horizontal-rule keymap, and a context-aware
   placeholder. These are the seams for slash menus / AI-insert later.

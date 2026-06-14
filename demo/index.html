@@ -1,30 +1,63 @@
 <!doctype html>
-<html lang="en" data-theme="pinion" data-tune="default">
+<html lang="ja" data-theme="pinion" data-tune="default">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>pinion-ui · &lt;x-editor&gt; demo (W1)</title>
+  <title>pinion-ui · &lt;x-editor&gt; — minimal editor</title>
   <link rel="stylesheet" href="./app.css" />
+  <style>[x-cloak]{display:none!important}</style>
 </head>
 <body class="bg-base-100 text-base-content min-h-screen">
   <div
-    class="max-w-5xl mx-auto p-[var(--space-section-inner)] flex flex-col gap-[var(--space-element)]"
+    class="max-w-[46rem] mx-auto px-[var(--space-element)] py-[var(--space-section-inner)] flex flex-col gap-[var(--space-text)]"
     x-data="pinionEditor({
+      placeholder: '本文を入力…',
       sync: 'debounce:800',
       content: {
         format: 'tiptap', version: 1,
         doc: { type: 'doc', content: [
-          { type: 'heading', attrs: { level: 1 }, content: [{ type: 'text', text: 'pinion-ui editor (W1)' }] },
+          { type: 'heading', attrs: { level: 1 }, content: [{ type: 'text', text: '本文タイポグラフィの検証' }] },
           { type: 'paragraph', content: [
-            { type: 'text', text: 'Production ' },
-            { type: 'text', marks: [{ type: 'pnHighlight' }], text: 'editor.js' },
-            { type: 'text', text: ' module. Try the toolbar, ' },
-            { type: 'text', marks: [{ type: 'code' }], text: '⌘⇧H' },
-            { type: 'text', text: ' highlight, ⌘↵ divider, ==x== input rule.' }
+            { type: 'text', text: 'これは' },
+            { type: 'text', marks: [{ type: 'bold' }], text: '日本語タイポグラフィ' },
+            { type: 'text', text: 'の検証用ドキュメントです。' },
+            { type: 'text', marks: [{ type: 'italic' }], text: '明朝の見出し' },
+            { type: 'text', text: 'と、読みやすいゴシックの本文。' },
+            { type: 'text', marks: [{ type: 'pnHighlight' }], text: '大事なところ' },
+            { type: 'text', text: 'を強調し、' },
+            { type: 'text', marks: [{ type: 'code' }], text: 'インラインコード' },
+            { type: 'text', text: 'や' },
+            { type: 'text', marks: [{ type: 'link', attrs: { href: 'https://example.com', target: '_blank', rel: 'noopener' } }], text: 'リンク' },
+            { type: 'text', text: 'も自然に馴染みます。半角 ABC123 と全角 ＡＢＣ１２３ の混植も確認。' }
           ] },
+          { type: 'heading', attrs: { level: 2 }, content: [{ type: 'text', text: 'リストの網羅' }] },
+          { type: 'bulletList', content: [
+            { type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: '箇条書きの項目その一' }] }] },
+            { type: 'listItem', content: [{ type: 'paragraph', content: [
+              { type: 'text', text: '二つ目（' },
+              { type: 'text', marks: [{ type: 'link', attrs: { href: 'https://example.org', target: '_blank', rel: 'noopener' } }], text: '参考リンク' },
+              { type: 'text', text: 'つき）' }
+            ] }] },
+            { type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: '三つ目の項目' }] }] }
+          ] },
+          { type: 'orderedList', content: [
+            { type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'テキストを選択する' }] }] },
+            { type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'ツールバーで書式を当てる' }] }] },
+            { type: 'listItem', content: [{ type: 'paragraph', content: [{ type: 'text', text: '完了' }] }] }
+          ] },
+          { type: 'heading', attrs: { level: 3 }, content: [{ type: 'text', text: '今日のタスク' }] },
           { type: 'taskList', content: [
-            { type: 'taskItem', attrs: { checked: true }, content: [{ type: 'paragraph', content: [{ type: 'text', text: 'task lists work' }] }] },
-            { type: 'taskItem', attrs: { checked: false }, content: [{ type: 'paragraph', content: [{ type: 'text', text: 'wire:model emits the envelope' }] }] }
+            { type: 'taskItem', attrs: { checked: true }, content: [{ type: 'paragraph', content: [{ type: 'text', text: 'チェックボックスを行の上下中央に揃える' }] }] },
+            { type: 'taskItem', attrs: { checked: false }, content: [{ type: 'paragraph', content: [{ type: 'text', text: '本文契約 {format, version, doc} を維持する' }] }] },
+            { type: 'taskItem', attrs: { checked: false }, content: [{ type: 'paragraph', content: [{ type: 'text', text: 'リンク・コードブロック・引用も検証する' }] }] }
+          ] },
+          { type: 'blockquote', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'シンプルさは、すべての真のエレガンスの基調である。' }] }] },
+          { type: 'codeBlock', content: [{ type: 'text', text: `const body = { format: 'tiptap', version: 1, doc };\neditor.commands.setContent(body.doc);` }] },
+          { type: 'horizontalRule' },
+          { type: 'paragraph', content: [
+            { type: 'text', text: '以上。詳しくは ' },
+            { type: 'text', marks: [{ type: 'link', attrs: { href: 'https://example.com/docs', target: '_blank', rel: 'noopener' } }], text: 'ドキュメント' },
+            { type: 'text', text: ' を参照してください。' }
           ] }
         ] }
       }
@@ -32,14 +65,11 @@
     x-on:destroy="destroy()"
   >
     <header class="flex items-baseline justify-between flex-wrap gap-3">
-      <div>
-        <h1 class="text-2xl font-bold">&lt;x-editor&gt; — W1 demo</h1>
-        <p class="text-sm text-base-content/60">Production Composer chrome + production editor.js. Styled purely from theme × tune tokens.</p>
-      </div>
+      <p class="text-sm text-base-content/45">pinion-ui · &lt;x-editor&gt;</p>
       <div class="flex items-center gap-2 text-sm">
         <label class="flex items-center gap-1.5">
-          <span class="text-base-content/60">theme</span>
-          <select class="bg-base-200 border border-base-content/15 rounded-[var(--radius-box)] px-2 py-1"
+          <span class="text-base-content/45">theme</span>
+          <select class="bg-base-100 border border-base-content/12 rounded-[var(--radius-box)] px-2 py-1"
             x-on:change="document.documentElement.dataset.theme = $event.target.value">
             <option value="pinion">pinion</option>
             <option value="reactive">reactive</option>
@@ -49,8 +79,8 @@
           </select>
         </label>
         <label class="flex items-center gap-1.5">
-          <span class="text-base-content/60">tune</span>
-          <select class="bg-base-200 border border-base-content/15 rounded-[var(--radius-box)] px-2 py-1"
+          <span class="text-base-content/45">tune</span>
+          <select class="bg-base-100 border border-base-content/12 rounded-[var(--radius-box)] px-2 py-1"
             x-on:change="document.documentElement.dataset.tune = $event.target.value">
             <option value="default">default</option>
             <option value="sharp">sharp</option>
@@ -62,69 +92,133 @@
       </div>
     </header>
 
-    <div class="grid lg:grid-cols-[1fr_24rem] gap-[var(--space-element)] items-start">
-      <!-- Editor — markup mirrors editor.blade.php (EditorComposer class strings). -->
-      <div class="bg-base-100 text-base-content border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] overflow-hidden focus-within:border-base-content/40 transition-colors">
-        <div class="flex flex-wrap items-center gap-1 p-[var(--space-compact)] border-b border-base-content/10 bg-base-200/50" role="toolbar" aria-label="Editor toolbar">
-          <div class="flex flex-wrap items-center gap-0.5" id="tbgroups"></div>
-          <span class="ml-auto text-[length:var(--text-field-xs)] text-base-content/40 pr-1" x-text="chars + ' chars'"></span>
-        </div>
-        <div class="p-[var(--space-text)]">
-          <div x-ref="editor" data-prose-class="pn-prose text-[length:var(--text-field-md)] min-h-[12rem] focus:outline-none"></div>
-        </div>
-        <div class="flex items-center gap-2 px-[var(--space-text)] py-[var(--space-compact)] border-t border-base-content/10 text-[length:var(--text-field-xs)] text-base-content/40">
-          shortcuts: ⌘⇧H highlight · ⌘↵ divider · ==x== highlight
+    <!-- Editor — NO card, NO persistent toolbar: it is the page (Notion-style).
+         Formatting appears on selection / right-click via the floating toolbox. -->
+    <div class="text-base-content">
+      <div class="px-[var(--space-element)] py-[var(--space-element)]">
+        <div x-ref="editor" data-prose-class="pn-prose text-[length:var(--text-field-md)] min-h-[16rem] focus:outline-none"></div>
+      </div>
+    </div>
+
+    <!-- Floating toolbox — appears on text selection / right-click, sized to its
+         content. @mousedown.prevent keeps the editor selection alive on click. -->
+    <div x-ref="menu" x-show="menu.open" x-cloak x-transition.opacity.duration.100ms
+      @mousedown.prevent
+      :style="`top:${menu.top}px; left:${menu.left}px`"
+      class="fixed z-50 flex flex-nowrap items-center gap-0.5 p-1 bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-lg"
+      id="floatmenu" role="toolbar" aria-label="Formatting"></div>
+
+    <!-- Bottom bar: shortcuts (left) + dual character count (right), OUTSIDE the editor -->
+    <div class="flex items-center justify-between gap-3 px-[var(--space-text)] text-[length:var(--text-field-xs)] text-base-content/40">
+      <div class="relative" x-data="{ sc:false }">
+        <button type="button" @click="sc=!sc"
+          :class="sc ? 'bg-base-content/10 text-base-content' : 'text-base-content/45'"
+          class="inline-flex items-center gap-1.5 h-7 px-2 rounded-[calc(var(--radius-box)*0.6)] hover:text-base-content hover:bg-base-content/[0.06] transition-colors cursor-pointer select-none [&_svg]:w-[0.95rem] [&_svg]:h-[0.95rem] [&_svg]:stroke-[1.75]"
+          aria-label="Keyboard shortcuts" title="Keyboard shortcuts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>
+          <span>ショートカット</span>
+        </button>
+        <div x-show="sc" x-cloak @click.outside="sc=false" x-transition.opacity.duration.150ms
+          class="absolute bottom-full left-0 mb-2 z-30 w-[19rem] bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-lg overflow-hidden">
+          <div class="px-3 py-2 text-[length:var(--text-field-xs)] font-medium text-base-content/55 border-b border-base-content/[0.07]">Keyboard shortcuts</div>
+          <div class="p-1.5 max-h-[20rem] overflow-auto" id="sc-list"></div>
         </div>
       </div>
-
-      <!-- Live envelope = the wire:model value -->
-      <div class="bg-base-200 rounded-[var(--radius-box)] overflow-hidden border border-base-content/10">
-        <div class="px-3 py-2 text-xs font-semibold text-base-content/60 border-b border-base-content/10">
-          wire:model envelope → <code>apps.body</code>
-        </div>
-        <pre class="p-3 text-xs leading-relaxed overflow-auto max-h-[28rem] text-base-content/80"><code x-text="envelopeString"></code></pre>
+      <div class="flex items-center gap-3 tabular-nums">
+        <span>半角 <span x-text="charsHalf"></span></span>
+        <span aria-hidden="true" class="text-base-content/25">·</span>
+        <span>全角 <span x-text="charsFull"></span></span>
       </div>
     </div>
 
     <!-- hidden wire:model carrier (mirrors the Blade's hidden input) -->
     <input type="hidden" x-ref="model" id="bodyfield" />
-    <p class="text-xs text-base-content/50">hidden input #bodyfield value (what Livewire receives) updates on the sync cadence (debounce 800ms + blur).</p>
   </div>
 
   <script type="module">
     import Alpine from 'alpinejs';
     import { pinionEditor } from '../src/resources/js/editor.js';
 
-    // Toolbar buttons — built in JS for the demo (the Blade renders these
-    // server-side from EditorComposer). Same command spec the Blade uses.
+    const I = (b) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${b}</svg>`;
+    const icon = {
+      bold:      I('<path d="M6 4h8a4 4 0 0 1 0 8H6z"/><path d="M6 12h9a4 4 0 0 1 0 8H6z"/>'),
+      italic:    I('<line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/>'),
+      code:      I('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'),
+      highlight: I('<path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/>'),
+      bullet:    I('<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>'),
+      ordered:   I('<line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-1.5 2-2.5S5 14 4 14.5"/>'),
+      task:      I('<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'),
+      quote:     I('<path d="M17 6H3"/><path d="M21 12H8"/><path d="M21 18H8"/><path d="M3 12v6"/>'),
+      codeblock: I('<path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/>'),
+      link:      I('<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>'),
+    };
+
+    // [innerHTML, aria, run, name, attrs?]
     const groups = [
-      [['H1', c=>c.toggleHeading({level:1}), 'heading', {level:1}],
-       ['H2', c=>c.toggleHeading({level:2}), 'heading', {level:2}],
-       ['H3', c=>c.toggleHeading({level:3}), 'heading', {level:3}]],
-      [['B', c=>c.toggleBold(), 'bold'], ['I', c=>c.toggleItalic(), 'italic'],
-       ['</>', c=>c.toggleCode(), 'code'], ['HL', c=>c.toggleMark('pnHighlight'), 'pnHighlight']],
-      [['•', c=>c.toggleBulletList(), 'bulletList'], ['1.', c=>c.toggleOrderedList(), 'orderedList'],
-       ['☑', c=>c.toggleTaskList(), 'taskList']],
-      [['“', c=>c.toggleBlockquote(), 'blockquote'], ['{ }', c=>c.toggleCodeBlock(), 'codeBlock']],
+      [['H1', 'Heading 1', c=>c.toggleHeading({level:1}), 'heading', {level:1}],
+       ['H2', 'Heading 2', c=>c.toggleHeading({level:2}), 'heading', {level:2}],
+       ['H3', 'Heading 3', c=>c.toggleHeading({level:3}), 'heading', {level:3}]],
+      [[icon.bold, 'Bold', c=>c.toggleBold(), 'bold'],
+       [icon.italic, 'Italic', c=>c.toggleItalic(), 'italic'],
+       [icon.code, 'Inline code', c=>c.toggleCode(), 'code'],
+       [icon.highlight, 'Highlight', c=>c.toggleMark('pnHighlight'), 'pnHighlight']],
+      [[icon.bullet, 'Bullet list', c=>c.toggleBulletList(), 'bulletList'],
+       [icon.ordered, 'Numbered list', c=>c.toggleOrderedList(), 'orderedList'],
+       [icon.task, 'Task list', c=>c.toggleTaskList(), 'taskList']],
+      [[icon.quote, 'Quote', c=>c.toggleBlockquote(), 'blockquote'],
+       [icon.codeblock, 'Code block', c=>c.toggleCodeBlock(), 'codeBlock'],
+       [icon.link, 'Link', null, 'link']],
     ];
-    const btnClass = "min-w-8 h-8 px-2 text-[length:var(--text-field-sm)] inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/80 hover:bg-base-content/10 transition-colors cursor-pointer select-none";
-    const host = document.getElementById('tbgroups');
+    const btnClass = "shrink-0 min-w-8 h-8 px-2 text-[length:var(--text-field-sm)] inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/55 hover:text-base-content hover:bg-base-content/[0.06] transition-colors duration-100 cursor-pointer select-none [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75]";
+    const activeClass = "bg-base-content/10 text-base-content";
+    const host = document.getElementById('floatmenu');
     groups.forEach((g, gi) => {
       const wrap = document.createElement('div');
-      wrap.className = 'flex flex-wrap items-center gap-0.5';
-      g.forEach(([label, run, name, attrs]) => {
+      wrap.className = 'flex flex-nowrap items-center gap-0.5 shrink-0';
+      g.forEach(([html, aria, run, name, attrs]) => {
         const b = document.createElement('button');
-        b.type = 'button'; b.textContent = label; b.className = btnClass;
-        b.setAttribute('x-bind:class', `isActive('${name}'${attrs ? ', '+JSON.stringify(attrs) : ''}) ? 'bg-primary text-primary-content' : ''`);
-        b.setAttribute('x-on:click', `cmd(${run.toString()})`);
+        b.type = 'button'; b.innerHTML = html; b.className = btnClass;
+        b.setAttribute('aria-label', aria); b.setAttribute('title', aria);
+        if (name === 'link' && run === null) {
+          b.setAttribute('x-bind:class', `isActive('link') ? '${activeClass}' : ''`);
+          b.setAttribute('x-on:click', 'setLink()');
+        } else {
+          b.setAttribute('x-bind:class', `isActive('${name}'${attrs ? ', '+JSON.stringify(attrs) : ''}) ? '${activeClass}' : ''`);
+          b.setAttribute('x-on:click', `cmd(${run.toString()})`);
+        }
         wrap.appendChild(b);
       });
       host.appendChild(wrap);
       if (gi < groups.length - 1) {
         const d = document.createElement('span');
-        d.className = 'self-stretch w-px bg-base-content/10 mx-1'; d.setAttribute('aria-hidden','true');
+        d.className = 'self-stretch my-1 w-px bg-base-content/10 mx-1.5 shrink-0'; d.setAttribute('aria-hidden','true');
         host.appendChild(d);
       }
+    });
+
+    // Shortcuts popover content (Tiptap StarterKit defaults + our custom keys).
+    const shortcuts = [
+      ['Text', [['Bold','⌘B'],['Italic','⌘I'],['Inline code','⌘E'],['Highlight','⌘⇧H']]],
+      ['Headings', [['Heading 1','⌘⌥1'],['Heading 2','⌘⌥2'],['Heading 3','⌘⌥3']]],
+      ['Lists', [['Bullet list','⌘⇧8'],['Numbered list','⌘⇧7'],['Task list','⌘⇧9']]],
+      ['Blocks', [['Quote','⌘⇧B'],['Code block','⌘⌥C'],['Divider','⌘↵']]],
+      ['History', [['Undo','⌘Z'],['Redo','⌘⇧Z']]],
+      ['Magic', [['Highlight text','==text=='],['New line','⇧↵']]],
+    ];
+    const scHost = document.getElementById('sc-list');
+    shortcuts.forEach(([group, rows]) => {
+      const h = document.createElement('div');
+      h.className = 'px-2 pt-2 pb-1 text-[length:var(--text-field-xs)] font-medium uppercase tracking-wide text-base-content/35';
+      h.textContent = group; scHost.appendChild(h);
+      rows.forEach(([label, key]) => {
+        const r = document.createElement('div');
+        r.className = 'flex items-center justify-between gap-4 px-2 py-1 rounded-[calc(var(--radius-box)*0.5)] hover:bg-base-content/[0.04]';
+        const l = document.createElement('span');
+        l.className = 'text-[length:var(--text-field-sm)] text-base-content/75'; l.textContent = label;
+        const k = document.createElement('kbd');
+        k.className = 'font-mono text-[length:var(--text-field-xs)] text-base-content/55 bg-base-200 px-1.5 py-0.5 rounded-[calc(var(--radius-box)*0.4)] border border-base-content/10 whitespace-nowrap'; k.textContent = key;
+        r.appendChild(l); r.appendChild(k); scHost.appendChild(r);
+      });
     });
 
     Alpine.data('pinionEditor', pinionEditor);
