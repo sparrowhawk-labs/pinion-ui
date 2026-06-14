@@ -99,6 +99,13 @@
 /* Tune design token system (data-tune attribute) */
 @import "./tune.css";
 
+/* Editor prose styles (.pn-prose) for <x-editor>. Block rules that can't be
+   utility classes (descendant selectors on ProseMirror nodes), keyed off theme
+   color + tune tokens. A few hundred bytes for every consumer; the Tiptap JS
+   engine stays opt-in (see ui:install --editor) so non-editor apps pay no JS
+   bundle cost. */
+@import "./editor.css";
+
 /* ==========================================
    pinion theme (v0.4.0) — light only
    ==========================================

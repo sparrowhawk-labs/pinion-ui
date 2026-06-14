@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* The REAL pinion-ui preset — same import a consumer app uses. Pulls in daisyUI
+   colors/themes, the tune token system, the pinion + reactive themes, AND (new
+   in W1) the bundled editor.css (.pn-prose rules). So the editor is styled
+   against the genuine design system. */
+@import "../src/resources/css/pinion-ui.css";
+
+/* Scan this demo's markup + the production JS module so the utility classes used
+   survive JIT purging. */
+@source "./index.html";
+@source "../src/resources/js/editor.js";

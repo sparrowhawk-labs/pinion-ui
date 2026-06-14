@@ -21,6 +21,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-input-number>`](./input-number.md) | Quantity selector — `<input type="number">` flanked by joined ± buttons. min/max/step clamped both in HTML attrs and Alpine inc/dec logic. Native spinner arrows hidden. |
 | [`<x-input-group>`](./input-group.md) | Generic horizontal joiner for form-shaped children — select+input, input+button, multi-input rows. Self-contained Tailwind join (no daisyUI `.join`). Exposes an `addon` helper class for text decorators. |
 | [`<x-pin-input>`](./pin-input.md) | OTP / verification code — N single-character boxes with auto-advance, backspace-back, arrow nav, paste-to-fill. `numeric` / `alphanumeric` type, optional `masked`. Combined value submits via hidden input. |
+| [`<x-editor>`](./editor.md) | Headless rich-text editor (Tiptap / ProseMirror), styled purely with theme × tune tokens. MVP blocks: headings, lists, task list, blockquote, code, link + bold/italic/code/highlight marks. Emits a versioned JSON envelope for `wire:model`. **Opt-in JS** — run `ui:install --editor`. |
 
 ## Data display
 

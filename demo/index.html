@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" data-theme="pinion" data-tune="default">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>pinion-ui · &lt;x-editor&gt; demo (W1)</title>
+  <link rel="stylesheet" href="./app.css" />
+</head>
+<body class="bg-base-100 text-base-content min-h-screen">
+  <div
+    class="max-w-5xl mx-auto p-[var(--space-section-inner)] flex flex-col gap-[var(--space-element)]"
+    x-data="pinionEditor({
+      sync: 'debounce:800',
+      content: {
+        format: 'tiptap', version: 1,
+        doc: { type: 'doc', content: [
+          { type: 'heading', attrs: { level: 1 }, content: [{ type: 'text', text: 'pinion-ui editor (W1)' }] },
+          { type: 'paragraph', content: [
+            { type: 'text', text: 'Production ' },
+            { type: 'text', marks: [{ type: 'pnHighlight' }], text: 'editor.js' },
+            { type: 'text', text: ' module. Try the toolbar, ' },
+            { type: 'text', marks: [{ type: 'code' }], text: '⌘⇧H' },
+            { type: 'text', text: ' highlight, ⌘↵ divider, ==x== input rule.' }
+          ] },
+          { type: 'taskList', content: [
+            { type: 'taskItem', attrs: { checked: true }, content: [{ type: 'paragraph', content: [{ type: 'text', text: 'task lists work' }] }] },
+            { type: 'taskItem', attrs: { checked: false }, content: [{ type: 'paragraph', content: [{ type: 'text', text: 'wire:model emits the envelope' }] }] }
+          ] }
+        ] }
+      }
+    })"
+    x-on:destroy="destroy()"
+  >
+    <header class="flex items-baseline justify-between flex-wrap gap-3">
+      <div>
+        <h1 class="text-2xl font-bold">&lt;x-editor&gt; — W1 demo</h1>
+        <p class="text-sm text-base-content/60">Production Composer chrome + production editor.js. Styled purely from theme × tune tokens.</p>
+      </div>
+      <div class="flex items-center gap-2 text-sm">
+        <label class="flex items-center gap-1.5">
+          <span class="text-base-content/60">theme</span>
+          <select class="bg-base-200 border border-base-content/15 rounded-[var(--radius-box)] px-2 py-1"
+            x-on:change="document.documentElement.dataset.theme = $event.target.value">
+            <option value="pinion">pinion</option>
+            <option value="reactive">reactive</option>
+            <option value="dark">dark</option>
+            <option value="dracula">dracula</option>
+            <option value="corporate">corporate</option>
+          </select>
+        </label>
+        <label class="flex items-center gap-1.5">
+          <span class="text-base-content/60">tune</span>
+          <select class="bg-base-200 border border-base-content/15 rounded-[var(--radius-box)] px-2 py-1"
+            x-on:change="document.documentElement.dataset.tune = $event.target.value">
+            <option value="default">default</option>
+            <option value="sharp">sharp</option>
+            <option value="soft">soft</option>
+            <option value="brutal">brutal</option>
+            <option value="elegant">elegant</option>
+          </select>
+        </label>
+      </div>
+    </header>
+
+    <div class="grid lg:grid-cols-[1fr_24rem] gap-[var(--space-element)] items-start">
+      <!-- Editor — markup mirrors editor.blade.php (EditorComposer class strings). -->
+      <div class="bg-base-100 text-base-content border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] overflow-hidden focus-within:border-base-content/40 transition-colors">
+        <div class="flex flex-wrap items-center gap-1 p-[var(--space-compact)] border-b border-base-content/10 bg-base-200/50" role="toolbar" aria-label="Editor toolbar">
+          <div class="flex flex-wrap items-center gap-0.5" id="tbgroups"></div>
+          <span class="ml-auto text-[length:var(--text-field-xs)] text-base-content/40 pr-1" x-text="chars + ' chars'"></span>
+        </div>
+        <div class="p-[var(--space-text)]">
+          <div x-ref="editor" data-prose-class="pn-prose text-[length:var(--text-field-md)] min-h-[12rem] focus:outline-none"></div>
+        </div>
+        <div class="flex items-center gap-2 px-[var(--space-text)] py-[var(--space-compact)] border-t border-base-content/10 text-[length:var(--text-field-xs)] text-base-content/40">
+          shortcuts: ⌘⇧H highlight · ⌘↵ divider · ==x== highlight
+        </div>
+      </div>
+
+      <!-- Live envelope = the wire:model value -->
+      <div class="bg-base-200 rounded-[var(--radius-box)] overflow-hidden border border-base-content/10">
+        <div class="px-3 py-2 text-xs font-semibold text-base-content/60 border-b border-base-content/10">
+          wire:model envelope → <code>apps.body</code>
+        </div>
+        <pre class="p-3 text-xs leading-relaxed overflow-auto max-h-[28rem] text-base-content/80"><code x-text="envelopeString"></code></pre>
+      </div>
+    </div>
+
+    <!-- hidden wire:model carrier (mirrors the Blade's hidden input) -->
+    <input type="hidden" x-ref="model" id="bodyfield" />
+    <p class="text-xs text-base-content/50">hidden input #bodyfield value (what Livewire receives) updates on the sync cadence (debounce 800ms + blur).</p>
+  </div>
+
+  <script type="module">
+    import Alpine from 'alpinejs';
+    import { pinionEditor } from '../src/resources/js/editor.js';
+
+    // Toolbar buttons — built in JS for the demo (the Blade renders these
+    // server-side from EditorComposer). Same command spec the Blade uses.
+    const groups = [
+      [['H1', c=>c.toggleHeading({level:1}), 'heading', {level:1}],
+       ['H2', c=>c.toggleHeading({level:2}), 'heading', {level:2}],
+       ['H3', c=>c.toggleHeading({level:3}), 'heading', {level:3}]],
+      [['B', c=>c.toggleBold(), 'bold'], ['I', c=>c.toggleItalic(), 'italic'],
+       ['</>', c=>c.toggleCode(), 'code'], ['HL', c=>c.toggleMark('pnHighlight'), 'pnHighlight']],
+      [['•', c=>c.toggleBulletList(), 'bulletList'], ['1.', c=>c.toggleOrderedList(), 'orderedList'],
+       ['☑', c=>c.toggleTaskList(), 'taskList']],
+      [['“', c=>c.toggleBlockquote(), 'blockquote'], ['{ }', c=>c.toggleCodeBlock(), 'codeBlock']],
+    ];
+    const btnClass = "min-w-8 h-8 px-2 text-[length:var(--text-field-sm)] inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/80 hover:bg-base-content/10 transition-colors cursor-pointer select-none";
+    const host = document.getElementById('tbgroups');
+    groups.forEach((g, gi) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'flex flex-wrap items-center gap-0.5';
+      g.forEach(([label, run, name, attrs]) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.textContent = label; b.className = btnClass;
+        b.setAttribute('x-bind:class', `isActive('${name}'${attrs ? ', '+JSON.stringify(attrs) : ''}) ? 'bg-primary text-primary-content' : ''`);
+        b.setAttribute('x-on:click', `cmd(${run.toString()})`);
+        wrap.appendChild(b);
+      });
+      host.appendChild(wrap);
+      if (gi < groups.length - 1) {
+        const d = document.createElement('span');
+        d.className = 'self-stretch w-px bg-base-content/10 mx-1'; d.setAttribute('aria-hidden','true');
+        host.appendChild(d);
+      }
+    });
+
+    Alpine.data('pinionEditor', pinionEditor);
+    window.Alpine = Alpine;
+    Alpine.start();
+  </script>
+</body>
+</html>

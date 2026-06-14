@@ -15,6 +15,7 @@ class UiInstall extends Command
         {--skip-css : Skip CSS file modifications}
         {--skip-alpine : Skip Alpine.js setup in app.js}
         {--skip-layout : Skip patching the consumer layout <html> data-theme}
+        {--editor : Wire the opt-in <x-editor> JS module (Tiptap deps + app.js registration)}
         {--tune-only= : Only include specific tune presets (comma-separated)}';
 
     protected $description = 'Install pinion-ui v2 components with required dependencies';
@@ -51,6 +52,13 @@ class UiInstall extends Command
         // missing the patch only loses discoverability, not functionality.
         if (!$this->option('skip-layout')) {
             $this->setupLayout();
+        }
+
+        // OPT-IN editor module. <x-editor> is pinion-ui's only JS-behavior
+        // component (Tiptap). Its npm deps + app.js registration are wired ONLY
+        // when --editor is passed, so non-editor apps pay zero JS bundle cost.
+        if ($this->option('editor')) {
+            $this->setupEditor();
         }
 
         // Add AI-agent reference to CLAUDE.md
@@ -271,6 +279,119 @@ JS;
         $content = $alpineSetup . $content;
         File::put($appJsPath, $content);
         $this->info('  ✓ Added Alpine.js + plugins to resources/js/app.js');
+    }
+
+    /**
+     * Wire the opt-in <x-editor> JS-behavior module (Tiptap).
+     *
+     * Two steps, mirroring setupAlpineJs():
+     *   1. Add the Tiptap npm deps to package.json (task-list/task-item/link are
+     *      NOT in StarterKit, hence listed explicitly).
+     *   2. Import the pinionEditor factory from the vendored module and register
+     *      it via Alpine.data('pinionEditor', …), inserted right before
+     *      Alpine.start() so it's available when components mount.
+     *
+     * Opt-in (only on `ui:install --editor`) so non-editor apps never pull the
+     * Tiptap bundle. Idempotent.
+     */
+    protected function setupEditor(): void
+    {
+        $this->newLine();
+        $this->info('  Editor (<x-editor>) — opt-in JS module');
+
+        // ── 1. npm deps ───────────────────────────────────────────────────
+        $packageJsonPath = base_path('package.json');
+        if (!File::exists($packageJsonPath)) {
+            $this->warn('    package.json not found. Skipping editor npm deps.');
+        } else {
+            $packageJson = json_decode(File::get($packageJsonPath), true);
+            $modified = false;
+
+            // task-list / task-item are NOT bundled in StarterKit. StarterKit v3
+            // bundles its own Link, but editor.js disables it (link: false) and
+            // adds the standalone Link with custom config — so it's a real dep.
+            $editorDeps = [
+                '@tiptap/core'                  => '^3.0.0',
+                '@tiptap/starter-kit'           => '^3.0.0',
+                '@tiptap/extension-placeholder' => '^3.0.0',
+                '@tiptap/extension-task-list'   => '^3.0.0',
+                '@tiptap/extension-task-item'   => '^3.0.0',
+                '@tiptap/extension-link'        => '^3.0.0',
+            ];
+
+            foreach ($editorDeps as $package => $version) {
+                if (!isset($packageJson['dependencies'][$package])) {
+                    $packageJson['dependencies'][$package] = $version;
+                    $modified = true;
+                    $this->line("    + Added {$package}@{$version}");
+                } else {
+                    $this->line("    - {$package} already present");
+                }
+            }
+
+            if ($modified) {
+                ksort($packageJson['dependencies']);
+                File::put($packageJsonPath, json_encode($packageJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
+                $this->info('    ✓ Updated package.json with Tiptap deps');
+            }
+        }
+
+        // ── 2. app.js registration ────────────────────────────────────────
+        $appJsPath = resource_path('js/app.js');
+        if (!File::exists($appJsPath)) {
+            $this->warn('    resources/js/app.js not found. Skipping editor registration.');
+            return;
+        }
+
+        $content = File::get($appJsPath);
+
+        if (str_contains($content, "Alpine.data('pinionEditor'") || str_contains($content, 'Alpine.data("pinionEditor"')) {
+            $this->line('    - pinionEditor already registered in resources/js/app.js');
+            return;
+        }
+
+        if (!str_contains($content, 'alpinejs') && !str_contains($content, 'Alpine')) {
+            $this->warn('    Alpine.js not set up in app.js — run without --skip-alpine first.');
+            return;
+        }
+
+        $importLine = "import { pinionEditor } from '../../vendor/sparrowhawk-labs/pinion-ui/src/resources/js/editor.js';";
+        $registerLine = "Alpine.data('pinionEditor', pinionEditor);";
+
+        // Insert the import after the Alpine import, and the registration right
+        // before Alpine.start() (so the component is defined before any mount).
+        $content = preg_replace(
+            '/(import Alpine from \'alpinejs\';)/',
+            "$1\n{$importLine}",
+            $content,
+            1
+        );
+
+        if (str_contains($content, 'Alpine.start();')) {
+            $content = preg_replace(
+                '/(Alpine\.start\(\);)/',
+                "{$registerLine}\n$1",
+                $content,
+                1
+            );
+        } else {
+            // No explicit start() (e.g. Livewire boots Alpine): register after
+            // the window.Alpine assignment, else just append.
+            if (str_contains($content, 'window.Alpine = Alpine;')) {
+                $content = preg_replace(
+                    '/(window\.Alpine = Alpine;)/',
+                    "$1\n{$registerLine}",
+                    $content,
+                    1
+                );
+            } else {
+                $content .= "\n{$registerLine}\n";
+            }
+        }
+
+        File::put($appJsPath, $content);
+        $this->info('    ✓ Registered pinionEditor in resources/js/app.js');
+        $this->line('      Run `npm install && npm run build`, then use <x-editor wire:model="body" />');
     }
 
     protected function setupLayout(): void
