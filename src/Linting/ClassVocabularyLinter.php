@@ -136,7 +136,11 @@ final class ClassVocabularyLinter
      */
     private function lintRootAttributes(string $source): array
     {
-        if (! preg_match('/<html\b[^>]*>/i', $source, $m, PREG_OFFSET_CAPTURE)) {
+        // Match the whole <html …> opening tag. NOT `[^>]*` — a Blade expression in
+        // an attribute commonly contains `>` (e.g. lang="{{ … app()->getLocale() }}"),
+        // which would truncate the tag and hide the real data-theme/data-tune. So skip
+        // over {{ … }} Blade blocks and quoted strings when scanning to the closing `>`.
+        if (! preg_match('/<html\b(?:\{\{.*?\}\}|"[^"]*"|\'[^\']*\'|[^>\'"])*>/is', $source, $m, PREG_OFFSET_CAPTURE)) {
             return [];
         }
 
