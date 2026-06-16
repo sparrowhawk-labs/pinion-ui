@@ -68,6 +68,20 @@ Because the layers are orthogonal, every class string you author — a composer,
 
 **Never daisyUI _component_ classes** (`.btn` `.card` `.badge` `.input` `.menu` …): excluded from the build (see gotchas) — they produce no styling. Compose the look from the three vocabularies above, or use the `<x-…>` component. The rule in one line: **plain Tailwind, except daisyUI color classes (color) and pinion-ui tune classes/tokens (shape · space · size).**
 
+### Enforcing the rule — `ui:lint` (universal) + automation adapters
+
+The rule is machine-checkable. **`php artisan ui:lint [paths…] [--json]`** is the **universal interface** — pure PHP (no Laravel needed at the core), exits non-zero on violations. It flags excluded daisyUI component classes, fixed/hex colors (ignore `data-theme`), and a root `<html>` missing **`data-theme` / `data-tune`** (the theme × tune cascade root). **Any** CLI agent (Claude Code, Cursor, aider, …), CI, or human runs the same command — so there is **no per-agent adapter to maintain**; agents that want feedback simply call `ui:lint --json` and read the result.
+
+Three ways to automate it (pick any; all call the one command):
+
+| Automation | Scope | Install |
+|---|---|---|
+| **CI / manual** | any | `php artisan ui:lint` (non-zero exit fails the job) |
+| **git pre-commit** | **agent-agnostic** — human, CI, any agent | `php artisan ui:install --git-hook` (blocks a commit whose staged Blade violates; never clobbers an existing hook) |
+| **Claude Code PostToolUse** | Claude Code (smooth in-edit feedback) | `ui:install` installs it by default (`--skip-hooks` to opt out) — runs `ui:lint` on each edited Blade and feeds violations back into the model's context |
+
+Suppress an intentional exception with a `pinion-lint-ignore` comment on the line (or the line above).
+
 ## daisyUI v5 gotchas (verified — do not "fix")
 
 - **daisyUI component classes don't exist in your build.** The pinion-ui preset loads daisyUI with an exclude list: you get the full color/theme layer (`bg-primary`, `text-base-content`, `data-theme`, all 35 themes) but `.btn`, `.card`, `.alert`, `.input`, `.menu`, `.modal`, etc. produce **no styling**. Never write daisyUI component markup (`<button class="btn btn-primary">`) — use the pinion-ui component (`<x-button color="primary">`). Do not "fix" this by adding `@plugin "daisyui"` to app.css; that re-enables everything and breaks the design boundary.

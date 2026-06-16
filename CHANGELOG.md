@@ -29,6 +29,11 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   0 and prints JSON — a non-zero exit would be dropped from the model's context). Pure PHP
   (no `jq`), shell-guarded so it's a no-op where the script is absent (shared symlinked
   `settings.json`), idempotent, and skippable with `--skip-hooks`.
+- **`ui:install --git-hook`** — installs a **general, agent-agnostic** git pre-commit hook
+  that runs `ui:lint` on staged Blade files and blocks the commit on violations. Works for
+  any workflow (human / CI / any CLI agent), complementing the Claude-Code-specific
+  PostToolUse hook. Never clobbers an existing `.git/hooks/pre-commit`. `ui:lint --json` is
+  documented in AGENTS.md as the single universal interface (no per-agent adapters).
 - **`reactive` theme** — GitHub-Light-adjacent light palette (pure-white canvas, cool
   gray surfaces, blue/green/purple semantic set), ported from the `/visualize` report
   tooling so HTML reports and pinion-ui apps share one color system. Opt-in via

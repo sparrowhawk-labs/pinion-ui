@@ -17,6 +17,7 @@ class UiInstall extends Command
         {--skip-layout : Skip patching the consumer layout <html> data-theme}
         {--editor : Wire the opt-in <x-editor> JS module (Tiptap deps + app.js registration)}
         {--skip-hooks : Skip installing the lint-after-edit Claude Code hook}
+        {--git-hook : Install a general (agent-agnostic) git pre-commit ui:lint hook}
         {--tune-only= : Only include specific tune presets (comma-separated)}';
 
     protected $description = 'Install pinion-ui v2 components with required dependencies';
@@ -81,6 +82,11 @@ class UiInstall extends Command
             if ($installHook) {
                 $this->installLintHook();
             }
+        }
+
+        // General, agent-agnostic automation: a git pre-commit hook (opt-in).
+        if ($this->option('git-hook')) {
+            $this->installGitHook();
         }
 
         $this->newLine();
@@ -535,6 +541,46 @@ JS;
         }
 
         $this->info('  ✓ Added pinion-ui reference to CLAUDE.md');
+    }
+
+    /**
+     * Install a general (agent-agnostic) git pre-commit hook that runs `ui:lint`
+     * on staged Blade files and blocks the commit on violations. Unlike the
+     * Claude Code PostToolUse hook, this is git-level — it works for any workflow
+     * (human, CI, or any CLI agent). The universal interface is `ui:lint`; this
+     * just wires it to commit. Never clobbers an existing pre-commit hook.
+     */
+    protected function installGitHook(): void
+    {
+        $stub = dirname(__DIR__, 2) . '/stubs/hooks/pre-commit-lint';
+        $gitDir = base_path('.git');
+        if (! is_dir($gitDir)) {
+            $this->warn('  No .git directory — skipping git pre-commit hook.');
+            return;
+        }
+        if (! File::exists($stub)) {
+            $this->warn('  pre-commit hook stub not found in package; skipping.');
+            return;
+        }
+
+        $hookPath = $gitDir . '/hooks/pre-commit';
+        $marker = 'pinion-ui pre-commit lint';
+
+        if (File::exists($hookPath)) {
+            if (str_contains(File::get($hookPath), $marker)) {
+                $this->line('    - git pre-commit ui:lint hook already installed');
+                return;
+            }
+            // Don't clobber a hook the user/another tool owns — show the one-liner.
+            $this->warn('  A .git/hooks/pre-commit already exists — add this line manually:');
+            $this->line('      php artisan ui:lint $(git diff --cached --name-only --diff-filter=ACM -- "*.blade.php")');
+            return;
+        }
+
+        File::ensureDirectoryExists($gitDir . '/hooks');
+        File::copy($stub, $hookPath);
+        @chmod($hookPath, 0o755);
+        $this->info('  ✓ Installed git pre-commit ui:lint hook (.git/hooks/pre-commit)');
     }
 
     /**

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# pinion-ui pre-commit lint — block a commit when staged Blade files violate the
+# class-vocabulary rule (excluded daisyUI component classes, fixed/hex colors, or
+# a root <html> missing data-theme / data-tune).
+#
+# General & agent-agnostic: this is git-level, so it works for any workflow —
+# a human committing, CI, or ANY CLI agent (Claude Code, Cursor, aider, …). The
+# universal interface is `php artisan ui:lint`; this hook just wires it to commit.
+# Installed by `php artisan ui:install --git-hook`.
+#
+set -euo pipefail
+
+# Staged (Added/Copied/Modified) Blade files only.
+files=$(git diff --cached --name-only --diff-filter=ACM -- '*.blade.php' || true)
+[ -z "$files" ] && exit 0
+
+# ui:lint exits non-zero on violations → blocks the commit and prints them.
+exec php artisan ui:lint $files
