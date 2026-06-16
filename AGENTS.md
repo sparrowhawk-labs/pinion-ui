@@ -56,6 +56,18 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 
 Themes and Tunes mix freely. Both are activated by `<x-tune-styles />` injecting the `data-tune="*"` CSS once into the layout `<head>`.
 
+### Class vocabulary — what you actually write
+
+Because the layers are orthogonal, every class string you author — a composer, a Blade, raw app markup, or a non-Blade adapter — is **plain Tailwind v4 by default, with exactly two exceptions**:
+
+| Concern | Use | Not |
+|---|---|---|
+| **Color** | daisyUI semantic color classes — `bg-primary` `text-primary-content` `bg-base-200` `text-base-content` `border-base-300` `text-error` `bg-success/10` (these track `data-theme`) | a fixed palette/hex (`bg-blue-500`, `#1d4ed8`) — ignores the theme |
+| **Shape · border · component size** (must follow the tune) | pinion-ui tune classes & tune tokens — `tune-border`; `tune-btn-{xs,sm,md,lg}` / `tune-input-*` / `tune-textarea-*` / `tune-card-pad`; raw tokens `rounded-[var(--radius-box)]` `[var(--space-*)]` `[var(--h-field-md)]` (these track `data-tune`) | a fixed Tailwind value (`rounded-lg`, `h-10`, `border`) where it should follow `data-tune` |
+| **Everything else** | plain Tailwind v4 — layout (`flex grid items-center gap-2`), generic spacing (`px-3 py-1.5`), typography (`text-sm font-semibold`), state (`hover:… disabled:…`) | — |
+
+**Never daisyUI _component_ classes** (`.btn` `.card` `.badge` `.input` `.menu` …): excluded from the build (see gotchas) — they produce no styling. Compose the look from the three vocabularies above, or use the `<x-…>` component. The rule in one line: **plain Tailwind, except daisyUI color classes (color) and pinion-ui tune classes/tokens (shape · space · size).**
+
 ## daisyUI v5 gotchas (verified — do not "fix")
 
 - **daisyUI component classes don't exist in your build.** The pinion-ui preset loads daisyUI with an exclude list: you get the full color/theme layer (`bg-primary`, `text-base-content`, `data-theme`, all 35 themes) but `.btn`, `.card`, `.alert`, `.input`, `.menu`, `.modal`, etc. produce **no styling**. Never write daisyUI component markup (`<button class="btn btn-primary">`) — use the pinion-ui component (`<x-button color="primary">`). Do not "fix" this by adding `@plugin "daisyui"` to app.css; that re-enables everything and breaks the design boundary.

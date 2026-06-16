@@ -31,7 +31,11 @@
         "sparrowhawk-labs/pinion-icons": "^1.0"
     },
     "scripts": {
-        "test": "@php tests/Compose/run.php"
+        "test": [
+            "@php tests/Compose/run.php",
+            "@php tests/Lint/run.php"
+        ],
+        "lint": "@php tests/Lint/run.php"
     },
     "extra": {
         "laravel": {

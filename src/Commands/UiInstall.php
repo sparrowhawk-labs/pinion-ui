@@ -15,6 +15,7 @@ class UiInstall extends Command
         {--skip-css : Skip CSS file modifications}
         {--skip-alpine : Skip Alpine.js setup in app.js}
         {--skip-layout : Skip patching the consumer layout <html> data-theme}
+        {--skip-hooks : Skip installing the lint-after-edit Claude Code hook}
         {--tune-only= : Only include specific tune presets (comma-separated)}';
 
     protected $description = 'Install pinion-ui v2 components with required dependencies';
@@ -60,6 +61,18 @@ class UiInstall extends Command
         }
         if ($addToClaude) {
             $this->addToClaudeMd();
+        }
+
+        // Install the lint-after-edit hook so agents get violations injected back
+        // into their context (not just shown to the human). See installLintHook().
+        if (!$this->option('skip-hooks')) {
+            $installHook = $this->option('ai') || $this->option('claude');
+            if (!$installHook) {
+                $installHook = $this->confirm('Install the lint-after-edit Claude Code hook? (runs ui:lint on edited Blade and feeds violations back to the agent)', true);
+            }
+            if ($installHook) {
+                $this->installLintHook();
+            }
         }
 
         $this->newLine();
@@ -401,6 +414,80 @@ JS;
         }
 
         $this->info('  ✓ Added pinion-ui reference to CLAUDE.md');
+    }
+
+    /**
+     * Install the PostToolUse "lint-after-edit" hook: copy the hook script into
+     * .claude/hooks/ and register it in .claude/settings.json (idempotent).
+     *
+     * The hook runs `ui:lint` on each edited Blade file and, on violations, feeds
+     * them back into the agent's context via `additionalContext` (the hook exits 0
+     * and prints JSON — a non-zero exit would be dropped from the model's context).
+     */
+    protected function installLintHook(): void
+    {
+        $stub = dirname(__DIR__, 2) . '/stubs/hooks/lint-blade.php';
+        if (!File::exists($stub)) {
+            $this->warn('  lint hook stub not found in package; skipping hook install.');
+            return;
+        }
+
+        // 1. (Re)copy the hook script — keeps it current with the installed package.
+        //    But if .claude/hooks (or the script itself) is a symlink, a scaffold owns
+        //    it (e.g. blueprint-flow symlinks .claude/hooks to a shared stack dir).
+        //    Writing through the symlink would clobber that shared, multi-app file —
+        //    so leave it as-is; the scaffold already provides the script.
+        $hookDir = base_path('.claude/hooks');
+        $hookFile = $hookDir . '/lint-blade.php';
+        if (is_link($hookDir) || is_link($hookFile)) {
+            $this->line('    - .claude/hooks is scaffold-managed (symlink); leaving hook script as-is');
+        } else {
+            File::ensureDirectoryExists($hookDir);
+            File::copy($stub, $hookFile);
+        }
+
+        // 2. Register the PostToolUse hook in .claude/settings.json (idempotent).
+        $settingsPath = base_path('.claude/settings.json');
+        $settings = [];
+        if (File::exists($settingsPath)) {
+            $settings = json_decode(File::get($settingsPath), true) ?: [];
+        }
+
+        // Shell-guarded so a missing script is a silent no-op. This matters when
+        // .claude/settings.json is a symlink to a shared scaffold (e.g. blueprint-flow):
+        // the registration is shared across apps, but each app's hook script is copied
+        // per-install — apps without the script must not error on every edit.
+        $command = 'test -f "$CLAUDE_PROJECT_DIR/.claude/hooks/lint-blade.php" '
+            . '&& php "$CLAUDE_PROJECT_DIR/.claude/hooks/lint-blade.php" || true';
+
+        $already = false;
+        foreach ($settings['hooks']['PostToolUse'] ?? [] as $entry) {
+            foreach ($entry['hooks'] ?? [] as $h) {
+                if (str_contains($h['command'] ?? '', 'lint-blade.php')) {
+                    $already = true;
+                }
+            }
+        }
+
+        if ($already) {
+            $this->line('    - lint-after-edit hook already registered (script refreshed)');
+            return;
+        }
+
+        $settings['hooks']['PostToolUse'][] = [
+            'matcher' => 'Edit|Write',
+            'hooks' => [[
+                'type' => 'command',
+                'command' => $command,
+            ]],
+        ];
+
+        File::put(
+            $settingsPath,
+            json_encode($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "\n"
+        );
+
+        $this->info('  ✓ Installed lint-after-edit hook (.claude/hooks/lint-blade.php + settings.json)');
     }
 
     protected function checkComponentConflicts(): bool

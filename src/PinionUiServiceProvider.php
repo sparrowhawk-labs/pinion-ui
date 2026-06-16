@@ -5,6 +5,7 @@ namespace SparrowhawkLabs\PinionUi;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use SparrowhawkLabs\PinionUi\Commands\UiInstall;
+use SparrowhawkLabs\PinionUi\Commands\UiLint;
 
 class PinionUiServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,7 @@ class PinionUiServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 UiInstall::class,
+                UiLint::class,
             ]);
 
             $this->publishes([

@@ -28,6 +28,8 @@ php artisan ui:install --ai
 
 `ui:install` adds the required npm dependencies (`daisyui ^5`, `alpinejs ^3`, `@alpinejs/focus ^3` — needed by `<x-sidebar>` and any focus-trap UI), wires up `resources/css/app.css` (single `@import` of the pinion-ui preset) and `resources/js/app.js` (Alpine + focus plugin), and with `--ai` appends a `## pinion-ui (AI agents)` block to your project's `CLAUDE.md` pointing at `vendor/sparrowhawk-labs/pinion-ui/AGENTS.md`. Drop `--ai` to skip the AI snippet — you can re-run later, or copy the contents of `vendor/sparrowhawk-labs/pinion-ui/CLAUDE_SNIPPET.md` into your own `AGENTS.md` if you prefer that convention.
 
+It also installs a **lint-after-edit Claude Code hook**: `.claude/hooks/lint-blade.php` plus a `PostToolUse` entry in `.claude/settings.json`. After an agent edits a Blade file, the hook runs `ui:lint` on it and, on violations, injects them back into the agent's context (via `additionalContext`) so it fixes them in the same turn — not merely shown to you. Idempotent and self-guarding (a no-op where the script is absent, e.g. a shared symlinked `settings.json`). Skip with `--skip-hooks`.
+
 Then build:
 
 ```bash
@@ -53,6 +55,18 @@ npm install && npm run build
 
 > **Why a preset?**
 > Pinion UI's Compose layer keeps class strings inside PHP (e.g. `bg-primary text-primary-content peer-checked:border-primary/70`). Tailwind v4's default scan only sees `*.blade.php` / `*.js`, so without the preset's `@source` rules those classes are silently dropped from the build. The preset's `@source` paths resolve from the preset file's own location — add a new component in the package and consumer apps keep working, no `app.css` re-edit needed.
+
+### Linting the class vocabulary
+
+Because excluded daisyUI component classes (`.btn`, `.card`, …) compile to nothing — a *silent* no-op — and fixed/hex colors quietly ignore `data-theme`, the package ships a linter that catches both in your Blade:
+
+```bash
+php artisan ui:lint                 # scans resources/views, exits non-zero on violations
+php artisan ui:lint resources/views/livewire app/View
+php artisan ui:lint --json          # machine-readable (for hooks / CI)
+```
+
+It flags excluded daisyUI **component** classes and **fixed/hex** colors, while leaving plain Tailwind, daisyUI *semantic* colors, tune classes/tokens, and the daisyUI parts pinion-ui keeps (`progress`, `timeline`, `range`, …) untouched. Suppress a deliberate exception with a `pinion-lint-ignore` comment on the line (or the line above). `ui:install` already wires it into a Claude Code PostToolUse hook (above); add it to CI or a pre-commit hook too so the design boundary is *enforced*, not just documented.
 
 ### Layout
 
