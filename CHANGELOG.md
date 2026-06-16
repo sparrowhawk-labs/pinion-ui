@@ -10,6 +10,25 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 ## [Unreleased]
 
 ### Added
+- **`php artisan ui:lint`** — lints Blade markup against the class-vocabulary rule
+  (AGENTS.md → "Class vocabulary"): flags excluded daisyUI **component** classes
+  (`.btn`, `.card`, … — silent no-ops in the build) and **fixed/hex** colors
+  (`bg-blue-500`, `text-[#1d4ed8]` — ignore `data-theme`), while leaving plain
+  Tailwind, daisyUI *semantic* colors, tune classes/tokens, and the kept daisyUI
+  parts (`progress`, `timeline`, `range`, …) untouched. Also flags a root `<html>`
+  missing **`data-theme`** / **`data-tune`** — the theme × tune cascade root; without
+  them colors stop tracking the theme and tune tokens don't apply (a silent break).
+  Handles static `class="…"`, dynamic `:class` / `@class([…])`, and variant prefixes;
+  a `pinion-lint-ignore` comment suppresses a line. Exits non-zero, so it gates CI /
+  pre-commit / a Claude Code PostToolUse hook. Pure `ClassVocabularyLinter` core
+  (no Laravel) with 44 unit tests (`composer lint`).
+- **`ui:install` installs a lint-after-edit hook** — copies `.claude/hooks/lint-blade.php`
+  and registers a `PostToolUse` (`Edit|Write`) entry in `.claude/settings.json`. After an
+  agent edits a Blade file, the hook runs `ui:lint` on it and, on violations, feeds them
+  back into the agent's context via `hookSpecificOutput.additionalContext` (the hook exits
+  0 and prints JSON — a non-zero exit would be dropped from the model's context). Pure PHP
+  (no `jq`), shell-guarded so it's a no-op where the script is absent (shared symlinked
+  `settings.json`), idempotent, and skippable with `--skip-hooks`.
 - **`reactive` theme** — GitHub-Light-adjacent light palette (pure-white canvas, cool
   gray surfaces, blue/green/purple semantic set), ported from the `/visualize` report
   tooling so HTML reports and pinion-ui apps share one color system. Opt-in via
