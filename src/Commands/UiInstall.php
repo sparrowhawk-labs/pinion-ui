@@ -16,6 +16,7 @@ class UiInstall extends Command
         {--skip-alpine : Skip Alpine.js setup in app.js}
         {--skip-layout : Skip patching the consumer layout <html> data-theme}
         {--editor : Wire the opt-in <x-editor> JS module (Tiptap deps + app.js registration)}
+        {--data-grid : Wire the opt-in <x-data-grid> JS module (Tabulator dep + base CSS + app.js registration)}
         {--skip-hooks : Skip installing the lint-after-edit Claude Code hook}
         {--git-hook : Install a general (agent-agnostic) git pre-commit ui:lint hook}
         {--tune-only= : Only include specific tune presets (comma-separated)}';
@@ -61,6 +62,13 @@ class UiInstall extends Command
         // when --editor is passed, so non-editor apps pay zero JS bundle cost.
         if ($this->option('editor')) {
             $this->setupEditor();
+        }
+
+        // OPT-IN data-grid module. <x-data-grid> wraps Tabulator (spreadsheet
+        // grid). Its npm dep + base CSS + app.js registration are wired ONLY when
+        // --data-grid is passed, so non-grid apps pay zero JS/CSS engine cost.
+        if ($this->option('data-grid')) {
+            $this->setupDataGrid();
         }
 
         // Add AI-agent reference to CLAUDE.md
@@ -369,7 +377,8 @@ JS;
             return;
         }
 
-        if (!str_contains($content, 'alpinejs') && !str_contains($content, 'Alpine')) {
+        // Require a REAL Alpine reference (not a bare-substring 'Alpine' in a comment).
+        if (!preg_match('/(from\s+[\'"]alpinejs[\'"]|from\s+[\'"][^\'"]*livewire\.esm[\'"]|\bAlpine\.(data|plugin|start)\b)/', $content)) {
             $this->warn('    Alpine.js not set up in app.js — run without --skip-alpine first.');
             return;
         }
@@ -377,40 +386,123 @@ JS;
         $importLine = "import { pinionEditor } from '../../vendor/sparrowhawk-labs/pinion-ui/src/resources/js/editor.js';";
         $registerLine = "Alpine.data('pinionEditor', pinionEditor);";
 
-        // Insert the import after the Alpine import, and the registration right
-        // before Alpine.start() (so the component is defined before any mount).
-        $content = preg_replace(
-            '/(import Alpine from \'alpinejs\';)/',
-            "$1\n{$importLine}",
-            $content,
-            1
-        );
-
-        if (str_contains($content, 'Alpine.start();')) {
-            $content = preg_replace(
-                '/(Alpine\.start\(\);)/',
-                "{$registerLine}\n$1",
-                $content,
-                1
-            );
+        // Insert the import after whichever line imports Alpine (vanilla
+        // `import Alpine from 'alpinejs'` OR `import { …, Alpine } from '…livewire.esm'`).
+        if (preg_match('/^import .*Alpine.* from .*;$/m', $content)) {
+            $content = preg_replace('/^(import .*Alpine.* from .*;)$/m', "$1\n{$importLine}", $content, 1);
         } else {
-            // No explicit start() (e.g. Livewire boots Alpine): register after
-            // the window.Alpine assignment, else just append.
-            if (str_contains($content, 'window.Alpine = Alpine;')) {
-                $content = preg_replace(
-                    '/(window\.Alpine = Alpine;)/',
-                    "$1\n{$registerLine}",
-                    $content,
-                    1
-                );
-            } else {
-                $content .= "\n{$registerLine}\n";
-            }
+            $content = $importLine . "\n" . $content;
+        }
+
+        // Register BEFORE the boot call (Livewire-ESM → Livewire.start(); vanilla →
+        // Alpine.start()), matching the call with an OPTIONAL semicolon so apps
+        // formatted with semi:false don't fall through and register after boot.
+        if (preg_match('/^[ \t]*Livewire\.start\(\)\s*;?/m', $content)) {
+            $content = preg_replace('/(^[ \t]*Livewire\.start\(\)\s*;?)/m', "{$registerLine}\n$1", $content, 1);
+        } elseif (preg_match('/^[ \t]*Alpine\.start\(\)\s*;?/m', $content)) {
+            $content = preg_replace('/(^[ \t]*Alpine\.start\(\)\s*;?)/m', "{$registerLine}\n$1", $content, 1);
+        } elseif (preg_match('/window\.Alpine\s*=\s*Alpine\s*;?/', $content)) {
+            $content = preg_replace('/(window\.Alpine\s*=\s*Alpine\s*;?)/', "$1\n{$registerLine}", $content, 1);
+        } else {
+            $content .= "\n{$registerLine}\n";
         }
 
         File::put($appJsPath, $content);
         $this->info('    ✓ Registered pinionEditor in resources/js/app.js');
         $this->line('      Run `npm install && npm run build`, then use <x-editor wire:model="body" />');
+    }
+
+    /**
+     * Wire the opt-in <x-data-grid> JS-behavior module (Tabulator).
+     *
+     * Mirrors setupEditor(), with two differences:
+     *   1. One npm dep (tabulator-tables) instead of six.
+     *   2. The grid needs Tabulator's base structural CSS, so we inject a CSS
+     *      import alongside the JS import.
+     *
+     * Robust to both app.js shapes: a vanilla `import Alpine from 'alpinejs'` +
+     * `Alpine.start()`, AND the Livewire-ESM single-Alpine bundle
+     * (`import { Livewire, Alpine } from '…/livewire.esm'` + `Livewire.start()`),
+     * where the registration MUST precede Livewire.start(). Idempotent.
+     */
+    protected function setupDataGrid(): void
+    {
+        $this->newLine();
+        $this->info('  Data grid (<x-data-grid>) — opt-in JS module');
+
+        // ── 1. npm dep ────────────────────────────────────────────────────
+        $packageJsonPath = base_path('package.json');
+        if (!File::exists($packageJsonPath)) {
+            $this->warn('    package.json not found. Skipping data-grid npm dep.');
+        } else {
+            $packageJson = json_decode(File::get($packageJsonPath), true);
+            $package = 'tabulator-tables';
+            $version = '^6.3.0';
+
+            if (!isset($packageJson['dependencies'][$package])) {
+                $packageJson['dependencies'][$package] = $version;
+                ksort($packageJson['dependencies']);
+                File::put($packageJsonPath, json_encode($packageJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
+                $this->line("    + Added {$package}@{$version}");
+                $this->info('    ✓ Updated package.json with Tabulator dep');
+            } else {
+                $this->line("    - {$package} already present");
+            }
+        }
+
+        // ── 2. app.js registration (import CSS + factory, register on Alpine) ─
+        $appJsPath = resource_path('js/app.js');
+        if (!File::exists($appJsPath)) {
+            $this->warn('    resources/js/app.js not found. Skipping data-grid registration.');
+            return;
+        }
+
+        $content = File::get($appJsPath);
+
+        if (str_contains($content, "Alpine.data('pinionDataGrid'") || str_contains($content, 'Alpine.data("pinionDataGrid"')) {
+            $this->line('    - pinionDataGrid already registered in resources/js/app.js');
+            return;
+        }
+
+        // Require a REAL Alpine reference (import or Alpine.{data,plugin,start}) — a
+        // bare substring 'Alpine' also matches a comment, which would let us register
+        // onto an undefined Alpine.
+        if (!preg_match('/(from\s+[\'"]alpinejs[\'"]|from\s+[\'"][^\'"]*livewire\.esm[\'"]|\bAlpine\.(data|plugin|start)\b)/', $content)) {
+            $this->warn('    Alpine.js not set up in app.js — run without --skip-alpine first.');
+            return;
+        }
+
+        $cssImport = "import 'tabulator-tables/dist/css/tabulator.min.css';";
+        $jsImport = "import { pinionDataGrid } from '../../vendor/sparrowhawk-labs/pinion-ui/src/resources/js/data-grid.js';";
+        $registerLine = "Alpine.data('pinionDataGrid', pinionDataGrid);";
+        $imports = "{$cssImport}\n{$jsImport}";
+
+        // Insert the imports right after whichever line imports Alpine (vanilla
+        // `import Alpine from 'alpinejs'` OR `import { …, Alpine } from '…livewire.esm'`).
+        if (preg_match('/^import .*Alpine.* from .*;$/m', $content)) {
+            $content = preg_replace('/^(import .*Alpine.* from .*;)$/m', "$1\n{$imports}", $content, 1);
+        } else {
+            $content = $imports . "\n" . $content;
+        }
+
+        // Register BEFORE the boot call so the component is defined before mount.
+        // Livewire-ESM boots Alpine via Livewire.start(); vanilla via Alpine.start().
+        // Match the call with an OPTIONAL semicolon (apps formatted with semi:false
+        // write `Livewire.start()` / `Alpine.start()` — a `;`-anchored check there
+        // falls through and appends the registration AFTER boot = registered too late).
+        if (preg_match('/^[ \t]*Livewire\.start\(\)\s*;?/m', $content)) {
+            $content = preg_replace('/(^[ \t]*Livewire\.start\(\)\s*;?)/m', "{$registerLine}\n$1", $content, 1);
+        } elseif (preg_match('/^[ \t]*Alpine\.start\(\)\s*;?/m', $content)) {
+            $content = preg_replace('/(^[ \t]*Alpine\.start\(\)\s*;?)/m', "{$registerLine}\n$1", $content, 1);
+        } elseif (preg_match('/window\.Alpine\s*=\s*Alpine\s*;?/', $content)) {
+            $content = preg_replace('/(window\.Alpine\s*=\s*Alpine\s*;?)/', "$1\n{$registerLine}", $content, 1);
+        } else {
+            $content .= "\n{$registerLine}\n";
+        }
+
+        File::put($appJsPath, $content);
+        $this->info('    ✓ Registered pinionDataGrid in resources/js/app.js');
+        $this->line('      Run `npm install && npm run build`, then use <x-data-grid :columns="…" wire:model="rows" />');
     }
 
     protected function setupLayout(): void

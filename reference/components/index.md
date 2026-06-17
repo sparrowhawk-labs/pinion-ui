@@ -36,6 +36,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-divider>`](./divider.md) | Horizontal or vertical separator with optional label. (daisyUI `divider-horizontal` ↔ vertical naming inverted; this wrapper normalizes.) |
 | [`<x-kbd>`](./kbd.md) | Keyboard-key display (`<kbd>`) — sizes, color variants, often nested in buttons for shortcuts. |
 | [`<x-table-scroll>`](./table-scroll.md) | Overflow-x wrapper for tables that keeps the page from flexing on narrow viewports. |
+| [`<x-data-grid>`](./data-grid.md) | Spreadsheet-style editable grid (Tabulator): per-type inline editors, range selection + clipboard + fill, sortable/resizable/reorderable columns. Emits a JSON row-array for `wire:model`. **Opt-in JS** — run `ui:install --data-grid`. |
 | [`<x-timeline>`](./timeline.md) | Vertical timeline of events — per-item `state` (`done`/`current`/`upcoming`), `appearance="solid"` default (saturated done-chain), `'soft'` opt-in for muted connector colours. |
 | [`<x-stat>`](./stat.md) | Single statistic block — label / value / change indicator. Group via flex/grid. |
 | [`<x-indicator>`](./indicator.md) | Positions a badge/dot at a corner of arbitrary child content (notification counters, status dots). `appearance="solid"` default (full daisyUI badge fill — strongest "needs attention" cue) with `'soft'`/`'outline'`/`'ghost'`/`'dash'` opt-ins. |

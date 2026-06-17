@@ -106,6 +106,13 @@
    bundle cost. */
 @import "./editor.css";
 
+/* data-grid theme (.pn-data-grid) for <x-data-grid>. Overrides Tabulator's own
+   selectors (.tabulator-header/-row/-range/…) with daisyUI/tune tokens so the grid
+   tracks data-theme × data-tune (Tabulator v6 ships literal-hex CSS with no runtime
+   variables). A few hundred bytes for every consumer and inert for non-grid apps;
+   the Tabulator JS + base CSS stay opt-in (ui:install --data-grid). */
+@import "./data-grid.css";
+
 /* ==========================================
    pinion theme (v0.4.0) — light only
    ==========================================

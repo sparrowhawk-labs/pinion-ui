@@ -1,0 +1,244 @@
+/* ==========================================
+   pinion-ui — data-grid theme (.pn-data-grid)
+   ==========================================
+   Re-colours the <x-data-grid> grid (Tabulator) so it tracks data-theme × data-tune
+   like every other component. Tabulator v6 ships a COMPILED stylesheet
+   (dist/css/tabulator.min.css) whose colours are LITERAL hex — it exposes NO runtime
+   CSS custom properties and reads NO var() — so theming is done by overriding its
+   actual selectors with:
+     - daisyUI *color* tokens (var(--color-*) → tracks data-theme),
+     - pinion-ui tune tokens (var(--radius-box) → tracks data-tune),
+     - plain CSS.
+   No hard-coded colors. The Tabulator JS + its base dist CSS stay opt-in
+   (ui:install --data-grid) so non-grid apps pay zero JS/CSS for the engine; this
+   small override map is bundled by the preset (pinion-ui.css @import) and is inert
+   (no `.tabulator` elements) for apps that never use the grid.
+
+   TWO load-bearing gotchas (do NOT "simplify" these away):
+
+   1. `new Tabulator(el)` adds the `.tabulator` class to the HOST element itself — the
+      same element that carries `.pn-data-grid`. There is NO separate `.tabulator`
+      child. So the host is `.pn-data-grid.tabulator` (compound, no space) and inner
+      parts are `.pn-data-grid.tabulator .tabulator-header` (descendant). A selector
+      with `.tabulator` as a SEPARATE descendant (`.pn-data-grid .tabulator …`) matches
+      NOTHING.
+
+   2. Tabulator's dist CSS is imported via app.js and is therefore UNLAYERED. An
+      unlayered rule beats ANY @layer rule regardless of specificity, so these
+      overrides must NOT be wrapped in @layer (unlike editor.css's .pn-prose). And
+      because Tabulator prefixes every rule with `.tabulator ` (e.g.
+      `.tabulator .tabulator-header` = 0,2,0), each override uses the COMPOUND host
+      prefix `.pn-data-grid.tabulator ` to out-specify it by one class
+      (`.pn-data-grid.tabulator .tabulator-header` = 0,3,0 > 0,2,0). A few stubborn
+      rules (rows, the row-number gutter) use !important because Tabulator does. */
+
+/* Host (the .tabulator element). Strip Tabulator's #999 border/#888 bg and provide
+   our themed frame; inherit the host's tuned text size. */
+.pn-data-grid.tabulator {
+    background: transparent;
+    border: 1px solid var(--color-base-300);
+    color: var(--color-base-content);
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Header — uniform base-100 background (same as cells); a slightly thicker bottom
+   border separates the header band from the data rows. */
+.pn-data-grid.tabulator .tabulator-header {
+    background-color: var(--color-base-100);
+    border-bottom: 2px solid var(--color-base-300);
+    color: var(--color-base-content);
+    font-weight: 500;
+}
+.pn-data-grid.tabulator .tabulator-header .tabulator-col {
+    background-color: var(--color-base-100);
+    border-right: 1px solid var(--color-base-300);
+    padding: 0;   /* indentation comes from .tabulator-col-content, matching the cell */
+}
+/* Header stays base-100 when a cell in the column is merely selected (drop the grey
+   "range-highlight"); an EXPLICIT column select gets a subtle themed primary tint. */
+.pn-data-grid.tabulator .tabulator-col.tabulator-range-highlight {
+    background-color: var(--color-base-100) !important;
+}
+.pn-data-grid.tabulator .tabulator-col.tabulator-range-selected {
+    background-color: color-mix(in oklab, var(--color-primary) 14%, var(--color-base-100)) !important;
+    color: var(--color-base-content) !important;
+}
+.pn-data-grid.tabulator .tabulator-col.tabulator-sortable.tabulator-col-sorter-element:hover {
+    background-color: color-mix(in oklab, var(--color-base-content) 8%, var(--color-base-200));
+}
+/* Sort-arrow (the minimal sort button). It's a CSS-border triangle whose colour is
+   the border-color, NOT `color` — and Tabulator hard-codes #bbb/#666 at high
+   specificity (0,8,0), so we override the arrow's border-color with !important.
+   Muted when unsorted, primary (pointing up/down) when the column is the sort key. */
+.pn-data-grid.tabulator [aria-sort=none] .tabulator-arrow {
+    border-bottom-color: color-mix(in oklab, var(--color-base-content) 35%, transparent) !important;
+}
+.pn-data-grid.tabulator [aria-sort=ascending] .tabulator-arrow {
+    border-bottom-color: var(--color-primary) !important;
+}
+.pn-data-grid.tabulator [aria-sort=descending] .tabulator-arrow {
+    border-top-color: var(--color-primary) !important;
+}
+
+/* Rows — Tabulator marks these !important, so we must too. */
+.pn-data-grid.tabulator .tabulator-row {
+    background: var(--color-base-100) !important;
+    color: var(--color-base-content);
+}
+.pn-data-grid.tabulator .tabulator-row.tabulator-row-even {
+    background: var(--color-base-100) !important;   /* uniform base-100 (no zebra) */
+}
+.pn-data-grid.tabulator .tabulator-row:hover {
+    background: color-mix(in oklab, var(--color-base-content) 6%, var(--color-base-100)) !important;
+}
+.pn-data-grid.tabulator .tabulator-row.tabulator-selected {
+    background: color-mix(in oklab, var(--color-primary) 16%, var(--color-base-100)) !important;
+}
+
+/* Cell + frozen separators */
+.pn-data-grid.tabulator .tabulator-cell {
+    border-right: 1px solid var(--color-base-300);
+}
+.pn-data-grid.tabulator .tabulator-frozen.tabulator-frozen-left {
+    border-right: 2px solid var(--color-base-300);
+}
+
+/* Row-number gutter (range-row-header) + its selected state. !important because
+   Tabulator's gutter rules (.tabulator-row.tabulator-range-highlight .tabulator-cell…)
+   reach 0,4,0+ and would otherwise tie and win on source order. */
+.pn-data-grid.tabulator .tabulator-cell.tabulator-range-row-header {
+    background-color: var(--color-base-100) !important;
+    color: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+}
+.pn-data-grid.tabulator .tabulator-row.tabulator-range-selected .tabulator-cell.tabulator-range-row-header,
+.pn-data-grid.tabulator .tabulator-cell.tabulator-range-row-header.tabulator-range-selected {
+    background-color: var(--color-primary) !important;
+    color: var(--color-primary-content);
+}
+
+/* Spreadsheet range selection box + fill handle (v6 range module) */
+.pn-data-grid.tabulator .tabulator-range,
+.pn-data-grid.tabulator .tabulator-range-overlay .tabulator-range {
+    border-color: var(--color-primary);
+}
+.pn-data-grid.tabulator .tabulator-range.tabulator-range-active:after {
+    background-color: var(--color-primary);
+}
+/* selected range cells (not the row-number header) get a faint primary wash */
+.pn-data-grid.tabulator .tabulator-cell.tabulator-range-selected:not(.tabulator-range-row-header) {
+    background-color: color-mix(in oklab, var(--color-primary) 12%, transparent) !important;
+}
+
+/* pinion-styled checkbox cell (custom pnCheckFormatter in data-grid.js) — matches
+   <x-checkbox> / the editor's task-list box, instead of Tabulator's plain tick glyph. */
+.pn-data-grid.tabulator .pn-grid-check {
+    display: inline-grid;
+    place-content: center;
+    box-sizing: border-box;
+    vertical-align: middle;   /* pin to the line middle so toggling (::after appears) doesn't shift it */
+    width: 1.15em;
+    height: 1.15em;
+    border: 1.5px solid color-mix(in oklab, var(--color-base-content) 35%, transparent);
+    border-radius: calc(var(--radius-box) * 0.4);
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+.pn-data-grid.tabulator .tabulator-cell:hover .pn-grid-check {
+    border-color: var(--color-primary);
+}
+.pn-data-grid.tabulator .pn-grid-check.is-checked {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+.pn-data-grid.tabulator .pn-grid-check.is-checked::after {
+    content: "";
+    width: 0.32em;
+    height: 0.6em;
+    margin-top: -0.1em;
+    border: solid var(--color-primary-content);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* pinion number cell: value flanked by transparent minimal − / + steppers
+   (custom pnNumberFormatter). Buttons reveal on cell hover; primary on hover. */
+.pn-data-grid.tabulator .pn-grid-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.1rem;
+    width: 100%;
+}
+.pn-data-grid.tabulator .pn-grid-num-val {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.pn-data-grid.tabulator .pn-grid-num-btn {
+    appearance: none;
+    background: transparent;
+    border: none;
+    width: 1.3em;
+    height: 1.3em;
+    padding: 0;
+    line-height: 1;
+    font-size: 0.95em;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+    border-radius: calc(var(--radius-box) * 0.35);
+    opacity: 0;
+    transition: opacity 0.12s ease, color 0.12s ease, background-color 0.12s ease;
+}
+.pn-data-grid.tabulator .tabulator-cell:hover .pn-grid-num-btn {
+    opacity: 1;
+}
+.pn-data-grid.tabulator .pn-grid-num-btn:hover {
+    color: var(--color-primary);
+    background: color-mix(in oklab, var(--color-base-content) 8%, transparent);
+}
+
+/* Hide the native number-input spinners while editing — the steppers replace them. */
+.pn-data-grid.tabulator .tabulator-cell.tabulator-editing input[type="number"] {
+    -moz-appearance: textfield;
+}
+.pn-data-grid.tabulator .tabulator-cell.tabulator-editing input[type="number"]::-webkit-outer-spin-button,
+.pn-data-grid.tabulator .tabulator-cell.tabulator-editing input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Comfortable spreadsheet rhythm — a touch more breathing room than Tabulator's 4px.
+   Header content uses the SAME horizontal padding as cells so the title left edge
+   lines up with the cell value below it. */
+.pn-data-grid.tabulator .tabulator-cell {
+    padding: 0.45rem 0.6rem;
+}
+.pn-data-grid.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+    padding: 0.45rem 0.6rem;
+}
+
+/* Editor widgets (native input/select rendered while a cell is editing) pick up the
+   theme rather than the browser default white box. */
+.pn-data-grid.tabulator .tabulator-cell.tabulator-editing input,
+.pn-data-grid.tabulator .tabulator-cell.tabulator-editing select {
+    background: var(--color-base-100);
+    color: var(--color-base-content);
+    border-color: var(--color-primary);
+}
+
+/* List editor (select) popup tracks the theme. Unscoped because Tabulator appends the
+   popup outside .pn-data-grid; pinion grids are the only Tabulator consumer so this
+   does not leak. */
+.tabulator-edit-list {
+    background: var(--color-base-100);
+    color: var(--color-base-content);
+    border: 1px solid var(--color-base-300);
+}
+.tabulator-edit-list .tabulator-edit-list-item.active,
+.tabulator-edit-list .tabulator-edit-list-item:hover {
+    background: color-mix(in oklab, var(--color-primary) 16%, transparent);
+    color: var(--color-base-content);
+}

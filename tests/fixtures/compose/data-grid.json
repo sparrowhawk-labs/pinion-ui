@@ -1,0 +1,33 @@
+[
+    {
+        "name": "default — md size",
+        "props": {},
+        "expected": {
+            "shell": "flex flex-col gap-2",
+            "toolbar": "flex items-center gap-2 flex-wrap",
+            "toolbarBtn": "h-8 px-3 text-[length:var(--text-field-sm)] inline-flex items-center justify-center gap-1 shrink-0 rounded-[calc(var(--radius-box)*0.6)] bg-base-200 text-base-content/80 hover:text-base-content hover:bg-base-content/[0.1] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
+            "count": "text-[length:var(--text-field-xs)] text-base-content/50 tabular-nums",
+            "grid": "pn-data-grid w-full overflow-hidden rounded-[var(--radius-box)] tune-border border-base-300 text-[length:var(--text-field-md)] text-base-content"
+        }
+    },
+    {
+        "name": "size=sm",
+        "props": {
+            "size": "sm"
+        },
+        "expected": {
+            "toolbarBtn": "h-7 px-2 text-[length:var(--text-field-xs)] inline-flex items-center justify-center gap-1 shrink-0 rounded-[calc(var(--radius-box)*0.6)] bg-base-200 text-base-content/80 hover:text-base-content hover:bg-base-content/[0.1] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
+            "grid": "pn-data-grid w-full overflow-hidden rounded-[var(--radius-box)] tune-border border-base-300 text-[length:var(--text-field-sm)] text-base-content"
+        }
+    },
+    {
+        "name": "size=lg",
+        "props": {
+            "size": "lg"
+        },
+        "expected": {
+            "toolbarBtn": "h-9 px-3.5 text-[length:var(--text-field-md)] inline-flex items-center justify-center gap-1 shrink-0 rounded-[calc(var(--radius-box)*0.6)] bg-base-200 text-base-content/80 hover:text-base-content hover:bg-base-content/[0.1] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
+            "grid": "pn-data-grid w-full overflow-hidden rounded-[var(--radius-box)] tune-border border-base-300 text-[length:var(--text-field-lg)] text-base-content"
+        }
+    }
+]
