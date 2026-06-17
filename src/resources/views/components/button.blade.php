@@ -13,7 +13,7 @@
 @php
     $tag = $href ? 'a' : $as;
 
-    $base = 'inline-flex items-center justify-center font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)]';
+    $base = 'inline-flex items-center justify-center whitespace-nowrap font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)]';
 
     $sizeClasses = match($size) {
         'xs' => 'h-[var(--h-field-xs)] px-[var(--px-field-xs)] text-[length:var(--text-field-xs)] gap-1',
