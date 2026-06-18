@@ -116,6 +116,7 @@
         tabindex="0"
         role="grid"
         x-on:keydown="onKey($event)"
+        x-on:mouseup.window="endDrag()"
         @if($height) style="max-height: {{ $height }}" @endif
     >
         <table class="{{ $c['table'] }}">
@@ -125,7 +126,15 @@
                         <th class="{{ $c['gutterCorner'] }}"></th>
                     @endif
                     <template x-for="(col, c) in cols" x-bind:key="col.key">
-                        <th class="{{ $c['headerCell'] }}" role="columnheader" x-text="col.title ?? col.key"></th>
+                        {{-- Header click selects the whole column (S2). NOTE: sort is S3 — when it lands,
+                             header click reconciles to sort vs select per track-s-sheet.md "前方依存". --}}
+                        <th
+                            class="{{ $c['headerCell'] }} cursor-pointer"
+                            x-bind:style="headerSelStyle(c)"
+                            role="columnheader"
+                            x-on:click="selectCol(c, $event)"
+                            x-text="col.title ?? col.key"
+                        ></th>
                     </template>
                 </tr>
             </thead>
@@ -133,15 +142,24 @@
                 <template x-for="(row, r) in rows" x-bind:key="row.id ?? r">
                     <tr role="row">
                         @if($rowNumbers)
-                            <td class="{{ $c['rowNumGutter'] }}" x-text="r + 1"></td>
+                            {{-- Gutter click selects the whole row (S2); Shift extends the block. --}}
+                            <td
+                                class="{{ $c['rowNumGutter'] }} cursor-pointer"
+                                x-bind:style="gutterSelStyle(r)"
+                                x-on:click="selectRow(r, $event)"
+                                x-text="r + 1"
+                            ></td>
                         @endif
                         <template x-for="(col, c) in cols" x-bind:key="col.key">
                             <td
                                 x-bind:data-r="r"
                                 x-bind:data-c="c"
                                 class="{{ $c['cell'] }} group/cell"
-                                x-bind:class="{ '{{ $c['cellSelected'] }}': isSel(r, c) && !isEd(r, c), '{{ $c['cellEditing'] }}': isEd(r, c) }"
-                                x-on:click="selectCell(r, c)"
+                                x-bind:class="{ '{{ $c['cellEditing'] }}': isEd(r, c), '{{ $c['cellInRange'] }}': inRange(r, c) && hasRange() && !isEd(r, c) }"
+                                x-bind:style="isEd(r, c) ? '' : cellSelStyle(r, c)"
+                                x-on:mousedown="startSelect(r, c, $event)"
+                                x-on:mouseenter="extendDrag(r, c)"
+                                x-on:click="onCellClick(r, c, $event)"
                                 x-on:dblclick="beginEdit(r, c)"
                                 role="gridcell"
                             >
@@ -164,6 +182,7 @@
                                         x-on:keydown="editorKey($event)"
                                         x-on:blur="commitEdit()"
                                         x-on:click.stop
+                                        x-on:mousedown.stop
                                     >
                                 </template>
 
@@ -174,7 +193,7 @@
                                 <template x-if="isEd(r, c) && col.type === 'date'">
                                     {{-- `ready` gates click.outside until after first paint, so the dblclick /
                                          Enter that OPENED the editor can't immediately close it. --}}
-                                    <div x-data="{ ready: false }" x-init="$nextTick(() => ready = true)" x-on:calendar-select="editValue = $event.detail.value; commitEdit()" x-on:keydown.escape.window="cancelEdit()">
+                                    <div x-data="{ ready: false }" x-init="$nextTick(() => ready = true)" x-on:mousedown.stop x-on:calendar-select="editValue = $event.detail.value; commitEdit()" x-on:keydown.escape.window="cancelEdit()">
                                         <div
                                             class="fixed z-40"
                                             x-data="pinionCalendar({ value: editValue })"
@@ -210,7 +229,7 @@
                                      its options on Alpine re-render). click.stop keeps the open-click from the
                                      dropdown's click.outside. --}}
                                 <template x-if="col.type === 'select'">
-                                    <button type="button" class="w-full flex items-center justify-between gap-1 text-left" x-bind:class="editableCol(c) ? 'cursor-pointer' : 'cursor-default'" x-bind:disabled="!editableCol(c)" x-on:click.stop="toggleSelect(r, c)" x-on:dblclick.stop>
+                                    <button type="button" class="w-full flex items-center justify-between gap-1 text-left" x-bind:class="editableCol(c) ? 'cursor-pointer' : 'cursor-default'" x-bind:disabled="!editableCol(c)" x-on:mousedown.stop x-on:click.stop="$event.shiftKey ? extendTo(r, c) : toggleSelect(r, c)" x-on:dblclick.stop>
                                         <span class="truncate" x-bind:class="row[col.key] ? 'text-base-content' : 'text-base-content/40'" x-text="row[col.key] || '—'"></span>
                                         <svg class="{{ $sel['chevron'] }}" x-bind:class="isSelOpen(r, c) ? 'rotate-180' : ''" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>
                                     </button>

@@ -15,10 +15,28 @@ Same public API and the **same `wire:model` data contract** as `<x-data-grid>` (
 | **S0** | Composer (full slot set) + static themed render + theme/tune tracking | **✅ shipped** |
 | **S1** | `pinionSheet` Alpine factory: single-cell select, keyboard nav (arrows/Tab/Enter/typing), per-type inline editing, `wire:model` JSON-string round-trip, `wire:ignore` + `:key` morphdom strategy | **✅ shipped** |
 | **S1.1+** | number ±-steppers (hover, no-shift), select = always-open custom dropdown (pinion `<x-select>` look), **date editor = [`<x-calendar>`](./calendar.md)** popover, editor-overlay (no cell resize) | **✅ shipped** |
-| S2 | range select, matrix copy/paste, fill-down | planned |
-| S3 | sort, column resize, row/column reorder (out-of-band events) → host cutover | planned |
+| **S2** | single-range selection (drag-rect, Shift-extend, whole row/column), matrix TSV copy/paste, fill-down, Delete-clear, Cmd/Ctrl+A | **✅ shipped** |
+| S3 | sort, column resize, row/column reorder, fill-handle drag (out-of-band events) → host cutover | planned |
 
-The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). Range/clipboard/sort/reorder land in S2–S3.
+The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). Sort/resize/reorder/fill-handle land in S3.
+
+## Range selection & clipboard (S2)
+
+A **single** rectangular range (anchor + active corner; no disjoint multi-range). Interactions:
+
+| Action | Behavior |
+|---|---|
+| **Drag** a cell | paint a rectangle (mousedown → drag → mouseup) |
+| **Shift+click** / **Shift+arrows** | extend the range from the fixed anchor |
+| **Row-number click** | select the whole row (Shift = a block of rows) |
+| **Header click** | select the whole column (Shift = a block of columns) |
+| **Cmd/Ctrl+C** | copy the range to the clipboard as **TSV** (rows `\n`, cells `\t`) |
+| **Cmd/Ctrl+V** | paste TSV from the active top-left, **clipped to existing bounds** (a single value fills the whole range; row/column growth stays the host's job) |
+| **Cmd/Ctrl+D** | fill-down — copy the range's top row into the rows below |
+| **Delete / Backspace** | clear every cell in the range (`null`; checkbox → `false`) |
+| **Cmd/Ctrl+A** | select the whole grid |
+
+**Selection visual.** The range is drawn as **one continuous 2px primary border** around the whole block (an inset box-shadow on the perimeter cells; the just-outside gridline is set transparent so the stroke is never doubled — no layout shift). The interior gets a faint uniform `bg-primary/10` wash (multi-cell only); a single selected cell is border-only. There is **no per-cell "active cell" outline** — the selection reads as one block. The selected row-number(s) and column-header(s) get a **subtle connected indicator** (a faint primary wash + the label in primary), so the block visibly ties back to its row/column labels on every theme. Clipboard requires a secure context (localhost/https) and a user gesture; a denied read is a silent no-op.
 
 ## Install
 
