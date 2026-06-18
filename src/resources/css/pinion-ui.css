@@ -113,6 +113,15 @@
    the Tabulator JS + base CSS stay opt-in (ui:install --data-grid). */
 @import "./data-grid.css";
 
+/* sheet styles (.pn-sheet) for <x-sheet> — the Locality-of-Behavior spreadsheet that
+   COEXISTS with <x-data-grid>. Unlike data-grid.css (which fights Tabulator's unlayered
+   hex CSS), <x-sheet> owns its own <table> markup, so its descendant rules (grid lines,
+   sticky header, the composed checkbox glyph) live CLEANLY under @layer components — like
+   editor.css's .pn-prose. A few hundred bytes for every consumer; inert until <x-sheet>
+   is used. The behavior (Alpine `pinionSheet` factory) will be opt-in (ui:install --sheet)
+   from S1; at S0 only this CSS + the static render ship. */
+@import "./sheet.css";
+
 /* ==========================================
    pinion theme (v0.4.0) — light only
    ==========================================

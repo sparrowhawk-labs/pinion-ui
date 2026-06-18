@@ -8,6 +8,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 |---|---|
 | [`<x-button>`](./button.md) | Primary action control. 8 colors × 8 appearances, sizes, loading/disabled, icons, renders as `<a>` when `href` is set. |
 | [`<x-button-group>`](./button-group.md) | Joined row of buttons that share borders — toolbars, segmented controls. |
+| [`<x-segmented>`](./segmented.md) | iOS-style segmented control — a mutually-exclusive 2–4 option toggle (icon/label), sliding pill. `wire:model` + `segmented-change` event. Pure Alpine. |
 | [`<x-input>`](./input.md) | Text input with label, error, prefix/suffix slots, and all native `type` values. |
 | [`<x-textarea>`](./textarea.md) | Multi-line text input. Same field-token system as `<x-input>`. |
 | [`<x-select>`](./select.md) | Native `<select>` with consistent styling, label, and error slot. |
@@ -21,6 +22,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-input-number>`](./input-number.md) | Quantity selector — `<input type="number">` flanked by joined ± buttons. min/max/step clamped both in HTML attrs and Alpine inc/dec logic. Native spinner arrows hidden. |
 | [`<x-input-group>`](./input-group.md) | Generic horizontal joiner for form-shaped children — select+input, input+button, multi-input rows. Self-contained Tailwind join (no daisyUI `.join`). Exposes an `addon` helper class for text decorators. |
 | [`<x-pin-input>`](./pin-input.md) | OTP / verification code — N single-character boxes with auto-advance, backspace-back, arrow nav, paste-to-fill. `numeric` / `alphanumeric` type, optional `masked`. Combined value submits via hidden input. |
+| [`<x-calendar>`](./calendar.md) | Minimal month-grid date picker — a trigger button + popover, ISO `YYYY-MM-DD` via `wire:model`. Pure Alpine (no dep); the same grid is reused as the `<x-sheet>` date-cell editor. **Opt-in JS** — run `ui:install --calendar`. |
 | [`<x-editor>`](./editor.md) | Headless rich-text editor (Tiptap / ProseMirror), styled purely with theme × tune tokens. MVP blocks: headings, lists, task list, blockquote, code, link + bold/italic/code/highlight marks. Emits a versioned JSON envelope for `wire:model`. **Opt-in JS** — run `ui:install --editor`. |
 
 ## Data display
@@ -37,6 +39,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-kbd>`](./kbd.md) | Keyboard-key display (`<kbd>`) — sizes, color variants, often nested in buttons for shortcuts. |
 | [`<x-table-scroll>`](./table-scroll.md) | Overflow-x wrapper for tables that keeps the page from flexing on narrow viewports. |
 | [`<x-data-grid>`](./data-grid.md) | Spreadsheet-style editable grid (Tabulator): per-type inline editors, range selection + clipboard + fill, sortable/resizable/reorderable columns. Emits a JSON row-array for `wire:model`. **Opt-in JS** — run `ui:install --data-grid`. |
+| [`<x-sheet>`](./sheet.md) | Locality-of-Behavior spreadsheet — same API + data contract as `<x-data-grid>`, but the grid behavior is hand-written in Alpine+Tailwind (no Tabulator). Coexists with `<x-data-grid>`. *(staged build: S0 static render shipped; behavior + `ui:install --sheet` from S1)* |
 | [`<x-timeline>`](./timeline.md) | Vertical timeline of events — per-item `state` (`done`/`current`/`upcoming`), `appearance="solid"` default (saturated done-chain), `'soft'` opt-in for muted connector colours. |
 | [`<x-stat>`](./stat.md) | Single statistic block — label / value / change indicator. Group via flex/grid. |
 | [`<x-indicator>`](./indicator.md) | Positions a badge/dot at a corner of arbitrary child content (notification counters, status dots). `appearance="solid"` default (full daisyUI badge fill — strongest "needs attention" cue) with `'soft'`/`'outline'`/`'ghost'`/`'dash'` opt-ins. |
@@ -83,6 +86,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | Component | Description |
 |---|---|
 | [`<x-theme-switcher>`](./theme-switcher.md) | Click-to-cycle theme switcher — pass `:themes` array, persists to `data-theme` on `<html>`. |
+| [`<x-theme-tune-switcher>`](./theme-tune-switcher.md) | `data-theme` × `data-tune` dropdowns (color-dot theme preview + tune preview), live-retune the page. `fixed` / `inline`, localStorage. Pure Alpine. |
 | [`<x-tune-styles>`](./tune-styles.md) | Injects the `<style>` block that defines all `data-tune="*"` presets. Place once in your layout `<head>`. Use `:only="['default','tech']"` to ship only the tunes you use. |
 
 ## Conventions used in these docs

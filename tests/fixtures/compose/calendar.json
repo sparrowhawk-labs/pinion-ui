@@ -1,0 +1,41 @@
+[
+    {
+        "name": "default — md size (all slots)",
+        "props": {},
+        "expected": {
+            "panel": "w-[15.5rem] bg-base-100 rounded-[var(--radius-box)] tune-border border-base-300 shadow-lg p-3 flex flex-col gap-2",
+            "header": "flex items-center justify-between gap-2",
+            "navBtn": "inline-grid place-content-center w-7 h-7 shrink-0 rounded-[calc(var(--radius-box)*0.45)] text-base-content/60 hover:text-base-content hover:bg-base-content/[0.08] transition-colors cursor-pointer select-none [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-2",
+            "monthLabel": "text-[length:var(--text-field-md)] font-medium text-base-content tabular-nums select-none",
+            "weekRow": "grid grid-cols-7 gap-0.5",
+            "weekday": "h-7 grid place-content-center text-[length:var(--text-field-xs)] text-base-content/40 select-none",
+            "day": "h-8 grid place-content-center text-[length:var(--text-field-sm)] tabular-nums rounded-[calc(var(--radius-box)*0.5)] text-base-content hover:bg-base-content/[0.08] cursor-pointer select-none transition-colors",
+            "daySelected": "bg-primary text-primary-content hover:bg-primary",
+            "dayToday": "ring-1 ring-inset ring-primary/45 text-primary",
+            "dayMuted": "h-8",
+            "yearRow": "grid grid-cols-4 gap-1",
+            "year": "h-9 grid place-content-center text-[length:var(--text-field-sm)] tabular-nums rounded-[calc(var(--radius-box)*0.5)] text-base-content hover:bg-base-content/[0.08] cursor-pointer select-none transition-colors",
+            "footer": "flex items-center justify-between pt-1 border-t border-base-300",
+            "footerBtn": "text-[length:var(--text-field-xs)] text-base-content/60 hover:text-primary px-1.5 py-1 rounded-[calc(var(--radius-box)*0.4)] hover:bg-base-content/[0.06] cursor-pointer select-none transition-colors",
+            "trigger": "h-[var(--h-field-md)] px-[var(--px-input-md)] text-[length:var(--text-field-md)] inline-flex items-center gap-2 justify-between rounded-[var(--radius-field)] tune-border border-base-300 bg-base-100 text-base-content hover:border-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary cursor-pointer select-none transition-colors [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75] [&_svg]:text-base-content/50"
+        }
+    },
+    {
+        "name": "size=sm — trigger scale",
+        "props": {
+            "size": "sm"
+        },
+        "expected": {
+            "trigger": "h-[var(--h-field-sm)] px-[var(--px-input-sm)] text-[length:var(--text-field-sm)] inline-flex items-center gap-2 justify-between rounded-[var(--radius-field)] tune-border border-base-300 bg-base-100 text-base-content hover:border-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary cursor-pointer select-none transition-colors [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75] [&_svg]:text-base-content/50"
+        }
+    },
+    {
+        "name": "size=lg — trigger scale",
+        "props": {
+            "size": "lg"
+        },
+        "expected": {
+            "trigger": "h-[var(--h-field-lg)] px-[var(--px-input-lg)] text-[length:var(--text-field-lg)] inline-flex items-center gap-2 justify-between rounded-[var(--radius-field)] tune-border border-base-300 bg-base-100 text-base-content hover:border-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary cursor-pointer select-none transition-colors [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75] [&_svg]:text-base-content/50"
+        }
+    }
+]

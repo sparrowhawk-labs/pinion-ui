@@ -1,0 +1,122 @@
+/* ==========================================
+   pinion-ui — sheet styles (.pn-sheet) for <x-sheet>
+   ==========================================
+   The descendant rules for the <x-sheet> spreadsheet that CANNOT be expressed as utility
+   classes — grid lines between cells, the sticky header band, the composed checkbox glyph
+   (.pn-sheet-check) and the number-cell stepper rhythm.
+
+   <x-sheet> is the Locality-of-Behavior counterpart to <x-data-grid>: it OWNS its own
+   <table> DOM (hand-written in the Blade), so — UNLIKE data-grid.css, which must out-
+   specify Tabulator's UNLAYERED literal-hex CSS with compound selectors + !important —
+   these rules sit CLEANLY under `@layer components` (the same place editor.css's .pn-prose
+   lives). Nothing here fights an engine's stylesheet.
+
+   Every value is composed ONLY from:
+     - plain CSS,
+     - daisyUI *color* tokens (var(--color-*) → tracks data-theme),
+     - pinion-ui tune tokens (var(--radius-box) → tracks data-tune).
+   No hard-coded colors. Bundled by the preset (pinion-ui.css @import "./sheet.css") and
+   inert (no `.pn-sheet` elements) for apps that never use the sheet. */
+
+@layer components {
+    /* Grid lines. border-collapse (set as a utility on the <table>) merges adjacent cell
+       borders into single hairlines that track the theme. */
+    .pn-sheet .pn-sheet-table th,
+    .pn-sheet .pn-sheet-table td {
+        border-right: 1px solid var(--color-base-300);
+        border-bottom: 1px solid var(--color-base-300);
+    }
+    /* No trailing right edge inside the framed host — the host's own border closes it. */
+    .pn-sheet .pn-sheet-table tr > *:last-child {
+        border-right: 0;
+    }
+    /* The last row's bottom edge is likewise closed by the host frame. */
+    .pn-sheet .pn-sheet-table tbody tr:last-child > * {
+        border-bottom: 0;
+    }
+
+    /* Sticky header band — stays put while the body scrolls inside the host's
+       overflow-auto. A slightly thicker bottom rule separates header from data, matching
+       the data-grid aesthetic. */
+    .pn-sheet .pn-sheet-table thead th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: var(--color-base-100);
+        border-bottom-width: 2px;
+    }
+    /* Freeze the row-number gutter COLUMN to the left edge on horizontal scroll — keyed
+       off the `pn-sheet-gutter` hook (NOT td:first-child), so a no-rowNumbers sheet's
+       first data cell and the empty-state cell are never wrongly pinned. The body gutter
+       sits below the header band; the header CORNER must outrank both (top:0 from the
+       thead rule already; add left:0 + the highest z so it stays put on both axes). */
+    .pn-sheet .pn-sheet-table td.pn-sheet-gutter {
+        position: sticky;
+        left: 0;
+        z-index: 0;
+    }
+    .pn-sheet .pn-sheet-table thead th.pn-sheet-gutter {
+        left: 0;
+        z-index: 2;
+    }
+
+    /* Hover affordance on data rows (quiet, like data-grid's). Scoped to tbody so the
+       header band is unaffected. */
+    .pn-sheet .pn-sheet-table tbody tr:hover > td {
+        background-color: color-mix(in oklab, var(--color-base-content) 4%, transparent);
+    }
+
+    /* Composed checkbox glyph — matches <x-checkbox> / the editor task-list box and the
+       data-grid .pn-grid-check, instead of a native tick. The box itself is composed via
+       utilities on the element (see SheetComposer::checkCell); the check mark + filled
+       state are the parts that need a pseudo-element, so they live here. */
+    .pn-sheet .pn-sheet-check.is-checked {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+    .pn-sheet .pn-sheet-check.is-checked::after {
+        content: "";
+        width: 0.32em;
+        height: 0.6em;
+        margin-top: -0.1em;
+        border: solid var(--color-primary-content);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    /* Inline cell editor (the <input>/<select> sheet.js opens on dblclick / Enter /
+       typing). OVERLAYS the cell (absolute inset-0) so opening an editor never changes
+       the cell/column size — the cell keeps its display-driven dimensions and the editor
+       fills them. The cell carries `relative` (SheetComposer::cell), so inset-0 anchors
+       here. Inherits the grid font; the cell's `cellEditing` outline is the focus ring. */
+    .pn-sheet .pn-sheet-editor {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0 var(--px-input-sm);
+        border: 0;
+        background: var(--color-base-100);
+        color: var(--color-base-content);
+        font: inherit;
+        line-height: inherit;
+        outline: none;
+    }
+    .pn-sheet .pn-sheet-editor:focus { outline: none; }
+    /* Number editor: hide the native spinners (tiny, and they fight the grid rhythm). */
+    .pn-sheet .pn-sheet-editor[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+    .pn-sheet .pn-sheet-editor[type="number"]::-webkit-outer-spin-button,
+    .pn-sheet .pn-sheet-editor[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+    /* The grid container is focusable (tabindex=0) for keyboard nav — quiet focus ring. */
+    .pn-sheet:focus { outline: none; }
+    .pn-sheet:focus-visible { outline: 2px solid color-mix(in oklab, var(--color-primary) 50%, transparent); outline-offset: -2px; }
+
+    /* Selection text highlight inside the sheet picks up the theme accent, softly —
+       parity with .pn-prose. */
+    .pn-sheet ::selection {
+        background: color-mix(in oklab, var(--color-primary) 22%, transparent);
+    }
+}

@@ -17,6 +17,8 @@ class UiInstall extends Command
         {--skip-layout : Skip patching the consumer layout <html> data-theme}
         {--editor : Wire the opt-in <x-editor> JS module (Tiptap deps + app.js registration)}
         {--data-grid : Wire the opt-in <x-data-grid> JS module (Tabulator dep + base CSS + app.js registration)}
+        {--sheet : Wire the opt-in <x-sheet> JS module (Locality-of-Behavior spreadsheet — pure Alpine, NO npm dep)}
+        {--calendar : Wire the opt-in <x-calendar> JS module (minimal date picker — pure Alpine, NO npm dep)}
         {--skip-hooks : Skip installing the lint-after-edit Claude Code hook}
         {--git-hook : Install a general (agent-agnostic) git pre-commit ui:lint hook}
         {--tune-only= : Only include specific tune presets (comma-separated)}';
@@ -69,6 +71,19 @@ class UiInstall extends Command
         // --data-grid is passed, so non-grid apps pay zero JS/CSS engine cost.
         if ($this->option('data-grid')) {
             $this->setupDataGrid();
+        }
+
+        // OPT-IN sheet module. <x-sheet> is the Locality-of-Behavior spreadsheet
+        // (hand-written Alpine, NO engine) — only an app.js registration, NO npm dep
+        // and NO extra CSS (the .pn-sheet theme is already in the bundled preset).
+        if ($this->option('sheet')) {
+            $this->setupSheet();
+        }
+
+        // OPT-IN calendar module. <x-calendar> is the minimal date picker (pure Alpine,
+        // no engine) — app.js registration only, no npm dep, no extra CSS.
+        if ($this->option('calendar')) {
+            $this->setupCalendar();
         }
 
         // Add AI-agent reference to CLAUDE.md
@@ -503,6 +518,116 @@ JS;
         File::put($appJsPath, $content);
         $this->info('    ✓ Registered pinionDataGrid in resources/js/app.js');
         $this->line('      Run `npm install && npm run build`, then use <x-data-grid :columns="…" wire:model="rows" />');
+    }
+
+    /**
+     * Wire the opt-in <x-sheet> JS-behavior module (Locality-of-Behavior spreadsheet).
+     *
+     * Simpler than setupDataGrid(): NO npm dependency (pure Alpine, no engine) and NO
+     * extra CSS import (the `.pn-sheet` theme ships in the bundled preset). Just the
+     * factory registration in app.js, placed BEFORE the boot call. Robust to both the
+     * vanilla-Alpine and Livewire-ESM single-Alpine app.js shapes; semicolon-independent;
+     * idempotent.
+     */
+    protected function setupSheet(): void
+    {
+        $this->newLine();
+        $this->info('  Sheet (<x-sheet>) — opt-in JS module (pure Alpine, no npm dep)');
+
+        $appJsPath = resource_path('js/app.js');
+        if (!File::exists($appJsPath)) {
+            $this->warn('    resources/js/app.js not found. Skipping sheet registration.');
+            return;
+        }
+
+        $content = File::get($appJsPath);
+
+        if (str_contains($content, "Alpine.data('pinionSheet'") || str_contains($content, 'Alpine.data("pinionSheet"')) {
+            $this->line('    - pinionSheet already registered in resources/js/app.js');
+            return;
+        }
+
+        // Require a REAL Alpine reference (not a bare substring that could be a comment).
+        if (!preg_match('/(from\s+[\'"]alpinejs[\'"]|from\s+[\'"][^\'"]*livewire\.esm[\'"]|\bAlpine\.(data|plugin|start)\b)/', $content)) {
+            $this->warn('    Alpine.js not set up in app.js — run without --skip-alpine first.');
+            return;
+        }
+
+        $jsImport = "import { pinionSheet } from '../../vendor/sparrowhawk-labs/pinion-ui/src/resources/js/sheet.js';";
+        $registerLine = "Alpine.data('pinionSheet', pinionSheet);";
+
+        // Insert the import right after whichever line imports Alpine.
+        if (preg_match('/^import .*Alpine.* from .*;$/m', $content)) {
+            $content = preg_replace('/^(import .*Alpine.* from .*;)$/m', "$1\n{$jsImport}", $content, 1);
+        } else {
+            $content = $jsImport . "\n" . $content;
+        }
+
+        // Register BEFORE the boot call (Livewire.start() / Alpine.start()), semicolon-optional.
+        if (preg_match('/^[ \t]*Livewire\.start\(\)\s*;?/m', $content)) {
+            $content = preg_replace('/(^[ \t]*Livewire\.start\(\)\s*;?)/m', "{$registerLine}\n$1", $content, 1);
+        } elseif (preg_match('/^[ \t]*Alpine\.start\(\)\s*;?/m', $content)) {
+            $content = preg_replace('/(^[ \t]*Alpine\.start\(\)\s*;?)/m', "{$registerLine}\n$1", $content, 1);
+        } elseif (preg_match('/window\.Alpine\s*=\s*Alpine\s*;?/', $content)) {
+            $content = preg_replace('/(window\.Alpine\s*=\s*Alpine\s*;?)/', "$1\n{$registerLine}", $content, 1);
+        } else {
+            $content .= "\n{$registerLine}\n";
+        }
+
+        File::put($appJsPath, $content);
+        $this->info('    ✓ Registered pinionSheet in resources/js/app.js');
+        $this->line('      Run `npm run build`, then use <x-sheet :columns="…" :rows="…" wire:model="rows" />');
+    }
+
+    /**
+     * Wire the opt-in <x-calendar> JS module (minimal date picker). Same shape as
+     * setupSheet(): NO npm dep, NO extra CSS — just the factory registration in app.js.
+     */
+    protected function setupCalendar(): void
+    {
+        $this->newLine();
+        $this->info('  Calendar (<x-calendar>) — opt-in JS module (pure Alpine, no npm dep)');
+
+        $appJsPath = resource_path('js/app.js');
+        if (!File::exists($appJsPath)) {
+            $this->warn('    resources/js/app.js not found. Skipping calendar registration.');
+            return;
+        }
+
+        $content = File::get($appJsPath);
+
+        if (str_contains($content, "Alpine.data('pinionCalendar'") || str_contains($content, 'Alpine.data("pinionCalendar"')) {
+            $this->line('    - pinionCalendar already registered in resources/js/app.js');
+            return;
+        }
+
+        if (!preg_match('/(from\s+[\'"]alpinejs[\'"]|from\s+[\'"][^\'"]*livewire\.esm[\'"]|\bAlpine\.(data|plugin|start)\b)/', $content)) {
+            $this->warn('    Alpine.js not set up in app.js — run without --skip-alpine first.');
+            return;
+        }
+
+        $jsImport = "import { pinionCalendar } from '../../vendor/sparrowhawk-labs/pinion-ui/src/resources/js/calendar.js';";
+        $registerLine = "Alpine.data('pinionCalendar', pinionCalendar);";
+
+        if (preg_match('/^import .*Alpine.* from .*;$/m', $content)) {
+            $content = preg_replace('/^(import .*Alpine.* from .*;)$/m', "$1\n{$jsImport}", $content, 1);
+        } else {
+            $content = $jsImport . "\n" . $content;
+        }
+
+        if (preg_match('/^[ \t]*Livewire\.start\(\)\s*;?/m', $content)) {
+            $content = preg_replace('/(^[ \t]*Livewire\.start\(\)\s*;?)/m', "{$registerLine}\n$1", $content, 1);
+        } elseif (preg_match('/^[ \t]*Alpine\.start\(\)\s*;?/m', $content)) {
+            $content = preg_replace('/(^[ \t]*Alpine\.start\(\)\s*;?)/m', "{$registerLine}\n$1", $content, 1);
+        } elseif (preg_match('/window\.Alpine\s*=\s*Alpine\s*;?/', $content)) {
+            $content = preg_replace('/(window\.Alpine\s*=\s*Alpine\s*;?)/', "$1\n{$registerLine}", $content, 1);
+        } else {
+            $content .= "\n{$registerLine}\n";
+        }
+
+        File::put($appJsPath, $content);
+        $this->info('    ✓ Registered pinionCalendar in resources/js/app.js');
+        $this->line('      Run `npm run build`, then use <x-calendar wire:model="date" />');
     }
 
     protected function setupLayout(): void

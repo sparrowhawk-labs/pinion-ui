@@ -1,0 +1,59 @@
+[
+    {
+        "name": "default — md size (asserts EVERY slot: subset-match won't catch a missing key)",
+        "props": {},
+        "expected": {
+            "shell": "flex flex-col gap-2",
+            "toolbar": "flex items-center gap-2 flex-wrap",
+            "toolbox": "inline-flex items-center gap-0.5 p-0.5 rounded-[calc(var(--radius-box)*0.6)] bg-base-200/60",
+            "iconBtn": "h-7 w-7 inline-grid place-content-center shrink-0 rounded-[calc(var(--radius-box)*0.45)] text-base-content/70 hover:text-base-content hover:bg-base-content/[0.08] transition-colors duration-100 cursor-pointer select-none [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75] disabled:opacity-40 disabled:cursor-not-allowed",
+            "toolbarBtn": "h-8 px-3 text-[length:var(--text-field-sm)] inline-flex items-center justify-center gap-1 shrink-0 rounded-[calc(var(--radius-box)*0.6)] bg-base-200 text-base-content/80 hover:text-base-content hover:bg-base-content/[0.1] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
+            "count": "text-[length:var(--text-field-xs)] text-base-content/50 tabular-nums",
+            "grid": "pn-sheet w-full overflow-auto rounded-[var(--radius-box)] tune-border border-base-300 text-[length:var(--text-field-md)] text-base-content",
+            "table": "pn-sheet-table w-full border-collapse",
+            "headerCell": "px-[var(--px-input-md)] py-[var(--py-input-md)] text-left font-medium text-base-content bg-base-100 select-none align-middle",
+            "headerCellSortable": "px-[var(--px-input-md)] py-[var(--py-input-md)] text-left font-medium text-base-content bg-base-100 select-none align-middle cursor-pointer hover:bg-base-200/60 transition-colors duration-100",
+            "cell": "relative px-[var(--px-input-md)] py-[var(--py-input-md)] text-base-content align-middle select-none cursor-default",
+            "cellSelected": "outline outline-2 -outline-offset-2 outline-primary",
+            "cellEditing": "outline outline-2 -outline-offset-2 outline-primary bg-base-100",
+            "cellInRange": "bg-primary/10",
+            "rowNumGutter": "pn-sheet-gutter px-2 py-[var(--py-input-md)] text-center text-base-content/45 bg-base-100 tabular-nums select-none cursor-default align-middle",
+            "gutterCorner": "pn-sheet-gutter bg-base-100 select-none",
+            "resizeHandle": "absolute top-0 right-0 h-full w-1 cursor-col-resize select-none hover:bg-primary/40",
+            "fillHandle": "absolute -bottom-1 -right-1 w-2 h-2 bg-primary rounded-[1px] cursor-crosshair",
+            "colDragHandle": "cursor-grab select-none",
+            "numStepper": "inline-grid place-content-center w-6 h-6 shrink-0 text-[length:var(--text-field-md)] leading-none text-base-content/55 hover:text-primary hover:bg-base-content/[0.08] rounded-[calc(var(--radius-box)*0.4)] cursor-pointer select-none transition-colors duration-100",
+            "checkCell": "pn-sheet-check inline-grid place-content-center align-middle w-[1.15em] h-[1.15em] box-border cursor-pointer tune-border border-base-content/35 rounded-[calc(var(--radius-box)*0.4)] hover:border-primary transition-colors duration-100"
+        }
+    },
+    {
+        "name": "size=sm — cell/header/gutter padding tightens, grid text shrinks",
+        "props": {
+            "size": "sm"
+        },
+        "expected": {
+            "iconBtn": "h-6 w-6 inline-grid place-content-center shrink-0 rounded-[calc(var(--radius-box)*0.45)] text-base-content/70 hover:text-base-content hover:bg-base-content/[0.08] transition-colors duration-100 cursor-pointer select-none [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75] disabled:opacity-40 disabled:cursor-not-allowed",
+            "toolbarBtn": "h-7 px-2 text-[length:var(--text-field-xs)] inline-flex items-center justify-center gap-1 shrink-0 rounded-[calc(var(--radius-box)*0.6)] bg-base-200 text-base-content/80 hover:text-base-content hover:bg-base-content/[0.1] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
+            "grid": "pn-sheet w-full overflow-auto rounded-[var(--radius-box)] tune-border border-base-300 text-[length:var(--text-field-sm)] text-base-content",
+            "headerCell": "px-[var(--px-input-sm)] py-[var(--py-input-sm)] text-left font-medium text-base-content bg-base-100 select-none align-middle",
+            "headerCellSortable": "px-[var(--px-input-sm)] py-[var(--py-input-sm)] text-left font-medium text-base-content bg-base-100 select-none align-middle cursor-pointer hover:bg-base-200/60 transition-colors duration-100",
+            "cell": "relative px-[var(--px-input-sm)] py-[var(--py-input-sm)] text-base-content align-middle select-none cursor-default",
+            "rowNumGutter": "pn-sheet-gutter px-2 py-[var(--py-input-sm)] text-center text-base-content/45 bg-base-100 tabular-nums select-none cursor-default align-middle"
+        }
+    },
+    {
+        "name": "size=lg — cell/header/gutter padding widens, grid text grows",
+        "props": {
+            "size": "lg"
+        },
+        "expected": {
+            "iconBtn": "h-8 w-8 inline-grid place-content-center shrink-0 rounded-[calc(var(--radius-box)*0.45)] text-base-content/70 hover:text-base-content hover:bg-base-content/[0.08] transition-colors duration-100 cursor-pointer select-none [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75] disabled:opacity-40 disabled:cursor-not-allowed",
+            "toolbarBtn": "h-9 px-3.5 text-[length:var(--text-field-md)] inline-flex items-center justify-center gap-1 shrink-0 rounded-[calc(var(--radius-box)*0.6)] bg-base-200 text-base-content/80 hover:text-base-content hover:bg-base-content/[0.1] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed",
+            "grid": "pn-sheet w-full overflow-auto rounded-[var(--radius-box)] tune-border border-base-300 text-[length:var(--text-field-lg)] text-base-content",
+            "headerCell": "px-[var(--px-input-lg)] py-[var(--py-input-lg)] text-left font-medium text-base-content bg-base-100 select-none align-middle",
+            "headerCellSortable": "px-[var(--px-input-lg)] py-[var(--py-input-lg)] text-left font-medium text-base-content bg-base-100 select-none align-middle cursor-pointer hover:bg-base-200/60 transition-colors duration-100",
+            "cell": "relative px-[var(--px-input-lg)] py-[var(--py-input-lg)] text-base-content align-middle select-none cursor-default",
+            "rowNumGutter": "pn-sheet-gutter px-2 py-[var(--py-input-lg)] text-center text-base-content/45 bg-base-100 tabular-nums select-none cursor-default align-middle"
+        }
+    }
+]
