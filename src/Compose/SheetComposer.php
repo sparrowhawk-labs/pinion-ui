@@ -50,6 +50,7 @@ namespace SparrowhawkLabs\PinionUi\Compose;
  *   colDragHandle      — column header drag affordance (reorder)               [S3]
  *   numStepper         — −/+ stepper button inside a number cell               [S2]
  *   checkCell          — composed checkbox box inside a checkbox cell          [S0 resting / S2 toggle]
+ *   sortCaret          — sort-toggle caret button in a sortable column header  [S3]
  */
 class SheetComposer
 {
@@ -79,6 +80,7 @@ class SheetComposer
             'colDragHandle'      => 'cursor-grab select-none',
             'numStepper'         => self::numStepper(),
             'checkCell'          => self::checkCell(),
+            'sortCaret'          => self::sortCaret(),
         ];
     }
 
@@ -199,6 +201,18 @@ class SheetComposer
             'hover:text-primary hover:bg-base-content/[0.08]',
             'rounded-[calc(var(--radius-box)*0.4)] cursor-pointer select-none',
             'transition-colors duration-100',
+        );
+    }
+
+    private static function sortCaret(): string
+    {
+        // Tiny icon button at the right of a sortable column header. The chevron inside is
+        // recoloured/rotated by the Blade per sort state (faint when off, primary when active).
+        return FieldVariants::join(
+            'shrink-0 inline-grid place-content-center w-4 h-4',
+            'rounded-[calc(var(--radius-box)*0.4)] cursor-pointer select-none',
+            'hover:bg-base-content/[0.08] transition-colors duration-100',
+            '[&_svg]:w-3 [&_svg]:h-3',
         );
     }
 

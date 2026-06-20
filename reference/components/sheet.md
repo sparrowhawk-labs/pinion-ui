@@ -16,9 +16,12 @@ Same public API and the **same `wire:model` data contract** as `<x-data-grid>` (
 | **S1** | `pinionSheet` Alpine factory: single-cell select, keyboard nav (arrows/Tab/Enter/typing), per-type inline editing, `wire:model` JSON-string round-trip, `wire:ignore` + `:key` morphdom strategy | **✅ shipped** |
 | **S1.1+** | number ±-steppers (hover, no-shift), select = always-open custom dropdown (pinion `<x-select>` look), **date editor = [`<x-calendar>`](./calendar.md)** popover, editor-overlay (no cell resize) | **✅ shipped** |
 | **S2** | single-range selection (drag-rect, Shift-extend, whole row/column), matrix TSV copy/paste, fill-down, Delete-clear, Cmd/Ctrl+A | **✅ shipped** |
-| S3 | sort, column resize, row/column reorder, fill-handle drag (out-of-band events) → host cutover | planned |
+| **S3a** | column sort — header caret toggles asc ⇄ desc (idle glyph on header hover, solid primary ▲/▼ when active), `↺` restores the pre-sort order; empties sort last; destructive (reorders `rows`, flushes) | **✅ shipped** |
+| **S3b** | row / column reorder — native HTML5 drag (whole-row / whole-column drag image), drop line indicator, overshoot clamps to first/last, fires `grid-rows-reordered` / `grid-columns-reordered` (same shape as `<x-data-grid>`); a manual order supersedes an active sort | **✅ shipped** |
+| S3c | fill-handle drag (selection bottom-right handle) | planned |
+| S3d | column resize → host cutover | planned |
 
-The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). Sort/resize/reorder/fill-handle land in S3.
+The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). Fill-handle drag and column resize land in S3c/S3d.
 
 ## Range selection & clipboard (S2)
 
@@ -73,10 +76,10 @@ Alpine.data('pinionCalendar', pinionCalendar);
 | `height` | `string \| null` | `null` | Max viewport height (e.g. `'24rem'`) → vertical scroll with a sticky header. `null` = grows with rows. |
 | `editable` | `bool` | `true` | Master switch for cell editing. *(S1)* |
 | `selectableRange` | `bool` | `true` | Range selection + clipboard + fill. *(S2)* |
-| `sortable` | `bool` | `true` | Header-click sort. *(S3; header affordance visible at S0)* |
+| `sortable` | `bool` | `true` | Header-caret sort (asc ⇄ desc, `↺` restores original order). *(S3a)* |
 | `rowNumbers` | `bool` | `true` | Frozen row-number gutter. |
-| `movableRows` | `bool` | `false` | Drag rows to reorder → fires `grid-rows-reordered`. *(S3)* |
-| `movableColumns` | `bool` | `false` | Drag column headers to reorder → fires `grid-columns-reordered`. *(S3)* |
+| `movableRows` | `bool` | `false` | Drag rows to reorder → fires `grid-rows-reordered`. *(S3b)* |
+| `movableColumns` | `bool` | `false` | Drag column headers to reorder → fires `grid-columns-reordered`. *(S3b)* |
 | `toolbar` | `bool` | `true` | Built-in top bar: a **toolbox** of icon-only ops + row count (+ `actions` slot + mobile help). |
 | `addRow` | `bool` | `true` | Show the built-in add-row icon button in the toolbox. *(inert at S0; dispatches to host in S1)* |
 | `addColumn` | `bool` | `true` | Show the built-in add-column icon button in the toolbox. *(inert at S0; dispatches to host in S1)* |

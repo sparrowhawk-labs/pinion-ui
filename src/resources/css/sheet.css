@@ -66,6 +66,15 @@
         background-color: color-mix(in oklab, var(--color-base-content) 4%, transparent);
     }
 
+    /* Reorder drop indicator (S3) — a 2px primary line at the insertion edge, toggled by the
+       Blade during a drag (selection is cleared on drag-start, so no inline box-shadow fights
+       this). box-shadow, not border, so there is no layout shift. Rows: a line across the row;
+       columns: a line down every cell of the target column. */
+    .pn-sheet .pn-sheet-table tbody tr.pn-drop-before > * { box-shadow: inset 0 2px 0 0 var(--color-primary); }
+    .pn-sheet .pn-sheet-table tbody tr.pn-drop-after  > * { box-shadow: inset 0 -2px 0 0 var(--color-primary); }
+    .pn-sheet .pn-sheet-table .pn-dropcol-before { box-shadow: inset 2px 0 0 0 var(--color-primary); }
+    .pn-sheet .pn-sheet-table .pn-dropcol-after  { box-shadow: inset -2px 0 0 0 var(--color-primary); }
+
     /* Composed checkbox glyph — matches <x-checkbox> / the editor task-list box and the
        data-grid .pn-grid-check, instead of a native tick. The box itself is composed via
        utilities on the element (see SheetComposer::checkCell); the check mark + filled

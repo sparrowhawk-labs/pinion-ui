@@ -49,6 +49,9 @@
         'columns'  => array_values($columns),
         'rows'     => array_values($rows),
         'editable' => (bool) $editable,
+        'sortable' => (bool) $sortable,
+        'movableRows' => (bool) $movableRows,
+        'movableColumns' => (bool) $movableColumns,
         'sync'     => $sync,
     ];
 @endphp
@@ -57,6 +60,10 @@
     {{ $attributes->whereDoesntStartWith('wire:model')->class([$c['shell']]) }}
     x-data="pinionSheet({{ \Illuminate\Support\Js::from($config) }})"
     x-on:destroy="destroy()"
+    @if($movableRows || $movableColumns)
+    x-on:dragover.window="onWinDragOver($event)"
+    x-on:drop.window="onWinDrop($event)"
+    @endif
 >
     {{-- Toolbox of icon-only ops (add-row / add-col, minimal) + row count. The add
          buttons mutate the local reactive buffer (standalone convenience); Livewire
@@ -126,27 +133,72 @@
                         <th class="{{ $c['gutterCorner'] }}"></th>
                     @endif
                     <template x-for="(col, c) in cols" x-bind:key="col.key">
-                        {{-- Header click selects the whole column (S2). NOTE: sort is S3 — when it lands,
-                             header click reconciles to sort vs select per track-s-sheet.md "前方依存". --}}
+                        {{-- Header BODY click = column-select (S2). The sort caret (right) = toggle sort
+                             (S3), x-on:click.stop so it never also selects. The two gestures coexist. --}}
                         <th
-                            class="{{ $c['headerCell'] }} cursor-pointer"
+                            class="{{ $c['headerCell'] }} group/th {{ $movableColumns ? 'cursor-grab' : 'cursor-pointer' }}"
                             x-bind:style="headerSelStyle(c)"
+                            x-bind:class="{ 'opacity-40': dragCol === c, 'pn-dropcol-before': dragCol !== null && dropCol === c, 'pn-dropcol-after': dragCol !== null && dropCol === c + 1 && c === cols.length - 1 }"
                             role="columnheader"
+                            x-bind:aria-sort="sortDir(c) === 'asc' ? 'ascending' : (sortDir(c) === 'desc' ? 'descending' : 'none')"
                             x-on:click="selectCol(c, $event)"
-                            x-text="col.title ?? col.key"
-                        ></th>
+                            @if($movableColumns)
+                            draggable="true"
+                            x-on:dragstart="colDragStart(c, $event)"
+                            x-on:dragend="clearColDrag()"
+                            @endif
+                        >
+                            <span class="flex items-center gap-1">
+                                <span class="flex-1 truncate" x-text="col.title ?? col.key"></span>
+                                {{-- restore-to-original (↺) — shown only while THIS column is sorted; click resets to the
+                                     pre-sort row order. Native title = the "元に戻す" hover tooltip. --}}
+                                <template x-if="colSortable(c) && sortDir(c)">
+                                    <button type="button" draggable="false" class="{{ $c['sortCaret'] }}" title="元に戻す" aria-label="並べ替えを元に戻す" x-on:click.stop="clearSort()" x-on:mousedown.stop>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-base-content/55"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5"/></svg>
+                                    </button>
+                                </template>
+                                {{-- sort toggle (asc ⇄ desc). IDLE = a faint sort glyph revealed on header HOVER only;
+                                     ACTIVE = a solid primary triangle (▲ asc / ▼ desc), always visible. --}}
+                                <template x-if="colSortable(c)">
+                                    <button
+                                        type="button"
+                                        draggable="false"
+                                        class="{{ $c['sortCaret'] }}"
+                                        x-bind:class="sortDir(c) ? '' : 'opacity-0 group-hover/th:opacity-100 transition-opacity duration-100'"
+                                        x-on:click.stop="toggleSort(c)"
+                                        x-on:mousedown.stop
+                                        x-bind:aria-label="(sortDir(c) === 'asc' ? '降順に並べ替え' : '昇順に並べ替え') + '：' + (col.title ?? col.key)"
+                                    >
+                                        <template x-if="!sortDir(c)">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-base-content/50"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+                                        </template>
+                                        <template x-if="sortDir(c)">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="text-primary" x-bind:style="sortDir(c) === 'asc' ? 'transform: rotate(180deg)' : ''"><path d="M6 9h12l-6 7z"/></svg>
+                                        </template>
+                                    </button>
+                                </template>
+                            </span>
+                        </th>
                     </template>
                 </tr>
             </thead>
             <tbody>
                 <template x-for="(row, r) in rows" x-bind:key="row.id ?? r">
-                    <tr role="row">
+                    <tr
+                        role="row"
+                        x-bind:class="{ 'opacity-40': dragRow === r, 'pn-drop-before': dragRow !== null && dropRow === r, 'pn-drop-after': dragRow !== null && dropRow === r + 1 && r === rows.length - 1 }"
+                    >
                         @if($rowNumbers)
-                            {{-- Gutter click selects the whole row (S2); Shift extends the block. --}}
+                            {{-- Gutter click selects the whole row (S2); Shift extends the block; drag = reorder (S3). --}}
                             <td
-                                class="{{ $c['rowNumGutter'] }} cursor-pointer"
+                                class="{{ $c['rowNumGutter'] }} {{ $movableRows ? 'cursor-grab' : 'cursor-pointer' }}"
                                 x-bind:style="gutterSelStyle(r)"
                                 x-on:click="selectRow(r, $event)"
+                                @if($movableRows)
+                                draggable="true"
+                                x-on:dragstart="rowDragStart(r, $event)"
+                                x-on:dragend="clearRowDrag()"
+                                @endif
                                 x-text="r + 1"
                             ></td>
                         @endif
@@ -155,7 +207,7 @@
                                 x-bind:data-r="r"
                                 x-bind:data-c="c"
                                 class="{{ $c['cell'] }} group/cell"
-                                x-bind:class="{ '{{ $c['cellEditing'] }}': isEd(r, c), '{{ $c['cellInRange'] }}': inRange(r, c) && hasRange() && !isEd(r, c) }"
+                                x-bind:class="{ '{{ $c['cellEditing'] }}': isEd(r, c), '{{ $c['cellInRange'] }}': inRange(r, c) && hasRange() && !isEd(r, c), 'opacity-40': dragCol === c, 'pn-dropcol-before': dragCol !== null && dropCol === c, 'pn-dropcol-after': dragCol !== null && dropCol === c + 1 && c === cols.length - 1 }"
                                 x-bind:style="isEd(r, c) ? '' : cellSelStyle(r, c)"
                                 x-on:mousedown="startSelect(r, c, $event)"
                                 x-on:mouseenter="extendDrag(r, c)"

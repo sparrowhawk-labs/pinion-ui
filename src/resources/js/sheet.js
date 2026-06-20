@@ -56,6 +56,7 @@ const truthy = (v) => v === true || v === 1 || v === '1' || v === 'true';
 export function pinionSheet(opts = {}) {
   let flushTimer = null;
   let flushPending = false;
+  let colGhost = null;   // transient whole-column drag-image element (built on colDragStart, removed on dragend)
   // The hidden wire:model carrier element, captured in init() (where `this.$refs` is
   // available). flush() uses THIS, not `this.$refs.model`, because flush can be reached
   // from an Alpine x-on EXPRESSION (the date cell's calendar-select → commitEdit), where
@@ -88,6 +89,10 @@ export function pinionSheet(opts = {}) {
     selectOnFocus: true,// on edit focus: select-all (Enter/dblclick) vs caret-at-end (typed)
     openSel: null,      // { r, c } of the OPEN select-cell dropdown, or null
     selPx: null, selPy: null, selW: null,   // fixed-anchor for the open select dropdown
+    sort: null,         // { c, dir:'asc'|'desc' } active sort, or null (S3)
+    sortSnapshot: null, // [id,…] original row order, captured on first sort (for the 'clear' restore)
+    dragRow: null, dropRow: null,   // row reorder: dragged index / insertion index (S3)
+    dragCol: null, dropCol: null,   // column reorder: dragged index / insertion index (S3)
 
     init() {
       // Deep-clone out of the opts proxy, then let Alpine re-proxy our own copy.
@@ -394,6 +399,184 @@ export function pinionSheet(opts = {}) {
       }
       if (changed) this.schedule();
     },
+
+    // ── sort (S3): DESTRUCTIVE — reorders `rows` (spreadsheet convention), flushes the new
+    //    order. caret cycles asc → desc → clear; clear restores the order captured on the
+    //    first sort. Header BODY click stays column-select (S2); the caret is x-on:click.stop. ──
+    colSortable(c) { return opts.sortable !== false && this.cols[c]?.sortable !== false; },
+    sortDir(c) { return this.sort && this.sort.c === c ? this.sort.dir : null; },
+    snapshotOrder() { this.sortSnapshot = this.rows.map((row, i) => row.id ?? i); },
+    restoreOrder() {
+      if (!this.sortSnapshot) return;
+      const pos = new Map(this.sortSnapshot.map((id, i) => [id, i]));
+      const at = (row, i) => (pos.has(row.id ?? i) ? pos.get(row.id ?? i) : Infinity);
+      this.rows = this.rows.slice().sort((a, b) => at(a) - at(b));   // reassign → Alpine re-renders
+      this.sortSnapshot = null;
+    },
+    applySort() {
+      const { c, dir } = this.sort;
+      const key = this.colKey(c), type = this.colType(c), sign = dir === 'asc' ? 1 : -1;
+      const empty = (v) => v === null || v === undefined || v === '';
+      this.rows = this.rows.slice().sort((ra, rb) => {
+        const a = ra[key], b = rb[key];
+        if (empty(a) && empty(b)) return 0;
+        if (empty(a)) return 1;        // empties last, regardless of direction
+        if (empty(b)) return -1;
+        let cmp;
+        if (type === 'number') cmp = Number(a) - Number(b);
+        else if (type === 'checkbox') cmp = (truthy(a) ? 1 : 0) - (truthy(b) ? 1 : 0);
+        else if (type === 'date') cmp = String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0;
+        else cmp = String(a).localeCompare(String(b), 'ja');
+        return cmp * sign;
+      });
+    },
+    toggleSort(c) {
+      if (!this.colSortable(c)) return;
+      if (this.editing) this.commitEdit();
+      const dir = this.sortDir(c) === 'asc' ? 'desc' : 'asc';   // null→asc, asc→desc, desc→asc (2-state)
+      if (!this.sort) this.snapshotOrder();   // remember the pre-sort order for the reset (↺) button
+      this.sort = { c, dir };
+      this.applySort();
+      this.collapse(0, c);   // row order changed → put the cursor at the sorted column's top
+      this.schedule();
+    },
+    clearSort() {   // the "↺ 元に戻す" button shown next to the caret while a column is sorted
+      if (!this.sort) return;
+      const c = this.sort.c;
+      this.sort = null;
+      this.restoreOrder();
+      this.collapse(0, c);
+      this.schedule();
+    },
+
+    // ── reorder (S3): native HTML5 drag-and-drop (auto-separates a click=select from a drag),
+    //    gated by movableRows / movableColumns in the Blade. Drop position is decided by which
+    //    half of the target the cursor is over; on drop we reorder the array, fire the SAME
+    //    event as <x-data-grid> (rows → id list, columns → key list), and clear any active sort
+    //    (a manual order supersedes it). The drop line + source dimming are CSS hooks. ──
+    rowDragStart(r, e) {
+      if (this.editing) this.commitEdit();
+      this.sel = null; this.anchor = null;        // reorganising, not selecting
+      this.dragRow = r;
+      if (e?.dataTransfer) {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', String(r));
+        const tr = e.currentTarget.closest('tr');     // drag image = the WHOLE row, not the gutter cell
+        if (tr) e.dataTransfer.setDragImage(tr, 24, tr.offsetHeight / 2);
+      }
+    },
+    // Insertion index from cursor Y vs row midpoints. Cursor above all → 0, below all → N, so
+    // OVERSHOOT past the table top/bottom clamps to first/last. Queries via $refs.grid (not
+    // currentTarget) because the listener is window-level — a drop anywhere on the page lands.
+    rowDragOverAt(e) {
+      if (this.dragRow === null) return;
+      const trs = Array.from(this.$refs.grid.querySelectorAll('tbody tr')).filter((el) => el.offsetHeight > 0);
+      let idx = trs.length;
+      for (let i = 0; i < trs.length; i++) {
+        const rect = trs[i].getBoundingClientRect();
+        if (e.clientY < rect.top + rect.height / 2) { idx = i; break; }
+      }
+      this.dropRow = idx;
+    },
+    rowDrop() {
+      if (this.dragRow !== null && this.dropRow !== null) {
+        let to = this.dropRow; const from = this.dragRow;
+        if (to !== from && to !== from + 1) {     // a real move
+          const next = this.rows.slice();
+          const [moved] = next.splice(from, 1);
+          if (from < to) to -= 1;                 // removal shifts the target
+          next.splice(to, 0, moved);
+          this.rows = next;
+          this.sort = null; this.sortSnapshot = null;   // manual order supersedes sort
+          this.emitRowOrder();
+          this.schedule();
+        }
+      }
+      this.clearRowDrag();
+    },
+    clearRowDrag() { this.dragRow = null; this.dropRow = null; },
+    emitRowOrder() { this.$dispatch('grid-rows-reordered', { order: this.rows.map((r) => r.id).filter((id) => id != null) }); },
+
+    colDragStart(c, e) {
+      if (this.editing) this.commitEdit();
+      this.sel = null; this.anchor = null;
+      this.dragCol = c;
+      if (e?.dataTransfer) {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', String(c));
+        const ghost = this.buildColGhost(c);          // drag image = the WHOLE column
+        if (ghost) e.dataTransfer.setDragImage(ghost, 24, 16);
+      }
+    },
+    colDragOverAt(e) {   // cursor X vs header midpoints; overshoot left/right clamps to first/last
+      if (this.dragCol === null) return;
+      const ths = Array.from(this.$refs.grid.querySelectorAll('thead [role="columnheader"]'));
+      let idx = ths.length;
+      for (let i = 0; i < ths.length; i++) {
+        const rect = ths[i].getBoundingClientRect();
+        if (e.clientX < rect.left + rect.width / 2) { idx = i; break; }
+      }
+      this.dropCol = idx;
+    },
+    // Window-level during a drag (added in the Blade) so a drop ANYWHERE on the page lands —
+    // overshooting far past the table edge still drops at first/last (the rowDragOverAt /
+    // colDragOverAt computation clamps). Self-guarded by dragRow/dragCol → multi-sheet safe,
+    // and preventDefault only while WE are dragging so other page drags are unaffected.
+    onWinDragOver(e) {
+      if (this.dragRow !== null) { e.preventDefault(); this.rowDragOverAt(e); }
+      else if (this.dragCol !== null) { e.preventDefault(); this.colDragOverAt(e); }
+    },
+    onWinDrop(e) {
+      if (this.dragRow !== null) { e.preventDefault(); this.rowDrop(); }
+      else if (this.dragCol !== null) { e.preventDefault(); this.colDrop(); }
+    },
+    // Build a styled WHOLE-column clone as the drag image (native default = just the grabbed header
+    // cell). Appended off-screen, removed in clearColDrag. Defensive: returns null on failure.
+    buildColGhost(c) {
+      const grid = this.$refs.grid;
+      const head = grid?.querySelectorAll('thead [role="columnheader"]')[c];
+      if (!head) return null;
+      const cells = [head, ...grid.querySelectorAll(`[data-c="${c}"]`)];
+      const wrap = document.createElement('div');
+      wrap.className = 'pn-sheet';
+      wrap.style.cssText = 'position:fixed; top:-9999px; left:-9999px; width:max-content; background:var(--color-base-100); box-shadow:0 6px 16px rgba(0,0,0,.18); opacity:.95;';
+      const table = document.createElement('table');
+      table.className = 'pn-sheet-table';
+      const tb = document.createElement('tbody');
+      cells.forEach((cell) => {
+        const tr = document.createElement('tr');
+        const td = cell.cloneNode(true);
+        td.removeAttribute('style');   // drop selection / transparent-gridline inline styles
+        tr.appendChild(td);
+        tb.appendChild(tr);
+      });
+      table.appendChild(tb);
+      wrap.appendChild(table);
+      document.body.appendChild(wrap);
+      colGhost = wrap;
+      return wrap;
+    },
+    colDrop() {
+      if (this.dragCol !== null && this.dropCol !== null) {
+        let to = this.dropCol; const from = this.dragCol;
+        if (to !== from && to !== from + 1) {
+          const next = this.cols.slice();
+          const [moved] = next.splice(from, 1);
+          if (from < to) to -= 1;
+          next.splice(to, 0, moved);
+          this.cols = next;
+          this.sort = null; this.sortSnapshot = null;
+          this.emitColOrder();
+          this.schedule();
+        }
+      }
+      this.clearColDrag();
+    },
+    clearColDrag() {
+      this.dragCol = null; this.dropCol = null;
+      if (colGhost) { colGhost.remove(); colGhost = null; }
+    },
+    emitColOrder() { this.$dispatch('grid-columns-reordered', { order: this.cols.map((c) => c.key).filter(Boolean) }); },
 
     // ── custom select-cell dropdown (pinion <x-select> look; no native <select>, so it
     //    survives Alpine re-renders, and is position:fixed so the grid overflow can't clip it) ──

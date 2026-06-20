@@ -22,6 +22,7 @@
             "resizeHandle": "absolute top-0 right-0 h-full w-1 cursor-col-resize select-none hover:bg-primary/40",
             "fillHandle": "absolute -bottom-1 -right-1 w-2 h-2 bg-primary rounded-[1px] cursor-crosshair",
             "colDragHandle": "cursor-grab select-none",
+            "sortCaret": "shrink-0 inline-grid place-content-center w-4 h-4 rounded-[calc(var(--radius-box)*0.4)] cursor-pointer select-none hover:bg-base-content/[0.08] transition-colors duration-100 [&_svg]:w-3 [&_svg]:h-3",
             "numStepper": "inline-grid place-content-center w-6 h-6 shrink-0 text-[length:var(--text-field-md)] leading-none text-base-content/55 hover:text-primary hover:bg-base-content/[0.08] rounded-[calc(var(--radius-box)*0.4)] cursor-pointer select-none transition-colors duration-100",
             "checkCell": "pn-sheet-check inline-grid place-content-center align-middle w-[1.15em] h-[1.15em] box-border cursor-pointer tune-border border-base-content/35 rounded-[calc(var(--radius-box)*0.4)] hover:border-primary transition-colors duration-100"
         }
