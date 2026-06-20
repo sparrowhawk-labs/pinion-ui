@@ -39,6 +39,7 @@ A **single** rectangular range (anchor + active corner; no disjoint multi-range)
 | **Drag the fill handle** | the square at the range's bottom-right; drag down/right to **tile** the source block's values into the new cells *(S3c)* |
 | **Delete / Backspace** | clear every cell in the range (`null`; checkbox → `false`) |
 | **Cmd/Ctrl+A** | select the whole grid |
+| **Cmd/Ctrl+Z** | undo the last change — steps back one mutation (edit / sort / reorder / fill / paste / clear / add row·column); repeatable to the load state |
 
 **Selection visual.** The range is drawn as **one continuous 2px primary border** around the whole block (an inset box-shadow on the perimeter cells; the just-outside gridline is set transparent so the stroke is never doubled — no layout shift). The interior gets a faint uniform `bg-primary/10` wash (multi-cell only); a single selected cell is border-only. There is **no per-cell "active cell" outline** — the selection reads as one block. The selected row-number(s) and column-header(s) get a **subtle connected indicator** (a faint primary wash + the label in primary), so the block visibly ties back to its row/column labels on every theme. Clipboard requires a secure context (localhost/https) and a user gesture; a denied read is a silent no-op.
 

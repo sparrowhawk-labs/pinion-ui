@@ -96,6 +96,8 @@ export function pinionSheet(opts = {}) {
     fillSrc: null,      // { r0,r1,c0,c1 } source rect captured at fill-handle drag start (S3c)
     fill: null,         // { r, c } current fill corner while dragging the handle, or null (S3c)
     filling: false,     // true while a fill-handle drag is in progress (S3c)
+    history: [],        // undo stack of PRE-mutation snapshots (Cmd/Ctrl+Z pops one); capped
+    lastState: null,    // snapshot of the current committed state; the next mutation pushes THIS
 
     init() {
       // Deep-clone out of the opts proxy, then let Alpine re-proxy our own copy.
@@ -105,6 +107,7 @@ export function pinionSheet(opts = {}) {
       this.anchor = this.sel ? { ...this.sel } : null;
       modelEl = this.$refs.model;   // capture once — see the closure note above
       this.flush();   // unconditional seed flush (mirrors data-grid: populates the carrier)
+      this.lastState = this.snapshot();   // undo baseline — the first mutation pushes this
     },
 
     get rowCount() { return this.rows.length; },
@@ -255,6 +258,7 @@ export function pinionSheet(opts = {}) {
       if (mod && (k === 'v' || k === 'V')) { e.preventDefault(); this.pasteRange(); return; }
       if (mod && (k === 'd' || k === 'D')) { e.preventDefault(); this.fillDown(); return; }
       if (mod && (k === 'a' || k === 'A')) { e.preventDefault(); this.selectAll(); return; }
+      if (mod && !e.shiftKey && (k === 'z' || k === 'Z')) { e.preventDefault(); this.undo(); return; }
       if (!mod && (k === 'Delete' || k === 'Backspace')) { e.preventDefault(); this.clearRange(); return; }
       if (k === 'ArrowUp') { e.preventDefault(); this.moveSelection(-1, 0, e.shiftKey); }
       else if (k === 'ArrowDown') { e.preventDefault(); this.moveSelection(1, 0, e.shiftKey); }
@@ -688,8 +692,49 @@ export function pinionSheet(opts = {}) {
       this.schedule();
     },
 
+    // ── undo (Cmd/Ctrl+Z): a stack of PRE-mutation snapshots. schedule() is the single mutation
+    //    chokepoint (every state change calls it once, guarded by a real-change check in its
+    //    caller), so recording history THERE covers edit / toggle / fill / paste / clear / step /
+    //    sort / reorder / add-row|col without touching each method. Captures rows+cols+sort
+    //    (presentation-only widths ride along on cols). Resize history is pushed at drag start. ──
+    snapshot() {
+      return {
+        rows: JSON.parse(JSON.stringify(this.rows)),
+        cols: JSON.parse(JSON.stringify(this.cols)),
+        sort: this.sort ? { ...this.sort } : null,
+        sortSnapshot: this.sortSnapshot ? this.sortSnapshot.slice() : null,
+      };
+    },
+    pushHistory(snap) {
+      if (!snap) return;
+      this.history.push(snap);
+      if (this.history.length > 100) this.history.shift();   // cap the stack
+    },
+    applyState(s) {
+      this.rows = JSON.parse(JSON.stringify(s.rows));
+      this.cols = JSON.parse(JSON.stringify(s.cols));
+      this.sort = s.sort ? { ...s.sort } : null;
+      this.sortSnapshot = s.sortSnapshot ? s.sortSnapshot.slice() : null;
+    },
+    clampSelection() {
+      if (!this.rows.length || !this.cols.length) { this.sel = null; this.anchor = null; return; }
+      const fix = (p) => p ? { r: Math.min(Math.max(p.r, 0), this.rows.length - 1), c: Math.min(Math.max(p.c, 0), this.cols.length - 1) } : p;
+      this.sel = fix(this.sel); this.anchor = fix(this.anchor);
+    },
+    undo() {
+      if (!this.history.length) return;
+      this.editing = null; this.openSel = null;   // drop any transient editor/dropdown
+      this.applyState(this.history.pop());         // restore the state before the last mutation
+      this.lastState = this.snapshot();            // this restored state is the new baseline
+      this.clampSelection();
+      if (syncMode !== 'manual') this.flush();     // push the restored rows to the carrier now
+      this.focusGrid();
+    },
+
     // ── carrier flush (IDENTICAL contract to data-grid) ──
     schedule() {
+      this.pushHistory(this.lastState);   // record the pre-mutation state, then refresh the baseline
+      this.lastState = this.snapshot();
       if (syncMode === 'manual') return;
       if (syncMode === 'debounce') {
         clearTimeout(flushTimer);
