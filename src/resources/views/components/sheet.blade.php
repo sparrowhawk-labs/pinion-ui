@@ -150,10 +150,12 @@
                         >
                             <span class="flex items-center gap-1">
                                 <span class="flex-1 truncate" x-text="col.title ?? col.key"></span>
-                                {{-- restore-to-original (↺) — shown only while THIS column is sorted; click resets to the
-                                     pre-sort row order. Native title = the "元に戻す" hover tooltip. --}}
-                                <template x-if="colSortable(c) && sortDir(c)">
-                                    <button type="button" draggable="false" class="{{ $c['sortCaret'] }}" title="元に戻す" aria-label="並べ替えを元に戻す" x-on:click.stop="clearSort()" x-on:mousedown.stop>
+                                {{-- restore-to-original (↺). ALWAYS rendered for sortable columns so the header
+                                     width is identical sorted vs unsorted — reserving its box (visibility-toggled,
+                                     not x-if-inserted) is what stops the column from widening on sort. Visible +
+                                     clickable only while THIS column is sorted; click resets the pre-sort order. --}}
+                                <template x-if="colSortable(c)">
+                                    <button type="button" draggable="false" class="{{ $c['sortCaret'] }}" x-bind:class="sortDir(c) ? '' : 'invisible pointer-events-none'" title="元に戻す" aria-label="並べ替えを元に戻す" x-on:click.stop="clearSort()" x-on:mousedown.stop>
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-base-content/55"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5"/></svg>
                                     </button>
                                 </template>
