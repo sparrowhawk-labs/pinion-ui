@@ -123,7 +123,7 @@
         tabindex="0"
         role="grid"
         x-on:keydown="onKey($event)"
-        x-on:mouseup.window="endDrag()"
+        x-on:mouseup.window="endDrag(); fillEnd()"
         @if($height) style="max-height: {{ $height }}" @endif
     >
         <table class="{{ $c['table'] }}">
@@ -207,10 +207,10 @@
                                 x-bind:data-r="r"
                                 x-bind:data-c="c"
                                 class="{{ $c['cell'] }} group/cell"
-                                x-bind:class="{ '{{ $c['cellEditing'] }}': isEd(r, c), '{{ $c['cellInRange'] }}': inRange(r, c) && hasRange() && !isEd(r, c), 'opacity-40': dragCol === c, 'pn-dropcol-before': dragCol !== null && dropCol === c, 'pn-dropcol-after': dragCol !== null && dropCol === c + 1 && c === cols.length - 1 }"
+                                x-bind:class="{ '{{ $c['cellEditing'] }}': isEd(r, c), '{{ $c['cellInRange'] }}': inRange(r, c) && hasRange() && !isEd(r, c), 'pn-fill-target': inFillPreview(r, c), 'opacity-40': dragCol === c, 'pn-dropcol-before': dragCol !== null && dropCol === c, 'pn-dropcol-after': dragCol !== null && dropCol === c + 1 && c === cols.length - 1 }"
                                 x-bind:style="isEd(r, c) ? '' : cellSelStyle(r, c)"
                                 x-on:mousedown="startSelect(r, c, $event)"
-                                x-on:mouseenter="extendDrag(r, c)"
+                                x-on:mouseenter="onCellEnter(r, c)"
                                 x-on:click="onCellClick(r, c, $event)"
                                 x-on:dblclick="beginEdit(r, c)"
                                 role="gridcell"
@@ -289,6 +289,15 @@
                                 <template x-if="!isEd(r, c) && col.type !== 'checkbox' && col.type !== 'number' && col.type !== 'select'">
                                     <span x-text="fmt(row[col.key])"></span>
                                 </template>
+
+                                @if($selectableRange)
+                                    {{-- fill handle (S3c): only on the range's bottom-right cell. mousedown.stop.prevent
+                                         so it starts a FILL drag, not a selection drag / text selection. Cells call
+                                         onCellEnter() (→ fillMoveTo while filling), window mouseup → fillEnd(). --}}
+                                    <template x-if="isFillCorner(r, c) && editableCol(c)">
+                                        <span class="{{ $c['fillHandle'] }} z-10" x-on:mousedown.stop.prevent="fillStart()" aria-hidden="true"></span>
+                                    </template>
+                                @endif
                             </td>
                         </template>
                     </tr>

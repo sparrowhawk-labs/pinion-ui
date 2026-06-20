@@ -18,10 +18,10 @@ Same public API and the **same `wire:model` data contract** as `<x-data-grid>` (
 | **S2** | single-range selection (drag-rect, Shift-extend, whole row/column), matrix TSV copy/paste, fill-down, Delete-clear, Cmd/Ctrl+A | **✅ shipped** |
 | **S3a** | column sort — header caret toggles asc ⇄ desc (idle glyph on header hover, solid primary ▲/▼ when active), `↺` restores the pre-sort order; empties sort last; destructive (reorders `rows`, flushes) | **✅ shipped** |
 | **S3b** | row / column reorder — native HTML5 drag (whole-row / whole-column drag image), drop line indicator, overshoot clamps to first/last, fires `grid-rows-reordered` / `grid-columns-reordered` (same shape as `<x-data-grid>`); a manual order supersedes an active sort | **✅ shipped** |
-| S3c | fill-handle drag (selection bottom-right handle) | planned |
+| **S3c** | fill-handle drag — the square at the range's bottom-right; drag down/right to extend along the dominant axis, **tiles** the source block's values into the new cells (copy only, no numeric series); selection grows to cover the result. Gated by `selectableRange` | **✅ shipped** |
 | S3d | column resize → host cutover | planned |
 
-The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). Fill-handle drag and column resize land in S3c/S3d.
+The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). Column resize lands in S3d.
 
 ## Range selection & clipboard (S2)
 
@@ -36,6 +36,7 @@ A **single** rectangular range (anchor + active corner; no disjoint multi-range)
 | **Cmd/Ctrl+C** | copy the range to the clipboard as **TSV** (rows `\n`, cells `\t`) |
 | **Cmd/Ctrl+V** | paste TSV from the active top-left, **clipped to existing bounds** (a single value fills the whole range; row/column growth stays the host's job) |
 | **Cmd/Ctrl+D** | fill-down — copy the range's top row into the rows below |
+| **Drag the fill handle** | the square at the range's bottom-right; drag down/right to **tile** the source block's values into the new cells *(S3c)* |
 | **Delete / Backspace** | clear every cell in the range (`null`; checkbox → `false`) |
 | **Cmd/Ctrl+A** | select the whole grid |
 

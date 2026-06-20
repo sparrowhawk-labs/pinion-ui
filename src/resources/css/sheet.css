@@ -75,6 +75,10 @@
     .pn-sheet .pn-sheet-table .pn-dropcol-before { box-shadow: inset 2px 0 0 0 var(--color-primary); }
     .pn-sheet .pn-sheet-table .pn-dropcol-after  { box-shadow: inset -2px 0 0 0 var(--color-primary); }
 
+    /* Fill-handle preview (S3c) — a dashed primary outline on the cells the handle drag will fill
+       (source block excluded). outline (not border/box-shadow) so it overlays without layout shift. */
+    .pn-sheet .pn-sheet-table .pn-fill-target { outline: 1px dashed var(--color-primary); outline-offset: -1px; }
+
     /* Composed checkbox glyph — matches <x-checkbox> / the editor task-list box and the
        data-grid .pn-grid-check, instead of a native tick. The box itself is composed via
        utilities on the element (see SheetComposer::checkCell); the check mark + filled

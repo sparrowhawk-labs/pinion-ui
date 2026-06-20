@@ -93,6 +93,9 @@ export function pinionSheet(opts = {}) {
     sortSnapshot: null, // [id,…] original row order, captured on first sort (for the 'clear' restore)
     dragRow: null, dropRow: null,   // row reorder: dragged index / insertion index (S3)
     dragCol: null, dropCol: null,   // column reorder: dragged index / insertion index (S3)
+    fillSrc: null,      // { r0,r1,c0,c1 } source rect captured at fill-handle drag start (S3c)
+    fill: null,         // { r, c } current fill corner while dragging the handle, or null (S3c)
+    filling: false,     // true while a fill-handle drag is in progress (S3c)
 
     init() {
       // Deep-clone out of the opts proxy, then let Alpine re-proxy our own copy.
@@ -399,6 +402,63 @@ export function pinionSheet(opts = {}) {
       }
       if (changed) this.schedule();
     },
+
+    // ── fill-handle drag (S3c): the small square at the range's BOTTOM-RIGHT. Dragging it
+    //    down/right (the only directions the corner affords) extends a preview rectangle along
+    //    the DOMINANT axis (whichever delta is larger — never diagonal at once), then TILES the
+    //    source block's values into the new cells (generalises Cmd/Ctrl+D fill-down; copy only,
+    //    NO numeric series extrapolation). On release the selection grows to cover the result. ──
+    isFillCorner(r, c) { return !!(this.sel && this.anchor) && !this.editing && r === this.rHi() && c === this.cHi(); },
+    fillStart() {
+      if (!this.sel || !this.anchor) return;
+      this.fillSrc = { r0: this.rLo(), r1: this.rHi(), c0: this.cLo(), c1: this.cHi() };
+      this.fill = { r: this.fillSrc.r1, c: this.fillSrc.c1 };
+      this.filling = true;
+    },
+    fillMoveTo(r, c) {   // clamp to extend down/right only (the handle sits at the bottom-right)
+      if (!this.filling) return;
+      this.fill = { r: Math.max(r, this.fillSrc.r1), c: Math.max(c, this.fillSrc.c1) };
+    },
+    // The preview/target rectangle along the dominant axis, or null when there's no extension yet.
+    fillRect() {
+      if (!this.filling || !this.fillSrc || !this.fill) return null;
+      const s = this.fillSrc;
+      const dDown = this.fill.r - s.r1, dRight = this.fill.c - s.c1;
+      if (dDown <= 0 && dRight <= 0) return null;
+      return dDown >= dRight
+        ? { r0: s.r0, r1: s.r1 + dDown, c0: s.c0, c1: s.c1 }      // vertical fill
+        : { r0: s.r0, r1: s.r1, c0: s.c0, c1: s.c1 + dRight };    // horizontal fill
+    },
+    inFillPreview(r, c) {   // cells the drag WILL fill (inside the rect, outside the source)
+      const f = this.fillRect(); if (!f) return false;
+      const s = this.fillSrc;
+      const inRect = r >= f.r0 && r <= f.r1 && c >= f.c0 && c <= f.c1;
+      const inSrc = r >= s.r0 && r <= s.r1 && c >= s.c0 && c <= s.c1;
+      return inRect && !inSrc;
+    },
+    fillEnd() {
+      if (!this.filling) return;
+      const f = this.fillRect(), s = this.fillSrc;
+      this.filling = false; this.fill = null; this.fillSrc = null;
+      if (!f) return;
+      const sH = s.r1 - s.r0 + 1, sW = s.c1 - s.c0 + 1;   // source block size (for the tiling modulo)
+      let changed = false;
+      for (let r = f.r0; r <= f.r1; r++) {
+        for (let c = f.c0; c <= f.c1; c++) {
+          if (r >= s.r0 && r <= s.r1 && c >= s.c0 && c <= s.c1) continue;   // leave the source intact
+          if (!this.editableCol(c) || !this.rows[r]) continue;
+          const srcVal = this.rows[s.r0 + ((r - s.r0) % sH)]?.[this.colKey(s.c0 + ((c - s.c0) % sW))];
+          const key = this.colKey(c), next = castValue(srcVal, this.colType(c));
+          if (this.rows[r][key] !== next) { this.rows[r][key] = next; changed = true; }
+        }
+      }
+      this.anchor = { r: f.r0, c: f.c0 };   // grow the selection to cover source ∪ filled
+      this.sel = { r: f.r1, c: f.c1 };
+      if (changed) this.schedule();
+      this.focusGrid();
+    },
+    // Cell mouseenter dispatcher: a fill-handle drag fills; a plain drag paints a selection.
+    onCellEnter(r, c) { if (this.filling) this.fillMoveTo(r, c); else this.extendDrag(r, c); },
 
     // ── sort (S3): DESTRUCTIVE — reorders `rows` (spreadsheet convention), flushes the new
     //    order. caret cycles asc → desc → clear; clear restores the order captured on the
