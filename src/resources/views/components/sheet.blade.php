@@ -10,6 +10,7 @@
     'movableRows' => false,
     'movableColumns' => false,
     'resizableColumns' => true,
+    'contextMenu' => true,
     'toolbar' => true,
     'sync' => 'debounce:400',
     'addRow' => true,
@@ -155,6 +156,7 @@
                             role="columnheader"
                             x-bind:aria-sort="sortDir(c) === 'asc' ? 'ascending' : (sortDir(c) === 'desc' ? 'descending' : 'none')"
                             x-on:click="selectCol(c, $event)"
+                            @if($contextMenu) x-on:contextmenu.prevent="openHeaderMenu(c, $event)" @endif
                             @if($movableColumns)
                             draggable="true"
                             x-on:dragstart="colDragStart(c, $event)"
@@ -233,6 +235,7 @@
                                 x-on:mouseenter="onCellEnter(r, c)"
                                 x-on:click="onCellClick(r, c, $event)"
                                 x-on:dblclick="beginEdit(r, c)"
+                                @if($contextMenu) x-on:contextmenu.prevent="openCellMenu(r, c, $event)" @endif
                                 role="gridcell"
                             >
                                 {{-- One <template x-if> per state×type. They are SIBLINGS (each x-if
@@ -358,6 +361,55 @@
             </li>
         </template>
     </ul>
+
+    @if($contextMenu)
+        {{-- Right-click context menu (S3e). Single sheet-level instance, driven by `menu`,
+             fixed-positioned (set in menuAt() with viewport clamp) so the grid overflow never
+             clips it. Copy is always available; everything else is gated by editable. --}}
+        <ul
+            x-show="menu"
+            x-cloak
+            x-transition.opacity.duration.100ms
+            x-on:click.outside="closeMenu()"
+            x-on:keydown.escape.window="closeMenu()"
+            x-on:contextmenu.prevent
+            x-bind:style="menu ? `top:${menu.y}px; left:${menu.x}px` : ''"
+            class="fixed z-50 min-w-52 bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-lg p-1 text-[length:var(--text-field-sm)]"
+            role="menu"
+        >
+            @if($editable)
+                {{-- 列の型 — hover flyout submenu; converts the right-clicked column's type (coerces cells). --}}
+                <li class="group/typesub relative">
+                    <div class="{{ $sel['option'] }} justify-between" role="menuitem">
+                        <span>列の型</span>
+                        <svg class="w-3.5 h-3.5 -mr-0.5 text-base-content/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                    <ul class="hidden group-hover/typesub:block absolute left-full top-0 min-w-36 bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-lg p-1" role="menu">
+                        <template x-for="t in colTypeOptions" x-bind:key="t.value">
+                            <li class="{{ $sel['option'] }}" x-bind:class="colType(menu?.c) === t.value ? '{{ $sel['optionSelected'] }}' : ''" role="menuitemradio" x-bind:aria-checked="colType(menu?.c) === t.value" x-on:click="convertColumn(menu?.c, t.value)">
+                                <span x-text="t.label"></span>
+                                <svg x-show="colType(menu?.c) === t.value" class="{{ $sel['optionCheck'] }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </li>
+                        </template>
+                    </ul>
+                </li>
+                <li class="my-1 border-t border-base-200" role="separator"></li>
+            @endif
+
+            <li class="{{ $sel['option'] }} justify-between" role="menuitem" x-on:click="copyRange(); closeMenu()"><span>コピー</span><span class="text-base-content/35 text-xs tabular-nums">⌘C</span></li>
+            @if($editable)
+                <li class="{{ $sel['option'] }} justify-between" role="menuitem" x-on:click="pasteRange(); closeMenu()"><span>貼り付け</span><span class="text-base-content/35 text-xs tabular-nums">⌘V</span></li>
+                <li class="{{ $sel['option'] }} justify-between" role="menuitem" x-on:click="clearRange(); closeMenu()"><span>クリア</span><span class="text-base-content/35 text-xs tabular-nums">Del</span></li>
+                <li class="my-1 border-t border-base-200" role="separator"></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertRow(menu?.r)"><span>行を上に挿入</span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertRow((menu?.r ?? 0) + 1)"><span>行を下に挿入</span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="deleteRows()"><span>行を削除</span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertColumn(menu?.c)"><span>列を左に挿入</span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertColumn((menu?.c ?? 0) + 1)"><span>列を右に挿入</span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="deleteColumns()"><span>列を削除</span></li>
+            @endif
+        </ul>
+    @endif
 
     {{-- wire:model carrier. sheet.js writes the row-array JSON string here and dispatches
          `input` so Livewire syncs per the sync cadence (a hidden input transmits a string;

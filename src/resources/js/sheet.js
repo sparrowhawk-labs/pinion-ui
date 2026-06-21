@@ -101,6 +101,7 @@ export function pinionSheet(opts = {}) {
     resizing: null,     // { c, startX, startW, snap } during a column-resize drag (S3d), or null
     widthsFrozen: false,// once true, the table is table-fixed with explicit per-column widths (S3d)
     gutterWidth: null,  // frozen row-number gutter width in px (S3d)
+    menu: null,         // { x, y, r, c } open right-click context menu (S3e), or null
 
     init() {
       // Deep-clone out of the opts proxy, then let Alpine re-proxy our own copy.
@@ -195,6 +196,7 @@ export function pinionSheet(opts = {}) {
     // Selection STARTS on mousedown (so a drag can paint a rectangle); a plain click only
     // toggles a checkbox. Shift = extend the range from the existing anchor.
     startSelect(r, c, e) {
+      if (e && e.button === 2) return;   // right-click is the context menu's (handled by contextmenu)
       if (this.editing && !this.isEd(r, c)) this.commitEdit();
       if (e && e.shiftKey && this.anchor) { this.sel = { r, c }; }   // extend: keep anchor fixed
       else { this.collapse(r, c); this.dragging = true; }           // new anchor; begin a drag
@@ -691,6 +693,90 @@ export function pinionSheet(opts = {}) {
       this.pushHistory(snap);              // make the resize (and first-time freeze) undoable
       this.lastState = this.snapshot();
       if (startW !== this.cols[c].width) this.$dispatch('grid-column-resized', { key: this.colKey(c), width: this.cols[c].width });
+    },
+
+    // ── right-click context menu (S3e): a sheet-specific menu (browser default suppressed). Acts
+    //    on the current selection / the right-clicked cell+column. Column TYPE conversion (per
+    //    column) coerces every cell via castValue; →select seeds options from the distinct existing
+    //    values. Structural ops (insert/delete row·column) are the same standalone-convenience as
+    //    the toolbar add buttons (Livewire hosts own structure and pass :context-menu="false").
+    //    Every action routes through schedule() so it is flushed + undoable. ──
+    colTypeOptions: [
+      { value: 'text', label: 'テキスト' },
+      { value: 'number', label: '数値' },
+      { value: 'date', label: '日付' },
+      { value: 'select', label: '選択肢' },
+      { value: 'checkbox', label: 'チェック' },
+    ],
+    menuAt(e, r, c) {
+      const W = 220, H = 360;   // clamp so the menu stays in the viewport
+      this.openSel = null;      // close any open select dropdown
+      this.menu = {
+        x: Math.max(8, Math.min(e.clientX, window.innerWidth - W - 8)),
+        y: Math.max(8, Math.min(e.clientY, window.innerHeight - H - 8)),
+        r, c,
+      };
+    },
+    openCellMenu(r, c, e) {
+      if (this.editing) this.commitEdit();
+      if (!this.inRange(r, c)) this.collapse(r, c);   // right-click outside the range re-selects
+      this.menuAt(e, r, c);
+    },
+    openHeaderMenu(c, e) {
+      if (this.editing) this.commitEdit();
+      this.collapse(0, c);   // target column c (single cell at its top — keeps row ops safe)
+      this.menuAt(e, 0, c);
+    },
+    closeMenu() { this.menu = null; },
+
+    convertColumn(c, type) {
+      this.closeMenu();
+      const col = this.cols[c];
+      if (!col || col.type === type) return;
+      if (type === 'select') {
+        const seen = new Set();
+        this.rows.forEach((row) => { const v = row[col.key]; if (v !== null && v !== undefined && v !== '') seen.add(String(v)); });
+        col.options = Array.from(seen);   // seed choices from the distinct existing values
+      }
+      col.type = type;
+      this.rows.forEach((row) => { row[col.key] = castValue(row[col.key], type); });   // coerce cells
+      this.schedule();
+    },
+    insertRow(at) {
+      const blank = {};
+      this.cols.forEach((col) => { blank[col.key] = col.type === 'checkbox' ? false : null; });
+      this.rows.splice(Math.max(0, Math.min(at, this.rows.length)), 0, blank);
+      this.collapse(Math.max(0, Math.min(at, this.rows.length - 1)), this.sel?.c ?? 0);
+      this.closeMenu(); this.schedule();
+    },
+    deleteRows() {
+      if (!this.sel) { this.closeMenu(); return; }
+      const lo = this.rLo(), hi = this.rHi();
+      this.rows.splice(lo, hi - lo + 1);
+      if (!this.rows.length) { this.sel = null; this.anchor = null; }
+      else this.collapse(Math.min(lo, this.rows.length - 1), this.sel.c);
+      this.closeMenu(); this.schedule();
+    },
+    insertColumn(at) {
+      const keys = this.cols.map((c) => c.key);
+      let n = this.cols.length + 1, key = 'col_' + n;
+      while (keys.includes(key)) { n++; key = 'col_' + n; }
+      const col = { key, title: '列 ' + n, type: 'text' };
+      if (this.widthsFrozen) col.width = 120;   // keep table-fixed consistent (else the new col gets 0)
+      this.cols.splice(Math.max(0, Math.min(at, this.cols.length)), 0, col);
+      this.rows.forEach((row) => { row[key] = null; });
+      this.collapse(this.sel?.r ?? 0, Math.max(0, Math.min(at, this.cols.length - 1)));
+      this.closeMenu(); this.schedule();
+    },
+    deleteColumns() {
+      if (!this.sel) { this.closeMenu(); return; }
+      const lo = this.cLo(), hi = this.cHi();
+      const removed = this.cols.slice(lo, hi + 1).map((c) => c.key);
+      this.cols.splice(lo, hi - lo + 1);
+      this.rows.forEach((row) => removed.forEach((k) => { delete row[k]; }));
+      if (!this.cols.length) { this.sel = null; this.anchor = null; }
+      else this.collapse(this.sel.r, Math.min(lo, this.cols.length - 1));
+      this.closeMenu(); this.schedule();
     },
 
     // ── custom select-cell dropdown (pinion <x-select> look; no native <select>, so it

@@ -19,7 +19,8 @@ Same public API and the **same `wire:model` data contract** as `<x-data-grid>` (
 | **S3a** | column sort — header caret toggles asc ⇄ desc (idle glyph on header hover, solid primary ▲/▼ when active), `↺` restores the pre-sort order; empties sort last; destructive (reorders `rows`, flushes) | **✅ shipped** |
 | **S3b** | row / column reorder — native HTML5 drag (whole-row / whole-column drag image), drop line indicator, overshoot clamps to first/last, fires `grid-rows-reordered` / `grid-columns-reordered` (same shape as `<x-data-grid>`); a manual order supersedes an active sort | **✅ shipped** |
 | **S3c** | fill-handle drag — the square at the range's bottom-right; drag down/right to extend along the dominant axis, **tiles** the source block's values into the new cells (copy only, no numeric series); selection grows to cover the result. Gated by `selectableRange` | **✅ shipped** |
-| **S3d** | column resize — drag a header's right edge. The table is content-auto until the first resize, which **lazily freezes** the rendered widths and flips to `table-fixed` (per-column widths become authoritative; widening past the container scrolls horizontally). Width is presentation (rides on `cols`, never flushed), undoable, fires `grid-column-resized` | **✅ shipped** |
+| **S3d** | column resize — drag a header's right edge. The table is content-auto until the first resize, which **lazily freezes** the rendered widths and flips to `table-fixed` (per-column widths become authoritative; widening past the container scrolls horizontally; 120px floor; the frame hugs the table when narrowed). Width is presentation (rides on `cols`, never flushed), undoable, fires `grid-column-resized` | **✅ shipped** |
+| **S3e** | right-click context menu — column-type conversion (coerces every cell; →select seeds options from distinct values), copy / paste / clear, insert·delete row / column. Standalone convenience (gate with `:context-menu="false"`); every action is undoable | **✅ shipped** |
 
 The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). **S3 is complete** — next is the host cutover (replacing the M5 `<x-data-grid>` table view).
 
@@ -83,6 +84,7 @@ Alpine.data('pinionCalendar', pinionCalendar);
 | `movableRows` | `bool` | `false` | Drag rows to reorder → fires `grid-rows-reordered`. *(S3b)* |
 | `movableColumns` | `bool` | `false` | Drag column headers to reorder → fires `grid-columns-reordered`. *(S3b)* |
 | `resizableColumns` | `bool` | `true` | Drag a header's right edge to resize → fires `grid-column-resized`. First resize freezes widths to `table-fixed`. *(S3d)* |
+| `contextMenu` | `bool` | `true` | Right-click a cell/header for a sheet menu: column-type conversion, copy/paste/clear, insert/delete row·column. Set `false` so a Livewire host owns structure. *(S3e)* |
 | `toolbar` | `bool` | `true` | Built-in top bar: a **toolbox** of icon-only ops + row count (+ `actions` slot + mobile help). |
 | `addRow` | `bool` | `true` | Show the built-in add-row icon button in the toolbox. *(inert at S0; dispatches to host in S1)* |
 | `addColumn` | `bool` | `true` | Show the built-in add-column icon button in the toolbox. *(inert at S0; dispatches to host in S1)* |
