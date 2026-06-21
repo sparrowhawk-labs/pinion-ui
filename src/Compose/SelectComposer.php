@@ -42,7 +42,7 @@ class SelectComposer
             'chip'          => self::chip($effectiveColor),
             'chipRemove'    => 'shrink-0 inline-flex text-current/60 hover:text-current cursor-pointer',
             'chevron'       => 'pointer-events-none shrink-0 size-4 text-base-content/40 transition-transform',
-            'dropdown'      => 'absolute z-40 mt-1 w-full max-h-72 overflow-auto bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-lg p-1',
+            'dropdown'      => 'absolute z-40 mt-1 w-full max-h-72 overflow-auto bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-[var(--shadow-box)] p-1',
             'option'        => self::option($size),
             'optionSelected' => self::optionSelected($effectiveColor),
             'optionDisabled' => 'opacity-50 cursor-not-allowed pointer-events-none',

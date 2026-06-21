@@ -7,7 +7,7 @@
             "root": "text-base-content",
             "body": "px-[var(--space-element)] py-[var(--space-element)]",
             "prose": "pn-prose text-[length:var(--text-field-md)] min-h-[14rem] focus:outline-none",
-            "menu": "fixed z-50 flex flex-nowrap items-center gap-0.5 p-1 bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-lg",
+            "menu": "fixed z-50 flex flex-nowrap items-center gap-0.5 p-1 bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-[var(--shadow-box)]",
             "menuGroup": "flex flex-nowrap items-center gap-0.5 shrink-0",
             "button": "min-w-8 h-8 px-2 text-[length:var(--text-field-sm)] shrink-0 inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/55 hover:text-base-content hover:bg-base-content/[0.06] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75]",
             "buttonActive": "bg-base-content/10 text-base-content",

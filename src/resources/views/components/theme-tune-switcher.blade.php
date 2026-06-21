@@ -13,10 +13,10 @@
     // The look matches the visualize playground switcher. (Distinct from <x-theme-switcher>,
     // which is a simple light/dark toggle button.)
     $themeList = $themes ?? ['reactive', 'pinion', 'light', 'dark', 'night', 'business', 'corporate', 'dim', 'nord', 'cupcake', 'emerald', 'forest', 'dracula', 'sunset', 'winter'];
-    $tuneList  = $tunes ?? ['default', 'minimal', 'sharp', 'soft', 'playful', 'corporate', 'brutal', 'elegant', 'bold', 'pixel', 'tech'];
+    $tuneList  = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft'];
     $wrap = $position === 'inline'
         ? 'inline-flex items-center gap-3'
-        : 'fixed top-3 right-4 z-[900] flex items-center gap-3 px-3 py-2 rounded-[var(--radius-box)] tune-border border-base-content/15 bg-base-100/90 backdrop-blur shadow-sm';
+        : 'fixed top-3 right-4 z-[900] flex items-center gap-3 px-3 py-2 rounded-[var(--radius-box)] tune-border border-base-content/15 bg-base-100/90 backdrop-blur shadow-[var(--shadow-box)]';
     $chev  = '<svg class="size-3 text-base-content/50" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>';
     $check = '<svg class="ml-auto size-3 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 01.006 1.414l-7.5 7.6a1 1 0 01-1.42.005l-3.5-3.5a1 1 0 011.414-1.414l2.79 2.79 6.794-6.886a1 1 0 011.416-.009z" clip-rule="evenodd"/></svg>';
     $dots  = '<span class="size-2 rounded-full bg-primary"></span><span class="size-2 rounded-full bg-secondary"></span><span class="size-2 rounded-full bg-accent"></span>';
@@ -45,7 +45,7 @@
             <span x-bind:class="themeOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
         </button>
         <ul x-show="themeOpen" x-cloak x-transition.opacity.duration.100ms role="listbox"
-            class="absolute top-full right-0 mt-1 z-50 w-60 max-h-80 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-lg py-1">
+            class="absolute top-full right-0 mt-1 z-50 w-60 max-h-80 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
             <template x-for="t in themes" x-bind:key="t">
                 <li>
                     <button type="button" x-on:click="setTheme(t)" role="option" x-bind:aria-selected="theme === t"
@@ -69,7 +69,7 @@
             <span x-bind:class="tuneOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
         </button>
         <ul x-show="tuneOpen" x-cloak x-transition.opacity.duration.100ms role="listbox"
-            class="absolute top-full right-0 mt-1 z-50 w-60 max-h-96 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-lg py-1">
+            class="absolute top-full right-0 mt-1 z-50 w-60 max-h-96 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
             <template x-for="t in tunes" x-bind:key="t">
                 <li>
                     <button type="button" x-on:click="setTune(t)" role="option" x-bind:aria-selected="tune === t"

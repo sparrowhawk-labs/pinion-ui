@@ -46,540 +46,659 @@
     font-style: normal;
     font-display: swap;
 }
+/* ============================================================================
+   TUNE PRESETS — v2 architecture (base + delta × strength, with override API)
+   ============================================================================
 
-/* --- Tune Presets --- */
+   Three-tier custom-property system behind every UNCHANGED public token name
+   (--radius-box, --border, --space-*, --h-field-*, --shadow-box, …):
 
-[data-tune="default"] {
+     --tb-{token}   BASE / zero-point      set once on :root, constant
+     --td-{token}   signed DELTA           set per [data-tune="…"] — the tune's
+                                           character. Defaults to 0 on [data-tune]
+                                           so calc() never sees an undefined delta.
+     --ovr-{token}  consumer OVERRIDE      escape hatch (inline / utility /
+                                           data-tune-{axis}). UNSET by default.
+
+   Plus one scalar:
+     --tune-k       STRENGTH               [data-tune-strength="xs|sm|md|lg|xl"]
+                                           scales the DELTA only (default tune,
+                                           all Δ=0, is strength-invariant).
+
+   Numeric resolver (3-level, a11y floor wraps the WHOLE thing):
+     --radius-box: max(0px,
+       var(--ovr-radius-box,
+           calc( var(--tb-radius-box) + var(--td-radius-box) * var(--tune-k) )));
+   Any --ovr-X set ⇒ k is bypassed for X (explicit override = absolute value).
+   The floor max()/clamp() wraps var(--ovr, calc), so neither strength NOR an
+   override can breach a floor.
+
+   Non-numeric tokens (font-family, assembled shadows) use a plain 2-level
+   var(--ovr-X, var(--td-X, <base>)) form — NO k.
+
+   k-EXEMPT (authored as literals, never run through calc/k):
+     - --font-family-*       (font = tune identity, invariant #5)
+     - pill literals         (--radius-selector:999px stays a pill at any k)
+     - --font-size-base      (minimal .9375 / pixel 1.125 — page-level scale)
+     - draft wobble radius  (multi-value radius literal, like pills)
+
+   OVERRIDE CLEAR RULE (O1 — footgun): to clear an override, REMOVE the property
+   (removeProperty). NEVER set --ovr-X to "" — an empty string is a *valid empty
+   substitution*: it does NOT trigger the var() fallback, it makes the public
+   token invalid and silently drops the tune.
+
+   AXIS OWNERSHIP (O2): the three axis macros (shadow/radius/density) win
+   STRUCTURALLY (first arm of var()), not by source order — presets write --td-*,
+   axes write --ovr-*, disjoint properties. Each axis owns a DISJOINT --ovr-* set.
+
+   Shadow base is INVERTED (O3): base = NO shadow (--tb-sh*-* : 0). Only tunes
+   that WANT a shadow add positive --td-sh*-* deltas. Blur shadows scale by the
+   damped --shadow-k; hard-offset shadows (brutal/pixel) scale by full --tune-k.
+   ============================================================================ */
+
+/* --- BASE zero-point (= the `default` tune, all deltas 0) --- */
+:root {
     /* Shape */
-    --radius-box: 0.5rem;
-    --radius-field: 0.25rem;
-    --radius-selector: 1rem;
-    --border: 1px;
-    --depth: 1;
-    --noise: 0;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
+    --tb-radius-box: 0.5rem;          /* 8px */
+    --tb-radius-field: 0.375rem;      /* 6px — ⚠ SEMVER: v1 was 0.25rem */
+    --tb-radius-selector: 1rem;
+    --tb-border: 1px;
     /* Spacing */
-    --space-section: 5rem;
-    --space-section-inner: 3rem;
-    --space-element: 1.5rem;
-    --space-compact: 0.75rem;
-    --space-text: 1rem;
-    --space-inline: 0.5rem;
-    /* Font */
-    --font-heading: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: ui-monospace, "SFMono-Regular", monospace;
-    --font-weight-heading: 700;
-    /* Component size — xs / sm / md / lg
-       --px-field-* : btn / alert / accordion / tab など click/container 系
-       --px-input-* : text input / textarea / select など text-entry 系（より tight）
-       --py-input-* : textarea など height-fluid な text-entry の縦 padding */
-    --h-field-xs: 1.75rem;
-    --h-field-sm: 2rem;
-    --h-field-md: 2.5rem;
-    --h-field-lg: 3rem;
-    --px-field-xs: 0.625rem;
-    --px-field-sm: 0.75rem;
-    --px-field-md: 1rem;
-    --px-field-lg: 1.5rem;
-    --px-input-xs: 0.5rem;
-    --px-input-sm: 0.5rem;
-    --px-input-md: 0.75rem;
-    --px-input-lg: 1rem;
-    --py-input-xs: 0.25rem;
-    --py-input-sm: 0.375rem;
-    --py-input-md: 0.5rem;
-    --py-input-lg: 0.75rem;
-    --text-field-xs: 0.75rem;
-    --text-field-sm: 0.875rem;
-    --text-field-md: 0.875rem;
-    --text-field-lg: 1rem;
-}
-
-[data-tune="sharp"] {
-    --radius-box: 0;
-    --radius-field: 0;
-    --radius-selector: 0;
-    --border: 1px;
+    --tb-space-section: 5rem;
+    --tb-space-section-inner: 3rem;
+    --tb-space-element: 1.5rem;
+    --tb-space-compact: 0.75rem;
+    --tb-space-text: 1rem;
+    --tb-space-inline: 0.5rem;
+    /* Typographic rhythm (NEW tokens) */
+    --tb-tracking-heading: -0.01em;
+    --tb-leading-body: 1.6;
+    --tb-type-scale-ratio: 1.2;
+    /* Heading weight */
+    --tb-fwh: 600;
+    /* Component size — xs / sm / md / lg */
+    --tb-h-field-xs: 1.75rem;
+    --tb-h-field-sm: 2rem;
+    --tb-h-field-md: 2.5rem;
+    --tb-h-field-lg: 3rem;
+    --tb-px-field-xs: 0.625rem;
+    --tb-px-field-sm: 0.75rem;
+    --tb-px-field-md: 1rem;
+    --tb-px-field-lg: 1.5rem;
+    --tb-px-input-xs: 0.5rem;
+    --tb-px-input-sm: 0.5rem;
+    --tb-px-input-md: 0.75rem;
+    --tb-px-input-lg: 1rem;
+    --tb-py-input-xs: 0.25rem;
+    --tb-py-input-sm: 0.375rem;
+    --tb-py-input-md: 0.5rem;
+    --tb-py-input-lg: 0.75rem;
+    --tb-text-field-xs: 0.75rem;
+    --tb-text-field-sm: 0.875rem;
+    --tb-text-field-md: 0.875rem;
+    --tb-text-field-lg: 1rem;
+    /* Shadow system — base is FLAT (O3): no shadow until a tune opts in. */
+    --tb-sh1-x: 0px;
+    --tb-sh1-y: 0px;
+    --tb-sh1-blur: 0px;
+    /* Legacy scalars — defined (invariant #4) but no longer consumed. */
     --depth: 1;
     --noise: 0;
     --size-selector: 0.25rem;
     --size-field: 0.25rem;
-    --space-section: 4rem;
-    --space-section-inner: 2.5rem;
-    --space-element: 1.25rem;
-    --space-compact: 0.625rem;
-    --space-text: 0.875rem;
-    --space-inline: 0.375rem;
-    --font-heading: "Instrument Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Instrument Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: ui-monospace, "SFMono-Regular", monospace;
-    --font-weight-heading: 700;
-    --h-field-xs: 1.625rem;
-    --h-field-sm: 1.875rem;
-    --h-field-md: 2.375rem;
-    --h-field-lg: 2.875rem;
-    --px-field-xs: 0.5rem;
-    --px-field-sm: 0.625rem;
-    --px-field-md: 0.875rem;
-    --px-field-lg: 1.25rem;
-    --px-input-xs: 0.375rem;
-    --px-input-sm: 0.5rem;
-    --px-input-md: 0.625rem;
-    --px-input-lg: 0.875rem;
-    --py-input-xs: 0.25rem;
-    --py-input-sm: 0.25rem;
-    --py-input-md: 0.375rem;
-    --py-input-lg: 0.5rem;
-    --text-field-xs: 0.75rem;
-    --text-field-sm: 0.8125rem;
-    --text-field-md: 0.8125rem;
-    --text-field-lg: 0.9375rem;
 }
 
-[data-tune="soft"] {
-    --radius-box: 1rem;
-    --radius-field: 0.5rem;
-    --radius-selector: 1rem;
-    --border: 1px;
-    --depth: 1;
-    --noise: 0;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
-    --space-section: 6rem;
-    --space-section-inner: 3.5rem;
-    --space-element: 2rem;
-    --space-compact: 1rem;
-    --space-text: 1.25rem;
-    --space-inline: 0.625rem;
-    --font-heading: "Quicksand", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Nunito", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: ui-monospace, "SFMono-Regular", monospace;
-    --font-weight-heading: 800;
-    --h-field-xs: 1.875rem;
-    --h-field-sm: 2.125rem;
-    --h-field-md: 2.625rem;
-    --h-field-lg: 3.25rem;
-    --px-field-xs: 0.75rem;
-    --px-field-sm: 0.875rem;
-    --px-field-md: 1.125rem;
-    --px-field-lg: 1.75rem;
-    --px-input-xs: 0.5rem;
-    --px-input-sm: 0.625rem;
-    --px-input-md: 0.75rem;
-    --px-input-lg: 1.125rem;
-    --py-input-xs: 0.375rem;
-    --py-input-sm: 0.5rem;
-    --py-input-md: 0.625rem;
-    --py-input-lg: 0.875rem;
-    --text-field-xs: 0.75rem;
-    --text-field-sm: 0.875rem;
-    --text-field-md: 0.875rem;
-    --text-field-lg: 1rem;
+/* --- STRENGTH scalars --- */
+/* --tune-k scales the delta only; --shadow-k is the damped driver for blur
+   shadows (atmospheric → tone gently). Hard-offset shadows use full --tune-k. */
+:root,
+[data-tune] {
+    --tune-k: 1;
+    --shadow-k: clamp(0.5, calc(0.5 + 0.5 * var(--tune-k)), 1.6);
+    --shadow-color: rgb(0 0 0 / 0.06);
+    --shadow-ink: currentColor;
+}
+[data-tune-strength="xs"] { --tune-k: 0.45; }
+[data-tune-strength="sm"] { --tune-k: 0.70; }
+[data-tune-strength="md"] { --tune-k: 1; }
+[data-tune-strength="lg"] { --tune-k: 1.45; }
+[data-tune-strength="xl"] { --tune-k: 1.90; }
+
+/* --- PUBLIC-TOKEN RESOLVERS (on every tuned subtree) ---
+   Defaults every --td-* to 0 / base so calc()/var() never see an undefined
+   delta, then resolves each public token: floor( ovr ?? base + delta·k ). */
+[data-tune] {
+    /* delta defaults (numeric) */
+    --td-radius-box: 0rem;
+    --td-radius-field: 0rem;
+    --td-radius-selector: 0rem;
+    --td-border: 0rem;
+    --td-space-section: 0rem;
+    --td-space-section-inner: 0rem;
+    --td-space-element: 0rem;
+    --td-space-compact: 0rem;
+    --td-space-text: 0rem;
+    --td-space-inline: 0rem;
+    --td-tracking-heading: 0rem;
+    --td-leading-body: 0;
+    --td-type-scale-ratio: 0;
+    --td-fwh: 0;
+    --td-h-field-xs: 0rem;
+    --td-h-field-sm: 0rem;
+    --td-h-field-md: 0rem;
+    --td-h-field-lg: 0rem;
+    --td-px-field-xs: 0rem;
+    --td-px-field-sm: 0rem;
+    --td-px-field-md: 0rem;
+    --td-px-field-lg: 0rem;
+    --td-px-input-xs: 0rem;
+    --td-px-input-sm: 0rem;
+    --td-px-input-md: 0rem;
+    --td-px-input-lg: 0rem;
+    --td-py-input-xs: 0rem;
+    --td-py-input-sm: 0rem;
+    --td-py-input-md: 0rem;
+    --td-py-input-lg: 0rem;
+    --td-text-field-xs: 0rem;
+    --td-text-field-sm: 0rem;
+    --td-text-field-md: 0rem;
+    --td-text-field-lg: 0rem;
+    --td-sh1-x: 0px;
+    --td-sh1-y: 0px;
+    --td-sh1-blur: 0px;
+
+    /* ---- Shape ---- */
+    --radius-box: max(0px,
+        var(--ovr-radius-box,
+            calc(var(--tb-radius-box) + var(--td-radius-box) * var(--tune-k))));
+    --radius-field: max(0px,
+        var(--ovr-radius-field,
+            calc(var(--tb-radius-field) + var(--td-radius-field) * var(--tune-k))));
+    --radius-selector: max(0px,
+        var(--ovr-radius-selector,
+            calc(var(--tb-radius-selector) + var(--td-radius-selector) * var(--tune-k))));
+    /* F7: border floor 0.5px (editorial ships 0.5px hairline by design). */
+    --border: max(0.5px,
+        var(--ovr-border,
+            calc(var(--tb-border) + var(--td-border) * var(--tune-k))));
+
+    /* ---- Spacing ---- */
+    --space-section: max(0px,
+        var(--ovr-space-section,
+            calc(var(--tb-space-section) + var(--td-space-section) * var(--tune-k))));
+    --space-section-inner: max(0px,
+        var(--ovr-space-section-inner,
+            calc(var(--tb-space-section-inner) + var(--td-space-section-inner) * var(--tune-k))));
+    --space-element: max(0px,
+        var(--ovr-space-element,
+            calc(var(--tb-space-element) + var(--td-space-element) * var(--tune-k))));
+    --space-text: max(0px,
+        var(--ovr-space-text,
+            calc(var(--tb-space-text) + var(--td-space-text) * var(--tune-k))));
+    /* F8: WCAG 2.5.8 spacing exception — inline/compact floored at 8px. */
+    --space-compact: max(8px,
+        var(--ovr-space-compact,
+            calc(var(--tb-space-compact) + var(--td-space-compact) * var(--tune-k))));
+    --space-inline: max(8px,
+        var(--ovr-space-inline,
+            calc(var(--tb-space-inline) + var(--td-space-inline) * var(--tune-k))));
+
+    /* ---- Typographic rhythm ---- */
+    /* F6: tracking clamp. */
+    --tracking-heading: clamp(-0.04em,
+        var(--ovr-tracking-heading,
+            calc(var(--tb-tracking-heading) + var(--td-tracking-heading) * var(--tune-k))),
+        0.18em);
+    /* F5: body leading clamp(1.4 … 2). */
+    --leading-body: clamp(1.4,
+        var(--ovr-leading-body,
+            calc(var(--tb-leading-body) + var(--td-leading-body) * var(--tune-k))),
+        2);
+    /* type scale clamp(1.05 … 1.4). */
+    --type-scale-ratio: clamp(1.05,
+        var(--ovr-type-scale-ratio,
+            calc(var(--tb-type-scale-ratio) + var(--td-type-scale-ratio) * var(--tune-k))),
+        1.4);
+
+    /* ---- Heading weight ---- */
+    /* Load-bearing weight clamp: corporate at xl would underflow without it. */
+    --font-weight-heading: clamp(100,
+        var(--ovr-font-weight-heading,
+            calc(var(--tb-fwh) + var(--td-fwh) * var(--tune-k))),
+        900);
+
+    /* ---- Component height ---- */
+    /* F1: h-field floor 24px (xs/sm/md), 28px (lg). NOT 40/44 — corporate/tech
+       ship 36px md by design; 44px is a data-tune-touch opt-in, never here. */
+    --h-field-xs: max(24px,
+        var(--ovr-h-field-xs,
+            calc(var(--tb-h-field-xs) + var(--td-h-field-xs) * var(--tune-k))));
+    --h-field-sm: max(24px,
+        var(--ovr-h-field-sm,
+            calc(var(--tb-h-field-sm) + var(--td-h-field-sm) * var(--tune-k))));
+    --h-field-md: max(24px,
+        var(--ovr-h-field-md,
+            calc(var(--tb-h-field-md) + var(--td-h-field-md) * var(--tune-k))));
+    --h-field-lg: max(28px,
+        var(--ovr-h-field-lg,
+            calc(var(--tb-h-field-lg) + var(--td-h-field-lg) * var(--tune-k))));
+
+    /* ---- Component padding (inline) ---- */
+    --px-field-xs: max(0px,
+        var(--ovr-px-field-xs,
+            calc(var(--tb-px-field-xs) + var(--td-px-field-xs) * var(--tune-k))));
+    --px-field-sm: max(0px,
+        var(--ovr-px-field-sm,
+            calc(var(--tb-px-field-sm) + var(--td-px-field-sm) * var(--tune-k))));
+    --px-field-md: max(0px,
+        var(--ovr-px-field-md,
+            calc(var(--tb-px-field-md) + var(--td-px-field-md) * var(--tune-k))));
+    --px-field-lg: max(0px,
+        var(--ovr-px-field-lg,
+            calc(var(--tb-px-field-lg) + var(--td-px-field-lg) * var(--tune-k))));
+    --px-input-xs: max(0px,
+        var(--ovr-px-input-xs,
+            calc(var(--tb-px-input-xs) + var(--td-px-input-xs) * var(--tune-k))));
+    --px-input-sm: max(0px,
+        var(--ovr-px-input-sm,
+            calc(var(--tb-px-input-sm) + var(--td-px-input-sm) * var(--tune-k))));
+    --px-input-md: max(0px,
+        var(--ovr-px-input-md,
+            calc(var(--tb-px-input-md) + var(--td-px-input-md) * var(--tune-k))));
+    --px-input-lg: max(0px,
+        var(--ovr-px-input-lg,
+            calc(var(--tb-px-input-lg) + var(--td-px-input-lg) * var(--tune-k))));
+    --py-input-xs: max(0px,
+        var(--ovr-py-input-xs,
+            calc(var(--tb-py-input-xs) + var(--td-py-input-xs) * var(--tune-k))));
+    --py-input-sm: max(0px,
+        var(--ovr-py-input-sm,
+            calc(var(--tb-py-input-sm) + var(--td-py-input-sm) * var(--tune-k))));
+    --py-input-md: max(0px,
+        var(--ovr-py-input-md,
+            calc(var(--tb-py-input-md) + var(--td-py-input-md) * var(--tune-k))));
+    --py-input-lg: max(0px,
+        var(--ovr-py-input-lg,
+            calc(var(--tb-py-input-lg) + var(--td-py-input-lg) * var(--tune-k))));
+
+    /* ---- Control text ---- */
+    /* F3: control-text floor 12px (NOT 14px — 5 tunes ship 13px control text). */
+    --text-field-xs: max(12px,
+        var(--ovr-text-field-xs,
+            calc(var(--tb-text-field-xs) + var(--td-text-field-xs) * var(--tune-k))));
+    --text-field-sm: max(12px,
+        var(--ovr-text-field-sm,
+            calc(var(--tb-text-field-sm) + var(--td-text-field-sm) * var(--tune-k))));
+    --text-field-md: max(12px,
+        var(--ovr-text-field-md,
+            calc(var(--tb-text-field-md) + var(--td-text-field-md) * var(--tune-k))));
+    --text-field-lg: max(12px,
+        var(--ovr-text-field-lg,
+            calc(var(--tb-text-field-lg) + var(--td-text-field-lg) * var(--tune-k))));
+
+    /* ---- Assembled shadows (non-numeric, override-first, NO k on the var) ----
+       Single-layer geometry; blur shadow scales by damped --shadow-k. A tune
+       that needs a multi-layer / hard-offset recipe overrides --shadow-box
+       wholesale below. */
+    --shadow-box: var(--ovr-shadow-box,
+        calc(var(--tb-sh1-x) + var(--td-sh1-x) * var(--shadow-k))
+        calc(var(--tb-sh1-y) + var(--td-sh1-y) * var(--shadow-k))
+        calc(var(--tb-sh1-blur) + var(--td-sh1-blur) * var(--shadow-k))
+        var(--shadow-color));
+    --shadow-field: var(--ovr-shadow-field, none);
+
+    /* ---- Fonts (non-numeric, base = default stack) ---- */
+    --font-heading: var(--ovr-font-heading,
+        var(--td-font-heading, "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif));
+    --font-body: var(--ovr-font-body,
+        var(--td-font-body, "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif));
+    --font-mono: var(--ovr-font-mono,
+        var(--td-font-mono, ui-monospace, "SFMono-Regular", monospace));
 }
 
-[data-tune="playful"] {
-    --radius-box: 2rem;
-    --radius-field: 1rem;
-    --radius-selector: 2rem;
-    --border: 1.5px;
-    --depth: 1;
-    --noise: 1;
-    --size-selector: 0.3125rem;
-    --size-field: 0.3125rem;
-    --space-section: 6rem;
-    --space-section-inner: 4rem;
-    --space-element: 2rem;
-    --space-compact: 1rem;
-    --space-text: 1.25rem;
-    --space-inline: 0.75rem;
-    --font-heading: "Fredoka", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Quicksand", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: ui-monospace, "SFMono-Regular", monospace;
-    --font-weight-heading: 600;
-    --h-field-xs: 2rem;
-    --h-field-sm: 2.25rem;
-    --h-field-md: 2.75rem;
-    --h-field-lg: 3.5rem;
-    --px-field-xs: 0.875rem;
-    --px-field-sm: 1rem;
-    --px-field-md: 1.25rem;
-    --px-field-lg: 2rem;
-    --px-input-xs: 0.625rem;
-    --px-input-sm: 0.75rem;
-    --px-input-md: 0.875rem;
-    --px-input-lg: 1.25rem;
-    --py-input-xs: 0.375rem;
-    --py-input-sm: 0.5rem;
-    --py-input-md: 0.625rem;
-    --py-input-lg: 0.875rem;
-    --text-field-xs: 0.8125rem;
-    --text-field-sm: 0.875rem;
-    --text-field-md: 0.9375rem;
-    --text-field-lg: 1.0625rem;
+/* ============================================================================
+   PER-TUNE DELTA BLOCKS (--td-*) — 11 tunes
+   final = base + Δ at k=1; only non-zero deltas listed.
+   ============================================================================ */
+
+/* default — origin, all Δ = 0; hairline shadow. */
+[data-tune="default"] {
+    --td-sh1-y: 1px;
+    --td-sh1-blur: 2px;
 }
 
-[data-tune="corporate"] {
-    --radius-box: 0.25rem;
-    --radius-field: 0.25rem;
-    --radius-selector: 0.25rem;
-    --border: 1px;
-    --depth: 0;
-    --noise: 0;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
-    --space-section: 4rem;
-    --space-section-inner: 2.5rem;
-    --space-element: 1.25rem;
-    --space-compact: 0.625rem;
-    --space-text: 0.875rem;
-    --space-inline: 0.375rem;
-    --font-heading: "Libre Franklin", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Libre Franklin", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: "Source Code Pro", ui-monospace, monospace;
-    --font-weight-heading: 600;
-    --h-field-xs: 1.5rem;
-    --h-field-sm: 1.75rem;
-    --h-field-md: 2.25rem;
-    --h-field-lg: 2.75rem;
-    --px-field-xs: 0.5rem;
-    --px-field-sm: 0.625rem;
-    --px-field-md: 0.75rem;
-    --px-field-lg: 1.25rem;
-    --px-input-xs: 0.375rem;
-    --px-input-sm: 0.375rem;
-    --px-input-md: 0.5rem;
-    --px-input-lg: 0.75rem;
-    --py-input-xs: 0.25rem;
-    --py-input-sm: 0.25rem;
-    --py-input-md: 0.375rem;
-    --py-input-lg: 0.5rem;
-    --text-field-xs: 0.6875rem;
-    --text-field-sm: 0.75rem;
-    --text-field-md: 0.8125rem;
-    --text-field-lg: 0.9375rem;
-}
-
-[data-tune="brutal"] {
-    --radius-box: 0;
-    --radius-field: 0;
-    --radius-selector: 0;
-    --border: 2px;
-    --depth: 0;
-    --noise: 0;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
-    --space-section: 4rem;
-    --space-section-inner: 2rem;
-    --space-element: 1.5rem;
-    --space-compact: 0.75rem;
-    --space-text: 1rem;
-    --space-inline: 0.5rem;
-    --font-heading: "Space Grotesk", "M PLUS 1p", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Space Mono", "M PLUS 1p", ui-monospace, monospace;
-    --font-mono: "Space Mono", ui-monospace, monospace;
-    --font-weight-heading: 700;
-    --h-field-xs: 1.75rem;
-    --h-field-sm: 2.125rem;
-    --h-field-md: 2.625rem;
-    --h-field-lg: 3.25rem;
-    --px-field-xs: 0.75rem;
-    --px-field-sm: 0.875rem;
-    --px-field-md: 1rem;
-    --px-field-lg: 1.5rem;
-    --px-input-xs: 0.5rem;
-    --px-input-sm: 0.5rem;
-    --px-input-md: 0.75rem;
-    --px-input-lg: 1rem;
-    --py-input-xs: 0.25rem;
-    --py-input-sm: 0.375rem;
-    --py-input-md: 0.5rem;
-    --py-input-lg: 0.75rem;
-    --text-field-xs: 0.75rem;
-    --text-field-sm: 0.875rem;
-    --text-field-md: 0.875rem;
-    --text-field-lg: 1rem;
-}
-
-[data-tune="elegant"] {
-    --radius-box: 0.5rem;
-    --radius-field: 0.25rem;
-    --radius-selector: 0.5rem;
-    --border: 0.5px;
-    --depth: 1;
-    --noise: 0;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
-    --space-section: 6rem;
-    --space-section-inner: 4rem;
-    --space-element: 2rem;
-    --space-compact: 1rem;
-    --space-text: 1.25rem;
-    --space-inline: 0.625rem;
-    --font-heading: "Playfair Display", "Shippori Mincho", ui-serif, Georgia, serif;
-    --font-body: "Lora", "Shippori Mincho", ui-serif, Georgia, serif;
-    --font-mono: ui-monospace, "SFMono-Regular", monospace;
-    --font-weight-heading: 700;
-    --h-field-xs: 1.75rem;
-    --h-field-sm: 2rem;
-    --h-field-md: 2.5rem;
-    --h-field-lg: 3rem;
-    --px-field-xs: 0.75rem;
-    --px-field-sm: 1rem;
-    --px-field-md: 1.25rem;
-    --px-field-lg: 2rem;
-    --px-input-xs: 0.5rem;
-    --px-input-sm: 0.625rem;
-    --px-input-md: 0.875rem;
-    --px-input-lg: 1.25rem;
-    --py-input-xs: 0.375rem;
-    --py-input-sm: 0.5rem;
-    --py-input-md: 0.625rem;
-    --py-input-lg: 0.875rem;
-    --text-field-xs: 0.75rem;
-    --text-field-sm: 0.8125rem;
-    --text-field-md: 0.875rem;
-    --text-field-lg: 1rem;
-}
-
-[data-tune="bold"] {
-    --radius-box: 0.5rem;
-    --radius-field: 0.5rem;
-    --radius-selector: 1rem;
-    --border: 1.5px;
-    --depth: 1;
-    --noise: 0;
-    --size-selector: 0.3125rem;
-    --size-field: 0.3125rem;
-    --space-section: 5rem;
-    --space-section-inner: 3rem;
-    --space-element: 1.5rem;
-    --space-compact: 0.75rem;
-    --space-text: 1rem;
-    --space-inline: 0.5rem;
-    --font-heading: "Montserrat", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Outfit", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: ui-monospace, "SFMono-Regular", monospace;
-    --font-weight-heading: 900;
-    --h-field-xs: 1.875rem;
-    --h-field-sm: 2.125rem;
-    --h-field-md: 2.75rem;
-    --h-field-lg: 3.25rem;
-    --px-field-xs: 0.75rem;
-    --px-field-sm: 0.875rem;
-    --px-field-md: 1.125rem;
-    --px-field-lg: 1.75rem;
-    --px-input-xs: 0.5rem;
-    --px-input-sm: 0.625rem;
-    --px-input-md: 0.75rem;
-    --px-input-lg: 1.125rem;
-    --py-input-xs: 0.375rem;
-    --py-input-sm: 0.5rem;
-    --py-input-md: 0.625rem;
-    --py-input-lg: 0.875rem;
-    --text-field-xs: 0.75rem;
-    --text-field-sm: 0.875rem;
-    --text-field-md: 0.9375rem;
-    --text-field-lg: 1.0625rem;
-}
-
-[data-tune="pixel"] {
-    --radius-box: 0;
-    --radius-field: 0;
-    --radius-selector: 0;
-    --border: 3px;
-    --font-size-base: 1.125rem;
-    --depth: 0;
-    --noise: 0;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
-    --space-section: 4rem;
-    --space-section-inner: 2.5rem;
-    --space-element: 1.5rem;
-    --space-compact: 0.75rem;
-    --space-text: 1rem;
-    --space-inline: 0.5rem;
-    --font-heading: "PixelMplus10", "DotGothic16", "Press Start 2P", cursive;
-    --font-body: "PixelMplus12", "DotGothic16", "Press Start 2P", cursive;
-    --font-mono: "PixelMplus12", "DotGothic16", "Press Start 2P", monospace;
-    --font-weight-heading: 400;
-    --h-field-xs: 2rem;
-    --h-field-sm: 2.25rem;
-    --h-field-md: 2.75rem;
-    --h-field-lg: 3.25rem;
-    --px-field-xs: 0.75rem;
-    --px-field-sm: 0.875rem;
-    --px-field-md: 1rem;
-    --px-field-lg: 1.5rem;
-    --px-input-xs: 0.5rem;
-    --px-input-sm: 0.5rem;
-    --px-input-md: 0.75rem;
-    --px-input-lg: 1rem;
-    --py-input-xs: 0.25rem;
-    --py-input-sm: 0.375rem;
-    --py-input-md: 0.5rem;
-    --py-input-lg: 0.75rem;
-    --text-field-xs: 0.625rem;
-    --text-field-sm: 0.6875rem;
-    --text-field-md: 0.75rem;
-    --text-field-lg: 0.8125rem;
-}
-
-[data-tune="tech"] {
-    --radius-box: 0.25rem;
-    --radius-field: 0.1875rem;
-    --radius-selector: 0.25rem;
-    --border: 1px;
-    --depth: 0;
-    --noise: 0;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
-    --space-section: 4rem;
-    --space-section-inner: 2.5rem;
-    --space-element: 1.25rem;
-    --space-compact: 0.5rem;
-    --space-text: 0.75rem;
-    --space-inline: 0.375rem;
-    --font-heading: "JetBrains Mono", "M PLUS 1 Code", ui-monospace, monospace;
-    --font-body: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: "JetBrains Mono", "M PLUS 1 Code", ui-monospace, monospace;
-    --font-weight-heading: 700;
-    /* Compact: buttons/inputs are subtly shorter & tighter than default */
-    --h-field-xs: 1.5rem;
-    --h-field-sm: 1.75rem;
-    --h-field-md: 2.25rem;
-    --h-field-lg: 2.75rem;
-    --px-field-xs: 0.5rem;
-    --px-field-sm: 0.625rem;
-    --px-field-md: 0.75rem;
-    --px-field-lg: 1rem;
-    --px-input-xs: 0.375rem;
-    --px-input-sm: 0.375rem;
-    --px-input-md: 0.5rem;
-    --px-input-lg: 0.75rem;
-    --py-input-xs: 0.25rem;
-    --py-input-sm: 0.25rem;
-    --py-input-md: 0.375rem;
-    --py-input-lg: 0.5rem;
-    --text-field-xs: 0.6875rem;
-    --text-field-sm: 0.75rem;
-    --text-field-md: 0.8125rem;
-    --text-field-lg: 0.875rem;
-}
-
+/* minimal — quiet, airiest. radius down, lighter weight, roomy whitespace,
+   no shadow (flat). base page scale nudged smaller (k-exempt). */
 [data-tune="minimal"] {
-    /* Shape — quiet, near-flat (no shadows) */
-    --radius-box: 0.25rem;
-    --radius-field: 0.25rem;
-    --radius-selector: 0.25rem;
-    --border: 1px;
-    --depth: 0;
-    --noise: 0;
-    --size-selector: 0.25rem;
-    --size-field: 0.25rem;
-    /* Spacing — the airiest preset: generous whitespace is the whole point */
-    --space-section: 7rem;
-    --space-section-inner: 4.5rem;
-    --space-element: 2.25rem;
-    --space-compact: 1rem;
-    --space-text: 1.25rem;
-    --space-inline: 0.625rem;
-    /* Font — restrained neutral sans, base nudged slightly smaller so the
-       whitespace (not the type) carries the page. */
-    --font-size-base: 0.9375rem;
-    --font-heading: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: ui-monospace, "SFMono-Regular", monospace;
-    --font-weight-heading: 600;
-    /* Component size — slightly smaller text; roomy px keeps controls airy. */
-    --h-field-xs: 1.75rem;
-    --h-field-sm: 2rem;
-    --h-field-md: 2.5rem;
-    --h-field-lg: 3rem;
-    --px-field-xs: 0.75rem;
-    --px-field-sm: 1rem;
-    --px-field-md: 1.25rem;
-    --px-field-lg: 1.75rem;
-    --px-input-xs: 0.5rem;
-    --px-input-sm: 0.625rem;
-    --px-input-md: 0.875rem;
-    --px-input-lg: 1.125rem;
-    --py-input-xs: 0.25rem;
-    --py-input-sm: 0.375rem;
-    --py-input-md: 0.5rem;
-    --py-input-lg: 0.75rem;
-    --text-field-xs: 0.6875rem;
-    --text-field-sm: 0.75rem;
-    --text-field-md: 0.8125rem;
-    --text-field-lg: 0.9375rem;
+    --td-radius-box: -0.125rem;       /* → 0.375rem */
+    --td-radius-field: -0.125rem;     /* → 0.25rem  */
+    --td-radius-selector: -0.75rem;   /* → 0.25rem  */
+    --td-fwh: -100;                   /* → 500 */
+    --td-tracking-heading: -0.01em;   /* → -0.02em */
+    --td-leading-body: 0.05;          /* → 1.65 */
+    --td-space-section: 2rem;         /* → 7rem */
+    --td-space-section-inner: 1.5rem; /* → 4.5rem */
+    --td-space-element: 0.75rem;      /* → 2.25rem */
+    --td-text-field-xs: -0.0625rem;
+    --td-text-field-sm: -0.0625rem;
+    --td-text-field-md: -0.0625rem;
+    --td-text-field-lg: -0.0625rem;
+    --font-size-base: 0.9375rem;      /* invariant, page-level (k-exempt) */
+    --td-font-heading: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
 }
 
-/* --- Japanese Support Toggle ---
-   Default (no attribute): each tune's font stack includes a Japanese
-   fallback — content that mixes Japanese and English renders cohesively.
-   data-ja="off": drop Japanese fonts for an English-only aesthetic
-   (cleaner look, no CJK fallback mixing).
-   --------------------------------------------------- */
+/* sharp — square corners, tight, neutral grotesk. hairline shadow. */
+[data-tune="sharp"] {
+    --td-radius-box: -0.5rem;         /* → 0 */
+    --td-radius-field: -0.375rem;     /* → 0 */
+    --td-radius-selector: -1rem;      /* → 0 */
+    --td-tracking-heading: -0.01em;   /* → -0.02em */
+    --td-fwh: -100;                   /* → 500 (review) */
+    --td-space-section: -1rem;        /* → 4rem */
+    --td-space-element: -0.25rem;     /* → 1.25rem */
+    --td-h-field-xs: -0.125rem;
+    --td-h-field-sm: -0.125rem;
+    --td-h-field-md: -0.125rem;
+    --td-h-field-lg: -0.125rem;
+    --td-sh1-y: 1px;                  /* hairline */
+    --td-sh1-blur: 2px;
+    --td-font-heading: "Instrument Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Instrument Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* corporate — flat, dense, restrained. weight 300 display + IBM Plex.
+   MECE separator: density tightened BELOW the sharp/tech cluster +
+   flat 1px contrast-border surface treatment (see tune-corporate-surface). */
+[data-tune="corporate"] {
+    --td-radius-box: -0.375rem;       /* → 0.125rem (2px) */
+    --td-radius-field: -0.25rem;      /* → 0.125rem (2px) */
+    --td-radius-selector: -0.875rem;  /* → 0.125rem (2px) */
+    --td-leading-body: -0.1;          /* → 1.5 */
+    --td-type-scale-ratio: -0.05;     /* → 1.15 */
+    --td-fwh: 0;                      /* → 600 (review: 300 read too light; MECE held via IBM Plex + density) */
+    --td-space-section: -1rem;        /* → 4rem */
+    --td-space-element: -0.375rem;    /* → 1.125rem — MECE separator */
+    --td-h-field-xs: -0.25rem;
+    --td-h-field-sm: -0.25rem;
+    --td-h-field-md: -0.25rem;        /* → 2.25rem */
+    --td-h-field-lg: -0.25rem;
+    --td-px-field-md: -0.25rem;
+    --td-px-input-md: -0.25rem;
+    --td-text-field-xs: -0.0625rem;
+    --td-text-field-sm: -0.0625rem;
+    --td-text-field-md: -0.0625rem;   /* → 0.8125rem (13px) */
+    --td-text-field-lg: -0.0625rem;
+    /* shadow → none (flat): no --td-sh* deltas (base is flat). */
+    --td-font-heading: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* tech — dev console. micro-radius, mono headings, ladder shadow. */
+[data-tune="tech"] {
+    --td-radius-box: -0.25rem;        /* → 0.25rem (~4px) */
+    --td-radius-field: -0.1875rem;    /* → 0.1875rem (3px) */
+    --td-radius-selector: -0.75rem;   /* → 0.25rem */
+    --td-leading-body: -0.1;          /* → 1.5 */
+    --td-fwh: -100;                   /* → 500 */
+    --td-space-section: -1rem;        /* → 4rem */
+    --td-space-element: -0.25rem;     /* → 1.25rem (review: tech slightly tighter than default; xl → tighter, xs → toward default) */
+    --td-space-compact: -0.25rem;     /* → 0.5rem */
+    --td-space-text: -0.125rem;       /* → 0.875rem */
+    --td-space-inline: -0.0625rem;    /* → 0.4375rem */
+    --td-h-field-xs: -0.25rem;
+    --td-h-field-sm: -0.25rem;
+    --td-h-field-md: -0.25rem;        /* → 2.25rem */
+    --td-h-field-lg: -0.25rem;
+    --td-px-field-md: -0.25rem;
+    --td-px-input-md: -0.25rem;
+    --td-text-field-xs: -0.0625rem;
+    --td-text-field-sm: -0.0625rem;
+    --td-text-field-md: -0.0625rem;   /* → 0.8125rem (13px) */
+    --td-text-field-lg: -0.0625rem;
+    /* ladder shadow: hard 0-blur offset, scales with damped --shadow-k. */
+    --shadow-box: var(--ovr-shadow-box,
+        0 calc(1px * var(--shadow-k)) 0 rgb(0 0 0 / 0.25));
+    --td-font-heading: "JetBrains Mono", "M PLUS 1 Code", ui-monospace, monospace;
+    --td-font-body: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: "JetBrains Mono", "M PLUS 1 Code", ui-monospace, monospace;
+}
+
+/* brutal — hard square, thick border, heavy weight, hard-offset shadow
+   driven by FULL --tune-k (structural signature → exaggerate fully). */
+[data-tune="brutal"] {
+    --td-radius-box: -0.5rem;         /* → 0 */
+    --td-radius-field: -0.375rem;     /* → 0 */
+    --td-radius-selector: -1rem;      /* → 0 */
+    --td-border: 1.5px;               /* → 2.5px */
+    --td-fwh: 100;                    /* → 700 (identity) */
+    --td-space-section: -1rem;        /* → 4rem */
+    --td-space-section-inner: -1rem;  /* → 2rem */
+    --td-h-field-sm: 0.125rem;
+    --td-h-field-md: 0.125rem;
+    --td-h-field-lg: 0.125rem;
+    /* hard-offset, dist 4px, FULL --tune-k → xs/md/xl = 1.8/4/7.6px ≈ 2/4/8 */
+    --shadow-box: var(--ovr-shadow-box,
+        calc(4px * var(--tune-k)) calc(4px * var(--tune-k)) 0 var(--shadow-ink));
+    --td-font-heading: "Space Grotesk", "M PLUS 1p", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Space Mono", "M PLUS 1p", ui-monospace, monospace;
+    --td-font-mono: "Space Mono", ui-monospace, monospace;
+}
+
+/* editorial — serif, roomy, larger type scale. hairline shadow. */
+[data-tune="editorial"] {
+    --td-radius-box: -0.375rem;       /* → 0.125rem (2px) */
+    --td-radius-field: -0.1875rem;    /* → 0.1875rem (3px) */
+    --td-radius-selector: -0.875rem;  /* → 0.125rem */
+    --td-tracking-heading: 0.01em;    /* → 0 */
+    --td-leading-body: 0.1;           /* → 1.7 */
+    --td-type-scale-ratio: 0.05;      /* → 1.25 */
+    --td-space-section: 1rem;         /* → 6rem */
+    --td-space-element: 0.5rem;       /* → 2rem */
+    --td-sh1-y: 1px;                  /* hairline */
+    --td-sh1-blur: 2px;
+    --td-font-heading: "Playfair Display", "Shippori Mincho", ui-serif, Georgia, serif;
+    --td-font-body: "Source Serif 4", "Shippori Mincho", ui-serif, Georgia, serif;
+    --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* luxury — generous radius, thin display weight, pill CTA, soft shadow. */
+[data-tune="luxury"] {
+    --td-radius-box: 0.25rem;         /* → 0.75rem (12px) */
+    --td-radius-field: 0.125rem;      /* → 0.5rem (do NOT pill the field) */
+    --td-tracking-heading: -0.005em;
+    --td-leading-body: 0.05;          /* → 1.65 */
+    --td-fwh: -300;                   /* → 300 */
+    --td-space-section: 1rem;         /* → 6rem */
+    --td-space-element: 0.5rem;       /* → 2rem */
+    /* soft shadow, blur driven by damped --shadow-k. */
+    --shadow-box: var(--ovr-shadow-box,
+        0 calc(2px * var(--shadow-k)) calc(10px * var(--shadow-k)) rgb(0 0 0 / 0.04));
+    --td-font-heading: "Hanken Grotesk", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
+}
+/* luxury pill CTA — literal, k-exempt (a pill at any k). Placed AFTER the
+   [data-tune] resolver so source-order wins for this single token. */
+[data-tune="luxury"] {
+    --radius-selector: 999px;
+}
+
+/* soft — rounded, warm, layered soft-blur shadow. */
+[data-tune="soft"] {
+    --td-radius-box: 0.625rem;        /* → 18px */
+    --td-radius-field: 0.5rem;        /* → 14px */
+    --td-tracking-heading: 0.005em;
+    --td-leading-body: 0.05;          /* → 1.65 */
+    --td-space-section: 1rem;         /* → 6rem */
+    --td-space-element: 0.5rem;       /* → 2rem */
+    --td-px-input-md: 0rem;              /* roomy already via base */
+    /* layered soft-blur, both layers driven by damped --shadow-k. */
+    --shadow-box: var(--ovr-shadow-box,
+        0 calc(8px * var(--shadow-k)) calc(24px * var(--shadow-k)) rgb(0 0 0 / 0.10),
+        0 calc(2px * var(--shadow-k)) calc(6px * var(--shadow-k)) rgb(0 0 0 / 0.06));
+    --td-font-heading: "Quicksand", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Nunito", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* pixel — dot-matrix arcade. square, thick border, hard-offset, big leading.
+   discrete text ladder (smallest 12px), page scale 1.125rem (both k-exempt). */
+[data-tune="pixel"] {
+    --td-radius-box: -0.5rem;         /* → 0 */
+    --td-radius-field: -0.375rem;     /* → 0 */
+    --td-radius-selector: -1rem;      /* → 0 */
+    --td-border: 2px;                 /* → 3px */
+    --td-tracking-heading: 0.01em;    /* → 0 */
+    --td-leading-body: 0.4;           /* → 2.0 */
+    --td-fwh: -200;                   /* → 400 */
+    --td-space-section: -1rem;        /* → 4rem */
+    --td-h-field-xs: 0.25rem;
+    --td-h-field-sm: 0.25rem;
+    --td-h-field-md: 0.25rem;
+    --td-h-field-lg: 0.25rem;
+    /* discrete text ladder — smallest rung 12px (10px→12px a11y bump). */
+    --td-text-field-xs: -0.125rem;    /* base .75 - .125 = .625rem → floored 12px */
+    --td-text-field-sm: -0.0625rem;
+    --td-text-field-md: -0.0625rem;
+    --td-text-field-lg: -0.0625rem;
+    /* hard-offset, dist 3px, FULL --tune-k. */
+    --shadow-box: var(--ovr-shadow-box,
+        calc(3px * var(--tune-k)) calc(3px * var(--tune-k)) 0 var(--shadow-ink));
+    --font-size-base: 1.125rem;       /* invariant, page-level (k-exempt) */
+    --td-font-heading: "PixelMplus10", "DotGothic16", "Press Start 2P", cursive;
+    --td-font-body: "PixelMplus12", "DotGothic16", "Press Start 2P", cursive;
+    --td-font-mono: "PixelMplus12", "DotGothic16", "Press Start 2P", monospace;
+}
+
+/* draft — excalidraw-style hand-drawn. wobble radius (literal, k-exempt),
+   ~1.5px drafty line, Caveat/Patrick Hand, soft single shadow. */
+[data-tune="draft"] {
+    --td-border: 0.5px;               /* → ~1.5px drafty line */
+    --td-fwh: 0;                      /* heading weight ~600 (Caveat reads bold) */
+    --td-tracking-heading: 0.01em;    /* → ~0 (handwriting doesn't tighten) */
+    --td-leading-body: 0.05;          /* → ~1.65 roomy */
+    /* soft single hand-drawn shadow via the shadow system. */
+    --td-sh1-y: 2px;
+    --td-sh1-blur: 6px;
+    --shadow-color: rgb(0 0 0 / 0.08);
+    --td-font-heading: "Patrick Hand", "Yomogi", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Patrick Hand", "Zen Kurenaido", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: "Patrick Hand", "Zen Kurenaido", ui-monospace, monospace;
+}
+/* draft wobble radius — literal multi-value, k-exempt (like pills).
+   Placed AFTER the [data-tune] resolver so source-order wins. */
+[data-tune="draft"] {
+    --radius-box: 14px 8px 16px 6px / 8px 16px 6px 14px;
+    --radius-field: 10px 6px 12px 5px / 6px 12px 5px 10px;
+    --radius-selector: 18px 12px 20px 10px / 12px 20px 10px 18px;
+}
+
+/* corporate MECE surface treatment — flat 1px contrast-border, no shadow.
+   Survives a weight-override or system-fallback font (separator is structural,
+   not font/weight). Apply via class tune-corporate-surface on card surfaces. */
+[data-tune="corporate"] .tune-corporate-surface {
+    box-shadow: none;
+    border: 1px solid color-mix(in oklab, currentColor 14%, transparent);
+}
+
+/* ============================================================================
+   data-ja="off" — drop the CJK family from --td-font-* (English-only aesthetic).
+   Two-attribute precedent (specificity (0,2,0)) overrides the single
+   [data-tune="X"] --td-font-* above. Rename map applied:
+     playful → (dropped)   elegant → editorial   bold → luxury
+   ============================================================================ */
 
 [data-tune="default"][data-ja="off"] {
-    --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
-}
-
-[data-tune="sharp"][data-ja="off"] {
-    --font-heading: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-}
-
-[data-tune="soft"][data-ja="off"] {
-    --font-heading: "Quicksand", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
-}
-
-[data-tune="playful"][data-ja="off"] {
-    --font-heading: "Fredoka", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Quicksand", ui-sans-serif, system-ui, sans-serif;
-}
-
-[data-tune="corporate"][data-ja="off"] {
-    --font-heading: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
-}
-
-[data-tune="brutal"][data-ja="off"] {
-    --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Space Mono", ui-monospace, monospace;
-}
-
-[data-tune="elegant"][data-ja="off"] {
-    --font-heading: "Playfair Display", ui-serif, Georgia, serif;
-    --font-body: "Lora", ui-serif, Georgia, serif;
-}
-
-[data-tune="bold"][data-ja="off"] {
-    --font-heading: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Outfit", ui-sans-serif, system-ui, sans-serif;
-}
-
-/* pixel: ja default uses self-hosted PixelMplus for a coarser dot-matrix
-   feel across Japanese + English; en-only flips to Press Start 2P for the
-   iconic arcade heading aesthetic (PixelMplus remains as CJK fallback). */
-[data-tune="pixel"][data-ja="off"] {
-    --font-heading: "Press Start 2P", "PixelMplus10", cursive;
-    --font-body: "Press Start 2P", "PixelMplus12", cursive;
-    --font-mono: "Press Start 2P", "PixelMplus12", monospace;
-}
-
-[data-tune="tech"][data-ja="off"] {
-    --font-heading: "JetBrains Mono", ui-monospace, monospace;
-    --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --td-font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 [data-tune="minimal"][data-ja="off"] {
-    --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
-    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --td-font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="sharp"][data-ja="off"] {
+    --td-font-heading: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="corporate"][data-ja="off"] {
+    --td-font-heading: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="tech"][data-ja="off"] {
+    --td-font-heading: "JetBrains Mono", ui-monospace, monospace;
+    --td-font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+[data-tune="brutal"][data-ja="off"] {
+    --td-font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Space Mono", ui-monospace, monospace;
+}
+
+[data-tune="editorial"][data-ja="off"] {
+    --td-font-heading: "Playfair Display", ui-serif, Georgia, serif;
+    --td-font-body: "Source Serif 4", ui-serif, Georgia, serif;
+}
+
+[data-tune="luxury"][data-ja="off"] {
+    --td-font-heading: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="soft"][data-ja="off"] {
+    --td-font-heading: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* pixel: en-only flips heading to Press Start 2P for the arcade aesthetic
+   (PixelMplus remains as CJK/body fallback). */
+[data-tune="pixel"][data-ja="off"] {
+    --td-font-heading: "Press Start 2P", "PixelMplus10", cursive;
+    --td-font-body: "Press Start 2P", "PixelMplus12", cursive;
+    --td-font-mono: "Press Start 2P", "PixelMplus12", monospace;
+}
+
+[data-tune="draft"][data-ja="off"] {
+    --td-font-heading: "Patrick Hand", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Patrick Hand", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: "Patrick Hand", ui-monospace, monospace;
+}
+
+/* ============================================================================
+   AXIS MACROS — ship exactly THREE (shadow / radius / density) + strength.
+   Emitted AFTER all presets, specificity (0,1,0). Each writes ONLY --ovr-*
+   (disjoint sets, O2), winning structurally via the first arm of var().
+   Font is NEVER an axis (invariant #5).
+   ============================================================================ */
+
+[data-tune-shadow="none"]   { --ovr-shadow-box: none; --ovr-shadow-field: none; }
+[data-tune-shadow="normal"] { --ovr-shadow-box: 0 1px 2px rgb(0 0 0 / 0.06); }
+[data-tune-shadow="soft"]   { --ovr-shadow-box: 0 6px 18px rgb(0 0 0 / 0.08); }
+
+[data-tune-radius="none"]   { --ovr-radius-box: 0; --ovr-radius-field: 0; --ovr-radius-selector: 0; }
+[data-tune-radius="lg"]     { --ovr-radius-box: 1rem; --ovr-radius-field: 0.5rem; }
+[data-tune-radius="pill"]   { --ovr-radius-box: 1.5rem; --ovr-radius-field: 999px; --ovr-radius-selector: 999px; }
+
+[data-tune-density="compact"] { --ovr-space-section: 3.5rem; --ovr-space-element: 1rem; --ovr-space-compact: 0.5rem; }
+[data-tune-density="airy"]    { --ovr-space-section: 7rem; --ovr-space-element: 2.25rem; --ovr-space-compact: 1rem; }
+
+/* --- draft: rough/hand-drawn ink ---
+   Displace the edges of bordered surfaces so every line looks hand-drafted
+   (excalidraw-style). Pure CSS via a data-URI SVG turbulence filter — no DOM
+   injection, no Alpine. Handwriting font + wobble radius are set in the
+   [data-tune="draft"] preset above; this rule adds the *rough line* quality.
+   scale=2.5 keeps body text legible while clearly roughening borders/fills.
+   (k-independent: roughness is draft's identity, not strength-scaled.) */
+[data-tune="draft"] :is(button, input, textarea, select, .tune-border) {
+    filter: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='r'%20x='-6%25'%20y='-6%25'%20width='112%25'%20height='112%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.02'%20numOctaves='2'%20seed='7'%20result='n'/%3E%3CfeDisplacementMap%20in='SourceGraphic'%20in2='n'%20scale='2.5'/%3E%3C/filter%3E%3C/svg%3E#r");
 }
 
 /* --- Font Application --- */

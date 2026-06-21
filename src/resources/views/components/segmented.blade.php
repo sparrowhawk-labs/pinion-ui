@@ -38,7 +38,7 @@
             type="button"
             role="tab"
             class="inline-flex items-center justify-center gap-1.5 h-full px-3 rounded-[calc(var(--radius-field)*0.8)] font-medium cursor-pointer select-none transition-colors duration-150 [&_svg]:w-4 [&_svg]:h-4"
-            x-bind:class="current === @js($o['value']) ? 'bg-base-100 text-base-content shadow-sm' : 'text-base-content/55 hover:text-base-content'"
+            x-bind:class="current === @js($o['value']) ? 'bg-base-100 text-base-content shadow-[var(--shadow-field)]' : 'text-base-content/55 hover:text-base-content'"
             x-bind:aria-selected="current === @js($o['value'])"
             x-on:click="set(@js($o['value']))"
         >

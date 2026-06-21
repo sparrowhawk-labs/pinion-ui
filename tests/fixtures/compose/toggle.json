@@ -7,7 +7,7 @@
             "row": "inline-flex items-center gap-3",
             "input": "peer sr-only",
             "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-5 bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary",
-            "thumb": "xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-sm transition-transform pointer-events-none",
+            "thumb": "xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
         }
@@ -24,7 +24,7 @@
         "props": { "appearance": "solid", "color": "success", "size": "lg" },
         "expected": {
             "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-6 bg-base-300 border-base-content/10 peer-checked:bg-success peer-checked:border-success",
-            "thumb": "xy-thumb size-6 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-sm transition-transform pointer-events-none",
+            "thumb": "xy-thumb size-6 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-md)] text-base-content select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
         }
@@ -43,7 +43,7 @@
         "props": { "color": "info", "size": "sm", "error": "x" },
         "expected": {
             "track": "h-5 w-9 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-4 bg-base-300 border-base-content/10 peer-checked:bg-error peer-checked:border-error",
-            "thumb": "xy-thumb size-4 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-sm transition-transform pointer-events-none",
+            "thumb": "xy-thumb size-4 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-xs)] text-error select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-error leading-snug"
         }

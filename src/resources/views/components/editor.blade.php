@@ -160,7 +160,7 @@
                     x-cloak
                     x-on:click.outside="sc = false"
                     x-transition.opacity.duration.150ms
-                    class="absolute bottom-full left-0 mb-2 z-30 w-[19rem] bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-lg overflow-hidden"
+                    class="absolute bottom-full left-0 mb-2 z-30 w-[19rem] bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-[var(--shadow-box)] overflow-hidden"
                 >
                     <div class="px-3 py-2 text-[length:var(--text-field-xs)] font-medium text-base-content/55 border-b border-base-content/[0.07]">Keyboard shortcuts</div>
                     <div class="p-1.5 max-h-[20rem] overflow-auto">

@@ -9,7 +9,7 @@
             "sideAnchor": "left-0",
             "enterFrom": "translate-x-[-100%]",
             "enterTo": "translate-x-0",
-            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto",
+            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto",
             "closeBtnFloat": "absolute top-[var(--space-element)] right-[var(--space-element)] z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200",
             "closeIcon": "w-5 h-5"
         }
@@ -23,7 +23,7 @@
             "sideAnchor": "right-0",
             "enterFrom": "translate-x-[100%]",
             "enterTo": "translate-x-0",
-            "panel": "absolute top-0 right-0 h-full w-80 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto",
+            "panel": "absolute top-0 right-0 h-full w-80 bg-base-100 text-base-content border-l border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto",
             "closeBtnFloat": "absolute top-[var(--space-element)] right-[var(--space-element)] z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200"
         }
     },
@@ -34,7 +34,7 @@
             "sizeWidth": "w-64",
             "sideAnchor": "left-0",
             "enterFrom": "translate-x-[-100%]",
-            "panel": "absolute top-0 left-0 h-full w-64 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto"
+            "panel": "absolute top-0 left-0 h-full w-64 bg-base-100 text-base-content border-r border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto"
         }
     },
     {
@@ -44,7 +44,7 @@
             "sizeWidth": "w-96",
             "sideAnchor": "left-0",
             "enterFrom": "translate-x-[-100%]",
-            "panel": "absolute top-0 left-0 h-full w-96 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto"
+            "panel": "absolute top-0 left-0 h-full w-96 bg-base-100 text-base-content border-r border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto"
         }
     },
     {
@@ -54,7 +54,7 @@
             "sizeWidth": "w-64",
             "sideAnchor": "right-0",
             "enterFrom": "translate-x-[100%]",
-            "panel": "absolute top-0 right-0 h-full w-64 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto",
+            "panel": "absolute top-0 right-0 h-full w-64 bg-base-100 text-base-content border-l border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto",
             "closeBtnFloat": "absolute top-[var(--space-element)] right-[var(--space-element)] z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200"
         }
     },
@@ -65,7 +65,7 @@
             "sizeWidth": "w-96",
             "sideAnchor": "right-0",
             "enterFrom": "translate-x-[100%]",
-            "panel": "absolute top-0 right-0 h-full w-96 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto"
+            "panel": "absolute top-0 right-0 h-full w-96 bg-base-100 text-base-content border-l border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto"
         }
     },
     {
@@ -73,7 +73,7 @@
         "props": { "side": "left", "size": "md", "backdrop": false },
         "expected": {
             "overlay": "fixed inset-0 z-50 pointer-events-none",
-            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto pointer-events-auto",
+            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto pointer-events-auto",
             "sideAnchor": "left-0",
             "enterFrom": "translate-x-[-100%]"
         }
@@ -83,7 +83,7 @@
         "props": { "side": "right", "size": "md", "backdrop": false },
         "expected": {
             "overlay": "fixed inset-0 z-50 pointer-events-none",
-            "panel": "absolute top-0 right-0 h-full w-80 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto pointer-events-auto",
+            "panel": "absolute top-0 right-0 h-full w-80 bg-base-100 text-base-content border-l border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto pointer-events-auto",
             "sideAnchor": "right-0",
             "enterFrom": "translate-x-[100%]"
         }
@@ -93,7 +93,7 @@
         "props": { "side": "left", "size": "huge" },
         "expected": {
             "sizeWidth": "w-80",
-            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-xl p-element overflow-y-auto"
+            "panel": "absolute top-0 left-0 h-full w-80 bg-base-100 text-base-content border-r border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto"
         }
     },
     {
@@ -105,7 +105,7 @@
             "sideAnchor": "right-0",
             "enterFrom": "translate-x-[100%]",
             "enterTo": "translate-x-0",
-            "panel": "absolute top-0 right-0 h-full w-96 bg-base-100 text-base-content border-l border-base-300 shadow-xl p-element overflow-y-auto pointer-events-auto",
+            "panel": "absolute top-0 right-0 h-full w-96 bg-base-100 text-base-content border-l border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto pointer-events-auto",
             "closeBtnFloat": "absolute top-[var(--space-element)] right-[var(--space-element)] z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200"
         }
     }
