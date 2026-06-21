@@ -128,7 +128,10 @@
         @if($resizableColumns)
         x-on:mousemove.window="resizeMove($event)"
         @endif
-        @if($height) style="max-height: {{ $height }}" @endif
+        {{-- when widths are frozen the grid hugs the table (fit-content, capped at the parent → it
+             shrinks with narrowed columns instead of staying full-width, and still scrolls when the
+             table is wider than the parent). Height (if set) rides along in both branches. --}}
+        x-bind:style="widthsFrozen ? 'width: fit-content{{ $height ? '; max-height: '.$height : '' }}' : '{{ $height ? 'max-height: '.$height : '' }}'"
     >
         <table class="{{ $c['table'] }}" x-bind:class="widthsFrozen ? 'table-fixed' : ''" x-bind:style="widthsFrozen ? `width:${frozenTableWidth}px` : ''">
             <colgroup>

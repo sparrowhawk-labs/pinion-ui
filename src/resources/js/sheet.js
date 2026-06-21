@@ -680,7 +680,8 @@ export function pinionSheet(opts = {}) {
     resizeMove(e) {
       if (!this.resizing) return;
       const { c, startX, startW } = this.resizing;
-      this.cols[c].width = Math.max(48, startW + (e.clientX - startX));   // 48px floor
+      this.cols[c].width = Math.max(120, startW + (e.clientX - startX));   // 120px floor — fits a header's
+      // controls + a number cell's −/＋ steppers without overflow (review RP2).
     },
     resizeEnd() {
       if (!this.resizing) return;
