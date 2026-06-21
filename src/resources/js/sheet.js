@@ -36,12 +36,17 @@
 // Alpine's x-for DOM; a Livewire host re-seeds by bumping its :key (a key change
 // replaces the element — wire:ignore only blocks morphing of a PERSISTED element).
 //
-// S1 scope: single-cell selection, keyboard nav (arrows/Tab/Enter/typing), per-type
-// inline editing (text/number/date/select + checkbox toggle), flush round-trip.
-// S2 scope (this file): single-range selection (anchor + active `sel`) via drag-rectangle,
-// Shift-extend (click + arrows), whole row/column pick (gutter/header), TSV copy/paste
-// (clipboard, clipped to bounds — no row/col growth), Cmd/Ctrl+D fill-down, Delete clear,
-// Cmd/Ctrl+A select-all. Out: fill-handle DRAG, sort, resize, reorder = S3.
+// Scope (all shipped):
+// S1  single-cell selection, keyboard nav (arrows/Tab/Enter/typing), per-type inline editing
+//     (text/number/date/select + checkbox toggle), flush round-trip.
+// S2  single-range selection (anchor + active `sel`) via drag-rectangle, Shift-extend, whole
+//     row/column pick, TSV copy/paste (clipped to bounds), Cmd/Ctrl+D fill-down, Delete clear,
+//     Cmd/Ctrl+A select-all.
+// S3a sort (header caret asc⇄desc + ↺ restore).  S3b row/column reorder (HTML5 drag, same
+//     events as <x-data-grid>).  S3c fill-handle drag (tile fill).  S3d column resize (lazy
+//     freeze → table-fixed).  S3e right-click context menu + column type conversion.
+// Cross-cutting: undo (Cmd/Ctrl+Z) — a snapshot stack fed from schedule(), the single mutation
+// chokepoint (resize pushes its own snapshot at drag start).
 
 const truthy = (v) => v === true || v === 1 || v === '1' || v === 'true';
 
