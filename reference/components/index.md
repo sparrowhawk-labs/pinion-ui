@@ -43,6 +43,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-timeline>`](./timeline.md) | Vertical timeline of events — per-item `state` (`done`/`current`/`upcoming`), `appearance="solid"` default (saturated done-chain), `'soft'` opt-in for muted connector colours. |
 | [`<x-stat>`](./stat.md) | Single statistic block — label / value / change indicator. Group via flex/grid. |
 | [`<x-indicator>`](./indicator.md) | Positions a badge/dot at a corner of arbitrary child content (notification counters, status dots). `appearance="solid"` default (full daisyUI badge fill — strongest "needs attention" cue) with `'soft'`/`'outline'`/`'ghost'`/`'dash'` opt-ins. |
+| [`<x-positioning-map>`](./positioning-map.md) | Generic 2-axis positioning / perceptual map — plots labelled points (price×quality, effort×impact, tune shape×voice). `points` data, `xLabels`/`yLabels`, `active`/`xActive` highlight (static or live Alpine), `quadrants`, sizes. Theme-agnostic, tune-aware frame, zero JS by default. |
 
 ## Feedback
 
