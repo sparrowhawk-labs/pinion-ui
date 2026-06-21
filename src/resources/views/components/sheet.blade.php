@@ -9,6 +9,7 @@
     'rowNumbers' => true,
     'movableRows' => false,
     'movableColumns' => false,
+    'resizableColumns' => true,
     'toolbar' => true,
     'sync' => 'debounce:400',
     'addRow' => true,
@@ -123,10 +124,19 @@
         tabindex="0"
         role="grid"
         x-on:keydown="onKey($event)"
-        x-on:mouseup.window="endDrag(); fillEnd()"
+        x-on:mouseup.window="endDrag(); fillEnd(); resizeEnd()"
+        @if($resizableColumns)
+        x-on:mousemove.window="resizeMove($event)"
+        @endif
         @if($height) style="max-height: {{ $height }}" @endif
     >
-        <table class="{{ $c['table'] }}">
+        <table class="{{ $c['table'] }}" x-bind:class="widthsFrozen ? 'table-fixed' : ''" x-bind:style="widthsFrozen ? `width:${frozenTableWidth}px` : ''">
+            <colgroup>
+                @if($rowNumbers)<col x-bind:style="gutterWidth ? `width:${gutterWidth}px` : ''" />@endif
+                <template x-for="(col, c) in cols" x-bind:key="col.key">
+                    <col x-bind:style="col.width ? `width:${col.width}px` : ''" />
+                </template>
+            </colgroup>
             <thead>
                 <tr role="row">
                     @if($rowNumbers)
@@ -136,7 +146,7 @@
                         {{-- Header BODY click = column-select (S2). The sort caret (right) = toggle sort
                              (S3), x-on:click.stop so it never also selects. The two gestures coexist. --}}
                         <th
-                            class="{{ $c['headerCell'] }} group/th {{ $movableColumns ? 'cursor-grab' : 'cursor-pointer' }}"
+                            class="{{ $c['headerCell'] }} group/th relative {{ $movableColumns ? 'cursor-grab' : 'cursor-pointer' }}"
                             x-bind:style="headerSelStyle(c)"
                             x-bind:class="{ 'opacity-40': dragCol === c, 'pn-dropcol-before': dragCol !== null && dropCol === c, 'pn-dropcol-after': dragCol !== null && dropCol === c + 1 && c === cols.length - 1 }"
                             role="columnheader"
@@ -180,6 +190,11 @@
                                     </button>
                                 </template>
                             </span>
+                            @if($resizableColumns)
+                                {{-- column-resize grip on the header's right edge (S3d). mousedown.stop.prevent so it
+                                     starts a resize, not a column drag / text selection / column-select click. --}}
+                                <span class="{{ $c['resizeHandle'] }}" draggable="false" x-on:mousedown.stop.prevent="resizeStart(c, $event)" x-on:click.stop x-on:dblclick.stop aria-hidden="true"></span>
+                            @endif
                         </th>
                     </template>
                 </tr>

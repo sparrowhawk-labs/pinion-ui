@@ -19,9 +19,9 @@ Same public API and the **same `wire:model` data contract** as `<x-data-grid>` (
 | **S3a** | column sort — header caret toggles asc ⇄ desc (idle glyph on header hover, solid primary ▲/▼ when active), `↺` restores the pre-sort order; empties sort last; destructive (reorders `rows`, flushes) | **✅ shipped** |
 | **S3b** | row / column reorder — native HTML5 drag (whole-row / whole-column drag image), drop line indicator, overshoot clamps to first/last, fires `grid-rows-reordered` / `grid-columns-reordered` (same shape as `<x-data-grid>`); a manual order supersedes an active sort | **✅ shipped** |
 | **S3c** | fill-handle drag — the square at the range's bottom-right; drag down/right to extend along the dominant axis, **tiles** the source block's values into the new cells (copy only, no numeric series); selection grows to cover the result. Gated by `selectableRange` | **✅ shipped** |
-| S3d | column resize → host cutover | planned |
+| **S3d** | column resize — drag a header's right edge. The table is content-auto until the first resize, which **lazily freezes** the rendered widths and flips to `table-fixed` (per-column widths become authoritative; widening past the container scrolls horizontally). Width is presentation (rides on `cols`, never flushed), undoable, fires `grid-column-resized` | **✅ shipped** |
 
-The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). Column resize lands in S3d.
+The behavior props (`editable`, `sync`, `addRow`, `addColumn`, …) are now live. **Install is required from S1** (the `pinionSheet` factory must be registered — see Install below). **S3 is complete** — next is the host cutover (replacing the M5 `<x-data-grid>` table view).
 
 ## Range selection & clipboard (S2)
 
@@ -82,6 +82,7 @@ Alpine.data('pinionCalendar', pinionCalendar);
 | `rowNumbers` | `bool` | `true` | Frozen row-number gutter. |
 | `movableRows` | `bool` | `false` | Drag rows to reorder → fires `grid-rows-reordered`. *(S3b)* |
 | `movableColumns` | `bool` | `false` | Drag column headers to reorder → fires `grid-columns-reordered`. *(S3b)* |
+| `resizableColumns` | `bool` | `true` | Drag a header's right edge to resize → fires `grid-column-resized`. First resize freezes widths to `table-fixed`. *(S3d)* |
 | `toolbar` | `bool` | `true` | Built-in top bar: a **toolbox** of icon-only ops + row count (+ `actions` slot + mobile help). |
 | `addRow` | `bool` | `true` | Show the built-in add-row icon button in the toolbox. *(inert at S0; dispatches to host in S1)* |
 | `addColumn` | `bool` | `true` | Show the built-in add-column icon button in the toolbox. *(inert at S0; dispatches to host in S1)* |
@@ -108,7 +109,7 @@ The sheet will flush its rows as a **JSON string** to the hidden `wire:model` ca
   { "id": 13, "item": "月額保守", "qty": 12, "category": "保守" } ]
 ```
 
-**Bind it to a `string` property and `json_decode` it** — initial data goes IN via the `:rows` prop (a real PHP array): array in, JSON-string out. **Structural changes (add/remove rows/columns) are the host's job** (the host persists, then re-seeds by bumping the Livewire `:key`); the component never invents ids or schema. Drag-reorder dispatches bubbling `grid-rows-reordered` / `grid-columns-reordered` `CustomEvent`s carrying the new order — same names and `detail.order` shape as `<x-data-grid>`.
+**Bind it to a `string` property and `json_decode` it** — initial data goes IN via the `:rows` prop (a real PHP array): array in, JSON-string out. **Structural changes (add/remove rows/columns) are the host's job** (the host persists, then re-seeds by bumping the Livewire `:key`); the component never invents ids or schema. Drag-reorder dispatches bubbling `grid-rows-reordered` / `grid-columns-reordered` `CustomEvent`s carrying the new order — same names and `detail.order` shape as `<x-data-grid>`. Column resize dispatches `grid-column-resized` with `detail.{key, width}` (width is presentation-only — it is never written to the carrier, so a Livewire host can ignore it or persist it as it likes).
 
 ## Examples
 

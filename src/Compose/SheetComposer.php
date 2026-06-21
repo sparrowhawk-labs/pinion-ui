@@ -75,7 +75,7 @@ class SheetComposer
             'cellInRange'        => 'bg-primary/10',
             'rowNumGutter'       => self::rowNumGutter($size),
             'gutterCorner'       => 'pn-sheet-gutter bg-base-100 select-none',
-            'resizeHandle'       => 'absolute top-0 right-0 h-full w-1 cursor-col-resize select-none hover:bg-primary/40',
+            'resizeHandle'       => 'absolute top-0 right-0 h-full w-1.5 cursor-col-resize select-none hover:bg-primary/40 z-10',
             'fillHandle'         => 'absolute -bottom-1 -right-1 w-2 h-2 bg-primary rounded-[1px] cursor-crosshair',
             'colDragHandle'      => 'cursor-grab select-none',
             'numStepper'         => self::numStepper(),

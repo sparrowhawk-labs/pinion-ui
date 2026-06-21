@@ -19,7 +19,7 @@
             "cellInRange": "bg-primary/10",
             "rowNumGutter": "pn-sheet-gutter px-2 py-[var(--py-input-md)] text-center text-base-content/45 bg-base-100 tabular-nums select-none cursor-default align-middle",
             "gutterCorner": "pn-sheet-gutter bg-base-100 select-none",
-            "resizeHandle": "absolute top-0 right-0 h-full w-1 cursor-col-resize select-none hover:bg-primary/40",
+            "resizeHandle": "absolute top-0 right-0 h-full w-1.5 cursor-col-resize select-none hover:bg-primary/40 z-10",
             "fillHandle": "absolute -bottom-1 -right-1 w-2 h-2 bg-primary rounded-[1px] cursor-crosshair",
             "colDragHandle": "cursor-grab select-none",
             "sortCaret": "shrink-0 inline-grid place-content-center w-4 h-4 rounded-[calc(var(--radius-box)*0.4)] cursor-pointer select-none hover:bg-base-content/[0.08] transition-colors duration-100 [&_svg]:w-3 [&_svg]:h-3",

@@ -98,6 +98,9 @@ export function pinionSheet(opts = {}) {
     filling: false,     // true while a fill-handle drag is in progress (S3c)
     history: [],        // undo stack of PRE-mutation snapshots (Cmd/Ctrl+Z pops one); capped
     lastState: null,    // snapshot of the current committed state; the next mutation pushes THIS
+    resizing: null,     // { c, startX, startW, snap } during a column-resize drag (S3d), or null
+    widthsFrozen: false,// once true, the table is table-fixed with explicit per-column widths (S3d)
+    gutterWidth: null,  // frozen row-number gutter width in px (S3d)
 
     init() {
       // Deep-clone out of the opts proxy, then let Alpine re-proxy our own copy.
@@ -642,6 +645,53 @@ export function pinionSheet(opts = {}) {
     },
     emitColOrder() { this.$dispatch('grid-columns-reordered', { order: this.cols.map((c) => c.key).filter(Boolean) }); },
 
+    // ── column resize (S3d): drag a header's right edge. The table is content-auto by default;
+    //    the FIRST resize lazily FREEZES the current rendered widths into cols[c].width and flips
+    //    the table to table-fixed (width:auto), making per-column widths authoritative (widening a
+    //    column past the container then scrolls horizontally). Width is presentation, not row data
+    //    — it rides on cols (never flushed to the carrier), is undoable, and fires
+    //    grid-column-resized on release. mousemove/mouseup are window-level (drag can leave the th). ──
+    freezeWidths() {
+      const grid = this.$refs.grid;
+      // Semantic selectors — NOT `thead tr > *`, whose count includes Alpine's inert x-for
+      // <template> node and the gutter, throwing the index off. role=columnheader = the rendered
+      // column th's only; the corner gutter is the sole thead .pn-sheet-gutter.
+      const headers = Array.from(grid.querySelectorAll('thead [role="columnheader"]'));
+      if (headers.length !== this.cols.length) return;   // not painted yet → stay auto, bail
+      headers.forEach((th, c) => { this.cols[c].width = Math.round(th.getBoundingClientRect().width); });
+      const corner = grid.querySelector('thead .pn-sheet-gutter');
+      if (corner) this.gutterWidth = Math.round(corner.getBoundingClientRect().width);
+      this.widthsFrozen = true;
+    },
+    // Explicit total width once frozen (gutter + every column). Forcing the table to this px width
+    // (overriding the w-full class) makes column widths authoritative: widening a column grows the
+    // total → the overflow-auto grid scrolls horizontally, instead of table-fixed+width:100%
+    // re-distributing the drag across the other columns.
+    get frozenTableWidth() {
+      if (!this.widthsFrozen) return null;
+      return this.cols.reduce((a, col) => a + (col.width || 0), 0) + (this.gutterWidth || 0);
+    },
+    resizeStart(c, e) {
+      if (this.editing) this.commitEdit();
+      const snap = this.snapshot();              // pre-resize (and pre-freeze) state, for undo
+      if (!this.widthsFrozen) this.freezeWidths();
+      this.resizing = { c, startX: e.clientX, startW: this.cols[c].width, snap };
+    },
+    resizeMove(e) {
+      if (!this.resizing) return;
+      const { c, startX, startW } = this.resizing;
+      this.cols[c].width = Math.max(48, startW + (e.clientX - startX));   // 48px floor
+    },
+    resizeEnd() {
+      if (!this.resizing) return;
+      const { c, startW, snap } = this.resizing;
+      this.resizing = null;
+      if (JSON.stringify(snap.cols) === JSON.stringify(this.cols)) return;   // no freeze, no width change
+      this.pushHistory(snap);              // make the resize (and first-time freeze) undoable
+      this.lastState = this.snapshot();
+      if (startW !== this.cols[c].width) this.$dispatch('grid-column-resized', { key: this.colKey(c), width: this.cols[c].width });
+    },
+
     // ── custom select-cell dropdown (pinion <x-select> look; no native <select>, so it
     //    survives Alpine re-renders, and is position:fixed so the grid overflow can't clip it) ──
     cellEl(r, c) { return this.$refs.grid?.querySelector(`[data-r="${r}"][data-c="${c}"]`); },
@@ -703,6 +753,8 @@ export function pinionSheet(opts = {}) {
         cols: JSON.parse(JSON.stringify(this.cols)),
         sort: this.sort ? { ...this.sort } : null,
         sortSnapshot: this.sortSnapshot ? this.sortSnapshot.slice() : null,
+        widthsFrozen: this.widthsFrozen,   // S3d: so undoing a resize also reverts the freeze /
+        gutterWidth: this.gutterWidth,     //      width-mode (else table-fixed lingers, all-equal)
       };
     },
     pushHistory(snap) {
@@ -715,6 +767,8 @@ export function pinionSheet(opts = {}) {
       this.cols = JSON.parse(JSON.stringify(s.cols));
       this.sort = s.sort ? { ...s.sort } : null;
       this.sortSnapshot = s.sortSnapshot ? s.sortSnapshot.slice() : null;
+      this.widthsFrozen = s.widthsFrozen ?? false;
+      this.gutterWidth = s.gutterWidth ?? null;
     },
     clampSelection() {
       if (!this.rows.length || !this.cols.length) { this.sel = null; this.anchor = null; return; }
