@@ -110,6 +110,7 @@
     --tb-space-compact: 0.75rem;
     --tb-space-text: 1rem;
     --tb-space-inline: 0.5rem;
+    --tb-space-micro: 0.25rem;   /* smallest tier — icon↔label, chip gaps, tight list rhythm */
     /* Typographic rhythm (NEW tokens) */
     --tb-tracking-heading: -0.01em;
     --tb-leading-body: 1.6;
@@ -179,6 +180,7 @@
     --td-space-compact: 0rem;
     --td-space-text: 0rem;
     --td-space-inline: 0rem;
+    --td-space-micro: 0rem;
     --td-tracking-heading: 0rem;
     --td-leading-body: 0;
     --td-type-scale-ratio: 0;
@@ -242,6 +244,11 @@
     --space-inline: max(8px,
         var(--ovr-space-inline,
             calc(var(--tb-space-inline) + var(--td-space-inline) * var(--tune-k))));
+    /* micro = the sub-inline tier (icon↔label, chip gaps). Floored at 2px so a
+       tight tune can pull truly close without a "touching" collapse. */
+    --space-micro: max(2px,
+        var(--ovr-space-micro,
+            calc(var(--tb-space-micro) + var(--td-space-micro) * var(--tune-k))));
 
     /* ---- Typographic rhythm ---- */
     /* F6: tracking clamp. */
@@ -366,6 +373,21 @@
     --td-sh1-y: 1px;
     --td-sh1-blur: 2px;
 }
+
+/* micro-tier (--space-micro) per-tune deltas — kept together because they are
+   small and near-uniform: airy tunes loosen the tiniest gaps a touch, tight
+   tunes pull them closer. Scaled by --tune-k like every other delta, so the
+   micro response also strengthens at higher data-tune-strength. Listed here as
+   one block (not scattered) since the tier is subtle and read as a set. */
+[data-tune="minimal"]   { --td-space-micro:  0.125rem; }
+[data-tune="soft"]      { --td-space-micro:  0.125rem; }
+[data-tune="editorial"] { --td-space-micro:  0.0625rem; }
+[data-tune="luxury"]    { --td-space-micro:  0.0625rem; }
+[data-tune="draft"]     { --td-space-micro:  0.0625rem; }
+[data-tune="sharp"]     { --td-space-micro: -0.0625rem; }
+[data-tune="corporate"] { --td-space-micro: -0.0625rem; }
+[data-tune="tech"]      { --td-space-micro: -0.0625rem; }
+[data-tune="brutal"]    { --td-space-micro: -0.0625rem; }
 
 /* minimal — quiet, airiest. radius down, lighter weight, roomy whitespace,
    no shadow (flat). base page scale nudged smaller (k-exempt). */
@@ -891,9 +913,46 @@
     gap: var(--space-inline);
 }
 
+@utility gap-micro {
+    gap: var(--space-micro);
+}
+
 @utility space-x-inline {
     & > :not(:last-child) {
         margin-inline-end: var(--space-inline);
+    }
+}
+
+@utility space-x-micro {
+    & > :not(:last-child) {
+        margin-inline-end: var(--space-micro);
+    }
+}
+
+/* Vertical tune-spacing stacks. Convention matches space-x-inline: margin on
+   the block-end of every child but the last. (space-y-element was referenced
+   by consumers before it existed — these close that gap.) */
+@utility space-y-micro {
+    & > :not(:last-child) {
+        margin-block-end: var(--space-micro);
+    }
+}
+
+@utility space-y-text {
+    & > :not(:last-child) {
+        margin-block-end: var(--space-text);
+    }
+}
+
+@utility space-y-compact {
+    & > :not(:last-child) {
+        margin-block-end: var(--space-compact);
+    }
+}
+
+@utility space-y-element {
+    & > :not(:last-child) {
+        margin-block-end: var(--space-element);
     }
 }
 
