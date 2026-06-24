@@ -78,7 +78,11 @@ class SidebarComposer
             self::sizeWidth($size),
             'bg-base-100 text-base-content',
             $borderSide,
-            'border-base-300 shadow-xl p-element overflow-y-auto',
+            // Functional overlay with only ONE perimeter border (the edge it
+            // slides from is flush with the viewport). Layer a quiet base
+            // elevation under the tune shadow so the drawer reads as lifted in
+            // flat tunes (minimal/corporate → --shadow-box: none) too.
+            'border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto',
         ];
         if (!$backdrop) {
             // re-enable pointer events on the panel itself when overlay is

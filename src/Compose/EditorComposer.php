@@ -44,7 +44,7 @@ class EditorComposer
             'root'         => self::root($disabled),
             'body'         => self::body($size),
             'prose'        => self::prose($size),
-            'menu'         => 'fixed z-50 flex flex-nowrap items-center gap-0.5 p-1 bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-lg',
+            'menu'         => 'fixed z-50 flex flex-nowrap items-center gap-0.5 p-1 bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-[var(--shadow-box)]',
             'menuGroup'    => 'flex flex-nowrap items-center gap-0.5 shrink-0',
             'button'       => self::button($size),
             'buttonActive' => 'bg-base-content/10 text-base-content',

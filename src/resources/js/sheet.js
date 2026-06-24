@@ -732,7 +732,7 @@ export function pinionSheet(opts = {}) {
       this.collapse(0, c);   // target column c (single cell at its top — keeps row ops safe)
       this.menuAt(e, 0, c);
     },
-    closeMenu() { this.menu = null; },
+    closeMenu() { this.menu = null; this.focusGrid(); },   // refocus so Cmd+Z works right after a menu action
 
     convertColumn(c, type) {
       this.closeMenu();
@@ -743,8 +743,10 @@ export function pinionSheet(opts = {}) {
         this.rows.forEach((row) => { const v = row[col.key]; if (v !== null && v !== undefined && v !== '') seen.add(String(v)); });
         col.options = Array.from(seen);   // seed choices from the distinct existing values
       }
+      // NON-destructive: only change the type (+ derive select options). Values are PRESERVED —
+      // coercion happens lazily on the next edit (castValue in commitEdit). So text→number keeps
+      // the text visible (no "everything vanished"), and converting back restores it. (review RP1)
       col.type = type;
-      this.rows.forEach((row) => { row[col.key] = castValue(row[col.key], type); });   // coerce cells
       this.schedule();
     },
     insertRow(at) {

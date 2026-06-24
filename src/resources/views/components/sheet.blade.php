@@ -39,7 +39,15 @@
         'colPlus' => $svg('<path d="M6 4v16"/><path d="M11 4v16"/><path d="M16 4v7"/><path d="M16 16h5"/><path d="M18.5 13.5v5"/>'),
         'help'    => $svg('<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2"/><path d="M12 17h.01"/>'),
         'close'   => $svg('<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'),
+        // context-menu icons (simple Lucide-style)
+        'type'    => $svg('<path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/>'),
+        'copy'    => $svg('<rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>'),
+        'paste'   => $svg('<rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>'),
+        'eraser'  => $svg('<path d="m7 21-4.3-4.3a1 1 0 0 1 0-1.4l9.6-9.6a1 1 0 0 1 1.4 0l5.6 5.6a1 1 0 0 1 0 1.4L13 21"/><path d="M22 21H7"/>'),
+        'trash'   => $svg('<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'),
     ];
+    // wrapper that sizes any of the above inline SVGs to a menu-row icon
+    $mi = 'shrink-0 w-4 h-4 text-base-content/55 [&_svg]:w-4 [&_svg]:h-4';
 
     // wire:model → a dedicated hidden <input> (mirrors <x-data-grid> / <x-editor>);
     // detected via whereStartsWith so the component works without Livewire installed.
@@ -90,7 +98,7 @@
                     <button type="button" class="{{ $c['iconBtn'] }} text-base-content/45" x-on:click="help = true" aria-label="操作の説明" title="操作の説明">{!! $icon['help'] !!}</button>
 
                     <div x-show="help" x-cloak x-transition.opacity.duration.150ms x-on:click="help = false" class="fixed inset-0 z-40 flex items-end justify-center bg-base-content/30 p-4">
-                        <div x-on:click.stop role="dialog" aria-modal="true" aria-label="表の操作の説明" class="w-full max-w-sm bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-lg p-4 flex flex-col gap-3">
+                        <div x-on:click.stop role="dialog" aria-modal="true" aria-label="表の操作の説明" class="w-full max-w-sm bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-[0_10px_30px_-8px_rgb(0_0_0_/_0.18),var(--shadow-box)] p-4 flex flex-col gap-3">
                             <div class="flex items-center justify-between">
                                 <h3 class="text-sm font-semibold text-base-content">表の操作</h3>
                                 <button type="button" class="{{ $c['iconBtn'] }} text-base-content/45" x-on:click="help = false" aria-label="閉じる">{!! $icon['close'] !!}</button>
@@ -344,7 +352,7 @@
         x-on:click.outside="openSel = null"
         x-on:keydown.escape.window="openSel = null"
         x-bind:style="openSel ? `top:${selPy}px; left:${selPx}px; min-width:${selW}px` : ''"
-        class="fixed z-40 max-h-60 overflow-auto bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-lg p-1"
+        class="fixed z-40 max-h-60 overflow-auto bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-[var(--shadow-box)] p-1"
         role="listbox"
     >
         <li class="{{ $sel['option'] }}" x-on:click="chooseOption(openSel.r, openSel.c, '')"><span class="text-base-content/50">（なし）</span></li>
@@ -374,17 +382,17 @@
             x-on:keydown.escape.window="closeMenu()"
             x-on:contextmenu.prevent
             x-bind:style="menu ? `top:${menu.y}px; left:${menu.x}px` : ''"
-            class="fixed z-50 min-w-52 bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-lg p-1 text-[length:var(--text-field-sm)]"
+            class="fixed z-50 min-w-52 bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-[var(--shadow-box)] p-1 text-[length:var(--text-field-sm)]"
             role="menu"
         >
             @if($editable)
-                {{-- 列の型 — hover flyout submenu; converts the right-clicked column's type (coerces cells). --}}
+                {{-- 列の型 — hover flyout submenu; converts the right-clicked column's type (non-destructive: values preserved). --}}
                 <li class="group/typesub relative">
-                    <div class="{{ $sel['option'] }} justify-between" role="menuitem">
-                        <span>列の型</span>
+                    <div class="{{ $sel['option'] }}" role="menuitem">
+                        <span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['type'] !!}</span><span>列の型</span></span>
                         <svg class="w-3.5 h-3.5 -mr-0.5 text-base-content/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
                     </div>
-                    <ul class="hidden group-hover/typesub:block absolute left-full top-0 min-w-36 bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-lg p-1" role="menu">
+                    <ul class="hidden group-hover/typesub:block absolute left-full top-0 min-w-36 bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-[var(--shadow-box)] p-1" role="menu">
                         <template x-for="t in colTypeOptions" x-bind:key="t.value">
                             <li class="{{ $sel['option'] }}" x-bind:class="colType(menu?.c) === t.value ? '{{ $sel['optionSelected'] }}' : ''" role="menuitemradio" x-bind:aria-checked="colType(menu?.c) === t.value" x-on:click="convertColumn(menu?.c, t.value)">
                                 <span x-text="t.label"></span>
@@ -396,17 +404,17 @@
                 <li class="my-1 border-t border-base-200" role="separator"></li>
             @endif
 
-            <li class="{{ $sel['option'] }} justify-between" role="menuitem" x-on:click="copyRange(); closeMenu()"><span>コピー</span><span class="text-base-content/35 text-xs tabular-nums">⌘C</span></li>
+            <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="copyRange(); closeMenu()"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['copy'] !!}</span><span>コピー</span></span><span class="text-base-content/35 text-xs tabular-nums">⌘C</span></li>
             @if($editable)
-                <li class="{{ $sel['option'] }} justify-between" role="menuitem" x-on:click="pasteRange(); closeMenu()"><span>貼り付け</span><span class="text-base-content/35 text-xs tabular-nums">⌘V</span></li>
-                <li class="{{ $sel['option'] }} justify-between" role="menuitem" x-on:click="clearRange(); closeMenu()"><span>クリア</span><span class="text-base-content/35 text-xs tabular-nums">Del</span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="pasteRange(); closeMenu()"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['paste'] !!}</span><span>貼り付け</span></span><span class="text-base-content/35 text-xs tabular-nums">⌘V</span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="clearRange(); closeMenu()"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['eraser'] !!}</span><span>クリア</span></span><span class="text-base-content/35 text-xs tabular-nums">Del</span></li>
                 <li class="my-1 border-t border-base-200" role="separator"></li>
-                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertRow(menu?.r)"><span>行を上に挿入</span></li>
-                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertRow((menu?.r ?? 0) + 1)"><span>行を下に挿入</span></li>
-                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="deleteRows()"><span>行を削除</span></li>
-                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertColumn(menu?.c)"><span>列を左に挿入</span></li>
-                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertColumn((menu?.c ?? 0) + 1)"><span>列を右に挿入</span></li>
-                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="deleteColumns()"><span>列を削除</span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertRow(menu?.r)"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['rowPlus'] !!}</span><span>行を上に挿入</span></span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertRow((menu?.r ?? 0) + 1)"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['rowPlus'] !!}</span><span>行を下に挿入</span></span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="deleteRows()"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['trash'] !!}</span><span>行を削除</span></span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertColumn(menu?.c)"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['colPlus'] !!}</span><span>列を左に挿入</span></span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="insertColumn((menu?.c ?? 0) + 1)"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['colPlus'] !!}</span><span>列を右に挿入</span></span></li>
+                <li class="{{ $sel['option'] }}" role="menuitem" x-on:click="deleteColumns()"><span class="flex items-center gap-2"><span class="{{ $mi }}">{!! $icon['trash'] !!}</span><span>列を削除</span></span></li>
             @endif
         </ul>
     @endif

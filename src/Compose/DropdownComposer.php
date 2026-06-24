@@ -44,7 +44,7 @@ class DropdownComposer
             self::positionClasses($position),
             $width,
             'bg-base-100 border-[length:var(--border)] border-base-300',
-            'rounded-[var(--radius-box)] shadow-lg py-1 overflow-hidden',
+            'rounded-[var(--radius-box)] shadow-[var(--shadow-box)] py-1 overflow-hidden',
         );
     }
 

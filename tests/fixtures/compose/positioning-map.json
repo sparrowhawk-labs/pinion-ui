@@ -1,0 +1,42 @@
+[
+    {
+        "name": "default — md, grid on",
+        "props": {},
+        "expected": {
+            "root": "positioning-map relative w-full min-h-[22rem] bg-base-100 text-base-content tune-border border-base-content/15 rounded-[var(--radius-box)] overflow-hidden",
+            "grid": "absolute inset-[8%] pointer-events-none",
+            "plot": "absolute inset-[8%]",
+            "point": "absolute group z-10 hover:z-30",
+            "pointActive": "absolute group z-20 hover:z-30",
+            "node": "block h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-base-content ring-2 ring-base-100 shadow-[var(--shadow-box)]",
+            "nodeActive": "block h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary ring-[3px] ring-base-100",
+            "flag": "absolute left-0 bottom-full -translate-x-1/2 flex flex-col items-center",
+            "marker": "inline-flex items-center gap-1 rounded-[var(--radius-field)] bg-base-100 tune-border border-base-content/15 text-base-content text-xs font-semibold leading-none px-2 py-1 whitespace-nowrap shadow-[var(--shadow-box)] transition-colors group-hover:border-base-content/40",
+            "markerActive": "inline-flex items-center gap-1 rounded-[var(--radius-field)] bg-primary border-transparent text-primary-content text-xs font-semibold leading-none px-2 py-1 whitespace-nowrap shadow-[var(--shadow-box)]",
+            "icon": "w-3.5 h-3.5 shrink-0",
+            "markerImage": "block overflow-hidden h-9 w-9 tune-border border-base-content/15 bg-base-100 shadow-[var(--shadow-box)] transition-colors group-hover:border-base-content/40",
+            "imageEl": "h-full w-full object-cover"
+        }
+    },
+    {
+        "name": "size=sm — shorter plot",
+        "props": { "size": "sm" },
+        "expected": {
+            "root": "positioning-map relative w-full min-h-[15rem] bg-base-100 text-base-content tune-border border-base-content/15 rounded-[var(--radius-box)] overflow-hidden"
+        }
+    },
+    {
+        "name": "size=lg — taller plot",
+        "props": { "size": "lg" },
+        "expected": {
+            "root": "positioning-map relative w-full min-h-[30rem] bg-base-100 text-base-content tune-border border-base-content/15 rounded-[var(--radius-box)] overflow-hidden"
+        }
+    },
+    {
+        "name": "grid=false — grid hidden",
+        "props": { "grid": false },
+        "expected": {
+            "grid": "hidden"
+        }
+    }
+]

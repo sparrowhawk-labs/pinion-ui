@@ -11,7 +11,10 @@ class StatComposer
         $wrapped    = array_key_exists('wrapped', $props) ? (bool) $props['wrapped'] : true;
 
         return [
-            'root'   => $wrapped ? 'stats shadow' : '',
+            // daisyUI's bare `shadow` utility is a fixed depth box-shadow; swap
+            // it for the tune-driven token so the stat card's elevation takes
+            // on each tune's shadow character (hairline / flat / hard / soft).
+            'root'   => $wrapped ? 'stats shadow-[var(--shadow-box)]' : '',
             'inner'  => 'stat',
             'figure' => self::figureClass($valueColor),
             'title'  => 'stat-title',

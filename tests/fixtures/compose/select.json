@@ -65,7 +65,7 @@
             "triggerText": "truncate text-[length:var(--text-field-md)] text-base-content",
             "placeholder": "text-base-content/40",
             "chip": "inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[length:var(--text-field-xs)] bg-base-200 text-base-content border-base-300",
-            "dropdown": "absolute z-40 mt-1 w-full max-h-72 overflow-auto bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-lg p-1",
+            "dropdown": "absolute z-40 mt-1 w-full max-h-72 overflow-auto bg-base-100 tune-border border-base-300 rounded-[var(--radius-field)] shadow-[var(--shadow-box)] p-1",
             "optionSelected": "bg-base-200 font-medium",
             "optionCheck": "shrink-0 size-4 text-base-content"
         }

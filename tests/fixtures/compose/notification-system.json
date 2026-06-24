@@ -4,7 +4,7 @@
         "props": {},
         "expected": {
             "wrapper": "fixed z-50 flex flex-col gap-3 max-w-sm w-full px-4 py-4 pointer-events-none bottom-0 right-0 items-end",
-            "item": "pointer-events-auto flex items-start rounded-[var(--radius-box)] tune-border shadow-lg min-h-[var(--h-field-md)] px-[var(--px-field-md)] py-2.5 text-[length:var(--text-field-md)] gap-3",
+            "item": "pointer-events-auto flex items-start rounded-[var(--radius-box)] tune-border shadow-[var(--shadow-box)] min-h-[var(--h-field-md)] px-[var(--px-field-md)] py-2.5 text-[length:var(--text-field-md)] gap-3",
             "iconSize": "w-5 h-5",
             "variantInfo": "bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-info",
             "variantSuccess": "bg-base-100 text-base-content border-base-content/10 border-l-4 border-l-success",
@@ -68,7 +68,7 @@
         "name": "size=sm",
         "props": { "size": "sm" },
         "expected": {
-            "item": "pointer-events-auto flex items-start rounded-[var(--radius-box)] tune-border shadow-lg min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] py-2 text-[length:var(--text-field-sm)] gap-2",
+            "item": "pointer-events-auto flex items-start rounded-[var(--radius-box)] tune-border shadow-[var(--shadow-box)] min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] py-2 text-[length:var(--text-field-sm)] gap-2",
             "iconSize": "w-4 h-4",
             "closeBtn": "shrink-0 inline-flex items-center justify-center rounded-[var(--radius-field)] opacity-60 hover:opacity-100 transition-opacity cursor-pointer leading-none w-5 h-5 text-base"
         }

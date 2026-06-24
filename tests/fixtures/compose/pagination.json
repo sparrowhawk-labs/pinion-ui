@@ -4,7 +4,7 @@
         "props": { "current": 1, "last": 1 },
         "expected": {
             "wrapper": "flex flex-col sm:flex-row items-center justify-between gap-4 py-4 w-full",
-            "nav": "join shadow-sm",
+            "nav": "join shadow-[var(--shadow-box)]",
             "itemBase": "join-item inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-md)] min-w-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2",
             "itemActive": "bg-primary/15 text-primary border-primary/40 focus-visible:ring-primary cursor-default relative z-10",
             "itemIdle": "bg-base-100 text-base-content border-base-content/10 hover:bg-base-200 focus-visible:ring-base-content cursor-pointer",

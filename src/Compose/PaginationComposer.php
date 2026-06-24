@@ -18,7 +18,7 @@ class PaginationComposer
         return [
             'wrapper'      => 'flex flex-col sm:flex-row items-center justify-between gap-4 py-4 w-full',
             'wrapperSimple'=> 'inline-flex flex-col items-center gap-3',
-            'nav'          => 'join shadow-sm',
+            'nav'          => 'join shadow-[var(--shadow-box)]',
             'itemBase'     => self::itemBase($size),
             'itemActive'   => self::itemActive($appearance, $color),
             'itemIdle'     => self::itemIdle(),

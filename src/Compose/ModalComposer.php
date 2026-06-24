@@ -51,7 +51,11 @@ class ModalComposer
             self::sizeClass($size),
             'bg-base-100 text-base-content text-[length:var(--text-field-md)]',
             'rounded-[var(--radius-box)] border-[length:var(--border)] border-base-300',
-            'shadow-lg p-element',
+            // Functional overlay: route the decorative character through the
+            // tune shadow, layered over a quiet base elevation so the dialog
+            // stays lifted off the scrim even in flat tunes (minimal/corporate
+            // set --shadow-box: none). Border carries the perimeter regardless.
+            'shadow-[0_10px_30px_-8px_rgb(0_0_0_/_0.18),var(--shadow-box)] p-element',
         );
     }
 

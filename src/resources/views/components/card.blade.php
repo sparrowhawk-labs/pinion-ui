@@ -19,7 +19,7 @@
         // elevated: surface + shadow, no border (color ignored)
         'elevated-primary', 'elevated-secondary', 'elevated-accent', 'elevated-neutral',
         'elevated-info', 'elevated-success', 'elevated-warning', 'elevated-error'
-            => 'bg-base-100 text-base-content border-transparent shadow-md',
+            => 'bg-base-100 text-base-content border-base-content/10 shadow-[var(--shadow-box)]',
 
         // filled: base-200 tinted, no border (color ignored)
         'filled-primary', 'filled-secondary', 'filled-accent', 'filled-neutral',
@@ -104,7 +104,7 @@
         default => 'bg-base-100 text-base-content border-base-content/10',
     };
 
-    $hover = $hoverable ? 'transition-shadow hover:shadow-lg cursor-pointer' : '';
+    $hover = $hoverable ? 'transition-shadow hover:shadow-[var(--shadow-box)] cursor-pointer' : '';
 
     // Two layout modes:
     //  divider=true  → each section owns p-element, hr sits between sections (outerPad is empty)
@@ -115,21 +115,42 @@
     $footerDivider = $divider ? 'border-t-[length:var(--border)] border-base-content/10' : '';
     $headerGap = !$divider ? 'mb-[var(--space-text)]' : '';
     $footerGap = !$divider ? 'mt-[var(--space-text)]' : '';
+
+    // Full-bleed divider fix.
+    //   The card root is a border-box with a `tune-border` of width var(--border)
+    //   (brutal = 2.5px). Its direct children's content box is therefore inset
+    //   from the card OUTER edge by one border width on each inline side. A
+    //   header/footer's `border-b` / `border-t` spans only that inset width, so
+    //   the divider line stops var(--border) short of each side border and reads
+    //   as NARROWER than the card.
+    //   Fix: on the bordered sections only, pull the inline edges back out by
+    //   var(--border) with negative inline margin so the section (and thus its
+    //   border line) reaches flush to the card's inner border face, then add the
+    //   same var(--border) back to inline padding so the *content* doesn't move.
+    //   Works with overflow-hidden + rounded corners (the root still clips) and
+    //   scales with the tune border width automatically.
+    $dividerBleed = $divider
+        ? ($padding
+            // padded: keep vertical p-element, widen inline padding by the border
+            ? '-mx-[var(--border)] py-[var(--space-element)] px-[calc(var(--space-element)+var(--border))]'
+            // unpadded: just restore the content position lost to the pull-out
+            : '-mx-[var(--border)] px-[var(--border)]')
+        : '';
 @endphp
 
 <{{ $as }} {{ $attributes->merge(['class' => "$base $variantClasses $hover $outerPad flex flex-col"]) }}>
     @if(isset($header))
-        <div class="{{ $sectionPad }} {{ $headerDivider }} {{ $headerGap }}">
+        <div class="{{ $divider ? $dividerBleed : $sectionPad }} {{ $headerDivider }} {{ $headerGap }}">
             {{ $header }}
         </div>
     @endif
 
-    <div class="{{ $sectionPad }} flex-1">
+    <div class="{{ $divider ? $dividerBleed : $sectionPad }} flex-1">
         {{ $slot }}
     </div>
 
     @if(isset($footer))
-        <div class="{{ $sectionPad }} {{ $footerDivider }} {{ $footerGap }}">
+        <div class="{{ $divider ? $dividerBleed : $sectionPad }} {{ $footerDivider }} {{ $footerGap }}">
             {{ $footer }}
         </div>
     @endif

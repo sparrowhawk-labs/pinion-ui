@@ -56,7 +56,7 @@ class NotificationSystemComposer
         return FieldVariants::join(
             'pointer-events-auto flex items-start',
             'rounded-[var(--radius-box)] tune-border',
-            'shadow-lg',
+            'shadow-[var(--shadow-box)]',
             $sizePart,
         );
     }

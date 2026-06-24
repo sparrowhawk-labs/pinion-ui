@@ -8,7 +8,7 @@ namespace SparrowhawkLabs\PinionUi\Compose;
  * Behaviour lives in the Blade's Alpine x-data; this composer returns
  * class strings for the wrapper and each box.
  *
- * Sizing note: each box is square-ish (`w-{}` paired with `h-[var(--h-field-{})]`)
+ * Sizing note: each box is square-ish (w-SIZE paired with h-[var(--h-field-SIZE)])
  * so the row reads as a clean grid regardless of the active tune.
  */
 class PinInputComposer

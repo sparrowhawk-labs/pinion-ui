@@ -33,8 +33,8 @@ class TableScrollComposer
     private static function buttonInner(string $style): string
     {
         return match ($style) {
-            'flat' => 'inline-flex items-center justify-center w-7 h-7 rounded-[var(--radius-field)] bg-base-200 hover:bg-base-300 transition-colors shadow-sm',
-            default => 'inline-flex items-center justify-center w-7 h-7 rounded-full bg-base-100 hover:bg-base-200 transition-colors shadow border border-base-content/10',
+            'flat' => 'inline-flex items-center justify-center w-7 h-7 rounded-[var(--radius-field)] bg-base-200 hover:bg-base-300 transition-colors shadow-[var(--shadow-field)]',
+            default => 'inline-flex items-center justify-center w-7 h-7 rounded-full bg-base-100 hover:bg-base-200 transition-colors shadow-[var(--shadow-box)] border border-base-content/10',
         };
     }
 }

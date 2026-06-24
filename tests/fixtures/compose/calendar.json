@@ -3,7 +3,7 @@
         "name": "default — md size (all slots)",
         "props": {},
         "expected": {
-            "panel": "w-[15.5rem] bg-base-100 rounded-[var(--radius-box)] tune-border border-base-300 shadow-lg p-3 flex flex-col gap-2",
+            "panel": "w-[15.5rem] bg-base-100 rounded-[var(--radius-box)] tune-border border-base-300 shadow-[var(--shadow-box)] p-3 flex flex-col gap-2",
             "header": "flex items-center justify-between gap-2",
             "navBtn": "inline-grid place-content-center w-7 h-7 shrink-0 rounded-[calc(var(--radius-box)*0.45)] text-base-content/60 hover:text-base-content hover:bg-base-content/[0.08] transition-colors cursor-pointer select-none [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-2",
             "monthLabel": "text-[length:var(--text-field-md)] font-medium text-base-content tabular-nums select-none",

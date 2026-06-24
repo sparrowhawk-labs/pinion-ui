@@ -105,7 +105,7 @@ class ToggleComposer
         return self::join(
             'xy-thumb',
             $sizeClass,
-            'absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-sm transition-transform pointer-events-none'
+            'absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none'
         );
     }
 

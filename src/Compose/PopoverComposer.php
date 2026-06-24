@@ -51,7 +51,7 @@ class PopoverComposer
             'absolute z-50',
             $position,
             $width,
-            'rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-lg',
+            'rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)]',
             $padding,
         );
     }

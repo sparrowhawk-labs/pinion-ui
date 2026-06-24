@@ -3,7 +3,7 @@
         "name": "default — wrapped=true, no color, no trend",
         "props": {},
         "expected": {
-            "root": "stats shadow",
+            "root": "stats shadow-[var(--shadow-box)]",
             "inner": "stat",
             "figure": "stat-figure text-base-content/60",
             "title": "stat-title",
@@ -15,7 +15,7 @@
         "name": "+ desc — no trend, base desc class only",
         "props": { "desc": "since last month" },
         "expected": {
-            "root": "stats shadow",
+            "root": "stats shadow-[var(--shadow-box)]",
             "value": "stat-value",
             "desc": "stat-desc"
         }
@@ -66,7 +66,7 @@
             "desc": "vs last week"
         },
         "expected": {
-            "root": "stats shadow",
+            "root": "stats shadow-[var(--shadow-box)]",
             "value": "stat-value text-success",
             "figure": "stat-figure text-success",
             "desc": "stat-desc text-success"
