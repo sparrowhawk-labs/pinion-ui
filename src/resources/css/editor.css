@@ -112,18 +112,31 @@
     .pn-prose ul[data-type="taskList"] li {
         display: flex;
         align-items: flex-start;
-        gap: 0.6em;
+        gap: 0.5em;
     }
     /* Center the checkbox on the FIRST text line: a label box exactly one
-       line-height tall, with the input centered inside it. `1lh` tracks the
-       prose line-height, so it stays centered at any size/tune. */
+       line-height tall (= .pn-prose line-height) with the input centered inside.
+       The label is also the click target, so it's a generous full-line gutter
+       (a tiny negative inline margin keeps the box visually flush to the edge). */
     .pn-prose ul[data-type="taskList"] li > label {
         flex: 0 0 auto;
         display: inline-flex;
         align-items: center;
-        height: 1lh;
-        margin: 0;
+        justify-content: center;
+        height: 1.95em;
+        padding-inline: 0.15em;
+        margin-inline: -0.15em 0;
+        /* The text column's first line box starts ~0.3em below the row top (the
+           flex cross-start), so nudge the label down to sit the checkbox on the
+           first line's optical center. em-based, so it tracks size/tune. */
+        margin-block-start: 0.3em;
+        cursor: pointer;
         user-select: none;
+    }
+    /* @tiptap/extension-task-item renders an empty <span> after the input; it
+       carries the prose line-height and skews the flex cross-axis centering. */
+    .pn-prose ul[data-type="taskList"] li > label > span {
+        display: none;
     }
     .pn-prose ul[data-type="taskList"] li > div {
         flex: 1 1 auto;
@@ -132,8 +145,8 @@
     .pn-prose ul[data-type="taskList"] input[type="checkbox"] {
         appearance: none;
         -webkit-appearance: none;
-        width: 1.05em;
-        height: 1.05em;
+        width: 1.2em;
+        height: 1.2em;
         margin: 0;
         border: 1.5px solid color-mix(in oklab, currentColor 35%, transparent);
         border-radius: calc(var(--radius-box) * 0.4);
