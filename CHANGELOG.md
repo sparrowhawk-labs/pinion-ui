@@ -9,7 +9,21 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [Unreleased]
 
+## [0.4.4] — 2026-06
+
 ### Added
+- **Tune v2 system** — `base + delta × strength` token model (`--tb-*` base / `--td-*`
+  per-tune delta / `--ovr-*` override, scaled by `data-tune-strength="xs…xl"`), 11 MECE
+  presets, tune-driven multi-layer shadows, new tokens (`--tracking-heading`,
+  `--leading-body`, `--type-scale-ratio`, `--space-micro`), a micro spacing tier +
+  `space-y-{micro,text,compact,element}` utilities, and the rhythmic-vs-optical spacing
+  convention. v1 tune names are deprecated/renamed: `playful`→`soft`, `elegant`→`editorial`,
+  `bold`/`monumental`→`luxury`, `sketch`→`draft`, `terminal`→`tech`.
+- **`<x-positioning-map>`** — generic 2-axis positioning / perceptual map (tune-independent;
+  takes `points()`).
+- **`<x-sheet>` S3** — column sort, row/column reorder, fill-handle drag (tile fill),
+  undo (Cmd/Ctrl+Z), column resize (drag header edge), and a right-click context menu with
+  column type conversion.
 - **`php artisan ui:lint`** — lints Blade markup against the class-vocabulary rule
   (AGENTS.md → "Class vocabulary"): flags excluded daisyUI **component** classes
   (`.btn`, `.card`, … — silent no-ops in the build) and **fixed/hex** colors
@@ -38,6 +52,17 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   gray surfaces, blue/green/purple semantic set), ported from the `/visualize` report
   tooling so HTML reports and pinion-ui apps share one color system. Opt-in via
   `data-theme="reactive"`; `pinion` remains the default.
+
+### Fixed
+- **`<x-editor>`** — task-list checkbox is centered on the first text line with a larger,
+  full-line-height click target; the empty `<span>` Tiptap appends is hidden so flex
+  centering stays accurate.
+- **`<x-sheet>`** — sorting no longer widens the column (the ↺ button box is reserved);
+  S3d column resize honors a 120px minimum and the frame hugs the table.
+
+### Internal
+- `CLAUDE.md` and the `docs/` tree are no longer shipped in the package tarball — internal
+  contributor/design docs are kept local-only (gitignored).
 
 ## [0.4.1] — 2026-06
 
@@ -83,6 +108,7 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 - **`pinion-dark` theme removed** — Pinion now ships only the `pinion` (light) theme.
   Consumers pick any daisyUI standard dark theme via `<html data-theme>`.
 
-[Unreleased]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.4...HEAD
+[0.4.4]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.3...v0.4.4
 [0.4.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/sparrowhawk-labs/pinion-ui/releases/tag/v0.4.0
