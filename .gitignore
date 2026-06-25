@@ -14,7 +14,7 @@
 # Each subdirectory is a separate library (daisyui, preline, penguinui, …) copied
 # for LLM/agent reference during component design. Not redistributable, so the
 # entire docs/ tree stays out of the published repo.
-/docs/*/
+/docs/
 .screenshots/
 
 # Contributor doc (CLAUDE.md) — kept local-only, never published
