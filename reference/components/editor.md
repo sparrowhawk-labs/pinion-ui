@@ -6,7 +6,7 @@ theme (`data-theme`) × tune (`data-tune`) tokens. Emits a versioned JSON
 its engine is **opt-in** — see [Install](#install). Non-editor apps that never
 run `ui:install --editor` pull zero Tiptap bundle.
 
-**MVP block set**: paragraph, heading H1–H3, bullet list, ordered list,
+**MVP block set**: paragraph, heading H1–H4, bullet list, ordered list,
 task/checkbox list, blockquote, code (inline + fenced), link; marks
 bold / italic / code / highlight. Tables / images / columns are deferred.
 

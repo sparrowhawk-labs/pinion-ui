@@ -3,7 +3,7 @@
    ==========================================
    The block rules for the <x-editor> contenteditable surface that CANNOT be
    expressed as utility classes (descendant selectors on ProseMirror-emitted
-   nodes: h1/h2/h3, lists, taskList, blockquote, code, the custom pn-highlight
+   nodes: h1/h2/h3/h4, lists, taskList, blockquote, code, the custom pn-highlight
    mark, the placeholder pseudo-element).
 
    Aesthetic: "Notion's quiet page" — a borderless reading surface with a
@@ -60,17 +60,20 @@
     .pn-prose > * + * { margin-top: 0.9em; }
     .pn-prose > h1 + *,
     .pn-prose > h2 + *,
-    .pn-prose > h3 + * { margin-top: 0.5em; }
+    .pn-prose > h3 + *,
+    .pn-prose > h4 + * { margin-top: 0.5em; }
     .pn-prose h1 { margin-top: 2.2em; }
     .pn-prose h2 { margin-top: 2em; }
     .pn-prose h3 { margin-top: 1.7em; }
+    .pn-prose h4 { margin-top: 1.4em; }
     .pn-prose > :first-child { margin-top: 0; }
 
     /* Elegant serif display for headings against the sans body — an editorial
        pairing. Lighter weights + relaxed tracking read refined, not heavy. */
     .pn-prose h1,
     .pn-prose h2,
-    .pn-prose h3 {
+    .pn-prose h3,
+    .pn-prose h4 {
         font-family: var(--pn-editor-heading-font);
         font-weight: 600;
         letter-spacing: 0.02em;
@@ -88,6 +91,11 @@
         font-size: 1.2em;
         font-weight: 650;
         line-height: 1.45;
+    }
+    .pn-prose h4 {
+        font-size: 1.05em;
+        font-weight: 700;
+        line-height: 1.5;
     }
 
     .pn-prose p { line-height: 1.95; }
@@ -234,7 +242,8 @@
     .pn-prose p.is-editor-empty:first-child::before,
     .pn-prose h1.is-empty::before,
     .pn-prose h2.is-empty::before,
-    .pn-prose h3.is-empty::before {
+    .pn-prose h3.is-empty::before,
+    .pn-prose h4.is-empty::before {
         content: attr(data-placeholder);
         color: color-mix(in oklab, currentColor 32%, transparent);
         float: left;

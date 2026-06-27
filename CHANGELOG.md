@@ -9,6 +9,15 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [Unreleased]
 
+## [0.4.5] — 2026-06
+
+### Added
+- **`<x-editor>` H4 heading** — heading level 4 added to the editor. Tiptap `heading.levels`
+  is now `[1, 2, 3, 4]`, an **H4** button joins H1–H3 in the floating format toolbar, and the
+  `####` + space markdown input rule creates an H4. New `.pn-prose h4` style (serif display,
+  sized below H3 and above body) and empty-heading placeholder. Round-trips through markdown
+  as `#### ` (bare StarterKit consumers preserve level 4).
+
 ## [0.4.4] — 2026-06
 
 ### Added

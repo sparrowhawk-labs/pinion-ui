@@ -182,7 +182,7 @@ export function pinionEditor(opts = {}) {
         },
         extensions: [
           StarterKit.configure({
-            heading: { levels: [1, 2, 3] },
+            heading: { levels: [1, 2, 3, 4] },
             // Disable StarterKit's bundled Link; we add the standalone Link once
             // with our own config (see import note re: duplicate-name warning).
             link: false,

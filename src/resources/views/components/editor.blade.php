@@ -57,6 +57,7 @@
             ['html' => 'H1', 'aria' => 'Heading 1', 'run' => "c => c.toggleHeading({level:1})", 'name' => 'heading', 'attrs' => '{level:1}'],
             ['html' => 'H2', 'aria' => 'Heading 2', 'run' => "c => c.toggleHeading({level:2})", 'name' => 'heading', 'attrs' => '{level:2}'],
             ['html' => 'H3', 'aria' => 'Heading 3', 'run' => "c => c.toggleHeading({level:3})", 'name' => 'heading', 'attrs' => '{level:3}'],
+            ['html' => 'H4', 'aria' => 'Heading 4', 'run' => "c => c.toggleHeading({level:4})", 'name' => 'heading', 'attrs' => '{level:4}'],
         ]],
         ['t' => 'group', 'items' => [
             ['html' => $icon['bold'],      'aria' => 'Bold',        'run' => "c => c.toggleBold()",   'name' => 'bold'],
