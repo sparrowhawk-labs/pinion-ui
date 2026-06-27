@@ -1,0 +1,5 @@
+node_modules/
+build/
+harness/golden/
+*.local
+.DS_Store

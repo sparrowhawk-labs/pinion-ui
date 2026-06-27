@@ -1,0 +1,20 @@
+/* ============================================================================
+   reference.entry.css — the REFERENCE (golden) build for the Phase 0 harness.
+   ============================================================================
+   This compiles the CURRENT Blade preset exactly as consumers receive it
+   (daisyUI colour layer + tune token system + theme blocks, WITH Tailwind
+   preflight). The computed-style snapshot taken from this build is the golden
+   baseline that the future plain-dist CSS (v0.5.0 Phases 1-4) must match.
+
+   We import the real source — NOT a copy — so the reference can never drift
+   from what ships. The @source globs inside pinion-ui.css resolve relative to
+   that file, so the actual Blade views + Compose PHP get scanned here too.
+   ============================================================================ */
+@import "tailwindcss";
+@import "../../../src/resources/css/pinion-ui.css";
+
+/* Purge-guard: the harness fixture names every tune @utility + probe class, so
+   Tailwind JIT keeps all 73 utilities in the reference build even though the
+   Blade components don't happen to use every one. Without this @source, unused
+   utilities would be purged and the harness could not observe them. */
+@source "../harness/fixture.html";
