@@ -13,6 +13,17 @@
 @import "tailwindcss";
 @import "../../../src/resources/css/pinion-ui.css";
 
+/* ── [SPIKE S2 · docs/design/spacing-v0.5-tshirt.md] ──────────────────────────
+   Validate that Tailwind-idiom t-shirt spacing utilities stay tune-reactive,
+   WITHOUT touching the shipping tune.css. These alias t-shirt names to existing
+   tune-reactive tokens (--space-text = md, --space-element = lg). The harness
+   probes them; if they vary across tunes, the naming scheme is sound. Delete
+   this block when S3 renames spacing for real inside tune.css. */
+@utility p-md   { padding: var(--space-text); }
+@utility p-lg   { padding: var(--space-element); }
+@utility gap-lg { gap: var(--space-element); }
+@utility space-y-lg { & > :not(:last-child) { margin-block-end: var(--space-element); } }
+
 /* Purge-guard: the harness fixture names every tune @utility + probe class, so
    Tailwind JIT keeps all 73 utilities in the reference build even though the
    Blade components don't happen to use every one. Without this @source, unused

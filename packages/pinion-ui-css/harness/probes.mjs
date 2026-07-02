@@ -167,6 +167,18 @@ probe({ id: 'leading-body', style: 'line-height:var(--leading-body)', capture: [
    multiplying a known base so the resolved px reflects the token. */
 probe({ id: 'type-scale-ratio', style: 'font-size:calc(1rem * var(--type-scale-ratio))', capture: ['font-size'] });
 
+/* =====================================================================
+   [SPIKE S2 · docs/design/spacing-v0.5-tshirt.md] t-shirt spacing probes.
+   Prove the Tailwind-idiom t-shirt utilities (aliased to tune-reactive
+   tokens in reference.entry.css) still vary per tune. Additive — existing
+   probes are untouched, so a diff vs the pre-spike baseline over the old
+   probes must be 0. Replace when S3 renames spacing for real.
+   ===================================================================== */
+probe({ id: 'p-md', className: 'p-md', capture: PAD_ALL });
+probe({ id: 'p-lg', className: 'p-lg', capture: PAD_ALL });
+probe({ id: 'gap-lg', className: 'gap-lg', style: 'display:flex', capture: GAP });
+probe({ id: 'space-y-lg', className: 'space-y-lg', capOn: 'firstChild', capture: ['margin-bottom'] });
+
 /* Every combination of theme × tune × strength the harness sweeps. */
 export function combos() {
   const out = [];
