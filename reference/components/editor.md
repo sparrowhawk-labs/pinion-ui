@@ -72,6 +72,15 @@ All other attributes pass through to the outer Alpine host `<div>`, **except**
 `wire:model*`, which is forwarded to a dedicated hidden `<input>` (see below).
 Disambiguated use: `<x-pn::editor>`.
 
+**JS-level opt (not a Blade prop):** `extensions` — an array of extra Tiptap
+extensions appended after the core set (Table, Markdown, custom nodes, …).
+Pass it by wrapping the factory at registration:
+
+```js
+Alpine.data('pinionEditor', (opts = {}) =>
+  pinionEditor({ ...opts, extensions: [Table, TableRow, TableCell, TableHeader, Markdown] }));
+```
+
 ## Slots
 
 - **footer** — optional status / shortcut-hint row rendered under the body
