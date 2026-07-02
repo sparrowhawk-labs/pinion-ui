@@ -93,9 +93,13 @@
     x-on:destroy="destroy()"
 >
     {{-- Editor: NO card, NO persistent toolbar — it is the page. --}}
+    {{-- wire:ignore on the Tiptap host (same rationale as <x-sheet>'s grid host):
+         the host is server-rendered EMPTY and Tiptap builds its DOM client-side, so any
+         Livewire re-render would morph the live ProseMirror tree back to this empty div
+         — the document visually vanishes (data stays safe; the editor just dies). --}}
     <div class="{{ $c['root'] }}">
         <div class="{{ $c['body'] }}">
-            <div x-ref="editor" data-prose-class="{{ $c['prose'] }}"></div>
+            <div x-ref="editor" wire:ignore data-prose-class="{{ $c['prose'] }}"></div>
         </div>
     </div>
 
