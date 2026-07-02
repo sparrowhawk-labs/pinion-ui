@@ -199,6 +199,9 @@ export function pinionEditor(opts = {}) {
             showOnlyWhenEditable: true,
             showOnlyCurrent: false,
           }),
+          // Consumer-supplied extensions (Table, Markdown, custom nodes, …).
+          // The core set above stays authoritative; this is additive only.
+          ...(opts.extensions ?? []),
         ],
         content: startDoc,
         onCreate: ({ editor }) => this.read(editor),
