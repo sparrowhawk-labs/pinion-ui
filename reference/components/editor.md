@@ -86,6 +86,15 @@ Alpine.data('pinionEditor', (opts = {}) =>
 - **footer** — optional status / shortcut-hint row rendered under the body
   (border-t, muted text). Example: `<x-slot:footer>⌘⇧H highlight</x-slot:footer>`.
 
+## Livewire morph safety
+
+The Tiptap host (`x-ref="editor"`) carries **`wire:ignore`** — same rationale as
+`<x-sheet>`'s grid host. The host is server-rendered *empty* and Tiptap builds the
+document DOM client-side, so without it any Livewire re-render of the surrounding
+component morphs the live ProseMirror tree back to the empty div: the document
+visually vanishes (persisted data is unaffected; the editor instance just dies).
+Consumers do NOT need their own `wire:ignore` wrapper.
+
 ## Body contract (the `wire:model` JSON) — W2 / gate G3
 
 The component's `wire:model` value is a **thin envelope** around the ProseMirror
