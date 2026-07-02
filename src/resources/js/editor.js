@@ -204,7 +204,6 @@ export function pinionEditor(opts = {}) {
           ...(opts.extensions ?? []),
         ],
         content: startDoc,
-        onCreate: ({ editor }) => this.read(editor),
         onUpdate: ({ editor }) => {
           this.read(editor);
           if (syncMode === 'debounce') {
@@ -212,6 +211,15 @@ export function pinionEditor(opts = {}) {
             debounceTimer = setTimeout(() => this.flush(), debounceMs);
           }
           // 'blur' and 'manual' do not flush on update.
+        },
+        onCreate: ({ editor }) => {
+          this.read(editor);
+          // Raw (un-proxied) instance for outside consumers. Reaching the editor
+          // via Alpine.$data(...) hands back a reactive proxy, and a proxied
+          // EditorView corrupts transactions ("Applying a mismatched transaction")
+          // — see the load-bearing note at the top. A plain DOM property skips
+          // Alpine's proxy entirely.
+          if (this.$root) this.$root._pnEditor = editor;
         },
         onSelectionUpdate: () => { this._tick++; this.refreshMenu(); },
         onBlur: () => {
