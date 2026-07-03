@@ -1,0 +1,22 @@
+{
+  "name": "@sparrowhawk-labs/pinion-ui-css",
+  "version": "0.5.0-dev.0",
+  "private": true,
+  "type": "module",
+  "description": "Standalone theme × tune CSS for pinion-ui (v0.5.0, in development). Phase 0 = golden computed-style harness proving plain-dist parity with the Blade build.",
+  "scripts": {
+    "gen:fixture": "node harness/gen-fixture.mjs",
+    "build:ref": "tailwindcss -i src/reference.entry.css -o build/reference.css",
+    "verify": "node harness/verify.mjs",
+    "capture": "node harness/capture.mjs",
+    "diff": "node harness/diff.mjs",
+    "selfcheck": "node harness/selfcheck.mjs",
+    "ref": "npm run gen:fixture && npm run build:ref && npm run verify && npm run capture && npm run selfcheck"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.1",
+    "daisyui": "^5.5.23",
+    "playwright": "^1.49.0",
+    "tailwindcss": "^4.3.1"
+  }
+}
