@@ -107,6 +107,7 @@ export function pinionSheet(opts = {}) {
     widthsFrozen: false,// once true, the table is table-fixed with explicit per-column widths (S3d)
     gutterWidth: null,  // frozen row-number gutter width in px (S3d)
     menu: null,         // { x, y, r, c } open right-click context menu (S3e), or null
+    lastColsSchema: null, // JSON of the column schema at the last flush — grid-columns-changed baseline
 
     init() {
       // Deep-clone out of the opts proxy, then let Alpine re-proxy our own copy.
@@ -898,6 +899,16 @@ export function pinionSheet(opts = {}) {
       if (!input) return;
       input.value = JSON.stringify(this.rows);
       input.dispatchEvent(new Event('input', { bubbles: true }));
+      // Column-schema notification: the rows carrier can't express structure, so any schema
+      // change since the last flush (insert/delete/convert/add-column, reorder, undo of those)
+      // fires `grid-columns-changed` with the full ordered schema for the host to persist.
+      // `width` is presentation-only (grid-column-resized) and excluded; the seed flush only
+      // sets the baseline — no event on mount.
+      const schema = JSON.stringify(this.cols.map(({ width, ...col }) => col));
+      if (this.lastColsSchema !== null && schema !== this.lastColsSchema) {
+        this.$dispatch('grid-columns-changed', { columns: JSON.parse(schema) });
+      }
+      this.lastColsSchema = schema;
     },
     destroy() {
       if (syncMode !== 'manual') this.flush();   // don't lose a debounced edit on :key re-seed
