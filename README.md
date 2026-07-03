@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/packagist/l/sparrowhawk-labs/pinion-ui.svg?style=flat-square)](LICENSE)
 [![PHP Version](https://img.shields.io/packagist/php-v/sparrowhawk-labs/pinion-ui.svg?style=flat-square)](composer.json)
 
+![One specimen, two attributes — data-tune morphs shape/space/type, data-theme morphs color](.github/media/hero.gif)
+
 A Blade UI component library for Laravel built on **Tailwind v4 + daisyUI v5 + Alpine.js**. Ships 46 ready-to-use components and an 11-preset *Tune* token system that lets you reshape spacing, radii, and typography with a single attribute swap — without touching component code.
 
 By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` series. Hard-requires [`sparrowhawk-labs/pinion-icons`](https://github.com/sparrowhawk-labs/pinion-icons).
