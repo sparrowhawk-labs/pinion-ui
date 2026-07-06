@@ -9,7 +9,7 @@ use SparrowhawkLabs\PinionUi\PinionUiServiceProvider;
 class UiInstall extends Command
 {
     protected $signature = 'ui:install
-        {--ai : Add AI-agent reference to CLAUDE.md (points at AGENTS.md)}
+        {--ai : Add AI-agent reference to AGENTS.md (CLAUDE.md imports it via @AGENTS.md)}
         {--claude : Alias of --ai (kept for compatibility)}
         {--skip-npm : Skip adding npm dependencies}
         {--skip-css : Skip CSS file modifications}
@@ -86,13 +86,17 @@ class UiInstall extends Command
             $this->setupCalendar();
         }
 
-        // Add AI-agent reference to CLAUDE.md
+        // Add AI-agent reference: core snippet into the host's AGENTS.md,
+        // plus a CLAUDE.md `@AGENTS.md` import so Claude Code (which reads
+        // CLAUDE.md, not AGENTS.md) picks up the same content without
+        // duplicating it.
         $addToClaude = $this->option('ai') || $this->option('claude');
         if (!$addToClaude) {
-            $addToClaude = $this->confirm('Add pinion-ui AI-agent reference to CLAUDE.md? (so Claude Code / other agents pick up AGENTS.md)', true);
+            $addToClaude = $this->confirm('Add pinion-ui AI-agent reference to AGENTS.md? (Claude Code picks it up via a CLAUDE.md @AGENTS.md import)', true);
         }
         if ($addToClaude) {
-            $this->addToClaudeMd();
+            $this->ensureAgentsMdCore();
+            $this->ensureClaudeMdImportsAgents();
         }
 
         // Install the lint-after-edit hook so agents get violations injected back
@@ -733,9 +737,16 @@ JS;
         return ltrim(str_replace(base_path(), '', $absolute), '/');
     }
 
-    protected function addToClaudeMd(): void
+    /**
+     * Append the pinion-ui core snippet (calling conventions, class
+     * vocabulary rule, pointer to the package's own AGENTS.md for the full
+     * reference) into the host app's AGENTS.md — the cross-tool convention
+     * file most coding agents other than Claude Code read natively.
+     * Idempotent via the CLAUDE_SNIPPET.md marker heading.
+     */
+    protected function ensureAgentsMdCore(): void
     {
-        $claudeMdPath = base_path('CLAUDE.md');
+        $agentsMdPath = base_path('AGENTS.md');
         $snippetPath = dirname(__DIR__, 2) . '/CLAUDE_SNIPPET.md';
 
         if (!File::exists($snippetPath)) {
@@ -746,18 +757,43 @@ JS;
         $snippet = File::get($snippetPath);
         $marker = '## pinion-ui (AI agents)';
 
-        if (File::exists($claudeMdPath)) {
-            $existing = File::get($claudeMdPath);
+        if (File::exists($agentsMdPath)) {
+            $existing = File::get($agentsMdPath);
             if (str_contains($existing, $marker)) {
-                $this->line('    - CLAUDE.md already contains pinion-ui reference');
+                $this->line('    - AGENTS.md already contains pinion-ui reference');
                 return;
             }
-            File::append($claudeMdPath, "\n" . $snippet);
+            File::append($agentsMdPath, "\n" . $snippet);
         } else {
-            File::put($claudeMdPath, "# Project Guidelines\n\n" . $snippet);
+            File::put($agentsMdPath, $snippet);
         }
 
-        $this->info('  ✓ Added pinion-ui reference to CLAUDE.md');
+        $this->info('  ✓ Added pinion-ui reference to AGENTS.md');
+    }
+
+    /**
+     * Claude Code reads CLAUDE.md, not AGENTS.md, unless CLAUDE.md imports it
+     * (`@AGENTS.md`) — see https://code.claude.com/docs/en/memory (AGENTS.md
+     * section). Ensure that import so Claude Code sessions pick up the same
+     * AGENTS.md core section without duplicating its content into CLAUDE.md.
+     * Creates a minimal CLAUDE.md if the host app has none. Idempotent.
+     */
+    protected function ensureClaudeMdImportsAgents(): void
+    {
+        $claudeMdPath = base_path('CLAUDE.md');
+        $existing = File::exists($claudeMdPath) ? File::get($claudeMdPath) : '';
+
+        if (str_contains($existing, '@AGENTS.md')) {
+            $this->line('    - CLAUDE.md already imports AGENTS.md');
+            return;
+        }
+
+        $content = $existing === ''
+            ? "@AGENTS.md\n"
+            : "@AGENTS.md\n\n" . ltrim($existing);
+
+        File::put($claudeMdPath, $content);
+        $this->info('  ✓ Added @AGENTS.md import to CLAUDE.md');
     }
 
     /**
