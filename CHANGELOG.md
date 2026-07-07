@@ -9,6 +9,13 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [Unreleased]
 
+### Added
+- **`<x-terminal>`** — fake terminal window with a typewriter reveal, for demoing a CLI step
+  (`artisan tinker`, a seeder run, a build command, …) without recording a real terminal (which
+  steals window focus and is brittle to automate). Commands type character-by-character, output
+  lines appear instantly; default slot reveals on finish, plus a `terminal-done` event. Pure
+  Alpine, no opt-in JS install required. See [`reference/components/terminal.md`](./reference/components/terminal.md).
+
 ## [0.4.5] — 2026-06
 
 ### Added
