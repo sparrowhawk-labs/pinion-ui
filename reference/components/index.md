@@ -62,6 +62,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-tabs>`](./tabs.md) | Tabbed content — parent `<x-tabs>` + nested `<x-tab name label :icon>` children, `underline` / `boxed` / `pill` variants, Alpine-driven panel switching. |
 | [`<x-menu-item>`](./menu-item.md) | Single nav item — active/disabled states, optional icon, renders `<a>` when `href` is set. |
 | [`<x-dropdown>`](./dropdown.md) | Trigger + panel menu built on Alpine — placements, hover/click open, keyboard nav. |
+| [`<x-lang-switcher>`](./lang-switcher.md) | Navbar language switcher — `<x-dropdown>` trigger over `<x-menu-item>` locale links, from a `locales` array. Locale-routing-agnostic (you supply each `href`). |
 | [`<x-breadcrumb>`](./breadcrumb.md) | Path-style nav from an `$items` array — separators, current-page highlight. |
 | [`<x-sidebar>`](./sidebar.md) | Off-canvas drawer panel — left/right placement, `trigger` slot, focus trap, ESC + backdrop click to close. |
 | [`<x-pagination>`](./pagination.md) | Full pagination — page numbers, ellipsis, first/last/prev/next, sizes. Accepts a Laravel paginator. |
