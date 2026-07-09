@@ -3,58 +3,59 @@
         "name": "default — wrapped=true, no color, no trend",
         "props": {},
         "expected": {
-            "root": "stats shadow-[var(--shadow-box)]",
-            "inner": "stat",
-            "figure": "stat-figure text-base-content/60",
-            "title": "stat-title",
-            "value": "stat-value",
-            "desc": "stat-desc"
+            "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden",
+            "inner": "flex items-center justify-between gap-4 px-6 py-4",
+            "text": "flex flex-col gap-1 min-w-0",
+            "figure": "shrink-0 flex items-center justify-center text-base-content/60",
+            "title": "text-xs text-base-content/60 whitespace-nowrap",
+            "value": "text-3xl font-extrabold whitespace-nowrap text-base-content",
+            "desc": "text-xs whitespace-nowrap text-base-content/60"
         }
     },
     {
         "name": "+ desc — no trend, base desc class only",
         "props": { "desc": "since last month" },
         "expected": {
-            "root": "stats shadow-[var(--shadow-box)]",
-            "value": "stat-value",
-            "desc": "stat-desc"
+            "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden",
+            "value": "text-3xl font-extrabold whitespace-nowrap text-base-content",
+            "desc": "text-xs whitespace-nowrap text-base-content/60"
         }
     },
     {
         "name": "+ valueColor=primary — value gets text-primary, figure tracks color",
         "props": { "valueColor": "primary" },
         "expected": {
-            "value": "stat-value text-primary",
-            "figure": "stat-figure text-primary"
+            "value": "text-3xl font-extrabold whitespace-nowrap text-primary",
+            "figure": "shrink-0 flex items-center justify-center text-primary"
         }
     },
     {
         "name": "+ trend=up + trendValue — desc text-success (arrow lives in blade helper)",
         "props": { "trend": "up", "trendValue": "+12%" },
         "expected": {
-            "desc": "stat-desc text-success"
+            "desc": "text-xs whitespace-nowrap text-success"
         }
     },
     {
         "name": "+ trend=down + trendValue — desc text-error",
         "props": { "trend": "down", "trendValue": "-3%" },
         "expected": {
-            "desc": "stat-desc text-error"
+            "desc": "text-xs whitespace-nowrap text-error"
         }
     },
     {
         "name": "trend=flat — desc text-base-content/50",
         "props": { "trend": "flat" },
         "expected": {
-            "desc": "stat-desc text-base-content/50"
+            "desc": "text-xs whitespace-nowrap text-base-content/50"
         }
     },
     {
-        "name": "wrapped=false — root empty (no stats wrapper class)",
+        "name": "wrapped=false — root empty (no outer card chrome)",
         "props": { "wrapped": false },
         "expected": {
             "root": "",
-            "inner": "stat"
+            "inner": "flex items-center justify-between gap-4 px-6 py-4"
         }
     },
     {
@@ -66,18 +67,18 @@
             "desc": "vs last week"
         },
         "expected": {
-            "root": "stats shadow-[var(--shadow-box)]",
-            "value": "stat-value text-success",
-            "figure": "stat-figure text-success",
-            "desc": "stat-desc text-success"
+            "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden",
+            "value": "text-3xl font-extrabold whitespace-nowrap text-success",
+            "figure": "shrink-0 flex items-center justify-center text-success",
+            "desc": "text-xs whitespace-nowrap text-success"
         }
     },
     {
         "name": "valueColor=error — error tone on value/figure",
         "props": { "valueColor": "error" },
         "expected": {
-            "value": "stat-value text-error",
-            "figure": "stat-figure text-error"
+            "value": "text-3xl font-extrabold whitespace-nowrap text-error",
+            "figure": "shrink-0 flex items-center justify-center text-error"
         }
     },
     {
@@ -85,9 +86,9 @@
         "props": { "valueColor": "secondary", "wrapped": false },
         "expected": {
             "root": "",
-            "inner": "stat",
-            "value": "stat-value text-secondary",
-            "figure": "stat-figure text-secondary"
+            "inner": "flex items-center justify-between gap-4 px-6 py-4",
+            "value": "text-3xl font-extrabold whitespace-nowrap text-secondary",
+            "figure": "shrink-0 flex items-center justify-center text-secondary"
         }
     }
 ]

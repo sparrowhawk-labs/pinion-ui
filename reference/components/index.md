@@ -41,7 +41,8 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-data-grid>`](./data-grid.md) | Spreadsheet-style editable grid (Tabulator): per-type inline editors, range selection + clipboard + fill, sortable/resizable/reorderable columns. Emits a JSON row-array for `wire:model`. **Opt-in JS** — run `ui:install --data-grid`. |
 | [`<x-sheet>`](./sheet.md) | Locality-of-Behavior spreadsheet — same API + data contract as `<x-data-grid>`, but the grid behavior is hand-written in Alpine+Tailwind (no Tabulator). Coexists with `<x-data-grid>`. *(staged build: S0 static render shipped; behavior + `ui:install --sheet` from S1)* |
 | [`<x-timeline>`](./timeline.md) | Vertical timeline of events — per-item `state` (`done`/`current`/`upcoming`), `appearance="solid"` default (saturated done-chain), `'soft'` opt-in for muted connector colours. |
-| [`<x-stat>`](./stat.md) | Single statistic block — label / value / change indicator. Group via flex/grid. |
+| [`<x-stat>`](./stat.md) | Single statistic block — label / value / change indicator. |
+| [`<x-stat-group>`](./stat-group.md) | Joins multiple `<x-stat :wrapped="false">` into one bordered/divided card — horizontal, vertical, or responsive. |
 | [`<x-indicator>`](./indicator.md) | Positions a badge/dot at a corner of arbitrary child content (notification counters, status dots). `appearance="solid"` default (full daisyUI badge fill — strongest "needs attention" cue) with `'soft'`/`'outline'`/`'ghost'`/`'dash'` opt-ins. |
 | [`<x-positioning-map>`](./positioning-map.md) | Generic 2-axis positioning / perceptual map — plots labelled points (price×quality, effort×impact, tune shape×voice). `points` data, `xLabels`/`yLabels`, `active`/`xActive` highlight (static or live Alpine), `quadrants`, sizes. Theme-agnostic, tune-aware frame, zero JS by default. |
 

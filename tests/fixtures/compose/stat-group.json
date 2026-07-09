@@ -1,0 +1,37 @@
+[
+    {
+        "name": "default — horizontal, shadow=true",
+        "props": {},
+        "expected": {
+            "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 overflow-hidden shadow-[var(--shadow-box)] flex divide-x divide-base-content/10"
+        }
+    },
+    {
+        "name": "direction=vertical",
+        "props": { "direction": "vertical" },
+        "expected": {
+            "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 overflow-hidden shadow-[var(--shadow-box)] flex flex-col divide-y divide-base-content/10"
+        }
+    },
+    {
+        "name": "direction=responsive — stacked on mobile, row at lg",
+        "props": { "direction": "responsive" },
+        "expected": {
+            "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 overflow-hidden shadow-[var(--shadow-box)] flex flex-col lg:flex-row divide-y divide-base-content/10 lg:divide-y-0 lg:divide-x"
+        }
+    },
+    {
+        "name": "shadow=false",
+        "props": { "shadow": false },
+        "expected": {
+            "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 overflow-hidden flex divide-x divide-base-content/10"
+        }
+    },
+    {
+        "name": "unknown direction falls back to horizontal",
+        "props": { "direction": "diagonal" },
+        "expected": {
+            "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 overflow-hidden shadow-[var(--shadow-box)] flex divide-x divide-base-content/10"
+        }
+    }
+]
