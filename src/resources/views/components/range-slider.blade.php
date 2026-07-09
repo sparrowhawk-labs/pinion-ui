@@ -63,7 +63,7 @@
         style="--range-fill: {{ $pct }}%"
         x-bind:style="'--range-fill: ' + pct + '%'"
         @if($name) name="{{ $name }}" @endif
-        x-on:input="pct = Math.max(0, Math.min(100, (($event.target.value - {{ $minNum }}) / {{ $rangeNum ?: 1 }}) * 100))@if($showValue); v = $event.target.value@endif"
+        x-on:input="pct = Math.max(0, Math.min(100, (($event.target.value - {{ $minNum }}) / {{ $rangeNum ?: 1 }}) * 100))@if($showValue); v = $event.target.value @endif"
         {{ $attributes->whereStartsWith('wire:') }}
         {{ $attributes->whereDoesntStartWith('wire:')->merge(['class' => $c['input']]) }}
         @if($required) required @endif
