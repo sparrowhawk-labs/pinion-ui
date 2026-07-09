@@ -1,75 +1,95 @@
 [
     {
-        "name": "default — rect, w-full h-4, rounded, animated",
+        "name": "default \u2014 rect, w-full h-4, rounded, animated",
         "props": {},
         "expected": {
-            "root": "skeleton rounded w-full h-4",
-            "item": "skeleton rounded w-full h-4",
-            "itemLast": "skeleton rounded w-full h-4",
+            "root": "animate-pulse bg-base-300 rounded w-full h-4",
+            "item": "animate-pulse bg-base-300 rounded w-full h-4",
+            "itemLast": "animate-pulse bg-base-300 rounded w-full h-4",
             "shape": "rect",
             "lines": "1",
             "animated": "1"
         }
     },
     {
-        "name": "shape=circle — defaults to w-12 h-12 and rounded-full",
-        "props": { "shape": "circle" },
+        "name": "shape=circle \u2014 defaults to w-12 h-12 and rounded-full",
+        "props": {
+            "shape": "circle"
+        },
         "expected": {
-            "root": "skeleton rounded-full w-12 h-12",
+            "root": "animate-pulse bg-base-300 rounded-full w-12 h-12",
             "shape": "circle"
         }
     },
     {
-        "name": "shape=circle + width=w-24 — width overrides default, height fallback h-12",
-        "props": { "shape": "circle", "width": "w-24" },
+        "name": "shape=circle + width=w-24 \u2014 width overrides default, height fallback h-12",
+        "props": {
+            "shape": "circle",
+            "width": "w-24"
+        },
         "expected": {
-            "root": "skeleton rounded-full w-24 h-12"
+            "root": "animate-pulse bg-base-300 rounded-full w-24 h-12"
         }
     },
     {
-        "name": "shape=text + lines=1 — single skeleton, no wrapper",
-        "props": { "shape": "text", "lines": 1 },
+        "name": "shape=text + lines=1 \u2014 single skeleton, no wrapper",
+        "props": {
+            "shape": "text",
+            "lines": 1
+        },
         "expected": {
-            "root": "skeleton rounded w-full h-4",
+            "root": "animate-pulse bg-base-300 rounded w-full h-4",
             "shape": "text",
             "lines": "1"
         }
     },
     {
-        "name": "shape=text + lines=3 — wrapper space-y-2 + item + itemLast (w-2/3)",
-        "props": { "shape": "text", "lines": 3 },
+        "name": "shape=text + lines=3 \u2014 wrapper space-y-2 + item + itemLast (w-2/3)",
+        "props": {
+            "shape": "text",
+            "lines": 3
+        },
         "expected": {
             "root": "space-y-2 w-full",
-            "item": "skeleton rounded h-4 w-full",
-            "itemLast": "skeleton rounded h-4 w-2/3",
+            "item": "animate-pulse bg-base-300 rounded h-4 w-full",
+            "itemLast": "animate-pulse bg-base-300 rounded h-4 w-2/3",
             "shape": "text",
             "lines": "3"
         }
     },
     {
-        "name": "width=w-32 + height=h-32 — explicit sizes pass through",
-        "props": { "width": "w-32", "height": "h-32" },
+        "name": "width=w-32 + height=h-32 \u2014 explicit sizes pass through",
+        "props": {
+            "width": "w-32",
+            "height": "h-32"
+        },
         "expected": {
-            "root": "skeleton rounded w-32 h-32"
+            "root": "animate-pulse bg-base-300 rounded w-32 h-32"
         }
     },
     {
-        "name": "radius=full — rounded-full applied",
-        "props": { "radius": "full" },
+        "name": "radius=full \u2014 rounded-full applied",
+        "props": {
+            "radius": "full"
+        },
         "expected": {
-            "root": "skeleton rounded-full w-full h-4"
+            "root": "animate-pulse bg-base-300 rounded-full w-full h-4"
         }
     },
     {
-        "name": "radius=lg — rounded-lg applied",
-        "props": { "radius": "lg" },
+        "name": "radius=lg \u2014 rounded-lg applied",
+        "props": {
+            "radius": "lg"
+        },
         "expected": {
-            "root": "skeleton rounded-lg w-full h-4"
+            "root": "animate-pulse bg-base-300 rounded-lg w-full h-4"
         }
     },
     {
-        "name": "animated=false — bg-base-300 replaces skeleton class",
-        "props": { "animated": false },
+        "name": "animated=false \u2014 bg-base-300 replaces animate-pulse",
+        "props": {
+            "animated": false
+        },
         "expected": {
             "root": "bg-base-300 rounded w-full h-4",
             "animated": "0"

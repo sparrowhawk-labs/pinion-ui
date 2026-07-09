@@ -19,7 +19,7 @@ Animated placeholder for content that hasn't loaded yet. Three shapes — `rect`
 | `height` | `string \| null` | shape-dependent | Tailwind height class — `'h-4'`, `'h-24'`. Defaults: `circle` → `h-12`, others → `h-4`. Ignored entirely for a multi-line `text` block (every line is forced to `h-4`; the last line is also shortened to `w-2/3`). |
 | `lines` | `int` | `1` | Only honored when `shape="text"`. With `lines > 1` renders a stack of bars (vertical `space-y-2`); the last line is shortened to `w-2/3` for typographic realism. |
 | `radius` | `'default' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'default'` | Corner radius (Tailwind `rounded-*`). Ignored for `shape="circle"` (always `rounded-full`). |
-| `animated` | `bool` | `true` | When `true` uses daisyUI's `skeleton` class (shimmer animation); when `false` falls back to a static `bg-base-300` block — useful in tests / motion-sensitive contexts. |
+| `animated` | `bool` | `true` | When `true` applies Tailwind's `animate-pulse` utility on top of `bg-base-300` (opacity-pulse loading look); when `false` falls back to a static `bg-base-300` block — useful in tests / motion-sensitive contexts. |
 
 All other attributes pass through to the wrapper `<div>` (`aria-hidden="true"` is set automatically).
 
@@ -65,7 +65,7 @@ None — skeleton is a pure visual placeholder.
 
 ## Class composition
 
-Class strings come from [`SparrowhawkLabs\PinionUi\Compose\SkeletonComposer`](../../src/Compose/SkeletonComposer.php). Composer returns `root`, `item`, and `itemLast` — single-shape skeletons collapse all three to the same string, multi-line text uses a wrapper (`root`) plus per-line item classes with `itemLast` shortened to `w-2/3`.
+Class strings come from [`SparrowhawkLabs\PinionUi\Compose\SkeletonComposer`](../../src/Compose/SkeletonComposer.php). Composer returns `root`, `item`, and `itemLast` — single-shape skeletons collapse all three to the same string, multi-line text uses a wrapper (`root`) plus per-line item classes with `itemLast` shortened to `w-2/3`. Colour/animation is plain Tailwind (`bg-base-300`, plus `animate-pulse` when animated) — no daisyUI `skeleton` class is used (see `CLAUDE.md` invariant 6: daisyUI classes are semantic-color-only).
 
 ## Related
 

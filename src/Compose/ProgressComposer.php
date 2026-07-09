@@ -12,7 +12,8 @@ class ProgressComposer
 
         return [
             'root'  => self::root(),
-            'bar'   => self::bar($color, $size, $hasVal),
+            'track' => self::track($size),
+            'fill'  => self::fill($color, $hasVal),
             'label' => self::label(),
         ];
     }
@@ -22,16 +23,30 @@ class ProgressComposer
         return 'w-full flex flex-col gap-1';
     }
 
-    private static function bar(?string $color, string $size, bool $hasVal): string
+    private static function track(string $size): string
     {
-        $parts = ['progress', 'w-full'];
+        // Plain Tailwind track — no daisyUI `.progress` structural class
+        // (native <progress>'s ::-webkit-progress-bar pseudo-element is what
+        // made daisyUI's CSS load-bearing here; a div track sidesteps that
+        // entirely per CLAUDE.md invariant 6).
+        return implode(' ', array_filter([
+            'w-full bg-base-300 rounded-full overflow-hidden',
+            self::sizeClass($size),
+        ], fn ($p) => $p !== ''));
+    }
 
-        $parts[] = self::colorClass($color);
-        $parts[] = self::sizeClass($size);
+    private static function fill(?string $color, bool $hasVal): string
+    {
+        $parts = ['h-full rounded-full', self::colorClass($color)];
 
         if (! $hasVal) {
-            // daisyUI animates the stripe when no `value` attribute is present.
-            $parts[] = 'progress-indeterminate';
+            // No native <progress> stripe animation to lean on anymore —
+            // drive the indeterminate sweep with a small custom keyframe
+            // (`animate-progress-indeterminate`, defined in pinion-ui.css)
+            // instead of daisyUI's `progress-indeterminate`.
+            $parts[] = 'w-1/3 animate-progress-indeterminate';
+        } else {
+            $parts[] = 'transition-[width] duration-300 ease-out';
         }
 
         return implode(' ', array_filter($parts, fn ($p) => $p !== ''));
@@ -40,15 +55,18 @@ class ProgressComposer
     private static function colorClass(?string $color): string
     {
         return match ($color) {
-            'primary'   => 'progress-primary',
-            'secondary' => 'progress-secondary',
-            'accent'    => 'progress-accent',
-            'info'      => 'progress-info',
-            'success'   => 'progress-success',
-            'warning'   => 'progress-warning',
-            'error'     => 'progress-error',
-            'neutral'   => 'progress-neutral',
-            default     => '',
+            'primary'   => 'bg-primary',
+            'secondary' => 'bg-secondary',
+            'accent'    => 'bg-accent',
+            'info'      => 'bg-info',
+            'success'   => 'bg-success',
+            'warning'   => 'bg-warning',
+            'error'     => 'bg-error',
+            'neutral'   => 'bg-neutral',
+            // Div fill has no native fallback color the way <progress> did,
+            // so the unset case needs an explicit default (was the browser's
+            // stock progress-bar grey before).
+            default     => 'bg-neutral',
         };
     }
 
