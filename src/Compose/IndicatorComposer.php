@@ -57,9 +57,15 @@ class IndicatorComposer
         $appearance = in_array($appearance, ['solid', 'soft', 'outline', 'ghost', 'dash'], true)
             ? $appearance : 'solid';
 
+        // Non-dot: h-5 + min-w-[1.25rem] (both 20px) locks the height so short
+        // content (a single digit/glyph) renders as a true circle instead of
+        // a squashed oval — px-2 alone (no explicit height) let line-height/
+        // flex-sizing interact unpredictably and produced a ~22×10px oval.
+        // Longer content (e.g. "99+") still grows the width via padding while
+        // height stays pinned, giving the expected pill shape for that case.
         $base = $dot
             ? 'block h-3 w-3 p-0 rounded-full tune-border'
-            : 'inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border';
+            : 'inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border';
 
         $variant = match ("{$appearance}-{$color}") {
             // solid — filled chip, alert-strength (default)
