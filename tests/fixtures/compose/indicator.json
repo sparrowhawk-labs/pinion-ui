@@ -4,7 +4,7 @@
         "props": [],
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -24,7 +24,7 @@
         },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-start inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "indicator-item indicator-top indicator-start inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -45,7 +45,7 @@
         },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-bottom indicator-start inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "indicator-item indicator-bottom indicator-start inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -66,7 +66,7 @@
         },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border bg-neutral text-neutral-content border-neutral"
+            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-neutral text-neutral-content border-neutral"
         }
     },
     {
@@ -87,7 +87,7 @@
         },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border bg-error/15 text-error border-transparent"
+            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error/15 text-error border-transparent"
         }
     },
     {
@@ -98,7 +98,7 @@
         },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border bg-success/15 text-success border-transparent"
+            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-success/15 text-success border-transparent"
         }
     },
     {
@@ -109,7 +109,7 @@
         },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border bg-base-100 text-primary border-primary"
+            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-base-100 text-primary border-primary"
         }
     },
     {
@@ -131,7 +131,7 @@
         },
         "expected": {
             "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium px-2 py-1 rounded-full tune-border bg-base-100 text-info border-info border-dashed"
+            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-base-100 text-info border-info border-dashed"
         }
     }
 ]
