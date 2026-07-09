@@ -10,15 +10,29 @@ class BreadcrumbComposer
         $size      = $props['size'] ?? 'md';
 
         return [
-            'root' => self::root($size, $separator),
+            'root' => self::root($size),
+            'list' => self::list($separator),
         ];
     }
 
-    private static function root(string $size, string $separator): string
+    private static function root(string $size): string
+    {
+        // Plain Tailwind: horizontal scroll for long trails on narrow
+        // viewports is the only behavior daisyUI's `breadcrumbs` class
+        // contributed to the outer wrapper — everything else (flex row,
+        // separators) now lives on the `<ul>` (see list()).
+        $parts = array_filter([
+            'overflow-x-auto',
+            self::sizeClass($size),
+        ], fn ($s) => $s !== '');
+
+        return implode(' ', $parts);
+    }
+
+    private static function list(string $separator): string
     {
         $parts = array_filter([
-            'breadcrumbs',
-            self::sizeClass($size),
+            'flex items-center flex-nowrap list-none',
             self::separatorClass($separator),
         ], fn ($s) => $s !== '');
 
@@ -36,13 +50,12 @@ class BreadcrumbComposer
 
     private static function separatorClass(string $separator): string
     {
-        // chevron is the daisyUI default — no override needed.
-        // slash: override the ::before pseudo-element to render '/' instead of
-        // the default rotated bordered square. Reset borders, rotation, and
-        // sizing; set content to '/' and tweak margins so it sits inline.
+        // No daisyUI `breadcrumbs` class left to draw the default separator,
+        // so both variants are explicit Tailwind arbitrary-variant content
+        // on the `::before` pseudo-element of every `li` after the first.
         return match ($separator) {
-            'slash' => "[&_li+li]:before:content-['/'] [&_li+li]:before:border-0 [&_li+li]:before:rotate-0 [&_li+li]:before:w-auto [&_li+li]:before:h-auto [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40",
-            default => '',
+            'slash' => "[&_li+li]:before:content-['/'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40",
+            default => "[&_li+li]:before:content-['›'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40",
         };
     }
 }

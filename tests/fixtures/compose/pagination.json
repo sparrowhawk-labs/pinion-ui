@@ -4,8 +4,8 @@
         "props": { "current": 1, "last": 1 },
         "expected": {
             "wrapper": "flex flex-col sm:flex-row items-center justify-between gap-4 py-4 w-full",
-            "nav": "join shadow-[var(--shadow-box)]",
-            "itemBase": "join-item inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-md)] min-w-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2",
+            "nav": "flex shadow-[var(--shadow-box)]",
+            "itemBase": "rounded-none first:rounded-l-[var(--radius-field)] last:rounded-r-[var(--radius-field)] inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] border-l-0 first:border-l focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-md)] min-w-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2",
             "itemActive": "bg-primary/15 text-primary border-primary/40 focus-visible:ring-primary cursor-default relative z-10",
             "itemIdle": "bg-base-100 text-base-content border-base-content/10 hover:bg-base-200 focus-visible:ring-base-content cursor-pointer",
             "itemDisabled": "bg-base-100 text-base-content/30 border-base-content/10 cursor-not-allowed pointer-events-none",
@@ -20,14 +20,14 @@
         "name": "size sm",
         "props": { "current": 1, "last": 1, "size": "sm" },
         "expected": {
-            "itemBase": "join-item inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-sm)] min-w-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)] gap-1"
+            "itemBase": "rounded-none first:rounded-l-[var(--radius-field)] last:rounded-r-[var(--radius-field)] inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] border-l-0 first:border-l focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-sm)] min-w-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)] gap-1"
         }
     },
     {
         "name": "size lg",
         "props": { "current": 1, "last": 1, "size": "lg" },
         "expected": {
-            "itemBase": "join-item inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-lg)] min-w-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)] gap-2.5"
+            "itemBase": "rounded-none first:rounded-l-[var(--radius-field)] last:rounded-r-[var(--radius-field)] inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] border-l-0 first:border-l focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 h-[var(--h-field-lg)] min-w-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)] gap-2.5"
         }
     },
     {

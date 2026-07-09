@@ -4,7 +4,8 @@
         "props": {},
         "expected": {
             "root": "w-full flex flex-col gap-1",
-            "bar": "progress w-full h-3 progress-indeterminate",
+            "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
+            "fill": "h-full rounded-full bg-neutral w-1/3 animate-progress-indeterminate",
             "label": "flex items-center justify-end text-xs text-base-content/60 tabular-nums"
         }
     },
@@ -12,49 +13,56 @@
         "name": "value=50/max=100 — determinate, neutral, md",
         "props": { "value": 50 },
         "expected": {
-            "bar": "progress w-full h-3"
+            "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
+            "fill": "h-full rounded-full bg-neutral transition-[width] duration-300 ease-out"
         }
     },
     {
         "name": "value=3/max=10 — custom max",
         "props": { "value": 3, "max": 10 },
         "expected": {
-            "bar": "progress w-full h-3"
+            "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
+            "fill": "h-full rounded-full bg-neutral transition-[width] duration-300 ease-out"
         }
     },
     {
-        "name": "color=primary — adds progress-primary",
+        "name": "color=primary — adds bg-primary",
         "props": { "value": 40, "color": "primary" },
         "expected": {
-            "bar": "progress w-full progress-primary h-3"
+            "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
+            "fill": "h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
         }
     },
     {
         "name": "color=success + size=lg + showLabel + labelFormat=fraction",
         "props": { "value": 7, "max": 10, "color": "success", "size": "lg", "showLabel": true, "labelFormat": "fraction" },
         "expected": {
-            "bar": "progress w-full progress-success h-4"
+            "track": "w-full bg-base-300 rounded-full overflow-hidden h-4",
+            "fill": "h-full rounded-full bg-success transition-[width] duration-300 ease-out"
         }
     },
     {
         "name": "size=xs — thinnest bar",
         "props": { "value": 25, "size": "xs" },
         "expected": {
-            "bar": "progress w-full h-1"
+            "track": "w-full bg-base-300 rounded-full overflow-hidden h-1",
+            "fill": "h-full rounded-full bg-neutral transition-[width] duration-300 ease-out"
         }
     },
     {
         "name": "indeterminate — value=null explicit",
         "props": { "value": null },
         "expected": {
-            "bar": "progress w-full h-3 progress-indeterminate"
+            "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
+            "fill": "h-full rounded-full bg-neutral w-1/3 animate-progress-indeterminate"
         }
     },
     {
         "name": "color=error + size=sm",
         "props": { "value": 90, "color": "error", "size": "sm" },
         "expected": {
-            "bar": "progress w-full progress-error h-2"
+            "track": "w-full bg-base-300 rounded-full overflow-hidden h-2",
+            "fill": "h-full rounded-full bg-error transition-[width] duration-300 ease-out"
         }
     }
 ]

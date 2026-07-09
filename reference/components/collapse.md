@@ -1,6 +1,6 @@
 # x-collapse
 
-Single disclosure region built on daisyUI's `collapse` utility. Uses a hidden `<input type="checkbox">` for no-JS toggle support — open/close works without Alpine. Minimal by default (no affordance icon); opt in to a chevron (`arrow`) or plus/minus (`plus`) when needed. Supports an optional border.
+Single disclosure region built with plain Tailwind (no daisyUI `collapse`/`collapse-title`/`collapse-content`/`collapse-arrow`/`collapse-plus` classes — see CLAUDE.md invariant 6). Uses a hidden `<input type="checkbox">` + a `<label>` and a CSS grid-rows `0fr`→`1fr` transition (driven by `peer-checked`) for no-JS toggle support — open/close works without Alpine. Minimal by default (no affordance icon); opt in to a chevron (`arrow`, rendered as an inline `<svg>`) or plus/minus (`plus`, rendered as two overlapping `<span>` bars) when needed. Supports an optional border.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/collapse.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/collapse.blade.php) — full variant matrix and live demos.
 
@@ -77,7 +77,7 @@ All other attributes pass through to the root `<div>`.
 
 ## Class composition
 
-See [`src/Compose/CollapseComposer.php`](../../src/Compose/CollapseComposer.php). Returns `root`, `title`, `content`. The root composes `collapse` + `collapse-arrow` / `collapse-plus` + optional border + `bg-base-100`. Per `docs/daisyui/pages/collapse.md`, the daisyUI `collapse` utility relies on a sibling `<input>` for the toggle — that's why the markup includes a hidden checkbox even though it visually looks like a button.
+See [`src/Compose/CollapseComposer.php`](../../src/Compose/CollapseComposer.php). Returns `root`, `title`, `panel`, `wrap`, `content`, `icon` — all plain Tailwind, no daisyUI structural classes. `root` composes `radius-box overflow-hidden` + optional border + `bg-base-100`. `title` is the `<label for="...">` header; when `icon="arrow"` / `icon="plus"` it also carries a `peer-checked:[&>svg]:rotate-180` / `peer-checked:[&_.cc-bar-v]:scale-y-0` arbitrary-variant descendant selector, since `peer-checked` itself only reaches direct siblings of the checkbox (the label), not the icon nested inside it. `panel` is the grid wrapper doing the `grid-rows-[0fr]` → `peer-checked:grid-rows-[1fr]` height transition; `wrap` is the `overflow-hidden` clipping div inside it; `content` holds the padding/typography for the slot. The daisyUI-era `docs/daisyui/pages/daisyui-5-components.md` (lines 262-276) documents the original `collapse`/`collapse-title`/`collapse-content`/`collapse-arrow`/`collapse-plus` classes this component no longer emits — kept here only as historical context for the sibling-`<input>` toggle idea, which this implementation preserves with a checkbox + label instead of daisyUI's opacity-0-overlay checkbox trick.
 
 ## Related
 
@@ -87,5 +87,6 @@ See [`src/Compose/CollapseComposer.php`](../../src/Compose/CollapseComposer.php)
 ## Notes
 
 - The toggle is checkbox-based, so it works without JavaScript. Form submission will include the checkbox state unless you add a `name=""` attribute (or pass `name=""` deliberately to capture it).
-- The default (`icon=null`) emits no `collapse-arrow` / `collapse-plus` modifier — the surface still toggles open/closed; only the visual affordance is absent. Opt in to an icon only when the header alone doesn't communicate the affordance.
-- Per CLAUDE.md's docs/daisyui grep rule: `collapse-arrow` and `collapse-plus` are mutually exclusive — only one is added, with `arrow` winning when both somehow get set.
+- The default (`icon=null`) renders no `<svg>` / bar affordance — the surface still toggles open/closed via the label click target; only the visual affordance is absent. Opt in to an icon only when the header alone doesn't communicate the affordance.
+- `arrow` and `plus` are mutually exclusive — only one icon element is rendered, matching whichever `icon` value is passed.
+- The checkbox is visually hidden with `sr-only` (not `hidden`/`display:none`), so it stays in the accessibility tree and keyboard-focusable/toggleable via the associated `<label for="...">`.

@@ -3,74 +3,100 @@
         "name": "default — vertical, no compact, no snap",
         "props": {},
         "expected": {
-            "root": "timeline timeline-vertical",
+            "root": "flex flex-col relative",
             "orientation": "vertical",
-            "middle": "timeline-middle",
-            "box": "timeline-box"
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto_1fr] items-center relative justify-items-center",
+            "middle": "row-start-2 col-start-2",
+            "sideStart": "row-start-1 row-end-4 col-start-1 col-end-2 self-center justify-self-end",
+            "sideEnd": "row-start-1 row-end-4 col-start-3 col-end-4 self-center justify-self-start",
+            "connectorBefore": "row-start-1 col-start-2 w-1 h-full mx-auto",
+            "connectorAfter": "row-start-3 col-start-2 w-1 h-full mx-auto",
+            "box": "rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-2 px-4 text-xs"
         }
     },
     {
         "name": "orientation=horizontal",
         "props": { "orientation": "horizontal" },
         "expected": {
-            "root": "timeline timeline-horizontal",
-            "orientation": "horizontal"
+            "root": "flex flex-row relative",
+            "orientation": "horizontal",
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto_1fr] items-center relative",
+            "middle": "row-start-2 col-start-2",
+            "sideStart": "col-start-1 col-end-4 row-start-1 row-end-2 justify-self-center self-end",
+            "sideEnd": "col-start-1 col-end-4 row-start-3 row-end-4 justify-self-center self-start",
+            "connectorBefore": "row-start-2 col-start-1 h-1 w-full my-auto",
+            "connectorAfter": "row-start-2 col-start-3 h-1 w-full my-auto"
         }
     },
     {
         "name": "compact=true (vertical default)",
         "props": { "compact": true },
         "expected": {
-            "root": "timeline timeline-vertical timeline-compact",
-            "orientation": "vertical"
+            "root": "flex flex-col relative",
+            "orientation": "vertical",
+            "li": "grid grid-cols-[0_auto_1fr] grid-rows-[1fr_auto_1fr] items-center relative justify-items-center",
+            "sideStart": "row-start-1 row-end-4 col-start-3 col-end-4 self-center justify-self-start",
+            "sideEnd": "row-start-1 row-end-4 col-start-3 col-end-4 self-center justify-self-start"
         }
     },
     {
         "name": "snap=true (vertical default)",
         "props": { "snap": true },
         "expected": {
-            "root": "timeline timeline-vertical timeline-snap-icon",
-            "orientation": "vertical"
+            "root": "flex flex-col relative",
+            "orientation": "vertical",
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[0.5rem_auto_1fr] items-center relative justify-items-center",
+            "sideStart": "row-start-1 row-end-4 col-start-1 col-end-2 self-center justify-self-end",
+            "sideEnd": "row-start-1 row-end-4 col-start-3 col-end-4 self-center justify-self-start"
         }
     },
     {
         "name": "orientation=horizontal + compact=true",
         "props": { "orientation": "horizontal", "compact": true },
         "expected": {
-            "root": "timeline timeline-horizontal timeline-compact",
-            "orientation": "horizontal"
+            "root": "flex flex-row relative",
+            "orientation": "horizontal",
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[0_auto_1fr] items-center relative",
+            "sideStart": "col-start-1 col-end-4 row-start-3 row-end-4 justify-self-center self-start",
+            "sideEnd": "col-start-1 col-end-4 row-start-3 row-end-4 justify-self-center self-start"
         }
     },
     {
         "name": "orientation=vertical + snap=true (explicit)",
         "props": { "orientation": "vertical", "snap": true },
         "expected": {
-            "root": "timeline timeline-vertical timeline-snap-icon",
-            "orientation": "vertical"
+            "root": "flex flex-col relative",
+            "orientation": "vertical",
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[0.5rem_auto_1fr] items-center relative justify-items-center"
         }
     },
     {
         "name": "full combo — horizontal + compact + snap",
         "props": { "orientation": "horizontal", "compact": true, "snap": true },
         "expected": {
-            "root": "timeline timeline-horizontal timeline-compact timeline-snap-icon",
-            "orientation": "horizontal"
+            "root": "flex flex-row relative",
+            "orientation": "horizontal",
+            "li": "grid grid-cols-[0.5rem_auto_1fr] grid-rows-[0_auto_1fr] items-center relative",
+            "sideStart": "col-start-1 col-end-4 row-start-3 row-end-4 justify-self-center self-start",
+            "sideEnd": "col-start-1 col-end-4 row-start-3 row-end-4 justify-self-center self-start"
         }
     },
     {
         "name": "unknown orientation falls back to vertical",
         "props": { "orientation": "diagonal" },
         "expected": {
-            "root": "timeline timeline-vertical",
-            "orientation": "vertical"
+            "root": "flex flex-col relative",
+            "orientation": "vertical",
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto_1fr] items-center relative justify-items-center"
         }
     },
     {
         "name": "compact=false + snap=false explicit (default-equivalent)",
         "props": { "compact": false, "snap": false },
         "expected": {
-            "root": "timeline timeline-vertical",
-            "orientation": "vertical"
+            "root": "flex flex-col relative",
+            "orientation": "vertical",
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto_1fr] items-center relative justify-items-center"
         }
     },
     {
@@ -93,7 +119,8 @@
         "name": "appearance=solid (explicit) + horizontal + compact",
         "props": { "appearance": "solid", "orientation": "horizontal", "compact": true },
         "expected": {
-            "root": "timeline timeline-horizontal timeline-compact",
+            "root": "flex flex-row relative",
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[0_auto_1fr] items-center relative",
             "stateColors": "done=text-primary|current=text-base-content|upcoming=text-base-content/40|default=text-primary",
             "hrColors": "done=bg-primary|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-primary"
         }
@@ -102,7 +129,8 @@
         "name": "appearance=soft + snap=true (co-emit muted colours)",
         "props": { "appearance": "soft", "snap": true },
         "expected": {
-            "root": "timeline timeline-vertical timeline-snap-icon",
+            "root": "flex flex-col relative",
+            "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[0.5rem_auto_1fr] items-center relative justify-items-center",
             "stateColors": "done=text-primary/70|current=text-base-content|upcoming=text-base-content/40|default=text-primary/70",
             "hrColors": "done=bg-primary/30|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-primary/30"
         }
