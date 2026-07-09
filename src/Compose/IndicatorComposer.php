@@ -12,7 +12,7 @@ class IndicatorComposer
         $appearance = $props['appearance'] ?? 'solid';
 
         return [
-            'root' => 'indicator',
+            'root' => 'relative inline-flex w-fit',
             'item' => self::item($position, $dot, $color, $appearance),
         ];
     }
@@ -20,7 +20,7 @@ class IndicatorComposer
     private static function item(string $position, bool $dot, ?string $color, string $appearance): string
     {
         $parts = array_filter([
-            'indicator-item',
+            'absolute z-10',
             self::positionClass($position),
             self::badgeClasses($color, $dot, $appearance),
         ], fn ($s) => $s !== '');
@@ -28,18 +28,25 @@ class IndicatorComposer
         return implode(' ', $parts);
     }
 
+    /**
+     * Plain-Tailwind corner anchoring, mirroring daisyUI's `indicator`/
+     * `indicator-item`/`indicator-{position}` grammar: `top`/`bottom`/
+     * `start`/`end` set the anchor edge (or the 50% midpoint for
+     * `center`/`middle`), and a matching half-size translate straddles the
+     * chip across that edge.
+     */
     private static function positionClass(string $position): string
     {
         return match ($position) {
-            'top-start'      => 'indicator-top indicator-start',
-            'top-center'     => 'indicator-top indicator-center',
-            'middle-start'   => 'indicator-middle indicator-start',
-            'middle-center'  => 'indicator-middle indicator-center',
-            'middle-end'     => 'indicator-middle indicator-end',
-            'bottom-start'   => 'indicator-bottom indicator-start',
-            'bottom-center'  => 'indicator-bottom indicator-center',
-            'bottom-end'     => 'indicator-bottom indicator-end',
-            default          => 'indicator-top indicator-end',
+            'top-start'      => 'top-0 start-0 -translate-y-1/2 -translate-x-1/2',
+            'top-center'     => 'top-0 start-1/2 -translate-y-1/2 -translate-x-1/2',
+            'middle-start'   => 'top-1/2 start-0 -translate-y-1/2 -translate-x-1/2',
+            'middle-center'  => 'top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2',
+            'middle-end'     => 'top-1/2 end-0 -translate-y-1/2 translate-x-1/2',
+            'bottom-start'   => 'bottom-0 start-0 translate-y-1/2 -translate-x-1/2',
+            'bottom-center'  => 'bottom-0 start-1/2 translate-y-1/2 -translate-x-1/2',
+            'bottom-end'     => 'bottom-0 end-0 translate-y-1/2 translate-x-1/2',
+            default          => 'top-0 end-0 -translate-y-1/2 translate-x-1/2',
         };
     }
 

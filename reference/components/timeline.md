@@ -1,6 +1,6 @@
 # x-timeline
 
-Vertical (default) or horizontal timeline of events, built on daisyUI's `timeline` utility. Pass an `:items` array of `{title, time, desc, side, state}` entries; each item gets a middle icon, a connector line, and a content box. Per-item `state` (`done` / `current` / `upcoming`) tints both the icon and the connecting line.
+Vertical (default) or horizontal timeline of events, built on plain Tailwind CSS Grid (migrated off daisyUI's `timeline`/`timeline-*` structural classes — project rule, see pinion-ui `CLAUDE.md` invariant 6). Pass an `:items` array of `{title, time, desc, side, state}` entries; each item gets a middle icon, a connector line, and a content box. Per-item `state` (`done` / `current` / `upcoming`) tints both the icon and the connecting line.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/timeline.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/timeline.blade.php) — full variant matrix and live demos.
 
@@ -81,7 +81,11 @@ This component is array-driven; it does not accept a default slot.
 
 ## Class composition
 
-See [`src/Compose/TimelineComposer.php`](../../src/Compose/TimelineComposer.php). Returns `root`, `orientation`, `middle`, `box`, `stateColors`, `hrColors`. State → color maps are pipe-joined strings consumed by the static helper `TimelineComposer::pick($map, $key)` (used inside the Blade view to look up per-item icon + connector colors without per-item PHP arrays). Missing or unknown `state` falls back to `done` (primary tint).
+See [`src/Compose/TimelineComposer.php`](../../src/Compose/TimelineComposer.php). Returns `root`, `orientation`, `li`, `middle`, `sideStart`, `sideEnd`, `connectorBefore`, `connectorAfter`, `box`, `stateColors`, `hrColors`. State → color maps are pipe-joined strings consumed by the static helper `TimelineComposer::pick($map, $key)` (used inside the Blade view to look up per-item icon + connector colors without per-item PHP arrays). Missing or unknown `state` falls back to `done` (primary tint).
+
+**Grid structure (v0.5 migration)**: each `<li>` is a plain 3x3 CSS Grid (`grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto_1fr]` for vertical; rows/cols swapped in role for horizontal) — a direct port of daisyUI's own `timeline.css` grid-area algebra (verified against `pinion-ui-playground/node_modules/daisyui/components/timeline.css`; the public daisyUI doc at `docs/daisyui/pages/daisyui-5-components__6.md` only lists the class-name surface, not the grid internals). `sideStart`/`sideEnd` place whichever div (muted time text or title box) into the start/end grid cell; `connectorBefore`/`connectorAfter` place the `<hr>` segments flanking the middle icon. `compact` shrinks the icon/connector track toward zero on the cross-axis and collapses `sideStart`/`sideEnd` to the same cell, so content always lands on one side regardless of item `side` — reproducing the documented "drops every item to one side" effect without mirroring every one of daisyUI's internal `:has()` selector branches. `snap` shrinks the track on the other axis so the icon sits near the start of the box instead of centered on it.
+
+**Speech-bubble arrow — dropped, but this is exact parity, not a simplification**: daisyUI's `.timeline-box` in the source CSS has no `::before`/`::after` arrow at all — it's a plain bordered card (`border` + `border-radius` + `background-color` + padding + `box-shadow`, nothing else). The new `box` class (`rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-2 px-4 text-xs`) is a direct 1:1 port of that, using the same tune-token convention as `<x-card>`/`<x-popover>` etc. (If a speech-bubble arrow is ever wanted, `PopoverComposer::arrowClass()` has the established `w-2 h-2 rotate-45` pattern to reuse.)
 
 ## Related
 
@@ -93,5 +97,5 @@ See [`src/Compose/TimelineComposer.php`](../../src/Compose/TimelineComposer.php)
 - **v0.3.4 default reverted**: `appearance` defaults to `'solid'` again. v0.3.0 briefly flipped to `'soft'` to calm dense done-chains, but the visual hierarchy of the timeline relies on the saturated primary trail — soft made the completed segments fade into the upcoming ones. Use `appearance="soft"` per call site when you specifically want the muted look.
 - Default item state is `done` (primary-tinted icon + connector). Pass `state="upcoming"` to fade items still ahead.
 - The middle icon is a hardcoded check-circle SVG; to customise per item, fork the blade view — there is currently no `icon` field on the item array.
-- Per `docs/daisyui/pages/timeline.md`, `timeline-compact` collapses all items onto the start side regardless of the per-item `side` field — pair it with consistent left-aligned items.
+- Per `docs/daisyui/pages/daisyui-5-components__6.md` (`### timeline` section), `timeline-compact` collapses all items onto one side regardless of the per-item `side` field — pair it with consistent left-aligned items.
 - `time` field is rendered as small muted text (`text-xs text-base-content/60`) on the opposite side of the title box.

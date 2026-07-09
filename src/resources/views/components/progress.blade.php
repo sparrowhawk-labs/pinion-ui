@@ -25,10 +25,20 @@
             ? "{$intValue} / {$intMax}"
             : "{$percentage}%";
     } else {
+        $percentage = 0;
         $labelText = '';
     }
 @endphp
 
+{{--
+    Div-based track/fill bar, not the native <progress> element — the
+    ::-webkit-progress-bar / ::-webkit-progress-value / ::-moz-progress-bar
+    pseudo-elements only take daisyUI's CSS, which is exactly what this
+    migration removes (see CLAUDE.md invariant 6). Accessibility semantics
+    are preserved via the standard WAI-ARIA `progressbar` pattern
+    (role + aria-valuenow/min/max on the wrapper), so no hidden native
+    <progress> announcer is needed.
+--}}
 <div
     {{ $attributes->class([$c['root']]) }}
     role="progressbar"
@@ -42,9 +52,12 @@
         <div class="{{ $c['label'] }}">{{ $labelText }}</div>
     @endif
 
-    @if($isIndeterminate)
-        <progress class="{{ $c['bar'] }}" max="{{ $intMax }}"></progress>
-    @else
-        <progress class="{{ $c['bar'] }}" value="{{ $intValue }}" max="{{ $intMax }}"></progress>
-    @endif
+    <div class="{{ $c['track'] }}">
+        <div
+            class="{{ $c['fill'] }}"
+            @if(! $isIndeterminate)
+                style="width: {{ $percentage }}%"
+            @endif
+        ></div>
+    </div>
 </div>

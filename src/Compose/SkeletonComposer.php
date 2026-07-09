@@ -31,7 +31,7 @@ class SkeletonComposer
             $radiusClass = self::radiusClass($radius);
         }
 
-        $baseClass     = $animated ? 'skeleton' : 'bg-base-300';
+        $baseClass     = $animated ? 'animate-pulse bg-base-300' : 'bg-base-300';
         $isMultiline   = $shape === 'text' && $lines > 1;
 
         if ($isMultiline) {

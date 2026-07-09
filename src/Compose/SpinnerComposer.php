@@ -17,8 +17,12 @@ class SpinnerComposer
 
     private static function root(string $variant, string $size, ?string $color): string
     {
+        // No daisyUI `loading`/`loading-*` classes here (CLAUDE.md invariant
+        // 6). `spinner` is pinion-ui's own base class — see the
+        // "spinner (<x-spinner>)" section in pinion-ui.css for the
+        // mask-image + SMIL mechanism that replaces daisyUI's component CSS.
         $parts = array_filter([
-            'loading',
+            'spinner',
             self::variantClass($variant),
             self::sizeClass($size),
             self::colorClass($color),
@@ -30,23 +34,23 @@ class SpinnerComposer
     private static function variantClass(string $variant): string
     {
         return match ($variant) {
-            'dots'     => 'loading-dots',
-            'ring'     => 'loading-ring',
-            'bars'     => 'loading-bars',
-            'ball'     => 'loading-ball',
-            'infinity' => 'loading-infinity',
-            default    => 'loading-spinner',
+            'dots'     => 'spinner-dots',
+            'ring'     => 'spinner-ring',
+            'bars'     => 'spinner-bars',
+            'ball'     => 'spinner-ball',
+            'infinity' => 'spinner-infinity',
+            default    => 'spinner-spinner',
         };
     }
 
     private static function sizeClass(string $size): string
     {
         return match ($size) {
-            'xs' => 'loading-xs',
-            'sm' => 'loading-sm',
-            'lg' => 'loading-lg',
-            'xl' => 'loading-xl',
-            default => 'loading-md',
+            'xs' => 'spinner-xs',
+            'sm' => 'spinner-sm',
+            'lg' => 'spinner-lg',
+            'xl' => 'spinner-xl',
+            default => 'spinner-md',
         };
     }
 
