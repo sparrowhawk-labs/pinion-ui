@@ -52,7 +52,7 @@ class TooltipComposer
             'absolute z-50 pointer-events-none',
             'whitespace-nowrap max-w-xs',
             'px-2 py-1 text-xs',
-            'rounded-[var(--radius-field)] shadow-[var(--shadow-box)] tune-border',
+            'rounded-[var(--radius-field)] tune-border',
             $placement,
             self::bubbleColorClass($color),
         );
