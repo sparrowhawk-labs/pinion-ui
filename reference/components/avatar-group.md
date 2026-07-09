@@ -1,6 +1,6 @@
 # x-avatar-group
 
-Stacked / overlapping row of `<x-avatar>` children, built on daisyUI's `avatar-group` utility. Useful for member lists, contributor rows, and "+N more" overflow patterns.
+Stacked / overlapping row of `<x-avatar>` children, built with plain Tailwind (`flex` + negative-margin overlap + a ring on each child) — no daisyUI structural class. Useful for member lists, contributor rows, and "+N more" overflow patterns.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/avatar-group.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/avatar-group.blade.php) — full variant matrix and live demos.
 
@@ -20,7 +20,7 @@ All other attributes pass through to the root `<div>`.
 
 ## Slots
 
-- **default** — one or more `<x-avatar>` children. The visual ring around each avatar is provided by `<x-avatar>` itself; this wrapper only handles the negative-margin stacking.
+- **default** — one or more `<x-avatar>` children. The wrapper applies the ring (`[&>*]:ring-2 [&>*]:ring-base-100`) and the negative-margin stacking to its direct children.
 
 ## Examples
 
@@ -63,7 +63,7 @@ All other attributes pass through to the root `<div>`.
 
 ## Class composition
 
-See [`src/Compose/AvatarGroupComposer.php`](../../src/Compose/AvatarGroupComposer.php). The composer returns a single `root` class string of the form `avatar-group {spacing}`. The daisyUI `avatar-group` utility is responsible for the ring-on-avatar styling that makes overlap legible.
+See [`src/Compose/AvatarGroupComposer.php`](../../src/Compose/AvatarGroupComposer.php). The composer returns a single `root` class string of the form `flex {spacing} [&>*]:ring-2 [&>*]:ring-base-100` — a plain Tailwind flex row, the `-space-x-*` scale for overlap, and an arbitrary-variant selector that puts a `ring-base-100` border (matching `<x-avatar>`'s own status-dot ring color) on every direct child so overlapping avatars stay visually separated. No daisyUI class is emitted (per CLAUDE.md invariant 6).
 
 ## Related
 
@@ -72,6 +72,6 @@ See [`src/Compose/AvatarGroupComposer.php`](../../src/Compose/AvatarGroupCompose
 
 ## Notes
 
-- Children should be `<x-avatar>` for the daisyUI ring outline to render correctly — wrapping with another tag will break the `:not(.avatar)` selector chain in daisyUI's CSS.
+- The ring is applied generically to every direct child (`[&>*]:ring-2 [&>*]:ring-base-100`) — any element works as a child, not just `<x-avatar>`, though `<x-avatar>` is the intended use case.
 - The visual stacking order in the DOM is left-to-right, but z-index goes the other way (last avatar sits on top). Reorder your loop if you need a different stacking direction.
-- Per `docs/daisyui/pages/avatar.md`, the `avatar-group` utility expects `.avatar` children to apply the ring — if you customise the inner classes of `<x-avatar>`, keep that base class intact.
+- Prior to this migration this component wrapped daisyUI's `avatar-group` class (per `docs/daisyui/pages/daisyui-5-components.md`: "Use `avatar-group` for containing multiple avatars"). It's now plain Tailwind per CLAUDE.md invariant 6 (daisyUI classes limited to semantic color utilities).

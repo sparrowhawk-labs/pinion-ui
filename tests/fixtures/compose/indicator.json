@@ -3,8 +3,8 @@
         "name": "default — position=top-end, dot=false, color=error, appearance=solid (utility chip since v0.4.2)",
         "props": [],
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -13,8 +13,8 @@
             "dot": true
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -23,8 +23,8 @@
             "position": "top-start"
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-start inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 start-0 -translate-y-1/2 -translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -34,8 +34,8 @@
             "dot": true
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-middle indicator-center block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -44,8 +44,8 @@
             "position": "bottom-start"
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-bottom indicator-start inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 bottom-0 start-0 translate-y-1/2 -translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -55,8 +55,8 @@
             "dot": true
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-center block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 start-1/2 -translate-y-1/2 -translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
         }
     },
     {
@@ -65,8 +65,8 @@
             "color": "neutral"
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-neutral text-neutral-content border-neutral"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-neutral text-neutral-content border-neutral"
         }
     },
     {
@@ -76,8 +76,8 @@
             "dot": true
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end block h-3 w-3 p-0 rounded-full tune-border bg-neutral text-neutral-content border-neutral"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-neutral text-neutral-content border-neutral"
         }
     },
     {
@@ -86,8 +86,8 @@
             "appearance": "soft"
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error/15 text-error border-transparent"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error/15 text-error border-transparent"
         }
     },
     {
@@ -97,8 +97,8 @@
             "color": "success"
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-success/15 text-success border-transparent"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-success/15 text-success border-transparent"
         }
     },
     {
@@ -108,8 +108,8 @@
             "color": "primary"
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-base-100 text-primary border-primary"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-base-100 text-primary border-primary"
         }
     },
     {
@@ -119,8 +119,8 @@
             "dot": true
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end block h-3 w-3 p-0 rounded-full tune-border bg-base-200 text-base-content border-transparent"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-base-200 text-base-content border-transparent"
         }
     },
     {
@@ -130,8 +130,8 @@
             "color": "info"
         },
         "expected": {
-            "root": "indicator",
-            "item": "indicator-item indicator-top indicator-end inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-base-100 text-info border-info border-dashed"
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-base-100 text-info border-info border-dashed"
         }
     }
 ]

@@ -3,72 +3,74 @@
         "name": "default — no props (no icon, bordered=true)",
         "props": {},
         "expected": {
-            "root": "collapse border border-base-300 bg-base-100",
-            "title": "collapse-title font-semibold",
-            "content": "collapse-content text-sm"
+            "root": "radius-box overflow-hidden border border-base-300 bg-base-100",
+            "title": "flex w-full cursor-pointer select-none items-center justify-between gap-2 px-4 py-3 font-semibold",
+            "content": "px-4 pb-4 text-sm"
         }
     },
     {
         "name": "icon=arrow (opt-in)",
         "props": { "icon": "arrow" },
         "expected": {
-            "root": "collapse collapse-arrow border border-base-300 bg-base-100"
+            "root": "radius-box overflow-hidden border border-base-300 bg-base-100",
+            "title": "flex w-full cursor-pointer select-none items-center justify-between gap-2 px-4 py-3 font-semibold peer-checked:[&>svg]:rotate-180"
         }
     },
     {
         "name": "icon=plus (opt-in)",
         "props": { "icon": "plus" },
         "expected": {
-            "root": "collapse collapse-plus border border-base-300 bg-base-100"
+            "root": "radius-box overflow-hidden border border-base-300 bg-base-100",
+            "title": "flex w-full cursor-pointer select-none items-center justify-between gap-2 px-4 py-3 font-semibold peer-checked:[&_.cc-bar-v]:scale-y-0"
         }
     },
     {
         "name": "icon=null — explicit no icon (same as default)",
         "props": { "icon": null },
         "expected": {
-            "root": "collapse border border-base-300 bg-base-100"
+            "root": "radius-box overflow-hidden border border-base-300 bg-base-100"
         }
     },
     {
         "name": "bordered=false (no icon default)",
         "props": { "bordered": false },
         "expected": {
-            "root": "collapse bg-base-100"
+            "root": "radius-box overflow-hidden bg-base-100"
         }
     },
     {
         "name": "open=true — does not affect class output (composer is class-only)",
         "props": { "open": true },
         "expected": {
-            "root": "collapse border border-base-300 bg-base-100"
+            "root": "radius-box overflow-hidden border border-base-300 bg-base-100"
         }
     },
     {
         "name": "title prop + open=true — composer ignores title/open, root stays default",
         "props": { "title": "What is this?", "open": true },
         "expected": {
-            "root": "collapse border border-base-300 bg-base-100"
+            "root": "radius-box overflow-hidden border border-base-300 bg-base-100"
         }
     },
     {
         "name": "icon=arrow + bordered=true",
         "props": { "icon": "arrow", "bordered": true },
         "expected": {
-            "root": "collapse collapse-arrow border border-base-300 bg-base-100"
+            "root": "radius-box overflow-hidden border border-base-300 bg-base-100"
         }
     },
     {
         "name": "icon=plus + bordered=false",
         "props": { "icon": "plus", "bordered": false },
         "expected": {
-            "root": "collapse collapse-plus bg-base-100"
+            "root": "radius-box overflow-hidden bg-base-100"
         }
     },
     {
         "name": "icon=null + bordered=false — minimal root",
         "props": { "icon": null, "bordered": false },
         "expected": {
-            "root": "collapse bg-base-100"
+            "root": "radius-box overflow-hidden bg-base-100"
         }
     }
 ]

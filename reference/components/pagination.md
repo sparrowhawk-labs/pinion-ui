@@ -82,7 +82,7 @@ Items emit `page-change` events you can listen to with Alpine or Livewire.
 
 ## Class composition
 
-Class strings come from [`PaginationComposer::compose($props)`](../../src/Compose/PaginationComposer.php) — keys: `wrapper`, `nav` (a daisyUI `join` to fuse item borders), `itemBase`, `itemActive`, `itemIdle`, `itemDisabled`, `itemStatic`, `infoText`. The window of visible page numbers is computed by `PaginationComposer::windowPages($current, $last, $onEachSide)` and returns `{ pages, showFirst, showLast, showDotsLeft, showDotsRight }`. The composer is **shared** with [`<x-pagination-simple>`](./pagination-simple.md), which uses the `wrapperSimple` key instead of `wrapper` and skips the window logic. URL building (with optional query preservation) lives in `PaginationComposer::buildUrl()`.
+Class strings come from [`PaginationComposer::compose($props)`](../../src/Compose/PaginationComposer.php) — keys: `wrapper`, `nav` (plain `flex` row), `itemBase` (each item zeroes its own radius/left-border via `rounded-none`/`border-l-0` then restores them on `first:`/`last:` so adjacent items fuse into one bordered strip — no daisyUI `join`/`join-item`), `itemActive`, `itemIdle`, `itemDisabled`, `itemStatic`, `infoText`. The window of visible page numbers is computed by `PaginationComposer::windowPages($current, $last, $onEachSide)` and returns `{ pages, showFirst, showLast, showDotsLeft, showDotsRight }`. The composer is **shared** with [`<x-pagination-simple>`](./pagination-simple.md), which uses the `wrapperSimple` key instead of `wrapper` and skips the window logic. URL building (with optional query preservation) lives in `PaginationComposer::buildUrl()`.
 
 ## Related
 

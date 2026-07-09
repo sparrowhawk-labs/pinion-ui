@@ -10,32 +10,74 @@ class DividerComposer
         $color     = $props['color'] ?? null;
         $position  = $props['position'] ?? 'center';
 
-        $classes = ['divider'];
+        $vertical = $direction === 'vertical';
 
-        // direction
-        // daisyUI uses `divider-horizontal` for a *vertical* line inside flex row.
-        // The default (no modifier) is a horizontal line stacked between blocks.
-        // We expose this through our `direction` prop where:
-        //   direction=horizontal → no class (the default daisyUI behaviour)
-        //   direction=vertical   → `divider-horizontal` (daisyUI's name for an in-flex vertical bar)
-        if ($direction === 'vertical') {
-            $classes[] = 'divider-horizontal';
-        }
+        // Plain-Tailwind reimplementation of daisyUI's `divider` (see
+        // CLAUDE.md invariant 6 — no daisyUI structural classes). The visual
+        // shape is a flex row (or column, for `direction=vertical`) split
+        // into two line segments with an optional centered label between
+        // them: line - label - line. daisyUI's own `divider-horizontal`
+        // class name is the *vertical*-bar variant (kept only as prose in
+        // reference/components/divider.md); this composer keeps our
+        // normalized prop naming (`direction=vertical` → vertical bar).
+        $borderSide = $vertical ? 'border-l' : 'border-t';
+        $borderColor = self::borderColorClass($color);
 
-        // color
-        if ($color !== null && $color !== '') {
-            $classes[] = "divider-{$color}";
-        }
+        $rootBase = $vertical
+            ? 'flex flex-col items-center h-full'
+            : 'flex items-center w-full';
 
-        // position
-        if ($position === 'start') {
-            $classes[] = 'divider-start';
-        } elseif ($position === 'end') {
-            $classes[] = 'divider-end';
-        }
+        // position=start/end shrink the line segment nearest the label's
+        // edge to a fixed size (was daisyUI's `divider-start`/`divider-end`),
+        // leaving the far segment to grow and fill the remaining space.
+        $shortSize = $vertical ? 'h-4' : 'w-4';
+        $shortLine = "flex-none {$shortSize} {$borderSide} {$borderColor}";
+        $growLine  = "flex-1 {$borderSide} {$borderColor}";
+
+        [$lineStart, $lineEnd] = match ($position) {
+            'start' => [$shortLine, $growLine],
+            'end'   => [$growLine, $shortLine],
+            default => [$growLine, $growLine],
+        };
+
+        $labelSpacing = $vertical ? 'py-3' : 'px-3';
+        $label = trim("{$labelSpacing} text-xs font-medium shrink-0 ".self::labelColorClass($color));
 
         return [
-            'root' => implode(' ', $classes),
+            'root'      => $rootBase,
+            'lineStart' => $lineStart,
+            'lineEnd'   => $lineEnd,
+            'label'     => $label,
         ];
+    }
+
+    private static function borderColorClass(?string $color): string
+    {
+        return match ($color) {
+            'primary'   => 'border-primary/30',
+            'secondary' => 'border-secondary/30',
+            'accent'    => 'border-accent/30',
+            'neutral'   => 'border-neutral/30',
+            'info'      => 'border-info/30',
+            'success'   => 'border-success/30',
+            'warning'   => 'border-warning/30',
+            'error'     => 'border-error/30',
+            default     => 'border-base-content/10',
+        };
+    }
+
+    private static function labelColorClass(?string $color): string
+    {
+        return match ($color) {
+            'primary'   => 'text-primary',
+            'secondary' => 'text-secondary',
+            'accent'    => 'text-accent',
+            'neutral'   => 'text-neutral',
+            'info'      => 'text-info',
+            'success'   => 'text-success',
+            'warning'   => 'text-warning',
+            'error'     => 'text-error',
+            default     => 'text-base-content/60',
+        };
     }
 }
