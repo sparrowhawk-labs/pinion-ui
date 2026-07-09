@@ -3,35 +3,35 @@
         "name": "default — spacing=normal (-space-x-4)",
         "props": {},
         "expected": {
-            "root": "avatar-group -space-x-4"
+            "root": "flex -space-x-4 [&>*]:ring-2 [&>*]:ring-base-100"
         }
     },
     {
         "name": "spacing=tight — avatars overlap more (-space-x-6)",
         "props": { "spacing": "tight" },
         "expected": {
-            "root": "avatar-group -space-x-6"
+            "root": "flex -space-x-6 [&>*]:ring-2 [&>*]:ring-base-100"
         }
     },
     {
         "name": "spacing=loose — avatars overlap less (-space-x-2)",
         "props": { "spacing": "loose" },
         "expected": {
-            "root": "avatar-group -space-x-2"
+            "root": "flex -space-x-2 [&>*]:ring-2 [&>*]:ring-base-100"
         }
     },
     {
         "name": "spacing=unknown — falls back to normal (-space-x-4)",
         "props": { "spacing": "wat" },
         "expected": {
-            "root": "avatar-group -space-x-4"
+            "root": "flex -space-x-4 [&>*]:ring-2 [&>*]:ring-base-100"
         }
     },
     {
         "name": "spacing=normal (explicit) — same as default",
         "props": { "spacing": "normal" },
         "expected": {
-            "root": "avatar-group -space-x-4"
+            "root": "flex -space-x-4 [&>*]:ring-2 [&>*]:ring-base-100"
         }
     }
 ]

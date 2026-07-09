@@ -34,8 +34,8 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-avatar>`](./avatar.md) | User avatar — image, initials, or icon fallback in priority order. |
 | [`<x-avatar-group>`](./avatar-group.md) | Stacked / overlapping avatars with optional `+N` overflow badge. |
 | [`<x-accordion>`](./accordion.md) | Collapsible item group — parent `<x-accordion>` + nested `<x-accordion-item title>` children, Alpine `x-collapse` animation, single-open by default or `multiple`. |
-| [`<x-collapse>`](./collapse.md) | Single collapsible disclosure region — daisyUI `collapse` (checkbox-based, no-JS). Minimal by default; opt in to `icon="arrow"` or `icon="plus"` affordance. |
-| [`<x-divider>`](./divider.md) | Horizontal or vertical separator with optional label. (daisyUI `divider-horizontal` ↔ vertical naming inverted; this wrapper normalizes.) |
+| [`<x-collapse>`](./collapse.md) | Single collapsible disclosure region — checkbox-driven CSS-only expand/collapse (no-JS). Minimal by default; opt in to `icon="arrow"` or `icon="plus"` affordance. |
+| [`<x-divider>`](./divider.md) | Horizontal or vertical separator with optional label. (`direction` prop normalizes daisyUI's historical `divider-horizontal` ↔ vertical naming inversion — kept for backwards compatibility even though the implementation no longer uses daisyUI CSS.) |
 | [`<x-kbd>`](./kbd.md) | Keyboard-key display (`<kbd>`) — sizes, color variants, often nested in buttons for shortcuts. |
 | [`<x-table-scroll>`](./table-scroll.md) | Overflow-x wrapper for tables that keeps the page from flexing on narrow viewports. |
 | [`<x-terminal>`](./terminal.md) | Fake terminal window with a typewriter reveal — demos a CLI step (`artisan tinker`, a seeder run, …) without a real terminal recording. Commands type char-by-char, output lines appear instantly; default slot reveals on finish (`terminal-done` event). |
@@ -43,7 +43,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-sheet>`](./sheet.md) | Locality-of-Behavior spreadsheet — same API + data contract as `<x-data-grid>`, but the grid behavior is hand-written in Alpine+Tailwind (no Tabulator). Coexists with `<x-data-grid>`. *(staged build: S0 static render shipped; behavior + `ui:install --sheet` from S1)* |
 | [`<x-timeline>`](./timeline.md) | Vertical timeline of events — per-item `state` (`done`/`current`/`upcoming`), `appearance="solid"` default (saturated done-chain), `'soft'` opt-in for muted connector colours. |
 | [`<x-stat>`](./stat.md) | Single statistic block — label / value / change indicator. Group via flex/grid. |
-| [`<x-indicator>`](./indicator.md) | Positions a badge/dot at a corner of arbitrary child content (notification counters, status dots). `appearance="solid"` default (full daisyUI badge fill — strongest "needs attention" cue) with `'soft'`/`'outline'`/`'ghost'`/`'dash'` opt-ins. |
+| [`<x-indicator>`](./indicator.md) | Positions a badge/dot at a corner of arbitrary child content (notification counters, status dots). `appearance="solid"` default (full color-fill badge — strongest "needs attention" cue) with `'soft'`/`'outline'`/`'ghost'`/`'dash'` opt-ins. |
 | [`<x-positioning-map>`](./positioning-map.md) | Generic 2-axis positioning / perceptual map — plots labelled points (price×quality, effort×impact, tune shape×voice). `points` data, `xLabels`/`yLabels`, `active`/`xActive` highlight (static or live Alpine), `quadrants`, sizes. Theme-agnostic, tune-aware frame, zero JS by default. |
 
 ## Feedback
@@ -93,7 +93,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 
 ## Conventions used in these docs
 
-- **Defaults**: daisyUI defaults are omitted from output classes unless another modifier requires the explicit class. e.g. `size="md"` on `<x-rating>` still emits `rating-md` because `rating-half` requires it.
+- **Defaults**: default-value classes are omitted from output unless another modifier requires the explicit class. e.g. `size="md"` on `<x-rating>` still emits its size class because `half` mode requires it.
 - **Backwards compatibility**: prop names and defaults are never silently changed. New props are opt-in (default = previous behavior).
 - **Pass-through attributes**: any attribute not listed in **Props** is forwarded to the component's root element. Use `class="..."` to extend styles via Tailwind's natural merging.
 - **Required peer**: every component that renders icons (`icon` / `iconRight` / `<x-i>` markers) requires [`sparrowhawk-labs/pinion-icons`](https://github.com/sparrowhawk-labs/pinion-icons) — installed as a hard dependency.

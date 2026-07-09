@@ -3,49 +3,56 @@
         "name": "default — no props (size=md, separator=chevron)",
         "props": {},
         "expected": {
-            "root": "breadcrumbs"
+            "root": "overflow-x-auto",
+            "list": "flex items-center flex-nowrap list-none [&_li+li]:before:content-['›'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
         }
     },
     {
         "name": "separator=slash — slash override classes appended",
         "props": { "separator": "slash" },
         "expected": {
-            "root": "breadcrumbs [&_li+li]:before:content-['/'] [&_li+li]:before:border-0 [&_li+li]:before:rotate-0 [&_li+li]:before:w-auto [&_li+li]:before:h-auto [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
+            "root": "overflow-x-auto",
+            "list": "flex items-center flex-nowrap list-none [&_li+li]:before:content-['/'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
         }
     },
     {
         "name": "size=sm",
         "props": { "size": "sm" },
         "expected": {
-            "root": "breadcrumbs text-sm"
+            "root": "overflow-x-auto text-sm",
+            "list": "flex items-center flex-nowrap list-none [&_li+li]:before:content-['›'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
         }
     },
     {
         "name": "size=lg",
         "props": { "size": "lg" },
         "expected": {
-            "root": "breadcrumbs text-lg"
+            "root": "overflow-x-auto text-lg",
+            "list": "flex items-center flex-nowrap list-none [&_li+li]:before:content-['›'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
         }
     },
     {
         "name": "size=sm + separator=slash",
         "props": { "size": "sm", "separator": "slash" },
         "expected": {
-            "root": "breadcrumbs text-sm [&_li+li]:before:content-['/'] [&_li+li]:before:border-0 [&_li+li]:before:rotate-0 [&_li+li]:before:w-auto [&_li+li]:before:h-auto [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
+            "root": "overflow-x-auto text-sm",
+            "list": "flex items-center flex-nowrap list-none [&_li+li]:before:content-['/'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
         }
     },
     {
         "name": "size=md — same as default (no size class)",
         "props": { "size": "md" },
         "expected": {
-            "root": "breadcrumbs"
+            "root": "overflow-x-auto",
+            "list": "flex items-center flex-nowrap list-none [&_li+li]:before:content-['›'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
         }
     },
     {
         "name": "size=lg + separator=chevron (explicit) — chevron is default, no override",
         "props": { "size": "lg", "separator": "chevron" },
         "expected": {
-            "root": "breadcrumbs text-lg"
+            "root": "overflow-x-auto text-lg",
+            "list": "flex items-center flex-nowrap list-none [&_li+li]:before:content-['›'] [&_li+li]:before:mx-2 [&_li+li]:before:opacity-40"
         }
     }
 ]

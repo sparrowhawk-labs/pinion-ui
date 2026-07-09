@@ -3,56 +3,56 @@
         "name": "default — no props (size=md, appearance=default)",
         "props": {},
         "expected": {
-            "root": "kbd"
+            "root": "inline-flex items-center justify-center align-middle rounded-[var(--radius-field)] px-[.5em] h-6 min-w-6 text-sm bg-base-200 border border-base-content/20 border-b-2"
         }
     },
     {
         "name": "size=xs",
         "props": { "size": "xs" },
         "expected": {
-            "root": "kbd kbd-xs"
+            "root": "inline-flex items-center justify-center align-middle rounded-[var(--radius-field)] px-[.5em] h-4 min-w-4 text-[0.625rem] bg-base-200 border border-base-content/20 border-b-2"
         }
     },
     {
         "name": "size=sm",
         "props": { "size": "sm" },
         "expected": {
-            "root": "kbd kbd-sm"
+            "root": "inline-flex items-center justify-center align-middle rounded-[var(--radius-field)] px-[.5em] h-5 min-w-5 text-xs bg-base-200 border border-base-content/20 border-b-2"
         }
     },
     {
         "name": "size=md — same as default (no size class)",
         "props": { "size": "md" },
         "expected": {
-            "root": "kbd"
+            "root": "inline-flex items-center justify-center align-middle rounded-[var(--radius-field)] px-[.5em] h-6 min-w-6 text-sm bg-base-200 border border-base-content/20 border-b-2"
         }
     },
     {
         "name": "size=lg",
         "props": { "size": "lg" },
         "expected": {
-            "root": "kbd kbd-lg"
+            "root": "inline-flex items-center justify-center align-middle rounded-[var(--radius-field)] px-[.5em] h-7 min-w-7 text-base bg-base-200 border border-base-content/20 border-b-2"
         }
     },
     {
         "name": "size=xl",
         "props": { "size": "xl" },
         "expected": {
-            "root": "kbd kbd-xl"
+            "root": "inline-flex items-center justify-center align-middle rounded-[var(--radius-field)] px-[.5em] h-8 min-w-8 text-lg bg-base-200 border border-base-content/20 border-b-2"
         }
     },
     {
         "name": "appearance=soft + size=md — base-200 bg, no border",
         "props": { "appearance": "soft", "size": "md" },
         "expected": {
-            "root": "kbd bg-base-200 text-base-content border-0"
+            "root": "inline-flex items-center justify-center align-middle rounded-[var(--radius-field)] px-[.5em] h-6 min-w-6 text-sm bg-base-200 text-base-content border-0"
         }
     },
     {
         "name": "appearance=outline + size=lg — transparent bg with border",
         "props": { "appearance": "outline", "size": "lg" },
         "expected": {
-            "root": "kbd kbd-lg border border-base-content/30 bg-transparent"
+            "root": "inline-flex items-center justify-center align-middle rounded-[var(--radius-field)] px-[.5em] h-7 min-w-7 text-base border border-base-content/30 bg-transparent"
         }
     }
 ]

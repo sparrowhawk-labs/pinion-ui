@@ -3,7 +3,7 @@
         "name": "default — color=primary, size=md (md emits no class)",
         "props": {},
         "expected": {
-            "input": "range w-full range-primary",
+            "input": "pn-range w-full pn-range-primary",
             "labelColor": "text-base-content",
             "hintColor": "text-base-content/50"
         }
@@ -12,77 +12,77 @@
         "name": "color=secondary, size default",
         "props": { "color": "secondary" },
         "expected": {
-            "input": "range w-full range-secondary"
+            "input": "pn-range w-full pn-range-secondary"
         }
     },
     {
         "name": "color=success",
         "props": { "color": "success" },
         "expected": {
-            "input": "range w-full range-success"
+            "input": "pn-range w-full pn-range-success"
         }
     },
     {
         "name": "color=error",
         "props": { "color": "error" },
         "expected": {
-            "input": "range w-full range-error"
+            "input": "pn-range w-full pn-range-error"
         }
     },
     {
         "name": "color=neutral",
         "props": { "color": "neutral" },
         "expected": {
-            "input": "range w-full range-neutral"
+            "input": "pn-range w-full pn-range-neutral"
         }
     },
     {
         "name": "size=xs, color default",
         "props": { "size": "xs" },
         "expected": {
-            "input": "range w-full range-primary range-xs"
+            "input": "pn-range w-full pn-range-primary pn-range-xs"
         }
     },
     {
         "name": "size=sm",
         "props": { "size": "sm" },
         "expected": {
-            "input": "range w-full range-primary range-sm"
+            "input": "pn-range w-full pn-range-primary pn-range-sm"
         }
     },
     {
         "name": "size=lg",
         "props": { "size": "lg" },
         "expected": {
-            "input": "range w-full range-primary range-lg"
+            "input": "pn-range w-full pn-range-primary pn-range-lg"
         }
     },
     {
         "name": "size=xl",
         "props": { "size": "xl" },
         "expected": {
-            "input": "range w-full range-primary range-xl"
+            "input": "pn-range w-full pn-range-primary pn-range-xl"
         }
     },
     {
         "name": "size=md explicit — same as default (no class)",
         "props": { "size": "md" },
         "expected": {
-            "input": "range w-full range-primary"
+            "input": "pn-range w-full pn-range-primary"
         }
     },
     {
         "name": "color=accent + size=lg",
         "props": { "color": "accent", "size": "lg" },
         "expected": {
-            "input": "range w-full range-accent range-lg"
+            "input": "pn-range w-full pn-range-accent pn-range-lg"
         }
     },
     {
         "name": "error state — label/hint colors flip to error",
         "props": { "error": "Required" },
         "expected": {
-            "input": "range w-full range-primary",
+            "input": "pn-range w-full pn-range-primary",
             "labelColor": "text-error",
             "hintColor": "text-error"
         }
@@ -91,7 +91,7 @@
         "name": "unknown color falls back to primary",
         "props": { "color": "fuchsia" },
         "expected": {
-            "input": "range w-full range-primary"
+            "input": "pn-range w-full pn-range-primary"
         }
     }
 ]

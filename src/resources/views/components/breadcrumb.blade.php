@@ -12,7 +12,7 @@
 @endphp
 
 <div {{ $attributes->class([$c['root']]) }}>
-    <ul>
+    <ul class="{{ $c['list'] }}">
         @if($items !== null)
             @foreach($items as $item)
                 <li>

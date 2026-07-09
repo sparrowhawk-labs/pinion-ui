@@ -18,7 +18,7 @@ class PaginationComposer
         return [
             'wrapper'      => 'flex flex-col sm:flex-row items-center justify-between gap-4 py-4 w-full',
             'wrapperSimple'=> 'inline-flex flex-col items-center gap-3',
-            'nav'          => 'join shadow-[var(--shadow-box)]',
+            'nav'          => 'flex shadow-[var(--shadow-box)]',
             'itemBase'     => self::itemBase($size),
             'itemActive'   => self::itemActive($appearance, $color),
             'itemIdle'     => self::itemIdle(),
@@ -66,8 +66,9 @@ class PaginationComposer
     private static function itemBase(string $size): string
     {
         return FieldVariants::join(
-            'join-item inline-flex items-center justify-center font-medium transition-colors',
-            'border-[length:var(--border)]',
+            'rounded-none first:rounded-l-[var(--radius-field)] last:rounded-r-[var(--radius-field)]',
+            'inline-flex items-center justify-center font-medium transition-colors',
+            'border-[length:var(--border)] border-l-0 first:border-l',
             'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1',
             self::sizeClasses($size),
         );

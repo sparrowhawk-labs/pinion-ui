@@ -30,13 +30,13 @@
             // For alternating layout: side='end' swaps time/box positions.
             $timeOnEnd = $side === 'end';
         @endphp
-        <li>
+        <li class="{{ $c['li'] }}">
             @if($i > 0)
-                <hr class="{{ $hrColor }}" />
+                <hr class="{{ $c['connectorBefore'] }} {{ $hrColor }}" />
             @endif
 
             @if($time !== null && !$timeOnEnd)
-                <div class="timeline-start text-xs text-base-content/60">{{ $time }}</div>
+                <div class="{{ $c['sideStart'] }} text-xs text-base-content/60">{{ $time }}</div>
             @endif
 
             <div class="{{ $c['middle'] }}">
@@ -46,15 +46,15 @@
             </div>
 
             @if($timeOnEnd)
-                <div class="timeline-end text-xs text-base-content/60">{{ $time }}</div>
-                <div class="timeline-start {{ $c['box'] }}">
+                <div class="{{ $c['sideEnd'] }} text-xs text-base-content/60">{{ $time }}</div>
+                <div class="{{ $c['sideStart'] }} {{ $c['box'] }}">
                     <div class="font-medium">{{ $title }}</div>
                     @if($desc !== null)
                         <div class="text-sm text-base-content/70">{{ $desc }}</div>
                     @endif
                 </div>
             @else
-                <div class="timeline-end {{ $c['box'] }}">
+                <div class="{{ $c['sideEnd'] }} {{ $c['box'] }}">
                     <div class="font-medium">{{ $title }}</div>
                     @if($desc !== null)
                         <div class="text-sm text-base-content/70">{{ $desc }}</div>
@@ -63,7 +63,7 @@
             @endif
 
             @if($i < $count - 1)
-                <hr class="{{ $hrColor }}" />
+                <hr class="{{ $c['connectorAfter'] }} {{ $hrColor }}" />
             @endif
         </li>
     @endforeach
