@@ -38,7 +38,17 @@
    Kept component parts (verified against src/Compose + Blade output):
      avatar (avatar-group), breadcrumbs, collapse, divider, indicator,
      kbd, loading (spinner), mask + rating, progress, range, skeleton,
-     stat, timeline — plus the `join` utility (pagination).
+     timeline — plus the `join` utility (pagination).
+
+   `stat` was removed from this list 2026-07-09: <x-stat>/<x-stat-group>
+   no longer use daisyUI's `.stats`/`.stat`/`.stat-*` classes at all (they
+   were non-tune-reactive and the joined-stats divider silently computed a
+   0px border in some theme×tune combos). New project rule going forward:
+   daisyUI classes are ONLY ever used for semantic color utilities
+   (bg-primary, text-error, border-base-content/10, …) — never structural/
+   behavioral component classes. Existing entries in this "kept" list
+   predate the rule and haven't been migrated yet (tracked incrementally,
+   component by component — don't assume they're exempt from the rule).
 
    When a component starts (or stops) using a daisyUI class, update
    this list in the same commit. */
@@ -48,7 +58,7 @@
         checkbox, countdown, diff, dock, drawer, dropdown, fab,
         fieldset, fileinput, filter, footer, hero, hover3d,
         hovergallery, input, label, link, list, menu, mockup, modal,
-        navbar, radialprogress, radio, select, stack, status, steps,
+        navbar, radialprogress, radio, select, stack, stat, status, steps,
         swap, tab, table, textarea, textrotate, toast, toggle, tooltip,
         validator;
 }
