@@ -66,6 +66,8 @@ All other attributes pass through to the root `<div>`.
 
 Class strings come from [`BreadcrumbComposer::compose($props)`](../../src/Compose/BreadcrumbComposer.php) — plain Tailwind, no daisyUI structural class (per the project rule that daisyUI classes are semantic-color-only). Two keys: `root` (on the outer `<div>`) joins `overflow-x-auto` with the optional size class; `list` (on the `<ul>`) joins `flex items-center flex-nowrap list-none` with the separator override. Both separators are Tailwind arbitrary selectors targeting `[&_li+li]:before:content-[...]` — `›` for chevron, `/` for slash — with `mx-2 opacity-40` for spacing/muting.
 
+`list` also carries `[&_li>a]:inline-flex [&_li>a]:items-center [&_li>a]:gap-1` (and the `span` equivalent) so any icon+label crumb built via the slot API stays on one line. This exists because Tailwind's preflight sets `svg { display: block }` — an `<x-i>` icon dropped into a plain (inline) `<a>`/`<span>` becomes a block-level child, which breaks the inline formatting context and forces the label text onto its own line. You don't need to add `inline-flex`/`gap` yourself when mixing `<x-i>` into a crumb's slot markup (see "Custom slot markup" below) — the component forces it on every `<li>`'s direct `<a>`/`<span>`, icon or not.
+
 ## Related
 
 - [`<x-menu-item>`](./menu-item.md) — for top-level nav.

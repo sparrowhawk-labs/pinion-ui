@@ -68,6 +68,8 @@ All other attributes pass through to the outer `<span>`.
 
 Avatar composes classes **inline** in [`src/resources/views/components/avatar.blade.php`](../../src/resources/views/components/avatar.blade.php) — it predates the Composer pattern used by form components. Class strings are stable across patch versions. Override with `class="..."` (Tailwind classes merge naturally via the attribute bag).
 
+The **root** `<span>` carries `$shapeClasses` (the same `rounded-full` / `rounded-[var(--radius-field)]` / `rounded-[var(--radius-box)]` as the inner span), not just the inner mask. This matters for `<x-avatar-group>`, which applies its overlap ring (`ring-2 ring-base-100`) to each avatar's root via `[&>*]:`— if the root weren't itself clipped to the same shape, the ring would trace the root's (rectangular) box instead of the visible circle/shape, producing a straight-line artifact at the overlap boundary instead of a clean curved gap (fixed 2026-07-10).
+
 ## Related
 
 - [`<x-avatar-group>`](./avatar-group.md) — overlapping row of avatars with optional `+N` overflow.
