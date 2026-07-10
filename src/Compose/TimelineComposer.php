@@ -58,11 +58,22 @@ class TimelineComposer
         return $orientation === 'horizontal' ? 'horizontal' : 'vertical';
     }
 
+    /**
+     * `gap-compact` (tune-aware `--space-compact`, 8px floor) keeps a real
+     * gap between adjacent `<li>` items. Every `sideStart`/`sideEnd`/`box`
+     * slot spans the item's full grid height (vertical) or width
+     * (horizontal) with no margin of its own, so with zero inter-item gap
+     * two consecutive boxes render pixel-touching: their borders coincide
+     * (doubling `tune-border`'s width) and, on tunes with a hard-offset
+     * `--shadow-box` (e.g. brutal), one box's shadow is drawn directly over
+     * the next box. The floor guarantees breathing room even on the
+     * tightest tune/strength combination.
+     */
     private static function rootClass(string $orientationKey): string
     {
         return $orientationKey === 'horizontal'
-            ? 'flex flex-row relative'
-            : 'flex flex-col relative';
+            ? 'flex flex-row relative gap-compact'
+            : 'flex flex-col relative gap-compact';
     }
 
     /**

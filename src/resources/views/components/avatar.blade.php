@@ -73,7 +73,7 @@
     };
 @endphp
 
-<span {{ $attributes->merge(['class' => "relative inline-flex shrink-0 $sizeClasses"]) }}>
+<span {{ $attributes->merge(['class' => "relative inline-flex shrink-0 $sizeClasses $shapeClasses"]) }}>
     <span class="w-full h-full flex items-center justify-center font-semibold overflow-hidden {{ $shapeClasses }} {{ $variantClasses }}">
         @if($src)
             <img src="{{ $src }}" alt="{{ $alt }}" class="w-full h-full object-cover">

@@ -13,7 +13,7 @@
         "name": "direction=vertical — in-flex vertical bar",
         "props": { "direction": "vertical" },
         "expected": {
-            "root": "flex flex-col items-center h-full",
+            "root": "flex flex-col items-center self-stretch",
             "lineStart": "flex-1 border-l border-base-content/10",
             "lineEnd": "flex-1 border-l border-base-content/10",
             "label": "py-3 text-xs font-medium shrink-0 text-base-content/60"
@@ -32,7 +32,7 @@
         "name": "color=success + direction=vertical",
         "props": { "color": "success", "direction": "vertical" },
         "expected": {
-            "root": "flex flex-col items-center h-full",
+            "root": "flex flex-col items-center self-stretch",
             "lineStart": "flex-1 border-l border-success/30",
             "lineEnd": "flex-1 border-l border-success/30",
             "label": "py-3 text-xs font-medium shrink-0 text-success"
@@ -67,7 +67,7 @@
         "name": "full combo — color=error + direction=vertical + position=end",
         "props": { "color": "error", "direction": "vertical", "position": "end" },
         "expected": {
-            "root": "flex flex-col items-center h-full",
+            "root": "flex flex-col items-center self-stretch",
             "lineStart": "flex-1 border-l border-error/30",
             "lineEnd": "flex-none h-4 border-l border-error/30",
             "label": "py-3 text-xs font-medium shrink-0 text-error"
