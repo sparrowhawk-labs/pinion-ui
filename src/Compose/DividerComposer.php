@@ -23,8 +23,19 @@ class DividerComposer
         $borderSide = $vertical ? 'border-l' : 'border-t';
         $borderColor = self::borderColorClass($color);
 
+        // `h-full` (height:100%) fails to resolve against the outer flex
+        // row's indefinite height (it's sized by its tallest content child,
+        // not an explicit height), which computes to an effectively 'auto'
+        // used height that *also* short-circuits the default
+        // `align-items:stretch` the row would otherwise apply — the root
+        // collapses to its own content height (~40px) instead of stretching
+        // to match its siblings (~72px), pushing the label above the true
+        // vertical midpoint. Omitting an explicit height lets the outer
+        // row's default `align-items:stretch` size the root to match its
+        // siblings, so `flex-1` on lineStart/lineEnd then has a real height
+        // to distribute and the label lands on the actual center.
         $rootBase = $vertical
-            ? 'flex flex-col items-center h-full'
+            ? 'flex flex-col items-center self-stretch'
             : 'flex items-center w-full';
 
         // position=start/end shrink the line segment nearest the label's

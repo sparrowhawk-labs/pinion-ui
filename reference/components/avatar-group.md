@@ -65,6 +65,8 @@ All other attributes pass through to the root `<div>`.
 
 See [`src/Compose/AvatarGroupComposer.php`](../../src/Compose/AvatarGroupComposer.php). The composer returns a single `root` class string of the form `flex {spacing} [&>*]:ring-2 [&>*]:ring-base-100` — a plain Tailwind flex row, the `-space-x-*` scale for overlap, and an arbitrary-variant selector that puts a `ring-base-100` border (matching `<x-avatar>`'s own status-dot ring color) on every direct child so overlapping avatars stay visually separated. No daisyUI class is emitted (per CLAUDE.md invariant 6).
 
+This `[&>*]:` ring targets each `<x-avatar>`'s **root** element directly, so that root must itself be clipped to the same shape as the visible avatar (see [`avatar.md`](./avatar.md#class-composition)) — otherwise the ring traces a rectangular box instead of the circle/shape, producing a straight-line artifact at the overlap boundary instead of a clean curved gap (fixed 2026-07-10).
+
 ## Related
 
 - [`<x-avatar>`](./avatar.md) — the individual avatar; required as a child.

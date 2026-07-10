@@ -10,19 +10,25 @@ class IndicatorComposer
         $dot        = array_key_exists('dot', $props) ? (bool) $props['dot'] : false;
         $color      = $props['color']      ?? 'error';
         $appearance = $props['appearance'] ?? 'solid';
+        // 'circle' is a derived boolean, not raw slot content — the Blade view
+        // measures the rendered badge slot (mb_strlen <= 1, i.e. a single
+        // alphanumeric/glyph or icon-only) and hands compose() the yes/no
+        // answer. This keeps compose() a pure function of its props: it never
+        // inspects markup/slot content itself, it only branches on a bool.
+        $circle     = array_key_exists('circle', $props) ? (bool) $props['circle'] : false;
 
         return [
             'root' => 'relative inline-flex w-fit',
-            'item' => self::item($position, $dot, $color, $appearance),
+            'item' => self::item($position, $dot, $color, $appearance, $circle),
         ];
     }
 
-    private static function item(string $position, bool $dot, ?string $color, string $appearance): string
+    private static function item(string $position, bool $dot, ?string $color, string $appearance, bool $circle): string
     {
         $parts = array_filter([
             'absolute z-10',
             self::positionClass($position),
-            self::badgeClasses($color, $dot, $appearance),
+            self::badgeClasses($color, $dot, $appearance, $circle),
         ], fn ($s) => $s !== '');
 
         return implode(' ', $parts);
@@ -57,7 +63,7 @@ class IndicatorComposer
      * no longer get `.badge` at all). Match arms stay fully literal so the
      * preset's @source scan over Compose PHP picks every class up.
      */
-    private static function badgeClasses(?string $color, bool $dot, string $appearance): string
+    private static function badgeClasses(?string $color, bool $dot, string $appearance, bool $circle = false): string
     {
         $color = in_array($color, ['primary', 'secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error'], true)
             ? $color : 'error';
@@ -70,9 +76,21 @@ class IndicatorComposer
         // flex-sizing interact unpredictably and produced a ~22×10px oval.
         // Longer content (e.g. "99+") still grows the width via padding while
         // height stays pinned, giving the expected pill shape for that case.
-        $base = $dot
-            ? 'block h-3 w-3 p-0 rounded-full tune-border'
-            : 'inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border';
+        //
+        // BUT once real content is present, px-1.5 padding on top of the
+        // 1.25rem min-width still widens single-character content into an
+        // oval/rounded-rectangle (20px tall × ~30px wide) instead of a perfect
+        // circle. `$circle` is the fix: when the badge slot resolves to a
+        // single alphanumeric character/glyph or icon-only content (measured
+        // in the Blade view, see indicator.blade.php), swap min-w+px for a
+        // fixed square (h-5 w-5, no horizontal padding) — same 20px height,
+        // now also 20px width, so `rounded-full` renders a true circle.
+        // Multi-character content ("12", "99+", "NEW") keeps the pill.
+        $base = match (true) {
+            $dot    => 'block h-3 w-3 p-0 rounded-full tune-border',
+            $circle => 'inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 w-5 p-0 rounded-full tune-border',
+            default => 'inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border',
+        };
 
         $variant = match ("{$appearance}-{$color}") {
             // solid — filled chip, alert-strength (default)
