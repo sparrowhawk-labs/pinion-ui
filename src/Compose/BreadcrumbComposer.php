@@ -33,6 +33,15 @@ class BreadcrumbComposer
     {
         $parts = array_filter([
             'flex items-center flex-nowrap list-none',
+            // Tailwind's preflight sets `svg { display: block }`, so an
+            // icon dropped straight into a plain (inline) `<a>`/`<span>`
+            // — the documented slot-API pattern for icon+label crumbs —
+            // forces the label text onto its own line (a block-level SVG
+            // child breaks the inline formatting context). Forcing every
+            // `<li>`'s direct `<a>`/`<span>` to `inline-flex` keeps icon +
+            // label on one row regardless of whether the crumb has an
+            // icon at all; plain-text crumbs are unaffected.
+            '[&_li>a]:inline-flex [&_li>a]:items-center [&_li>a]:gap-1 [&_li>span]:inline-flex [&_li>span]:items-center [&_li>span]:gap-1',
             self::separatorClass($separator),
         ], fn ($s) => $s !== '');
 

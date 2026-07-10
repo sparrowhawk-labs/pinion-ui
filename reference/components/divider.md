@@ -14,7 +14,7 @@ Horizontal or vertical separator with optional label. Built from plain Tailwind 
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Line orientation. `horizontal` = `border-t` line stacked between blocks (root is a flex row). `vertical` = `border-l` line inside a flex row (root is a flex column filling the parent's height — see Notes). |
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Line orientation. `horizontal` = `border-t` line stacked between blocks (root is a flex row). `vertical` = `border-l` line inside a flex row (root is a flex column that stretches to match its siblings' height — see Notes). |
 | `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error' \| null` | `null` | Tints the line (`border-{color}/30`) and the label text (`text-{color}`). `null` uses `border-base-content/10` / `text-base-content/60`. |
 | `position` | `'start' \| 'center' \| 'end'` | `'center'` | Alignment of the label along the line. `start`/`end` shrink the line segment nearest that edge to a fixed `w-4`/`h-4` (was daisyUI's `divider-start`/`divider-end`) so the other segment grows to fill the remaining space; `center` gives both segments equal `flex-1`. |
 
@@ -69,5 +69,5 @@ See [`src/Compose/DividerComposer.php`](../../src/Compose/DividerComposer.php). 
 
 - **No daisyUI classes**: per CLAUDE.md invariant 6, this component never emits `divider`/`divider-*`. It's plain Tailwind (`flex`, `border-t`/`border-l`, `flex-1`/`flex-none`) — see `src/Compose/DividerComposer.php`.
 - **`direction` prop naming (historical)**: the original daisyUI-backed implementation inverted `direction="vertical"` to work around daisyUI's own `divider-horizontal` class rendering a *vertical* bar (see `docs/daisyui/pages/daisyui-5-components__2.md`, `divider` section — `direction: divider-vertical, divider-horizontal`). The prop naming is unchanged for backwards compatibility even though the plain-Tailwind implementation no longer touches that class.
-- `direction="vertical"` only makes sense inside a parent with `display: flex` (or grid) along the row axis, and the divider itself needs a height to span (`root` is `flex flex-col items-center h-full`) — otherwise the line has nothing to span.
+- `direction="vertical"` only makes sense inside a parent with `display: flex` along the row axis, and the divider itself needs a height to span. `root` is `flex flex-col items-center self-stretch` — `self-stretch` (not `h-full`) is deliberate: `h-full` (`height: 100%`) fails to resolve against the outer row when the row's own height is indefinite (sized by its tallest content child rather than an explicit height), which silently overrides the row's default `align-items: stretch` and collapses the divider to its own content height, pushing the label above the true vertical midpoint. `self-stretch` forces the stretch behavior explicitly regardless of the outer row's `align-items`.
 - `position="center"` gives both line segments equal `flex-1` — passing it is a no-op vs. omitting the prop (safe but redundant).

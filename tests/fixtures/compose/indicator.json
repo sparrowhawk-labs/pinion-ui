@@ -133,5 +133,38 @@
             "root": "relative inline-flex w-fit",
             "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-base-100 text-info border-info border-dashed"
         }
+    },
+    {
+        "name": "circle=true — single alphanumeric/glyph or icon-only badge slot (measured in indicator.blade.php, not a raw prop) renders a perfect circle: h-5 w-5, no horizontal padding, instead of the min-w+px-1.5 pill",
+        "props": {
+            "circle": true
+        },
+        "expected": {
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 w-5 p-0 rounded-full tune-border bg-error text-error-content border-error"
+        }
+    },
+    {
+        "name": "circle=true + color=primary + appearance=soft — circle sizing composes with any color/appearance variant",
+        "props": {
+            "circle": true,
+            "color": "primary",
+            "appearance": "soft"
+        },
+        "expected": {
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 w-5 p-0 rounded-full tune-border bg-primary/15 text-primary border-transparent"
+        }
+    },
+    {
+        "name": "circle=true + dot=true — dot sizing wins (dot is checked first / circle is a non-dot-only concern)",
+        "props": {
+            "circle": true,
+            "dot": true
+        },
+        "expected": {
+            "root": "relative inline-flex w-fit",
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
+        }
     }
 ]
