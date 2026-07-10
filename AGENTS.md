@@ -70,6 +70,20 @@ Because the layers are orthogonal, every class string you author — a composer,
 
 **Rhythmic vs optical spacing.** The dividing line for spacing is *not* size — it is **purpose**. *Rhythmic* spacing is the page's breathing: section padding, gaps between cards/sections, heading→body margins, list vertical rhythm, table cell density. It should track the tune at every scale, down to the smallest `gap-micro` (icon↔label, chip gaps). Use the tune spacing utilities above so a tight tune (`corporate`, `tech`) reads denser and an airy one (`minimal`, `soft`) reads roomier — otherwise the page only morphs its shape/font and the spacing stays frozen. *Optical* spacing is a fixed nudge that aligns one element (a 2px shift to sit an icon on the text baseline); morphing it would misalign, not breathe, so leave it plain Tailwind. This convention is **not** machine-enforced by `ui:lint` today (spacing is intentionally out of scope to avoid false positives) — it is an authoring guideline.
 
+**Which tier at which structural level.** The 7 rhythmic tiers form a ladder (`micro` 4px < `inline` 8px < `compact` 12px < `text` 16px < `element` 24px < `section-inner` 48px < `section` 80px, base values — all scale with tune strength). Pick the tier by *what two things you're spacing apart*, not by eyeballing a pixel value:
+
+| Structural level | What it separates | Tier to use |
+|---|---|---|
+| **Between page sections** | One `<section>`/major page block to the next (hero → features → footer) | `space-section` (outer block margin/padding) |
+| **Inside a section, between its sub-blocks** | A section's heading block → its content grid; a card's header → its body | `space-section-inner` / `gap-section-inner` |
+| **Between sibling elements/components** | Cards in a grid, stacked form fields, list items, rows in a stack | `gap-element` / `mt-element` / `mb-element` / `p-element` / `space-y-element` |
+| **Within one component, between paragraphs/lines of running text** | Paragraph-to-paragraph inside a card body, label → helper text | `gap-text` / `mt-text` / `mb-text` / `space-y-text` |
+| **Within one component, compact internal padding/gaps** | Dense table cells, a compact card's own padding, tightly-packed toolbar groups | `gap-compact` / `p-compact` / `px-compact` / `py-compact` / `space-y-compact` |
+| **Between small inline items on one line/row** | Icon + label, badge + adjacent text, breadcrumb segments | `gap-inline` / `space-x-inline` |
+| **Tightest — within a tiny cluster** | Icon↔label inside a button, chip-internal gaps, dense list bullets | `gap-micro` / `space-x-micro` / `space-y-micro` |
+
+When in doubt, pick the tier one level *tighter* than you'd guess — the tune's own strength setting (`data-tune-strength`) already amplifies the gap on airier tunes, so authoring at the "natural" density and letting the tune stretch it reads better than pre-inflating the choice.
+
 ### Enforcing the rule — `ui:lint` (universal) + automation adapters
 
 The rule is machine-checkable. **`php artisan ui:lint [paths…] [--json]`** is the **universal interface** — pure PHP (no Laravel needed at the core), exits non-zero on violations. It flags excluded daisyUI component classes, fixed/hex colors (ignore `data-theme`), and a root `<html>` missing **`data-theme` / `data-tune`** (the theme × tune cascade root). **Any** CLI agent (Claude Code, Cursor, aider, …), CI, or human runs the same command — so there is **no per-agent adapter to maintain**; agents that want feedback simply call `ui:lint --json` and read the result.
