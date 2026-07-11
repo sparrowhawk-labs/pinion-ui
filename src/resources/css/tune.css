@@ -209,6 +209,14 @@
     --td-sh1-y: 0px;
     --td-sh1-blur: 0px;
 
+    /* delta defaults (font) — base stacks. Custom properties inherit, so
+       without these a nested [data-tune] subtree (e.g. a data-tune="default"
+       font preview inside a data-tune="pixel" page) resolves --font-* through
+       an ancestor tune's inherited --td-font-* instead of the base stack. */
+    --td-font-heading: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
+
     /* ---- Shape ---- */
     --radius-box: max(0px,
         var(--ovr-radius-box,
