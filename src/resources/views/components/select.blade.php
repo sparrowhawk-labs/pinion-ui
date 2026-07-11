@@ -69,7 +69,16 @@
                      this.options = Array.from(sel.options)
                          .filter(o => !o.hidden)
                          .map(o => ({ value: o.value, label: o.text, disabled: o.disabled }));
-                     this.values = Array.from(sel.selectedOptions).map(o => o.value).filter(v => v !== '');
+                     // Defer reading selectedOptions until after Alpine finishes applying
+                     // this tree's other bindings (notably wire:model/x-model on the native
+                     // <select> itself). Without this, init() runs before the child select's
+                     // own binding corrects its value, so the cached `values` — and the
+                     // trigger label bound to it — get stuck on the pre-bind SSR state
+                     // (placeholder or first <option>) even though the native select and
+                     // the Livewire property end up correct.
+                     this.$nextTick(() => {
+                         this.values = Array.from(sel.selectedOptions).map(o => o.value).filter(v => v !== '');
+                     });
                  },
                  toggle(value, isDisabled) {
                      if (isDisabled) return;
