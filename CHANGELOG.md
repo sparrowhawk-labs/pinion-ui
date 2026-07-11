@@ -9,6 +9,46 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [Unreleased]
 
+## [0.4.6] — 2026-07
+
+### Added
+- **`<x-lang-switcher>`** — navbar language switcher, a thin `<x-dropdown>` + `<x-menu-item>`
+  composition; locale-routing-agnostic (the consumer resolves each locale's href).
+- **`<x-skin-wall>`** — decorative full-bleed diagonal marquee rendering the same slot markup
+  across many `data-tune` × `data-theme` skins.
+- **`<x-stat-group>`** — companion to `<x-stat>`, migrated off daisyUI's `.stats` class.
+- **`<x-sheet>`** — `grid-columns-changed` flush-time notification (insert/delete/convert/add/
+  reorder/undo; width excluded) so Livewire hosts can persist `detail.columns`.
+- **`<x-editor>`** — JS-level `opts.extensions` for consumer Tiptap extensions (Table/Markdown/
+  etc.), and the raw Editor instance now exposed via a `_pnEditor` DOM property (bypasses the
+  reactive Alpine proxy that was corrupting ProseMirror transactions).
+- **`packages/pinion-ui-css`** (internal, not yet shipped) — Phase 0 golden computed-style
+  verification harness for the planned standalone CSS package.
+
+### Fixed
+- **`<x-select>`** — custom-mode trigger label stuck on the placeholder/first-option label on
+  initial mount, even though the bound value (DB, Livewire property, native `<select>`) was
+  already correct — an Alpine `init()` vs. `wire:model` init-order race.
+- **daisyUI structural classes removed project-wide** — avatar-group, breadcrumb, collapse,
+  divider, indicator, kbd, pagination, progress, range-slider, rating, skeleton, spinner, stat,
+  and timeline no longer use daisyUI's own component CSS classes (only semantic color utilities
+  remain); every daisyUI component is now excluded from the compiled preset.
+- 6 visual regressions found in a follow-up review of the above migration: avatar-group ring
+  tracing a rectangle instead of the circle, breadcrumb icon+label wrapping to 2 lines, vertical
+  divider collapsing to content height, indicator single-char badges rendering as ovals,
+  pagination active-item border seam, and timeline border/shadow overlap between items.
+- **`<x-indicator>`** — badge rendered as a squashed oval instead of a circle for single-character
+  content; pinned to a fixed square box.
+- **`<x-tooltip>`** — dropped a redundant box-shadow (border alone was already sufficient).
+- **`<x-range-slider>`** — a missing space before `@endif` made Blade treat it as literal text,
+  leaving the directive uncompiled and breaking `showValue`.
+- **`<x-editor>`** — added `wire:ignore` to the Tiptap host; Livewire re-renders were morphing
+  the client-owned ProseMirror DOM back to an empty server-rendered div.
+
+### Docs
+- Spacing-tier-by-structural-level guidance added to AGENTS.md.
+- README hero GIF.
+
 ## [0.4.5] — 2026-06
 
 ### Added
