@@ -103,7 +103,9 @@
    only apply where NO [data-tune] ancestor exists; inside a tuned subtree the
    resolver block re-declares the same key with the tune-reactive calc (that
    re-declaration is load-bearing for nested tunes — see design doc O1).
-   Size-utility leakage (w-md, h-lg, …) is accepted as harmless (O1). */
+   Size-utility leakage is accepted as harmless (O1) ONLY for the height/size
+   family (h-md, size-lg, …) — additive-only, no stock utility shadowed. The
+   width family is NOT harmless and is compensated below. */
 @theme {
     --spacing-3xs: 0.125rem;
     --spacing-2xs: 0.25rem;
@@ -118,6 +120,78 @@
     --spacing-5xl: 6rem;
     --spacing-6xl: 8rem;
     --spacing-7xl: 10rem;
+}
+
+/* --- CONTAINER-SCALE COMPENSATION (load-bearing — do not remove) ---
+   The t-shirt keys above share their names (3xs–7xl) with Tailwind's default
+   --container-* scale, and for the width-family utilities (w-<size>,
+   min-w-<size>, max-w-<size>, basis-<size>) the spacing namespace WINS name
+   resolution — re-declaring --container-* does NOT help (verified: spacing
+   outranks container regardless of declaration order). Without this block
+   `max-w-6xl` compiles to max-width: var(--spacing-6xl) = 8rem in every host
+   app — and tune-REACTIVE at that — a total layout break (hit sologentic in
+   production build, 2026-07-12). The per-utility namespaces below outrank
+   spacing, so pointing them back at the container scale restores stock
+   Tailwind behaviour; var(--container-<size>) (not literal rems) keeps host
+   --container-* overrides honoured — Tailwind emits the referenced
+   --container-* variables automatically. Guarded by the golden harness:
+   probes.mjs CONTAINER_GUARD + selfcheck.mjs container-scale gate. */
+@theme {
+    --width-3xs: var(--container-3xs);
+    --width-2xs: var(--container-2xs);
+    --width-xs: var(--container-xs);
+    --width-sm: var(--container-sm);
+    --width-md: var(--container-md);
+    --width-lg: var(--container-lg);
+    --width-xl: var(--container-xl);
+    --width-2xl: var(--container-2xl);
+    --width-3xl: var(--container-3xl);
+    --width-4xl: var(--container-4xl);
+    --width-5xl: var(--container-5xl);
+    --width-6xl: var(--container-6xl);
+    --width-7xl: var(--container-7xl);
+
+    --min-width-3xs: var(--container-3xs);
+    --min-width-2xs: var(--container-2xs);
+    --min-width-xs: var(--container-xs);
+    --min-width-sm: var(--container-sm);
+    --min-width-md: var(--container-md);
+    --min-width-lg: var(--container-lg);
+    --min-width-xl: var(--container-xl);
+    --min-width-2xl: var(--container-2xl);
+    --min-width-3xl: var(--container-3xl);
+    --min-width-4xl: var(--container-4xl);
+    --min-width-5xl: var(--container-5xl);
+    --min-width-6xl: var(--container-6xl);
+    --min-width-7xl: var(--container-7xl);
+
+    --max-width-3xs: var(--container-3xs);
+    --max-width-2xs: var(--container-2xs);
+    --max-width-xs: var(--container-xs);
+    --max-width-sm: var(--container-sm);
+    --max-width-md: var(--container-md);
+    --max-width-lg: var(--container-lg);
+    --max-width-xl: var(--container-xl);
+    --max-width-2xl: var(--container-2xl);
+    --max-width-3xl: var(--container-3xl);
+    --max-width-4xl: var(--container-4xl);
+    --max-width-5xl: var(--container-5xl);
+    --max-width-6xl: var(--container-6xl);
+    --max-width-7xl: var(--container-7xl);
+
+    --flex-basis-3xs: var(--container-3xs);
+    --flex-basis-2xs: var(--container-2xs);
+    --flex-basis-xs: var(--container-xs);
+    --flex-basis-sm: var(--container-sm);
+    --flex-basis-md: var(--container-md);
+    --flex-basis-lg: var(--container-lg);
+    --flex-basis-xl: var(--container-xl);
+    --flex-basis-2xl: var(--container-2xl);
+    --flex-basis-3xl: var(--container-3xl);
+    --flex-basis-4xl: var(--container-4xl);
+    --flex-basis-5xl: var(--container-5xl);
+    --flex-basis-6xl: var(--container-6xl);
+    --flex-basis-7xl: var(--container-7xl);
 }
 
 /* --- BASE zero-point (= the `default` tune, all deltas 0) --- */

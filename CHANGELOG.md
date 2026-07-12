@@ -26,6 +26,19 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   lines appear instantly; default slot reveals on finish, plus a `terminal-done` event. Pure
   Alpine, no opt-in JS install required. See [`reference/components/terminal.md`](./reference/components/terminal.md).
 
+### Fixed
+- **t-shirt spacing keys no longer shadow Tailwind's container scale** — the `@theme
+  --spacing-<size>` keys share their names (`3xs`–`7xl`) with the default `--container-*` scale,
+  and the spacing namespace wins name resolution for the width-family utilities, so in host apps
+  `max-w-6xl` compiled to `max-width: var(--spacing-6xl)` (72rem → 8rem, tune-reactive) and broke
+  layouts (`w-<size>`, `min-w-<size>`, `basis-<size>` likewise). `tune.css` now ships a
+  container-scale compensation `@theme` block pinning the per-utility namespaces (`--width-*`,
+  `--min-width-*`, `--max-width-*`, `--flex-basis-*` — all of which outrank spacing) back to
+  `var(--container-<size>)`, restoring stock behaviour while keeping host `--container-*`
+  overrides working. Guarded by new golden-harness probes + a selfcheck container-scale gate;
+  existing golden surface unchanged (diff=0 over 25,410 values). Height/size-family t-shirt
+  leakage (`h-md`, `size-lg`, …) is additive-only in stock Tailwind and remains accepted.
+
 ## [0.4.5] — 2026-06
 
 ### Added

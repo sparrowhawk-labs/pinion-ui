@@ -189,6 +189,43 @@ probe({ id: 'p-lg', className: 'p-lg', capture: PAD_ALL });
 probe({ id: 'gap-lg', className: 'gap-lg', style: 'display:flex', capture: GAP });
 probe({ id: 'space-y-lg', className: 'space-y-lg', capOn: 'firstChild', capture: ['margin-bottom'] });
 
+/* =====================================================================
+   4) Host-app container-scale guard — the @theme --spacing-<size> keys
+      share their key names (3xs-7xl) with Tailwind's default --container-*
+      scale, and the spacing namespace WINS name resolution for the
+      width-family utilities (w-*, min-w-*, max-w-*, basis-*). Without the
+      per-utility compensation keys in tune.css these collapse to spacing
+      values in every host app (max-w-6xl: 72rem -> 8rem = layout break).
+      These probes pin the Tailwind default container values so any future
+      spacing-key change that re-shadows the scale fails the golden diff.
+      h-*, min-h-*, max-h-*, size-* have no container-named values in stock
+      Tailwind, so their t-shirt leakage stays additive-only (O1) and needs
+      no probe.
+      Expected values are rem-relative (some tunes scale the page font-size:
+      minimal .9375 / pixel 1.125), so each guarded size gets a CONTROL probe
+      carrying the literal container rem value inline; selfcheck.mjs asserts
+      utility === control per combo instead of hardcoded px. */
+export const CONTAINER_GUARD = [
+  { size: 'md', rem: '28rem' },  /* --container-md */
+  { size: '6xl', rem: '72rem' }, /* --container-6xl */
+];
+export const WIDTH_FAMILY = [
+  ['max-w', 'max-width'],
+  ['w', 'width'],
+  ['min-w', 'min-width'],
+  ['basis', 'flex-basis'],
+];
+for (const { size, rem } of CONTAINER_GUARD) {
+  probe({
+    id: `ctrl-container-${size}`,
+    style: `width:${rem};min-width:${rem};max-width:${rem};flex-basis:${rem}`,
+    capture: WIDTH_FAMILY.map(([, prop]) => prop),
+  });
+  for (const [prefix, prop] of WIDTH_FAMILY) {
+    probe({ id: `${prefix}-${size}`, className: `${prefix}-${size}`, capture: [prop] });
+  }
+}
+
 /* Every combination of theme × tune × strength the harness sweeps. */
 export function combos() {
   const out = [];
