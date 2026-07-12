@@ -9,6 +9,13 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [Unreleased]
 
+### Fixed
+- **tune.css** — font deltas (`--td-font-heading/body/mono`) are now reset to the base stack
+  on every `[data-tune]` subtree, like every other delta. Previously they fell through to the
+  resolver's `var()` fallback, so a nested `[data-tune]` element (e.g. a `data-tune="default"`
+  font preview inside a `data-tune="pixel"` page) inherited the ancestor tune's font delta and
+  rendered in the wrong font. Html-level tunes are unaffected.
+
 ## [0.4.6] — 2026-07
 
 ### Added
