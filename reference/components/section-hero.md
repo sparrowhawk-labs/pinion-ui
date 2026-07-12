@@ -86,7 +86,7 @@ Hero composes classes **inline** in [`src/resources/views/components/section/her
 
 - [`<x-button>`](./button.md) — used internally for `primaryAction` / `secondaryAction`.
 - [`<x-card>`](./card.md) — a common companion below the hero for feature grids.
-- [`<x-pn::tune-styles>`](./tune-styles.md) — controls `--space-section` / `--space-section-inner`, which drive the hero's vertical rhythm.
+- Tune system ([`src/resources/css/tune.css`](../../src/resources/css/tune.css), bundled by the `pinion-ui.css` preset) — controls `--space-section` / `--space-section-inner`, which drive the hero's vertical rhythm.
 
 ## Notes
 

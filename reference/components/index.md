@@ -90,7 +90,6 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 |---|---|
 | [`<x-theme-switcher>`](./theme-switcher.md) | Click-to-cycle theme switcher — pass `:themes` array, persists to `data-theme` on `<html>`. |
 | [`<x-theme-tune-switcher>`](./theme-tune-switcher.md) | `data-theme` × `data-tune` dropdowns (color-dot theme preview + tune preview), live-retune the page. `fixed` / `inline`, localStorage. Pure Alpine. |
-| [`<x-tune-styles>`](./tune-styles.md) | Injects the `<style>` block that defines all `data-tune="*"` presets. Place once in your layout `<head>`. Use `:only="['default','tech']"` to ship only the tunes you use. |
 
 ## Conventions used in these docs
 
