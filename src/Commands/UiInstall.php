@@ -20,8 +20,7 @@ class UiInstall extends Command
         {--sheet : Wire the opt-in <x-sheet> JS module (Locality-of-Behavior spreadsheet — pure Alpine, NO npm dep)}
         {--calendar : Wire the opt-in <x-calendar> JS module (minimal date picker — pure Alpine, NO npm dep)}
         {--skip-hooks : Skip installing the lint-after-edit Claude Code hook}
-        {--git-hook : Install a general (agent-agnostic) git pre-commit ui:lint hook}
-        {--tune-only= : Only include specific tune presets (comma-separated)}';
+        {--git-hook : Install a general (agent-agnostic) git pre-commit ui:lint hook}';
 
     protected $description = 'Install pinion-ui v2 components with required dependencies';
 

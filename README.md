@@ -13,7 +13,7 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 
 ## Features
 
-- **46 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, tune-styles, and more.
+- **46 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
 - **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="dracula" data-tune="playful"`).
 - **11 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`. Each preset bundles ~30 CSS custom properties.
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
@@ -168,10 +168,10 @@ Each preset writes CSS custom properties across four categories:
 ### Process (1)
 `stepper`
 
-### Theme / Tune (2)
-`theme-switcher`, `tune-styles`
+### Theme / Tune (1)
+`theme-switcher`
 
-Most components share a `Compose` layer (`src/Compose/*Composer.php`) that centralises variant / size / state class composition — making behaviour testable and easy to extend. A handful of simple components (button, alert, card, badge, avatar, menu-item, section.hero, theme-switcher, tune-styles) compose their classes inline in the Blade file.
+Most components share a `Compose` layer (`src/Compose/*Composer.php`) that centralises variant / size / state class composition — making behaviour testable and easy to extend. A handful of simple components (button, alert, card, badge, avatar, menu-item, section.hero, theme-switcher) compose their classes inline in the Blade file.
 
 ## Pairs with Pinion Icons
 
