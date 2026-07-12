@@ -52,7 +52,7 @@ Theme-switcher composes classes **inline** in [`src/resources/views/components/t
 
 ## Related
 
-- [`<x-pn::tune-styles>`](./tune-styles.md) — the Tune layer (`data-tune`) is orthogonal to Theme (`data-theme`). Pair this switcher with a Tune picker for full design-language control.
+- [`<x-theme-tune-switcher>`](./theme-tune-switcher.md) — the Tune layer (`data-tune`, defined in `tune.css` via the `pinion-ui.css` preset) is orthogonal to Theme (`data-theme`). Use this combined switcher for full design-language control.
 - [`<x-dropdown>`](./dropdown.md) — wrap multiple `<x-theme-switcher>`-style buttons inside a dropdown if you need a richer picker UI.
 
 ## Notes

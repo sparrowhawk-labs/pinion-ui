@@ -60,6 +60,8 @@ A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defau
 
     Rationale & design record: `docs/design/spacing-v0.5-tshirt.md` (internal). The t-shirt scale also makes the rhythmic/optical convention self-documenting: t-shirt = tune-reactive rhythm, numeric = fixed optical nudge.
 
+- **`<x-tune-styles>` removed.** The v1-era inline-`<style>` fallback for tune presets. It emitted the v1 tune names deprecated in v0.4.4 (`playful`/`elegant`/`bold`) and flat token values that override the Tune v2 `base + delta × strength` computed values when loaded alongside `pinion-ui.css` (same `[data-tune="…"]` specificity, later in the cascade). No code in the package, stubs, demo, or playground consumed it. Migration: delete the `<x-pn::tune-styles />` line from your layout — `ui:install` already imports the `pinion-ui.css` preset (which bundles `tune.css`) into `app.css`. The never-functional `ui:install --tune-only` option is removed with it.
+
 ### v0.4.3 (unreleased) — 2026-06
 
 - **`ui:install` no longer overwrites a custom `data-theme` when run non-interactively.** The layout-patching confirm ("Switch to pinion?") defaulted to *yes*, and Laravel's `confirm()` returns the default in non-interactive runs (CI, agents, `-n`) — so every `ui:install` re-run silently stomped a host's custom theme (found via NADI's `data-theme="nadi"` → `"pinion"`). The default is now *yes* only when the current theme is `light` (the pre-v0.4.0 recommendation the migration was aimed at); any other value defaults to *keep*. Interactive behaviour is unchanged apart from the default answer.

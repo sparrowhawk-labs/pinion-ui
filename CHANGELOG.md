@@ -26,6 +26,18 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   lines appear instantly; default slot reveals on finish, plus a `terminal-done` event. Pure
   Alpine, no opt-in JS install required. See [`reference/components/terminal.md`](./reference/components/terminal.md).
 
+### Removed
+- **`<x-tune-styles>`** — the v1-era Blade fallback that injected tune presets as inline
+  `<style>` blocks. It still emitted the deprecated v1 tune names (`playful`/`elegant`/`bold`,
+  renamed to `soft`/`editorial`/`luxury` in the v0.4.4 Tune v2 release) and flat token values
+  that fight the v2 `base + delta × strength` system: loaded alongside `pinion-ui.css` (the
+  `ui:install` default), its equal-specificity `[data-tune="…"]` blocks come later in the
+  cascade and override tune.css's computed values. The zero-config path it promised is now the
+  single `pinion-ui.css` import that `ui:install` wires into `app.css`. The `ui:install
+  --tune-only` option (declared but never read — the CLI mirror of this component's `only`
+  prop) is removed with it. **BC note**: this removal must ship in a minor (v0.5.0), per
+  [`SEMVER.md`](./SEMVER.md).
+
 ### Fixed
 - **t-shirt spacing keys no longer shadow Tailwind's container scale** — the `@theme
   --spacing-<size>` keys share their names (`3xs`–`7xl`) with the default `--container-*` scale,

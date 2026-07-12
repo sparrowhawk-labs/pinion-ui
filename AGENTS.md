@@ -41,7 +41,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 ## Architecture rules (do not violate)
 
 1. **Compose pattern**: For most components, class strings live in `src/Compose/{Name}Composer.php`, not the Blade. Each composer has a static `compose(array $props): array` that returns a flat dict of class strings. The Blade reads `$c['root']`, `$c['title']`, etc. — it is render-only.
-   - Components **without** a composer (classes embedded in the Blade): `button`, `alert`, `card`, `badge`, `avatar`, `menu-item`, `section.hero`, `theme-switcher`, `tune-styles`. These predate the pattern.
+   - Components **without** a composer (classes embedded in the Blade): `button`, `alert`, `card`, `badge`, `avatar`, `menu-item`, `section.hero`, `theme-switcher`. These predate the pattern.
 2. **Composer returns class strings only — no markup, no array values.** If you need conditional markup, branch in the Blade based on a prop.
 3. **Fixture tests**: Each composer has `tests/fixtures/compose/{name}.json` covering its variant matrix. Run with `php tests/Compose/run.php`. Comparison is subset (only listed `expected` keys are checked). Add cases when you add props.
 4. **Backwards compatibility**: Never rename props or silently change their defaults. New props are opt-in (default preserves previous behaviour).
@@ -51,10 +51,10 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 | Layer | Where it lives | Examples |
 |---|---|---|
 | **Theme** (color palette) | `<html data-theme="...">` | `light`, `dark`, `dracula`, any daisyUI theme |
-| **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `elegant`, `playful` (11 presets) |
+| **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft` (11 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
-Themes and Tunes mix freely. Both are activated by `<x-tune-styles />` injecting the `data-tune="*"` CSS once into the layout `<head>`.
+Themes and Tunes mix freely. Both are activated by the `pinion-ui.css` preset (imported into `app.css` by `ui:install`), which bundles the `data-tune` token system from `tune.css`.
 
 ### Class vocabulary — what you actually write
 
