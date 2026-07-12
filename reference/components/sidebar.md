@@ -65,7 +65,7 @@ The page underneath stays fully interactive — useful for "click row → inspec
 
 ### Sidebar with footer
 
-The hairline border-t spans the full panel width by canceling the panel's `p-element` horizontal padding with `-mx-[var(--space-element)] px-[var(--space-element)]`. The body uses `flex flex-col h-full` so `mt-auto` pushes the footer to the bottom.
+The hairline border-t spans the full panel width by canceling the panel's `p-lg` horizontal padding with `-mx-lg px-lg`. The body uses `flex flex-col h-full` so `mt-auto` pushes the footer to the bottom.
 
 ```blade
 <x-sidebar side="left" size="md">
@@ -78,7 +78,7 @@ The hairline border-t spans the full panel width by canceling the panel's `p-ele
             <x-menu-item href="/team">Team</x-menu-item>
         </nav>
 
-        <div class="mt-auto -mx-[var(--space-element)] px-[var(--space-element)] pt-5 border-t border-base-300">
+        <div class="mt-auto -mx-lg px-lg pt-5 border-t border-base-300">
             <div class="flex items-center gap-3">
                 <x-avatar size="sm" :initials="'AT'" />
                 <div class="min-w-0 flex-1">
@@ -116,6 +116,6 @@ Class strings come from [`SidebarComposer::compose($props)`](../../src/Compose/S
 
 - The panel is teleported to `<body>` (`<template x-teleport="body">`), so it escapes overflow / transform contexts of ancestors. Don't rely on its position in the DOM tree for selectors.
 - `x-trap.inert.noscroll` traps Tab inside the panel and locks page scroll while the drawer is open.
-- The floating close button is always pinned to the panel's **top-right** corner (`top-[var(--space-element)] right-[var(--space-element)]`) regardless of `side`. Content headings typically sit top-left (LTR), so this avoids overlap. Override with `class="..."` on a custom close button inside the slot if you need a different position.
+- The floating close button is always pinned to the panel's **top-right** corner (`top-lg right-lg`) regardless of `side`. Content headings typically sit top-left (LTR), so this avoids overlap. Override with `class="..."` on a custom close button inside the slot if you need a different position.
 - Open/close events are name-spaced by `id`: `open-sidebar-{id}` and `close-sidebar-{id}`. Always set an explicit `id` if you'll dispatch events from outside the trigger slot.
 - `closeOnBackdrop` and `escape` are both `true` by default — set to `false` for modal-style "must use action button to close" flows.

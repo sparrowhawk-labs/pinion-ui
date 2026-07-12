@@ -107,14 +107,14 @@
     $hover = $hoverable ? 'transition-shadow hover:shadow-[var(--shadow-box)] cursor-pointer' : '';
 
     // Two layout modes:
-    //  divider=true  → each section owns p-element, hr sits between sections (outerPad is empty)
-    //  divider=false → single outer p-element, sections flow with text-gap between them
-    $outerPad   = (!$divider && $padding) ? 'p-element' : '';
-    $sectionPad = ($divider && $padding) ? 'p-element' : '';
+    //  divider=true  → each section owns p-lg, hr sits between sections (outerPad is empty)
+    //  divider=false → single outer p-lg, sections flow with text-gap between them
+    $outerPad   = (!$divider && $padding) ? 'p-lg' : '';
+    $sectionPad = ($divider && $padding) ? 'p-lg' : '';
     $headerDivider = $divider ? 'border-b-[length:var(--border)] border-base-content/10' : '';
     $footerDivider = $divider ? 'border-t-[length:var(--border)] border-base-content/10' : '';
-    $headerGap = !$divider ? 'mb-[var(--space-text)]' : '';
-    $footerGap = !$divider ? 'mt-[var(--space-text)]' : '';
+    $headerGap = !$divider ? 'mb-md' : '';
+    $footerGap = !$divider ? 'mt-md' : '';
 
     // Full-bleed divider fix.
     //   The card root is a border-box with a `tune-border` of width var(--border)
@@ -131,8 +131,8 @@
     //   scales with the tune border width automatically.
     $dividerBleed = $divider
         ? ($padding
-            // padded: keep vertical p-element, widen inline padding by the border
-            ? '-mx-[var(--border)] py-[var(--space-element)] px-[calc(var(--space-element)+var(--border))]'
+            // padded: keep vertical p-lg, widen inline padding by the border
+            ? '-mx-[var(--border)] py-lg px-[calc(var(--spacing-lg)+var(--border))]'
             // unpadded: just restore the content position lost to the pull-out
             : '-mx-[var(--border)] px-[var(--border)]')
         : '';

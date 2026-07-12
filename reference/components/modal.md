@@ -28,7 +28,7 @@ All other attributes pass through to the outer Alpine scope `<div>`.
 
 - **default** — modal body content. Rendered directly inside the panel below the (optional) header.
 - **trigger** — wrapping element clicked to open the modal in place. Optional — omit it if you only open via `$dispatch('open-modal-{id}')`.
-- **actions** — footer slot for action buttons. Rendered with `flex items-center justify-end gap-inline mt-[var(--space-element)]`. Each button typically uses `@click="open = false"` to close after handling its action.
+- **actions** — footer slot for action buttons. Rendered with `flex items-center justify-end gap-xs mt-lg`. Each button typically uses `@click="open = false"` to close after handling its action.
 
 ## Examples
 

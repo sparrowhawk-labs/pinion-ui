@@ -23,7 +23,7 @@ class AccordionComposer
             'icon'      => 'w-4 h-4 shrink-0 transition-transform duration-200',
             'content'   => FieldVariants::join(
                 $sizeClasses,
-                'py-[var(--space-compact)] text-base-content/70',
+                'py-sm text-base-content/70',
             ),
         ];
     }

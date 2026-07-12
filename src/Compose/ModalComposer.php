@@ -55,13 +55,13 @@ class ModalComposer
             // tune shadow, layered over a quiet base elevation so the dialog
             // stays lifted off the scrim even in flat tunes (minimal/corporate
             // set --shadow-box: none). Border carries the perimeter regardless.
-            'shadow-[0_10px_30px_-8px_rgb(0_0_0_/_0.18),var(--shadow-box)] p-element',
+            'shadow-[0_10px_30px_-8px_rgb(0_0_0_/_0.18),var(--shadow-box)] p-lg',
         );
     }
 
     private static function header(): string
     {
-        return 'flex items-center justify-between mb-[var(--space-compact)]';
+        return 'flex items-center justify-between mb-sm';
     }
 
     private static function title(): string
@@ -91,7 +91,7 @@ class ModalComposer
     private static function closeBtnFloat(): string
     {
         return FieldVariants::join(
-            'absolute top-[var(--space-element)] right-[var(--space-element)] z-10',
+            'absolute top-lg right-lg z-10',
             'text-base-content/50 hover:text-base-content transition-colors',
             'rounded-[var(--radius-field)] p-0.5 hover:bg-base-200',
         );
@@ -109,6 +109,6 @@ class ModalComposer
 
     private static function actions(): string
     {
-        return 'flex items-center justify-end gap-inline mt-[var(--space-element)]';
+        return 'flex items-center justify-end gap-xs mt-lg';
     }
 }

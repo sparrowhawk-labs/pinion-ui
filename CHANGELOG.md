@@ -9,6 +9,16 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [Unreleased]
 
+### Changed
+- **BREAKING: tune spacing utilities renamed to t-shirt sizes** — the magnitude-tier spacing
+  utilities (`gap-element`, `space-section`, `p-compact`, `space-y-text`, …) are removed and
+  replaced by tune-reactive `@theme --spacing-<size>` keys that generate the full Tailwind
+  spacing namespace (`p-md`, `px-sm`, `gap-lg`, `mt-2xl`, `space-y-xl`, …) for sizes
+  `3xs`–`7xl`. Public tokens renamed `--space-<tier>` → `--spacing-<size>`. Computed output is
+  unchanged for every mapped tier (golden-harness verified, diff=0). Migration map and details
+  in [`SEMVER.md`](./SEMVER.md). Nested `data-tune` scopes keep working — the spacing keys are
+  re-declared on `[data-tune]` so nested tunes recompute them.
+
 ### Added
 - **`<x-terminal>`** — fake terminal window with a typewriter reveal, for demoing a CLI step
   (`artisan tinker`, a seeder run, a build command, …) without recording a real terminal (which

@@ -16,7 +16,7 @@ Surface container for grouped content. Renders `<div>` by default with optional 
 |------|------|---------|-------------|
 | `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'neutral'` | Semantic color. Ignored for `default`, `elevated`, `filled`, `ghost` (those use base surface only). Drives accent for `outline`, `soft`, `solid`, `base-*`, `bordered-top`. |
 | `appearance` | `'default' \| 'elevated' \| 'filled' \| 'ghost' \| 'outline' \| 'soft' \| 'solid' \| 'base-100' \| 'base-200' \| 'base-300' \| 'bordered-top'` | `'default'` | Visual style. `default` = base-100 surface + subtle border; `elevated` = shadow, no border; `filled` = base-200 tint; `ghost` = transparent; `outline` = colored border; `soft` = tinted bg + colored text; `solid` = colored fill; `base-*` = matching surface bg + colored text; `bordered-top` = base-100 surface with a 4px colored accent on top. |
-| `padding` | `bool` | `true` | Toggles inner padding (uses the `p-element` token). Set `false` for media-flush cards. |
+| `padding` | `bool` | `true` | Toggles inner padding (uses the `p-lg` token). Set `false` for media-flush cards. |
 | `divider` | `bool` | `true` | If `true`, header/footer get a 1px line between them and the slot. If `false`, sections flow with text-gap spacing. |
 | `hoverable` | `bool` | `false` | Adds `transition-shadow hover:shadow-lg cursor-pointer` — pair with a wrapping `<a>` for clickable cards. |
 | `as` | `string` | `'div'` | HTML tag for the root element. Use `as="article"` / `as="section"` for semantic landmark wrapping. |
@@ -77,7 +77,7 @@ All other attributes pass through to the root element.
 ```blade
 <x-card :padding="false" appearance="elevated">
     <img src="/cover.jpg" alt="" class="w-full h-40 object-cover">
-    <div class="p-element">
+    <div class="p-lg">
         <p>Body padded manually because the image bleeds edge-to-edge.</p>
     </div>
 </x-card>
@@ -96,5 +96,5 @@ Card composes classes **inline** in [`src/resources/views/components/card.blade.
 ## Notes
 
 - `default`, `elevated`, `filled`, `ghost` ignore the `color` prop — these are surface-only variants. To accent a neutral card, prefer `bordered-top` + `color`.
-- When `divider=false`, the outer wrapper takes the `p-element` padding; when `divider=true`, each of header/body/footer carries its own `p-element` so the dividing line spans full width.
+- When `divider=false`, the outer wrapper takes the `p-lg` padding; when `divider=true`, each of header/body/footer carries its own `p-lg` so the dividing line spans full width.
 - `bordered-top` always lays its accent on `bg-base-100` even if the parent uses a different surface — use `appearance="base-200"` instead if you want both surface tinting AND a colored text accent without the top stripe.

@@ -7,8 +7,8 @@
             "tabBase": "order-0 relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
             "tabActive": "text-primary border-b-2 border-primary",
             "tabIdle": "text-base-content/60 hover:text-base-content border-b-2 border-transparent",
-            "iconWrap": "inline-flex items-center gap-inline",
-            "panel": "order-1 basis-full mt-[var(--space-compact)]"
+            "iconWrap": "inline-flex items-center gap-xs",
+            "panel": "order-1 basis-full mt-sm"
         }
     },
     {
@@ -84,7 +84,7 @@
         "name": "panel class is layout-agnostic (always row 2 via order-1 + basis-full)",
         "props": { "variant": "boxed", "size": "lg" },
         "expected": {
-            "panel": "order-1 basis-full mt-[var(--space-compact)]"
+            "panel": "order-1 basis-full mt-sm"
         }
     }
 ]

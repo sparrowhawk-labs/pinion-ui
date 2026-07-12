@@ -137,7 +137,7 @@ Theme and Tune are fully orthogonal — any combination works.
 Each preset writes CSS custom properties across four categories:
 
 - **Shape** — `--radius-box`, `--radius-field`, `--radius-selector`, `--border`, `--depth`, `--noise`
-- **Spacing** — `--space-section`, `--space-section-inner`, `--space-element`, `--space-compact`, `--space-text`, `--space-inline`
+- **Spacing** — `--spacing-3xs` … `--spacing-7xl` (t-shirt ramp; drives `p-md`, `gap-lg`, `space-y-xl`, …)
 - **Font** — `--font-heading`, `--font-body`, `--font-mono`, `--font-weight-heading`
 - **Component Size** — `--h-field-{xs,sm,md,lg}`, `--px-field-{xs,sm,md,lg}`, `--text-field-{xs,sm,md,lg}`
 

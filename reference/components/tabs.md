@@ -30,7 +30,7 @@ All other attributes pass through to the root `<div>` (`id`, `wire:ignore`, etc.
 |------|------|---------|-------------|
 | `name` | `string` (required) | — | Identifier compared against `activeTab`. Must be unique within the parent `<x-tabs>`. |
 | `label` | `string \| null` | `null` | Button text. Falls back to `name` when omitted. |
-| `icon` | `string \| null` | `null` | Raw inline HTML (typically SVG) rendered before the label inside an `inline-flex items-center gap-inline` wrapper. Output via `{!! !!}` — must be trusted markup. |
+| `icon` | `string \| null` | `null` | Raw inline HTML (typically SVG) rendered before the label inside an `inline-flex items-center gap-xs` wrapper. Output via `{!! !!}` — must be trusted markup. |
 
 `variant` and `size` are not declared on `<x-tab>` as props; they're inherited from the parent via Blade `@aware`.
 
@@ -123,7 +123,7 @@ Class strings are built by [`TabsComposer::compose($props)`](../../src/Compose/T
 | `tabBase` | Each child `<button role="tab">` — size/typography/positioning shared across variants. |
 | `tabActive` / `tabIdle` | Active vs idle button class, swapped per button via Alpine `x-bind:class`. |
 | `iconWrap` | Wrapper around `icon + label` when `icon` is set. |
-| `panel` | Each child `<div role="tabpanel">` — `order-1 basis-full mt-[var(--space-compact)]` so panels sit below the button row inside the same flex container. |
+| `panel` | Each child `<div role="tabpanel">` — `order-1 basis-full mt-sm` so panels sit below the button row inside the same flex container. |
 
 > **v0.4.0 BC**: the previous `tabList` and `panels` keys were removed — the new layout puts buttons and panels as siblings inside a single flex-wrap container, so there is no separate tablist wrapper element.
 

@@ -170,7 +170,7 @@
 @endphp
 
 <div
-    {{ $attributes->merge(['class' => "flex gap-inline rounded-[var(--radius-box)] $sizeClasses $variantClasses", 'role' => 'alert']) }}
+    {{ $attributes->merge(['class' => "flex gap-xs rounded-[var(--radius-box)] $sizeClasses $variantClasses", 'role' => 'alert']) }}
     @if($dismissible) x-data="{ show: true }" x-show="show" x-transition @endif
 >
     <div class="{{ $iconWrapClasses }}">

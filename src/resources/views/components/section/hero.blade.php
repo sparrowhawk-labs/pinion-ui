@@ -19,11 +19,11 @@
     };
 @endphp
 
-<section {{ $attributes->merge(['class' => "$bgClass space-section"]) }}>
+<section {{ $attributes->merge(['class' => "$bgClass py-4xl"]) }}>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         @if($variant === 'centered')
-            <div class="text-center max-w-3xl mx-auto flex flex-col items-center gap-section-inner">
+            <div class="text-center max-w-3xl mx-auto flex flex-col items-center gap-2xl">
                 @if($badge)
                     <span class="inline-flex items-center px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-[var(--radius-selector)]">
                         {{ $badge }}
@@ -45,7 +45,7 @@
                 @endif
 
                 @if($primaryAction || $secondaryAction || isset($actions))
-                    <div class="flex flex-col sm:flex-row items-center gap-compact">
+                    <div class="flex flex-col sm:flex-row items-center gap-sm">
                         @if(isset($actions))
                             {{ $actions }}
                         @else
@@ -67,8 +67,8 @@
             </div>
 
         @elseif($variant === 'split')
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-section-inner items-center">
-                <div class="flex flex-col gap-element">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2xl items-center">
+                <div class="flex flex-col gap-lg">
                     @if($badge)
                         <span class="inline-flex items-center self-start px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-[var(--radius-selector)]">
                             {{ $badge }}
@@ -90,7 +90,7 @@
                     @endif
 
                     @if($primaryAction || $secondaryAction || isset($actions))
-                        <div class="flex flex-col sm:flex-row items-start gap-compact">
+                        <div class="flex flex-col sm:flex-row items-start gap-sm">
                             @if(isset($actions))
                                 {{ $actions }}
                             @else

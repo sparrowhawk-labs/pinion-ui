@@ -49,7 +49,7 @@ class EditorComposer
             'button'       => self::button($size),
             'buttonActive' => 'bg-base-content/10 text-base-content',
             'divider'      => 'self-stretch my-1 w-px bg-base-content/10 mx-1.5 shrink-0',
-            'bottom'       => 'flex items-center justify-between gap-3 px-[var(--space-text)] text-[length:var(--text-field-xs)] text-base-content/40',
+            'bottom'       => 'flex items-center justify-between gap-3 px-md text-[length:var(--text-field-xs)] text-base-content/40',
             'count'        => 'flex items-center gap-3 tabular-nums',
             'footer'       => self::footer(),
         ];
@@ -94,9 +94,9 @@ class EditorComposer
     {
         // Generous breathing room — the writing surface should feel open.
         $pad = match ($size) {
-            'sm'    => 'px-[var(--space-text)] py-[var(--space-element)]',
-            'lg'    => 'px-[var(--space-section-inner)] py-[var(--space-section-inner)]',
-            default => 'px-[var(--space-element)] py-[var(--space-element)]',
+            'sm'    => 'px-md py-lg',
+            'lg'    => 'px-2xl py-2xl',
+            default => 'px-lg py-lg',
         };
 
         return FieldVariants::join($pad);
@@ -126,7 +126,7 @@ class EditorComposer
     {
         return FieldVariants::join(
             'flex items-center gap-2',
-            'px-[var(--space-element)] py-[var(--space-compact)]',
+            'px-lg py-sm',
             'text-[length:var(--text-field-xs)] text-base-content/35',
         );
     }

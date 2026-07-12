@@ -22,7 +22,7 @@ class PopoverComposer
         $placement = $props['placement'] ?? 'bottom';
         $width     = $props['width']     ?? 'w-72';
         $arrow     = (bool) ($props['arrow'] ?? true);
-        $padding   = $props['padding']   ?? 'p-element';
+        $padding   = $props['padding']   ?? 'p-lg';
 
         return [
             'root'      => 'relative inline-block',

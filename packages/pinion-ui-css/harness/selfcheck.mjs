@@ -50,7 +50,7 @@ function distinctAcrossTunes(theme, strength, id, prop) {
 /* radius and font are guaranteed to differ across the 11 tunes (sharp r=0 vs
    soft/luxury large; pixel font vs editorial serif). Treat these as HARD. */
 const HARD = [['radius-box', 'border-top-left-radius'], ['font-heading', 'font-family']];
-const SOFT = [['shadow-box', 'box-shadow'], ['space-section', 'padding-top'], ['tune-btn-md', 'height']];
+const SOFT = [['shadow-box', 'box-shadow'], ['py-4xl', 'padding-top'], ['tune-btn-md', 'height']];
 
 for (const [id, prop] of HARD) {
   const n = distinctAcrossTunes('pinion', 'xl', id, prop).size;

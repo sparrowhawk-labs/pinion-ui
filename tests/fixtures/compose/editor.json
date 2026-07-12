@@ -5,16 +5,16 @@
         "expected": {
             "shell": "flex flex-col gap-1.5",
             "root": "text-base-content",
-            "body": "px-[var(--space-element)] py-[var(--space-element)]",
+            "body": "px-lg py-lg",
             "prose": "pn-prose text-[length:var(--text-field-md)] min-h-[14rem] focus:outline-none",
             "menu": "fixed z-50 flex flex-nowrap items-center gap-0.5 p-1 bg-base-100 rounded-[var(--radius-box)] ring-1 ring-base-content/10 shadow-[var(--shadow-box)]",
             "menuGroup": "flex flex-nowrap items-center gap-0.5 shrink-0",
             "button": "min-w-8 h-8 px-2 text-[length:var(--text-field-sm)] shrink-0 inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/55 hover:text-base-content hover:bg-base-content/[0.06] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75]",
             "buttonActive": "bg-base-content/10 text-base-content",
             "divider": "self-stretch my-1 w-px bg-base-content/10 mx-1.5 shrink-0",
-            "bottom": "flex items-center justify-between gap-3 px-[var(--space-text)] text-[length:var(--text-field-xs)] text-base-content/40",
+            "bottom": "flex items-center justify-between gap-3 px-md text-[length:var(--text-field-xs)] text-base-content/40",
             "count": "flex items-center gap-3 tabular-nums",
-            "footer": "flex items-center gap-2 px-[var(--space-element)] py-[var(--space-compact)] text-[length:var(--text-field-xs)] text-base-content/35"
+            "footer": "flex items-center gap-2 px-lg py-sm text-[length:var(--text-field-xs)] text-base-content/35"
         }
     },
     {
@@ -24,7 +24,7 @@
         },
         "expected": {
             "button": "min-w-7 h-7 px-1.5 text-[length:var(--text-field-xs)] shrink-0 inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/55 hover:text-base-content hover:bg-base-content/[0.06] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75]",
-            "body": "px-[var(--space-text)] py-[var(--space-element)]",
+            "body": "px-md py-lg",
             "prose": "pn-prose text-[length:var(--text-field-sm)] min-h-[8rem] focus:outline-none"
         }
     },
@@ -35,7 +35,7 @@
         },
         "expected": {
             "button": "min-w-9 h-9 px-2.5 text-[length:var(--text-field-md)] shrink-0 inline-flex items-center justify-center rounded-[calc(var(--radius-box)*0.6)] text-base-content/55 hover:text-base-content hover:bg-base-content/[0.06] transition-colors duration-100 cursor-pointer select-none disabled:opacity-40 disabled:cursor-not-allowed [&_svg]:w-[1.05rem] [&_svg]:h-[1.05rem] [&_svg]:stroke-[1.75]",
-            "body": "px-[var(--space-section-inner)] py-[var(--space-section-inner)]",
+            "body": "px-2xl py-2xl",
             "prose": "pn-prose text-[length:var(--text-field-lg)] min-h-[18rem] focus:outline-none"
         }
     },
