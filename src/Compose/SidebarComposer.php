@@ -82,7 +82,7 @@ class SidebarComposer
             // slides from is flush with the viewport). Layer a quiet base
             // elevation under the tune shadow so the drawer reads as lifted in
             // flat tunes (minimal/corporate → --shadow-box: none) too.
-            'border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-element overflow-y-auto',
+            'border-base-300 shadow-[0_0_40px_-8px_rgb(0_0_0_/_0.20),var(--shadow-box)] p-lg overflow-y-auto',
         ];
         if (!$backdrop) {
             // re-enable pointer events on the panel itself when overlay is
@@ -101,7 +101,7 @@ class SidebarComposer
     private static function closeBtnFloat(): string
     {
         return FieldVariants::join(
-            'absolute top-[var(--space-element)] right-[var(--space-element)]',
+            'absolute top-lg right-lg',
             'z-10',
             'text-base-content/50 hover:text-base-content transition-colors',
             'rounded-[var(--radius-field)] p-1 hover:bg-base-200',

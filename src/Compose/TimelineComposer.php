@@ -59,7 +59,7 @@ class TimelineComposer
     }
 
     /**
-     * `gap-compact` (tune-aware `--space-compact`, 8px floor) keeps a real
+     * `gap-sm` (tune-aware `--spacing-sm`, 8px floor) keeps a real
      * gap between adjacent `<li>` items. Every `sideStart`/`sideEnd`/`box`
      * slot spans the item's full grid height (vertical) or width
      * (horizontal) with no margin of its own, so with zero inter-item gap
@@ -72,8 +72,8 @@ class TimelineComposer
     private static function rootClass(string $orientationKey): string
     {
         return $orientationKey === 'horizontal'
-            ? 'flex flex-row relative gap-compact'
-            : 'flex flex-col relative gap-compact';
+            ? 'flex flex-row relative gap-sm'
+            : 'flex flex-col relative gap-sm';
     }
 
     /**

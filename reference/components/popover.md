@@ -23,7 +23,7 @@ Positioning is **CSS-based** (no JS computation): pick one of four placements (`
 | `width` | `string` | `'w-72'` | Tailwind width utility for the panel. Use `'w-fit'` for content-shrunk popovers, or `'w-96'` etc. for wider. |
 | `arrow` | `bool` | `true` | Show a small diamond pointing at the trigger. Disable for borderless / minimal popovers. |
 | `trigger` | `'click' \| 'hover'` | `'click'` | Open mechanism. `'click'` toggles open on click, closes on outside click and ESC. `'hover'` opens on mouseenter, closes on mouseleave — careful: hover popovers shouldn't host inputs (you can't move the cursor in without leaving the trigger). |
-| `padding` | `string` | `'p-element'` | Tailwind padding utility for the panel. Default `'p-element'` is sized for info-card / mini-form content. For **context-menu style** popovers (list of clickable items with their own per-row padding), pass a tight value like `'p-1'` or `'p-compact'` so the menu items sit close to the edges. |
+| `padding` | `string` | `'p-lg'` | Tailwind padding utility for the panel. Default `'p-lg'` is sized for info-card / mini-form content. For **context-menu style** popovers (list of clickable items with their own per-row padding), pass a tight value like `'p-1'` or `'p-sm'` so the menu items sit close to the edges. |
 
 All other attributes pass through to the outer wrapper.
 
@@ -110,7 +110,7 @@ All other attributes pass through to the outer wrapper.
 ### Context menu (tight padding for menu items)
 
 For a context-menu / overflow-menu where each row already has its own
-`px-2 py-1`, the default `p-element` panel padding pushes the rows
+`px-2 py-1`, the default `p-lg` panel padding pushes the rows
 too far inside. Pass `padding="p-1"` (or `p-0`) so the menu items sit
 close to the panel edges.
 

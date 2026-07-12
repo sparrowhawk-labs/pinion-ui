@@ -14,8 +14,8 @@ class TabsComposer
             'tabBase'   => self::tabBase($size),
             'tabActive' => self::tabActive($variant),
             'tabIdle'   => self::tabIdle($variant),
-            'iconWrap'  => 'inline-flex items-center gap-inline',
-            'panel'     => 'order-1 basis-full mt-[var(--space-compact)]',
+            'iconWrap'  => 'inline-flex items-center gap-xs',
+            'panel'     => 'order-1 basis-full mt-sm',
         ];
     }
 

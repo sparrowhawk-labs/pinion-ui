@@ -13,8 +13,9 @@
 @import "tailwindcss";
 @import "../../../src/resources/css/pinion-ui.css";
 
-/* Purge-guard: the harness fixture names every tune @utility + probe class, so
-   Tailwind JIT keeps all 73 utilities in the reference build even though the
-   Blade components don't happen to use every one. Without this @source, unused
-   utilities would be purged and the harness could not observe them. */
+/* Purge-guard: the harness fixture names every tune @utility + probe class
+   (incl. the theme-generated t-shirt spacing utilities), so Tailwind JIT keeps
+   them all in the reference build even though the Blade components don't
+   happen to use every one. Without this @source, unused utilities would be
+   purged and the harness could not observe them. */
 @source "../harness/fixture.html";

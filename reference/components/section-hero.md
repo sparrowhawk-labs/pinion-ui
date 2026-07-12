@@ -1,13 +1,13 @@
 # x-pn::section.hero
 
-Top-of-page hero section with `centered` and `split` layouts, title/subtitle, optional badge, and primary/secondary action buttons. Renders a `<section>` with `space-section` vertical rhythm and a max-width container; respects the active `data-tune` for spacing and radii.
+Top-of-page hero section with `centered` and `split` layouts, title/subtitle, optional badge, and primary/secondary action buttons. Renders a `<section>` with `py-4xl` vertical rhythm and a max-width container; respects the active `data-tune` for spacing and radii.
 
 **Playground page**: no dedicated demo page — see the [overview](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/overview.blade.php) and the [`README` quick-start example](../../README.md#quick-start).
 
 ## When to use
 
 - Marketing / landing pages where the first viewport needs a headline, supporting copy, and 1–2 calls-to-action.
-- App empty states or dashboard intros that benefit from the same `space-section` rhythm as marketing pages.
+- App empty states or dashboard intros that benefit from the same `py-4xl` rhythm as marketing pages.
 - For a plain content header inside an app, use a `<h1>` + plain prose instead — this component is opinionated about vertical space.
 
 ## Props
@@ -25,7 +25,7 @@ Top-of-page hero section with `centered` and `split` layouts, title/subtitle, op
 | `secondaryAction` | `array \| null` | `null` | Same shape as `primaryAction`; rendered as `appearance="ghost"`. |
 | `bgClass` | `string` | `'bg-base-100'` | Background utility for the outer `<section>`. Pass any Tailwind / daisyUI class (e.g. `bg-gradient-to-br from-primary/10`). |
 
-All other attributes pass through to the root `<section>` (merged with `bgClass` and `space-section`).
+All other attributes pass through to the root `<section>` (merged with `bgClass` and `py-4xl`).
 
 ## Slots
 
@@ -86,11 +86,11 @@ Hero composes classes **inline** in [`src/resources/views/components/section/her
 
 - [`<x-button>`](./button.md) — used internally for `primaryAction` / `secondaryAction`.
 - [`<x-card>`](./card.md) — a common companion below the hero for feature grids.
-- [`<x-pn::tune-styles>`](./tune-styles.md) — controls `--space-section` / `--space-section-inner`, which drive the hero's vertical rhythm.
+- [`<x-pn::tune-styles>`](./tune-styles.md) — controls `--spacing-4xl` / `--spacing-2xl`, which drive the hero's vertical rhythm.
 
 ## Notes
 
 - The component is namespaced under the `section.` directory, so the fully-qualified tag is `<x-pn::section.hero>`. The plain `<x-section.hero>` form also works once `pinion-ui` is installed.
-- Vertical rhythm uses Tune CSS variables (`space-section`, `space-section-inner`, `gap-element`, `gap-compact`). Switching `data-tune` automatically reflows the hero — no prop changes needed.
+- Vertical rhythm uses tune-reactive t-shirt spacing utilities (`py-4xl`, `gap-2xl`, `gap-lg`, `gap-sm`). Switching `data-tune` automatically reflows the hero — no prop changes needed.
 - When both `image` and the `media` slot are set, the slot wins. Same rule for `title` ↔ `heading` slot, and `primaryAction`/`secondaryAction` ↔ `actions` slot.
 - The badge pill uses `bg-primary/10 text-primary` with the active tune's `--radius-selector`.

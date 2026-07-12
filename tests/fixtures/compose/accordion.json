@@ -7,7 +7,7 @@
             "header": "w-full flex items-center justify-between min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] py-0 font-medium text-base-content hover:bg-base-200/50 transition-colors cursor-pointer",
             "sizeClasses": "min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
             "icon": "w-4 h-4 shrink-0 transition-transform duration-200",
-            "content": "min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] py-[var(--space-compact)] text-base-content/70"
+            "content": "min-h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] py-sm text-base-content/70"
         }
     },
     {
@@ -16,7 +16,7 @@
         "expected": {
             "sizeClasses": "min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)]",
             "header": "w-full flex items-center justify-between min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)] py-0 font-medium text-base-content hover:bg-base-200/50 transition-colors cursor-pointer",
-            "content": "min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)] py-[var(--space-compact)] text-base-content/70"
+            "content": "min-h-[var(--h-field-sm)] px-[var(--px-field-sm)] text-[length:var(--text-field-sm)] py-sm text-base-content/70"
         }
     },
     {
@@ -25,7 +25,7 @@
         "expected": {
             "sizeClasses": "min-h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)]",
             "header": "w-full flex items-center justify-between min-h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)] py-0 font-medium text-base-content hover:bg-base-200/50 transition-colors cursor-pointer",
-            "content": "min-h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)] py-[var(--space-compact)] text-base-content/70"
+            "content": "min-h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)] py-sm text-base-content/70"
         }
     },
     {

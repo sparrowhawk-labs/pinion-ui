@@ -64,7 +64,7 @@ All other attributes pass through to the root `<div>`.
 
 ```blade
 <x-dropdown label="Filter" width="w-80">
-    <div class="p-element space-y-2">
+    <div class="p-lg space-y-2">
         <x-input label="Search" />
         <x-checkbox label="Active only" />
     </div>

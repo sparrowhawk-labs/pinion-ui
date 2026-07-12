@@ -120,7 +120,7 @@ Class strings are built by [`AccordionComposer::compose($props)`](../../src/Comp
 | `root` | Parent `<div>` — `w-full divide-y divide-base-300 radius-box tune-border border-base-300 overflow-hidden`. |
 | `header` | Child `<button>` — height/padding/text from `sizeClasses`, plus `flex items-center justify-between` and hover state. |
 | `icon` | The chevron `<svg>` — `w-4 h-4 shrink-0 transition-transform duration-200`. Rotates 180° when the item is open (driven by an Alpine `x-bind:class`). |
-| `content` | The expanded body wrapper — vertical padding via `--space-compact`, padding-x from `sizeClasses`. |
+| `content` | The expanded body wrapper — vertical padding via `--spacing-sm`, padding-x from `sizeClasses`. |
 | `sizeClasses` | The shared `min-h-*` / `px-*` / `text-*` triple. Exposed for downstream composition. |
 
 ## Related

@@ -9,7 +9,35 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [Unreleased]
 
+### Changed
+- **BREAKING: tune spacing utilities renamed to t-shirt sizes** — the magnitude-tier spacing
+  utilities (`gap-element`, `space-section`, `p-compact`, `space-y-text`, …) are removed and
+  replaced by tune-reactive `@theme --spacing-<size>` keys that generate the full Tailwind
+  spacing namespace (`p-md`, `px-sm`, `gap-lg`, `mt-2xl`, `space-y-xl`, …) for sizes
+  `3xs`–`7xl`. Public tokens renamed `--space-<tier>` → `--spacing-<size>`. Computed output is
+  unchanged for every mapped tier (golden-harness verified, diff=0). Migration map and details
+  in [`SEMVER.md`](./SEMVER.md). Nested `data-tune` scopes keep working — the spacing keys are
+  re-declared on `[data-tune]` so nested tunes recompute them.
+
+### Added
+- **`<x-terminal>`** — fake terminal window with a typewriter reveal, for demoing a CLI step
+  (`artisan tinker`, a seeder run, a build command, …) without recording a real terminal (which
+  steals window focus and is brittle to automate). Commands type character-by-character, output
+  lines appear instantly; default slot reveals on finish, plus a `terminal-done` event. Pure
+  Alpine, no opt-in JS install required. See [`reference/components/terminal.md`](./reference/components/terminal.md).
+
 ### Fixed
+- **t-shirt spacing keys no longer shadow Tailwind's container scale** — the `@theme
+  --spacing-<size>` keys share their names (`3xs`–`7xl`) with the default `--container-*` scale,
+  and the spacing namespace wins name resolution for the width-family utilities, so in host apps
+  `max-w-6xl` compiled to `max-width: var(--spacing-6xl)` (72rem → 8rem, tune-reactive) and broke
+  layouts (`w-<size>`, `min-w-<size>`, `basis-<size>` likewise). `tune.css` now ships a
+  container-scale compensation `@theme` block pinning the per-utility namespaces (`--width-*`,
+  `--min-width-*`, `--max-width-*`, `--flex-basis-*` — all of which outrank spacing) back to
+  `var(--container-<size>)`, restoring stock behaviour while keeping host `--container-*`
+  overrides working. Guarded by new golden-harness probes + a selfcheck container-scale gate;
+  existing golden surface unchanged (diff=0 over 25,410 values). Height/size-family t-shirt
+  leakage (`h-md`, `size-lg`, …) is additive-only in stock Tailwind and remains accepted.
 - **tune.css** — font deltas (`--td-font-heading/body/mono`) are now reset to the base stack
   on every `[data-tune]` subtree, like every other delta. Previously they fell through to the
   resolver's `var()` fallback, so a nested `[data-tune]` element (e.g. a `data-tune="default"`

@@ -7,7 +7,7 @@
 
    Token categories:
      Shape:   --radius-*, --border, --depth, --noise
-     Spacing: --space-*
+     Spacing: --spacing-*
      Font:    --font-heading, --font-body, --font-mono, --font-weight-heading
      Size:    --h-field-*, --px-field-*, --text-field-* (component heights/paddings)
    ======================================== */
@@ -51,7 +51,7 @@
    ============================================================================
 
    Three-tier custom-property system behind every UNCHANGED public token name
-   (--radius-box, --border, --space-*, --h-field-*, --shadow-box, …):
+   (--radius-box, --border, --spacing-*, --h-field-*, --shadow-box, …):
 
      --tb-{token}   BASE / zero-point      set once on :root, constant
      --td-{token}   signed DELTA           set per [data-tune="…"] — the tune's
@@ -96,6 +96,104 @@
    damped --shadow-k; hard-offset shadows (brutal/pixel) scale by full --tune-k.
    ============================================================================ */
 
+/* --- SPACING THEME KEYS (t-shirt) ---
+   Registering --spacing-<size> as theme keys makes Tailwind generate the full
+   spacing-namespace utility set for each bucket (p-md, px-lg, gap-sm, mt-2xl,
+   space-y-xl, …). The static values below are the tune-neutral bases — they
+   only apply where NO [data-tune] ancestor exists; inside a tuned subtree the
+   resolver block re-declares the same key with the tune-reactive calc (that
+   re-declaration is load-bearing for nested tunes — see design doc O1).
+   Size-utility leakage is accepted as harmless (O1) ONLY for the height/size
+   family (h-md, size-lg, …) — additive-only, no stock utility shadowed. The
+   width family is NOT harmless and is compensated below. */
+@theme {
+    --spacing-3xs: 0.125rem;
+    --spacing-2xs: 0.25rem;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+    --spacing-4xl: 5rem;
+    --spacing-5xl: 6rem;
+    --spacing-6xl: 8rem;
+    --spacing-7xl: 10rem;
+}
+
+/* --- CONTAINER-SCALE COMPENSATION (load-bearing — do not remove) ---
+   The t-shirt keys above share their names (3xs–7xl) with Tailwind's default
+   --container-* scale, and for the width-family utilities (w-<size>,
+   min-w-<size>, max-w-<size>, basis-<size>) the spacing namespace WINS name
+   resolution — re-declaring --container-* does NOT help (verified: spacing
+   outranks container regardless of declaration order). Without this block
+   `max-w-6xl` compiles to max-width: var(--spacing-6xl) = 8rem in every host
+   app — and tune-REACTIVE at that — a total layout break (hit sologentic in
+   production build, 2026-07-12). The per-utility namespaces below outrank
+   spacing, so pointing them back at the container scale restores stock
+   Tailwind behaviour; var(--container-<size>) (not literal rems) keeps host
+   --container-* overrides honoured — Tailwind emits the referenced
+   --container-* variables automatically. Guarded by the golden harness:
+   probes.mjs CONTAINER_GUARD + selfcheck.mjs container-scale gate. */
+@theme {
+    --width-3xs: var(--container-3xs);
+    --width-2xs: var(--container-2xs);
+    --width-xs: var(--container-xs);
+    --width-sm: var(--container-sm);
+    --width-md: var(--container-md);
+    --width-lg: var(--container-lg);
+    --width-xl: var(--container-xl);
+    --width-2xl: var(--container-2xl);
+    --width-3xl: var(--container-3xl);
+    --width-4xl: var(--container-4xl);
+    --width-5xl: var(--container-5xl);
+    --width-6xl: var(--container-6xl);
+    --width-7xl: var(--container-7xl);
+
+    --min-width-3xs: var(--container-3xs);
+    --min-width-2xs: var(--container-2xs);
+    --min-width-xs: var(--container-xs);
+    --min-width-sm: var(--container-sm);
+    --min-width-md: var(--container-md);
+    --min-width-lg: var(--container-lg);
+    --min-width-xl: var(--container-xl);
+    --min-width-2xl: var(--container-2xl);
+    --min-width-3xl: var(--container-3xl);
+    --min-width-4xl: var(--container-4xl);
+    --min-width-5xl: var(--container-5xl);
+    --min-width-6xl: var(--container-6xl);
+    --min-width-7xl: var(--container-7xl);
+
+    --max-width-3xs: var(--container-3xs);
+    --max-width-2xs: var(--container-2xs);
+    --max-width-xs: var(--container-xs);
+    --max-width-sm: var(--container-sm);
+    --max-width-md: var(--container-md);
+    --max-width-lg: var(--container-lg);
+    --max-width-xl: var(--container-xl);
+    --max-width-2xl: var(--container-2xl);
+    --max-width-3xl: var(--container-3xl);
+    --max-width-4xl: var(--container-4xl);
+    --max-width-5xl: var(--container-5xl);
+    --max-width-6xl: var(--container-6xl);
+    --max-width-7xl: var(--container-7xl);
+
+    --flex-basis-3xs: var(--container-3xs);
+    --flex-basis-2xs: var(--container-2xs);
+    --flex-basis-xs: var(--container-xs);
+    --flex-basis-sm: var(--container-sm);
+    --flex-basis-md: var(--container-md);
+    --flex-basis-lg: var(--container-lg);
+    --flex-basis-xl: var(--container-xl);
+    --flex-basis-2xl: var(--container-2xl);
+    --flex-basis-3xl: var(--container-3xl);
+    --flex-basis-4xl: var(--container-4xl);
+    --flex-basis-5xl: var(--container-5xl);
+    --flex-basis-6xl: var(--container-6xl);
+    --flex-basis-7xl: var(--container-7xl);
+}
+
 /* --- BASE zero-point (= the `default` tune, all deltas 0) --- */
 :root {
     /* Shape */
@@ -103,14 +201,23 @@
     --tb-radius-field: 0.375rem;      /* 6px — ⚠ SEMVER: v1 was 0.25rem */
     --tb-radius-selector: 1rem;
     --tb-border: 1px;
-    /* Spacing */
-    --tb-space-section: 5rem;
-    --tb-space-section-inner: 3rem;
-    --tb-space-element: 1.5rem;
-    --tb-space-compact: 0.75rem;
-    --tb-space-text: 1rem;
-    --tb-space-inline: 0.5rem;
-    --tb-space-micro: 0.25rem;   /* smallest tier — icon↔label, chip gaps, tight list rhythm */
+    /* Spacing — t-shirt ramp (v0.5 breaking rename; design:
+       docs/design/spacing-v0.5-tshirt.md). Buckets without a legacy tier
+       ship with zero per-tune delta — tunes can grow personalities for
+       them later, non-breaking. */
+    --tb-space-3xs: 0.125rem;  /* 2px — hairline tier */
+    --tb-space-2xs: 0.25rem;   /* was micro — icon↔label, chip gaps, tight list rhythm */
+    --tb-space-xs: 0.5rem;     /* was inline */
+    --tb-space-sm: 0.75rem;    /* was compact */
+    --tb-space-md: 1rem;       /* was text */
+    --tb-space-lg: 1.5rem;     /* was element */
+    --tb-space-xl: 2rem;
+    --tb-space-2xl: 3rem;      /* was section-inner */
+    --tb-space-3xl: 4rem;
+    --tb-space-4xl: 5rem;      /* was section */
+    --tb-space-5xl: 6rem;
+    --tb-space-6xl: 8rem;
+    --tb-space-7xl: 10rem;
     /* Typographic rhythm (NEW tokens) */
     --tb-tracking-heading: -0.01em;
     --tb-leading-body: 1.6;
@@ -174,13 +281,19 @@
     --td-radius-field: 0rem;
     --td-radius-selector: 0rem;
     --td-border: 0rem;
-    --td-space-section: 0rem;
-    --td-space-section-inner: 0rem;
-    --td-space-element: 0rem;
-    --td-space-compact: 0rem;
-    --td-space-text: 0rem;
-    --td-space-inline: 0rem;
-    --td-space-micro: 0rem;
+    --td-space-3xs: 0rem;
+    --td-space-2xs: 0rem;
+    --td-space-xs: 0rem;
+    --td-space-sm: 0rem;
+    --td-space-md: 0rem;
+    --td-space-lg: 0rem;
+    --td-space-xl: 0rem;
+    --td-space-2xl: 0rem;
+    --td-space-3xl: 0rem;
+    --td-space-4xl: 0rem;
+    --td-space-5xl: 0rem;
+    --td-space-6xl: 0rem;
+    --td-space-7xl: 0rem;
     --td-tracking-heading: 0rem;
     --td-leading-body: 0;
     --td-type-scale-ratio: 0;
@@ -232,31 +345,55 @@
         var(--ovr-border,
             calc(var(--tb-border) + var(--td-border) * var(--tune-k))));
 
-    /* ---- Spacing ---- */
-    --space-section: max(0px,
-        var(--ovr-space-section,
-            calc(var(--tb-space-section) + var(--td-space-section) * var(--tune-k))));
-    --space-section-inner: max(0px,
-        var(--ovr-space-section-inner,
-            calc(var(--tb-space-section-inner) + var(--td-space-section-inner) * var(--tune-k))));
-    --space-element: max(0px,
-        var(--ovr-space-element,
-            calc(var(--tb-space-element) + var(--td-space-element) * var(--tune-k))));
-    --space-text: max(0px,
-        var(--ovr-space-text,
-            calc(var(--tb-space-text) + var(--td-space-text) * var(--tune-k))));
-    /* F8: WCAG 2.5.8 spacing exception — inline/compact floored at 8px. */
-    --space-compact: max(8px,
-        var(--ovr-space-compact,
-            calc(var(--tb-space-compact) + var(--td-space-compact) * var(--tune-k))));
-    --space-inline: max(8px,
-        var(--ovr-space-inline,
-            calc(var(--tb-space-inline) + var(--td-space-inline) * var(--tune-k))));
-    /* micro = the sub-inline tier (icon↔label, chip gaps). Floored at 2px so a
+    /* ---- Spacing (t-shirt) ----
+       Public key = --spacing-<size>, the SAME key Tailwind's spacing-namespace
+       utilities (p-md / gap-lg / space-y-xl / mt-2xl …) read. The @theme block
+       (top of file) makes Tailwind GENERATE those utilities and provides a
+       static no-tune fallback; re-declaring the key here is what makes nested
+       [data-tune] scopes recompute it (custom-property substitution happens at
+       the declaring element — verified 2026-07-12, see design doc O1). */
+    --spacing-3xs: max(0px,
+        var(--ovr-space-3xs,
+            calc(var(--tb-space-3xs) + var(--td-space-3xs) * var(--tune-k))));
+    /* 2xs = the sub-xs tier (icon↔label, chip gaps). Floored at 2px so a
        tight tune can pull truly close without a "touching" collapse. */
-    --space-micro: max(2px,
-        var(--ovr-space-micro,
-            calc(var(--tb-space-micro) + var(--td-space-micro) * var(--tune-k))));
+    --spacing-2xs: max(2px,
+        var(--ovr-space-2xs,
+            calc(var(--tb-space-2xs) + var(--td-space-2xs) * var(--tune-k))));
+    /* F8: WCAG 2.5.8 spacing exception — xs/sm floored at 8px. */
+    --spacing-xs: max(8px,
+        var(--ovr-space-xs,
+            calc(var(--tb-space-xs) + var(--td-space-xs) * var(--tune-k))));
+    --spacing-sm: max(8px,
+        var(--ovr-space-sm,
+            calc(var(--tb-space-sm) + var(--td-space-sm) * var(--tune-k))));
+    --spacing-md: max(0px,
+        var(--ovr-space-md,
+            calc(var(--tb-space-md) + var(--td-space-md) * var(--tune-k))));
+    --spacing-lg: max(0px,
+        var(--ovr-space-lg,
+            calc(var(--tb-space-lg) + var(--td-space-lg) * var(--tune-k))));
+    --spacing-xl: max(0px,
+        var(--ovr-space-xl,
+            calc(var(--tb-space-xl) + var(--td-space-xl) * var(--tune-k))));
+    --spacing-2xl: max(0px,
+        var(--ovr-space-2xl,
+            calc(var(--tb-space-2xl) + var(--td-space-2xl) * var(--tune-k))));
+    --spacing-3xl: max(0px,
+        var(--ovr-space-3xl,
+            calc(var(--tb-space-3xl) + var(--td-space-3xl) * var(--tune-k))));
+    --spacing-4xl: max(0px,
+        var(--ovr-space-4xl,
+            calc(var(--tb-space-4xl) + var(--td-space-4xl) * var(--tune-k))));
+    --spacing-5xl: max(0px,
+        var(--ovr-space-5xl,
+            calc(var(--tb-space-5xl) + var(--td-space-5xl) * var(--tune-k))));
+    --spacing-6xl: max(0px,
+        var(--ovr-space-6xl,
+            calc(var(--tb-space-6xl) + var(--td-space-6xl) * var(--tune-k))));
+    --spacing-7xl: max(0px,
+        var(--ovr-space-7xl,
+            calc(var(--tb-space-7xl) + var(--td-space-7xl) * var(--tune-k))));
 
     /* ---- Typographic rhythm ---- */
     /* F6: tracking clamp. */
@@ -382,20 +519,20 @@
     --td-sh1-blur: 2px;
 }
 
-/* micro-tier (--space-micro) per-tune deltas — kept together because they are
+/* micro-tier (--spacing-2xs) per-tune deltas — kept together because they are
    small and near-uniform: airy tunes loosen the tiniest gaps a touch, tight
    tunes pull them closer. Scaled by --tune-k like every other delta, so the
    micro response also strengthens at higher data-tune-strength. Listed here as
    one block (not scattered) since the tier is subtle and read as a set. */
-[data-tune="minimal"]   { --td-space-micro:  0.125rem; }
-[data-tune="soft"]      { --td-space-micro:  0.125rem; }
-[data-tune="editorial"] { --td-space-micro:  0.0625rem; }
-[data-tune="luxury"]    { --td-space-micro:  0.0625rem; }
-[data-tune="draft"]     { --td-space-micro:  0.0625rem; }
-[data-tune="sharp"]     { --td-space-micro: -0.0625rem; }
-[data-tune="corporate"] { --td-space-micro: -0.0625rem; }
-[data-tune="tech"]      { --td-space-micro: -0.0625rem; }
-[data-tune="brutal"]    { --td-space-micro: -0.0625rem; }
+[data-tune="minimal"]   { --td-space-2xs:  0.125rem; }
+[data-tune="soft"]      { --td-space-2xs:  0.125rem; }
+[data-tune="editorial"] { --td-space-2xs:  0.0625rem; }
+[data-tune="luxury"]    { --td-space-2xs:  0.0625rem; }
+[data-tune="draft"]     { --td-space-2xs:  0.0625rem; }
+[data-tune="sharp"]     { --td-space-2xs: -0.0625rem; }
+[data-tune="corporate"] { --td-space-2xs: -0.0625rem; }
+[data-tune="tech"]      { --td-space-2xs: -0.0625rem; }
+[data-tune="brutal"]    { --td-space-2xs: -0.0625rem; }
 
 /* minimal — quiet, airiest. radius down, lighter weight, roomy whitespace,
    no shadow (flat). base page scale nudged smaller (k-exempt). */
@@ -406,9 +543,9 @@
     --td-fwh: -100;                   /* → 500 */
     --td-tracking-heading: -0.01em;   /* → -0.02em */
     --td-leading-body: 0.05;          /* → 1.65 */
-    --td-space-section: 2rem;         /* → 7rem */
-    --td-space-section-inner: 1.5rem; /* → 4.5rem */
-    --td-space-element: 0.75rem;      /* → 2.25rem */
+    --td-space-4xl: 2rem;         /* → 7rem */
+    --td-space-2xl: 1.5rem; /* → 4.5rem */
+    --td-space-lg: 0.75rem;      /* → 2.25rem */
     --td-text-field-xs: -0.0625rem;
     --td-text-field-sm: -0.0625rem;
     --td-text-field-md: -0.0625rem;
@@ -426,8 +563,8 @@
     --td-radius-selector: -1rem;      /* → 0 */
     --td-tracking-heading: -0.01em;   /* → -0.02em */
     --td-fwh: -100;                   /* → 500 (review) */
-    --td-space-section: -1rem;        /* → 4rem */
-    --td-space-element: -0.25rem;     /* → 1.25rem */
+    --td-space-4xl: -1rem;        /* → 4rem */
+    --td-space-lg: -0.25rem;     /* → 1.25rem */
     --td-h-field-xs: -0.125rem;
     --td-h-field-sm: -0.125rem;
     --td-h-field-md: -0.125rem;
@@ -449,8 +586,8 @@
     --td-leading-body: -0.1;          /* → 1.5 */
     --td-type-scale-ratio: -0.05;     /* → 1.15 */
     --td-fwh: 0;                      /* → 600 (review: 300 read too light; MECE held via IBM Plex + density) */
-    --td-space-section: -1rem;        /* → 4rem */
-    --td-space-element: -0.375rem;    /* → 1.125rem — MECE separator */
+    --td-space-4xl: -1rem;        /* → 4rem */
+    --td-space-lg: -0.375rem;    /* → 1.125rem — MECE separator */
     --td-h-field-xs: -0.25rem;
     --td-h-field-sm: -0.25rem;
     --td-h-field-md: -0.25rem;        /* → 2.25rem */
@@ -474,11 +611,11 @@
     --td-radius-selector: -0.75rem;   /* → 0.25rem */
     --td-leading-body: -0.1;          /* → 1.5 */
     --td-fwh: -100;                   /* → 500 */
-    --td-space-section: -1rem;        /* → 4rem */
-    --td-space-element: -0.25rem;     /* → 1.25rem (review: tech slightly tighter than default; xl → tighter, xs → toward default) */
-    --td-space-compact: -0.25rem;     /* → 0.5rem */
-    --td-space-text: -0.125rem;       /* → 0.875rem */
-    --td-space-inline: -0.0625rem;    /* → 0.4375rem */
+    --td-space-4xl: -1rem;        /* → 4rem */
+    --td-space-lg: -0.25rem;     /* → 1.25rem (review: tech slightly tighter than default; xl → tighter, xs → toward default) */
+    --td-space-sm: -0.25rem;     /* → 0.5rem */
+    --td-space-md: -0.125rem;       /* → 0.875rem */
+    --td-space-xs: -0.0625rem;    /* → 0.4375rem */
     --td-h-field-xs: -0.25rem;
     --td-h-field-sm: -0.25rem;
     --td-h-field-md: -0.25rem;        /* → 2.25rem */
@@ -505,8 +642,8 @@
     --td-radius-selector: -1rem;      /* → 0 */
     --td-border: 1.5px;               /* → 2.5px */
     --td-fwh: 100;                    /* → 700 (identity) */
-    --td-space-section: -1rem;        /* → 4rem */
-    --td-space-section-inner: -1rem;  /* → 2rem */
+    --td-space-4xl: -1rem;        /* → 4rem */
+    --td-space-2xl: -1rem;  /* → 2rem */
     --td-h-field-sm: 0.125rem;
     --td-h-field-md: 0.125rem;
     --td-h-field-lg: 0.125rem;
@@ -526,8 +663,8 @@
     --td-tracking-heading: 0.01em;    /* → 0 */
     --td-leading-body: 0.1;           /* → 1.7 */
     --td-type-scale-ratio: 0.05;      /* → 1.25 */
-    --td-space-section: 1rem;         /* → 6rem */
-    --td-space-element: 0.5rem;       /* → 2rem */
+    --td-space-4xl: 1rem;         /* → 6rem */
+    --td-space-lg: 0.5rem;       /* → 2rem */
     --td-sh1-y: 1px;                  /* hairline */
     --td-sh1-blur: 2px;
     --td-font-heading: "Playfair Display", "Shippori Mincho", ui-serif, Georgia, serif;
@@ -542,8 +679,8 @@
     --td-tracking-heading: -0.005em;
     --td-leading-body: 0.05;          /* → 1.65 */
     --td-fwh: -300;                   /* → 300 */
-    --td-space-section: 1rem;         /* → 6rem */
-    --td-space-element: 0.5rem;       /* → 2rem */
+    --td-space-4xl: 1rem;         /* → 6rem */
+    --td-space-lg: 0.5rem;       /* → 2rem */
     /* soft shadow, blur driven by damped --shadow-k. */
     --shadow-box: var(--ovr-shadow-box,
         0 calc(2px * var(--shadow-k)) calc(10px * var(--shadow-k)) rgb(0 0 0 / 0.04));
@@ -563,8 +700,8 @@
     --td-radius-field: 0.5rem;        /* → 14px */
     --td-tracking-heading: 0.005em;
     --td-leading-body: 0.05;          /* → 1.65 */
-    --td-space-section: 1rem;         /* → 6rem */
-    --td-space-element: 0.5rem;       /* → 2rem */
+    --td-space-4xl: 1rem;         /* → 6rem */
+    --td-space-lg: 0.5rem;       /* → 2rem */
     --td-px-input-md: 0rem;              /* roomy already via base */
     /* layered soft-blur, both layers driven by damped --shadow-k. */
     --shadow-box: var(--ovr-shadow-box,
@@ -585,7 +722,7 @@
     --td-tracking-heading: 0.01em;    /* → 0 */
     --td-leading-body: 0.4;           /* → 2.0 */
     --td-fwh: -200;                   /* → 400 */
-    --td-space-section: -1rem;        /* → 4rem */
+    --td-space-4xl: -1rem;        /* → 4rem */
     --td-h-field-xs: 0.25rem;
     --td-h-field-sm: 0.25rem;
     --td-h-field-md: 0.25rem;
@@ -717,8 +854,8 @@
 [data-tune-radius="lg"]     { --ovr-radius-box: 1rem; --ovr-radius-field: 0.5rem; }
 [data-tune-radius="pill"]   { --ovr-radius-box: 1.5rem; --ovr-radius-field: 999px; --ovr-radius-selector: 999px; }
 
-[data-tune-density="compact"] { --ovr-space-section: 3.5rem; --ovr-space-element: 1rem; --ovr-space-compact: 0.5rem; }
-[data-tune-density="airy"]    { --ovr-space-section: 7rem; --ovr-space-element: 2.25rem; --ovr-space-compact: 1rem; }
+[data-tune-density="compact"] { --ovr-space-4xl: 3.5rem; --ovr-space-lg: 1rem; --ovr-space-sm: 0.5rem; }
+[data-tune-density="airy"]    { --ovr-space-4xl: 7rem; --ovr-space-lg: 2.25rem; --ovr-space-sm: 1rem; }
 
 /* --- draft: rough/hand-drawn ink ---
    Displace the edges of bordered surfaces so every line looks hand-drafted
@@ -863,7 +1000,7 @@
 
 @utility tune-accordion-body {
     padding-inline: var(--px-field-md);
-    padding-block: var(--space-compact);
+    padding-block: var(--spacing-sm);
     font-size: var(--text-field-md);
 }
 
@@ -891,118 +1028,12 @@
     font-size: var(--text-field-lg);
 }
 
-/* --- Spacing Utility Classes --- */
-
-@utility space-section {
-    padding-block: var(--space-section);
-}
-
-@utility space-section-inner {
-    padding: var(--space-section-inner);
-}
-
-@utility gap-section-inner {
-    gap: var(--space-section-inner);
-}
-
-@utility gap-element {
-    gap: var(--space-element);
-}
-
-@utility gap-compact {
-    gap: var(--space-compact);
-}
-
-@utility gap-text {
-    gap: var(--space-text);
-}
-
-@utility gap-inline {
-    gap: var(--space-inline);
-}
-
-@utility gap-micro {
-    gap: var(--space-micro);
-}
-
-@utility space-x-inline {
-    & > :not(:last-child) {
-        margin-inline-end: var(--space-inline);
-    }
-}
-
-@utility space-x-micro {
-    & > :not(:last-child) {
-        margin-inline-end: var(--space-micro);
-    }
-}
-
-/* Vertical tune-spacing stacks. Convention matches space-x-inline: margin on
-   the block-end of every child but the last. (space-y-element was referenced
-   by consumers before it existed — these close that gap.) */
-@utility space-y-micro {
-    & > :not(:last-child) {
-        margin-block-end: var(--space-micro);
-    }
-}
-
-@utility space-y-text {
-    & > :not(:last-child) {
-        margin-block-end: var(--space-text);
-    }
-}
-
-@utility space-y-compact {
-    & > :not(:last-child) {
-        margin-block-end: var(--space-compact);
-    }
-}
-
-@utility space-y-element {
-    & > :not(:last-child) {
-        margin-block-end: var(--space-element);
-    }
-}
-
-@utility mt-text {
-    margin-top: var(--space-text);
-}
-
-@utility mb-text {
-    margin-bottom: var(--space-text);
-}
-
-@utility mt-element {
-    margin-top: var(--space-element);
-}
-
-@utility mb-element {
-    margin-bottom: var(--space-element);
-}
-
-@utility mt-section-inner {
-    margin-top: var(--space-section-inner);
-}
-
-@utility mb-section-inner {
-    margin-bottom: var(--space-section-inner);
-}
-
-@utility p-element {
-    padding: var(--space-element);
-}
-
-@utility p-compact {
-    padding: var(--space-compact);
-}
-
-@utility px-compact {
-    padding-inline: var(--space-compact);
-}
-
-@utility py-compact {
-    padding-block: var(--space-compact);
-}
+/* --- Spacing utilities ---
+   Gone as of the v0.5 t-shirt rename: the spacing-namespace utilities
+   (p-md / px-sm / gap-lg / mt-2xl / space-y-xl / …) are now auto-generated by
+   Tailwind from the @theme --spacing-<size> keys at the top of this file.
+   Legacy tier utilities (gap-element, space-section, p-compact, …) were
+   removed — migration map in SEMVER.md. */
 
 /* --- Font Utility Classes --- */
 

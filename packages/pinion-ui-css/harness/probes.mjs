@@ -19,7 +19,7 @@
         probe that sets BOTH height and padding, that flips computed `height`.
         Forcing border-box inline (inline wins over everything) removes the
         confound — box-sizing is not a tune token, so neutralizing it is correct.
-     3. Probes consume the SHARED surface only: the 73 tune @utility classes and
+     3. Probes consume the SHARED surface only: the tune @utility classes, the theme-generated t-shirt spacing utilities, and
         the theme colors via `var(--color-*)`. NOT daisyUI component classes nor
         `bg-primary`-style utilities — those are OUT of the plain-dist scope and
         would make the candidate build unable to reproduce the reference.
@@ -71,7 +71,8 @@ const GAP = ['column-gap', 'row-gap'];
 const FSIZE = ['font-size'];
 
 /* =====================================================================
-   1) Tune @utility probes — all 73, each capturing only what it sets.
+   1) Tune utility probes — every tune @utility plus the theme-generated
+      t-shirt spacing utilities, each capturing only what it sets.
    ===================================================================== */
 
 /* --- Shape --- */
@@ -99,30 +100,39 @@ probe({ id: 'tune-card-pad', className: 'tune-card-pad', capture: PAD_ALL });
 probe({ id: 'tune-modal-body', className: 'tune-modal-body', capture: FSIZE });
 probe({ id: 'tune-modal-title', className: 'tune-modal-title', capture: FSIZE });
 
-/* --- Spacing --- */
-probe({ id: 'space-section', className: 'space-section', capture: PAD_BLOCK });
-probe({ id: 'space-section-inner', className: 'space-section-inner', capture: PAD_ALL });
-for (const u of ['gap-section-inner', 'gap-element', 'gap-compact', 'gap-text', 'gap-inline', 'gap-micro']) {
+/* --- Spacing (t-shirt — v0.5 rename, docs/design/spacing-v0.5-tshirt.md) ---
+   These are Tailwind spacing-namespace utilities generated from the @theme
+   --spacing-<size> keys in tune.css (NOT tune @utility definitions). The
+   probe set mirrors the pre-rename tiers 1:1 so the rename can be verified
+   as computed-identical (old golden ↔ new golden via the tier→t-shirt map),
+   plus one PAD_ALL probe per NEW bucket for dist-diff coverage. */
+probe({ id: 'py-4xl', className: 'py-4xl', capture: PAD_BLOCK });      /* was space-section */
+probe({ id: 'p-2xl', className: 'p-2xl', capture: PAD_ALL });          /* was space-section-inner */
+for (const u of ['gap-2xl', 'gap-lg', 'gap-sm', 'gap-md', 'gap-xs', 'gap-2xs']) {
   probe({ id: u, className: u, style: 'display:flex', capture: GAP });
 }
 /* descendant-combinator stacks: utility sets margin on every child but the last,
    so we give the probe 2 children and read the FIRST child's margin. */
-for (const u of ['space-x-inline', 'space-x-micro']) {
+for (const u of ['space-x-xs', 'space-x-2xs']) {
   probe({ id: u, className: u, capOn: 'firstChild', capture: ['margin-right'] });
 }
-for (const u of ['space-y-micro', 'space-y-text', 'space-y-compact', 'space-y-element']) {
+for (const u of ['space-y-2xs', 'space-y-md', 'space-y-sm', 'space-y-lg']) {
   probe({ id: u, className: u, capOn: 'firstChild', capture: ['margin-bottom'] });
 }
-probe({ id: 'mt-text', className: 'mt-text', capture: ['margin-top'] });
-probe({ id: 'mb-text', className: 'mb-text', capture: ['margin-bottom'] });
-probe({ id: 'mt-element', className: 'mt-element', capture: ['margin-top'] });
-probe({ id: 'mb-element', className: 'mb-element', capture: ['margin-bottom'] });
-probe({ id: 'mt-section-inner', className: 'mt-section-inner', capture: ['margin-top'] });
-probe({ id: 'mb-section-inner', className: 'mb-section-inner', capture: ['margin-bottom'] });
-probe({ id: 'p-element', className: 'p-element', capture: PAD_ALL });
-probe({ id: 'p-compact', className: 'p-compact', capture: PAD_ALL });
-probe({ id: 'px-compact', className: 'px-compact', capture: PAD_INLINE });
-probe({ id: 'py-compact', className: 'py-compact', capture: PAD_BLOCK });
+probe({ id: 'mt-md', className: 'mt-md', capture: ['margin-top'] });
+probe({ id: 'mb-md', className: 'mb-md', capture: ['margin-bottom'] });
+probe({ id: 'mt-lg', className: 'mt-lg', capture: ['margin-top'] });
+probe({ id: 'mb-lg', className: 'mb-lg', capture: ['margin-bottom'] });
+probe({ id: 'mt-2xl', className: 'mt-2xl', capture: ['margin-top'] });
+probe({ id: 'mb-2xl', className: 'mb-2xl', capture: ['margin-bottom'] });
+probe({ id: 'p-lg', className: 'p-lg', capture: PAD_ALL });            /* was p-element */
+probe({ id: 'p-sm', className: 'p-sm', capture: PAD_ALL });            /* was p-compact */
+probe({ id: 'px-sm', className: 'px-sm', capture: PAD_INLINE });
+probe({ id: 'py-sm', className: 'py-sm', capture: PAD_BLOCK });
+/* NEW buckets (no legacy counterpart — coverage for the v0.5 dist diff). */
+for (const u of ['p-3xs', 'p-2xs', 'p-xs', 'p-md', 'p-xl', 'p-3xl', 'p-4xl', 'p-5xl', 'p-6xl', 'p-7xl']) {
+  probe({ id: u, className: u, capture: PAD_ALL });
+}
 
 /* --- Font --- */
 probe({ id: 'font-heading', className: 'font-heading', capture: ['font-family'] });
@@ -166,6 +176,55 @@ probe({ id: 'leading-body', style: 'line-height:var(--leading-body)', capture: [
 /* type-scale-ratio is a unitless multiplier used inside calc()s; observe it by
    multiplying a known base so the resolved px reflects the token. */
 probe({ id: 'type-scale-ratio', style: 'font-size:calc(1rem * var(--type-scale-ratio))', capture: ['font-size'] });
+
+/* =====================================================================
+   [SPIKE S2 · docs/design/spacing-v0.5-tshirt.md] t-shirt spacing probes.
+   Prove the Tailwind-idiom t-shirt utilities (aliased to tune-reactive
+   tokens in reference.entry.css) still vary per tune. Additive — existing
+   probes are untouched, so a diff vs the pre-spike baseline over the old
+   probes must be 0. Replace when S3 renames spacing for real.
+   ===================================================================== */
+probe({ id: 'p-md', className: 'p-md', capture: PAD_ALL });
+probe({ id: 'p-lg', className: 'p-lg', capture: PAD_ALL });
+probe({ id: 'gap-lg', className: 'gap-lg', style: 'display:flex', capture: GAP });
+probe({ id: 'space-y-lg', className: 'space-y-lg', capOn: 'firstChild', capture: ['margin-bottom'] });
+
+/* =====================================================================
+   4) Host-app container-scale guard — the @theme --spacing-<size> keys
+      share their key names (3xs-7xl) with Tailwind's default --container-*
+      scale, and the spacing namespace WINS name resolution for the
+      width-family utilities (w-*, min-w-*, max-w-*, basis-*). Without the
+      per-utility compensation keys in tune.css these collapse to spacing
+      values in every host app (max-w-6xl: 72rem -> 8rem = layout break).
+      These probes pin the Tailwind default container values so any future
+      spacing-key change that re-shadows the scale fails the golden diff.
+      h-*, min-h-*, max-h-*, size-* have no container-named values in stock
+      Tailwind, so their t-shirt leakage stays additive-only (O1) and needs
+      no probe.
+      Expected values are rem-relative (some tunes scale the page font-size:
+      minimal .9375 / pixel 1.125), so each guarded size gets a CONTROL probe
+      carrying the literal container rem value inline; selfcheck.mjs asserts
+      utility === control per combo instead of hardcoded px. */
+export const CONTAINER_GUARD = [
+  { size: 'md', rem: '28rem' },  /* --container-md */
+  { size: '6xl', rem: '72rem' }, /* --container-6xl */
+];
+export const WIDTH_FAMILY = [
+  ['max-w', 'max-width'],
+  ['w', 'width'],
+  ['min-w', 'min-width'],
+  ['basis', 'flex-basis'],
+];
+for (const { size, rem } of CONTAINER_GUARD) {
+  probe({
+    id: `ctrl-container-${size}`,
+    style: `width:${rem};min-width:${rem};max-width:${rem};flex-basis:${rem}`,
+    capture: WIDTH_FAMILY.map(([, prop]) => prop),
+  });
+  for (const [prefix, prop] of WIDTH_FAMILY) {
+    probe({ id: `${prefix}-${size}`, className: `${prefix}-${size}`, capture: [prop] });
+  }
+}
 
 /* Every combination of theme × tune × strength the harness sweeps. */
 export function combos() {
