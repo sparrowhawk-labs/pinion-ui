@@ -1,6 +1,6 @@
 # x-kbd
 
-Keyboard-key display, renders semantic `<kbd>` with daisyUI's `kbd` styling. Five sizes and three appearances (`default` = daisyUI native; `soft` = neutral chip; `outline` = transparent with border). Often nested inside `<x-button>` slots or tooltips for shortcut hints.
+Keyboard-key display, renders semantic `<kbd>` styled with plain Tailwind (no daisyUI `kbd`/`kbd-*` classes — see project rule in CLAUDE.md invariant 6). Five sizes and three appearances (`default` = bordered "key cap" chrome; `soft` = neutral chip; `outline` = transparent with border). Often nested inside `<x-button>` slots or tooltips for shortcut hints.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/kbd.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/kbd.blade.php) — full variant matrix and live demos.
 
@@ -14,8 +14,8 @@ Keyboard-key display, renders semantic `<kbd>` with daisyUI's `kbd` styling. Fiv
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | daisyUI size modifier (`kbd-xs` … `kbd-xl`). `md` emits no size class (daisyUI default). |
-| `appearance` | `'default' \| 'soft' \| 'outline'` | `'default'` | Visual style. `default` = daisyUI's native styled key. `soft` = neutral tinted chip with no border. `outline` = transparent with a hairline border. |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Box size (height/min-width/font-size), reproducing daisyUI's former `kbd-xs` … `kbd-xl` steps as plain Tailwind scale classes (`h-4`…`h-8`). |
+| `appearance` | `'default' \| 'soft' \| 'outline'` | `'default'` | Visual style. `default` = bordered "key cap" chrome (`bg-base-200` + hairline border + thicker bottom border). `soft` = neutral tinted chip with no border. `outline` = transparent with a hairline border. |
 
 All other attributes pass through to the `<kbd>` element.
 
@@ -70,7 +70,7 @@ All other attributes pass through to the `<kbd>` element.
 
 ## Class composition
 
-See [`src/Compose/KbdComposer.php`](../../src/Compose/KbdComposer.php). Returns a single `root` class composed of `kbd` + size modifier + appearance overrides. `default` appearance contributes no extra classes — daisyUI's base `kbd` styling applies. Per `docs/daisyui/pages/kbd.md`, `md` is the implicit default so no `kbd-md` class is emitted.
+See [`src/Compose/KbdComposer.php`](../../src/Compose/KbdComposer.php). Returns a single `root` class composed of structural layout (`inline-flex items-center justify-center align-middle`, `rounded-[var(--radius-field)] px-[.5em]`) + a size step (height/min-width/font-size) + an appearance (background/border). No daisyUI `kbd`/`kbd-*` classes are used — the box shape reproduces daisyUI's former computed values (per `docs/daisyui/pages/daisyui-5-components__4.md` `kbd` entry and `demo/node_modules/daisyui/components/kbd.css`: `border-radius: var(--radius-field)`, height/min-width steps of `.25rem × {4,5,6,7,8}`, `padding-inline: .5em`, font-size steps `.625rem/.75rem/.875rem/1rem/1.125rem`) using plain Tailwind utilities.
 
 ## Related
 

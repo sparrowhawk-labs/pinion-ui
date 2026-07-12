@@ -84,7 +84,7 @@ Alpine.data('pinionCalendar', pinionCalendar);
 | `movableRows` | `bool` | `false` | Drag rows to reorder → fires `grid-rows-reordered`. *(S3b)* |
 | `movableColumns` | `bool` | `false` | Drag column headers to reorder → fires `grid-columns-reordered`. *(S3b)* |
 | `resizableColumns` | `bool` | `true` | Drag a header's right edge to resize → fires `grid-column-resized`. First resize freezes widths to `table-fixed`. *(S3d)* |
-| `contextMenu` | `bool` | `true` | Right-click a cell/header for a sheet menu: column-type conversion, copy/paste/clear, insert/delete row·column. Set `false` so a Livewire host owns structure. *(S3e)* |
+| `contextMenu` | `bool` | `true` | Right-click a cell/header for a sheet menu: column-type conversion, copy/paste/clear, insert/delete row·column. Set `false` so a Livewire host owns structure server-side — or keep it `true` and persist via `grid-columns-changed` (see Data contract). *(S3e)* |
 | `toolbar` | `bool` | `true` | Built-in top bar: a **toolbox** of icon-only ops + row count (+ `actions` slot + mobile help). |
 | `addRow` | `bool` | `true` | Show the built-in add-row icon button in the toolbox. *(inert at S0; dispatches to host in S1)* |
 | `addColumn` | `bool` | `true` | Show the built-in add-column icon button in the toolbox. *(inert at S0; dispatches to host in S1)* |
@@ -112,6 +112,8 @@ The sheet will flush its rows as a **JSON string** to the hidden `wire:model` ca
 ```
 
 **Bind it to a `string` property and `json_decode` it** — initial data goes IN via the `:rows` prop (a real PHP array): array in, JSON-string out. **Structural changes (add/remove rows/columns) are the host's job** (the host persists, then re-seeds by bumping the Livewire `:key`); the component never invents ids or schema. Drag-reorder dispatches bubbling `grid-rows-reordered` / `grid-columns-reordered` `CustomEvent`s carrying the new order — same names and `detail.order` shape as `<x-data-grid>`. Column resize dispatches `grid-column-resized` with `detail.{key, width}` (width is presentation-only — it is never written to the carrier, so a Livewire host can ignore it or persist it as it likes).
+
+**Column-schema changes dispatch `grid-columns-changed`** with `detail.columns` — the full ordered column spec array (`{key, title, type, options?, …}`, minus presentation `width`). It fires on any flush where the schema differs from the previous flush: context-menu insert/delete column, column-type conversion, the toolbar add-column button, drag reorder, and undo of any of those. The seed flush on mount only sets the baseline (no event on mount). This lets a Livewire host keep the standalone conveniences ON (`:context-menu="true"`, `:add-column="true"`) and still own persistence: listen for the event and save `detail.columns` wholesale; cell edits/coercions ride the normal rows carrier. Hosts that instead own structure server-side (own toolbox UI, re-seed via `:key`) keep gating with `:context-menu="false"` as before.
 
 ## Examples
 

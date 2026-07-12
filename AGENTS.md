@@ -70,6 +70,20 @@ Because the layers are orthogonal, every class string you author — a composer,
 
 **Rhythmic vs optical spacing.** The dividing line for spacing is *not* size — it is **purpose**, and the two scales make it self-documenting: **t-shirt = rhythmic** (tune-reactive), **numeric = optical** (fixed). *Rhythmic* spacing is the page's breathing: section padding (`py-4xl`), gaps between cards/sections (`gap-2xl`, `gap-lg`), heading→body margins (`mb-md`), list vertical rhythm (`space-y-md`), down to the smallest `gap-2xs` (icon↔label, chip gaps). Use t-shirt sizes so a tight tune (`corporate`, `tech`) reads denser and an airy one (`minimal`, `soft`) reads roomier — otherwise the page only morphs its shape/font and the spacing stays frozen. *Optical* spacing is a fixed nudge that aligns one element (a `mt-0.5` shift to sit an icon on the text baseline, a deliberate `gap-2` that must never breathe); a t-shirt value would morph it and misalign, so keep it numeric/arbitrary. This convention is **not** machine-enforced by `ui:lint` today (spacing is intentionally out of scope to avoid false positives) — it is an authoring guideline.
 
+**Which size at which structural level.** The t-shirt sizes form a ladder (`3xs` 2px < `2xs` 4px < `xs` 8px < `sm` 12px < `md` 16px < `lg` 24px < `xl` 32px < `2xl` 48px < `3xl` 64px < `4xl` 80px < `5xl`–`7xl` 96–160px, base values — all scale with tune strength). Pick the size by *what two things you're spacing apart*, not by eyeballing a pixel value:
+
+| Structural level | What it separates | Size to use |
+|---|---|---|
+| **Between page sections** | One `<section>`/major page block to the next (hero → features → footer) | `4xl` (`py-4xl` / `mt-4xl`) |
+| **Inside a section, between its sub-blocks** | A section's heading block → its content grid; a card's header → its body | `2xl` (`p-2xl` / `gap-2xl` / `mt-2xl`) |
+| **Between sibling elements/components** | Cards in a grid, stacked form fields, list items, rows in a stack | `lg` (`gap-lg` / `mt-lg` / `mb-lg` / `p-lg` / `space-y-lg`) |
+| **Within one component, between paragraphs/lines of running text** | Paragraph-to-paragraph inside a card body, label → helper text | `md` (`gap-md` / `mt-md` / `mb-md` / `space-y-md`) |
+| **Within one component, compact internal padding/gaps** | Dense table cells, a compact card's own padding, tightly-packed toolbar groups | `sm` (`gap-sm` / `p-sm` / `px-sm` / `py-sm` / `space-y-sm`) |
+| **Between small inline items on one line/row** | Icon + label, badge + adjacent text, breadcrumb segments | `xs` (`gap-xs` / `space-x-xs`) |
+| **Tightest — within a tiny cluster** | Icon↔label inside a button, chip-internal gaps, dense list bullets | `2xs` (`gap-2xs` / `space-x-2xs` / `space-y-2xs`) |
+
+When in doubt, pick the tier one level *tighter* than you'd guess — the tune's own strength setting (`data-tune-strength`) already amplifies the gap on airier tunes, so authoring at the "natural" density and letting the tune stretch it reads better than pre-inflating the choice.
+
 ### Enforcing the rule — `ui:lint` (universal) + automation adapters
 
 The rule is machine-checkable. **`php artisan ui:lint [paths…] [--json]`** is the **universal interface** — pure PHP (no Laravel needed at the core), exits non-zero on violations. It flags excluded daisyUI component classes, fixed/hex colors (ignore `data-theme`), and a root `<html>` missing **`data-theme` / `data-tune`** (the theme × tune cascade root). **Any** CLI agent (Claude Code, Cursor, aider, …), CI, or human runs the same command — so there is **no per-agent adapter to maintain**; agents that want feedback simply call `ui:lint --json` and read the result.

@@ -3,56 +3,74 @@
         "name": "default — horizontal, no color, center",
         "props": {},
         "expected": {
-            "root": "divider"
+            "root": "flex items-center w-full",
+            "lineStart": "flex-1 border-t border-base-content/10",
+            "lineEnd": "flex-1 border-t border-base-content/10",
+            "label": "px-3 text-xs font-medium shrink-0 text-base-content/60"
         }
     },
     {
-        "name": "direction=vertical — daisyUI divider-horizontal (in-flex vertical bar)",
+        "name": "direction=vertical — in-flex vertical bar",
         "props": { "direction": "vertical" },
         "expected": {
-            "root": "divider divider-horizontal"
+            "root": "flex flex-col items-center self-stretch",
+            "lineStart": "flex-1 border-l border-base-content/10",
+            "lineEnd": "flex-1 border-l border-base-content/10",
+            "label": "py-3 text-xs font-medium shrink-0 text-base-content/60"
         }
     },
     {
         "name": "color=primary",
         "props": { "color": "primary" },
         "expected": {
-            "root": "divider divider-primary"
+            "lineStart": "flex-1 border-t border-primary/30",
+            "lineEnd": "flex-1 border-t border-primary/30",
+            "label": "px-3 text-xs font-medium shrink-0 text-primary"
         }
     },
     {
         "name": "color=success + direction=vertical",
         "props": { "color": "success", "direction": "vertical" },
         "expected": {
-            "root": "divider divider-horizontal divider-success"
+            "root": "flex flex-col items-center self-stretch",
+            "lineStart": "flex-1 border-l border-success/30",
+            "lineEnd": "flex-1 border-l border-success/30",
+            "label": "py-3 text-xs font-medium shrink-0 text-success"
         }
     },
     {
         "name": "position=start",
         "props": { "position": "start" },
         "expected": {
-            "root": "divider divider-start"
+            "lineStart": "flex-none w-4 border-t border-base-content/10",
+            "lineEnd": "flex-1 border-t border-base-content/10"
         }
     },
     {
         "name": "position=end",
         "props": { "position": "end" },
         "expected": {
-            "root": "divider divider-end"
+            "lineStart": "flex-1 border-t border-base-content/10",
+            "lineEnd": "flex-none w-4 border-t border-base-content/10"
         }
     },
     {
         "name": "color=accent + position=start",
         "props": { "color": "accent", "position": "start" },
         "expected": {
-            "root": "divider divider-accent divider-start"
+            "lineStart": "flex-none w-4 border-t border-accent/30",
+            "lineEnd": "flex-1 border-t border-accent/30",
+            "label": "px-3 text-xs font-medium shrink-0 text-accent"
         }
     },
     {
         "name": "full combo — color=error + direction=vertical + position=end",
         "props": { "color": "error", "direction": "vertical", "position": "end" },
         "expected": {
-            "root": "divider divider-horizontal divider-error divider-end"
+            "root": "flex flex-col items-center self-stretch",
+            "lineStart": "flex-1 border-l border-error/30",
+            "lineEnd": "flex-none h-4 border-l border-error/30",
+            "label": "py-3 text-xs font-medium shrink-0 text-error"
         }
     }
 ]

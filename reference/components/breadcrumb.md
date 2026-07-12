@@ -1,6 +1,6 @@
 # x-breadcrumb
 
-Path-style navigation trail showing where the current page sits in the site hierarchy. Renders an array of `$items` as a daisyUI `breadcrumbs` list, or accepts a default slot for fully custom markup. Two separators (`chevron` default, `slash`) and three sizes.
+Path-style navigation trail showing where the current page sits in the site hierarchy. Renders an array of `$items` as a plain-Tailwind flex list (no daisyUI structural class), or accepts a default slot for fully custom markup. Two separators (`chevron` default, `slash`) and three sizes.
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/breadcrumb.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/breadcrumb.blade.php) — full variant matrix and live demos.
 
@@ -15,14 +15,14 @@ Path-style navigation trail showing where the current page sits in the site hier
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `items` | `array<array{label: string, url?: string}> \| null` | `null` | Items rendered in order. Each item with a `url` becomes an `<a>`; otherwise renders as a `<span>` (typical for the current page, last in the trail). When `null` the default slot is used instead. |
-| `separator` | `'chevron' \| 'slash'` | `'chevron'` | Separator between items. `chevron` is daisyUI's default rotated square; `slash` overrides the `::before` pseudo-element to render a literal `/` with relaxed opacity. |
+| `separator` | `'chevron' \| 'slash'` | `'chevron'` | Separator between items, drawn on each non-first `<li>`'s `::before` pseudo-element. `chevron` renders a literal `›`; `slash` renders a literal `/`. Both are muted via reduced opacity. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Adds `text-sm` / `text-lg` to the wrapper; `md` emits no size class (daisyUI default). |
 
 All other attributes pass through to the root `<div>`.
 
 ## Slots
 
-- **default** *(optional)* — fully custom `<li>` markup when `:items` is not supplied. The component still renders the outer `<div class="breadcrumbs">` + `<ul>`, so you only need the items.
+- **default** *(optional)* — fully custom `<li>` markup when `:items` is not supplied. The component still renders the outer scrollable `<div>` + flex `<ul>`, so you only need the items.
 
 ## Examples
 
@@ -64,7 +64,9 @@ All other attributes pass through to the root `<div>`.
 
 ## Class composition
 
-Class strings come from [`BreadcrumbComposer::compose($props)`](../../src/Compose/BreadcrumbComposer.php) — single key `root` joining `breadcrumbs` (daisyUI base), the size class, and the optional separator override. The slash variant uses a Tailwind arbitrary selector `[&_li+li]:before:content-['/']` plus several resets to neutralize daisyUI's default rotated-square separator.
+Class strings come from [`BreadcrumbComposer::compose($props)`](../../src/Compose/BreadcrumbComposer.php) — plain Tailwind, no daisyUI structural class (per the project rule that daisyUI classes are semantic-color-only). Two keys: `root` (on the outer `<div>`) joins `overflow-x-auto` with the optional size class; `list` (on the `<ul>`) joins `flex items-center flex-nowrap list-none` with the separator override. Both separators are Tailwind arbitrary selectors targeting `[&_li+li]:before:content-[...]` — `›` for chevron, `/` for slash — with `mx-2 opacity-40` for spacing/muting.
+
+`list` also carries `[&_li>a]:inline-flex [&_li>a]:items-center [&_li>a]:gap-1` (and the `span` equivalent) so any icon+label crumb built via the slot API stays on one line. This exists because Tailwind's preflight sets `svg { display: block }` — an `<x-i>` icon dropped into a plain (inline) `<a>`/`<span>` becomes a block-level child, which breaks the inline formatting context and forces the label text onto its own line. You don't need to add `inline-flex`/`gap` yourself when mixing `<x-i>` into a crumb's slot markup (see "Custom slot markup" below) — the component forces it on every `<li>`'s direct `<a>`/`<span>`, icon or not.
 
 ## Related
 
@@ -74,6 +76,5 @@ Class strings come from [`BreadcrumbComposer::compose($props)`](../../src/Compos
 ## Notes
 
 - The current (last) page should not have a `url` — render as plain `<span>` so it isn't a clickable link to itself.
-- The `breadcrumbs` daisyUI class provides built-in horizontal scrolling for very long trails on narrow viewports.
-- The `slash` separator deliberately resets `border-0 rotate-0 w-auto h-auto` because daisyUI's default `::before` renders a rotated, sized, bordered square — see `BreadcrumbComposer::separatorClass()`.
-- Per [`docs/daisyui/`](../../docs/daisyui/) the separator size lives on the `::before` pseudo-element; if you customize further, target `[&_li+li]:before:*` not the `<li>`.
+- `overflow-x-auto` on the root `<div>` gives built-in horizontal scrolling for very long trails on narrow viewports (this used to be a side effect of daisyUI's `breadcrumbs` class; it's now explicit Tailwind).
+- Both separators are drawn purely with Tailwind arbitrary variants — no daisyUI pseudo-element to reset. If you customize further, target `[&_li+li]:before:*` (on the `list` key), not the `<li>` itself — see `BreadcrumbComposer::separatorClass()`.
