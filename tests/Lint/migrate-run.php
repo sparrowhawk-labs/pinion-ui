@@ -13,6 +13,7 @@ declare(strict_types=1);
  * ignore-marked lines) and width-family utilities untouched.
  */
 
+require_once dirname(__DIR__, 2) . '/src/Linting/ClassSegments.php';
 require_once dirname(__DIR__, 2) . '/src/Linting/SpacingMigrator.php';
 
 use SparrowhawkLabs\PinionUi\Linting\SpacingMigrator;

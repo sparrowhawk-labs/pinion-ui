@@ -29,10 +29,9 @@ namespace SparrowhawkLabs\PinionUi\Linting;
  * above). Width-family utilities (w-* / max-w-* / basis-* / size-*) are out
  * of scope by the same prefix whitelist as the census.
  *
- * Deliberately PURE (no Laravel). Unlike the linter it needs precise byte
- * offsets for every class-string *and* every quoted literal inside dynamic
- * bindings, so it carries its own extraction (same patterns as
- * ClassVocabularyLinter::extractClassStrings, offset-preserving variant).
+ * Deliberately PURE (no Laravel). Rewriting needs precise byte offsets for
+ * every class-string *and* every quoted literal inside dynamic bindings —
+ * provided by the shared ClassSegments extractor.
  */
 final class SpacingMigrator
 {
@@ -72,7 +71,7 @@ final class SpacingMigrator
         // collect [contentOffset, content] edits, apply back-to-front
         $edits = [];
 
-        foreach ($this->extractSegments($source) as [$content, $offset]) {
+        foreach (ClassSegments::extract($source) as [$content, $offset]) {
             $line = substr_count($source, "\n", 0, min($offset, strlen($source))) + 1;
 
             $thisLine = $lines[$line - 1] ?? '';
@@ -192,40 +191,4 @@ final class SpacingMigrator
         return $bestDist <= log(self::MAX_RATIO) ? $best : [null, 0];
     }
 
-    /**
-     * Extract every class-string segment with a precise byte offset:
-     * static class="..."/'...' content, plus each quoted literal inside
-     * :class / x-bind:class expressions and @class([...]) arrays. Same
-     * patterns as ClassVocabularyLinter::extractClassStrings, but literals
-     * inside dynamic bindings get their own absolute offsets so they can be
-     * rewritten in place.
-     */
-    private function extractSegments(string $source): array
-    {
-        $out = [];
-
-        if (preg_match_all('/\bclass\s*=\s*(["\'])(.*?)\1/s', $source, $m, PREG_OFFSET_CAPTURE)) {
-            foreach ($m[2] as $cap) {
-                $out[] = [$cap[0], $cap[1]];
-            }
-        }
-
-        foreach (['/(?::class|x-bind:class)\s*=\s*"([^"]*)"/s', '/@class\s*\(\s*\[(.*?)\]\s*\)/s'] as $pattern) {
-            if (preg_match_all($pattern, $source, $m, PREG_OFFSET_CAPTURE)) {
-                foreach ($m[1] as $cap) {
-                    [$expr, $exprOffset] = $cap;
-                    if (preg_match_all('/"([^"]*)"|\'([^\']*)\'/', $expr, $lm, PREG_OFFSET_CAPTURE)) {
-                        foreach ($lm[1] as $j => $dq) {
-                            $lit = $dq[0] !== '' ? $dq : $lm[2][$j];
-                            if ($lit[0] !== '') {
-                                $out[] = [$lit[0], $exprOffset + $lit[1]];
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return $out;
-    }
 }

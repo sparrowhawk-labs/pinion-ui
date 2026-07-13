@@ -32,6 +32,17 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   are reported, not converted. Dry-run by default, `--write` applies, `--json` for automation;
   variants / `!` / negative margins are preserved, and `*-px` / `*-0` / arbitrary values /
   `pinion-lint-ignore`-marked lines / width-family utilities are never touched.
+- **`ui:eject`** — the reverse direction: freeze a theme × tune × strength rendering into
+  vanilla Tailwind classes (t-shirt spacing → numeric, `tune-btn-md` → `h-9 px-3.5 text-[14px]`,
+  `[var(--token)]` → measured px, `bg-primary` → hex with opacity modifiers preserved). Migrate
+  to adopt, eject to leave — no lock-in. Token values are browser-measured per combo into
+  `src/resources/eject-table.json` by the golden harness (`packages/pinion-ui-css/harness/
+  eject-table.mjs`) rather than re-deriving tune.css math in PHP. Per-tune fonts, unknown
+  `var(--…)` tokens and `<x-…>` component tags are reported for manual handling, not converted.
+- **Snapshot undo for the rewrite commands** — every `ui:spacing-migrate --write` /
+  `ui:eject --write` records the pre-rewrite files to `storage/pinion-ui/rewrites/<run>/`;
+  `--runs` lists history, `--undo [--run=<id>]` reverts. Restores are hash-guarded: a file
+  hand-edited since the rewrite is reported and left untouched, never silently clobbered.
 - **`<x-terminal>`** — fake terminal window with a typewriter reveal, for demoing a CLI step
   (`artisan tinker`, a seeder run, a build command, …) without recording a real terminal (which
   steals window focus and is brittle to automate). Commands type character-by-character, output

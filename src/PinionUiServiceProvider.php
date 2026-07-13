@@ -4,6 +4,7 @@ namespace SparrowhawkLabs\PinionUi;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use SparrowhawkLabs\PinionUi\Commands\UiEject;
 use SparrowhawkLabs\PinionUi\Commands\UiInstall;
 use SparrowhawkLabs\PinionUi\Commands\UiLint;
 use SparrowhawkLabs\PinionUi\Commands\UiSpacingMigrate;
@@ -27,6 +28,7 @@ class PinionUiServiceProvider extends ServiceProvider
         // Commands + config publishing
         if ($this->app->runningInConsole()) {
             $this->commands([
+                UiEject::class,
                 UiInstall::class,
                 UiLint::class,
                 UiSpacingMigrate::class,
