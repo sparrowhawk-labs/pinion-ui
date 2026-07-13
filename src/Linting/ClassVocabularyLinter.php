@@ -188,8 +188,9 @@ final class ClassVocabularyLinter
      * Pull every class string out of the source: static `class="..."`/`'...'`,
      * plus dynamic `:class` / `x-bind:class` / `@class([...])` (their quoted
      * literals and array keys). Returns [classString, byteOffset] pairs.
+     * Public so SpacingUsageScanner sees the exact same class strings.
      */
-    private function extractClassStrings(string $source): array
+    public function extractClassStrings(string $source): array
     {
         $out = [];
 

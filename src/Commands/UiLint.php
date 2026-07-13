@@ -4,6 +4,7 @@ namespace SparrowhawkLabs\PinionUi\Commands;
 
 use Illuminate\Console\Command;
 use SparrowhawkLabs\PinionUi\Linting\ClassVocabularyLinter;
+use SparrowhawkLabs\PinionUi\Linting\SpacingUsageScanner;
 
 /**
  * `php artisan ui:lint` — scan Blade files for class-vocabulary violations:
@@ -12,11 +13,17 @@ use SparrowhawkLabs\PinionUi\Linting\ClassVocabularyLinter;
  *
  * Exits non-zero when violations are found, so it can gate CI / pre-commit /
  * a Claude Code PostToolUse hook.
+ *
+ * `--spacing` appends an INFORMATIONAL census of spacing tokens (rhythmic
+ * t-shirt vs optical numeric/arbitrary — see SpacingUsageScanner). It never
+ * affects the exit code: rhythmic-vs-optical is designer intent, not a
+ * machine-checkable rule.
  */
 class UiLint extends Command
 {
     protected $signature = 'ui:lint
         {path?* : Files or directories to scan (default: resources/views)}
+        {--spacing : Append a non-gating spacing usage census (rhythmic t-shirt vs optical numeric)}
         {--json : Output machine-readable JSON}';
 
     protected $description = 'Lint Blade markup against the pinion-ui class-vocabulary rule';
@@ -44,14 +51,23 @@ class UiLint extends Command
             }
         }
 
+        $spacing = $this->option('spacing') ? $this->spacingCensus($files) : null;
+
         if ($this->option('json')) {
-            $this->line(json_encode(['violations' => $all, 'files' => count($files)], JSON_UNESCAPED_SLASHES));
+            $payload = ['violations' => $all, 'files' => count($files)];
+            if ($spacing !== null) {
+                $payload['spacing'] = $spacing;
+            }
+            $this->line(json_encode($payload, JSON_UNESCAPED_SLASHES));
 
             return empty($all) ? Command::SUCCESS : Command::FAILURE;
         }
 
         if (empty($all)) {
             $this->info("✓ pinion-ui class vocabulary: clean (" . count($files) . " files).");
+            if ($spacing !== null) {
+                $this->renderSpacing($spacing);
+            }
 
             return Command::SUCCESS;
         }
@@ -84,7 +100,69 @@ class UiLint extends Command
         $this->line('  Full rule: vendor/sparrowhawk-labs/pinion-ui/AGENTS.md -> "Class vocabulary".');
         $this->newLine();
 
+        if ($spacing !== null) {
+            $this->renderSpacing($spacing);
+        }
+
         return Command::FAILURE;
+    }
+
+    /**
+     * Count spacing tokens across the given files.
+     * Returns ['counts' => [kind => n], 'optical' => occurrence list].
+     */
+    private function spacingCensus(array $files): array
+    {
+        $scanner = new SpacingUsageScanner();
+        $counts = ['rhythmic' => 0, 'numeric' => 0, 'arbitrary' => 0];
+        $optical = [];
+        foreach ($files as $file) {
+            foreach ($scanner->scanFile($file) as $o) {
+                $counts[$o['kind']]++;
+                if ($o['kind'] !== 'rhythmic') {
+                    $optical[] = $o;
+                }
+            }
+        }
+
+        return ['counts' => $counts, 'optical' => $optical];
+    }
+
+    private function renderSpacing(array $spacing): void
+    {
+        $c = $spacing['counts'];
+        $total = array_sum($c);
+
+        $this->newLine();
+        $this->line('  spacing usage census <fg=gray>(informational — never fails the build)</>');
+        $this->line('  ─────────────────────────────────────');
+
+        if ($total === 0) {
+            $this->line('  <fg=gray>no spacing tokens found.</>');
+            $this->newLine();
+
+            return;
+        }
+
+        $pct = fn (int $n) => str_pad((string) round($n / $total * 100), 3, ' ', STR_PAD_LEFT) . '%';
+        $this->line("  rhythmic (t-shirt):   <fg=green>{$c['rhythmic']}</>  {$pct($c['rhythmic'])}");
+        $this->line("  optical  (numeric):   <fg=yellow>{$c['numeric']}</>  {$pct($c['numeric'])}");
+        $this->line("  optical  (arbitrary): <fg=yellow>{$c['arbitrary']}</>  {$pct($c['arbitrary'])}");
+
+        if (! empty($spacing['optical'])) {
+            $byFile = [];
+            foreach ($spacing['optical'] as $o) {
+                $byFile[$o['file']][] = "<fg=gray>L{$o['line']}</> {$o['token']}";
+            }
+            $this->newLine();
+            $this->line('  optical locations:');
+            foreach ($byFile as $file => $hits) {
+                $this->line('    <fg=cyan>' . $this->relative($file) . '</>  ' . implode('  ', $hits));
+            }
+        }
+
+        $this->line('  <fg=gray>Convention: t-shirt = rhythmic (tune-reactive), numeric = optical fixed nudge — AGENTS.md -> "Rhythmic vs optical spacing".</>');
+        $this->newLine();
     }
 
     /** @param string[] $paths */

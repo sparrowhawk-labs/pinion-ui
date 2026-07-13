@@ -20,6 +20,11 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   re-declared on `[data-tune]` so nested tunes recompute them.
 
 ### Added
+- **`ui:lint --spacing`** — a non-gating spacing usage census: counts rhythmic (t-shirt) vs
+  optical (numeric/arbitrary) spacing tokens and lists optical locations, so tune-reactivity
+  drift stays visible. Purely informational — never affects the exit code (`spacing` key in
+  `--json`). The rhythmic/optical convention itself stays an authoring guideline: it encodes
+  designer intent, which a token-level lint cannot judge without false-positive noise.
 - **`<x-terminal>`** — fake terminal window with a typewriter reveal, for demoing a CLI step
   (`artisan tinker`, a seeder run, a build command, …) without recording a real terminal (which
   steals window focus and is brittle to automate). Commands type character-by-character, output
