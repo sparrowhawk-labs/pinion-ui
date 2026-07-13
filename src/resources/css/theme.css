@@ -1,0 +1,107 @@
+/* ==========================================
+   pinion-ui theme definitions — SHARED SOURCE
+   ==========================================
+   The two shipped themes (`pinion` default + opt-in `reactive`) as daisyUI
+   theme blocks. Extracted from pinion-ui.css (v0.5.0, S5) so the SAME source
+   feeds both the Blade preset (via pinion-ui.css @import) and the standalone
+   @sparrowhawk-labs/pinion-ui-css dist build — one definition, no drift. */
+
+/* ==========================================
+   pinion theme (v0.4.0) — light only
+   ==========================================
+   Warm-cream surface + near-black ink + amber-550 accent + teal-petrol
+   secondary, inspired by beck-server. `pinion` is the default theme shipped
+   by this preset — consumers who do not set `data-theme` will get pinion
+   automatically. There is no bundled dark companion; consumers who want a
+   dark mode can pick any of daisyUI's standard dark themes (`dark`, `dim`,
+   `night`, `business`, …) via `<html data-theme="…">`.
+
+   Picked tones (decided in playground /theme-preview):
+     primary   = oklch(0.18 0.005 50)  near-black ink (50° warmth)
+     secondary = oklch(0.45 0.10 200)  teal-petrol
+     accent    = oklch(0.75 0.165 58)  amber-550 (#E58A0E, between 500/600)
+     base-100  = oklch(0.985 0.005 75) warm off-white cream
+
+   Tune tokens (--radius-*, --border, etc.) are intentionally NOT redefined
+   here — the tune.css cascade owns those. */
+@plugin 'daisyui/theme' {
+    name: 'pinion';
+    default: true;
+    color-scheme: 'light';
+    --color-base-100:          oklch(0.985 0.005 75);
+    --color-base-200:          oklch(0.965 0.005 75);
+    --color-base-300:          oklch(0.920 0.005 75);
+    --color-base-content:      oklch(0.180 0.005 50);
+    --color-primary:           oklch(0.180 0.005 50);
+    --color-primary-content:   oklch(0.985 0.005 75);
+    --color-secondary:         oklch(0.450 0.100 200);
+    --color-secondary-content: oklch(0.985 0.005 75);
+    --color-accent:            oklch(0.750 0.165 58);
+    --color-accent-content:    oklch(0.180 0.005 50);
+    --color-neutral:           oklch(0.300 0.005 50);
+    --color-neutral-content:   oklch(0.985 0.005 75);
+    --color-info:              oklch(0.680 0.100 235);
+    --color-info-content:      oklch(0.180 0.050 235);
+    --color-success:           oklch(0.680 0.120 145);
+    --color-success-content:   oklch(0.180 0.050 145);
+    --color-warning:           oklch(0.820 0.130 80);
+    --color-warning-content:   oklch(0.180 0.050 50);
+    --color-error:             oklch(0.600 0.180 25);
+    --color-error-content:     oklch(0.985 0.005 75);
+    --radius-selector: 0.5rem;
+    --radius-field:    0.375rem;
+    --radius-box:      0.5rem;
+    --size-selector:   0.25rem;
+    --size-field:      0.25rem;
+    --border:          1px;
+    --depth:           1;
+    --noise:           0;
+}
+
+/* ==========================================
+   reactive theme — light only, opt-in
+   ==========================================
+   GitHub-Light-adjacent "clean technical document" palette, ported from the
+   /visualize report tooling so HTML reports and pinion-ui apps can share one
+   color system. Pure white canvas, cool gray surfaces, the familiar
+   blue / green / purple semantic set.
+
+     primary   = #0969da  link blue (GitHub accent.fg)
+     secondary = #1f883d  CTA green (GitHub btn-primary)
+     accent    = #8250df  conclusion purple (GitHub done.fg)
+     base-100  = #ffffff  pure white canvas
+
+   Opt-in via <html data-theme="reactive">. `pinion` stays the default. */
+@plugin 'daisyui/theme' {
+    name: 'reactive';
+    default: false;
+    color-scheme: 'light';
+    --color-base-100:          #ffffff;
+    --color-base-200:          #f6f8fa;
+    --color-base-300:          #d0d7de;
+    --color-base-content:      #1f2328;
+    --color-primary:           #0969da;
+    --color-primary-content:   #ffffff;
+    --color-secondary:         #1f883d;
+    --color-secondary-content: #ffffff;
+    --color-accent:            #8250df;
+    --color-accent-content:    #ffffff;
+    --color-neutral:           #2d333b;
+    --color-neutral-content:   #ffffff;
+    --color-info:              #0969da;
+    --color-info-content:      #ffffff;
+    --color-success:           #1a7f37;
+    --color-success-content:   #ffffff;
+    --color-warning:           #9a6700;
+    --color-warning-content:   #ffffff;
+    --color-error:             #cf222e;
+    --color-error-content:     #ffffff;
+    --radius-selector: 0.375rem;
+    --radius-field:    0.375rem;
+    --radius-box:      0.5rem;
+    --size-selector:   0.25rem;
+    --size-field:      0.25rem;
+    --border:          1px;
+    --depth:           1;
+    --noise:           0;
+}

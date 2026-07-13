@@ -7,7 +7,7 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
-## [Unreleased]
+## [0.5.0] — 2026-07-13
 
 ### Changed
 - **BREAKING: tune spacing utilities renamed to t-shirt sizes** — the magnitude-tier spacing
@@ -78,6 +78,16 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   resolver's `var()` fallback, so a nested `[data-tune]` element (e.g. a `data-tune="default"`
   font preview inside a `data-tune="pixel"` page) inherited the ancestor tune's font delta and
   rendered in the wrong font. Html-level tunes are unaffected.
+
+### Internal
+- **`@sparrowhawk-labs/pinion-ui-css` Phase 1 shipped** (`packages/pinion-ui-css/dist/`) — the
+  standalone theme × tune CSS dist (no Tailwind preflight, no daisyUI built-in themes, no Blade
+  globs; self-hosted PixelMplus + opt-in `dist/fonts.css`). Golden-gated: 27,170 computed values
+  identical to the Blade reference build (110 combos × 122 probes), 91/91 tune utilities survive
+  purge. Not yet published to npm (org claim pending) — `npm run dist` rebuilds + re-gates.
+- **Theme definitions extracted to `src/resources/css/theme.css`** (pinion + reactive daisyUI
+  theme blocks), imported by both the Blade preset and the dist build so the two can't drift.
+  No-op for consumers (golden diff=0 over 27,170 values).
 
 ## [0.4.6] — 2026-07
 

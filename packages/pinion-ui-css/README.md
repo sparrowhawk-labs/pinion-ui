@@ -4,10 +4,18 @@ Standalone **theme × tune** CSS for pinion-ui: plain pre-compiled `dist/*.css` 
 React / Vue / Astro / vanilla consumers import with zero build tooling, generated
 from the SAME `src/resources/css/*` the Blade preset uses (so it can't drift).
 
-> **Status: Phase 0 only.** This directory currently holds just the *verification
-> harness* — the golden computed-style baseline + diff gate that every later phase
-> must pass. The shippable `dist/` does not exist yet (Phases 1–5). Design is LOCKED
-> in the repo `CLAUDE.md` ("v0.5.0 design — LOCKED 2026-06-25"); do not re-litigate.
+> **Status: Phase 1 SHIPPED (2026-07-13).** `dist/pinion-ui.css` exists and passes
+> the golden gate: **27,170 computed values (110 combos × 122 probes) identical**
+> to the Blade reference build, with 91/91 tune utilities surviving purge, both
+> theme blocks, self-hosted PixelMplus, no preflight, no daisyUI built-in themes.
+> Design is LOCKED in the repo `CLAUDE.md` ("v0.5.0 design — LOCKED 2026-06-25").
+>
+> - Rebuild + re-gate: `npm run dist` (after `npm run ref` if source CSS changed)
+> - `dist/fonts.css` = opt-in Google Fonts loader (core self-hosts only PixelMplus)
+> - `harness/eject-table.mjs` regenerates `src/resources/eject-table.json` for
+>   `ui:eject` — rerun whenever tune.css or theme colors change
+> - **npm publish is pending**: claim the `@sparrowhawk-labs` npm org, `npm login`,
+>   flip `"private": true` off, then `npm publish --access public`.
 
 ## The harness (Phase 0)
 

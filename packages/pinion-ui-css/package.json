@@ -1,9 +1,9 @@
 {
   "name": "@sparrowhawk-labs/pinion-ui-css",
-  "version": "0.5.0-dev.0",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
-  "description": "Standalone theme × tune CSS for pinion-ui (v0.5.0, in development). Phase 0 = golden computed-style harness proving plain-dist parity with the Blade build.",
+  "description": "Standalone theme × tune CSS for pinion-ui — plain pre-compiled dist consumed by React / Vue / Astro / vanilla with zero build tooling. Generated from the same source as the Blade preset; computed-style-identical (golden-harness verified).",
   "scripts": {
     "gen:fixture": "node harness/gen-fixture.mjs",
     "build:ref": "tailwindcss -i src/reference.entry.css -o build/reference.css",
@@ -11,12 +11,28 @@
     "capture": "node harness/capture.mjs",
     "diff": "node harness/diff.mjs",
     "selfcheck": "node harness/selfcheck.mjs",
-    "ref": "npm run gen:fixture && npm run build:ref && npm run verify && npm run capture && npm run selfcheck"
+    "ref": "npm run gen:fixture && npm run build:ref && npm run verify && npm run capture && npm run selfcheck",
+    "build:dist": "tailwindcss -i src/dist.entry.css -o dist/pinion-ui.css",
+    "gate:dist": "node harness/capture.mjs --css dist/pinion-ui.css --label dist --out harness/golden/dist.json && node harness/diff.mjs harness/golden/reference.json harness/golden/dist.json",
+    "eject-table": "node harness/eject-table.mjs",
+    "dist": "npm run build:dist && npm run gate:dist"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.1",
     "daisyui": "^5.5.23",
     "playwright": "^1.49.0",
     "tailwindcss": "^4.3.1"
-  }
+  },
+  "exports": {
+    ".": "./dist/pinion-ui.css",
+    "./pinion-ui.css": "./dist/pinion-ui.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./source": "./src/dist.entry.css"
+  },
+  "files": [
+    "dist",
+    "fonts",
+    "src/dist.entry.css",
+    "README.md"
+  ]
 }

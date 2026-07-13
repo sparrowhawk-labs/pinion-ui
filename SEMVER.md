@@ -52,7 +52,7 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
-### v0.5.0 (unreleased) — 2026-07
+### v0.5.0 — 2026-07
 
 - **Tune spacing utilities renamed from magnitude tiers to Tailwind-idiom t-shirt sizes.** The legacy tier utilities (`space-section`, `space-section-inner`, `gap-section-inner`, `gap-element`, `gap-compact`, `gap-text`, `gap-inline`, `gap-micro`, `space-x-inline`, `space-x-micro`, `space-y-{micro,text,compact,element}`, `mt/mb-{text,element,section-inner}`, `p-element`, `p-compact`, `px-compact`, `py-compact`) are **removed** — replaced by tune-reactive `@theme --spacing-<size>` keys, which generate the full Tailwind spacing namespace (`p-*`, `px/py-*`, `m/mt/mb-*`, `gap-*`, `space-x/y-*`, …) for sizes `3xs 2xs xs sm md lg xl 2xl 3xl 4xl 5xl 6xl 7xl`. The public spacing tokens renamed accordingly: `--space-{section,section-inner,element,compact,text,inline,micro}` → `--spacing-{4xl,2xl,lg,sm,md,xs,2xs}` (override keys `--ovr-space-<tier>` → `--ovr-space-<size>`). Computed values are unchanged for every mapped tier (verified by the golden computed-style harness: 4,620 spacing cells diff=0 across 2 themes × 11 tunes × 5 strengths).
 
