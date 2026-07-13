@@ -25,6 +25,13 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   drift stays visible. Purely informational — never affects the exit code (`spacing` key in
   `--json`). The rhythmic/optical convention itself stays an authoring guideline: it encodes
   designer intent, which a token-level lint cannot judge without false-positive noise.
+- **`ui:spacing-migrate`** — bulk-convert numeric spacing utilities to the nearest tune-reactive
+  t-shirt size (`p-4` → `p-md`, `py-10` → `py-2xl`), making an existing static-Tailwind page
+  respond to `data-tune`. Nearest is judged in log space (spacing perception is ratio-based —
+  `p-5` = 20px goes to `lg`, not `md`); values with no close t-shirt (>×1.5 off, e.g. `p-64`)
+  are reported, not converted. Dry-run by default, `--write` applies, `--json` for automation;
+  variants / `!` / negative margins are preserved, and `*-px` / `*-0` / arbitrary values /
+  `pinion-lint-ignore`-marked lines / width-family utilities are never touched.
 - **`<x-terminal>`** — fake terminal window with a typewriter reveal, for demoing a CLI step
   (`artisan tinker`, a seeder run, a build command, …) without recording a real terminal (which
   steals window focus and is brittle to automate). Commands type character-by-character, output

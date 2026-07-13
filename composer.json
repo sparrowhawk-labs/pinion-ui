@@ -34,11 +34,13 @@
         "test": [
             "@php tests/Compose/run.php",
             "@php tests/Lint/run.php",
-            "@php tests/Lint/spacing-run.php"
+            "@php tests/Lint/spacing-run.php",
+            "@php tests/Lint/migrate-run.php"
         ],
         "lint": [
             "@php tests/Lint/run.php",
-            "@php tests/Lint/spacing-run.php"
+            "@php tests/Lint/spacing-run.php",
+            "@php tests/Lint/migrate-run.php"
         ]
     },
     "extra": {

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use SparrowhawkLabs\PinionUi\Commands\UiInstall;
 use SparrowhawkLabs\PinionUi\Commands\UiLint;
+use SparrowhawkLabs\PinionUi\Commands\UiSpacingMigrate;
 
 class PinionUiServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,7 @@ class PinionUiServiceProvider extends ServiceProvider
             $this->commands([
                 UiInstall::class,
                 UiLint::class,
+                UiSpacingMigrate::class,
             ]);
 
             $this->publishes([
