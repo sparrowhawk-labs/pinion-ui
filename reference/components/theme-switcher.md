@@ -7,7 +7,7 @@ Click-to-cycle theme switcher. Toggles between an Alpine-tracked list of theme n
 ## When to use
 
 - Site headers and app shells that expose a light / dark (or n-way) theme toggle.
-- Any time the user should be able to cycle between a fixed set of daisyUI themes without a dropdown.
+- Any time the user should be able to cycle between a fixed set of shipped pinion-ui themes without a dropdown.
 - For a full theme **picker** (search, preview tiles), build a `<x-dropdown>` over the same `document.documentElement.setAttribute('data-theme', …)` call; this component is intentionally a single-button cycle.
 
 ## Props

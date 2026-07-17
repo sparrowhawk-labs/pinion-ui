@@ -50,7 +50,7 @@ All other attributes pass through to the root `<div>` (`id`, `wire:ignore`, etc.
         Only dynamic components need Alpine.
     </x-accordion-item>
     <x-accordion-item title="How do I theme it?">
-        Use daisyUI themes via <code>data-theme</code>.
+        Switch themes via <code>data-theme</code>.
     </x-accordion-item>
 </x-accordion>
 ```
