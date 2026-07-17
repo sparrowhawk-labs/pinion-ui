@@ -7,6 +7,15 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.6.1] — 2026-07-17
+
+### Changed
+- **Brand default `pinion` / `pinion-dark` recolored to the `reactive` palette family**
+  (GitHub-Primer-adjacent clean technical document: white canvas, ink text, link-blue /
+  green / purple semantics; Primer-Dark-adjacent dark pair). Same-day brand call on top
+  of v0.6.0. The verdigris palette survives as **`mood-verdigris` / `mood-verdigris-dark`**
+  — the lineup is now 37 themes (74 blocks). The opt-in `reactive` theme is unchanged.
+
 ## [0.6.0] — 2026-07-17
 
 ### Changed
@@ -274,6 +283,7 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 - **`pinion-dark` theme removed** — Pinion now ships only the `pinion` (light) theme.
   Consumers pick any daisyUI standard dark theme via `<html data-theme>`.
 
+[0.6.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.5.0...v0.6.0
 [0.4.4]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.3...v0.4.4
 [0.4.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.0...v0.4.1

@@ -12,8 +12,9 @@
    packages/pinion-ui-css/harness/gen-themes.mjs (npm run gen:themes).
 
    Naming: `<name>` = light · `<name>-dark` = dark. The brand default pair is
-   `pinion` / `pinion-dark` (same `pinion` name as v0.4.0–v0.5.x but an
-   entirely new verdigris palette — see SEMVER.md v0.6.0). `pinion` carries
+   `pinion` / `pinion-dark` — since v0.6.1 the reactive palette family
+   (GitHub-Primer-adjacent clean technical document; the v0.6.0 verdigris
+   palette lives on as mood-verdigris — see SEMVER.md). `pinion` carries
    `default: true`, so consumers who do not set `data-theme` get it at :root.
 
    Every generated block also sets `--root-bg` to the palette's page-canvas
@@ -76,39 +77,39 @@
 }
 
 /* ── BEGIN GENERATED THEME LINEUP — gen-themes.mjs (do not edit by hand) ── */
-/* 36 themes × light/dark = 72 blocks, generated from
+/* 37 themes × light/dark = 74 blocks, generated from
    src/resources/themes/lineup.json (locked 2026-07-17). Regenerate with
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
 
-/* pinion / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（light 既定） (Claude Verdigris) */
+/* pinion / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（クリーン技術文書調・白ベース） (Reactive family (GitHub-Light/Dark-adjacent, Primer-derived)) */
 
 @plugin 'daisyui/theme' {
     name:                      'pinion';
     default:                   true;
     prefersdark:               false;
     color-scheme:              'light';
-    --color-base-100:          #FFFFFF;
-    --color-base-200:          #F5F0E8;
-    --color-base-300:          #E3DED6;
-    --color-base-content:      #29261F;
-    --color-primary:           #0F766E;
-    --color-primary-content:   #FFFFFF;
-    --color-secondary:         #C05B2E;
-    --color-secondary-content: #FFFFFF;
-    --color-accent:            #A16207;
-    --color-accent-content:    #FFFFFF;
-    --color-neutral:           #434039;
-    --color-neutral-content:   #FFFFFF;
-    --color-info:              #488BC1;
-    --color-info-content:      #29261F;
-    --color-success:           #5F8F6B;
-    --color-success-content:   #29261F;
-    --color-warning:           #C3A345;
-    --color-warning-content:   #29261F;
-    --color-error:             #D04941;
-    --color-error-content:     #FFFFFF;
-    --root-bg:                 #F5F0E8;
+    --color-base-100:          #ffffff;
+    --color-base-200:          #f6f8fa;
+    --color-base-300:          #E3E5E7;
+    --color-base-content:      #1f2328;
+    --color-primary:           #0969da;
+    --color-primary-content:   #ffffff;
+    --color-secondary:         #1f883d;
+    --color-secondary-content: #ffffff;
+    --color-accent:            #8250df;
+    --color-accent-content:    #ffffff;
+    --color-neutral:           #3A3E43;
+    --color-neutral-content:   #ffffff;
+    --color-info:              #0969DA;
+    --color-info-content:      #ffffff;
+    --color-success:           #1A7F37;
+    --color-success-content:   #ffffff;
+    --color-warning:           #9A6700;
+    --color-warning-content:   #ffffff;
+    --color-error:             #CF222E;
+    --color-error-content:     #ffffff;
+    --root-bg:                 #f6f8fa;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -124,27 +125,27 @@
     default:                   false;
     prefersdark:               true;
     color-scheme:              'dark';
-    --color-base-100:          #2F2C28;
-    --color-base-200:          #262421;
-    --color-base-300:          #3E3C38;
-    --color-base-content:      #F0EAE0;
-    --color-primary:           #2DA88F;
-    --color-primary-content:   #262421;
-    --color-secondary:         #E07A4F;
-    --color-secondary-content: #262421;
-    --color-accent:            #D9A441;
-    --color-accent-content:    #262421;
-    --color-neutral:           #484540;
-    --color-neutral-content:   #F0EAE0;
-    --color-info:              #609CCF;
-    --color-info-content:      #262421;
-    --color-success:           #93B478;
-    --color-success-content:   #262421;
-    --color-warning:           #C8A957;
-    --color-warning-content:   #262421;
-    --color-error:             #D5635D;
-    --color-error-content:     #262421;
-    --root-bg:                 #262421;
+    --color-base-100:          #161b22;
+    --color-base-200:          #0d1117;
+    --color-base-300:          #252A31;
+    --color-base-content:      #e6edf3;
+    --color-primary:           #4493f8;
+    --color-primary-content:   #0d1117;
+    --color-secondary:         #3fb950;
+    --color-secondary-content: #0d1117;
+    --color-accent:            #a371f7;
+    --color-accent-content:    #0d1117;
+    --color-neutral:           #30353D;
+    --color-neutral-content:   #e6edf3;
+    --color-info:              #58A6FF;
+    --color-info-content:      #0d1117;
+    --color-success:           #3FB950;
+    --color-success-content:   #0d1117;
+    --color-warning:           #D29922;
+    --color-warning-content:   #0d1117;
+    --color-error:             #F85149;
+    --color-error-content:     #0d1117;
+    --root-bg:                 #0d1117;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2735,6 +2736,80 @@
     --color-error:             #D4625F;
     --color-error-content:     #241E2E;
     --root-bg:                 #241E2E;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-verdigris / mood-verdigris-dark — 美学系 (mood) · ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト (Claude Verdigris (旧ブランド既定 v0.6.0)) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-verdigris';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F5F0E8;
+    --color-base-300:          #E3DED6;
+    --color-base-content:      #29261F;
+    --color-primary:           #0F766E;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #C05B2E;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #A16207;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #434039;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488BC1;
+    --color-info-content:      #29261F;
+    --color-success:           #5F8F6B;
+    --color-success-content:   #29261F;
+    --color-warning:           #C3A345;
+    --color-warning-content:   #29261F;
+    --color-error:             #D04941;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F5F0E8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-verdigris-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #2F2C28;
+    --color-base-200:          #262421;
+    --color-base-300:          #3E3C38;
+    --color-base-content:      #F0EAE0;
+    --color-primary:           #2DA88F;
+    --color-primary-content:   #262421;
+    --color-secondary:         #E07A4F;
+    --color-secondary-content: #262421;
+    --color-accent:            #D9A441;
+    --color-accent-content:    #262421;
+    --color-neutral:           #484540;
+    --color-neutral-content:   #F0EAE0;
+    --color-info:              #609CCF;
+    --color-info-content:      #262421;
+    --color-success:           #93B478;
+    --color-success-content:   #262421;
+    --color-warning:           #C8A957;
+    --color-warning-content:   #262421;
+    --color-error:             #D5635D;
+    --color-error-content:     #262421;
+    --root-bg:                 #262421;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;

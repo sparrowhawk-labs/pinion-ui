@@ -107,7 +107,7 @@ pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled
 - **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`). The brand default pair alone is `pinion` / `pinion-dark` — there is **no bare `pinion`** (the old v0.4 `pinion` theme was removed in v0.6.0).
 - **Default**: `pinion` applies at `:root` automatically when no `data-theme` is set; if the OS prefers dark (`prefers-color-scheme: dark`), `pinion-dark` applies instead (it carries daisyUI's `prefersdark` flag). An explicit `data-theme` on any element always wins over both. To pin light regardless of OS setting, set `data-theme="pinion"` explicitly.
 - **Page canvas vs component face**: every theme paints the page background (`:root`) with its tinted canvas color and puts components on `base-100` (white in light themes) — do **not** hardcode a body background. `bg-base-200` equals the canvas color (recessed wells, hover); `border-base-300` is the matching border tone.
-- **`reactive`** — one extra opt-in, light-only theme (GitHub-Light-adjacent, for report tooling). Not part of the pairs.
+- **`reactive`** — one extra opt-in, light-only theme (GitHub-Light-adjacent, for report tooling). Not part of the pairs. As of v0.6.1 the brand default `pinion` shares this palette family, so `reactive` mostly matters for the report tooling that hardcodes its name.
 - **Switchers**: `<x-theme-switcher>` cycles `pinion` ↔ `pinion-dark` by default; `<x-theme-tune-switcher>` shows the whole grouped lineup with a light/dark mode toggle.
 
 ### Picking a theme (for AI agents scaffolding an app)
@@ -116,7 +116,7 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 
 | Theme (light / dark) | Group | Use when the app is… |
 |---|---|---|
-| `pinion` / `pinion-dark` | Brand | **The default — anything without a clearer match.** The pinion-ui face (verdigris + warm cream). |
+| `pinion` / `pinion-dark` | Brand | **The default — anything without a clearer match.** The pinion-ui face: clean white technical-document palette (GitHub-Primer-adjacent blue / green / purple; near-black ink). |
 | `mood-monokai` / `-dark` | Mood | Editor-like or developer-facing UI（エディタ系・開発者向け） |
 | `mood-synthwave` / `-dark` | Mood | Neon, gaming, events（ネオン・ゲーム・イベント） |
 | `mood-vapor` / `-dark` | Mood | Soft retro, Gen-Z products（ソフトなレトロ・Z世代向け） |
@@ -125,6 +125,7 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 | `mood-zen` / `-dark` | Mood | Wabi-sabi, craft, ryokan, minimalist taste（和風・工芸・旅館） |
 | `mood-botanical` / `-dark` | Mood | Flowers, gardening, organic, cosmetics（花・園芸・オーガニック・コスメ） |
 | `mood-pop` / `-dark` | Mood | Entertainment, youth, campaign LPs（エンタメ・若年層・キャンペーン LP） |
+| `mood-verdigris` / `-dark` | Mood | Warm ivory × retro teal-green; calm, warm products（ウォームアイボリー×レトログリーン。旧ブランド既定） |
 | `payments` / `-dark` | SaaS | Payments, fintech（決済・フィンテック） |
 | `docs` / `-dark` | SaaS | Documentation, knowledge base（ドキュメント・ナレッジベース） |
 | `mono` / `-dark` | SaaS | Minimal tools, portfolios（ミニマルツール・ポートフォリオ） |

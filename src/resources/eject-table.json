@@ -4,7 +4,7 @@
   "css": "build/reference.css",
   "tunes": 11,
   "strengths": 5,
-  "themes": 73,
+  "themes": 75,
   "tokens": 39,
   "colors": 20
  },
@@ -1072,7 +1072,7 @@
    "radius-box": 4.4,
    "radius-field": 3.3,
    "radius-selector": 8.8,
-   "shadow-box": "rgb(41, 38, 31) 1.8px 1.8px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 1.8px 1.8px 0px 0px",
    "shadow-field": "none"
   },
   "brutal|sm": {
@@ -1113,7 +1113,7 @@
    "radius-box": 2.4,
    "radius-field": 1.8,
    "radius-selector": 4.8,
-   "shadow-box": "rgb(41, 38, 31) 2.8px 2.8px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 2.8px 2.8px 0px 0px",
    "shadow-field": "none"
   },
   "brutal|md": {
@@ -1154,7 +1154,7 @@
    "radius-box": 0,
    "radius-field": 0,
    "radius-selector": 0,
-   "shadow-box": "rgb(41, 38, 31) 4px 4px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 4px 4px 0px 0px",
    "shadow-field": "none"
   },
   "brutal|lg": {
@@ -1195,7 +1195,7 @@
    "radius-box": 0,
    "radius-field": 0,
    "radius-selector": 0,
-   "shadow-box": "rgb(41, 38, 31) 5.8px 5.8px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 5.8px 5.8px 0px 0px",
    "shadow-field": "none"
   },
   "brutal|xl": {
@@ -1236,7 +1236,7 @@
    "radius-box": 0,
    "radius-field": 0,
    "radius-selector": 0,
-   "shadow-box": "rgb(41, 38, 31) 7.6px 7.6px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 7.6px 7.6px 0px 0px",
    "shadow-field": "none"
   },
   "editorial|xs": {
@@ -1892,7 +1892,7 @@
    "radius-box": 4.95,
    "radius-field": 3.7125,
    "radius-selector": 9.9,
-   "shadow-box": "rgb(41, 38, 31) 1.35px 1.35px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 1.35px 1.35px 0px 0px",
    "shadow-field": "none"
   },
   "pixel|sm": {
@@ -1933,7 +1933,7 @@
    "radius-box": 2.7,
    "radius-field": 2.025,
    "radius-selector": 5.4,
-   "shadow-box": "rgb(41, 38, 31) 2.1px 2.1px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 2.1px 2.1px 0px 0px",
    "shadow-field": "none"
   },
   "pixel|md": {
@@ -1974,7 +1974,7 @@
    "radius-box": 0,
    "radius-field": 0,
    "radius-selector": 0,
-   "shadow-box": "rgb(41, 38, 31) 3px 3px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 3px 3px 0px 0px",
    "shadow-field": "none"
   },
   "pixel|lg": {
@@ -2015,7 +2015,7 @@
    "radius-box": 0,
    "radius-field": 0,
    "radius-selector": 0,
-   "shadow-box": "rgb(41, 38, 31) 4.35px 4.35px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 4.35px 4.35px 0px 0px",
    "shadow-field": "none"
   },
   "pixel|xl": {
@@ -2056,7 +2056,7 @@
    "radius-box": 0,
    "radius-field": 0,
    "radius-selector": 0,
-   "shadow-box": "rgb(41, 38, 31) 5.7px 5.7px 0px 0px",
+   "shadow-box": "rgb(31, 35, 40) 5.7px 5.7px 0px 0px",
    "shadow-field": "none"
   },
   "draft|xs": {
@@ -2267,48 +2267,48 @@
  },
  "colors": {
   "pinion": {
-   "primary": "#0f766e",
+   "primary": "#0969da",
    "primary-content": "#ffffff",
-   "secondary": "#c05b2e",
+   "secondary": "#1f883d",
    "secondary-content": "#ffffff",
-   "accent": "#a16207",
+   "accent": "#8250df",
    "accent-content": "#ffffff",
-   "neutral": "#434039",
+   "neutral": "#3a3e43",
    "neutral-content": "#ffffff",
    "base-100": "#ffffff",
-   "base-200": "#f5f0e8",
-   "base-300": "#e3ded6",
-   "base-content": "#29261f",
-   "info": "#488bc1",
-   "info-content": "#29261f",
-   "success": "#5f8f6b",
-   "success-content": "#29261f",
-   "warning": "#c3a345",
-   "warning-content": "#29261f",
-   "error": "#d04941",
+   "base-200": "#f6f8fa",
+   "base-300": "#e3e5e7",
+   "base-content": "#1f2328",
+   "info": "#0969da",
+   "info-content": "#ffffff",
+   "success": "#1a7f37",
+   "success-content": "#ffffff",
+   "warning": "#9a6700",
+   "warning-content": "#ffffff",
+   "error": "#cf222e",
    "error-content": "#ffffff"
   },
   "pinion-dark": {
-   "primary": "#2da88f",
-   "primary-content": "#262421",
-   "secondary": "#e07a4f",
-   "secondary-content": "#262421",
-   "accent": "#d9a441",
-   "accent-content": "#262421",
-   "neutral": "#484540",
-   "neutral-content": "#f0eae0",
-   "base-100": "#2f2c28",
-   "base-200": "#262421",
-   "base-300": "#3e3c38",
-   "base-content": "#f0eae0",
-   "info": "#609ccf",
-   "info-content": "#262421",
-   "success": "#93b478",
-   "success-content": "#262421",
-   "warning": "#c8a957",
-   "warning-content": "#262421",
-   "error": "#d5635d",
-   "error-content": "#262421"
+   "primary": "#4493f8",
+   "primary-content": "#0d1117",
+   "secondary": "#3fb950",
+   "secondary-content": "#0d1117",
+   "accent": "#a371f7",
+   "accent-content": "#0d1117",
+   "neutral": "#30353d",
+   "neutral-content": "#e6edf3",
+   "base-100": "#161b22",
+   "base-200": "#0d1117",
+   "base-300": "#252a31",
+   "base-content": "#e6edf3",
+   "info": "#58a6ff",
+   "info-content": "#0d1117",
+   "success": "#3fb950",
+   "success-content": "#0d1117",
+   "warning": "#d29922",
+   "warning-content": "#0d1117",
+   "error": "#f85149",
+   "error-content": "#0d1117"
   },
   "mood-monokai": {
    "primary": "#e14775",
@@ -3849,6 +3849,50 @@
    "warning-content": "#241e2e",
    "error": "#d4625f",
    "error-content": "#241e2e"
+  },
+  "mood-verdigris": {
+   "primary": "#0f766e",
+   "primary-content": "#ffffff",
+   "secondary": "#c05b2e",
+   "secondary-content": "#ffffff",
+   "accent": "#a16207",
+   "accent-content": "#ffffff",
+   "neutral": "#434039",
+   "neutral-content": "#ffffff",
+   "base-100": "#ffffff",
+   "base-200": "#f5f0e8",
+   "base-300": "#e3ded6",
+   "base-content": "#29261f",
+   "info": "#488bc1",
+   "info-content": "#29261f",
+   "success": "#5f8f6b",
+   "success-content": "#29261f",
+   "warning": "#c3a345",
+   "warning-content": "#29261f",
+   "error": "#d04941",
+   "error-content": "#ffffff"
+  },
+  "mood-verdigris-dark": {
+   "primary": "#2da88f",
+   "primary-content": "#262421",
+   "secondary": "#e07a4f",
+   "secondary-content": "#262421",
+   "accent": "#d9a441",
+   "accent-content": "#262421",
+   "neutral": "#484540",
+   "neutral-content": "#f0eae0",
+   "base-100": "#2f2c28",
+   "base-200": "#262421",
+   "base-300": "#3e3c38",
+   "base-content": "#f0eae0",
+   "info": "#609ccf",
+   "info-content": "#262421",
+   "success": "#93b478",
+   "success-content": "#262421",
+   "warning": "#c8a957",
+   "warning-content": "#262421",
+   "error": "#d5635d",
+   "error-content": "#262421"
   },
   "reactive": {
    "primary": "#0969da",

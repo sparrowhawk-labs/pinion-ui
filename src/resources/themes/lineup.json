@@ -6,39 +6,44 @@
     "defaultMode": "light",
     "logoFinal": "docs/logo-candidates/round4/j2-v14-ivory-clay.png",
     "moodPrefix": "mood- = ジャンル非依存の美学系テーマ（2026-07-17 確定）。業種/用途テーマは裸名",
-    "finalizedAt": "2026-07-17 (balance 棚卸し + mood 追加まで反映・最終確定)"
+    "finalizedAt": "2026-07-17 (balance 棚卸し + mood 追加まで反映・最終確定)",
+    "brandPalette": "2026-07-17 (夕): ブランド既定 pinion のパレットを Verdigris → reactive 系（GitHub-Light/Dark 隣接・Primer 由来 MIT トークン）へ上書き（ユーザー確信案件）。旧 Verdigris は mood-verdigris として温存。reactive テーマ自体は /visualize 依存のため従来どおり別枠維持"
   },
   "themes": [
     {
       "name": "pinion",
-      "source": "Claude Verdigris",
+      "source": "Reactive family (GitHub-Light/Dark-adjacent, Primer-derived)",
       "category": "ブランド既定",
-      "llmTrigger": "迷ったらこれ。pinion-ui の顔（light 既定）",
+      "llmTrigger": "迷ったらこれ。pinion-ui の顔（クリーン技術文書調・白ベース）",
       "brandDefault": true,
       "light": {
-        "bg": "#F5F0E8",
-        "panel": "#FFFFFF",
-        "fg": "#29261F",
-        "muted": "#8C8474",
-        "primary": "#0F766E",
-        "secondary": "#C05B2E",
-        "accent": "#A16207",
+        "bg": "#f6f8fa",
+        "panel": "#ffffff",
+        "fg": "#1f2328",
+        "muted": "#59636e",
+        "primary": "#0969da",
+        "secondary": "#1f883d",
+        "accent": "#8250df",
         "extra": [
-          "#5F8F6B",
-          "#6B5CA5"
+          "#cf222e",
+          "#9a6700",
+          "#1a7f37",
+          "#0969da"
         ]
       },
       "dark": {
-        "bg": "#262421",
-        "panel": "#2F2C28",
-        "fg": "#F0EAE0",
-        "muted": "#9C927F",
-        "primary": "#2DA88F",
-        "secondary": "#E07A4F",
-        "accent": "#D9A441",
+        "bg": "#0d1117",
+        "panel": "#161b22",
+        "fg": "#e6edf3",
+        "muted": "#8d96a0",
+        "primary": "#4493f8",
+        "secondary": "#3fb950",
+        "accent": "#a371f7",
         "extra": [
-          "#93B478",
-          "#A28BE0"
+          "#f85149",
+          "#d29922",
+          "#3fb950",
+          "#58a6ff"
         ]
       }
     },
@@ -1200,6 +1205,39 @@
         "extra": [
           "#A78BFA",
           "#5FE8B0"
+        ]
+      }
+    },
+    {
+      "name": "mood-verdigris",
+      "source": "Claude Verdigris (旧ブランド既定 v0.6.0)",
+      "category": "美学系 (mood)",
+      "llmTrigger": "ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F5F0E8",
+        "panel": "#FFFFFF",
+        "fg": "#29261F",
+        "muted": "#8C8474",
+        "primary": "#0F766E",
+        "secondary": "#C05B2E",
+        "accent": "#A16207",
+        "extra": [
+          "#5F8F6B",
+          "#6B5CA5"
+        ]
+      },
+      "dark": {
+        "bg": "#262421",
+        "panel": "#2F2C28",
+        "fg": "#F0EAE0",
+        "muted": "#9C927F",
+        "primary": "#2DA88F",
+        "secondary": "#E07A4F",
+        "accent": "#D9A441",
+        "extra": [
+          "#93B478",
+          "#A28BE0"
         ]
       }
     }

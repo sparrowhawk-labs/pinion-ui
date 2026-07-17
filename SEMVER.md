@@ -52,6 +52,12 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.6.1 — 2026-07-17
+
+- **Brand default `pinion` palette replaced again — verdigris → the `reactive` family** (GitHub-Primer-adjacent "clean technical document": white canvas `#f6f8fa`/`#ffffff`, ink `#1f2328`, link-blue primary `#0969da`, green secondary `#1f883d`, purple accent `#8250df`; dark pair is Primer-Dark-adjacent `#0d1117`/`#161b22` with `#4493f8`/`#3fb950`/`#a371f7`). Same-day follow-up to v0.6.0 while nothing downstream had adopted the verdigris default; a deliberate brand call, not a regression fix. Layouts keep working — only colors change.
+- The verdigris palette is **preserved as `mood-verdigris` / `mood-verdigris-dark`** (aesthetic group), so nothing was lost from the lineup (now 37 themes / 74 blocks).
+- The opt-in `reactive` theme itself is unchanged (the /visualize report tooling hardcodes its name); `pinion` is generated from the lineup with the standard token derivation, so the two are near- but not byte-identical (`base-300`/`neutral` differ slightly).
+
 ### v0.6.0 — 2026-07-17
 
 - **daisyUI's 35 built-in themes are removed from the build** (`themes: false` in the preset). pinion-ui now ships **only original themes**: a 36-theme lineup × light/dark pairs (72 `[data-theme]` blocks, generated from `src/resources/themes/lineup.json`) plus the opt-in `reactive`. Any `data-theme` set to a daisyUI stock name renders unthemed (base tokens fall back to the `pinion` `:root` default colors but the attribute matches no block).
