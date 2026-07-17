@@ -1183,7 +1183,7 @@
   }
 }
 @layer base {
-  :where(:root),:root:has(input.theme-controller[value=pinion-light]:checked),[data-theme="pinion-light"] {
+  :where(:root),:root:has(input.theme-controller[value=pinion]:checked),[data-theme="pinion"] {
     color-scheme: light;
     --color-base-100: #FFFFFF;
     --color-base-200: #F5F0E8;

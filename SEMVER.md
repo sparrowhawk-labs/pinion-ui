@@ -54,16 +54,16 @@ A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defau
 
 ### v0.6.0 (unreleased) — 2026-07
 
-- **daisyUI's 35 built-in themes are removed from the build** (`themes: false` in the preset). pinion-ui now ships **only original themes**: a 36-theme lineup × light/dark pairs (72 `[data-theme]` blocks, generated from `src/resources/themes/lineup.json`) plus the opt-in `reactive`. Any `data-theme` set to a daisyUI stock name renders unthemed (base tokens fall back to the `pinion-light` `:root` default colors but the attribute matches no block).
+- **daisyUI's 35 built-in themes are removed from the build** (`themes: false` in the preset). pinion-ui now ships **only original themes**: a 36-theme lineup × light/dark pairs (72 `[data-theme]` blocks, generated from `src/resources/themes/lineup.json`) plus the opt-in `reactive`. Any `data-theme` set to a daisyUI stock name renders unthemed (base tokens fall back to the `pinion` `:root` default colors but the attribute matches no block).
 
-    Naming convention: `<name>` = light · `<name>-dark` = dark. Brand default pair: `pinion-light` / `pinion-dark` (`pinion-light` carries the daisyUI `default` flag → applies at `:root` with no attribute).
+    Naming convention: `<name>` = light · `<name>-dark` = dark. Brand default pair: `pinion` / `pinion-dark` (`pinion` carries the daisyUI `default` flag → applies at `:root` with no attribute).
 
     Migration (old → new), pick the nearest by intent:
 
     | You had | Move to |
     |---|---|
-    | `pinion` (v0.4.0 warm-cream brand theme — **removed**) | `pinion-light` (new verdigris brand light) |
-    | `light` / `cupcake` / `emerald` / `winter` / `nord` | `pinion-light`, `mono`, `docs`, or any lineup light |
+    | `pinion` (v0.4.0 warm-cream palette) | `pinion` (**same name, entirely new verdigris palette** — layouts keep working, colors change) |
+    | `light` / `cupcake` / `emerald` / `winter` / `nord` | `pinion`, `mono`, `docs`, or any lineup light |
     | `dark` / `dim` / `night` / `business` | `pinion-dark`, `mono-dark`, `devtool-dark`, or any lineup `-dark` |
     | `dracula` / `synthwave` / `cyberpunk` | `mood-monokai-dark` / `mood-synthwave-dark` / `mood-neotokyo-dark` |
     | `corporate` | `mood-bigblue` / `finance` |
@@ -72,7 +72,7 @@ A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defau
     | `coffee` / `luxury` / `black` | `atelier-dark` / `mono-dark` |
     | a hand-written `@plugin 'daisyui/theme'` block of your own | keep it — consumer theme blocks still work unchanged |
 
-    `ui:install` migrates `data-theme="pinion"` and `data-theme="light"` layouts to `pinion-light` (confirmation default *yes* for those two historical recommendations, *keep* for anything else). `<x-theme-switcher>`'s default cycle flipped `['light', 'dark']` → `['pinion-light', 'pinion-dark']`; `<x-theme-tune-switcher>`'s default list is now the grouped lineup (override with `:themes` for a flat list). `ui:eject --theme` default flipped `pinion` → `pinion-light`, and the eject table's color keys are the new theme ids.
+    `ui:install` migrates `data-theme="light"` layouts to `pinion` (confirmation default *yes* for that historical recommendation, *keep* for anything else); existing `data-theme="pinion"` layouts need no attribute change — the name is kept and only the palette changes. `<x-theme-switcher>`'s default cycle flipped `['light', 'dark']` → `['pinion', 'pinion-dark']`; `<x-theme-tune-switcher>`'s default list is now the grouped lineup (override with `:themes` for a flat list). `ui:eject --theme` default remains `pinion` (now resolving to the new verdigris palette), and the eject table's color keys are the new theme ids.
 
     Rationale: the lineup (each palette curated as a light/dark pair with per-app-domain triggers for LLM selection — see `AGENTS.md` → "Theme lineup & selection guide") replaces the generic daisyUI catalog as the product's color system. Design record: `docs/design/theme-lineup-v2-implementation.md` (internal).
 

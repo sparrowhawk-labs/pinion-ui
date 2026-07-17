@@ -1,5 +1,5 @@
 @props([
-    'themes' => ['pinion-light', 'pinion-dark'],
+    'themes' => ['pinion', 'pinion-dark'],
     'size' => 'md',
 ])
 

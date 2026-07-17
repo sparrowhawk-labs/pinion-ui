@@ -31,14 +31,15 @@ if (!function_exists('pn_theme_groups')) {
      * and returns:
      *
      *   [
-     *     'Brand'    => [['name' => 'pinion', 'light' => 'pinion-light', 'dark' => 'pinion-dark'], ...],
+     *     'Brand'    => [['name' => 'pinion', 'light' => 'pinion', 'dark' => 'pinion-dark'], ...],
      *     'Mood'     => [...],
      *     'SaaS'     => [...],
      *     'Industry' => [...],
      *   ]
      *
      * Naming convention: `<name>` = light, `<name>-dark` = dark; only the
-     * brand default uses `pinion-light` (there is no bare `pinion` theme).
+     * every theme follows `<name>` = light / `<name>-dark` = dark, including
+     * the brand default pair `pinion` / `pinion-dark`.
      * The opt-in `reactive` theme is NOT part of the lineup (hand-maintained,
      * light-only, for the /visualize report tooling) and is not returned.
      */
@@ -68,7 +69,7 @@ if (!function_exists('pn_theme_groups')) {
             $group = $categoryLabels[$theme['category']] ?? 'Industry';
             $groups[$group][] = [
                 'name' => $theme['name'],
-                'light' => $theme['name'] === 'pinion' ? 'pinion-light' : $theme['name'],
+                'light' => $theme['name'],
                 'dark' => $theme['name'] . '-dark',
             ];
         }

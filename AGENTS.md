@@ -50,7 +50,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 
 | Layer | Where it lives | Examples |
 |---|---|---|
-| **Theme** (color palette) | `<html data-theme="...">` | `pinion-light`, `pinion-dark`, `mood-monokai`, `payments-dark` (36 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
+| **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `mood-monokai`, `payments-dark` (36 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
 | **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft` (11 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
@@ -104,19 +104,19 @@ Suppress an intentional exception with a `pinion-lint-ignore` comment on the lin
 
 pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 36 themes, each a **light/dark pair**:
 
-- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`). The brand default pair alone is `pinion-light` / `pinion-dark` — there is **no bare `pinion`** (the old v0.4 `pinion` theme was removed in v0.6.0).
-- **Default**: `pinion-light` applies at `:root` automatically when no `data-theme` is set. Light is the default mode; dark is a deliberate opt-in (`<html data-theme="pinion-dark">` or a switcher). There is no automatic OS-dark switching.
+- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`). The brand default pair alone is `pinion` / `pinion-dark` — there is **no bare `pinion`** (the old v0.4 `pinion` theme was removed in v0.6.0).
+- **Default**: `pinion` applies at `:root` automatically when no `data-theme` is set. Light is the default mode; dark is a deliberate opt-in (`<html data-theme="pinion-dark">` or a switcher). There is no automatic OS-dark switching.
 - **Page canvas vs component face**: every theme paints the page background (`:root`) with its tinted canvas color and puts components on `base-100` (white in light themes) — do **not** hardcode a body background. `bg-base-200` equals the canvas color (recessed wells, hover); `border-base-300` is the matching border tone.
 - **`reactive`** — one extra opt-in, light-only theme (GitHub-Light-adjacent, for report tooling). Not part of the pairs.
-- **Switchers**: `<x-theme-switcher>` cycles `pinion-light` ↔ `pinion-dark` by default; `<x-theme-tune-switcher>` shows the whole grouped lineup with a light/dark mode toggle.
+- **Switchers**: `<x-theme-switcher>` cycles `pinion` ↔ `pinion-dark` by default; `<x-theme-tune-switcher>` shows the whole grouped lineup with a light/dark mode toggle.
 
 ### Picking a theme (for AI agents scaffolding an app)
 
-Match the app's domain/vibe against the trigger column; when nothing clearly matches, use `pinion-light`. Wire it as `<html data-theme="{theme}" data-tune="{tune}">` and offer dark mode with `{theme}-dark`.
+Match the app's domain/vibe against the trigger column; when nothing clearly matches, use `pinion`. Wire it as `<html data-theme="{theme}" data-tune="{tune}">` and offer dark mode with `{theme}-dark`.
 
 | Theme (light / dark) | Group | Use when the app is… |
 |---|---|---|
-| `pinion-light` / `pinion-dark` | Brand | **The default — anything without a clearer match.** The pinion-ui face (verdigris + warm cream). |
+| `pinion` / `pinion-dark` | Brand | **The default — anything without a clearer match.** The pinion-ui face (verdigris + warm cream). |
 | `mood-monokai` / `-dark` | Mood | Editor-like or developer-facing UI（エディタ系・開発者向け） |
 | `mood-synthwave` / `-dark` | Mood | Neon, gaming, events（ネオン・ゲーム・イベント） |
 | `mood-vapor` / `-dark` | Mood | Soft retro, Gen-Z products（ソフトなレトロ・Z世代向け） |

@@ -2266,7 +2266,7 @@
   }
  },
  "colors": {
-  "pinion-light": {
+  "pinion": {
    "primary": "#0f766e",
    "primary-content": "#ffffff",
    "secondary": "#c05b2e",

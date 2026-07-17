@@ -103,14 +103,14 @@ check($linter, 'ignore marker (same line)', '<button class="btn btn-primary">x</
 
 // ── data-theme × data-tune cascade root (<html>) ───────────────────────────
 check($linter, 'html missing both attrs', '<html lang="ja"><head></head><body></body></html>', ['data-theme', 'data-tune']);
-check($linter, 'html missing data-tune only', '<html lang="ja" data-theme="pinion-light"><body></body></html>', ['data-tune']);
+check($linter, 'html missing data-tune only', '<html lang="ja" data-theme="pinion"><body></body></html>', ['data-tune']);
 check($linter, 'html missing data-theme only', '<html data-tune="default"><body></body></html>', ['data-theme']);
-check($linter, 'html with both → clean', '<html lang="ja" data-theme="pinion-light" data-tune="default"><body></body></html>', []);
+check($linter, 'html with both → clean', '<html lang="ja" data-theme="pinion" data-tune="default"><body></body></html>', []);
 check($linter, 'non-layout file is unaffected', '<div class="flex p-4"><x-button>x</x-button></div>', []);
 check($linter, 'html ignore marker suppresses', '<html lang="ja"> {{-- pinion-lint-ignore --}}', []);
 // Blade expr with `->` (its `>`) in an <html> attr must NOT truncate the tag scan.
-check($linter, 'html Blade -> in attr, both present → clean', '<html lang="{{ app()->getLocale() }}" data-theme="pinion-light" data-tune="default"></html>', []);
-check($linter, 'html Blade -> in attr, missing tune', '<html lang="{{ app()->getLocale() }}" data-theme="pinion-light"></html>', ['data-tune']);
+check($linter, 'html Blade -> in attr, both present → clean', '<html lang="{{ app()->getLocale() }}" data-theme="pinion" data-tune="default"></html>', []);
+check($linter, 'html Blade -> in attr, missing tune', '<html lang="{{ app()->getLocale() }}" data-theme="pinion"></html>', ['data-tune']);
 
 echo "\n--- Lint linter: $pass pass, $fail fail ---\n";
 exit($fail > 0 ? 1 : 0);

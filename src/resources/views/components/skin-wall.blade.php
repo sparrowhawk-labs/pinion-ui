@@ -19,9 +19,9 @@
     // Curated tune × theme pairs from the v0.6.0 original lineup (daisyUI's
     // built-in themes no longer exist in the build — see theme.css).
     $combos = $combos ?: [
-        ['default','pinion-light'], ['brutal','mood-monokai-dark'], ['editorial','atelier'], ['tech','devtool-dark'],
+        ['default','pinion'], ['brutal','mood-monokai-dark'], ['editorial','atelier'], ['tech','devtool-dark'],
         ['soft','kids'], ['pixel','mood-pop'], ['corporate','mood-bigblue'], ['luxury','atelier-dark'],
-        ['minimal','mono'], ['sharp','mono-dark'], ['draft','pinion-light'], ['tech','mood-synthwave-dark'],
+        ['minimal','mono'], ['sharp','mono-dark'], ['draft','pinion'], ['tech','mood-synthwave-dark'],
         ['soft','mood-vapor'], ['editorial','pinion-dark'], ['brutal','mood-neotokyo-dark'], ['corporate','finance'],
         ['luxury','legal-dark'], ['minimal','wellness'], ['sharp','payments-dark'], ['pixel','mood-pop-dark'],
         ['default','travel'], ['editorial','media-dark'], ['soft','people'], ['tech','pinion-dark'],

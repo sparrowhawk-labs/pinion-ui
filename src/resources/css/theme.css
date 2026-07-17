@@ -12,8 +12,8 @@
    packages/pinion-ui-css/harness/gen-themes.mjs (npm run gen:themes).
 
    Naming: `<name>` = light · `<name>-dark` = dark. The brand default pair is
-   `pinion-light` / `pinion-dark` (the old warm-cream `pinion` theme shipped
-   in v0.4.0–v0.5.x is GONE — see SEMVER.md v0.6.0). `pinion-light` carries
+   `pinion` / `pinion-dark` (same `pinion` name as v0.4.0–v0.5.x but an
+   entirely new verdigris palette — see SEMVER.md v0.6.0). `pinion` carries
    `default: true`, so consumers who do not set `data-theme` get it at :root.
 
    Every generated block also sets `--root-bg` to the palette's page-canvas
@@ -40,7 +40,7 @@
      accent    = #8250df  conclusion purple (GitHub done.fg)
      base-100  = #ffffff  pure white canvas
 
-   Opt-in via <html data-theme="reactive">. `pinion-light` is the default. */
+   Opt-in via <html data-theme="reactive">. `pinion` is the default. */
 @plugin 'daisyui/theme' {
     name: 'reactive';
     default: false;
@@ -81,10 +81,10 @@
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
 
-/* pinion-light / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（light 既定） (Claude Verdigris) */
+/* pinion / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（light 既定） (Claude Verdigris) */
 
 @plugin 'daisyui/theme' {
-    name:                      'pinion-light';
+    name:                      'pinion';
     default:                   true;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;

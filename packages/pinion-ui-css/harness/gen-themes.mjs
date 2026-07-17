@@ -145,7 +145,7 @@ function statusColors(mode, palette) {
 
 /* ---------------- theme block ---------------- */
 function themeId(name, mode) {
-  const light = name === 'pinion' ? 'pinion-light' : name;
+  const light = name;
   return mode === 'light' ? light : `${name}-dark`;
 }
 

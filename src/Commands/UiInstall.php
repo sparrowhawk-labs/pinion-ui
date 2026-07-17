@@ -207,7 +207,7 @@ class UiInstall extends Command
         //     Composers build via interpolation (Tailwind JIT can't see
         //     through "bg-{$color}/10")
         //   • @import "./tune.css" for the data-tune token system
-        //   • the theme lineup (36 originals × light/dark, `pinion-light` default)
+        //   • the theme lineup (36 originals × light/dark, `pinion` default)
         // Skipping the preset = ~half the design system silently missing
         // from the bundle, which is what the v0.3.17 bug report uncovered.
         $presetImport = '@import "../../vendor/sparrowhawk-labs/pinion-ui/src/resources/css/pinion-ui.css";';
@@ -656,7 +656,7 @@ JS;
 
         if ($layoutPath === null) {
             $this->warn('  No standard layout found (looked for components/layouts/app, layouts/app, app).');
-            $this->line('    Manually add data-theme="pinion-light" data-tune="default" to your <html> tag.');
+            $this->line('    Manually add data-theme="pinion" data-tune="default" to your <html> tag.');
             return;
         }
 
@@ -678,33 +678,33 @@ JS;
         $attrs = $matches[1];
 
         // Three cases:
-        //   1. data-theme="pinion-light"  → idempotent no-op
+        //   1. data-theme="pinion"  → idempotent no-op
+        //      (the name survives v0.6.0 — only the palette behind it changed)
         //   2. data-theme="something-else" → migrate with confirmation
-        //      (v0.6.0 ships pinion-light as the brand default; the old
-        //       `pinion` theme and daisyUI's built-in themes no longer
-        //       exist in the build, so `pinion` and `light` — the two past
-        //       ui:install recommendations — default to migrate; any other
-        //       value is a deliberate choice and defaults to keep)
-        //   3. no data-theme              → append data-theme="pinion-light"
+        //      (daisyUI's built-in themes no longer exist in the build, so
+        //       `light` — the past ui:install recommendation — defaults to
+        //       migrate; any other value is a deliberate choice and
+        //       defaults to keep)
+        //   3. no data-theme              → append data-theme="pinion"
         //      (+ data-tune="default" if missing too)
-        if (preg_match('/data-theme\s*=\s*["\']pinion-light["\']/', $attrs)) {
-            $this->line("    - {$relative}: <html data-theme=\"pinion-light\"> already present");
+        if (preg_match('/data-theme\s*=\s*["\']pinion["\']/', $attrs)) {
+            $this->line("    - {$relative}: <html data-theme=\"pinion\"> already present");
             return;
         }
 
         if (preg_match('/data-theme\s*=\s*["\']([^"\']+)["\']/', $attrs, $themeMatch)) {
             $currentTheme = $themeMatch[1];
             // Default to migrating only from the past ui:install
-            // recommendations: "light" (pre-v0.4.0) and "pinion" (v0.4.0—
-            // v0.5.x, REMOVED in v0.6.0 — keeping it would render unstyled).
-            // Any other value — the host's own custom theme — is a
-            // deliberate choice, so the default is "keep". confirm() returns
-            // the default when the command runs non-interactively, which is
-            // what used to silently stomp custom themes on every re-run
-            // (v0.4.2 regression, found via NADI).
+            // recommendation "light" (pre-v0.4.0; a daisyUI stock name that
+            // no longer exists in the build — keeping it would render
+            // unthemed). Any other value — the host's own custom theme — is
+            // a deliberate choice, so the default is "keep". confirm()
+            // returns the default when the command runs non-interactively,
+            // which is what used to silently stomp custom themes on every
+            // re-run (v0.4.2 regression, found via NADI).
             $migrate = $this->confirm(
-                "  {$relative} has data-theme=\"{$currentTheme}\". Switch to \"pinion-light\" (v0.6.0 brand default)?",
-                in_array($currentTheme, ['light', 'pinion'], true)
+                "  {$relative} has data-theme=\"{$currentTheme}\". Switch to \"pinion\" (v0.6.0 brand default)?",
+                $currentTheme === 'light'
             );
             if (!$migrate) {
                 $this->line("    - {$relative}: kept data-theme=\"{$currentTheme}\"");
@@ -712,28 +712,28 @@ JS;
             }
             $newAttrs = preg_replace(
                 '/data-theme\s*=\s*["\'][^"\']*["\']/',
-                'data-theme="pinion-light"',
+                'data-theme="pinion"',
                 $attrs,
                 1
             );
             $newTag = '<html' . $newAttrs . '>';
             $content = preg_replace($htmlPattern, $newTag, $content, 1);
             File::put($layoutPath, $content);
-            $this->info("  ✓ {$relative}: data-theme=\"{$currentTheme}\" → \"pinion-light\"");
+            $this->info("  ✓ {$relative}: data-theme=\"{$currentTheme}\" → \"pinion\"");
             return;
         }
 
         // No data-theme — append. Also append data-tune="default" if it's
         // missing, since the tune system is part of the bundle and a blank
         // <html> with no data-tune renders the implicit `default` tune anyway.
-        $additions = ' data-theme="pinion-light"';
+        $additions = ' data-theme="pinion"';
         if (!preg_match('/data-tune\s*=/', $attrs)) {
             $additions .= ' data-tune="default"';
         }
         $newTag = '<html' . rtrim($attrs) . $additions . '>';
         $content = preg_replace($htmlPattern, $newTag, $content, 1);
         File::put($layoutPath, $content);
-        $this->info("  ✓ {$relative}: added data-theme=\"pinion-light\"");
+        $this->info("  ✓ {$relative}: added data-theme=\"pinion\"");
     }
 
     protected function relativeLayoutPath(string $absolute): string

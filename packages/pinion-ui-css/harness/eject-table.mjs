@@ -42,7 +42,7 @@ const STRENGTHS = ['xs', 'sm', 'md', 'lg', 'xl'];
    lineup.json) + reactive, so `ui:eject --theme=<any shipped theme>` works. */
 const lineup = JSON.parse(readFileSync(join(root, '..', '..', 'src', 'resources', 'themes', 'lineup.json'), 'utf8'));
 const THEMES = [
-  ...lineup.themes.flatMap((t) => [t.name === 'pinion' ? 'pinion-light' : t.name, `${t.name}-dark`]),
+  ...lineup.themes.flatMap((t) => [t.name === 'pinion' ? 'pinion' : t.name, `${t.name}-dark`]),
   'reactive',
 ];
 
@@ -121,7 +121,7 @@ async function captureColors(theme) {
 const tokens = {};
 for (const tune of TUNES) {
   for (const strength of STRENGTHS) {
-    tokens[`${tune}|${strength}`] = await captureTokens('pinion-light', tune, strength);
+    tokens[`${tune}|${strength}`] = await captureTokens('pinion', tune, strength);
   }
 }
 

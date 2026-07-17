@@ -2,7 +2,7 @@
   "lockedAt": "2026-07-17",
   "decision": {
     "daisyuiThemes": "all off — pinion-ui はオリジナル theme のみ出荷（ユーザー確定）",
-    "naming": "<name> = light / <name>-dark = dark。ブランド既定のみ pinion-light / pinion-dark で旧 pinion テーマは廃棄",
+    "naming": "<name> = light / <name>-dark = dark。ブランド既定も同法則で pinion / pinion-dark（2026-07-17 改名: pinion-light → pinion。旧 v0.4 の pinion パレットは名前ごと Verdigris に置換）",
     "defaultMode": "light",
     "logoFinal": "docs/logo-candidates/round4/j2-v14-ivory-clay.png",
     "moodPrefix": "mood- = ジャンル非依存の美学系テーマ（2026-07-17 確定）。業種/用途テーマは裸名",

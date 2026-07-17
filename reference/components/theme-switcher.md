@@ -14,7 +14,7 @@ Click-to-cycle theme switcher. Toggles between an Alpine-tracked list of theme n
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `themes` | `array<string>` | `['pinion-light', 'pinion-dark']` | Themes to cycle through, in order. Each value must be a shipped pinion-ui theme (`<name>` / `<name>-dark` pairs, or `reactive`) — daisyUI stock names don't exist in the build (v0.6.0). |
+| `themes` | `array<string>` | `['pinion', 'pinion-dark']` | Themes to cycle through, in order. Each value must be a shipped pinion-ui theme (`<name>` / `<name>-dark` pairs, or `reactive`) — daisyUI stock names don't exist in the build (v0.6.0). |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button + icon size. `sm` → `w-8 h-8` / `w-4 h-4` icon. `lg` → `w-12 h-12` / `w-6 h-6` icon. |
 
 All other attributes pass through to the root `<button>` (`class`, `aria-label`, `@click`, etc.). A default `aria-label="Toggle theme"` is set unless overridden.
@@ -25,7 +25,7 @@ None — the icon is rendered by the component (sun in dark theme, moon otherwis
 
 ## Examples
 
-### Default (pinion-light ↔ pinion-dark)
+### Default (pinion ↔ pinion-dark)
 
 ```blade
 <x-theme-switcher />
@@ -34,7 +34,7 @@ None — the icon is rendered by the component (sun in dark theme, moon otherwis
 ### Multi-theme cycle
 
 ```blade
-<x-theme-switcher :themes="['pinion-light', 'pinion-dark', 'mood-monokai', 'mood-monokai-dark']" size="lg" />
+<x-theme-switcher :themes="['pinion', 'pinion-dark', 'mood-monokai', 'mood-monokai-dark']" size="lg" />
 ```
 
 ### Inside a header

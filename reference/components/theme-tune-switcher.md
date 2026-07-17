@@ -11,7 +11,7 @@ A self-contained **`data-theme` × `data-tune` switcher** — two dropdowns (the
 | `position` | `'fixed' \| 'inline'` | `'fixed'` | `fixed` = floating top-right card; `inline` = sits in flow (e.g. a header). |
 | `storage` | `bool` | `true` | Persist the choice to `localStorage` (so it survives reloads). |
 | `storageKey` | `string` | `'pn'` | localStorage key prefix (`{key}-theme` / `{key}-tune`). |
-| `themes` | `array \| null` | grouped lineup | Override with a FLAT list of literal shipped theme ids (e.g. `['pinion-light', 'reactive']`). Disables grouping and the light/dark mode toggle. daisyUI stock names don't exist in the build. |
+| `themes` | `array \| null` | grouped lineup | Override with a FLAT list of literal shipped theme ids (e.g. `['pinion', 'reactive']`). Disables grouping and the light/dark mode toggle. daisyUI stock names don't exist in the build. |
 | `tunes` | `array \| null` | all tunes | Override the tune list. |
 
 ## Behavior

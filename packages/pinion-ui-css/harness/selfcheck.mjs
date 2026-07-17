@@ -58,12 +58,12 @@ const HARD = [['radius-box', 'border-top-left-radius'], ['font-heading', 'font-f
 const SOFT = [['shadow-box', 'box-shadow'], ['py-4xl', 'padding-top'], ['tune-btn-md', 'height']];
 
 for (const [id, prop] of HARD) {
-  const n = distinctAcrossTunes('pinion-light', 'xl', id, prop).size;
+  const n = distinctAcrossTunes('pinion', 'xl', id, prop).size;
   if (n < 2) fail(`sensitivity(HARD): ${id}.${prop} has ${n} distinct value across tunes — harness may be blind`);
   console.log(`${n < 2 ? '✗' : '✓'} sensitivity: ${id}.${prop} → ${n} distinct across 11 tunes`);
 }
 for (const [id, prop] of SOFT) {
-  const n = distinctAcrossTunes('pinion-light', 'xl', id, prop).size;
+  const n = distinctAcrossTunes('pinion', 'xl', id, prop).size;
   console.log(`  · ${id}.${prop} → ${n} distinct across 11 tunes`);
 }
 

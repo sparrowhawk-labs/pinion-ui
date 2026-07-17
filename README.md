@@ -20,7 +20,7 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 ## Features
 
 - **46 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
-- **36 original themes × light/dark** — a brand default (`pinion-light`/`pinion-dark`) plus mood, SaaS, and industry palettes (`mood-monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
+- **36 original themes × light/dark** — a brand default (`pinion`/`pinion-dark`) plus mood, SaaS, and industry palettes (`mood-monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
 - **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="mood-monokai-dark" data-tune="soft"`).
 - **11 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`. Each preset bundles ~30 CSS custom properties.
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
@@ -80,7 +80,7 @@ It flags excluded daisyUI **component** classes and **fixed/hex** colors, while 
 ### Layout
 
 ```html
-<html data-theme="pinion-light" data-tune="default">
+<html data-theme="pinion" data-tune="default">
 ```
 
 ## Quick start
@@ -121,7 +121,7 @@ Components are registered as **anonymous components** (no prefix needed) for the
 
 | Layer | Attribute / Prop | Controls | Examples |
 |-------|------------------|----------|----------|
-| **Theme** | `data-theme` | Color palette | `pinion-light`, `pinion-dark`, `mood-monokai`, `payments-dark` (36 original light/dark pairs — see `AGENTS.md` for the catalog) |
+| **Theme** | `data-theme` | Color palette | `pinion`, `pinion-dark`, `mood-monokai`, `payments-dark` (36 original light/dark pairs — see `AGENTS.md` for the catalog) |
 | **Tune** | `data-tune` | Shape, spacing, font, component sizing | `default`, `tech`, `elegant`, `playful` |
 | **Component** | Blade props | Variant, size, behavior | `variant="primary"`, `size="lg"`, `dismissible` |
 
