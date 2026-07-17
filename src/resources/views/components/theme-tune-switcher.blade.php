@@ -2,7 +2,7 @@
     'position' => 'fixed',   // 'fixed' (floating top-right) | 'inline' (sits in flow)
     'storage' => true,       // persist the choice to localStorage
     'storageKey' => 'pn',    // localStorage key prefix
-    'themes' => null,        // override the theme list (array) — default below
+    'themes' => null,        // override with a FLAT list of literal theme ids (disables the grouped lineup + mode toggle)
     'tunes' => null,         // override the tune list (array)  — default below
 ])
 
@@ -12,7 +12,29 @@
     // own theme via `:data-theme` color dots / its own tune via `:data-tune` on the label.
     // The look matches the visualize playground switcher. (Distinct from <x-theme-switcher>,
     // which is a simple light/dark toggle button.)
-    $themeList = $themes ?? ['reactive', 'pinion', 'light', 'dark', 'night', 'business', 'corporate', 'dim', 'nord', 'cupcake', 'emerald', 'forest', 'dracula', 'sunset', 'winter'];
+    //
+    // v0.6.0: the default list is the shipped 36-theme lineup, grouped
+    // (Brand / Mood / SaaS / Industry) via pn_theme_groups() — the same
+    // lineup.json that generates the theme CSS, so this picker cannot drift.
+    // Each lineup entry is a light/dark PAIR (`<name>` / `<name>-dark`); a
+    // sun/moon mode toggle switches the whole picker between the two columns.
+    // Passing `:themes="[...]"` (flat literal ids) restores the old
+    // ungrouped single-list behaviour and hides the mode toggle.
+    $grouped = $themes === null;
+    if ($grouped) {
+        $groupData = [];
+        foreach (pn_theme_groups() as $label => $items) {
+            $groupData[] = ['label' => $label, 'items' => array_values($items)];
+        }
+    } else {
+        $groupData = [[
+            'label' => null,
+            'items' => array_map(
+                fn ($t) => ['name' => $t, 'light' => $t, 'dark' => $t],
+                array_values($themes)
+            ),
+        ]];
+    }
     $tuneList  = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft'];
     $wrap = $position === 'inline'
         ? 'relative inline-flex items-center gap-3'
@@ -20,23 +42,51 @@
     $chev  = '<svg class="size-3 text-base-content/50" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>';
     $check = '<svg class="ml-auto size-3 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 01.006 1.414l-7.5 7.6a1 1 0 01-1.42.005l-3.5-3.5a1 1 0 011.414-1.414l2.79 2.79 6.794-6.886a1 1 0 011.416-.009z" clip-rule="evenodd"/></svg>';
     $dots  = '<span class="size-2 rounded-full bg-primary"></span><span class="size-2 rounded-full bg-secondary"></span><span class="size-2 rounded-full bg-accent"></span>';
+    $sun   = '<svg class="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>';
+    $moon  = '<svg class="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>';
     // GitHub mark (Simple Icons "github", inlined — kept intentionally small/quiet, this is
     // attribution, not promotion). Reused for the in-dropdown footer link and the corner badge.
     $githubMark = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.42.36.78 1.08.78 2.18 0 1.57-.02 2.84-.02 3.23 0 .3.21.66.79.55A10.51 10.51 0 0023.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg>';
     $linkHref = 'https://pinion-ui.dev/';
+    $defaultTheme = $grouped ? 'pinion-light' : ($groupData[0]['items'][0]['light'] ?? 'pinion-light');
 @endphp
 
 <div
     {{ $attributes->class([$wrap]) }}
     x-data="{
-        theme: @js((bool) $storage) ? (localStorage.getItem('{{ $storageKey }}-theme') || document.documentElement.dataset.theme || 'reactive') : (document.documentElement.dataset.theme || 'reactive'),
+        theme: @js((bool) $storage) ? (localStorage.getItem('{{ $storageKey }}-theme') || document.documentElement.dataset.theme || @js($defaultTheme)) : (document.documentElement.dataset.theme || @js($defaultTheme)),
         tune: @js((bool) $storage) ? (localStorage.getItem('{{ $storageKey }}-tune') || document.documentElement.dataset.tune || 'default') : (document.documentElement.dataset.tune || 'default'),
-        themes: @js(array_values($themeList)),
+        groups: @js($groupData),
+        grouped: @js($grouped),
         tunes: @js(array_values($tuneList)),
+        mode: 'light',
         themeOpen: false, tuneOpen: false,
-        setTheme(t) { this.theme = t; document.documentElement.dataset.theme = t; if (@js((bool) $storage)) localStorage.setItem('{{ $storageKey }}-theme', t); this.themeOpen = false; },
+        pairOf(id) {
+            for (const g of this.groups) for (const t of g.items) {
+                if (t.light === id || t.dark === id) return t;
+            }
+            return null;
+        },
+        idFor(t) { return this.mode === 'dark' ? t.dark : t.light; },
+        apply(id) {
+            this.theme = id;
+            document.documentElement.dataset.theme = id;
+            if (@js((bool) $storage)) localStorage.setItem('{{ $storageKey }}-theme', id);
+        },
+        setTheme(t) { this.apply(this.idFor(t)); this.themeOpen = false; },
+        setMode(m) {
+            this.mode = m;
+            const pair = this.pairOf(this.theme);
+            if (pair) this.apply(this.idFor(pair));
+        },
+        isActive(t) { return this.theme === t.light || this.theme === t.dark; },
         setTune(t) { this.tune = t; document.documentElement.dataset.tune = t; if (@js((bool) $storage)) localStorage.setItem('{{ $storageKey }}-tune', t); this.tuneOpen = false; },
-        init() { document.documentElement.dataset.theme = this.theme; document.documentElement.dataset.tune = this.tune; },
+        init() {
+            const pair = this.pairOf(this.theme);
+            if (pair && pair.dark === this.theme && pair.dark !== pair.light) this.mode = 'dark';
+            document.documentElement.dataset.theme = this.theme;
+            document.documentElement.dataset.tune = this.tune;
+        },
     }"
 >
     {{-- Theme --}}
@@ -48,17 +98,36 @@
             <span x-text="theme"></span>
             <span x-bind:class="themeOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
         </button>
+        @if ($grouped)
+            {{-- light/dark mode toggle — flips the whole lineup between the <name> / <name>-dark columns --}}
+            <button type="button" x-on:click="setMode(mode === 'dark' ? 'light' : 'dark')"
+                class="p-1 rounded-[var(--radius-field)] text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
+                x-bind:aria-label="mode === 'dark' ? 'Switch to light themes' : 'Switch to dark themes'"
+                x-bind:title="mode === 'dark' ? 'Light themes' : 'Dark themes'">
+                <span x-show="mode === 'dark'">{!! $sun !!}</span>
+                <span x-show="mode !== 'dark'">{!! $moon !!}</span>
+            </button>
+        @endif
         <ul x-show="themeOpen" x-cloak x-transition.opacity.duration.100ms role="listbox"
-            class="absolute top-full right-0 mt-1 z-50 w-60 max-h-80 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
-            <template x-for="t in themes" x-bind:key="t">
+            class="absolute top-full right-0 mt-1 z-50 w-64 max-h-80 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
+            <template x-for="g in groups" x-bind:key="g.label ?? 'flat'">
                 <li>
-                    <button type="button" x-on:click="setTheme(t)" role="option" x-bind:aria-selected="theme === t"
-                        class="flex items-center gap-2.5 w-full px-3 py-1.5 text-xs hover:bg-base-200 transition-colors text-left"
-                        x-bind:class="theme === t ? 'bg-base-200 font-semibold' : ''">
-                        <span x-bind:data-theme="t" class="inline-flex shrink-0 items-center gap-1 px-2 py-1.5 rounded-[calc(var(--radius-box)*0.6)] bg-base-100 tune-border border-base-content/20">{!! $dots !!}</span>
-                        <span x-text="t"></span>
-                        <span x-show="theme === t">{!! $check !!}</span>
-                    </button>
+                    <template x-if="g.label">
+                        <div class="px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-wide text-base-content/40" x-text="g.label"></div>
+                    </template>
+                    <ul>
+                        <template x-for="t in g.items" x-bind:key="t.name">
+                            <li>
+                                <button type="button" x-on:click="setTheme(t)" role="option" x-bind:aria-selected="isActive(t)"
+                                    class="flex items-center gap-2.5 w-full px-3 py-1.5 text-xs hover:bg-base-200 transition-colors text-left"
+                                    x-bind:class="isActive(t) ? 'bg-base-200 font-semibold' : ''">
+                                    <span x-bind:data-theme="idFor(t)" class="inline-flex shrink-0 items-center gap-1 px-2 py-1.5 rounded-[calc(var(--radius-box)*0.6)] bg-base-100 tune-border border-base-content/20">{!! $dots !!}</span>
+                                    <span x-text="grouped ? t.name : idFor(t)"></span>
+                                    <span x-show="isActive(t)">{!! $check !!}</span>
+                                </button>
+                            </li>
+                        </template>
+                    </ul>
                 </li>
             </template>
             <li class="flex justify-end px-3 pt-1.5 mt-1 border-t border-base-content/10">

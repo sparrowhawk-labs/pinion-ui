@@ -1,5 +1,5 @@
 @props([
-    'themes' => ['light', 'dark'],
+    'themes' => ['pinion-light', 'pinion-dark'],
     'size' => 'md',
 ])
 
@@ -42,9 +42,9 @@
         'aria-label' => 'Toggle theme',
     ]) }}
 >
-    {{-- Sun icon (shown in dark theme) --}}
+    {{-- Sun icon (shown in dark theme — v0.6.0 lineup convention: dark themes end in "-dark") --}}
     <svg
-        x-show="theme === 'dark'"
+        x-show="theme === 'dark' || theme.endsWith('-dark')"
         x-transition
         class="{{ $iconSize }}"
         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
@@ -54,7 +54,7 @@
 
     {{-- Moon icon (shown in light theme) --}}
     <svg
-        x-show="theme !== 'dark'"
+        x-show="theme !== 'dark' && !theme.endsWith('-dark')"
         x-transition
         class="{{ $iconSize }}"
         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
