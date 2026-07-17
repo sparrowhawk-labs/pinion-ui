@@ -1,77 +1,46 @@
 /* ==========================================
    pinion-ui theme definitions — SHARED SOURCE
    ==========================================
-   The two shipped themes (`pinion` default + opt-in `reactive`) as daisyUI
-   theme blocks. Extracted from pinion-ui.css (v0.5.0, S5) so the SAME source
-   feeds both the Blade preset (via pinion-ui.css @import) and the standalone
-   @sparrowhawk-labs/pinion-ui-css dist build — one definition, no drift. */
+   All shipped themes as daisyUI theme blocks. The SAME source feeds both the
+   Blade preset (via pinion-ui.css @import) and the standalone
+   @sparrowhawk-labs/pinion-ui-css dist build — one definition, no drift.
+
+   v0.6.0 lineup: pinion-ui ships ONLY original themes (daisyUI's built-in
+   35 themes are disabled — the preset loads the plugin with `themes: false`).
+   36 themes × light/dark pairs (72 `[data-theme]` blocks), generated from
+   src/resources/themes/lineup.json by
+   packages/pinion-ui-css/harness/gen-themes.mjs (npm run gen:themes).
+
+   Naming: `<name>` = light · `<name>-dark` = dark. The brand default pair is
+   `pinion-light` / `pinion-dark` (the old warm-cream `pinion` theme shipped
+   in v0.4.0–v0.5.x is GONE — see SEMVER.md v0.6.0). `pinion-light` carries
+   `default: true`, so consumers who do not set `data-theme` get it at :root.
+
+   Every generated block also sets `--root-bg` to the palette's page-canvas
+   color: daisyUI v5 paints `:root` with `var(--root-bg, --color-base-100)`,
+   so the page background is the tinted canvas (`bg`) while components sit on
+   `base-100` (= the palette's `panel`, white in light mode) with zero
+   consumer CSS. `bg-base-200` equals the canvas color for recessed/hover
+   surfaces.
+
+   Tune tokens (--radius-*, --border, etc.) are intentionally identical
+   across all themes — the tune.css cascade owns shape (invariant 5). */
 
 /* ==========================================
-   pinion theme (v0.4.0) — light only
-   ==========================================
-   Warm-cream surface + near-black ink + amber-550 accent + teal-petrol
-   secondary, inspired by beck-server. `pinion` is the default theme shipped
-   by this preset — consumers who do not set `data-theme` will get pinion
-   automatically. There is no bundled dark companion; consumers who want a
-   dark mode can pick any of daisyUI's standard dark themes (`dark`, `dim`,
-   `night`, `business`, …) via `<html data-theme="…">`.
-
-   Picked tones (decided in playground /theme-preview):
-     primary   = oklch(0.18 0.005 50)  near-black ink (50° warmth)
-     secondary = oklch(0.45 0.10 200)  teal-petrol
-     accent    = oklch(0.75 0.165 58)  amber-550 (#E58A0E, between 500/600)
-     base-100  = oklch(0.985 0.005 75) warm off-white cream
-
-   Tune tokens (--radius-*, --border, etc.) are intentionally NOT redefined
-   here — the tune.css cascade owns those. */
-@plugin 'daisyui/theme' {
-    name: 'pinion';
-    default: true;
-    color-scheme: 'light';
-    --color-base-100:          oklch(0.985 0.005 75);
-    --color-base-200:          oklch(0.965 0.005 75);
-    --color-base-300:          oklch(0.920 0.005 75);
-    --color-base-content:      oklch(0.180 0.005 50);
-    --color-primary:           oklch(0.180 0.005 50);
-    --color-primary-content:   oklch(0.985 0.005 75);
-    --color-secondary:         oklch(0.450 0.100 200);
-    --color-secondary-content: oklch(0.985 0.005 75);
-    --color-accent:            oklch(0.750 0.165 58);
-    --color-accent-content:    oklch(0.180 0.005 50);
-    --color-neutral:           oklch(0.300 0.005 50);
-    --color-neutral-content:   oklch(0.985 0.005 75);
-    --color-info:              oklch(0.680 0.100 235);
-    --color-info-content:      oklch(0.180 0.050 235);
-    --color-success:           oklch(0.680 0.120 145);
-    --color-success-content:   oklch(0.180 0.050 145);
-    --color-warning:           oklch(0.820 0.130 80);
-    --color-warning-content:   oklch(0.180 0.050 50);
-    --color-error:             oklch(0.600 0.180 25);
-    --color-error-content:     oklch(0.985 0.005 75);
-    --radius-selector: 0.5rem;
-    --radius-field:    0.375rem;
-    --radius-box:      0.5rem;
-    --size-selector:   0.25rem;
-    --size-field:      0.25rem;
-    --border:          1px;
-    --depth:           1;
-    --noise:           0;
-}
-
-/* ==========================================
-   reactive theme — light only, opt-in
+   reactive theme — light only, opt-in, hand-maintained (NOT generated)
    ==========================================
    GitHub-Light-adjacent "clean technical document" palette, ported from the
    /visualize report tooling so HTML reports and pinion-ui apps can share one
    color system. Pure white canvas, cool gray surfaces, the familiar
-   blue / green / purple semantic set.
+   blue / green / purple semantic set. Kept verbatim across the v0.6.0
+   lineup swap — the /visualize tooling depends on it.
 
      primary   = #0969da  link blue (GitHub accent.fg)
      secondary = #1f883d  CTA green (GitHub btn-primary)
      accent    = #8250df  conclusion purple (GitHub done.fg)
      base-100  = #ffffff  pure white canvas
 
-   Opt-in via <html data-theme="reactive">. `pinion` stays the default. */
+   Opt-in via <html data-theme="reactive">. `pinion-light` is the default. */
 @plugin 'daisyui/theme' {
     name: 'reactive';
     default: false;
@@ -105,3 +74,2602 @@
     --depth:           1;
     --noise:           0;
 }
+
+/* ── BEGIN GENERATED THEME LINEUP — gen-themes.mjs (do not edit by hand) ── */
+/* 36 themes × light/dark = 72 blocks, generated from
+   src/resources/themes/lineup.json (locked 2026-07-17). Regenerate with
+   `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
+   Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
+
+/* pinion-light / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（light 既定） (Claude Verdigris) */
+
+@plugin 'daisyui/theme' {
+    name:                      'pinion-light';
+    default:                   true;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F5F0E8;
+    --color-base-300:          #E3DED6;
+    --color-base-content:      #29261F;
+    --color-primary:           #0F766E;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #C05B2E;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #A16207;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #434039;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488BC1;
+    --color-info-content:      #29261F;
+    --color-success:           #5F8F6B;
+    --color-success-content:   #29261F;
+    --color-warning:           #C3A345;
+    --color-warning-content:   #29261F;
+    --color-error:             #D04941;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F5F0E8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'pinion-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2F2C28;
+    --color-base-200:          #262421;
+    --color-base-300:          #3E3C38;
+    --color-base-content:      #F0EAE0;
+    --color-primary:           #2DA88F;
+    --color-primary-content:   #262421;
+    --color-secondary:         #E07A4F;
+    --color-secondary-content: #262421;
+    --color-accent:            #D9A441;
+    --color-accent-content:    #262421;
+    --color-neutral:           #484540;
+    --color-neutral-content:   #F0EAE0;
+    --color-info:              #609CCF;
+    --color-info-content:      #262421;
+    --color-success:           #93B478;
+    --color-success-content:   #262421;
+    --color-warning:           #C8A957;
+    --color-warning-content:   #262421;
+    --color-error:             #D5635D;
+    --color-error-content:     #262421;
+    --root-bg:                 #262421;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-monokai / mood-monokai-dark — 美学系 (mood) · エディタ系・開発者向け UI (1. Monokai '80s) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-monokai';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FAF4F2;
+    --color-base-300:          #E7E1E0;
+    --color-base-content:      #29242A;
+    --color-primary:           #E14775;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #1C8CA8;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #CC7A0A;
+    --color-accent-content:    #29242A;
+    --color-neutral:           #443F44;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC2;
+    --color-info-content:      #29242A;
+    --color-success:           #269D69;
+    --color-success-content:   #29242A;
+    --color-warning:           #C4A346;
+    --color-warning-content:   #29242A;
+    --color-error:             #E16032;
+    --color-error-content:     #29242A;
+    --root-bg:                 #FAF4F2;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-monokai-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #221F22;
+    --color-base-200:          #2D2A2E;
+    --color-base-300:          #464347;
+    --color-base-content:      #FCFCFA;
+    --color-primary:           #FF6188;
+    --color-primary-content:   #221F22;
+    --color-secondary:         #78DCE8;
+    --color-secondary-content: #221F22;
+    --color-accent:            #FFD866;
+    --color-accent-content:    #221F22;
+    --color-neutral:           #3E3B3E;
+    --color-neutral-content:   #FCFCFA;
+    --color-info:              #619DD1;
+    --color-info-content:      #221F22;
+    --color-success:           #A9DC76;
+    --color-success-content:   #221F22;
+    --color-warning:           #C9AA59;
+    --color-warning-content:   #221F22;
+    --color-error:             #FC9867;
+    --color-error-content:     #221F22;
+    --root-bg:                 #2D2A2E;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-synthwave / mood-synthwave-dark — 美学系 (mood) · ネオン・ゲーム・イベント (2. SynthWave '84) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-synthwave';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FBF7FF;
+    --color-base-300:          #E8E4EE;
+    --color-base-content:      #2A2139;
+    --color-primary:           #C736A2;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #0FA3A3;
+    --color-secondary-content: #2A2139;
+    --color-accent:            #C98A00;
+    --color-accent-content:    #2A2139;
+    --color-neutral:           #453D54;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC3;
+    --color-info-content:      #2A2139;
+    --color-success:           #1FA06A;
+    --color-success-content:   #2A2139;
+    --color-warning:           #C4A348;
+    --color-warning-content:   #2A2139;
+    --color-error:             #D96A1F;
+    --color-error-content:     #2A2139;
+    --root-bg:                 #FBF7FF;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-synthwave-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2A2139;
+    --color-base-200:          #262335;
+    --color-base-300:          #3F3C4E;
+    --color-base-content:      #F4F0FF;
+    --color-primary:           #FF7EDB;
+    --color-primary-content:   #262335;
+    --color-secondary:         #36F9F6;
+    --color-secondary-content: #262335;
+    --color-accent:            #FEDE5D;
+    --color-accent-content:    #262335;
+    --color-neutral:           #443C54;
+    --color-neutral-content:   #F4F0FF;
+    --color-info:              #609CD2;
+    --color-info-content:      #262335;
+    --color-success:           #6BEAB1;
+    --color-success-content:   #262335;
+    --color-warning:           #C8AA5B;
+    --color-warning-content:   #262335;
+    --color-error:             #FF8B39;
+    --color-error-content:     #262335;
+    --root-bg:                 #262335;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-vapor / mood-vapor-dark — 美学系 (mood) · ソフトなレトロ・Z世代向け (5. Vaporwave Pastel) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-vapor';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FDF6FF;
+    --color-base-300:          #ECE4F1;
+    --color-base-content:      #3A2C55;
+    --color-primary:           #E36BC6;
+    --color-primary-content:   #3A2C55;
+    --color-secondary:         #14A886;
+    --color-secondary-content: #3A2C55;
+    --color-accent:            #E8843C;
+    --color-accent-content:    #3A2C55;
+    --color-neutral:           #54476D;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #2E8FC0;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #7BA828;
+    --color-success-content:   #3A2C55;
+    --color-warning:           #C4A348;
+    --color-warning-content:   #3A2C55;
+    --color-error:             #D14A43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FDF6FF;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-vapor-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #342A4C;
+    --color-base-200:          #2B2140;
+    --color-base-300:          #433A58;
+    --color-base-content:      #F3EEFF;
+    --color-primary:           #FF9DE6;
+    --color-primary-content:   #2B2140;
+    --color-secondary:         #7FFFE0;
+    --color-secondary-content: #2B2140;
+    --color-accent:            #FFC49D;
+    --color-accent-content:    #2B2140;
+    --color-neutral:           #4D4465;
+    --color-neutral-content:   #F3EEFF;
+    --color-info:              #92DAF3;
+    --color-info-content:      #2B2140;
+    --color-success:           #B5DE7E;
+    --color-success-content:   #2B2140;
+    --color-warning:           #C8AA5D;
+    --color-warning-content:   #2B2140;
+    --color-error:             #D56362;
+    --color-error-content:     #2B2140;
+    --root-bg:                 #2B2140;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-bigblue / mood-bigblue-dark — 美学系 (mood) · エンタープライズ・B2B 堅め (11. Big Blue '81) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-bigblue';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F4F4F0;
+    --color-base-300:          #E1E1DE;
+    --color-base-content:      #21242B;
+    --color-primary:           #0043CE;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #DA1E28;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #8A3FFC;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3C3F45;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #478CC2;
+    --color-info-content:      #21242B;
+    --color-success:           #4B995F;
+    --color-success-content:   #21242B;
+    --color-warning:           #B28600;
+    --color-warning-content:   #21242B;
+    --color-error:             #D04A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F4F4F0;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-bigblue-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #181E2E;
+    --color-base-200:          #10141F;
+    --color-base-300:          #292D39;
+    --color-base-content:      #E8ECF7;
+    --color-primary:           #4589FF;
+    --color-primary-content:   #10141F;
+    --color-secondary:         #FA4D56;
+    --color-secondary-content: #10141F;
+    --color-accent:            #BE95FF;
+    --color-accent-content:    #10141F;
+    --color-neutral:           #323849;
+    --color-neutral-content:   #E8ECF7;
+    --color-info:              #5D9ACF;
+    --color-info-content:      #10141F;
+    --color-success:           #5FA772;
+    --color-success-content:   #10141F;
+    --color-warning:           #F1C21B;
+    --color-warning-content:   #10141F;
+    --color-error:             #D2615D;
+    --color-error-content:     #10141F;
+    --root-bg:                 #10141F;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-neotokyo / mood-neotokyo-dark — 美学系 (mood) · 和 × サイバー・ナイトライフ (13. Neo-Tokyo Noir) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-neotokyo';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F7F2EA;
+    --color-base-300:          #E4DFD9;
+    --color-base-content:      #26222B;
+    --color-primary:           #D42B3A;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #16717C;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #C99A2E;
+    --color-accent-content:    #26222B;
+    --color-neutral:           #413D44;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC1;
+    --color-info-content:      #26222B;
+    --color-success:           #4C995E;
+    --color-success-content:   #26222B;
+    --color-warning:           #C4A345;
+    --color-warning-content:   #26222B;
+    --color-error:             #D04A41;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F7F2EA;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-neotokyo-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #261E2C;
+    --color-base-200:          #1C1620;
+    --color-base-300:          #352F39;
+    --color-base-content:      #F4EDF7;
+    --color-primary:           #FF4757;
+    --color-primary-content:   #1C1620;
+    --color-secondary:         #2DD4BF;
+    --color-secondary-content: #1C1620;
+    --color-accent:            #F0C34E;
+    --color-accent-content:    #1C1620;
+    --color-neutral:           #413847;
+    --color-neutral-content:   #F4EDF7;
+    --color-info:              #5F9ACF;
+    --color-info-content:      #1C1620;
+    --color-success:           #62A872;
+    --color-success-content:   #1C1620;
+    --color-warning:           #C6A857;
+    --color-warning-content:   #1C1620;
+    --color-error:             #D3615D;
+    --color-error-content:     #1C1620;
+    --root-bg:                 #1C1620;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* payments / payments-dark — SaaS 実用 · 決済・フィンテック (S2. Slate Violet) */
+
+@plugin 'daisyui/theme' {
+    name:                      'payments';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F6F8FB;
+    --color-base-300:          #E2E4EA;
+    --color-base-content:      #1A1F36;
+    --color-primary:           #635BFF;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #0FA3C8;
+    --color-secondary-content: #1A1F36;
+    --color-accent:            #FF7A59;
+    --color-accent-content:    #1A1F36;
+    --color-neutral:           #353B51;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC3;
+    --color-info-content:      #1A1F36;
+    --color-success:           #16A34A;
+    --color-success-content:   #1A1F36;
+    --color-warning:           #C4A448;
+    --color-warning-content:   #1A1F36;
+    --color-error:             #E11D48;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F6F8FB;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'payments-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1D2338;
+    --color-base-200:          #151929;
+    --color-base-300:          #2E3242;
+    --color-base-content:      #EAEEF7;
+    --color-primary:           #8A84FF;
+    --color-primary-content:   #151929;
+    --color-secondary:         #38C7E3;
+    --color-secondary-content: #151929;
+    --color-accent:            #FF9578;
+    --color-accent-content:    #151929;
+    --color-neutral:           #373D52;
+    --color-neutral-content:   #EAEEF7;
+    --color-info:              #5D9BD0;
+    --color-info-content:      #151929;
+    --color-success:           #4ADE80;
+    --color-success-content:   #151929;
+    --color-warning:           #C5A859;
+    --color-warning-content:   #151929;
+    --color-error:             #FB7185;
+    --color-error-content:     #151929;
+    --root-bg:                 #151929;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* docs / docs-dark — SaaS 実用 · ドキュメント・ナレッジベース (S3. Ivory Ink) */
+
+@plugin 'daisyui/theme' {
+    name:                      'docs';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F7F6F3;
+    --color-base-300:          #E6E5E2;
+    --color-base-content:      #37352F;
+    --color-primary:           #2383E2;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #D9730D;
+    --color-secondary-content: #37352F;
+    --color-accent:            #6940A5;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #504E49;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC2;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #0F7B6C;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #C4A346;
+    --color-warning-content:   #37352F;
+    --color-error:             #E03E3E;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F7F6F3;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'docs-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2E2D27;
+    --color-base-200:          #25241F;
+    --color-base-300:          #3D3C37;
+    --color-base-content:      #EFEEE9;
+    --color-primary:           #529CCA;
+    --color-primary-content:   #25241F;
+    --color-secondary:         #FFA344;
+    --color-secondary-content: #25241F;
+    --color-accent:            #9A6DD7;
+    --color-accent-content:    #25241F;
+    --color-neutral:           #474640;
+    --color-neutral-content:   #EFEEE9;
+    --color-info:              #609CCF;
+    --color-info-content:      #25241F;
+    --color-success:           #4DAB9A;
+    --color-success-content:   #25241F;
+    --color-warning:           #C8A956;
+    --color-warning-content:   #25241F;
+    --color-error:             #FF7369;
+    --color-error-content:     #25241F;
+    --root-bg:                 #25241F;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mono / mono-dark — SaaS 実用 · ミニマルツール・ポートフォリオ (S4. Vercel Mono) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mono';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FAFAFA;
+    --color-base-200:          #FFFFFF;
+    --color-base-300:          #E8E8E8;
+    --color-base-content:      #0A0A0A;
+    --color-primary:           #171717;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #0070F3;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #7928CA;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #272727;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488DC3;
+    --color-info-content:      #0A0A0A;
+    --color-success:           #2AC9A9;
+    --color-success-content:   #0A0A0A;
+    --color-warning:           #EA9B06;
+    --color-warning-content:   #0A0A0A;
+    --color-error:             #D14B43;
+    --color-error-content:     #0A0A0A;
+    --root-bg:                 #FFFFFF;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mono-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #141414;
+    --color-base-200:          #0A0A0A;
+    --color-base-300:          #242424;
+    --color-base-content:      #F5F5F5;
+    --color-primary:           #EDEDED;
+    --color-primary-content:   #0A0A0A;
+    --color-secondary:         #3291FF;
+    --color-secondary-content: #0A0A0A;
+    --color-accent:            #BF5AF2;
+    --color-accent-content:    #0A0A0A;
+    --color-neutral:           #303030;
+    --color-neutral-content:   #F5F5F5;
+    --color-info:              #5C99CC;
+    --color-info-content:      #0A0A0A;
+    --color-success:           #50E3C2;
+    --color-success-content:   #0A0A0A;
+    --color-warning:           #F5A623;
+    --color-warning-content:   #0A0A0A;
+    --color-error:             #D0605A;
+    --color-error-content:     #0A0A0A;
+    --root-bg:                 #0A0A0A;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* ops / ops-dark — SaaS 実用 · PM・運用・社内ツール (S5. Forest Ops) */
+
+@plugin 'daisyui/theme' {
+    name:                      'ops';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FBFAF7;
+    --color-base-300:          #E8E7E3;
+    --color-base-content:      #26251F;
+    --color-primary:           #1D7A46;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #8A5A2E;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #C7A252;
+    --color-accent-content:    #26251F;
+    --color-neutral:           #41403A;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #2E86AB;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4C9A5F;
+    --color-success-content:   #26251F;
+    --color-warning:           #C4A447;
+    --color-warning-content:   #26251F;
+    --color-error:             #D14B42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FBFAF7;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'ops-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #272B25;
+    --color-base-200:          #1E211C;
+    --color-base-300:          #373A34;
+    --color-base-content:      #EEF0E9;
+    --color-primary:           #4CAF78;
+    --color-primary-content:   #1E211C;
+    --color-secondary:         #C89058;
+    --color-secondary-content: #1E211C;
+    --color-accent:            #E0C070;
+    --color-accent-content:    #1E211C;
+    --color-neutral:           #41453E;
+    --color-neutral-content:   #EEF0E9;
+    --color-info:              #5FA8D3;
+    --color-info-content:      #1E211C;
+    --color-success:           #61A972;
+    --color-success-content:   #1E211C;
+    --color-warning:           #C7A956;
+    --color-warning-content:   #1E211C;
+    --color-error:             #D4635C;
+    --color-error-content:     #1E211C;
+    --root-bg:                 #1E211C;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* finance / finance-dark — SaaS 実用 · 金融・法務エンタープライズ (S6. Navy & Gold) */
+
+@plugin 'daisyui/theme' {
+    name:                      'finance';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F7F8FA;
+    --color-base-300:          #E2E5EA;
+    --color-base-content:      #14213D;
+    --color-primary:           #1D3461;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #B08A2E;
+    --color-secondary-content: #14213D;
+    --color-accent:            #2E86AB;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #303D57;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC3;
+    --color-info-content:      #14213D;
+    --color-success:           #16A34A;
+    --color-success-content:   #14213D;
+    --color-warning:           #C4A447;
+    --color-warning-content:   #14213D;
+    --color-error:             #DC2626;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F7F8FA;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'finance-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #152036;
+    --color-base-200:          #0D1526;
+    --color-base-300:          #262E3F;
+    --color-base-content:      #E9EDF6;
+    --color-primary:           #4F79C7;
+    --color-primary-content:   #0D1526;
+    --color-secondary:         #D9B45B;
+    --color-secondary-content: #0D1526;
+    --color-accent:            #55B3D9;
+    --color-accent-content:    #0D1526;
+    --color-neutral:           #303B50;
+    --color-neutral-content:   #E9EDF6;
+    --color-info:              #5C9AD0;
+    --color-info-content:      #0D1526;
+    --color-success:           #4ADE80;
+    --color-success-content:   #0D1526;
+    --color-warning:           #C4A859;
+    --color-warning-content:   #0D1526;
+    --color-error:             #F87171;
+    --color-error-content:     #0D1526;
+    --root-bg:                 #0D1526;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* people / people-dark — SaaS 実用 · HR・コミュニティ (S7. Coral People) */
+
+@plugin 'daisyui/theme' {
+    name:                      'people';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FFF9F5;
+    --color-base-300:          #EDE6E2;
+    --color-base-content:      #33261F;
+    --color-primary:           #E65F52;
+    --color-primary-content:   #33261F;
+    --color-secondary:         #14A886;
+    --color-secondary-content: #33261F;
+    --color-accent:            #F0B840;
+    --color-accent-content:    #33261F;
+    --color-neutral:           #4E413A;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #2E86AB;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4D9A5F;
+    --color-success-content:   #33261F;
+    --color-warning:           #C4A446;
+    --color-warning-content:   #33261F;
+    --color-error:             #D14A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FFF9F5;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'people-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #302520;
+    --color-base-200:          #261C17;
+    --color-base-300:          #3F342F;
+    --color-base-content:      #F5EBE4;
+    --color-primary:           #F08074;
+    --color-primary-content:   #261C17;
+    --color-secondary:         #35C7A3;
+    --color-secondary-content: #261C17;
+    --color-accent:            #F5CB60;
+    --color-accent-content:    #261C17;
+    --color-neutral:           #4A3F39;
+    --color-neutral-content:   #F5EBE4;
+    --color-info:              #5FA8D3;
+    --color-info-content:      #261C17;
+    --color-success:           #63A871;
+    --color-success-content:   #261C17;
+    --color-warning:           #C8A855;
+    --color-warning-content:   #261C17;
+    --color-error:             #D4625C;
+    --color-error-content:     #261C17;
+    --root-bg:                 #261C17;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* health / health-dark — SaaS 実用 · 医療・ウェルネス SaaS (S8. Calm Health) */
+
+@plugin 'daisyui/theme' {
+    name:                      'health';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F4FAFA;
+    --color-base-300:          #E1E8E8;
+    --color-base-content:      #1C2B2D;
+    --color-primary:           #0E8FA3;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #5FB57F;
+    --color-secondary-content: #1C2B2D;
+    --color-accent:            #E8843C;
+    --color-accent-content:    #1C2B2D;
+    --color-neutral:           #384648;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #478CC3;
+    --color-info-content:      #1C2B2D;
+    --color-success:           #4B9A60;
+    --color-success-content:   #1C2B2D;
+    --color-warning:           #C3A447;
+    --color-warning-content:   #1C2B2D;
+    --color-error:             #DC2626;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F4FAFA;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'health-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1D2E30;
+    --color-base-200:          #152325;
+    --color-base-300:          #2E3C3E;
+    --color-base-content:      #E8F2F3;
+    --color-primary:           #3FB7CB;
+    --color-primary-content:   #152325;
+    --color-secondary:         #7FD09E;
+    --color-secondary-content: #152325;
+    --color-accent:            #F09E5F;
+    --color-accent-content:    #152325;
+    --color-neutral:           #37484A;
+    --color-neutral-content:   #E8F2F3;
+    --color-info:              #5D9CD0;
+    --color-info-content:      #152325;
+    --color-success:           #60A973;
+    --color-success-content:   #152325;
+    --color-warning:           #C6A958;
+    --color-warning-content:   #152325;
+    --color-error:             #F87171;
+    --color-error-content:     #152325;
+    --root-bg:                 #152325;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* analytics / analytics-dark — SaaS 実用 · BI・データ可視化 (S9. Plum Analytics) */
+
+@plugin 'daisyui/theme' {
+    name:                      'analytics';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FAF8FF;
+    --color-base-300:          #E7E5EE;
+    --color-base-content:      #2A2440;
+    --color-primary:           #6D28D9;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #DB2777;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #F59E0B;
+    --color-accent-content:    #2A2440;
+    --color-neutral:           #45405A;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0891B2;
+    --color-info-content:      #2A2440;
+    --color-success:           #16A34A;
+    --color-success-content:   #2A2440;
+    --color-warning:           #C4A448;
+    --color-warning-content:   #2A2440;
+    --color-error:             #D14A43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FAF8FF;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'analytics-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #252032;
+    --color-base-200:          #1B1727;
+    --color-base-300:          #343040;
+    --color-base-content:      #EFEBF9;
+    --color-primary:           #A78BFA;
+    --color-primary-content:   #1B1727;
+    --color-secondary:         #F472B6;
+    --color-secondary-content: #1B1727;
+    --color-accent:            #FBBF24;
+    --color-accent-content:    #1B1727;
+    --color-neutral:           #3F3A4C;
+    --color-neutral-content:   #EFEBF9;
+    --color-info:              #22D3EE;
+    --color-info-content:      #1B1727;
+    --color-success:           #4ADE80;
+    --color-success-content:   #1B1727;
+    --color-warning:           #C6A859;
+    --color-warning-content:   #1B1727;
+    --color-error:             #D3625E;
+    --color-error-content:     #1B1727;
+    --root-bg:                 #1B1727;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* devtool / devtool-dark — SaaS 実用 · 開発者ツール・API 系 (S10. Slate Cyan) */
+
+@plugin 'daisyui/theme' {
+    name:                      'devtool';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F8FAFC;
+    --color-base-300:          #E3E5E9;
+    --color-base-content:      #0F172A;
+    --color-primary:           #0891B2;
+    --color-primary-content:   #0F172A;
+    --color-secondary:         #475569;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #E11D48;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #2B3446;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC3;
+    --color-info-content:      #0F172A;
+    --color-success:           #16A34A;
+    --color-success-content:   #0F172A;
+    --color-warning:           #EE9800;
+    --color-warning-content:   #0F172A;
+    --color-error:             #D14B43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F8FAFC;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'devtool-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1A2438;
+    --color-base-200:          #0F172A;
+    --color-base-300:          #283043;
+    --color-base-content:      #E9EFF7;
+    --color-primary:           #22D3EE;
+    --color-primary-content:   #0F172A;
+    --color-secondary:         #94A3B8;
+    --color-secondary-content: #0F172A;
+    --color-accent:            #FB7185;
+    --color-accent-content:    #0F172A;
+    --color-neutral:           #343E52;
+    --color-neutral-content:   #E9EFF7;
+    --color-info:              #5C9AD0;
+    --color-info-content:      #0F172A;
+    --color-success:           #4ADE80;
+    --color-success-content:   #0F172A;
+    --color-warning:           #FBBF24;
+    --color-warning-content:   #0F172A;
+    --color-error:             #D2625F;
+    --color-error-content:     #0F172A;
+    --root-bg:                 #0F172A;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* comms / comms-dark — SaaS 実用 · チャット・コラボレーション (S11. Aubergine Comms) */
+
+@plugin 'daisyui/theme' {
+    name:                      'comms';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FBF9FB;
+    --color-base-300:          #E9E6E9;
+    --color-base-content:      #2C2231;
+    --color-primary:           #611F69;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #2BAC76;
+    --color-secondary-content: #2C2231;
+    --color-accent:            #ECB22E;
+    --color-accent-content:    #2C2231;
+    --color-neutral:           #473E4C;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #2DBFEA;
+    --color-info-content:      #2C2231;
+    --color-success:           #4C9A60;
+    --color-success-content:   #2C2231;
+    --color-warning:           #C4A448;
+    --color-warning-content:   #2C2231;
+    --color-error:             #E01E5A;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FBF9FB;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'comms-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2C1F31;
+    --color-base-200:          #221726;
+    --color-base-300:          #3B303F;
+    --color-base-content:      #F2ECF4;
+    --color-primary:           #B366C0;
+    --color-primary-content:   #221726;
+    --color-secondary:         #4FCF95;
+    --color-secondary-content: #221726;
+    --color-accent:            #F5C64E;
+    --color-accent-content:    #221726;
+    --color-neutral:           #46394B;
+    --color-neutral-content:   #F2ECF4;
+    --color-info:              #5FD3F5;
+    --color-info-content:      #221726;
+    --color-success:           #63A873;
+    --color-success-content:   #221726;
+    --color-warning:           #C7A858;
+    --color-warning-content:   #221726;
+    --color-error:             #F06487;
+    --color-error-content:     #221726;
+    --root-bg:                 #221726;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* growth / growth-dark — SaaS 実用 · マーケ・グロース・LP 系 (S12. Sunrise Growth) */
+
+@plugin 'daisyui/theme' {
+    name:                      'growth';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FFFBF4;
+    --color-base-300:          #EDE7E0;
+    --color-base-content:      #331F14;
+    --color-primary:           #F97316;
+    --color-primary-content:   #331F14;
+    --color-secondary:         #7C3AED;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #10B981;
+    --color-accent-content:    #331F14;
+    --color-neutral:           #4E3B30;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0EA5E9;
+    --color-info-content:      #331F14;
+    --color-success:           #4D9A5F;
+    --color-success-content:   #331F14;
+    --color-warning:           #C4A446;
+    --color-warning-content:   #331F14;
+    --color-error:             #E11D48;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FFFBF4;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'growth-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #32261A;
+    --color-base-200:          #271C12;
+    --color-base-300:          #40352A;
+    --color-base-content:      #F7EDE2;
+    --color-primary:           #FB923C;
+    --color-primary-content:   #271C12;
+    --color-secondary:         #A78BFA;
+    --color-secondary-content: #271C12;
+    --color-accent:            #34D399;
+    --color-accent-content:    #271C12;
+    --color-neutral:           #4C4034;
+    --color-neutral-content:   #F7EDE2;
+    --color-info:              #38BDF8;
+    --color-info-content:      #271C12;
+    --color-success:           #64A870;
+    --color-success-content:   #271C12;
+    --color-warning:           #C8A854;
+    --color-warning-content:   #271C12;
+    --color-error:             #FB7185;
+    --color-error-content:     #271C12;
+    --root-bg:                 #271C12;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* commerce / commerce-dark — 業種特化 · EC・リテール・マーケットプレイス (commerce — EC / リテール) */
+
+@plugin 'daisyui/theme' {
+    name:                      'commerce';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FBFAF8;
+    --color-base-300:          #E8E7E4;
+    --color-base-content:      #2A2620;
+    --color-primary:           #E8590C;
+    --color-primary-content:   #2A2620;
+    --color-secondary:         #1D8A5A;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #2E86AB;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #45413B;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC3;
+    --color-info-content:      #2A2620;
+    --color-success:           #4C9A5F;
+    --color-success-content:   #2A2620;
+    --color-warning:           #CEA94F;
+    --color-warning-content:   #2A2620;
+    --color-error:             #D14B42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FBFAF8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'commerce-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2C2721;
+    --color-base-200:          #221E19;
+    --color-base-300:          #3B3731;
+    --color-base-content:      #F4EFE8;
+    --color-primary:           #FB8A3C;
+    --color-primary-content:   #221E19;
+    --color-secondary:         #3FBF87;
+    --color-secondary-content: #221E19;
+    --color-accent:            #55B3D9;
+    --color-accent-content:    #221E19;
+    --color-neutral:           #46413B;
+    --color-neutral-content:   #F4EFE8;
+    --color-info:              #609CCE;
+    --color-info-content:      #221E19;
+    --color-success:           #62A971;
+    --color-success-content:   #221E19;
+    --color-warning:           #E0C070;
+    --color-warning-content:   #221E19;
+    --color-error:             #D4625C;
+    --color-error-content:     #221E19;
+    --root-bg:                 #221E19;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* education / education-dark — 業種特化 · EdTech・学習サービス (education — EdTech / 学習) */
+
+@plugin 'daisyui/theme' {
+    name:                      'education';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F7FAFF;
+    --color-base-300:          #E3E8EF;
+    --color-base-content:      #1F2A44;
+    --color-primary:           #2563EB;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #F59E0B;
+    --color-secondary-content: #1F2A44;
+    --color-accent:            #10B981;
+    --color-accent-content:    #1F2A44;
+    --color-neutral:           #3B455E;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC3;
+    --color-info-content:      #1F2A44;
+    --color-success:           #4B9A60;
+    --color-success-content:   #1F2A44;
+    --color-warning:           #C4A448;
+    --color-warning-content:   #1F2A44;
+    --color-error:             #D14B43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F7FAFF;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'education-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1C2540;
+    --color-base-200:          #141B2E;
+    --color-base-300:          #2D3447;
+    --color-base-content:      #EAF0FB;
+    --color-primary:           #5B8DEF;
+    --color-primary-content:   #141B2E;
+    --color-secondary:         #FBBF24;
+    --color-secondary-content: #141B2E;
+    --color-accent:            #34D399;
+    --color-accent-content:    #141B2E;
+    --color-neutral:           #36405A;
+    --color-neutral-content:   #EAF0FB;
+    --color-info:              #5D9BD1;
+    --color-info-content:      #141B2E;
+    --color-success:           #60A875;
+    --color-success-content:   #141B2E;
+    --color-warning:           #C5A95A;
+    --color-warning-content:   #141B2E;
+    --color-error:             #D2625F;
+    --color-error-content:     #141B2E;
+    --root-bg:                 #141B2E;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* legal / legal-dark — 業種特化 · 法務・士業・契約管理 (legal — 法務 / 士業) */
+
+@plugin 'daisyui/theme' {
+    name:                      'legal';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F8F7F5;
+    --color-base-300:          #E6E4E2;
+    --color-base-content:      #2B2624;
+    --color-primary:           #6B1F2A;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #3A4A5A;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #B08A2E;
+    --color-accent-content:    #2B2624;
+    --color-neutral:           #46413F;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC2;
+    --color-info-content:      #2B2624;
+    --color-success:           #277261;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #C4A347;
+    --color-warning-content:   #2B2624;
+    --color-error:             #D14A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F8F7F5;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'legal-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2A2523;
+    --color-base-200:          #201C1B;
+    --color-base-300:          #393433;
+    --color-base-content:      #F1ECE9;
+    --color-primary:           #C05A6A;
+    --color-primary-content:   #201C1B;
+    --color-secondary:         #7E96AC;
+    --color-secondary-content: #201C1B;
+    --color-accent:            #D9B45B;
+    --color-accent-content:    #201C1B;
+    --color-neutral:           #443F3C;
+    --color-neutral-content:   #F1ECE9;
+    --color-info:              #5F9BCE;
+    --color-info-content:      #201C1B;
+    --color-success:           #4FA898;
+    --color-success-content:   #201C1B;
+    --color-warning:           #C7A856;
+    --color-warning-content:   #201C1B;
+    --color-error:             #D4625C;
+    --color-error-content:     #201C1B;
+    --root-bg:                 #201C1B;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* logistics / logistics-dark — 業種特化 · 物流・配送・モビリティ (logistics — 物流 / モビリティ) */
+
+@plugin 'daisyui/theme' {
+    name:                      'logistics';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F6F7F8;
+    --color-base-300:          #E3E4E6;
+    --color-base-content:      #22272E;
+    --color-primary:           #F26419;
+    --color-primary-content:   #22272E;
+    --color-secondary:         #2E4057;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #1D8A9A;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3D4248;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC3;
+    --color-info-content:      #22272E;
+    --color-success:           #4B995F;
+    --color-success-content:   #22272E;
+    --color-warning:           #C7A252;
+    --color-warning-content:   #22272E;
+    --color-error:             #D04A43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F6F7F8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'logistics-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #202730;
+    --color-base-200:          #171B20;
+    --color-base-300:          #303439;
+    --color-base-content:      #ECEFF3;
+    --color-primary:           #FB8A4C;
+    --color-primary-content:   #171B20;
+    --color-secondary:         #7E96AC;
+    --color-secondary-content: #171B20;
+    --color-accent:            #3FB7CB;
+    --color-accent-content:    #171B20;
+    --color-neutral:           #3A414A;
+    --color-neutral-content:   #ECEFF3;
+    --color-info:              #5E9BCF;
+    --color-info-content:      #171B20;
+    --color-success:           #60A872;
+    --color-success-content:   #171B20;
+    --color-warning:           #E0C070;
+    --color-warning-content:   #171B20;
+    --color-error:             #D3625D;
+    --color-error-content:     #171B20;
+    --root-bg:                 #171B20;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* media / media-dark — 業種特化 · メディア・出版・ニュース (media — メディア / 出版) */
+
+@plugin 'daisyui/theme' {
+    name:                      'media';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #F7F7F7;
+    --color-base-200:          #FFFFFF;
+    --color-base-300:          #E9E9E9;
+    --color-base-content:      #111111;
+    --color-primary:           #C41E2F;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #1A1A1A;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #0F62AC;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #2E2E2E;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488DC3;
+    --color-info-content:      #111111;
+    --color-success:           #1D8A5A;
+    --color-success-content:   #111111;
+    --color-warning:           #B08A2E;
+    --color-warning-content:   #111111;
+    --color-error:             #D14B43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FFFFFF;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'media-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1D1D1D;
+    --color-base-200:          #131313;
+    --color-base-300:          #2D2D2D;
+    --color-base-content:      #F2F2F2;
+    --color-primary:           #F0455A;
+    --color-primary-content:   #131313;
+    --color-secondary:         #E0E0E0;
+    --color-secondary-content: #131313;
+    --color-accent:            #4F9CE0;
+    --color-accent-content:    #131313;
+    --color-neutral:           #383838;
+    --color-neutral-content:   #F2F2F2;
+    --color-info:              #5D9ACD;
+    --color-info-content:      #131313;
+    --color-success:           #3FBF87;
+    --color-success-content:   #131313;
+    --color-warning:           #D9B45B;
+    --color-warning-content:   #131313;
+    --color-error:             #D2615B;
+    --color-error-content:     #131313;
+    --root-bg:                 #131313;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* security / security-dark — 業種特化 · セキュリティ・監査・認証 (security — セキュリティ / 監査) */
+
+@plugin 'daisyui/theme' {
+    name:                      'security';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F5F7F6;
+    --color-base-300:          #E1E4E3;
+    --color-base-content:      #1B2420;
+    --color-primary:           #166D4D;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #37474F;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #C0392B;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #373F3B;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0E7FA8;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4B995F;
+    --color-success-content:   #1B2420;
+    --color-warning:           #B08A2E;
+    --color-warning-content:   #1B2420;
+    --color-error:             #D04A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F5F7F6;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'security-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #182226;
+    --color-base-200:          #10171A;
+    --color-base-300:          #293033;
+    --color-base-content:      #E7F0EB;
+    --color-primary:           #35C78B;
+    --color-primary-content:   #10171A;
+    --color-secondary:         #78909C;
+    --color-secondary-content: #10171A;
+    --color-accent:            #F0605A;
+    --color-accent-content:    #10171A;
+    --color-neutral:           #323C40;
+    --color-neutral-content:   #E7F0EB;
+    --color-info:              #3FB7CB;
+    --color-info-content:      #10171A;
+    --color-success:           #5FA872;
+    --color-success-content:   #10171A;
+    --color-warning:           #D9B45B;
+    --color-warning-content:   #10171A;
+    --color-error:             #D2625C;
+    --color-error-content:     #10171A;
+    --root-bg:                 #10171A;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* kids / kids-dark — 業種特化 · 子ども・ファミリー向け (kids — 子ども / ファミリー) */
+
+@plugin 'daisyui/theme' {
+    name:                      'kids';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FFFDF5;
+    --color-base-300:          #EDEBE3;
+    --color-base-content:      #35302E;
+    --color-primary:           #FF6B6B;
+    --color-primary-content:   #35302E;
+    --color-secondary:         #4ECDC4;
+    --color-secondary-content: #35302E;
+    --color-accent:            #FFD93D;
+    --color-accent-content:    #35302E;
+    --color-neutral:           #504B48;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #6C8DFA;
+    --color-info-content:      #35302E;
+    --color-success:           #4C9A5F;
+    --color-success-content:   #35302E;
+    --color-warning:           #C4A446;
+    --color-warning-content:   #35302E;
+    --color-error:             #D14B42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FFFDF5;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'kids-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2F2A3D;
+    --color-base-200:          #262230;
+    --color-base-300:          #3F3B49;
+    --color-base-content:      #F5F1FA;
+    --color-primary:           #FF8787;
+    --color-primary-content:   #262230;
+    --color-secondary:         #6EE7DE;
+    --color-secondary-content: #262230;
+    --color-accent:            #FFE066;
+    --color-accent-content:    #262230;
+    --color-neutral:           #494456;
+    --color-neutral-content:   #F5F1FA;
+    --color-info:              #8FA8FF;
+    --color-info-content:      #262230;
+    --color-success:           #63A974;
+    --color-success-content:   #262230;
+    --color-warning:           #C8A95A;
+    --color-warning-content:   #262230;
+    --color-error:             #D5635F;
+    --color-error-content:     #262230;
+    --root-bg:                 #262230;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* wellness / wellness-dark — 業種特化 · ヨガ・瞑想・メンタルケア (wellness — ヨガ / メンタルケア) */
+
+@plugin 'daisyui/theme' {
+    name:                      'wellness';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F8F7F2;
+    --color-base-300:          #E6E5E0;
+    --color-base-content:      #2E2F27;
+    --color-primary:           #7C8F62;
+    --color-primary-content:   #2E2F27;
+    --color-secondary:         #9A85C0;
+    --color-secondary-content: #2E2F27;
+    --color-accent:            #C7A252;
+    --color-accent-content:    #2E2F27;
+    --color-neutral:           #484941;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0E8FA3;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4C995F;
+    --color-success-content:   #2E2F27;
+    --color-warning:           #C4A346;
+    --color-warning-content:   #2E2F27;
+    --color-error:             #D14A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F8F7F2;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'wellness-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2B2E25;
+    --color-base-200:          #22241D;
+    --color-base-300:          #3B3C35;
+    --color-base-content:      #F0F1E8;
+    --color-primary:           #A5BC85;
+    --color-primary-content:   #22241D;
+    --color-secondary:         #B7A0E0;
+    --color-secondary-content: #22241D;
+    --color-accent:            #E0C070;
+    --color-accent-content:    #22241D;
+    --color-neutral:           #45483E;
+    --color-neutral-content:   #F0F1E8;
+    --color-info:              #3FB7CB;
+    --color-info-content:      #22241D;
+    --color-success:           #62A972;
+    --color-success-content:   #22241D;
+    --color-warning:           #C7A956;
+    --color-warning-content:   #22241D;
+    --color-error:             #D4635C;
+    --color-error-content:     #22241D;
+    --root-bg:                 #22241D;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* civic / civic-dark — 業種特化 · 行政・公共・自治体 (civic — 行政 / 公共) */
+
+@plugin 'daisyui/theme' {
+    name:                      'civic';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F6F8FA;
+    --color-base-300:          #E3E5E8;
+    --color-base-content:      #1F2933;
+    --color-primary:           #145DA0;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #5A7184;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #1D8A5A;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3B444D;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC3;
+    --color-info-content:      #1F2933;
+    --color-success:           #4B9960;
+    --color-success-content:   #1F2933;
+    --color-warning:           #C4A447;
+    --color-warning-content:   #1F2933;
+    --color-error:             #B3382C;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F6F8FA;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'civic-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1B2530;
+    --color-base-200:          #121A22;
+    --color-base-300:          #2B333B;
+    --color-base-content:      #E9F0F6;
+    --color-primary:           #4F94D4;
+    --color-primary-content:   #121A22;
+    --color-secondary:         #94A9BC;
+    --color-secondary-content: #121A22;
+    --color-accent:            #3FBF87;
+    --color-accent-content:    #121A22;
+    --color-neutral:           #353F4A;
+    --color-neutral-content:   #E9F0F6;
+    --color-info:              #5D9BCF;
+    --color-info-content:      #121A22;
+    --color-success:           #5FA873;
+    --color-success-content:   #121A22;
+    --color-warning:           #C5A858;
+    --color-warning-content:   #121A22;
+    --color-error:             #F0605A;
+    --color-error-content:     #121A22;
+    --root-bg:                 #121A22;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* atelier / atelier-dark — 業種特化 · 高級ブランド・D2C・ジュエリー (atelier — 高級ブランド / D2C) */
+
+@plugin 'daisyui/theme' {
+    name:                      'atelier';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FAF8F5;
+    --color-base-300:          #E7E4E1;
+    --color-base-content:      #23201C;
+    --color-primary:           #1A1A1A;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #B08A2E;
+    --color-secondary-content: #23201C;
+    --color-accent:            #6B1F2A;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3E3B37;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC2;
+    --color-info-content:      #23201C;
+    --color-success:           #4C995F;
+    --color-success-content:   #23201C;
+    --color-warning:           #C4A347;
+    --color-warning-content:   #23201C;
+    --color-error:             #D14A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FAF8F5;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'atelier-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #232019;
+    --color-base-200:          #191715;
+    --color-base-300:          #32302D;
+    --color-base-content:      #F2EFE9;
+    --color-primary:           #E8E2D8;
+    --color-primary-content:   #191715;
+    --color-secondary:         #D9B45B;
+    --color-secondary-content: #191715;
+    --color-accent:            #C05A6A;
+    --color-accent-content:    #191715;
+    --color-neutral:           #3D3A33;
+    --color-neutral-content:   #F2EFE9;
+    --color-info:              #5E9BCD;
+    --color-info-content:      #191715;
+    --color-success:           #61A871;
+    --color-success-content:   #191715;
+    --color-warning:           #C6A855;
+    --color-warning-content:   #191715;
+    --color-error:             #D3615C;
+    --color-error-content:     #191715;
+    --root-bg:                 #191715;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* estate / estate-dark — 業種特化 · 不動産・建築・設計 (estate — 不動産 / 建築 — ブループリント) */
+
+@plugin 'daisyui/theme' {
+    name:                      'estate';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F5F8FB;
+    --color-base-300:          #E2E6EA;
+    --color-base-content:      #1E2A38;
+    --color-primary:           #1F5FA8;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #E8791D;
+    --color-secondary-content: #1E2A38;
+    --color-accent:            #16717C;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3A4552;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #478CC3;
+    --color-info-content:      #1E2A38;
+    --color-success:           #4B9960;
+    --color-success-content:   #1E2A38;
+    --color-warning:           #C4A448;
+    --color-warning-content:   #1E2A38;
+    --color-error:             #B3382C;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F5F8FB;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'estate-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1D2735;
+    --color-base-200:          #141C26;
+    --color-base-300:          #2D353F;
+    --color-base-content:      #E9F0F8;
+    --color-primary:           #5C97D6;
+    --color-primary-content:   #141C26;
+    --color-secondary:         #FB9A4C;
+    --color-secondary-content: #141C26;
+    --color-accent:            #3FB7CB;
+    --color-accent-content:    #141C26;
+    --color-neutral:           #37414F;
+    --color-neutral-content:   #E9F0F8;
+    --color-info:              #5D9BD0;
+    --color-info-content:      #141C26;
+    --color-success:           #60A873;
+    --color-success-content:   #141C26;
+    --color-warning:           #C5A958;
+    --color-warning-content:   #141C26;
+    --color-error:             #F0605A;
+    --color-error-content:     #141C26;
+    --root-bg:                 #141C26;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* food / food-dark — 業種特化 · 飲食・フードデリバリー (food — 飲食 / フードテック — シトラスフレッシュ) */
+
+@plugin 'daisyui/theme' {
+    name:                      'food';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FFFCF5;
+    --color-base-300:          #EDE9E1;
+    --color-base-content:      #33291C;
+    --color-primary:           #FF8C42;
+    --color-primary-content:   #33291C;
+    --color-secondary:         #97B94E;
+    --color-secondary-content: #33291C;
+    --color-accent:            #E8443A;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #4E4438;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0E8FA3;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4D9A5F;
+    --color-success-content:   #33291C;
+    --color-warning:           #C4A446;
+    --color-warning-content:   #33291C;
+    --color-error:             #D14B42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FFFCF5;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'food-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #322817;
+    --color-base-200:          #271F14;
+    --color-base-300:          #40382C;
+    --color-base-content:      #F7EEE0;
+    --color-primary:           #FFA35C;
+    --color-primary-content:   #271F14;
+    --color-secondary:         #B3D06A;
+    --color-secondary-content: #271F14;
+    --color-accent:            #F0655C;
+    --color-accent-content:    #271F14;
+    --color-neutral:           #4C4231;
+    --color-neutral-content:   #F7EEE0;
+    --color-info:              #3FB7CB;
+    --color-info-content:      #271F14;
+    --color-success:           #63A970;
+    --color-success-content:   #271F14;
+    --color-warning:           #C8A954;
+    --color-warning-content:   #271F14;
+    --color-error:             #D4625B;
+    --color-error-content:     #271F14;
+    --root-bg:                 #271F14;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* travel / travel-dark — 業種特化 · 旅行・ホテル・リゾート (travel — 旅行 / ホスピタリティ — トロピックラグーン) */
+
+@plugin 'daisyui/theme' {
+    name:                      'travel';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F3FBFA;
+    --color-base-300:          #E0E9E9;
+    --color-base-content:      #1C3335;
+    --color-primary:           #12A5AB;
+    --color-primary-content:   #1C3335;
+    --color-secondary:         #FF7E6B;
+    --color-secondary-content: #1C3335;
+    --color-accent:            #D9A62E;
+    --color-accent-content:    #1C3335;
+    --color-neutral:           #384D4F;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #478CC3;
+    --color-info-content:      #1C3335;
+    --color-success:           #4C9A3F;
+    --color-success-content:   #1C3335;
+    --color-warning:           #C3A447;
+    --color-warning-content:   #1C3335;
+    --color-error:             #D04B43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F3FBFA;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'travel-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #173135;
+    --color-base-200:          #0F2426;
+    --color-base-300:          #293D3F;
+    --color-base-content:      #E6F5F5;
+    --color-primary:           #3FC7CD;
+    --color-primary-content:   #0F2426;
+    --color-secondary:         #FF9A88;
+    --color-secondary-content: #0F2426;
+    --color-accent:            #E8C15A;
+    --color-accent-content:    #0F2426;
+    --color-neutral:           #334B4E;
+    --color-neutral-content:   #E6F5F5;
+    --color-info:              #5C9CD0;
+    --color-info-content:      #0F2426;
+    --color-success:           #7BC060;
+    --color-success-content:   #0F2426;
+    --color-warning:           #C5AA58;
+    --color-warning-content:   #0F2426;
+    --color-error:             #D3645E;
+    --color-error-content:     #0F2426;
+    --root-bg:                 #0F2426;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* creative / creative-dark — 業種特化 · クリエイティブツール・デザイン (creative — クリエイティブツール — インク×ハイライター) */
+
+@plugin 'daisyui/theme' {
+    name:                      'creative';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #F8F8F6;
+    --color-base-200:          #FFFFFF;
+    --color-base-300:          #EAEAE9;
+    --color-base-content:      #191913;
+    --color-primary:           #1A1A1A;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #9DB80E;
+    --color-secondary-content: #191913;
+    --color-accent:            #FF4D6D;
+    --color-accent-content:    #191913;
+    --color-neutral:           #363630;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0070F3;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #22C55E;
+    --color-success-content:   #191913;
+    --color-warning:           #C4A448;
+    --color-warning-content:   #191913;
+    --color-error:             #D14B43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FFFFFF;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'creative-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1E1E1A;
+    --color-base-200:          #141412;
+    --color-base-300:          #2E2E2B;
+    --color-base-content:      #F4F4EE;
+    --color-primary:           #EFEFE7;
+    --color-primary-content:   #141412;
+    --color-secondary:         #D4E157;
+    --color-secondary-content: #141412;
+    --color-accent:            #FF6B87;
+    --color-accent-content:    #141412;
+    --color-neutral:           #393935;
+    --color-neutral-content:   #F4F4EE;
+    --color-info:              #3291FF;
+    --color-info-content:      #141412;
+    --color-success:           #4ADE80;
+    --color-success-content:   #141412;
+    --color-warning:           #C5A755;
+    --color-warning-content:   #141412;
+    --color-error:             #D2615B;
+    --color-error-content:     #141412;
+    --root-bg:                 #141412;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* agri / agri-dark — 業種特化 · 農業・植物工場・グリーンテック (agri — 農業 / グリーンテック — ハイドロポニック) */
+
+@plugin 'daisyui/theme' {
+    name:                      'agri';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F6FAF8;
+    --color-base-300:          #E3E7E5;
+    --color-base-content:      #1E2A26;
+    --color-primary:           #00B37E;
+    --color-primary-content:   #1E2A26;
+    --color-secondary:         #4A6572;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #E8A020;
+    --color-accent-content:    #1E2A26;
+    --color-neutral:           #3A4541;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0E8FA3;
+    --color-info-content:      #1E2A26;
+    --color-success:           #4B9A5F;
+    --color-success-content:   #1E2A26;
+    --color-warning:           #C4A447;
+    --color-warning-content:   #1E2A26;
+    --color-error:             #D14B43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F6FAF8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'agri-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1B2622;
+    --color-base-200:          #121B18;
+    --color-base-300:          #2B3431;
+    --color-base-content:      #E8F3EE;
+    --color-primary:           #2DD49B;
+    --color-primary-content:   #121B18;
+    --color-secondary:         #7E96A3;
+    --color-secondary-content: #121B18;
+    --color-accent:            #F0B840;
+    --color-accent-content:    #121B18;
+    --color-neutral:           #35403C;
+    --color-neutral-content:   #E8F3EE;
+    --color-info:              #3FB7CB;
+    --color-info-content:      #121B18;
+    --color-success:           #60A871;
+    --color-success-content:   #121B18;
+    --color-warning:           #C5A856;
+    --color-warning-content:   #121B18;
+    --color-error:             #D2625C;
+    --color-error-content:     #121B18;
+    --root-bg:                 #121B18;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* factory / factory-dark — 業種特化 · 製造・重工業・設備 (factory — 製造 / インダストリアル — スチールワークス) */
+
+@plugin 'daisyui/theme' {
+    name:                      'factory';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F4F6F8;
+    --color-base-300:          #E1E4E6;
+    --color-base-content:      #232A31;
+    --color-primary:           #3E5C76;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #E86A17;
+    --color-secondary-content: #232A31;
+    --color-accent:            #1D8A9A;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3E444B;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #478CC3;
+    --color-info-content:      #232A31;
+    --color-success:           #4B9960;
+    --color-success-content:   #232A31;
+    --color-warning:           #B08A2E;
+    --color-warning-content:   #232A31;
+    --color-error:             #D04A43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F4F6F8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'factory-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #1F262E;
+    --color-base-200:          #161B20;
+    --color-base-300:          #2F3439;
+    --color-base-content:      #ECF0F4;
+    --color-primary:           #7FA0BE;
+    --color-primary-content:   #161B20;
+    --color-secondary:         #FB8A3C;
+    --color-secondary-content: #161B20;
+    --color-accent:            #3FB7CB;
+    --color-accent-content:    #161B20;
+    --color-neutral:           #394048;
+    --color-neutral-content:   #ECF0F4;
+    --color-info:              #5E9BCF;
+    --color-info-content:      #161B20;
+    --color-success:           #60A872;
+    --color-success-content:   #161B20;
+    --color-warning:           #D9B45B;
+    --color-warning-content:   #161B20;
+    --color-error:             #D3625D;
+    --color-error-content:     #161B20;
+    --root-bg:                 #161B20;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-zen / mood-zen-dark — 美学系 (mood) · 和風・工芸・旅館・ミニマル志向 (mood-zen — 侘び寂び) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-zen';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F7F5F0;
+    --color-base-300:          #E5E3DE;
+    --color-base-content:      #2E2C28;
+    --color-primary:           #5E6B54;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #8A7B64;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #B3432B;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #484642;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488CC2;
+    --color-info-content:      #2E2C28;
+    --color-success:           #4C995F;
+    --color-success-content:   #2E2C28;
+    --color-warning:           #C4A346;
+    --color-warning-content:   #2E2C28;
+    --color-error:             #D04A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F7F5F0;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-zen-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2A2825;
+    --color-base-200:          #211F1C;
+    --color-base-300:          #393734;
+    --color-base-content:      #EFEDE7;
+    --color-primary:           #8FA283;
+    --color-primary-content:   #211F1C;
+    --color-secondary:         #B3A186;
+    --color-secondary-content: #211F1C;
+    --color-accent:            #D96C4F;
+    --color-accent-content:    #211F1C;
+    --color-neutral:           #44423E;
+    --color-neutral-content:   #EFEDE7;
+    --color-info:              #5F9CCF;
+    --color-info-content:      #211F1C;
+    --color-success:           #62A972;
+    --color-success-content:   #211F1C;
+    --color-warning:           #C7A956;
+    --color-warning-content:   #211F1C;
+    --color-error:             #D4635C;
+    --color-error-content:     #211F1C;
+    --root-bg:                 #211F1C;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-botanical / mood-botanical-dark — 美学系 (mood) · 花・園芸・オーガニック・コスメ (mood-botanical — 植物園) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-botanical';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F6F8F3;
+    --color-base-300:          #E3E6E1;
+    --color-base-content:      #24312A;
+    --color-primary:           #2F6B4A;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #7A9B57;
+    --color-secondary-content: #24312A;
+    --color-accent:            #C75B7A;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3F4B44;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #4A7C8C;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4B995F;
+    --color-success-content:   #24312A;
+    --color-warning:           #B08A2E;
+    --color-warning-content:   #24312A;
+    --color-error:             #D14A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F6F8F3;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-botanical-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #202B24;
+    --color-base-200:          #17211B;
+    --color-base-300:          #303A34;
+    --color-base-content:      #E9F1EC;
+    --color-primary:           #5FA582;
+    --color-primary-content:   #17211B;
+    --color-secondary:         #9FBE72;
+    --color-secondary-content: #17211B;
+    --color-accent:            #E08BA4;
+    --color-accent-content:    #17211B;
+    --color-neutral:           #3A453E;
+    --color-neutral-content:   #E9F1EC;
+    --color-info:              #74A8B8;
+    --color-info-content:      #17211B;
+    --color-success:           #60A971;
+    --color-success-content:   #17211B;
+    --color-warning:           #D9B45B;
+    --color-warning-content:   #17211B;
+    --color-error:             #D3635C;
+    --color-error-content:     #17211B;
+    --root-bg:                 #17211B;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* mood-pop / mood-pop-dark — 美学系 (mood) · エンタメ・若年層・キャンペーン LP (mood-pop — ドーパミン) */
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-pop';
+    default:                   false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FFFDF8;
+    --color-base-300:          #ECE9E6;
+    --color-base-content:      #2B2430;
+    --color-primary:           #FF5DA2;
+    --color-primary-content:   #2B2430;
+    --color-secondary:         #00C2D1;
+    --color-secondary-content: #2B2430;
+    --color-accent:            #FFC300;
+    --color-accent-content:    #2B2430;
+    --color-neutral:           #46404A;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #498DC3;
+    --color-info-content:      #2B2430;
+    --color-success:           #22CD89;
+    --color-success-content:   #2B2430;
+    --color-warning:           #C4A447;
+    --color-warning-content:   #2B2430;
+    --color-error:             #D14B42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FFFDF8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'mood-pop-dark';
+    default:                   false;
+    color-scheme:              'dark';
+    --color-base-100:          #2E2738;
+    --color-base-200:          #241E2E;
+    --color-base-300:          #3D3747;
+    --color-base-content:      #F6F0FA;
+    --color-primary:           #FF7EB8;
+    --color-primary-content:   #241E2E;
+    --color-secondary:         #3FD8E5;
+    --color-secondary-content: #241E2E;
+    --color-accent:            #FFD34D;
+    --color-accent-content:    #241E2E;
+    --color-neutral:           #484152;
+    --color-neutral-content:   #F6F0FA;
+    --color-info:              #609BD1;
+    --color-info-content:      #241E2E;
+    --color-success:           #5FE8B0;
+    --color-success-content:   #241E2E;
+    --color-warning:           #C7A95A;
+    --color-warning-content:   #241E2E;
+    --color-error:             #D4625F;
+    --color-error-content:     #241E2E;
+    --root-bg:                 #241E2E;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+/* ── END GENERATED THEME LINEUP ── */

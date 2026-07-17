@@ -14,6 +14,7 @@
     "ref": "npm run gen:fixture && npm run build:ref && npm run verify && npm run capture && npm run selfcheck",
     "build:dist": "tailwindcss -i src/dist.entry.css -o dist/pinion-ui.css",
     "gate:dist": "node harness/capture.mjs --css dist/pinion-ui.css --label dist --out harness/golden/dist.json && node harness/diff.mjs harness/golden/reference.json harness/golden/dist.json",
+    "gen:themes": "node harness/gen-themes.mjs",
     "eject-table": "node harness/eject-table.mjs",
     "dist": "npm run build:dist && npm run gate:dist"
   },

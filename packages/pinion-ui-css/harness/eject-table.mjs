@@ -38,7 +38,13 @@ const outPath = resolve(root, arg('out', '../../src/resources/eject-table.json')
 
 const TUNES = ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft'];
 const STRENGTHS = ['xs', 'sm', 'md', 'lg', 'xl'];
-const THEMES = ['pinion', 'reactive'];
+/* v0.6.0: colors are captured for the FULL lineup (36 × light/dark from
+   lineup.json) + reactive, so `ui:eject --theme=<any shipped theme>` works. */
+const lineup = JSON.parse(readFileSync(join(root, '..', '..', 'src', 'resources', 'themes', 'lineup.json'), 'utf8'));
+const THEMES = [
+  ...lineup.themes.flatMap((t) => [t.name === 'pinion' ? 'pinion-light' : t.name, `${t.name}-dark`]),
+  'reactive',
+];
 
 /* token -> [cssProperty to read, extra inline css needed] */
 const SIZES13 = ['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'];
@@ -115,7 +121,7 @@ async function captureColors(theme) {
 const tokens = {};
 for (const tune of TUNES) {
   for (const strength of STRENGTHS) {
-    tokens[`${tune}|${strength}`] = await captureTokens('pinion', tune, strength);
+    tokens[`${tune}|${strength}`] = await captureTokens('pinion-light', tune, strength);
   }
 }
 

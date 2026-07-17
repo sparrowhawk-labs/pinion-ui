@@ -9,7 +9,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { TUNE_UTILITIES } from './probes.mjs';
+import { TUNE_UTILITIES, THEMES } from './probes.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const cssPath = join(here, '..', 'build', 'reference.css');
@@ -26,8 +26,9 @@ const utilities = [...new Set(TUNE_UTILITIES)];
 const missing = utilities.filter((u) => !css.includes(`.${u}`));
 
 const structural = [
-  ['theme: pinion', css.includes('[data-theme="pinion"]')],
-  ['theme: reactive', css.includes('[data-theme="reactive"]')],
+  /* THEMES from probes.mjs — the representative sweep; verifies the lineup
+     blocks (light + dark + a non-brand pair member) AND reactive survived. */
+  ...THEMES.map((t) => [`theme: ${t}`, css.includes(`[data-theme="${t}"]`) || css.includes(`[data-theme=${t}]`)]),
   ['font: PixelMplus10', css.includes('PixelMplus10')],
   ['font: PixelMplus12', css.includes('PixelMplus12')],
   ['@font-face present', css.includes('@font-face')],

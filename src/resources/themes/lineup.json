@@ -1,0 +1,1207 @@
+{
+  "lockedAt": "2026-07-17",
+  "decision": {
+    "daisyuiThemes": "all off — pinion-ui はオリジナル theme のみ出荷（ユーザー確定）",
+    "naming": "<name> = light / <name>-dark = dark。ブランド既定のみ pinion-light / pinion-dark で旧 pinion テーマは廃棄",
+    "defaultMode": "light",
+    "logoFinal": "docs/logo-candidates/round4/j2-v14-ivory-clay.png",
+    "moodPrefix": "mood- = ジャンル非依存の美学系テーマ（2026-07-17 確定）。業種/用途テーマは裸名",
+    "finalizedAt": "2026-07-17 (balance 棚卸し + mood 追加まで反映・最終確定)"
+  },
+  "themes": [
+    {
+      "name": "pinion",
+      "source": "Claude Verdigris",
+      "category": "ブランド既定",
+      "llmTrigger": "迷ったらこれ。pinion-ui の顔（light 既定）",
+      "brandDefault": true,
+      "light": {
+        "bg": "#F5F0E8",
+        "panel": "#FFFFFF",
+        "fg": "#29261F",
+        "muted": "#8C8474",
+        "primary": "#0F766E",
+        "secondary": "#C05B2E",
+        "accent": "#A16207",
+        "extra": [
+          "#5F8F6B",
+          "#6B5CA5"
+        ]
+      },
+      "dark": {
+        "bg": "#262421",
+        "panel": "#2F2C28",
+        "fg": "#F0EAE0",
+        "muted": "#9C927F",
+        "primary": "#2DA88F",
+        "secondary": "#E07A4F",
+        "accent": "#D9A441",
+        "extra": [
+          "#93B478",
+          "#A28BE0"
+        ]
+      }
+    },
+    {
+      "name": "mood-monokai",
+      "source": "1. Monokai '80s",
+      "category": "美学系 (mood)",
+      "llmTrigger": "エディタ系・開発者向け UI",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FAF4F2",
+        "panel": "#FFFFFF",
+        "fg": "#29242A",
+        "muted": "#8D8A8E",
+        "primary": "#E14775",
+        "secondary": "#1C8CA8",
+        "accent": "#CC7A0A",
+        "extra": [
+          "#269D69",
+          "#7058BE",
+          "#E16032"
+        ]
+      },
+      "dark": {
+        "bg": "#2D2A2E",
+        "panel": "#221F22",
+        "fg": "#FCFCFA",
+        "muted": "#939293",
+        "primary": "#FF6188",
+        "secondary": "#78DCE8",
+        "accent": "#FFD866",
+        "extra": [
+          "#A9DC76",
+          "#AB9DF2",
+          "#FC9867"
+        ]
+      }
+    },
+    {
+      "name": "mood-synthwave",
+      "source": "2. SynthWave '84",
+      "category": "美学系 (mood)",
+      "llmTrigger": "ネオン・ゲーム・イベント",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FBF7FF",
+        "panel": "#FFFFFF",
+        "fg": "#2A2139",
+        "muted": "#8E82B5",
+        "primary": "#C736A2",
+        "secondary": "#0FA3A3",
+        "accent": "#C98A00",
+        "extra": [
+          "#D96A1F",
+          "#7C5FC9",
+          "#1FA06A"
+        ]
+      },
+      "dark": {
+        "bg": "#262335",
+        "panel": "#2A2139",
+        "fg": "#F4F0FF",
+        "muted": "#9E93C7",
+        "primary": "#FF7EDB",
+        "secondary": "#36F9F6",
+        "accent": "#FEDE5D",
+        "extra": [
+          "#FF8B39",
+          "#B893CE",
+          "#72F1B8"
+        ]
+      }
+    },
+    {
+      "name": "mood-vapor",
+      "source": "5. Vaporwave Pastel",
+      "category": "美学系 (mood)",
+      "llmTrigger": "ソフトなレトロ・Z世代向け",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FDF6FF",
+        "panel": "#FFFFFF",
+        "fg": "#3A2C55",
+        "muted": "#A292BE",
+        "primary": "#E36BC6",
+        "secondary": "#14A886",
+        "accent": "#E8843C",
+        "extra": [
+          "#8A6FE8",
+          "#2E8FC0",
+          "#7BA828"
+        ]
+      },
+      "dark": {
+        "bg": "#2B2140",
+        "panel": "#342A4C",
+        "fg": "#F3EEFF",
+        "muted": "#A79BC8",
+        "primary": "#FF9DE6",
+        "secondary": "#7FFFE0",
+        "accent": "#FFC49D",
+        "extra": [
+          "#B7A6FF",
+          "#9DE6FF",
+          "#D4FF9D"
+        ]
+      }
+    },
+    {
+      "name": "mood-bigblue",
+      "source": "11. Big Blue '81",
+      "category": "美学系 (mood)",
+      "llmTrigger": "エンタープライズ・B2B 堅め",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F4F4F0",
+        "panel": "#FFFFFF",
+        "fg": "#21242B",
+        "muted": "#8B909C",
+        "primary": "#0043CE",
+        "secondary": "#DA1E28",
+        "accent": "#8A3FFC",
+        "extra": [
+          "#007D79",
+          "#B28600"
+        ]
+      },
+      "dark": {
+        "bg": "#10141F",
+        "panel": "#181E2E",
+        "fg": "#E8ECF7",
+        "muted": "#8E97B3",
+        "primary": "#4589FF",
+        "secondary": "#FA4D56",
+        "accent": "#BE95FF",
+        "extra": [
+          "#08BDBA",
+          "#F1C21B"
+        ]
+      }
+    },
+    {
+      "name": "mood-neotokyo",
+      "source": "13. Neo-Tokyo Noir",
+      "category": "美学系 (mood)",
+      "llmTrigger": "和 × サイバー・ナイトライフ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F7F2EA",
+        "panel": "#FFFFFF",
+        "fg": "#26222B",
+        "muted": "#93899A",
+        "primary": "#D42B3A",
+        "secondary": "#16717C",
+        "accent": "#C99A2E",
+        "extra": [
+          "#7B4FE0",
+          "#E0157E"
+        ]
+      },
+      "dark": {
+        "bg": "#1C1620",
+        "panel": "#261E2C",
+        "fg": "#F4EDF7",
+        "muted": "#9A8CA8",
+        "primary": "#FF4757",
+        "secondary": "#2DD4BF",
+        "accent": "#F0C34E",
+        "extra": [
+          "#B893CE",
+          "#FF7EDB"
+        ]
+      }
+    },
+    {
+      "name": "payments",
+      "source": "S2. Slate Violet",
+      "category": "SaaS 実用",
+      "llmTrigger": "決済・フィンテック",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F6F8FB",
+        "panel": "#FFFFFF",
+        "fg": "#1A1F36",
+        "muted": "#8792A8",
+        "primary": "#635BFF",
+        "secondary": "#0FA3C8",
+        "accent": "#FF7A59",
+        "extra": [
+          "#16A34A",
+          "#E11D48"
+        ]
+      },
+      "dark": {
+        "bg": "#151929",
+        "panel": "#1D2338",
+        "fg": "#EAEEF7",
+        "muted": "#8B96B3",
+        "primary": "#8A84FF",
+        "secondary": "#38C7E3",
+        "accent": "#FF9578",
+        "extra": [
+          "#4ADE80",
+          "#FB7185"
+        ]
+      }
+    },
+    {
+      "name": "docs",
+      "source": "S3. Ivory Ink",
+      "category": "SaaS 実用",
+      "llmTrigger": "ドキュメント・ナレッジベース",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F7F6F3",
+        "panel": "#FFFFFF",
+        "fg": "#37352F",
+        "muted": "#9B9890",
+        "primary": "#2383E2",
+        "secondary": "#D9730D",
+        "accent": "#6940A5",
+        "extra": [
+          "#0F7B6C",
+          "#E03E3E"
+        ]
+      },
+      "dark": {
+        "bg": "#25241F",
+        "panel": "#2E2D27",
+        "fg": "#EFEEE9",
+        "muted": "#9D9A8F",
+        "primary": "#529CCA",
+        "secondary": "#FFA344",
+        "accent": "#9A6DD7",
+        "extra": [
+          "#4DAB9A",
+          "#FF7369"
+        ]
+      }
+    },
+    {
+      "name": "mono",
+      "source": "S4. Vercel Mono",
+      "category": "SaaS 実用",
+      "llmTrigger": "ミニマルツール・ポートフォリオ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFFFFF",
+        "panel": "#FAFAFA",
+        "fg": "#0A0A0A",
+        "muted": "#8F8F8F",
+        "primary": "#171717",
+        "secondary": "#0070F3",
+        "accent": "#7928CA",
+        "extra": [
+          "#50E3C2",
+          "#F5A623"
+        ]
+      },
+      "dark": {
+        "bg": "#0A0A0A",
+        "panel": "#141414",
+        "fg": "#F5F5F5",
+        "muted": "#7A7A7A",
+        "primary": "#EDEDED",
+        "secondary": "#3291FF",
+        "accent": "#BF5AF2",
+        "extra": [
+          "#50E3C2",
+          "#F5A623"
+        ]
+      }
+    },
+    {
+      "name": "ops",
+      "source": "S5. Forest Ops",
+      "category": "SaaS 実用",
+      "llmTrigger": "PM・運用・社内ツール",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FBFAF7",
+        "panel": "#FFFFFF",
+        "fg": "#26251F",
+        "muted": "#96917F",
+        "primary": "#1D7A46",
+        "secondary": "#8A5A2E",
+        "accent": "#C7A252",
+        "extra": [
+          "#2E86AB",
+          "#A855F7"
+        ]
+      },
+      "dark": {
+        "bg": "#1E211C",
+        "panel": "#272B25",
+        "fg": "#EEF0E9",
+        "muted": "#98A08C",
+        "primary": "#4CAF78",
+        "secondary": "#C89058",
+        "accent": "#E0C070",
+        "extra": [
+          "#5FA8D3",
+          "#C084FC"
+        ]
+      }
+    },
+    {
+      "name": "finance",
+      "source": "S6. Navy & Gold",
+      "category": "SaaS 実用",
+      "llmTrigger": "金融・法務エンタープライズ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F7F8FA",
+        "panel": "#FFFFFF",
+        "fg": "#14213D",
+        "muted": "#8C93A6",
+        "primary": "#1D3461",
+        "secondary": "#B08A2E",
+        "accent": "#2E86AB",
+        "extra": [
+          "#16A34A",
+          "#DC2626"
+        ]
+      },
+      "dark": {
+        "bg": "#0D1526",
+        "panel": "#152036",
+        "fg": "#E9EDF6",
+        "muted": "#8E99B3",
+        "primary": "#4F79C7",
+        "secondary": "#D9B45B",
+        "accent": "#55B3D9",
+        "extra": [
+          "#4ADE80",
+          "#F87171"
+        ]
+      }
+    },
+    {
+      "name": "people",
+      "source": "S7. Coral People",
+      "category": "SaaS 実用",
+      "llmTrigger": "HR・コミュニティ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFF9F5",
+        "panel": "#FFFFFF",
+        "fg": "#33261F",
+        "muted": "#A6907F",
+        "primary": "#E65F52",
+        "secondary": "#14A886",
+        "accent": "#F0B840",
+        "extra": [
+          "#7B5CB8",
+          "#2E86AB"
+        ]
+      },
+      "dark": {
+        "bg": "#261C17",
+        "panel": "#302520",
+        "fg": "#F5EBE4",
+        "muted": "#A98F7D",
+        "primary": "#F08074",
+        "secondary": "#35C7A3",
+        "accent": "#F5CB60",
+        "extra": [
+          "#A488D8",
+          "#5FA8D3"
+        ]
+      }
+    },
+    {
+      "name": "health",
+      "source": "S8. Calm Health",
+      "category": "SaaS 実用",
+      "llmTrigger": "医療・ウェルネス SaaS",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F4FAFA",
+        "panel": "#FFFFFF",
+        "fg": "#1C2B2D",
+        "muted": "#84999B",
+        "primary": "#0E8FA3",
+        "secondary": "#5FB57F",
+        "accent": "#E8843C",
+        "extra": [
+          "#6B5CA5",
+          "#DC2626"
+        ]
+      },
+      "dark": {
+        "bg": "#152325",
+        "panel": "#1D2E30",
+        "fg": "#E8F2F3",
+        "muted": "#7FA0A3",
+        "primary": "#3FB7CB",
+        "secondary": "#7FD09E",
+        "accent": "#F09E5F",
+        "extra": [
+          "#A28BE0",
+          "#F87171"
+        ]
+      }
+    },
+    {
+      "name": "analytics",
+      "source": "S9. Plum Analytics",
+      "category": "SaaS 実用",
+      "llmTrigger": "BI・データ可視化",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FAF8FF",
+        "panel": "#FFFFFF",
+        "fg": "#2A2440",
+        "muted": "#948CAE",
+        "primary": "#6D28D9",
+        "secondary": "#DB2777",
+        "accent": "#F59E0B",
+        "extra": [
+          "#0891B2",
+          "#16A34A"
+        ]
+      },
+      "dark": {
+        "bg": "#1B1727",
+        "panel": "#252032",
+        "fg": "#EFEBF9",
+        "muted": "#9289AC",
+        "primary": "#A78BFA",
+        "secondary": "#F472B6",
+        "accent": "#FBBF24",
+        "extra": [
+          "#22D3EE",
+          "#4ADE80"
+        ]
+      }
+    },
+    {
+      "name": "devtool",
+      "source": "S10. Slate Cyan",
+      "category": "SaaS 実用",
+      "llmTrigger": "開発者ツール・API 系",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F8FAFC",
+        "panel": "#FFFFFF",
+        "fg": "#0F172A",
+        "muted": "#8B97A8",
+        "primary": "#0891B2",
+        "secondary": "#475569",
+        "accent": "#E11D48",
+        "extra": [
+          "#16A34A",
+          "#F59E0B"
+        ]
+      },
+      "dark": {
+        "bg": "#0F172A",
+        "panel": "#1A2438",
+        "fg": "#E9EFF7",
+        "muted": "#8B99B0",
+        "primary": "#22D3EE",
+        "secondary": "#94A3B8",
+        "accent": "#FB7185",
+        "extra": [
+          "#4ADE80",
+          "#FBBF24"
+        ]
+      }
+    },
+    {
+      "name": "comms",
+      "source": "S11. Aubergine Comms",
+      "category": "SaaS 実用",
+      "llmTrigger": "チャット・コラボレーション",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FBF9FB",
+        "panel": "#FFFFFF",
+        "fg": "#2C2231",
+        "muted": "#9A8FA1",
+        "primary": "#611F69",
+        "secondary": "#2BAC76",
+        "accent": "#ECB22E",
+        "extra": [
+          "#36C5F0",
+          "#E01E5A"
+        ]
+      },
+      "dark": {
+        "bg": "#221726",
+        "panel": "#2C1F31",
+        "fg": "#F2ECF4",
+        "muted": "#A292AB",
+        "primary": "#B366C0",
+        "secondary": "#4FCF95",
+        "accent": "#F5C64E",
+        "extra": [
+          "#5FD3F5",
+          "#F06487"
+        ]
+      }
+    },
+    {
+      "name": "growth",
+      "source": "S12. Sunrise Growth",
+      "category": "SaaS 実用",
+      "llmTrigger": "マーケ・グロース・LP 系",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFFBF4",
+        "panel": "#FFFFFF",
+        "fg": "#331F14",
+        "muted": "#A6907C",
+        "primary": "#F97316",
+        "secondary": "#7C3AED",
+        "accent": "#10B981",
+        "extra": [
+          "#0EA5E9",
+          "#E11D48"
+        ]
+      },
+      "dark": {
+        "bg": "#271C12",
+        "panel": "#32261A",
+        "fg": "#F7EDE2",
+        "muted": "#AA9078",
+        "primary": "#FB923C",
+        "secondary": "#A78BFA",
+        "accent": "#34D399",
+        "extra": [
+          "#38BDF8",
+          "#FB7185"
+        ]
+      }
+    },
+    {
+      "name": "commerce",
+      "source": "commerce — EC / リテール",
+      "category": "業種特化",
+      "llmTrigger": "EC・リテール・マーケットプレイス",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FBFAF8",
+        "panel": "#FFFFFF",
+        "fg": "#2A2620",
+        "muted": "#A0968A",
+        "primary": "#E8590C",
+        "secondary": "#1D8A5A",
+        "accent": "#2E86AB",
+        "extra": [
+          "#7B5CB8",
+          "#D9B45B"
+        ]
+      },
+      "dark": {
+        "bg": "#221E19",
+        "panel": "#2C2721",
+        "fg": "#F4EFE8",
+        "muted": "#A69682",
+        "primary": "#FB8A3C",
+        "secondary": "#3FBF87",
+        "accent": "#55B3D9",
+        "extra": [
+          "#A488D8",
+          "#E0C070"
+        ]
+      }
+    },
+    {
+      "name": "education",
+      "source": "education — EdTech / 学習",
+      "category": "業種特化",
+      "llmTrigger": "EdTech・学習サービス",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F7FAFF",
+        "panel": "#FFFFFF",
+        "fg": "#1F2A44",
+        "muted": "#8C99B3",
+        "primary": "#2563EB",
+        "secondary": "#F59E0B",
+        "accent": "#10B981",
+        "extra": [
+          "#EC4899",
+          "#7C3AED"
+        ]
+      },
+      "dark": {
+        "bg": "#141B2E",
+        "panel": "#1C2540",
+        "fg": "#EAF0FB",
+        "muted": "#8C99B8",
+        "primary": "#5B8DEF",
+        "secondary": "#FBBF24",
+        "accent": "#34D399",
+        "extra": [
+          "#F472B6",
+          "#A78BFA"
+        ]
+      }
+    },
+    {
+      "name": "legal",
+      "source": "legal — 法務 / 士業",
+      "category": "業種特化",
+      "llmTrigger": "法務・士業・契約管理",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F8F7F5",
+        "panel": "#FFFFFF",
+        "fg": "#2B2624",
+        "muted": "#98908A",
+        "primary": "#6B1F2A",
+        "secondary": "#3A4A5A",
+        "accent": "#B08A2E",
+        "extra": [
+          "#1D6A5A",
+          "#8A3FFC"
+        ]
+      },
+      "dark": {
+        "bg": "#201C1B",
+        "panel": "#2A2523",
+        "fg": "#F1ECE9",
+        "muted": "#A39A93",
+        "primary": "#C05A6A",
+        "secondary": "#7E96AC",
+        "accent": "#D9B45B",
+        "extra": [
+          "#4FA898",
+          "#BE95FF"
+        ]
+      }
+    },
+    {
+      "name": "logistics",
+      "source": "logistics — 物流 / モビリティ",
+      "category": "業種特化",
+      "llmTrigger": "物流・配送・モビリティ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F6F7F8",
+        "panel": "#FFFFFF",
+        "fg": "#22272E",
+        "muted": "#8B939E",
+        "primary": "#F26419",
+        "secondary": "#2E4057",
+        "accent": "#1D8A9A",
+        "extra": [
+          "#5A6B7E",
+          "#C7A252"
+        ]
+      },
+      "dark": {
+        "bg": "#171B20",
+        "panel": "#202730",
+        "fg": "#ECEFF3",
+        "muted": "#8B96A3",
+        "primary": "#FB8A4C",
+        "secondary": "#7E96AC",
+        "accent": "#3FB7CB",
+        "extra": [
+          "#94A3B8",
+          "#E0C070"
+        ]
+      }
+    },
+    {
+      "name": "media",
+      "source": "media — メディア / 出版",
+      "category": "業種特化",
+      "llmTrigger": "メディア・出版・ニュース",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFFFFF",
+        "panel": "#F7F7F7",
+        "fg": "#111111",
+        "muted": "#8C8C8C",
+        "primary": "#C41E2F",
+        "secondary": "#1A1A1A",
+        "accent": "#0F62AC",
+        "extra": [
+          "#B08A2E",
+          "#1D8A5A"
+        ]
+      },
+      "dark": {
+        "bg": "#131313",
+        "panel": "#1D1D1D",
+        "fg": "#F2F2F2",
+        "muted": "#8F8F8F",
+        "primary": "#F0455A",
+        "secondary": "#E0E0E0",
+        "accent": "#4F9CE0",
+        "extra": [
+          "#D9B45B",
+          "#3FBF87"
+        ]
+      }
+    },
+    {
+      "name": "security",
+      "source": "security — セキュリティ / 監査",
+      "category": "業種特化",
+      "llmTrigger": "セキュリティ・監査・認証",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F5F7F6",
+        "panel": "#FFFFFF",
+        "fg": "#1B2420",
+        "muted": "#85938C",
+        "primary": "#166D4D",
+        "secondary": "#37474F",
+        "accent": "#C0392B",
+        "extra": [
+          "#0E7FA8",
+          "#B08A2E"
+        ]
+      },
+      "dark": {
+        "bg": "#10171A",
+        "panel": "#182226",
+        "fg": "#E7F0EB",
+        "muted": "#7E948A",
+        "primary": "#35C78B",
+        "secondary": "#78909C",
+        "accent": "#F0605A",
+        "extra": [
+          "#3FB7CB",
+          "#D9B45B"
+        ]
+      }
+    },
+    {
+      "name": "kids",
+      "source": "kids — 子ども / ファミリー",
+      "category": "業種特化",
+      "llmTrigger": "子ども・ファミリー向け",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFFDF5",
+        "panel": "#FFFFFF",
+        "fg": "#35302E",
+        "muted": "#A39B92",
+        "primary": "#FF6B6B",
+        "secondary": "#4ECDC4",
+        "accent": "#FFD93D",
+        "extra": [
+          "#6C8DFA",
+          "#B980F0"
+        ]
+      },
+      "dark": {
+        "bg": "#262230",
+        "panel": "#2F2A3D",
+        "fg": "#F5F1FA",
+        "muted": "#A79FBB",
+        "primary": "#FF8787",
+        "secondary": "#6EE7DE",
+        "accent": "#FFE066",
+        "extra": [
+          "#8FA8FF",
+          "#CDA1F5"
+        ]
+      }
+    },
+    {
+      "name": "wellness",
+      "source": "wellness — ヨガ / メンタルケア",
+      "category": "業種特化",
+      "llmTrigger": "ヨガ・瞑想・メンタルケア",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F8F7F2",
+        "panel": "#FFFFFF",
+        "fg": "#2E2F27",
+        "muted": "#9AA08D",
+        "primary": "#7C8F62",
+        "secondary": "#9A85C0",
+        "accent": "#C7A252",
+        "extra": [
+          "#0E8FA3",
+          "#C98A55"
+        ]
+      },
+      "dark": {
+        "bg": "#22241D",
+        "panel": "#2B2E25",
+        "fg": "#F0F1E8",
+        "muted": "#A0A78F",
+        "primary": "#A5BC85",
+        "secondary": "#B7A0E0",
+        "accent": "#E0C070",
+        "extra": [
+          "#3FB7CB",
+          "#C98A55"
+        ]
+      }
+    },
+    {
+      "name": "civic",
+      "source": "civic — 行政 / 公共",
+      "category": "業種特化",
+      "llmTrigger": "行政・公共・自治体",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F6F8FA",
+        "panel": "#FFFFFF",
+        "fg": "#1F2933",
+        "muted": "#8A99A8",
+        "primary": "#145DA0",
+        "secondary": "#5A7184",
+        "accent": "#1D8A5A",
+        "extra": [
+          "#B3382C",
+          "#7B5CB8"
+        ]
+      },
+      "dark": {
+        "bg": "#121A22",
+        "panel": "#1B2530",
+        "fg": "#E9F0F6",
+        "muted": "#8399AB",
+        "primary": "#4F94D4",
+        "secondary": "#94A9BC",
+        "accent": "#3FBF87",
+        "extra": [
+          "#F0605A",
+          "#A488D8"
+        ]
+      }
+    },
+    {
+      "name": "atelier",
+      "source": "atelier — 高級ブランド / D2C",
+      "category": "業種特化",
+      "llmTrigger": "高級ブランド・D2C・ジュエリー",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FAF8F5",
+        "panel": "#FFFFFF",
+        "fg": "#23201C",
+        "muted": "#9B948A",
+        "primary": "#1A1A1A",
+        "secondary": "#B08A2E",
+        "accent": "#6B1F2A",
+        "extra": [
+          "#3A4A5A",
+          "#7058BE"
+        ]
+      },
+      "dark": {
+        "bg": "#191715",
+        "panel": "#232019",
+        "fg": "#F2EFE9",
+        "muted": "#9C9488",
+        "primary": "#E8E2D8",
+        "secondary": "#D9B45B",
+        "accent": "#C05A6A",
+        "extra": [
+          "#7E96AC",
+          "#A28BE0"
+        ]
+      }
+    },
+    {
+      "name": "estate",
+      "source": "estate — 不動産 / 建築 — ブループリント",
+      "category": "業種特化",
+      "llmTrigger": "不動産・建築・設計",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F5F8FB",
+        "panel": "#FFFFFF",
+        "fg": "#1E2A38",
+        "muted": "#8798AA",
+        "primary": "#1F5FA8",
+        "secondary": "#E8791D",
+        "accent": "#16717C",
+        "extra": [
+          "#5A7184",
+          "#B3382C"
+        ]
+      },
+      "dark": {
+        "bg": "#141C26",
+        "panel": "#1D2735",
+        "fg": "#E9F0F8",
+        "muted": "#8095AB",
+        "primary": "#5C97D6",
+        "secondary": "#FB9A4C",
+        "accent": "#3FB7CB",
+        "extra": [
+          "#94A9BC",
+          "#F0605A"
+        ]
+      }
+    },
+    {
+      "name": "food",
+      "source": "food — 飲食 / フードテック — シトラスフレッシュ",
+      "category": "業種特化",
+      "llmTrigger": "飲食・フードデリバリー",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFFCF5",
+        "panel": "#FFFFFF",
+        "fg": "#33291C",
+        "muted": "#A69378",
+        "primary": "#FF8C42",
+        "secondary": "#97B94E",
+        "accent": "#E8443A",
+        "extra": [
+          "#0E8FA3",
+          "#C736A2"
+        ]
+      },
+      "dark": {
+        "bg": "#271F14",
+        "panel": "#322817",
+        "fg": "#F7EEE0",
+        "muted": "#AA9578",
+        "primary": "#FFA35C",
+        "secondary": "#B3D06A",
+        "accent": "#F0655C",
+        "extra": [
+          "#3FB7CB",
+          "#F472B6"
+        ]
+      }
+    },
+    {
+      "name": "travel",
+      "source": "travel — 旅行 / ホスピタリティ — トロピックラグーン",
+      "category": "業種特化",
+      "llmTrigger": "旅行・ホテル・リゾート",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F3FBFA",
+        "panel": "#FFFFFF",
+        "fg": "#1C3335",
+        "muted": "#7FA0A0",
+        "primary": "#12A5AB",
+        "secondary": "#FF7E6B",
+        "accent": "#D9A62E",
+        "extra": [
+          "#7B5CB8",
+          "#4C9A3F"
+        ]
+      },
+      "dark": {
+        "bg": "#0F2426",
+        "panel": "#173135",
+        "fg": "#E6F5F5",
+        "muted": "#78A0A2",
+        "primary": "#3FC7CD",
+        "secondary": "#FF9A88",
+        "accent": "#E8C15A",
+        "extra": [
+          "#A488D8",
+          "#7BC060"
+        ]
+      }
+    },
+    {
+      "name": "creative",
+      "source": "creative — クリエイティブツール — インク×ハイライター",
+      "category": "業種特化",
+      "llmTrigger": "クリエイティブツール・デザイン",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFFFFF",
+        "panel": "#F8F8F6",
+        "fg": "#191913",
+        "muted": "#8F8F87",
+        "primary": "#1A1A1A",
+        "secondary": "#9DB80E",
+        "accent": "#FF4D6D",
+        "extra": [
+          "#0070F3",
+          "#22C55E"
+        ]
+      },
+      "dark": {
+        "bg": "#141412",
+        "panel": "#1E1E1A",
+        "fg": "#F4F4EE",
+        "muted": "#8C8C82",
+        "primary": "#EFEFE7",
+        "secondary": "#D4E157",
+        "accent": "#FF6B87",
+        "extra": [
+          "#3291FF",
+          "#4ADE80"
+        ]
+      }
+    },
+    {
+      "name": "agri",
+      "source": "agri — 農業 / グリーンテック — ハイドロポニック",
+      "category": "業種特化",
+      "llmTrigger": "農業・植物工場・グリーンテック",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F6FAF8",
+        "panel": "#FFFFFF",
+        "fg": "#1E2A26",
+        "muted": "#86988F",
+        "primary": "#00B37E",
+        "secondary": "#4A6572",
+        "accent": "#E8A020",
+        "extra": [
+          "#0E8FA3",
+          "#94A3B8"
+        ]
+      },
+      "dark": {
+        "bg": "#121B18",
+        "panel": "#1B2622",
+        "fg": "#E8F3EE",
+        "muted": "#7F988D",
+        "primary": "#2DD49B",
+        "secondary": "#7E96A3",
+        "accent": "#F0B840",
+        "extra": [
+          "#3FB7CB",
+          "#94A3B8"
+        ]
+      }
+    },
+    {
+      "name": "factory",
+      "source": "factory — 製造 / インダストリアル — スチールワークス",
+      "category": "業種特化",
+      "llmTrigger": "製造・重工業・設備",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F4F6F8",
+        "panel": "#FFFFFF",
+        "fg": "#232A31",
+        "muted": "#8B96A0",
+        "primary": "#3E5C76",
+        "secondary": "#E86A17",
+        "accent": "#1D8A9A",
+        "extra": [
+          "#94A3B8",
+          "#B08A2E"
+        ]
+      },
+      "dark": {
+        "bg": "#161B20",
+        "panel": "#1F262E",
+        "fg": "#ECF0F4",
+        "muted": "#8B98A5",
+        "primary": "#7FA0BE",
+        "secondary": "#FB8A3C",
+        "accent": "#3FB7CB",
+        "extra": [
+          "#94A3B8",
+          "#D9B45B"
+        ]
+      }
+    },
+    {
+      "name": "mood-zen",
+      "source": "mood-zen — 侘び寂び",
+      "category": "美学系 (mood)",
+      "llmTrigger": "和風・工芸・旅館・ミニマル志向",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F7F5F0",
+        "panel": "#FFFFFF",
+        "fg": "#2E2C28",
+        "muted": "#9A958A",
+        "primary": "#5E6B54",
+        "secondary": "#8A7B64",
+        "accent": "#B3432B",
+        "extra": [
+          "#5F8A8B",
+          "#8A6FA8"
+        ]
+      },
+      "dark": {
+        "bg": "#211F1C",
+        "panel": "#2A2825",
+        "fg": "#EFEDE7",
+        "muted": "#9E988B",
+        "primary": "#8FA283",
+        "secondary": "#B3A186",
+        "accent": "#D96C4F",
+        "extra": [
+          "#88B5B6",
+          "#A995C7"
+        ]
+      }
+    },
+    {
+      "name": "mood-botanical",
+      "source": "mood-botanical — 植物園",
+      "category": "美学系 (mood)",
+      "llmTrigger": "花・園芸・オーガニック・コスメ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F6F8F3",
+        "panel": "#FFFFFF",
+        "fg": "#24312A",
+        "muted": "#8C9C90",
+        "primary": "#2F6B4A",
+        "secondary": "#7A9B57",
+        "accent": "#C75B7A",
+        "extra": [
+          "#B08A2E",
+          "#4A7C8C"
+        ]
+      },
+      "dark": {
+        "bg": "#17211B",
+        "panel": "#202B24",
+        "fg": "#E9F1EC",
+        "muted": "#8AA394",
+        "primary": "#5FA582",
+        "secondary": "#9FBE72",
+        "accent": "#E08BA4",
+        "extra": [
+          "#D9B45B",
+          "#74A8B8"
+        ]
+      }
+    },
+    {
+      "name": "mood-pop",
+      "source": "mood-pop — ドーパミン",
+      "category": "美学系 (mood)",
+      "llmTrigger": "エンタメ・若年層・キャンペーン LP",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFFDF8",
+        "panel": "#FFFFFF",
+        "fg": "#2B2430",
+        "muted": "#9E93A6",
+        "primary": "#FF5DA2",
+        "secondary": "#00C2D1",
+        "accent": "#FFC300",
+        "extra": [
+          "#7C3AED",
+          "#3DDC97"
+        ]
+      },
+      "dark": {
+        "bg": "#241E2E",
+        "panel": "#2E2738",
+        "fg": "#F6F0FA",
+        "muted": "#A697B3",
+        "primary": "#FF7EB8",
+        "secondary": "#3FD8E5",
+        "accent": "#FFD34D",
+        "extra": [
+          "#A78BFA",
+          "#5FE8B0"
+        ]
+      }
+    }
+  ]
+}

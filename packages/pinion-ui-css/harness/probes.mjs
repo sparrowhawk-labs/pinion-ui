@@ -25,7 +25,11 @@
         would make the candidate build unable to reproduce the reference.
    ============================================================================ */
 
-export const THEMES = ['pinion', 'reactive'];
+/* v0.6.0 lineup: 72 original themes exist; sweeping all of them would be
+   3,960 combos for no extra signal (theme blocks are structurally identical
+   generated output). We sweep a representative 5: the brand pair, reactive
+   (hand-maintained), one mood light, one SaaS dark. */
+export const THEMES = ['pinion-light', 'pinion-dark', 'reactive', 'mood-monokai', 'payments-dark'];
 
 export const TUNES = [
   'default', 'minimal', 'sharp', 'corporate', 'tech',

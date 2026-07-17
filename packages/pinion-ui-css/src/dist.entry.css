@@ -13,8 +13,9 @@
 
    The layered imports below are the documented Tailwind v4 way to compile
    @theme/@utility WITHOUT shipping preflight. daisyUI is loaded with
-   `themes: false` (no built-in themes; the two `daisyui/theme` blocks in the
-   shared theme.css are the only themes) and the same exclude-everything list
+   `themes: false` (no built-in themes; the `daisyui/theme` blocks in the
+   shared theme.css — the v0.6.0 lineup: 36 originals × light/dark +
+   reactive — are the only themes) and the same exclude-everything list
    as the Blade preset, so zero daisyUI component CSS can leak in. `bg-primary`
    -style color utilities are deliberately OUT of scope — dist consumers style
    with the `var(--color-*)` custom properties (see probes.mjs note 3).
