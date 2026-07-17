@@ -52,11 +52,11 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
-### v0.6.0 (unreleased) — 2026-07
+### v0.6.0 — 2026-07-17
 
 - **daisyUI's 35 built-in themes are removed from the build** (`themes: false` in the preset). pinion-ui now ships **only original themes**: a 36-theme lineup × light/dark pairs (72 `[data-theme]` blocks, generated from `src/resources/themes/lineup.json`) plus the opt-in `reactive`. Any `data-theme` set to a daisyUI stock name renders unthemed (base tokens fall back to the `pinion` `:root` default colors but the attribute matches no block).
 
-    Naming convention: `<name>` = light · `<name>-dark` = dark. Brand default pair: `pinion` / `pinion-dark` (`pinion` carries the daisyUI `default` flag → applies at `:root` with no attribute).
+    Naming convention: `<name>` = light · `<name>-dark` = dark. Brand default pair: `pinion` / `pinion-dark` (`pinion` carries the daisyUI `default` flag → applies at `:root` with no attribute; `pinion-dark` carries `prefersdark` → auto-applies when the OS prefers dark and no `data-theme` is set; an explicit `data-theme` always wins).
 
     Migration (old → new), pick the nearest by intent:
 

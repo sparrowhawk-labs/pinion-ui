@@ -7,14 +7,16 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
-## [Unreleased] — 0.6.0
+## [0.6.0] — 2026-07-17
 
 ### Changed
 - **BREAKING: theme lineup replaced wholesale — daisyUI's built-in themes are gone.** The
   preset now loads daisyUI with `themes: false`; pinion-ui ships **only original themes**:
   36 palettes × light/dark pairs (72 `[data-theme]` blocks) + the opt-in `reactive`.
   Naming: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`); the brand
-  default pair is `pinion` / `pinion-dark`. Setting `data-theme` to a daisyUI stock
+  default pair is `pinion` / `pinion-dark`. With no `data-theme` set, `pinion` applies
+  at `:root` — or `pinion-dark` when the OS prefers dark (`prefersdark` flag); an
+  explicit `data-theme` always wins. Setting `data-theme` to a daisyUI stock
   name (`light`, `dark`, `dracula`, …) now renders **unthemed** — pick a lineup theme
   instead (migration table in [`SEMVER.md`](./SEMVER.md)).
 - **BREAKING: the `pinion` theme keeps its name but gets an entirely new palette** —
@@ -272,7 +274,7 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 - **`pinion-dark` theme removed** — Pinion now ships only the `pinion` (light) theme.
   Consumers pick any daisyUI standard dark theme via `<html data-theme>`.
 
-[Unreleased]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.4...HEAD
+[0.6.0]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.5.0...v0.6.0
 [0.4.4]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.3...v0.4.4
 [0.4.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/sparrowhawk-labs/pinion-ui/releases/tag/v0.4.0

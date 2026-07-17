@@ -105,7 +105,7 @@ Suppress an intentional exception with a `pinion-lint-ignore` comment on the lin
 pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 36 themes, each a **light/dark pair**:
 
 - **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`). The brand default pair alone is `pinion` / `pinion-dark` — there is **no bare `pinion`** (the old v0.4 `pinion` theme was removed in v0.6.0).
-- **Default**: `pinion` applies at `:root` automatically when no `data-theme` is set. Light is the default mode; dark is a deliberate opt-in (`<html data-theme="pinion-dark">` or a switcher). There is no automatic OS-dark switching.
+- **Default**: `pinion` applies at `:root` automatically when no `data-theme` is set; if the OS prefers dark (`prefers-color-scheme: dark`), `pinion-dark` applies instead (it carries daisyUI's `prefersdark` flag). An explicit `data-theme` on any element always wins over both. To pin light regardless of OS setting, set `data-theme="pinion"` explicitly.
 - **Page canvas vs component face**: every theme paints the page background (`:root`) with its tinted canvas color and puts components on `base-100` (white in light themes) — do **not** hardcode a body background. `bg-base-200` equals the canvas color (recessed wells, hover); `border-base-300` is the matching border tone.
 - **`reactive`** — one extra opt-in, light-only theme (GitHub-Light-adjacent, for report tooling). Not part of the pairs.
 - **Switchers**: `<x-theme-switcher>` cycles `pinion` ↔ `pinion-dark` by default; `<x-theme-tune-switcher>` shows the whole grouped lineup with a light/dark mode toggle.

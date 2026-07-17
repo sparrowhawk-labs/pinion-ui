@@ -153,6 +153,7 @@ function block(theme, mode) {
   const p = theme[mode];
   const id = themeId(theme.name, mode);
   const isDefault = theme.brandDefault === true && mode === 'light';
+  const isPrefersdark = theme.brandDefault === true && mode === 'dark';
   const base300 = mix(p.bg, p.fg, mode === 'light' ? 0.08 : 0.14);
   const neutral = mode === 'light' ? mix(p.fg, p.bg, 0.15) : mix(p.panel, p.fg, 0.15);
   const status = statusColors(mode, p);
@@ -163,6 +164,7 @@ function block(theme, mode) {
     '@plugin \'daisyui/theme\' {',
     line('name', `'${id}'`),
     line('default', isDefault ? 'true' : 'false'),
+    line('prefersdark', isPrefersdark ? 'true' : 'false'),
     line('color-scheme', `'${mode}'`),
     line('--color-base-100', p.panel),
     line('--color-base-200', p.bg),
