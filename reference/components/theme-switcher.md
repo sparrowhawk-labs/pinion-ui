@@ -1,6 +1,6 @@
 # x-theme-switcher
 
-Click-to-cycle theme switcher. Toggles between an Alpine-tracked list of theme names, writes the result to `data-theme` on `<html>`, and persists it to `localStorage` under the key `theme`. Renders a sun / moon SVG that swaps based on whether the current theme is `dark`.
+Click-to-cycle theme switcher. Toggles between an Alpine-tracked list of theme names, writes the result to `data-theme` on `<html>`, and persists it to `localStorage` under the key `theme`. Renders a sun / moon SVG that swaps based on whether the current theme is dark (name is `dark` or ends in `-dark` — the v0.6.0 pair convention).
 
 **Playground page**: no dedicated demo page — see the [overview](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/overview.blade.php) where the switcher lives in the header.
 
@@ -14,7 +14,7 @@ Click-to-cycle theme switcher. Toggles between an Alpine-tracked list of theme n
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `themes` | `array<string>` | `['light', 'dark']` | Themes to cycle through, in order. Each value must be a daisyUI theme registered in `@plugin "daisyui" { themes: ... }`. |
+| `themes` | `array<string>` | `['pinion-light', 'pinion-dark']` | Themes to cycle through, in order. Each value must be a shipped pinion-ui theme (`<name>` / `<name>-dark` pairs, or `reactive`) — daisyUI stock names don't exist in the build (v0.6.0). |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button + icon size. `sm` → `w-8 h-8` / `w-4 h-4` icon. `lg` → `w-12 h-12` / `w-6 h-6` icon. |
 
 All other attributes pass through to the root `<button>` (`class`, `aria-label`, `@click`, etc.). A default `aria-label="Toggle theme"` is set unless overridden.
@@ -25,7 +25,7 @@ None — the icon is rendered by the component (sun in dark theme, moon otherwis
 
 ## Examples
 
-### Default (light ↔ dark)
+### Default (pinion-light ↔ pinion-dark)
 
 ```blade
 <x-theme-switcher />
@@ -34,7 +34,7 @@ None — the icon is rendered by the component (sun in dark theme, moon otherwis
 ### Multi-theme cycle
 
 ```blade
-<x-theme-switcher :themes="['light', 'dark', 'cyberpunk', 'dracula']" size="lg" />
+<x-theme-switcher :themes="['pinion-light', 'pinion-dark', 'mood-monokai', 'mood-monokai-dark']" size="lg" />
 ```
 
 ### Inside a header

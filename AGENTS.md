@@ -50,7 +50,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 
 | Layer | Where it lives | Examples |
 |---|---|---|
-| **Theme** (color palette) | `<html data-theme="...">` | `light`, `dark`, `dracula`, any daisyUI theme |
+| **Theme** (color palette) | `<html data-theme="...">` | `pinion-light`, `pinion-dark`, `mood-monokai`, `payments-dark` (36 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
 | **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft` (11 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
@@ -100,9 +100,64 @@ Three ways to automate it (pick any; all call the one command):
 
 Suppress an intentional exception with a `pinion-lint-ignore` comment on the line (or the line above).
 
+## Theme lineup & selection guide (v0.6.0)
+
+pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 36 themes, each a **light/dark pair**:
+
+- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`). The brand default pair alone is `pinion-light` / `pinion-dark` — there is **no bare `pinion`** (the old v0.4 `pinion` theme was removed in v0.6.0).
+- **Default**: `pinion-light` applies at `:root` automatically when no `data-theme` is set. Light is the default mode; dark is a deliberate opt-in (`<html data-theme="pinion-dark">` or a switcher). There is no automatic OS-dark switching.
+- **Page canvas vs component face**: every theme paints the page background (`:root`) with its tinted canvas color and puts components on `base-100` (white in light themes) — do **not** hardcode a body background. `bg-base-200` equals the canvas color (recessed wells, hover); `border-base-300` is the matching border tone.
+- **`reactive`** — one extra opt-in, light-only theme (GitHub-Light-adjacent, for report tooling). Not part of the pairs.
+- **Switchers**: `<x-theme-switcher>` cycles `pinion-light` ↔ `pinion-dark` by default; `<x-theme-tune-switcher>` shows the whole grouped lineup with a light/dark mode toggle.
+
+### Picking a theme (for AI agents scaffolding an app)
+
+Match the app's domain/vibe against the trigger column; when nothing clearly matches, use `pinion-light`. Wire it as `<html data-theme="{theme}" data-tune="{tune}">` and offer dark mode with `{theme}-dark`.
+
+| Theme (light / dark) | Group | Use when the app is… |
+|---|---|---|
+| `pinion-light` / `pinion-dark` | Brand | **The default — anything without a clearer match.** The pinion-ui face (verdigris + warm cream). |
+| `mood-monokai` / `-dark` | Mood | Editor-like or developer-facing UI（エディタ系・開発者向け） |
+| `mood-synthwave` / `-dark` | Mood | Neon, gaming, events（ネオン・ゲーム・イベント） |
+| `mood-vapor` / `-dark` | Mood | Soft retro, Gen-Z products（ソフトなレトロ・Z世代向け） |
+| `mood-bigblue` / `-dark` | Mood | Buttoned-up enterprise / B2B（エンタープライズ・B2B 堅め） |
+| `mood-neotokyo` / `-dark` | Mood | Japanese × cyber, nightlife（和×サイバー・ナイトライフ） |
+| `mood-zen` / `-dark` | Mood | Wabi-sabi, craft, ryokan, minimalist taste（和風・工芸・旅館） |
+| `mood-botanical` / `-dark` | Mood | Flowers, gardening, organic, cosmetics（花・園芸・オーガニック・コスメ） |
+| `mood-pop` / `-dark` | Mood | Entertainment, youth, campaign LPs（エンタメ・若年層・キャンペーン LP） |
+| `payments` / `-dark` | SaaS | Payments, fintech（決済・フィンテック） |
+| `docs` / `-dark` | SaaS | Documentation, knowledge base（ドキュメント・ナレッジベース） |
+| `mono` / `-dark` | SaaS | Minimal tools, portfolios（ミニマルツール・ポートフォリオ） |
+| `ops` / `-dark` | SaaS | PM, operations, internal tools（PM・運用・社内ツール） |
+| `finance` / `-dark` | SaaS | Finance / legal enterprise（金融・法務エンタープライズ） |
+| `people` / `-dark` | SaaS | HR, community（HR・コミュニティ） |
+| `health` / `-dark` | SaaS | Medical / wellness SaaS（医療・ウェルネス SaaS） |
+| `analytics` / `-dark` | SaaS | BI, data visualization（BI・データ可視化） |
+| `devtool` / `-dark` | SaaS | Developer tools, API products（開発者ツール・API 系） |
+| `comms` / `-dark` | SaaS | Chat, collaboration（チャット・コラボレーション） |
+| `growth` / `-dark` | SaaS | Marketing, growth, landing pages（マーケ・グロース・LP 系） |
+| `commerce` / `-dark` | Industry | EC, retail, marketplaces（EC・リテール・マーケットプレイス） |
+| `education` / `-dark` | Industry | EdTech, learning services（EdTech・学習サービス） |
+| `legal` / `-dark` | Industry | Legal, professional services, contracts（法務・士業・契約管理） |
+| `logistics` / `-dark` | Industry | Logistics, delivery, mobility（物流・配送・モビリティ） |
+| `media` / `-dark` | Industry | Media, publishing, news（メディア・出版・ニュース） |
+| `security` / `-dark` | Industry | Security, audit, auth（セキュリティ・監査・認証） |
+| `kids` / `-dark` | Industry | Kids / family products（子ども・ファミリー向け） |
+| `wellness` / `-dark` | Industry | Yoga, meditation, mental care（ヨガ・瞑想・メンタルケア） |
+| `civic` / `-dark` | Industry | Government, public sector（行政・公共・自治体） |
+| `atelier` / `-dark` | Industry | Luxury brands, D2C, jewelry（高級ブランド・D2C・ジュエリー） |
+| `estate` / `-dark` | Industry | Real estate, architecture（不動産・建築・設計） |
+| `food` / `-dark` | Industry | Food, delivery（飲食・フードデリバリー） |
+| `travel` / `-dark` | Industry | Travel, hotels, resorts（旅行・ホテル・リゾート） |
+| `creative` / `-dark` | Industry | Creative / design tools（クリエイティブツール・デザイン） |
+| `agri` / `-dark` | Industry | Agriculture, greentech（農業・植物工場・グリーンテック） |
+| `factory` / `-dark` | Industry | Manufacturing, heavy industry（製造・重工業・設備） |
+
+Canonical machine-readable source: `src/resources/themes/lineup.json` (name, category, trigger, full palettes) — the same file that generates the theme CSS, so it can never drift. In PHP, `pn_theme_groups()` returns the grouped light/dark ids.
+
 ## daisyUI v5 gotchas (verified — do not "fix")
 
-- **daisyUI component classes don't exist in your build.** The pinion-ui preset loads daisyUI with an exclude list: you get the full color/theme layer (`bg-primary`, `text-base-content`, `data-theme`, all 35 themes) but `.btn`, `.card`, `.alert`, `.input`, `.menu`, `.modal`, etc. produce **no styling**. Never write daisyUI component markup (`<button class="btn btn-primary">`) — use the pinion-ui component (`<x-button color="primary">`). Do not "fix" this by adding `@plugin "daisyui"` to app.css; that re-enables everything and breaks the design boundary.
+- **daisyUI component classes AND built-in themes don't exist in your build.** The pinion-ui preset loads daisyUI with `themes: false` + a full component exclude list: you get the color utility layer (`bg-primary`, `text-base-content`, `data-theme` switching) but `.btn`, `.card`, `.alert`, `.input`, `.menu`, `.modal`, etc. produce **no styling**, and daisyUI stock theme names (`light`, `dark`, `dracula`, `cupcakes`, …) set as `data-theme` render **unthemed** — only the pinion-ui lineup (previous section) exists. Never write daisyUI component markup (`<button class="btn btn-primary">`) — use the pinion-ui component (`<x-button color="primary">`). Do not "fix" this by adding `@plugin "daisyui"` to app.css; that re-enables everything and breaks the design boundary.
 - `divider-horizontal` renders a **vertical** line inside a flex row (daisyUI naming is inverted). The `<x-divider>` wrapper normalizes: `direction="vertical"` does what you expect.
 - `rating-half` requires the explicit `rating-{size}` class even at default size, or half-star widths collapse. `RatingComposer` always emits it.
 - `<x-collapse>` defaults to **no icon** since v0.2.1 — opt in with `icon="arrow"` or `icon="plus"`.

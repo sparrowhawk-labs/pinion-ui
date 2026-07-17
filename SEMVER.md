@@ -52,6 +52,30 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.6.0 (unreleased) — 2026-07
+
+- **daisyUI's 35 built-in themes are removed from the build** (`themes: false` in the preset). pinion-ui now ships **only original themes**: a 36-theme lineup × light/dark pairs (72 `[data-theme]` blocks, generated from `src/resources/themes/lineup.json`) plus the opt-in `reactive`. Any `data-theme` set to a daisyUI stock name renders unthemed (base tokens fall back to the `pinion-light` `:root` default colors but the attribute matches no block).
+
+    Naming convention: `<name>` = light · `<name>-dark` = dark. Brand default pair: `pinion-light` / `pinion-dark` (`pinion-light` carries the daisyUI `default` flag → applies at `:root` with no attribute).
+
+    Migration (old → new), pick the nearest by intent:
+
+    | You had | Move to |
+    |---|---|
+    | `pinion` (v0.4.0 warm-cream brand theme — **removed**) | `pinion-light` (new verdigris brand light) |
+    | `light` / `cupcake` / `emerald` / `winter` / `nord` | `pinion-light`, `mono`, `docs`, or any lineup light |
+    | `dark` / `dim` / `night` / `business` | `pinion-dark`, `mono-dark`, `devtool-dark`, or any lineup `-dark` |
+    | `dracula` / `synthwave` / `cyberpunk` | `mood-monokai-dark` / `mood-synthwave-dark` / `mood-neotokyo-dark` |
+    | `corporate` | `mood-bigblue` / `finance` |
+    | `retro` / `valentine` / `pastel` | `mood-pop` / `mood-vapor` / `kids` |
+    | `forest` / `garden` | `mood-botanical` / `agri` / `ops` |
+    | `coffee` / `luxury` / `black` | `atelier-dark` / `mono-dark` |
+    | a hand-written `@plugin 'daisyui/theme'` block of your own | keep it — consumer theme blocks still work unchanged |
+
+    `ui:install` migrates `data-theme="pinion"` and `data-theme="light"` layouts to `pinion-light` (confirmation default *yes* for those two historical recommendations, *keep* for anything else). `<x-theme-switcher>`'s default cycle flipped `['light', 'dark']` → `['pinion-light', 'pinion-dark']`; `<x-theme-tune-switcher>`'s default list is now the grouped lineup (override with `:themes` for a flat list). `ui:eject --theme` default flipped `pinion` → `pinion-light`, and the eject table's color keys are the new theme ids.
+
+    Rationale: the lineup (each palette curated as a light/dark pair with per-app-domain triggers for LLM selection — see `AGENTS.md` → "Theme lineup & selection guide") replaces the generic daisyUI catalog as the product's color system. Design record: `docs/design/theme-lineup-v2-implementation.md` (internal).
+
 ### v0.5.0 — 2026-07
 
 - **Tune spacing utilities renamed from magnitude tiers to Tailwind-idiom t-shirt sizes.** The legacy tier utilities (`space-section`, `space-section-inner`, `gap-section-inner`, `gap-element`, `gap-compact`, `gap-text`, `gap-inline`, `gap-micro`, `space-x-inline`, `space-x-micro`, `space-y-{micro,text,compact,element}`, `mt/mb-{text,element,section-inner}`, `p-element`, `p-compact`, `px-compact`, `py-compact`) are **removed** — replaced by tune-reactive `@theme --spacing-<size>` keys, which generate the full Tailwind spacing namespace (`p-*`, `px/py-*`, `m/mt/mb-*`, `gap-*`, `space-x/y-*`, …) for sizes `3xs 2xs xs sm md lg xl 2xl 3xl 4xl 5xl 6xl 7xl`. The public spacing tokens renamed accordingly: `--space-{section,section-inner,element,compact,text,inline,micro}` → `--spacing-{4xl,2xl,lg,sm,md,xs,2xs}` (override keys `--ovr-space-<tier>` → `--ovr-space-<size>`). Computed values are unchanged for every mapped tier (verified by the golden computed-style harness: 4,620 spacing cells diff=0 across 2 themes × 11 tunes × 5 strengths).

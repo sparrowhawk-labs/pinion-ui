@@ -7,6 +7,40 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [Unreleased] — 0.6.0
+
+### Changed
+- **BREAKING: theme lineup replaced wholesale — daisyUI's built-in themes are gone.** The
+  preset now loads daisyUI with `themes: false`; pinion-ui ships **only original themes**:
+  36 palettes × light/dark pairs (72 `[data-theme]` blocks) + the opt-in `reactive`.
+  Naming: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`); the brand
+  default pair is `pinion-light` / `pinion-dark`. Setting `data-theme` to a daisyUI stock
+  name (`light`, `dark`, `dracula`, …) now renders **unthemed** — pick a lineup theme
+  instead (migration table in [`SEMVER.md`](./SEMVER.md)).
+- **BREAKING: the old `pinion` theme (v0.4.0 warm cream + amber) is removed**, replaced by
+  the new brand pair `pinion-light` / `pinion-dark` (Claude Verdigris: teal-green primary,
+  terracotta secondary, warm cream canvas). `ui:install` migrates
+  `data-theme="pinion"` / `"light"` layouts to `pinion-light` (with confirmation;
+  defaults to *yes* for those two values, *keep* for anything else).
+- Every lineup theme paints the page canvas via daisyUI's `--root-bg` (tinted `bg` color)
+  while components sit on `base-100` (= the palette's panel, white in light mode) — tinted
+  page + white cards with zero consumer CSS.
+- `<x-theme-switcher>` default cycle is now `['pinion-light', 'pinion-dark']`; the sun/moon
+  icon keys off the `-dark` suffix.
+- `<x-theme-tune-switcher>` shows the grouped lineup (Brand / Mood / SaaS / Industry, from
+  the new `pn_theme_groups()` helper) with a light/dark mode toggle. Passing `:themes`
+  (flat literal ids) restores the ungrouped list.
+- `ui:eject` default is `--theme=pinion-light`; `eject-table.json` now carries colors for
+  the entire lineup, so any shipped theme can be ejected.
+
+### Added
+- **Theme lineup catalog + LLM selection guide** in `AGENTS.md` ("Theme lineup & selection
+  guide") — app-domain → recommended-theme mapping so AI agents can pick a fitting theme
+  when scaffolding. Canonical data: `src/resources/themes/lineup.json` (palettes, categories,
+  triggers), which also generates the theme CSS (`npm run gen:themes` in
+  `packages/pinion-ui-css`) — one source, no drift.
+- `pn_theme_groups()` helper — the grouped light/dark theme ids for pickers/docs.
+
 ## [0.5.0] — 2026-07-13
 
 ### Changed

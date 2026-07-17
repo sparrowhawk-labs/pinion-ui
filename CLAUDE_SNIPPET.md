@@ -11,6 +11,8 @@ Before writing pinion-ui code, read **`vendor/sparrowhawk-labs/pinion-ui/AGENTS.
 
 **Never daisyUI _component_ classes** (`.btn` `.card` `.badge` `.input` `.alert` `.menu` …) — excluded from the build, they produce no styling. **Never fixed palette/hex colors** (`bg-blue-500`, `#1d4ed8`) — they ignore `data-theme`. Full rule + examples: AGENTS.md → "Class vocabulary".
 
+**Themes**: pinion-ui ships 36 original themes as `<name>` (light) / `<name>-dark` pairs — daisyUI's stock themes (`light`, `dark`, `dracula`, …) do **not** exist in the build. Default is `pinion-light`. When scaffolding a page, pick the theme whose domain matches the app (e.g. `payments`, `mood-monokai`, `atelier`) via **AGENTS.md → "Theme lineup & selection guide"** and set `<html data-theme="…" data-tune="…">`.
+
 This block is a *summary*. Anything not stated here is authoritative in **AGENTS.md → "Class vocabulary"** — read it when the summary doesn't cover your case. Enforcement backstop: **`php artisan ui:lint`** flags excluded daisyUI component classes and fixed/hex colors and exits non-zero, so it gates CI / pre-commit / a PostToolUse hook.
 
 Per-component API: `vendor/sparrowhawk-labs/pinion-ui/reference/components/{name}.md` (props, slots, examples, class composition). Category-grouped index at `reference/components/index.md`.

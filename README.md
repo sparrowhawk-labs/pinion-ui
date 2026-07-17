@@ -20,7 +20,8 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 ## Features
 
 - **46 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
-- **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="dracula" data-tune="playful"`).
+- **36 original themes × light/dark** — a brand default (`pinion-light`/`pinion-dark`) plus mood, SaaS, and industry palettes (`mood-monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
+- **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="mood-monokai-dark" data-tune="soft"`).
 - **11 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`. Each preset bundles ~30 CSS custom properties.
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
 - **Compose-layer architecture** — class strings live in typed PHP composers (`InputComposer`, `SelectComposer`, etc.), not scattered in Blade. Variants/sizes/states stay testable and refactor-safe.
@@ -49,8 +50,8 @@ npm install && npm run build
 ```css
 @import "tailwindcss";
 
-/* Pinion UI preset — loads daisyUI (themes + only the component CSS
-   Pinion UI itself uses) and wires @source globs and Tune tokens.
+/* Pinion UI preset — loads daisyUI (color layer only), the pinion-ui
+   theme lineup, and wires @source globs and Tune tokens.
    Path is resolved relative to your app.css. */
 @import "../../vendor/sparrowhawk-labs/pinion-ui/src/resources/css/pinion-ui.css";
 
@@ -59,7 +60,7 @@ npm install && npm run build
 @source "../**/*.js";
 ```
 
-> **Do not add your own `@plugin "daisyui";` line** (remove it if an earlier setup added one — `ui:install` does this for you). The preset loads daisyUI with an exclude list: daisyUI *color/theme tokens* stay fully available (`bg-primary`, `data-theme`, all 35 themes), but daisyUI *component classes* (`.btn`, `.card`, `.alert`, …) are not generated. Components come from Pinion UI; daisyUI supplies the color system. A standalone full plugin would silently re-enable every daisyUI component class.
+> **Do not add your own `@plugin "daisyui";` line** (remove it if an earlier setup added one — `ui:install` does this for you). The preset loads daisyUI with `themes: false` plus a full component exclude list: daisyUI *color token utilities* stay fully available (`bg-primary`, `text-base-content`, `data-theme`), but daisyUI *component classes* (`.btn`, `.card`, `.alert`, …) and daisyUI's *built-in themes* (`light`, `dark`, `dracula`, …) are not generated — the pinion-ui lineup (36 originals × light/dark + `reactive`) is the only theme source. A standalone full plugin would silently re-enable every daisyUI component class and theme.
 
 > **Why a preset?**
 > Pinion UI's Compose layer keeps class strings inside PHP (e.g. `bg-primary text-primary-content peer-checked:border-primary/70`). Tailwind v4's default scan only sees `*.blade.php` / `*.js`, so without the preset's `@source` rules those classes are silently dropped from the build. The preset's `@source` paths resolve from the preset file's own location — add a new component in the package and consumer apps keep working, no `app.css` re-edit needed.
@@ -79,7 +80,7 @@ It flags excluded daisyUI **component** classes and **fixed/hex** colors, while 
 ### Layout
 
 ```html
-<html data-theme="light" data-tune="default">
+<html data-theme="pinion-light" data-tune="default">
 ```
 
 ## Quick start
@@ -120,7 +121,7 @@ Components are registered as **anonymous components** (no prefix needed) for the
 
 | Layer | Attribute / Prop | Controls | Examples |
 |-------|------------------|----------|----------|
-| **Theme** | `data-theme` | Color palette | `light`, `dark`, `cyberpunk`, `dracula` (any daisyUI theme) |
+| **Theme** | `data-theme` | Color palette | `pinion-light`, `pinion-dark`, `mood-monokai`, `payments-dark` (36 original light/dark pairs — see `AGENTS.md` for the catalog) |
 | **Tune** | `data-tune` | Shape, spacing, font, component sizing | `default`, `tech`, `elegant`, `playful` |
 | **Component** | Blade props | Variant, size, behavior | `variant="primary"`, `size="lg"`, `dismissible` |
 
