@@ -4,7 +4,7 @@
     "daisyuiThemes": "all off — pinion-ui はオリジナル theme のみ出荷（ユーザー確定）",
     "naming": "<name> = light / <name>-dark = dark。ブランド既定も同法則で pinion / pinion-dark（2026-07-17 改名: pinion-light → pinion。旧 v0.4 の pinion パレットは名前ごと Verdigris に置換）",
     "defaultMode": "light",
-    "logoFinal": "docs/logo-candidates/round4/j2-v14-ivory-clay.png",
+    "logoFinal": "docs/logo-candidates/round6/n5-swoosh.png (B-5 swoosh, reactive palette, 2026-07-17 確定)",
     "moodPrefix": "mood- = ジャンル非依存の美学系テーマ（2026-07-17 確定）。業種/用途テーマは裸名",
     "finalizedAt": "2026-07-17 (balance 棚卸し + mood 追加まで反映・最終確定)",
     "brandPalette": "2026-07-17 (夕): ブランド既定 pinion のパレットを Verdigris → reactive 系（GitHub-Light/Dark 隣接・Primer 由来 MIT トークン）へ上書き（ユーザー確信案件）。旧 Verdigris は mood-verdigris として温存。reactive テーマ自体は /visualize 依存のため従来どおり別枠維持"
