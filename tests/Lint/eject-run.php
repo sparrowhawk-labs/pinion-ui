@@ -96,7 +96,7 @@ check($t, '@class array', "@class(['tune-btn-sm', 'gap-lg' => \$x])", "@class(['
 
 /* ── layer 2: round-trip against the REAL table ──────────────────────────── */
 $table = json_decode((string) file_get_contents(dirname(__DIR__, 2) . '/src/resources/eject-table.json'), true);
-$real = new EjectTransformer($table['tokens']['default|md'], $table['colors']['pinion']);
+$real = new EjectTransformer($table['tokens']['default|md'], $table['colors']['pinion-light']);
 $migrator = new SpacingMigrator();
 
 $vanilla = '<section class="py-20 space-y-6"><div class="p-4 gap-2 mt-8 mb-3 px-12"><span class="mt-0.5 -ml-1">x</span></div></section>';
@@ -111,7 +111,7 @@ if ($back === $vanilla) {
 }
 
 // real-table spot values: tech|md compresses spacing
-$tech = new EjectTransformer($table['tokens']['tech|md'], $table['colors']['pinion']);
+$tech = new EjectTransformer($table['tokens']['tech|md'], $table['colors']['pinion-light']);
 $r = $tech->eject('<div class="p-md tune-btn-md">x</div>')['source'];
 if ($r === '<div class="p-3.5 h-9 px-3 text-[13px]">x</div>') {
     $pass++;
