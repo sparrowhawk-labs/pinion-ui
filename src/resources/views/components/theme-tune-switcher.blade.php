@@ -1,7 +1,8 @@
 @props([
     'position' => 'fixed',   // 'fixed' (floating top-right) | 'inline' (sits in flow)
-    'compact' => false,      // icon-only triggers (color-dots chip / Aa / sun-moon) — for mobile or tight chrome
+    'compact' => false,      // icon-only triggers (sun-moon / color-dots chip / Aa) — for mobile or tight chrome
     'drop' => 'down',        // dropdown direction: 'down' | 'up' (use 'up' when the switcher sits at the bottom of the screen)
+    'attribution' => true,   // show the pinion-ui.dev attribution (corner badge + dropdown footers). Opt out with :attribution="false"
     'storage' => true,       // persist the choice to localStorage
     'storageKey' => 'pn',    // localStorage key prefix
     'themes' => null,        // override with a FLAT list of literal theme ids (disables the grouped lineup + mode toggle)
@@ -57,6 +58,18 @@
     $githubMark = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.42.36.78 1.08.78 2.18 0 1.57-.02 2.84-.02 3.23 0 .3.21.66.79.55A10.51 10.51 0 0023.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg>';
     $linkHref = 'https://pinion-ui.dev/';
     $defaultTheme = $grouped ? 'pinion' : ($groupData[0]['items'][0]['light'] ?? 'pinion');
+    // light/dark mode toggle — flips the whole lineup between the <name> / <name>-dark columns.
+    // Rendered in one of two spots: compact = top-level FIRST (the most-used control leads the bar);
+    // full = inside the theme group, so toggling while the theme list is open keeps it open.
+    $modeBtn = <<<HTML
+        <button type="button" x-on:click="setMode(mode === 'dark' ? 'light' : 'dark')"
+            class="p-1 rounded-[var(--radius-field)] text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
+            x-bind:aria-label="mode === 'dark' ? 'Switch to light themes' : 'Switch to dark themes'"
+            x-bind:title="mode === 'dark' ? 'Light themes' : 'Dark themes'">
+            <span x-show="mode === 'dark'">{$sun}</span>
+            <span x-show="mode !== 'dark'">{$moon}</span>
+        </button>
+    HTML;
 @endphp
 
 <div
@@ -97,6 +110,11 @@
         },
     }"
 >
+    @if ($grouped && $compact)
+        {{-- compact: light/dark toggle leads the bar --}}
+        {!! $modeBtn !!}
+    @endif
+
     {{-- Theme --}}
     <div class="flex items-center gap-2 relative" x-on:click.outside="themeOpen = false" x-on:keydown.escape.window="themeOpen = false">
         @unless ($compact)
@@ -110,15 +128,9 @@
                 <span x-bind:class="themeOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
             @endunless
         </button>
-        @if ($grouped)
-            {{-- light/dark mode toggle — flips the whole lineup between the <name> / <name>-dark columns --}}
-            <button type="button" x-on:click="setMode(mode === 'dark' ? 'light' : 'dark')"
-                class="p-1 rounded-[var(--radius-field)] text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
-                x-bind:aria-label="mode === 'dark' ? 'Switch to light themes' : 'Switch to dark themes'"
-                x-bind:title="mode === 'dark' ? 'Light themes' : 'Dark themes'">
-                <span x-show="mode === 'dark'">{!! $sun !!}</span>
-                <span x-show="mode !== 'dark'">{!! $moon !!}</span>
-            </button>
+        @if ($grouped && ! $compact)
+            {{-- full: toggle lives inside the theme group, so using it keeps an open theme list open --}}
+            {!! $modeBtn !!}
         @endif
         <ul x-show="themeOpen" x-cloak x-transition.opacity.duration.100ms role="listbox"
             class="absolute {{ $dropPos }} z-50 w-64 max-h-80 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
@@ -142,6 +154,7 @@
                     </ul>
                 </li>
             </template>
+            @if ($attribution)
             <li class="flex justify-end px-3 pt-1.5 mt-1 border-t border-base-content/10">
                 <a href="{{ $linkHref }}" target="_blank" rel="noopener"
                     class="inline-flex items-center gap-1 text-[10px] text-base-content/30 hover:text-base-content/60 transition-colors"
@@ -150,6 +163,7 @@
                     <span>pinion-ui</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 
@@ -179,6 +193,7 @@
                     </button>
                 </li>
             </template>
+            @if ($attribution)
             <li class="flex justify-end px-3 pt-1.5 mt-1 border-t border-base-content/10">
                 <a href="{{ $linkHref }}" target="_blank" rel="noopener"
                     class="inline-flex items-center gap-1 text-[10px] text-base-content/30 hover:text-base-content/60 transition-colors"
@@ -187,13 +202,14 @@
                     <span>pinion-ui</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 
     {{-- Corner attribution badge — hidden while either dropdown is open so it never
          sits underneath the open panel (which would make it look overlapped/unreadable).
          Omitted in compact mode (attribution remains via the dropdown footer links). --}}
-    @unless ($compact)
+    @if ($attribution && ! $compact)
     <a href="{{ $linkHref }}" target="_blank" rel="noopener"
         x-show="!themeOpen && !tuneOpen"
         class="absolute -bottom-[13px] right-0 inline-flex items-center gap-1 text-[11px] leading-none text-base-content/25 hover:text-base-content/60 transition-colors"
@@ -201,5 +217,5 @@
         <span class="size-2">{!! $githubMark !!}</span>
         <span>pinion-ui</span>
     </a>
-    @endunless
+    @endif
 </div>
