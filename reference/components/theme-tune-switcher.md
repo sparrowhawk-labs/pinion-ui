@@ -9,7 +9,7 @@ A self-contained **`data-theme` × `data-tune` switcher** — two dropdowns (the
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `position` | `'fixed' \| 'inline'` | `'fixed'` | `fixed` = floating top-right card; `inline` = sits in flow (e.g. a header). |
-| `compact` | `bool` | `false` | Icon-only triggers — sun/moon (mode) **first/leftmost**, then color-dots chip (theme), then `Aa` (tune); labels and value text hidden, current values discoverable via hover `title`. For mobile or tight chrome. The corner attribution badge is omitted (attribution remains via the dropdown footers). In full mode the mode toggle sits inside the theme group instead, so toggling keeps an open theme list open. |
+| `compact` | `bool` | `false` | Icon-only triggers; labels and value text hidden, current values discoverable via hover `title`. For mobile or tight chrome. The corner attribution badge is omitted (attribution remains via the dropdown footers). In both full and compact the bar order is sun/moon (mode) **first/leftmost**, then theme, then tune. |
 | `drop` | `'down' \| 'up'` | `'down'` | Dropdown direction. Use `'up'` when the switcher sits at the bottom of the screen (e.g. a compact mobile bar), so the panels open above it. |
 | `attribution` | `bool` | `true` | Show the pinion-ui.dev attribution (corner badge + dropdown footer links). Opt out with `:attribution="false"`. |
 | `storage` | `bool` | `true` | Persist the choice to `localStorage` (so it survives reloads). |

@@ -59,8 +59,8 @@
     $linkHref = 'https://pinion-ui.dev/';
     $defaultTheme = $grouped ? 'pinion' : ($groupData[0]['items'][0]['light'] ?? 'pinion');
     // light/dark mode toggle — flips the whole lineup between the <name> / <name>-dark columns.
-    // Rendered in one of two spots: compact = top-level FIRST (the most-used control leads the bar);
-    // full = inside the theme group, so toggling while the theme list is open keeps it open.
+    // Always leads the bar (leftmost) in both full and compact: the most-used control sits first.
+    // (Trade-off, accepted: clicking it while a theme list is open closes the list via click-outside.)
     $modeBtn = <<<HTML
         <button type="button" x-on:click="setMode(mode === 'dark' ? 'light' : 'dark')"
             class="p-1 rounded-[var(--radius-field)] text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
@@ -110,8 +110,8 @@
         },
     }"
 >
-    @if ($grouped && $compact)
-        {{-- compact: light/dark toggle leads the bar --}}
+    @if ($grouped)
+        {{-- light/dark toggle leads the bar (full and compact alike) --}}
         {!! $modeBtn !!}
     @endif
 
@@ -128,10 +128,6 @@
                 <span x-bind:class="themeOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
             @endunless
         </button>
-        @if ($grouped && ! $compact)
-            {{-- full: toggle lives inside the theme group, so using it keeps an open theme list open --}}
-            {!! $modeBtn !!}
-        @endif
         <ul x-show="themeOpen" x-cloak x-transition.opacity.duration.100ms role="listbox"
             class="absolute {{ $dropPos }} z-50 w-64 max-h-80 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
             <template x-for="g in groups" x-bind:key="g.label ?? 'flat'">
