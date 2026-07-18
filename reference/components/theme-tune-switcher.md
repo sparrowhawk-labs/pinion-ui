@@ -9,6 +9,8 @@ A self-contained **`data-theme` × `data-tune` switcher** — two dropdowns (the
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `position` | `'fixed' \| 'inline'` | `'fixed'` | `fixed` = floating top-right card; `inline` = sits in flow (e.g. a header). |
+| `compact` | `bool` | `false` | Icon-only triggers — color-dots chip (theme), `Aa` (tune), sun/moon (mode); labels and value text hidden, current values discoverable via hover `title`. For mobile or tight chrome. The corner attribution badge is omitted (attribution remains via the dropdown footers). |
+| `drop` | `'down' \| 'up'` | `'down'` | Dropdown direction. Use `'up'` when the switcher sits at the bottom of the screen (e.g. a compact mobile bar), so the panels open above it. |
 | `storage` | `bool` | `true` | Persist the choice to `localStorage` (so it survives reloads). |
 | `storageKey` | `string` | `'pn'` | localStorage key prefix (`{key}-theme` / `{key}-tune`). |
 | `themes` | `array \| null` | grouped lineup | Override with a FLAT list of literal shipped theme ids (e.g. `['pinion', 'reactive']`). Disables grouping and the light/dark mode toggle. daisyUI stock names don't exist in the build. |
@@ -26,6 +28,11 @@ On select it sets `document.documentElement.dataset.theme` / `.tune` (and persis
 
 {{-- inline in a demo header, no persistence --}}
 <x-theme-tune-switcher position="inline" :storage="false" />
+
+{{-- compact icon bar pinned to the bottom of a mobile shell — dropdowns open upward --}}
+<div class="fixed bottom-4 right-4 z-50">
+    <x-theme-tune-switcher position="inline" compact drop="up" />
+</div>
 ```
 
 ## Class composition
