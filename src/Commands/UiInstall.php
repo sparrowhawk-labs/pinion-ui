@@ -363,6 +363,7 @@ JS;
                 '@tiptap/extension-task-list'   => '^3.0.0',
                 '@tiptap/extension-task-item'   => '^3.0.0',
                 '@tiptap/extension-link'        => '^3.0.0',
+                '@tiptap/extension-image'       => '^3.0.0',
             ];
 
             foreach ($editorDeps as $package => $version) {

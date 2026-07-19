@@ -9,6 +9,7 @@ const nm = fileURLToPath(new URL('./node_modules/', import.meta.url));
 const tiptap = [
   '@tiptap/core', '@tiptap/starter-kit', '@tiptap/extension-placeholder',
   '@tiptap/extension-task-list', '@tiptap/extension-task-item', '@tiptap/extension-link',
+  '@tiptap/extension-image',
   'alpinejs',
 ];
 

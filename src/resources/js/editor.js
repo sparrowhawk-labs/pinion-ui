@@ -17,6 +17,7 @@
 // Requires these npm deps in the consumer (added by ui:install --editor):
 //   @tiptap/core  @tiptap/starter-kit  @tiptap/extension-placeholder
 //   @tiptap/extension-task-list  @tiptap/extension-task-item  @tiptap/extension-link
+//   @tiptap/extension-image
 // (task-list / task-item are NOT in StarterKit. StarterKit v3 bundles its own
 //  Link, so we disable it there [link: false] and add the standalone Link once
 //  with our config — passing `link: {…}` through StarterKit double-registers it
@@ -44,6 +45,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 import Link from '@tiptap/extension-link';
+import Image from '@tiptap/extension-image';
 
 export const BODY_FORMAT = 'tiptap';
 export const BODY_VERSION = 1;
@@ -189,6 +191,7 @@ export function pinionEditor(opts = {}) {
           }),
           PnHighlight,
           Link.configure({ openOnClick: false, autolink: true }),
+          Image,
           TaskList,
           TaskItem.configure({ nested: true }),
           Placeholder.configure({

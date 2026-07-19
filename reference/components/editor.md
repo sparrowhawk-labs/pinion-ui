@@ -7,8 +7,9 @@ its engine is **opt-in** — see [Install](#install). Non-editor apps that never
 run `ui:install --editor` pull zero Tiptap bundle.
 
 **MVP block set**: paragraph, heading H1–H4, bullet list, ordered list,
-task/checkbox list, blockquote, code (inline + fenced), link; marks
-bold / italic / code / highlight. Tables / images / columns are deferred.
+task/checkbox list, blockquote, code (inline + fenced), link, image; marks
+bold / italic / code / highlight. Tables / columns are consumer-supplied
+extensions (see `opts.extensions`) — not in the base set.
 
 **Interaction** — there is **no persistent toolbar**; the editor reads as the
 page (no card, no chrome). Formatting appears in a **floating toolbox** on a
@@ -33,11 +34,13 @@ This adds to `package.json` (Tiptap v3):
 ```
 @tiptap/core  @tiptap/starter-kit  @tiptap/extension-placeholder
 @tiptap/extension-task-list  @tiptap/extension-task-item  @tiptap/extension-link
+@tiptap/extension-image
 ```
 
 (`task-list` / `task-item` are **not** in StarterKit. StarterKit v3 bundles its
 own Link, but `editor.js` disables it and adds the standalone Link with custom
-config, so it's listed explicitly.) And injects into `resources/js/app.js`:
+config, so it's listed explicitly. `image` is likewise not in StarterKit v3.)
+And injects into `resources/js/app.js`:
 
 ```js
 import { pinionEditor } from '../../vendor/sparrowhawk-labs/pinion-ui/src/resources/js/editor.js';
