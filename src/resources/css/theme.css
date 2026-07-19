@@ -5,17 +5,20 @@
    Blade preset (via pinion-ui.css @import) and the standalone
    @sparrowhawk-labs/pinion-ui-css dist build — one definition, no drift.
 
-   v0.6.0 lineup: pinion-ui ships ONLY original themes (daisyUI's built-in
+   v0.6.0+ lineup: pinion-ui ships ONLY original themes (daisyUI's built-in
    35 themes are disabled — the preset loads the plugin with `themes: false`).
-   36 themes × light/dark pairs (72 `[data-theme]` blocks), generated from
+   37 themes × light/dark pairs (74 `[data-theme]` blocks), generated from
    src/resources/themes/lineup.json by
    packages/pinion-ui-css/harness/gen-themes.mjs (npm run gen:themes).
 
-   Naming: `<name>` = light · `<name>-dark` = dark. The brand default pair is
-   `pinion` / `pinion-dark` — since v0.6.1 the reactive palette family
-   (GitHub-Primer-adjacent clean technical document; the v0.6.0 verdigris
-   palette lives on as mood-verdigris — see SEMVER.md). `pinion` carries
-   `default: true`, so consumers who do not set `data-theme` get it at :root.
+   Naming: `<name>` = light · `<name>-dark` = dark, all bare names (the
+   v0.6 `mood-` prefix was dropped in v0.7.0; categories live in lineup.json
+   metadata and the grouped switcher — `synthwave` became `outrun` to avoid
+   the daisyUI name). The brand default pair is `pinion` / `pinion-dark` —
+   the reactive palette family (GitHub-Primer-adjacent clean technical
+   document; the v0.6.0 verdigris palette lives on as `verdigris` — see
+   SEMVER.md). `pinion` carries `default: true`, so consumers who do not
+   set `data-theme` get it at :root.
 
    Every generated block also sets `--root-bg` to the palette's page-canvas
    color: daisyUI v5 paints `:root` with `var(--root-bg, --color-base-100)`,
@@ -82,34 +85,34 @@
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
 
-/* pinion / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（クリーン技術文書調・クリームホワイトベース） (Reactive family (GitHub-Light/Dark-adjacent, Primer-derived)) */
+/* pinion / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（クリーン技術文書調・クリームホワイトベース） (Reactive family (GitHub-Light/Dark-adjacent, Primer-derived) + teal secondary dedup) */
 
 @plugin 'daisyui/theme' {
     name:                      'pinion';
     default:                   true;
     prefersdark:               false;
     color-scheme:              'light';
-    --color-base-100:          #FFFFFE;
-    --color-base-200:          #FEFDFB;
-    --color-base-300:          #EAE9E7;
-    --color-base-content:      #241F1A;
-    --color-primary:           #1D4ED8;
-    --color-primary-content:   #FFFFFE;
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F6F8FA;
+    --color-base-300:          #E3E5E7;
+    --color-base-content:      #1F2328;
+    --color-primary:           #0969DA;
+    --color-primary-content:   #FFFFFF;
     --color-secondary:         #0F766E;
-    --color-secondary-content: #FFFFFE;
-    --color-accent:            #7C3AED;
-    --color-accent-content:    #FFFFFE;
-    --color-neutral:           #403B36;
-    --color-neutral-content:   #FFFFFE;
-    --color-info:              #0891B2;
-    --color-info-content:      #241F1A;
-    --color-success:           #059669;
-    --color-success-content:   #241F1A;
-    --color-warning:           #A8650E;
-    --color-warning-content:   #FFFFFE;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #8250DF;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3A3E43;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0969DA;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #1A7F37;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #9A6700;
+    --color-warning-content:   #FFFFFF;
     --color-error:             #CF222E;
-    --color-error-content:     #FFFFFE;
-    --root-bg:                 #FEFDFB;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F6F8FA;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -125,27 +128,27 @@
     default:                   false;
     prefersdark:               true;
     color-scheme:              'dark';
-    --color-base-100:          #161b22;
-    --color-base-200:          #0d1117;
+    --color-base-100:          #161B22;
+    --color-base-200:          #0D1117;
     --color-base-300:          #252A31;
-    --color-base-content:      #e6edf3;
-    --color-primary:           #818CF8;
-    --color-primary-content:   #0d1117;
+    --color-base-content:      #E6EDF3;
+    --color-primary:           #4493F8;
+    --color-primary-content:   #0D1117;
     --color-secondary:         #2DD4BF;
-    --color-secondary-content: #0d1117;
-    --color-accent:            #A78BFA;
-    --color-accent-content:    #0d1117;
+    --color-secondary-content: #0D1117;
+    --color-accent:            #A371F7;
+    --color-accent-content:    #0D1117;
     --color-neutral:           #30353D;
-    --color-neutral-content:   #e6edf3;
-    --color-info:              #22D3EE;
-    --color-info-content:      #0d1117;
-    --color-success:           #34D399;
-    --color-success-content:   #0d1117;
+    --color-neutral-content:   #E6EDF3;
+    --color-info:              #58A6FF;
+    --color-info-content:      #0D1117;
+    --color-success:           #3FB950;
+    --color-success-content:   #0D1117;
     --color-warning:           #D29922;
-    --color-warning-content:   #0d1117;
+    --color-warning-content:   #0D1117;
     --color-error:             #F85149;
-    --color-error-content:     #0d1117;
-    --root-bg:                 #0d1117;
+    --color-error-content:     #0D1117;
+    --root-bg:                 #0D1117;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -156,16 +159,16 @@
     --noise:                   0;
 }
 
-/* mood-monokai / mood-monokai-dark — 美学系 (mood) · エディタ系・開発者向け UI (1. Monokai '80s) */
+/* monokai / monokai-dark — 美学系 (mood) · エディタ系・開発者向け UI (1. Monokai '80s) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-monokai';
+    name:                      'monokai';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FAF4F2;
-    --color-base-300:          #E7E1E0;
+    --color-base-200:          #FAF1EC;
+    --color-base-300:          #E7DFDB;
     --color-base-content:      #29242A;
     --color-primary:           #E14775;
     --color-primary-content:   #FFFFFF;
@@ -173,17 +176,17 @@
     --color-secondary-content: #FFFFFF;
     --color-accent:            #CC7A0A;
     --color-accent-content:    #29242A;
-    --color-neutral:           #443F44;
+    --color-neutral:           #443E43;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC2;
+    --color-info:              #488BC2;
     --color-info-content:      #29242A;
     --color-success:           #269D69;
     --color-success-content:   #29242A;
-    --color-warning:           #C4A346;
+    --color-warning:           #C4A345;
     --color-warning-content:   #29242A;
     --color-error:             #E16032;
     --color-error-content:     #29242A;
-    --root-bg:                 #FAF4F2;
+    --root-bg:                 #FAF1EC;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -195,7 +198,7 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-monokai-dark';
+    name:                      'monokai-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
@@ -230,34 +233,34 @@
     --noise:                   0;
 }
 
-/* mood-synthwave / mood-synthwave-dark — 美学系 (mood) · ネオン・ゲーム・イベント (2. SynthWave '84) */
+/* outrun / outrun-dark — 美学系 (mood) · ネオン・ゲーム・イベント (outrun — SynthWave 系ネオン最大化（旧 mood-synthwave。daisyUI synthwave との衝突回避で改名）) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-synthwave';
+    name:                      'outrun';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FBF7FF;
-    --color-base-300:          #E8E4EE;
-    --color-base-content:      #2A2139;
-    --color-primary:           #C736A2;
+    --color-base-200:          #F4EFFF;
+    --color-base-300:          #E2DCEE;
+    --color-base-content:      #27203D;
+    --color-primary:           #D613A8;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #0FA3A3;
-    --color-secondary-content: #2A2139;
-    --color-accent:            #C98A00;
-    --color-accent-content:    #2A2139;
-    --color-neutral:           #453D54;
+    --color-secondary:         #00B8D4;
+    --color-secondary-content: #27203D;
+    --color-accent:            #D98E04;
+    --color-accent-content:    #27203D;
+    --color-neutral:           #413B57;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC3;
-    --color-info-content:      #2A2139;
-    --color-success:           #1FA06A;
-    --color-success-content:   #2A2139;
-    --color-warning:           #C4A348;
-    --color-warning-content:   #2A2139;
-    --color-error:             #D96A1F;
-    --color-error-content:     #2A2139;
-    --root-bg:                 #FBF7FF;
+    --color-info:              #2F6BFF;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #12B886;
+    --color-success-content:   #27203D;
+    --color-warning:           #C3A349;
+    --color-warning-content:   #27203D;
+    --color-error:             #E4572E;
+    --color-error-content:     #27203D;
+    --root-bg:                 #F4EFFF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -269,31 +272,31 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-synthwave-dark';
+    name:                      'outrun-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #2A2139;
-    --color-base-200:          #262335;
-    --color-base-300:          #3F3C4E;
+    --color-base-100:          #2D2250;
+    --color-base-200:          #241B3E;
+    --color-base-300:          #3C3557;
     --color-base-content:      #F4F0FF;
-    --color-primary:           #FF7EDB;
-    --color-primary-content:   #262335;
-    --color-secondary:         #36F9F6;
-    --color-secondary-content: #262335;
+    --color-primary:           #FF3EC8;
+    --color-primary-content:   #241B3E;
+    --color-secondary:         #00E5FF;
+    --color-secondary-content: #241B3E;
     --color-accent:            #FEDE5D;
-    --color-accent-content:    #262335;
-    --color-neutral:           #443C54;
+    --color-accent-content:    #241B3E;
+    --color-neutral:           #463E69;
     --color-neutral-content:   #F4F0FF;
-    --color-info:              #609CD2;
-    --color-info-content:      #262335;
-    --color-success:           #6BEAB1;
-    --color-success-content:   #262335;
-    --color-warning:           #C8AA5B;
-    --color-warning-content:   #262335;
-    --color-error:             #FF8B39;
-    --color-error-content:     #262335;
-    --root-bg:                 #262335;
+    --color-info:              #5C9DFF;
+    --color-info-content:      #241B3E;
+    --color-success:           #32EFBA;
+    --color-success-content:   #241B3E;
+    --color-warning:           #C7A95D;
+    --color-warning-content:   #241B3E;
+    --color-error:             #FF7A45;
+    --color-error-content:     #241B3E;
+    --root-bg:                 #241B3E;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -304,34 +307,34 @@
     --noise:                   0;
 }
 
-/* mood-vapor / mood-vapor-dark — 美学系 (mood) · ソフトなレトロ・Z世代向け (5. Vaporwave Pastel) */
+/* vapor / vapor-dark — 美学系 (mood) · ソフトなレトロ・Z世代向け (Vaporwave — pastel maximal, lavender canvas) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-vapor';
+    name:                      'vapor';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
-    --color-base-100:          #FFFFFF;
-    --color-base-200:          #FDF6FF;
-    --color-base-300:          #ECE4F1;
-    --color-base-content:      #3A2C55;
+    --color-base-100:          #FCF9FF;
+    --color-base-200:          #F3E8FF;
+    --color-base-300:          #E4D9F3;
+    --color-base-content:      #46356B;
     --color-primary:           #E36BC6;
-    --color-primary-content:   #3A2C55;
-    --color-secondary:         #14A886;
-    --color-secondary-content: #3A2C55;
-    --color-accent:            #E8843C;
-    --color-accent-content:    #3A2C55;
-    --color-neutral:           #54476D;
-    --color-neutral-content:   #FFFFFF;
-    --color-info:              #2E8FC0;
-    --color-info-content:      #FFFFFF;
-    --color-success:           #7BA828;
-    --color-success-content:   #3A2C55;
-    --color-warning:           #C4A348;
-    --color-warning-content:   #3A2C55;
-    --color-error:             #D14A43;
-    --color-error-content:     #FFFFFF;
-    --root-bg:                 #FDF6FF;
+    --color-primary-content:   #46356B;
+    --color-secondary:         #58C7C0;
+    --color-secondary-content: #46356B;
+    --color-accent:            #F2A65A;
+    --color-accent-content:    #46356B;
+    --color-neutral:           #5D4E80;
+    --color-neutral-content:   #FCF9FF;
+    --color-info:              #7BA2E8;
+    --color-info-content:      #46356B;
+    --color-success:           #75C384;
+    --color-success-content:   #46356B;
+    --color-warning:           #CDA94F;
+    --color-warning-content:   #46356B;
+    --color-error:             #E86A6A;
+    --color-error-content:     #46356B;
+    --root-bg:                 #F3E8FF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -343,31 +346,31 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-vapor-dark';
+    name:                      'vapor-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #342A4C;
-    --color-base-200:          #2B2140;
-    --color-base-300:          #433A58;
+    --color-base-100:          #3C2F63;
+    --color-base-200:          #322753;
+    --color-base-300:          #49406A;
     --color-base-content:      #F3EEFF;
     --color-primary:           #FF9DE6;
-    --color-primary-content:   #2B2140;
+    --color-primary-content:   #322753;
     --color-secondary:         #7FFFE0;
-    --color-secondary-content: #2B2140;
+    --color-secondary-content: #322753;
     --color-accent:            #FFC49D;
-    --color-accent-content:    #2B2140;
-    --color-neutral:           #4D4465;
+    --color-accent-content:    #322753;
+    --color-neutral:           #544979;
     --color-neutral-content:   #F3EEFF;
-    --color-info:              #92DAF3;
-    --color-info-content:      #2B2140;
-    --color-success:           #B5DE7E;
-    --color-success-content:   #2B2140;
-    --color-warning:           #C8AA5D;
-    --color-warning-content:   #2B2140;
-    --color-error:             #D56362;
-    --color-error-content:     #2B2140;
-    --root-bg:                 #2B2140;
+    --color-info:              #A6C8FF;
+    --color-info-content:      #322753;
+    --color-success:           #99E2AB;
+    --color-success-content:   #322753;
+    --color-warning:           #EACB75;
+    --color-warning-content:   #322753;
+    --color-error:             #FF8B8B;
+    --color-error-content:     #322753;
+    --root-bg:                 #322753;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -378,16 +381,16 @@
     --noise:                   0;
 }
 
-/* mood-bigblue / mood-bigblue-dark — 美学系 (mood) · エンタープライズ・B2B 堅め (11. Big Blue '81) */
+/* bigblue / bigblue-dark — 美学系 (mood) · エンタープライズ・B2B 堅め (11. Big Blue '81) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-bigblue';
+    name:                      'bigblue';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F4F4F0;
-    --color-base-300:          #E1E1DE;
+    --color-base-200:          #F2F2EA;
+    --color-base-300:          #DFDFD9;
     --color-base-content:      #21242B;
     --color-primary:           #0043CE;
     --color-primary-content:   #FFFFFF;
@@ -395,17 +398,17 @@
     --color-secondary-content: #FFFFFF;
     --color-accent:            #8A3FFC;
     --color-accent-content:    #FFFFFF;
-    --color-neutral:           #3C3F45;
+    --color-neutral:           #3C3E44;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #478CC2;
+    --color-info:              #478CC1;
     --color-info-content:      #21242B;
-    --color-success:           #4B995F;
+    --color-success:           #4B995E;
     --color-success-content:   #21242B;
     --color-warning:           #B28600;
     --color-warning-content:   #21242B;
-    --color-error:             #D04A42;
+    --color-error:             #D04A41;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F4F4F0;
+    --root-bg:                 #F2F2EA;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -417,7 +420,7 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-bigblue-dark';
+    name:                      'bigblue-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
@@ -452,34 +455,34 @@
     --noise:                   0;
 }
 
-/* mood-neotokyo / mood-neotokyo-dark — 美学系 (mood) · 和 × サイバー・ナイトライフ (13. Neo-Tokyo Noir) */
+/* neotokyo / neotokyo-dark — 美学系 (mood) · 和 × サイバー・ナイトライフ (Neo-Tokyo — 朱×藍×金, washi canvas) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-neotokyo';
+    name:                      'neotokyo';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
-    --color-base-100:          #FFFFFF;
-    --color-base-200:          #F7F2EA;
-    --color-base-300:          #E4DFD9;
+    --color-base-100:          #FFFDF8;
+    --color-base-200:          #F5EEE3;
+    --color-base-300:          #E2DCD3;
     --color-base-content:      #26222B;
     --color-primary:           #D42B3A;
-    --color-primary-content:   #FFFFFF;
-    --color-secondary:         #16717C;
-    --color-secondary-content: #FFFFFF;
+    --color-primary-content:   #FFFDF8;
+    --color-secondary:         #2B4C7E;
+    --color-secondary-content: #FFFDF8;
     --color-accent:            #C99A2E;
     --color-accent-content:    #26222B;
-    --color-neutral:           #413D44;
-    --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC1;
+    --color-neutral:           #413C43;
+    --color-neutral-content:   #FFFDF8;
+    --color-info:              #488BC1;
     --color-info-content:      #26222B;
-    --color-success:           #4C995E;
-    --color-success-content:   #26222B;
-    --color-warning:           #C4A345;
+    --color-success:           #178A67;
+    --color-success-content:   #FFFDF8;
+    --color-warning:           #C3A244;
     --color-warning-content:   #26222B;
-    --color-error:             #D04A41;
-    --color-error-content:     #FFFFFF;
-    --root-bg:                 #F7F2EA;
+    --color-error:             #D04940;
+    --color-error-content:     #FFFDF8;
+    --root-bg:                 #F5EEE3;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -491,31 +494,31 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-neotokyo-dark';
+    name:                      'neotokyo-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #261E2C;
-    --color-base-200:          #1C1620;
-    --color-base-300:          #352F39;
+    --color-base-100:          #241B2E;
+    --color-base-200:          #191320;
+    --color-base-300:          #322C3A;
     --color-base-content:      #F4EDF7;
     --color-primary:           #FF4757;
-    --color-primary-content:   #1C1620;
-    --color-secondary:         #2DD4BF;
-    --color-secondary-content: #1C1620;
+    --color-primary-content:   #191320;
+    --color-secondary:         #6C8CFF;
+    --color-secondary-content: #191320;
     --color-accent:            #F0C34E;
-    --color-accent-content:    #1C1620;
-    --color-neutral:           #413847;
+    --color-accent-content:    #191320;
+    --color-neutral:           #3F3649;
     --color-neutral-content:   #F4EDF7;
     --color-info:              #5F9ACF;
-    --color-info-content:      #1C1620;
-    --color-success:           #62A872;
-    --color-success-content:   #1C1620;
-    --color-warning:           #C6A857;
-    --color-warning-content:   #1C1620;
+    --color-info-content:      #191320;
+    --color-success:           #2DD4BF;
+    --color-success-content:   #191320;
+    --color-warning:           #C6A758;
+    --color-warning-content:   #191320;
     --color-error:             #D3615D;
-    --color-error-content:     #1C1620;
-    --root-bg:                 #1C1620;
+    --color-error-content:     #191320;
+    --root-bg:                 #191320;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -534,8 +537,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F6F8FB;
-    --color-base-300:          #E2E4EA;
+    --color-base-200:          #F5F7FB;
+    --color-base-300:          #E1E4EA;
     --color-base-content:      #1A1F36;
     --color-primary:           #635BFF;
     --color-primary-content:   #FFFFFF;
@@ -545,15 +548,15 @@
     --color-accent-content:    #1A1F36;
     --color-neutral:           #353B51;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC3;
+    --color-info:              #478CC3;
     --color-info-content:      #1A1F36;
-    --color-success:           #16A34A;
+    --color-success:           #1BA35F;
     --color-success-content:   #1A1F36;
-    --color-warning:           #C4A448;
+    --color-warning:           #C4A348;
     --color-warning-content:   #1A1F36;
-    --color-error:             #E11D48;
+    --color-error:             #E5325C;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F6F8FB;
+    --root-bg:                 #F5F7FB;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -583,11 +586,11 @@
     --color-neutral-content:   #EAEEF7;
     --color-info:              #5D9BD0;
     --color-info-content:      #151929;
-    --color-success:           #4ADE80;
+    --color-success:           #43CE8B;
     --color-success-content:   #151929;
     --color-warning:           #C5A859;
     --color-warning-content:   #151929;
-    --color-error:             #FB7185;
+    --color-error:             #F86A8F;
     --color-error-content:     #151929;
     --root-bg:                 #151929;
     --radius-selector:         0.5rem;
@@ -600,7 +603,7 @@
     --noise:                   0;
 }
 
-/* docs / docs-dark — SaaS 実用 · ドキュメント・ナレッジベース (S3. Ivory Ink) */
+/* docs / docs-dark — SaaS 実用 · ドキュメント・ナレッジベース (docs — Sepia Ink（古紙×インク×リンク青）) */
 
 @plugin 'daisyui/theme' {
     name:                      'docs';
@@ -608,26 +611,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F7F6F3;
-    --color-base-300:          #E6E5E2;
-    --color-base-content:      #37352F;
-    --color-primary:           #2383E2;
+    --color-base-200:          #F9F6EF;
+    --color-base-300:          #E8E5DE;
+    --color-base-content:      #3A342C;
+    --color-primary:           #8A5A2E;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #D9730D;
-    --color-secondary-content: #37352F;
-    --color-accent:            #6940A5;
+    --color-secondary:         #2383E2;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #A63A24;
     --color-accent-content:    #FFFFFF;
-    --color-neutral:           #504E49;
+    --color-neutral:           #534E46;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC2;
+    --color-info:              #3D74C9;
     --color-info-content:      #FFFFFF;
-    --color-success:           #0F7B6C;
+    --color-success:           #158A66;
     --color-success-content:   #FFFFFF;
-    --color-warning:           #C4A346;
-    --color-warning-content:   #37352F;
-    --color-error:             #E03E3E;
+    --color-warning:           #C28E12;
+    --color-warning-content:   #3A342C;
+    --color-error:             #B23A2E;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F7F6F3;
+    --root-bg:                 #F9F6EF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -643,27 +646,27 @@
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #2E2D27;
-    --color-base-200:          #25241F;
-    --color-base-300:          #3D3C37;
-    --color-base-content:      #EFEEE9;
-    --color-primary:           #529CCA;
-    --color-primary-content:   #25241F;
-    --color-secondary:         #FFA344;
-    --color-secondary-content: #25241F;
-    --color-accent:            #9A6DD7;
-    --color-accent-content:    #25241F;
-    --color-neutral:           #474640;
-    --color-neutral-content:   #EFEEE9;
-    --color-info:              #609CCF;
-    --color-info-content:      #25241F;
-    --color-success:           #4DAB9A;
-    --color-success-content:   #25241F;
-    --color-warning:           #C8A956;
-    --color-warning-content:   #25241F;
-    --color-error:             #FF7369;
-    --color-error-content:     #25241F;
-    --root-bg:                 #25241F;
+    --color-base-100:          #2E281E;
+    --color-base-200:          #241F17;
+    --color-base-300:          #3C372E;
+    --color-base-content:      #EFE9DC;
+    --color-primary:           #C89158;
+    --color-primary-content:   #241F17;
+    --color-secondary:         #5CA3E8;
+    --color-secondary-content: #241F17;
+    --color-accent:            #D96A4A;
+    --color-accent-content:    #241F17;
+    --color-neutral:           #474136;
+    --color-neutral-content:   #EFE9DC;
+    --color-info:              #6B9AD9;
+    --color-info-content:      #241F17;
+    --color-success:           #4DAB7F;
+    --color-success-content:   #241F17;
+    --color-warning:           #D9A93F;
+    --color-warning-content:   #241F17;
+    --color-error:             #E06052;
+    --color-error-content:     #241F17;
+    --root-bg:                 #241F17;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -756,26 +759,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FBFAF7;
-    --color-base-300:          #E8E7E3;
+    --color-base-200:          #F6F5EC;
+    --color-base-300:          #E3E2D9;
     --color-base-content:      #26251F;
     --color-primary:           #1D7A46;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #8A5A2E;
+    --color-secondary:         #7A5230;
     --color-secondary-content: #FFFFFF;
-    --color-accent:            #C7A252;
+    --color-accent:            #C29B3B;
     --color-accent-content:    #26251F;
-    --color-neutral:           #41403A;
+    --color-neutral:           #414039;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #2E86AB;
+    --color-info:              #2E7FB8;
     --color-info-content:      #FFFFFF;
-    --color-success:           #4C9A5F;
+    --color-success:           #4C995E;
     --color-success-content:   #26251F;
-    --color-warning:           #C4A447;
+    --color-warning:           #C4A345;
     --color-warning-content:   #26251F;
-    --color-error:             #D14B42;
+    --color-error:             #D04A41;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FBFAF7;
+    --root-bg:                 #F6F5EC;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -791,27 +794,27 @@
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #272B25;
-    --color-base-200:          #1E211C;
-    --color-base-300:          #373A34;
+    --color-base-100:          #242B22;
+    --color-base-200:          #1B211A;
+    --color-base-300:          #343A32;
     --color-base-content:      #EEF0E9;
     --color-primary:           #4CAF78;
-    --color-primary-content:   #1E211C;
-    --color-secondary:         #C89058;
-    --color-secondary-content: #1E211C;
-    --color-accent:            #E0C070;
-    --color-accent-content:    #1E211C;
-    --color-neutral:           #41453E;
+    --color-primary-content:   #1B211A;
+    --color-secondary:         #BD8A54;
+    --color-secondary-content: #1B211A;
+    --color-accent:            #D4B45F;
+    --color-accent-content:    #1B211A;
+    --color-neutral:           #3E453C;
     --color-neutral-content:   #EEF0E9;
-    --color-info:              #5FA8D3;
-    --color-info-content:      #1E211C;
-    --color-success:           #61A972;
-    --color-success-content:   #1E211C;
-    --color-warning:           #C7A956;
-    --color-warning-content:   #1E211C;
-    --color-error:             #D4635C;
-    --color-error-content:     #1E211C;
-    --root-bg:                 #1E211C;
+    --color-info:              #57A0CF;
+    --color-info-content:      #1B211A;
+    --color-success:           #61A971;
+    --color-success-content:   #1B211A;
+    --color-warning:           #C6A956;
+    --color-warning-content:   #1B211A;
+    --color-error:             #D3635C;
+    --color-error-content:     #1B211A;
+    --root-bg:                 #1B211A;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -830,8 +833,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F7F8FA;
-    --color-base-300:          #E2E5EA;
+    --color-base-200:          #F6F7FA;
+    --color-base-300:          #E1E4EA;
     --color-base-content:      #14213D;
     --color-primary:           #1D3461;
     --color-primary-content:   #FFFFFF;
@@ -843,13 +846,13 @@
     --color-neutral-content:   #FFFFFF;
     --color-info:              #488CC3;
     --color-info-content:      #14213D;
-    --color-success:           #16A34A;
+    --color-success:           #1D9E55;
     --color-success-content:   #14213D;
-    --color-warning:           #C4A447;
+    --color-warning:           #C4A348;
     --color-warning-content:   #14213D;
-    --color-error:             #DC2626;
+    --color-error:             #C92B3B;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F7F8FA;
+    --root-bg:                 #F6F7FA;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -879,11 +882,11 @@
     --color-neutral-content:   #E9EDF6;
     --color-info:              #5C9AD0;
     --color-info-content:      #0D1526;
-    --color-success:           #4ADE80;
+    --color-success:           #4FCF8D;
     --color-success-content:   #0D1526;
     --color-warning:           #C4A859;
     --color-warning-content:   #0D1526;
-    --color-error:             #F87171;
+    --color-error:             #F07A7A;
     --color-error-content:     #0D1526;
     --root-bg:                 #0D1526;
     --radius-selector:         0.5rem;
@@ -904,8 +907,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FFF9F5;
-    --color-base-300:          #EDE6E2;
+    --color-base-200:          #FEF6F1;
+    --color-base-300:          #ECE3DE;
     --color-base-content:      #33261F;
     --color-primary:           #E65F52;
     --color-primary-content:   #33261F;
@@ -915,15 +918,15 @@
     --color-accent-content:    #33261F;
     --color-neutral:           #4E413A;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #2E86AB;
-    --color-info-content:      #FFFFFF;
-    --color-success:           #4D9A5F;
+    --color-info:              #3E8CB8;
+    --color-info-content:      #33261F;
+    --color-success:           #4D995F;
     --color-success-content:   #33261F;
-    --color-warning:           #C4A446;
+    --color-warning:           #C4A346;
     --color-warning-content:   #33261F;
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FFF9F5;
+    --root-bg:                 #FEF6F1;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -940,26 +943,26 @@
     prefersdark:               false;
     color-scheme:              'dark';
     --color-base-100:          #302520;
-    --color-base-200:          #261C17;
-    --color-base-300:          #3F342F;
+    --color-base-200:          #281C15;
+    --color-base-300:          #41342D;
     --color-base-content:      #F5EBE4;
     --color-primary:           #F08074;
-    --color-primary-content:   #261C17;
+    --color-primary-content:   #281C15;
     --color-secondary:         #35C7A3;
-    --color-secondary-content: #261C17;
+    --color-secondary-content: #281C15;
     --color-accent:            #F5CB60;
-    --color-accent-content:    #261C17;
+    --color-accent-content:    #281C15;
     --color-neutral:           #4A3F39;
     --color-neutral-content:   #F5EBE4;
-    --color-info:              #5FA8D3;
-    --color-info-content:      #261C17;
-    --color-success:           #63A871;
-    --color-success-content:   #261C17;
+    --color-info:              #69AFD8;
+    --color-info-content:      #281C15;
+    --color-success:           #64A971;
+    --color-success-content:   #281C15;
     --color-warning:           #C8A855;
-    --color-warning-content:   #261C17;
-    --color-error:             #D4625C;
-    --color-error-content:     #261C17;
-    --root-bg:                 #261C17;
+    --color-warning-content:   #281C15;
+    --color-error:             #D5625B;
+    --color-error-content:     #281C15;
+    --root-bg:                 #281C15;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -978,8 +981,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F4FAFA;
-    --color-base-300:          #E1E8E8;
+    --color-base-200:          #F1FAF9;
+    --color-base-300:          #DEE8E7;
     --color-base-content:      #1C2B2D;
     --color-primary:           #0E8FA3;
     --color-primary-content:   #FFFFFF;
@@ -987,17 +990,17 @@
     --color-secondary-content: #1C2B2D;
     --color-accent:            #E8843C;
     --color-accent-content:    #1C2B2D;
-    --color-neutral:           #384648;
+    --color-neutral:           #374648;
     --color-neutral-content:   #FFFFFF;
     --color-info:              #478CC3;
     --color-info-content:      #1C2B2D;
-    --color-success:           #4B9A60;
+    --color-success:           #4A9A60;
     --color-success-content:   #1C2B2D;
     --color-warning:           #C3A447;
     --color-warning-content:   #1C2B2D;
-    --color-error:             #DC2626;
+    --color-error:             #D64545;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F4FAFA;
+    --root-bg:                 #F1FAF9;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1031,7 +1034,7 @@
     --color-success-content:   #152325;
     --color-warning:           #C6A958;
     --color-warning-content:   #152325;
-    --color-error:             #F87171;
+    --color-error:             #F07C74;
     --color-error-content:     #152325;
     --root-bg:                 #152325;
     --radius-selector:         0.5rem;
@@ -1044,7 +1047,7 @@
     --noise:                   0;
 }
 
-/* analytics / analytics-dark — SaaS 実用 · BI・データ可視化 (S9. Plum Analytics) */
+/* analytics / analytics-dark — SaaS 実用 · BI・データ可視化 (analytics — Plum shift（紫渋滞解消・チャート色 extras）) */
 
 @plugin 'daisyui/theme' {
     name:                      'analytics';
@@ -1052,26 +1055,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FAF8FF;
-    --color-base-300:          #E7E5EE;
+    --color-base-200:          #F8F3FF;
+    --color-base-300:          #E5E1EE;
     --color-base-content:      #2A2440;
-    --color-primary:           #6D28D9;
+    --color-primary:           #8324C9;
     --color-primary-content:   #FFFFFF;
     --color-secondary:         #DB2777;
     --color-secondary-content: #FFFFFF;
-    --color-accent:            #F59E0B;
+    --color-accent:            #EDA118;
     --color-accent-content:    #2A2440;
-    --color-neutral:           #45405A;
+    --color-neutral:           #443F5A;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #0891B2;
+    --color-info:              #0E93BE;
     --color-info-content:      #2A2440;
-    --color-success:           #16A34A;
+    --color-success:           #1FAE68;
     --color-success-content:   #2A2440;
-    --color-warning:           #C4A448;
+    --color-warning:           #C4A348;
     --color-warning-content:   #2A2440;
-    --color-error:             #D14A43;
+    --color-error:             #D14A44;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FAF8FF;
+    --root-bg:                 #F8F3FF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1087,27 +1090,27 @@
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #252032;
-    --color-base-200:          #1B1727;
-    --color-base-300:          #343040;
+    --color-base-100:          #2A1D3E;
+    --color-base-200:          #201430;
+    --color-base-300:          #382E49;
     --color-base-content:      #EFEBF9;
-    --color-primary:           #A78BFA;
-    --color-primary-content:   #1B1727;
-    --color-secondary:         #F472B6;
-    --color-secondary-content: #1B1727;
-    --color-accent:            #FBBF24;
-    --color-accent-content:    #1B1727;
-    --color-neutral:           #3F3A4C;
+    --color-primary:           #BE8FF5;
+    --color-primary-content:   #201430;
+    --color-secondary:         #F765AE;
+    --color-secondary-content: #201430;
+    --color-accent:            #F5B93A;
+    --color-accent-content:    #201430;
+    --color-neutral:           #433858;
     --color-neutral-content:   #EFEBF9;
-    --color-info:              #22D3EE;
-    --color-info-content:      #1B1727;
-    --color-success:           #4ADE80;
-    --color-success-content:   #1B1727;
-    --color-warning:           #C6A859;
-    --color-warning-content:   #1B1727;
-    --color-error:             #D3625E;
-    --color-error-content:     #1B1727;
-    --root-bg:                 #1B1727;
+    --color-info:              #2FC9E8;
+    --color-info-content:      #201430;
+    --color-success:           #54D98A;
+    --color-success-content:   #201430;
+    --color-warning:           #C7A85B;
+    --color-warning-content:   #201430;
+    --color-error:             #D36160;
+    --color-error-content:     #201430;
+    --root-bg:                 #201430;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1126,8 +1129,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F8FAFC;
-    --color-base-300:          #E3E5E9;
+    --color-base-200:          #F3F7F9;
+    --color-base-300:          #DEE3E7;
     --color-base-content:      #0F172A;
     --color-primary:           #0891B2;
     --color-primary-content:   #0F172A;
@@ -1135,17 +1138,17 @@
     --color-secondary-content: #FFFFFF;
     --color-accent:            #E11D48;
     --color-accent-content:    #FFFFFF;
-    --color-neutral:           #2B3446;
+    --color-neutral:           #2B3345;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC3;
+    --color-info:              #478CC3;
     --color-info-content:      #0F172A;
-    --color-success:           #16A34A;
+    --color-success:           #17A05B;
     --color-success-content:   #0F172A;
-    --color-warning:           #EE9800;
+    --color-warning:           #E89A0C;
     --color-warning-content:   #0F172A;
-    --color-error:             #D14B43;
+    --color-error:             #D04A43;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F8FAFC;
+    --root-bg:                 #F3F7F9;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1175,9 +1178,9 @@
     --color-neutral-content:   #E9EFF7;
     --color-info:              #5C9AD0;
     --color-info-content:      #0F172A;
-    --color-success:           #4ADE80;
+    --color-success:           #3FD980;
     --color-success-content:   #0F172A;
-    --color-warning:           #FBBF24;
+    --color-warning:           #F2B822;
     --color-warning-content:   #0F172A;
     --color-error:             #D2625F;
     --color-error-content:     #0F172A;
@@ -1200,8 +1203,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FBF9FB;
-    --color-base-300:          #E9E6E9;
+    --color-base-200:          #FAF6F9;
+    --color-base-300:          #E8E3E7;
     --color-base-content:      #2C2231;
     --color-primary:           #611F69;
     --color-primary-content:   #FFFFFF;
@@ -1209,17 +1212,17 @@
     --color-secondary-content: #2C2231;
     --color-accent:            #ECB22E;
     --color-accent-content:    #2C2231;
-    --color-neutral:           #473E4C;
+    --color-neutral:           #473D4B;
     --color-neutral-content:   #FFFFFF;
     --color-info:              #2DBFEA;
     --color-info-content:      #2C2231;
-    --color-success:           #4C9A60;
+    --color-success:           #4C9960;
     --color-success-content:   #2C2231;
-    --color-warning:           #C4A448;
+    --color-warning:           #C4A347;
     --color-warning-content:   #2C2231;
     --color-error:             #E01E5A;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FBF9FB;
+    --root-bg:                 #FAF6F9;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1274,8 +1277,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FFFBF4;
-    --color-base-300:          #EDE7E0;
+    --color-base-200:          #FFF9EF;
+    --color-base-300:          #EDE5DB;
     --color-base-content:      #331F14;
     --color-primary:           #F97316;
     --color-primary-content:   #331F14;
@@ -1287,13 +1290,13 @@
     --color-neutral-content:   #FFFFFF;
     --color-info:              #0EA5E9;
     --color-info-content:      #331F14;
-    --color-success:           #4D9A5F;
+    --color-success:           #4D9A5E;
     --color-success-content:   #331F14;
     --color-warning:           #C4A446;
     --color-warning-content:   #331F14;
-    --color-error:             #E11D48;
+    --color-error:             #DE2F55;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FFFBF4;
+    --root-bg:                 #FFF9EF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1310,26 +1313,26 @@
     prefersdark:               false;
     color-scheme:              'dark';
     --color-base-100:          #32261A;
-    --color-base-200:          #271C12;
-    --color-base-300:          #40352A;
+    --color-base-200:          #2A1D10;
+    --color-base-300:          #433629;
     --color-base-content:      #F7EDE2;
     --color-primary:           #FB923C;
-    --color-primary-content:   #271C12;
+    --color-primary-content:   #2A1D10;
     --color-secondary:         #A78BFA;
-    --color-secondary-content: #271C12;
+    --color-secondary-content: #2A1D10;
     --color-accent:            #34D399;
-    --color-accent-content:    #271C12;
+    --color-accent-content:    #2A1D10;
     --color-neutral:           #4C4034;
     --color-neutral-content:   #F7EDE2;
     --color-info:              #38BDF8;
-    --color-info-content:      #271C12;
-    --color-success:           #64A870;
-    --color-success-content:   #271C12;
+    --color-info-content:      #2A1D10;
+    --color-success:           #64A970;
+    --color-success-content:   #2A1D10;
     --color-warning:           #C8A854;
-    --color-warning-content:   #271C12;
-    --color-error:             #FB7185;
-    --color-error-content:     #271C12;
-    --root-bg:                 #271C12;
+    --color-warning-content:   #2A1D10;
+    --color-error:             #F86E90;
+    --color-error-content:     #2A1D10;
+    --root-bg:                 #2A1D10;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1348,26 +1351,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FBFAF8;
-    --color-base-300:          #E8E7E4;
+    --color-base-200:          #FBF8F4;
+    --color-base-300:          #E8E5E1;
     --color-base-content:      #2A2620;
     --color-primary:           #E8590C;
     --color-primary-content:   #2A2620;
     --color-secondary:         #1D8A5A;
     --color-secondary-content: #FFFFFF;
-    --color-accent:            #2E86AB;
+    --color-accent:            #3E7FA6;
     --color-accent-content:    #FFFFFF;
     --color-neutral:           #45413B;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC3;
+    --color-info:              #488CC2;
     --color-info-content:      #2A2620;
-    --color-success:           #4C9A5F;
+    --color-success:           #4C995F;
     --color-success-content:   #2A2620;
-    --color-warning:           #CEA94F;
+    --color-warning:           #CFA64A;
     --color-warning-content:   #2A2620;
-    --color-error:             #D14B42;
+    --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FBFAF8;
+    --root-bg:                 #FBF8F4;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1384,26 +1387,26 @@
     prefersdark:               false;
     color-scheme:              'dark';
     --color-base-100:          #2C2721;
-    --color-base-200:          #221E19;
-    --color-base-300:          #3B3731;
+    --color-base-200:          #241E17;
+    --color-base-300:          #3D372F;
     --color-base-content:      #F4EFE8;
     --color-primary:           #FB8A3C;
-    --color-primary-content:   #221E19;
-    --color-secondary:         #3FBF87;
-    --color-secondary-content: #221E19;
-    --color-accent:            #55B3D9;
-    --color-accent-content:    #221E19;
+    --color-primary-content:   #241E17;
+    --color-secondary:         #37B37F;
+    --color-secondary-content: #241E17;
+    --color-accent:            #4FA8CF;
+    --color-accent-content:    #241E17;
     --color-neutral:           #46413B;
     --color-neutral-content:   #F4EFE8;
     --color-info:              #609CCE;
-    --color-info-content:      #221E19;
-    --color-success:           #62A971;
-    --color-success-content:   #221E19;
-    --color-warning:           #E0C070;
-    --color-warning-content:   #221E19;
+    --color-info-content:      #241E17;
+    --color-success:           #63A971;
+    --color-success-content:   #241E17;
+    --color-warning:           #D6B060;
+    --color-warning-content:   #241E17;
     --color-error:             #D4625C;
-    --color-error-content:     #221E19;
-    --root-bg:                 #221E19;
+    --color-error-content:     #241E17;
+    --root-bg:                 #241E17;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1422,26 +1425,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F7FAFF;
-    --color-base-300:          #E3E8EF;
+    --color-base-200:          #F4F8FF;
+    --color-base-300:          #E1E6EF;
     --color-base-content:      #1F2A44;
     --color-primary:           #2563EB;
     --color-primary-content:   #FFFFFF;
     --color-secondary:         #F59E0B;
     --color-secondary-content: #1F2A44;
-    --color-accent:            #10B981;
+    --color-accent:            #12B76A;
     --color-accent-content:    #1F2A44;
-    --color-neutral:           #3B455E;
+    --color-neutral:           #3A455E;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC3;
+    --color-info:              #478CC3;
     --color-info-content:      #1F2A44;
     --color-success:           #4B9A60;
     --color-success-content:   #1F2A44;
-    --color-warning:           #C4A448;
+    --color-warning:           #C3A448;
     --color-warning-content:   #1F2A44;
-    --color-error:             #D14B43;
+    --color-error:             #D04B43;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F7FAFF;
+    --root-bg:                 #F4F8FF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1457,27 +1460,27 @@
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #1C2540;
-    --color-base-200:          #141B2E;
-    --color-base-300:          #2D3447;
+    --color-base-100:          #1B2547;
+    --color-base-200:          #131C33;
+    --color-base-300:          #2C354C;
     --color-base-content:      #EAF0FB;
     --color-primary:           #5B8DEF;
-    --color-primary-content:   #141B2E;
+    --color-primary-content:   #131C33;
     --color-secondary:         #FBBF24;
-    --color-secondary-content: #141B2E;
-    --color-accent:            #34D399;
-    --color-accent-content:    #141B2E;
-    --color-neutral:           #36405A;
+    --color-secondary-content: #131C33;
+    --color-accent:            #30C48D;
+    --color-accent-content:    #131C33;
+    --color-neutral:           #354060;
     --color-neutral-content:   #EAF0FB;
     --color-info:              #5D9BD1;
-    --color-info-content:      #141B2E;
-    --color-success:           #60A875;
-    --color-success-content:   #141B2E;
-    --color-warning:           #C5A95A;
-    --color-warning-content:   #141B2E;
-    --color-error:             #D2625F;
-    --color-error-content:     #141B2E;
-    --root-bg:                 #141B2E;
+    --color-info-content:      #131C33;
+    --color-success:           #5FA975;
+    --color-success-content:   #131C33;
+    --color-warning:           #C5A95B;
+    --color-warning-content:   #131C33;
+    --color-error:             #D26360;
+    --color-error-content:     #131C33;
+    --root-bg:                 #131C33;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1496,26 +1499,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F8F7F5;
-    --color-base-300:          #E6E4E2;
+    --color-base-200:          #F8F6F2;
+    --color-base-300:          #E6E3DF;
     --color-base-content:      #2B2624;
     --color-primary:           #6B1F2A;
     --color-primary-content:   #FFFFFF;
     --color-secondary:         #3A4A5A;
     --color-secondary-content: #FFFFFF;
-    --color-accent:            #B08A2E;
-    --color-accent-content:    #2B2624;
-    --color-neutral:           #46413F;
+    --color-accent:            #9C7A22;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #46413E;
     --color-neutral-content:   #FFFFFF;
     --color-info:              #488CC2;
     --color-info-content:      #2B2624;
     --color-success:           #277261;
     --color-success-content:   #FFFFFF;
-    --color-warning:           #C4A347;
+    --color-warning:           #C4A346;
     --color-warning-content:   #2B2624;
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F8F7F5;
+    --root-bg:                 #F8F6F2;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1532,26 +1535,26 @@
     prefersdark:               false;
     color-scheme:              'dark';
     --color-base-100:          #2A2523;
-    --color-base-200:          #201C1B;
-    --color-base-300:          #393433;
+    --color-base-200:          #211D1B;
+    --color-base-300:          #3A3533;
     --color-base-content:      #F1ECE9;
     --color-primary:           #C05A6A;
-    --color-primary-content:   #201C1B;
+    --color-primary-content:   #211D1B;
     --color-secondary:         #7E96AC;
-    --color-secondary-content: #201C1B;
-    --color-accent:            #D9B45B;
-    --color-accent-content:    #201C1B;
+    --color-secondary-content: #211D1B;
+    --color-accent:            #CBA84E;
+    --color-accent-content:    #211D1B;
     --color-neutral:           #443F3C;
     --color-neutral-content:   #F1ECE9;
     --color-info:              #5F9BCE;
-    --color-info-content:      #201C1B;
+    --color-info-content:      #211D1B;
     --color-success:           #4FA898;
-    --color-success-content:   #201C1B;
-    --color-warning:           #C7A856;
-    --color-warning-content:   #201C1B;
+    --color-success-content:   #211D1B;
+    --color-warning:           #C7A956;
+    --color-warning-content:   #211D1B;
     --color-error:             #D4625C;
-    --color-error-content:     #201C1B;
-    --root-bg:                 #201C1B;
+    --color-error-content:     #211D1B;
+    --root-bg:                 #211D1B;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1562,7 +1565,7 @@
     --noise:                   0;
 }
 
-/* logistics / logistics-dark — 業種特化 · 物流・配送・モビリティ (logistics — 物流 / モビリティ) */
+/* logistics / logistics-dark — 業種特化 · 物流・配送・モビリティ (logistics — 海運ネイビー×コンテナオレンジ（primary/secondary スワップ）) */
 
 @plugin 'daisyui/theme' {
     name:                      'logistics';
@@ -1570,26 +1573,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F6F7F8;
-    --color-base-300:          #E3E4E6;
+    --color-base-200:          #F1F3F3;
+    --color-base-300:          #DEE1E1;
     --color-base-content:      #22272E;
-    --color-primary:           #F26419;
-    --color-primary-content:   #22272E;
-    --color-secondary:         #2E4057;
-    --color-secondary-content: #FFFFFF;
-    --color-accent:            #1D8A9A;
+    --color-primary:           #465B71;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #F26419;
+    --color-secondary-content: #22272E;
+    --color-accent:            #17879B;
     --color-accent-content:    #FFFFFF;
-    --color-neutral:           #3D4248;
+    --color-neutral:           #3C4148;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC3;
+    --color-info:              #478CC2;
     --color-info-content:      #22272E;
     --color-success:           #4B995F;
     --color-success-content:   #22272E;
-    --color-warning:           #C7A252;
+    --color-warning:           #BD9741;
     --color-warning-content:   #22272E;
-    --color-error:             #D04A43;
+    --color-error:             #D04A42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F6F7F8;
+    --root-bg:                 #F1F3F3;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1609,11 +1612,11 @@
     --color-base-200:          #171B20;
     --color-base-300:          #303439;
     --color-base-content:      #ECEFF3;
-    --color-primary:           #FB8A4C;
+    --color-primary:           #8FA6BC;
     --color-primary-content:   #171B20;
-    --color-secondary:         #7E96AC;
+    --color-secondary:         #F97B2E;
     --color-secondary-content: #171B20;
-    --color-accent:            #3FB7CB;
+    --color-accent:            #2FA9BE;
     --color-accent-content:    #171B20;
     --color-neutral:           #3A414A;
     --color-neutral-content:   #ECEFF3;
@@ -1621,7 +1624,7 @@
     --color-info-content:      #171B20;
     --color-success:           #60A872;
     --color-success-content:   #171B20;
-    --color-warning:           #E0C070;
+    --color-warning:           #D8B554;
     --color-warning-content:   #171B20;
     --color-error:             #D3625D;
     --color-error-content:     #171B20;
@@ -1649,7 +1652,7 @@
     --color-base-content:      #111111;
     --color-primary:           #C41E2F;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #1A1A1A;
+    --color-secondary:         #1F1F1F;
     --color-secondary-content: #FFFFFF;
     --color-accent:            #0F62AC;
     --color-accent-content:    #FFFFFF;
@@ -1657,9 +1660,9 @@
     --color-neutral-content:   #FFFFFF;
     --color-info:              #488DC3;
     --color-info-content:      #111111;
-    --color-success:           #1D8A5A;
-    --color-success-content:   #111111;
-    --color-warning:           #B08A2E;
+    --color-success:           #23855F;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #B58B24;
     --color-warning-content:   #111111;
     --color-error:             #D14B43;
     --color-error-content:     #FFFFFF;
@@ -1693,9 +1696,9 @@
     --color-neutral-content:   #F2F2F2;
     --color-info:              #5D9ACD;
     --color-info-content:      #131313;
-    --color-success:           #3FBF87;
+    --color-success:           #46B98A;
     --color-success-content:   #131313;
-    --color-warning:           #D9B45B;
+    --color-warning:           #D0AC49;
     --color-warning-content:   #131313;
     --color-error:             #D2615B;
     --color-error-content:     #131313;
@@ -1710,7 +1713,7 @@
     --noise:                   0;
 }
 
-/* security / security-dark — 業種特化 · セキュリティ・監査・認証 (security — セキュリティ / 監査) */
+/* security / security-dark — 業種特化 · セキュリティ・監査・認証 (security — 鉄壁グラファイト×アラート赤（緑渋滞から離脱）) */
 
 @plugin 'daisyui/theme' {
     name:                      'security';
@@ -1718,26 +1721,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F5F7F6;
-    --color-base-300:          #E1E4E3;
-    --color-base-content:      #1B2420;
-    --color-primary:           #166D4D;
+    --color-base-200:          #F4F6F6;
+    --color-base-300:          #E1E3E4;
+    --color-base-content:      #1E272B;
+    --color-primary:           #37474F;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #37474F;
+    --color-secondary:         #C0392B;
     --color-secondary-content: #FFFFFF;
-    --color-accent:            #C0392B;
-    --color-accent-content:    #FFFFFF;
-    --color-neutral:           #373F3B;
+    --color-accent:            #C98A0B;
+    --color-accent-content:    #1E272B;
+    --color-neutral:           #394245;
     --color-neutral-content:   #FFFFFF;
     --color-info:              #0E7FA8;
     --color-info-content:      #FFFFFF;
-    --color-success:           #4B995F;
-    --color-success-content:   #1B2420;
-    --color-warning:           #B08A2E;
-    --color-warning-content:   #1B2420;
+    --color-success:           #1E7B52;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #C3A347;
+    --color-warning-content:   #1E272B;
     --color-error:             #D04A42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F5F7F6;
+    --root-bg:                 #F4F6F6;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1757,19 +1760,19 @@
     --color-base-200:          #10171A;
     --color-base-300:          #293033;
     --color-base-content:      #E7F0EB;
-    --color-primary:           #35C78B;
+    --color-primary:           #92A4AE;
     --color-primary-content:   #10171A;
-    --color-secondary:         #78909C;
+    --color-secondary:         #F55B54;
     --color-secondary-content: #10171A;
-    --color-accent:            #F0605A;
+    --color-accent:            #E8AB2F;
     --color-accent-content:    #10171A;
     --color-neutral:           #323C40;
     --color-neutral-content:   #E7F0EB;
-    --color-info:              #3FB7CB;
+    --color-info:              #38ADC2;
     --color-info-content:      #10171A;
-    --color-success:           #5FA872;
+    --color-success:           #35C78B;
     --color-success-content:   #10171A;
-    --color-warning:           #D9B45B;
+    --color-warning:           #C5A856;
     --color-warning-content:   #10171A;
     --color-error:             #D2625C;
     --color-error-content:     #10171A;
@@ -1784,7 +1787,7 @@
     --noise:                   0;
 }
 
-/* kids / kids-dark — 業種特化 · 子ども・ファミリー向け (kids — 子ども / ファミリー) */
+/* kids / kids-dark — 業種特化 · 子ども・ファミリー向け (kids — クレヨンレインボー（空色×草色×さくらんぼ・バターキャンバス）) */
 
 @plugin 'daisyui/theme' {
     name:                      'kids';
@@ -1792,26 +1795,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FFFDF5;
-    --color-base-300:          #EDEBE3;
+    --color-base-200:          #FFF8E1;
+    --color-base-300:          #EDE6D1;
     --color-base-content:      #35302E;
-    --color-primary:           #FF6B6B;
+    --color-primary:           #339AF0;
     --color-primary-content:   #35302E;
-    --color-secondary:         #4ECDC4;
+    --color-secondary:         #40C057;
     --color-secondary-content: #35302E;
-    --color-accent:            #FFD93D;
+    --color-accent:            #FF6B6B;
     --color-accent-content:    #35302E;
-    --color-neutral:           #504B48;
+    --color-neutral:           #504A46;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #6C8DFA;
-    --color-info-content:      #35302E;
-    --color-success:           #4C9A5F;
+    --color-info:              #498CC1;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4D995D;
     --color-success-content:   #35302E;
-    --color-warning:           #C4A446;
+    --color-warning:           #D0AA00;
     --color-warning-content:   #35302E;
-    --color-error:             #D14B42;
+    --color-error:             #D14A40;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FFFDF5;
+    --root-bg:                 #FFF8E1;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1827,27 +1830,27 @@
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #2F2A3D;
-    --color-base-200:          #262230;
-    --color-base-300:          #3F3B49;
-    --color-base-content:      #F5F1FA;
-    --color-primary:           #FF8787;
-    --color-primary-content:   #262230;
-    --color-secondary:         #6EE7DE;
-    --color-secondary-content: #262230;
-    --color-accent:            #FFE066;
-    --color-accent-content:    #262230;
-    --color-neutral:           #494456;
-    --color-neutral-content:   #F5F1FA;
-    --color-info:              #8FA8FF;
-    --color-info-content:      #262230;
-    --color-success:           #63A974;
-    --color-success-content:   #262230;
-    --color-warning:           #C8A95A;
-    --color-warning-content:   #262230;
-    --color-error:             #D5635F;
-    --color-error-content:     #262230;
-    --root-bg:                 #262230;
+    --color-base-100:          #363126;
+    --color-base-200:          #2B2820;
+    --color-base-300:          #434038;
+    --color-base-content:      #F5F1E6;
+    --color-primary:           #4DABF7;
+    --color-primary-content:   #2B2820;
+    --color-secondary:         #51CF66;
+    --color-secondary-content: #2B2820;
+    --color-accent:            #FF8787;
+    --color-accent-content:    #2B2820;
+    --color-neutral:           #4F4A3F;
+    --color-neutral-content:   #F5F1E6;
+    --color-info:              #619DCF;
+    --color-info-content:      #2B2820;
+    --color-success:           #63AA72;
+    --color-success-content:   #2B2820;
+    --color-warning:           #EBCC50;
+    --color-warning-content:   #2B2820;
+    --color-error:             #D5645D;
+    --color-error-content:     #2B2820;
+    --root-bg:                 #2B2820;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1866,8 +1869,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F8F7F2;
-    --color-base-300:          #E6E5E0;
+    --color-base-200:          #F8F7F0;
+    --color-base-300:          #E6E5DE;
     --color-base-content:      #2E2F27;
     --color-primary:           #7C8F62;
     --color-primary-content:   #2E2F27;
@@ -1877,15 +1880,15 @@
     --color-accent-content:    #2E2F27;
     --color-neutral:           #484941;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #0E8FA3;
-    --color-info-content:      #FFFFFF;
+    --color-info:              #488CC2;
+    --color-info-content:      #2E2F27;
     --color-success:           #4C995F;
     --color-success-content:   #2E2F27;
     --color-warning:           #C4A346;
     --color-warning-content:   #2E2F27;
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F8F7F2;
+    --root-bg:                 #F8F7F0;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1909,11 +1912,11 @@
     --color-primary-content:   #22241D;
     --color-secondary:         #B7A0E0;
     --color-secondary-content: #22241D;
-    --color-accent:            #E0C070;
+    --color-accent:            #DDBE65;
     --color-accent-content:    #22241D;
     --color-neutral:           #45483E;
     --color-neutral-content:   #F0F1E8;
-    --color-info:              #3FB7CB;
+    --color-info:              #5F9CCF;
     --color-info-content:      #22241D;
     --color-success:           #62A972;
     --color-success-content:   #22241D;
@@ -1932,7 +1935,7 @@
     --noise:                   0;
 }
 
-/* civic / civic-dark — 業種特化 · 行政・公共・自治体 (civic — 行政 / 公共) */
+/* civic / civic-dark — 業種特化 · 行政・公共・自治体 (civic — 公用ブルー×朱肉アクセント) */
 
 @plugin 'daisyui/theme' {
     name:                      'civic';
@@ -1940,26 +1943,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F6F8FA;
-    --color-base-300:          #E3E5E8;
+    --color-base-200:          #F5F7F9;
+    --color-base-300:          #E2E5E7;
     --color-base-content:      #1F2933;
     --color-primary:           #145DA0;
     --color-primary-content:   #FFFFFF;
     --color-secondary:         #5A7184;
     --color-secondary-content: #FFFFFF;
-    --color-accent:            #1D8A5A;
+    --color-accent:            #C63D2F;
     --color-accent-content:    #FFFFFF;
-    --color-neutral:           #3B444D;
+    --color-neutral:           #3A444D;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC3;
+    --color-info:              #478CC3;
     --color-info-content:      #1F2933;
-    --color-success:           #4B9960;
-    --color-success-content:   #1F2933;
-    --color-warning:           #C4A447;
+    --color-success:           #1E8556;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #C4A347;
     --color-warning-content:   #1F2933;
-    --color-error:             #B3382C;
+    --color-error:             #D04A43;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F6F8FA;
+    --root-bg:                 #F5F7F9;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1983,17 +1986,17 @@
     --color-primary-content:   #121A22;
     --color-secondary:         #94A9BC;
     --color-secondary-content: #121A22;
-    --color-accent:            #3FBF87;
+    --color-accent:            #E85D4A;
     --color-accent-content:    #121A22;
     --color-neutral:           #353F4A;
     --color-neutral-content:   #E9F0F6;
     --color-info:              #5D9BCF;
     --color-info-content:      #121A22;
-    --color-success:           #5FA873;
+    --color-success:           #43BC8B;
     --color-success-content:   #121A22;
     --color-warning:           #C5A858;
     --color-warning-content:   #121A22;
-    --color-error:             #F0605A;
+    --color-error:             #D2625E;
     --color-error-content:     #121A22;
     --root-bg:                 #121A22;
     --radius-selector:         0.5rem;
@@ -2006,7 +2009,7 @@
     --noise:                   0;
 }
 
-/* atelier / atelier-dark — 業種特化 · 高級ブランド・D2C・ジュエリー (atelier — 高級ブランド / D2C) */
+/* atelier / atelier-dark — 業種特化 · 高級ブランド・D2C・ジュエリー (atelier — エスプレッソ×真鍮×ワイン（黒3兄弟から離脱）) */
 
 @plugin 'daisyui/theme' {
     name:                      'atelier';
@@ -2014,14 +2017,14 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FAF8F5;
-    --color-base-300:          #E7E4E1;
+    --color-base-200:          #FAF7F2;
+    --color-base-300:          #E7E4DF;
     --color-base-content:      #23201C;
-    --color-primary:           #1A1A1A;
+    --color-primary:           #33261C;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #B08A2E;
+    --color-secondary:         #B6913B;
     --color-secondary-content: #23201C;
-    --color-accent:            #6B1F2A;
+    --color-accent:            #802A3E;
     --color-accent-content:    #FFFFFF;
     --color-neutral:           #3E3B37;
     --color-neutral-content:   #FFFFFF;
@@ -2029,11 +2032,11 @@
     --color-info-content:      #23201C;
     --color-success:           #4C995F;
     --color-success-content:   #23201C;
-    --color-warning:           #C4A347;
+    --color-warning:           #C4A346;
     --color-warning-content:   #23201C;
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FAF8F5;
+    --root-bg:                 #FAF7F2;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2049,27 +2052,27 @@
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #232019;
-    --color-base-200:          #191715;
-    --color-base-300:          #32302D;
+    --color-base-100:          #262119;
+    --color-base-200:          #1B1815;
+    --color-base-300:          #34312E;
     --color-base-content:      #F2EFE9;
     --color-primary:           #E8E2D8;
-    --color-primary-content:   #191715;
-    --color-secondary:         #D9B45B;
-    --color-secondary-content: #191715;
-    --color-accent:            #C05A6A;
-    --color-accent-content:    #191715;
-    --color-neutral:           #3D3A33;
+    --color-primary-content:   #1B1815;
+    --color-secondary:         #D3AC52;
+    --color-secondary-content: #1B1815;
+    --color-accent:            #B95873;
+    --color-accent-content:    #1B1815;
+    --color-neutral:           #403B33;
     --color-neutral-content:   #F2EFE9;
-    --color-info:              #5E9BCD;
-    --color-info-content:      #191715;
+    --color-info:              #5F9BCE;
+    --color-info-content:      #1B1815;
     --color-success:           #61A871;
-    --color-success-content:   #191715;
+    --color-success-content:   #1B1815;
     --color-warning:           #C6A855;
-    --color-warning-content:   #191715;
-    --color-error:             #D3615C;
-    --color-error-content:     #191715;
-    --root-bg:                 #191715;
+    --color-warning-content:   #1B1815;
+    --color-error:             #D3625B;
+    --color-error-content:     #1B1815;
+    --root-bg:                 #1B1815;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2080,7 +2083,7 @@
     --noise:                   0;
 }
 
-/* estate / estate-dark — 業種特化 · 不動産・建築・設計 (estate — 不動産 / 建築 — ブループリント) */
+/* estate / estate-dark — 業種特化 · 不動産・建築・設計 (estate — ブループリント（青焼き紙キャンバス×コバルト×テラコッタ）) */
 
 @plugin 'daisyui/theme' {
     name:                      'estate';
@@ -2088,26 +2091,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F5F8FB;
-    --color-base-300:          #E2E6EA;
-    --color-base-content:      #1E2A38;
-    --color-primary:           #1F5FA8;
+    --color-base-200:          #EDF4FB;
+    --color-base-300:          #DAE2EA;
+    --color-base-content:      #1C2A3A;
+    --color-primary:           #1E4F94;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #E8791D;
-    --color-secondary-content: #1E2A38;
-    --color-accent:            #16717C;
-    --color-accent-content:    #FFFFFF;
-    --color-neutral:           #3A4552;
+    --color-secondary:         #C65D3B;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #2E8FBE;
+    --color-accent-content:    #1C2A3A;
+    --color-neutral:           #374454;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #478CC3;
-    --color-info-content:      #1E2A38;
-    --color-success:           #4B9960;
-    --color-success-content:   #1E2A38;
-    --color-warning:           #C4A448;
-    --color-warning-content:   #1E2A38;
-    --color-error:             #B3382C;
+    --color-info:              #468CC3;
+    --color-info-content:      #1C2A3A;
+    --color-success:           #1F8A72;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #C3A348;
+    --color-warning-content:   #1C2A3A;
+    --color-error:             #D04A43;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F5F8FB;
+    --root-bg:                 #EDF4FB;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2123,27 +2126,27 @@
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #1D2735;
-    --color-base-200:          #141C26;
-    --color-base-300:          #2D353F;
-    --color-base-content:      #E9F0F8;
-    --color-primary:           #5C97D6;
-    --color-primary-content:   #141C26;
-    --color-secondary:         #FB9A4C;
-    --color-secondary-content: #141C26;
-    --color-accent:            #3FB7CB;
-    --color-accent-content:    #141C26;
-    --color-neutral:           #37414F;
-    --color-neutral-content:   #E9F0F8;
-    --color-info:              #5D9BD0;
-    --color-info-content:      #141C26;
-    --color-success:           #60A873;
-    --color-success-content:   #141C26;
-    --color-warning:           #C5A958;
-    --color-warning-content:   #141C26;
-    --color-error:             #F0605A;
-    --color-error-content:     #141C26;
-    --root-bg:                 #141C26;
+    --color-base-100:          #182B3E;
+    --color-base-200:          #10202F;
+    --color-base-300:          #293948;
+    --color-base-content:      #E7F0F8;
+    --color-primary:           #6BA3DC;
+    --color-primary-content:   #10202F;
+    --color-secondary:         #E8825C;
+    --color-secondary-content: #10202F;
+    --color-accent:            #5BBBE0;
+    --color-accent-content:    #10202F;
+    --color-neutral:           #334557;
+    --color-neutral-content:   #E7F0F8;
+    --color-info:              #5C9CD1;
+    --color-info-content:      #10202F;
+    --color-success:           #3FA986;
+    --color-success-content:   #10202F;
+    --color-warning:           #C5A95A;
+    --color-warning-content:   #10202F;
+    --color-error:             #D2635F;
+    --color-error-content:     #10202F;
+    --root-bg:                 #10202F;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2154,7 +2157,7 @@
     --noise:                   0;
 }
 
-/* food / food-dark — 業種特化 · 飲食・フードデリバリー (food — 飲食 / フードテック — シトラスフレッシュ) */
+/* food / food-dark — 業種特化 · 飲食・フードデリバリー (food — シトラスライム×トマト（橙渋滞から離脱）) */
 
 @plugin 'daisyui/theme' {
     name:                      'food';
@@ -2162,26 +2165,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FFFCF5;
-    --color-base-300:          #EDE9E1;
-    --color-base-content:      #33291C;
-    --color-primary:           #FF8C42;
-    --color-primary-content:   #33291C;
-    --color-secondary:         #97B94E;
-    --color-secondary-content: #33291C;
+    --color-base-200:          #F9FCE8;
+    --color-base-300:          #E7EBD6;
+    --color-base-content:      #333A18;
+    --color-primary:           #7E9B12;
+    --color-primary-content:   #333A18;
+    --color-secondary:         #FF8C42;
+    --color-secondary-content: #333A18;
     --color-accent:            #E8443A;
     --color-accent-content:    #FFFFFF;
-    --color-neutral:           #4E4438;
+    --color-neutral:           #4D5434;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #0E8FA3;
+    --color-info:              #488DC1;
     --color-info-content:      #FFFFFF;
-    --color-success:           #4D9A5F;
-    --color-success-content:   #33291C;
-    --color-warning:           #C4A446;
-    --color-warning-content:   #33291C;
-    --color-error:             #D14B42;
+    --color-success:           #4C9A5E;
+    --color-success-content:   #333A18;
+    --color-warning:           #C4A444;
+    --color-warning-content:   #333A18;
+    --color-error:             #D14B40;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FFFCF5;
+    --root-bg:                 #F9FCE8;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2197,27 +2200,27 @@
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #322817;
-    --color-base-200:          #271F14;
-    --color-base-300:          #40382C;
-    --color-base-content:      #F7EEE0;
-    --color-primary:           #FFA35C;
-    --color-primary-content:   #271F14;
-    --color-secondary:         #B3D06A;
-    --color-secondary-content: #271F14;
+    --color-base-100:          #2F3519;
+    --color-base-200:          #252A14;
+    --color-base-300:          #3E432D;
+    --color-base-content:      #F4F7E6;
+    --color-primary:           #A8C93F;
+    --color-primary-content:   #252A14;
+    --color-secondary:         #FFA35C;
+    --color-secondary-content: #252A14;
     --color-accent:            #F0655C;
-    --color-accent-content:    #271F14;
-    --color-neutral:           #4C4231;
-    --color-neutral-content:   #F7EEE0;
-    --color-info:              #3FB7CB;
-    --color-info-content:      #271F14;
-    --color-success:           #63A970;
-    --color-success-content:   #271F14;
-    --color-warning:           #C8A954;
-    --color-warning-content:   #271F14;
-    --color-error:             #D4625B;
-    --color-error-content:     #271F14;
-    --root-bg:                 #271F14;
+    --color-accent-content:    #252A14;
+    --color-neutral:           #494F34;
+    --color-neutral-content:   #F4F7E6;
+    --color-info:              #5F9DCE;
+    --color-info-content:      #252A14;
+    --color-success:           #37B3A8;
+    --color-success-content:   #252A14;
+    --color-warning:           #C8AA54;
+    --color-warning-content:   #252A14;
+    --color-error:             #D5645B;
+    --color-error-content:     #252A14;
+    --root-bg:                 #252A14;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2228,7 +2231,7 @@
     --noise:                   0;
 }
 
-/* travel / travel-dark — 業種特化 · 旅行・ホテル・リゾート (travel — 旅行 / ホスピタリティ — トロピックラグーン) */
+/* travel / travel-dark — 業種特化 · 旅行・ホテル・リゾート (travel — トロピックラグーン（アクアキャンバス大胆化）) */
 
 @plugin 'daisyui/theme' {
     name:                      'travel';
@@ -2236,26 +2239,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F3FBFA;
-    --color-base-300:          #E0E9E9;
+    --color-base-200:          #E9F7F4;
+    --color-base-300:          #D7E6E3;
     --color-base-content:      #1C3335;
     --color-primary:           #12A5AB;
     --color-primary-content:   #1C3335;
     --color-secondary:         #FF7E6B;
     --color-secondary-content: #1C3335;
-    --color-accent:            #D9A62E;
+    --color-accent:            #E0A32E;
     --color-accent-content:    #1C3335;
-    --color-neutral:           #384D4F;
+    --color-neutral:           #374D4E;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #478CC3;
+    --color-info:              #468CC2;
     --color-info-content:      #1C3335;
     --color-success:           #4C9A3F;
     --color-success-content:   #1C3335;
-    --color-warning:           #C3A447;
+    --color-warning:           #C3A347;
     --color-warning-content:   #1C3335;
-    --color-error:             #D04B43;
+    --color-error:             #D04B42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F3FBFA;
+    --root-bg:                 #E9F7F4;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2272,26 +2275,26 @@
     prefersdark:               false;
     color-scheme:              'dark';
     --color-base-100:          #173135;
-    --color-base-200:          #0F2426;
-    --color-base-300:          #293D3F;
+    --color-base-200:          #0E2528;
+    --color-base-300:          #283E41;
     --color-base-content:      #E6F5F5;
     --color-primary:           #3FC7CD;
-    --color-primary-content:   #0F2426;
+    --color-primary-content:   #0E2528;
     --color-secondary:         #FF9A88;
-    --color-secondary-content: #0F2426;
+    --color-secondary-content: #0E2528;
     --color-accent:            #E8C15A;
-    --color-accent-content:    #0F2426;
+    --color-accent-content:    #0E2528;
     --color-neutral:           #334B4E;
     --color-neutral-content:   #E6F5F5;
     --color-info:              #5C9CD0;
-    --color-info-content:      #0F2426;
+    --color-info-content:      #0E2528;
     --color-success:           #7BC060;
-    --color-success-content:   #0F2426;
+    --color-success-content:   #0E2528;
     --color-warning:           #C5AA58;
-    --color-warning-content:   #0F2426;
+    --color-warning-content:   #0E2528;
     --color-error:             #D3645E;
-    --color-error-content:     #0F2426;
-    --root-bg:                 #0F2426;
+    --color-error-content:     #0E2528;
+    --root-bg:                 #0E2528;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2315,15 +2318,15 @@
     --color-base-content:      #191913;
     --color-primary:           #1A1A1A;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #9DB80E;
+    --color-secondary:         #AACC00;
     --color-secondary-content: #191913;
     --color-accent:            #FF4D6D;
     --color-accent-content:    #191913;
     --color-neutral:           #363630;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #0070F3;
+    --color-info:              #0866FF;
     --color-info-content:      #FFFFFF;
-    --color-success:           #22C55E;
+    --color-success:           #2BC96B;
     --color-success-content:   #191913;
     --color-warning:           #C4A448;
     --color-warning-content:   #191913;
@@ -2357,9 +2360,9 @@
     --color-accent-content:    #141412;
     --color-neutral:           #393935;
     --color-neutral-content:   #F4F4EE;
-    --color-info:              #3291FF;
+    --color-info:              #3F8CFF;
     --color-info-content:      #141412;
-    --color-success:           #4ADE80;
+    --color-success:           #52E08A;
     --color-success-content:   #141412;
     --color-warning:           #C5A755;
     --color-warning-content:   #141412;
@@ -2384,8 +2387,8 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F6FAF8;
-    --color-base-300:          #E3E7E5;
+    --color-base-200:          #F3FAF6;
+    --color-base-300:          #E0E7E3;
     --color-base-content:      #1E2A26;
     --color-primary:           #00B37E;
     --color-primary-content:   #1E2A26;
@@ -2393,17 +2396,17 @@
     --color-secondary-content: #FFFFFF;
     --color-accent:            #E8A020;
     --color-accent-content:    #1E2A26;
-    --color-neutral:           #3A4541;
+    --color-neutral:           #394541;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #0E8FA3;
+    --color-info:              #1B98B0;
     --color-info-content:      #1E2A26;
     --color-success:           #4B9A5F;
     --color-success-content:   #1E2A26;
-    --color-warning:           #C4A447;
+    --color-warning:           #C3A447;
     --color-warning-content:   #1E2A26;
-    --color-error:             #D14B43;
+    --color-error:             #D04B42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F6FAF8;
+    --root-bg:                 #F3FAF6;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2431,7 +2434,7 @@
     --color-accent-content:    #121B18;
     --color-neutral:           #35403C;
     --color-neutral-content:   #E8F3EE;
-    --color-info:              #3FB7CB;
+    --color-info:              #5D9BCE;
     --color-info-content:      #121B18;
     --color-success:           #60A871;
     --color-success-content:   #121B18;
@@ -2450,7 +2453,7 @@
     --noise:                   0;
 }
 
-/* factory / factory-dark — 業種特化 · 製造・重工業・設備 (factory — 製造 / インダストリアル — スチールワークス) */
+/* factory / factory-dark — 業種特化 · 製造・重工業・設備 (factory — ハザードアンバー×グラファイト（青渋滞から離脱・黄スロット新規）) */
 
 @plugin 'daisyui/theme' {
     name:                      'factory';
@@ -2458,26 +2461,26 @@
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F4F6F8;
-    --color-base-300:          #E1E4E6;
+    --color-base-200:          #F2F4F5;
+    --color-base-300:          #DFE2E4;
     --color-base-content:      #232A31;
-    --color-primary:           #3E5C76;
-    --color-primary-content:   #FFFFFF;
-    --color-secondary:         #E86A17;
-    --color-secondary-content: #232A31;
-    --color-accent:            #1D8A9A;
-    --color-accent-content:    #FFFFFF;
+    --color-primary:           #C28410;
+    --color-primary-content:   #232A31;
+    --color-secondary:         #3E5C76;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #DD6B20;
+    --color-accent-content:    #232A31;
     --color-neutral:           #3E444B;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #478CC3;
-    --color-info-content:      #232A31;
-    --color-success:           #4B9960;
+    --color-info:              #2F8A99;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4B995F;
     --color-success-content:   #232A31;
-    --color-warning:           #B08A2E;
+    --color-warning:           #C3A347;
     --color-warning-content:   #232A31;
-    --color-error:             #D04A43;
+    --color-error:             #D04A42;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F4F6F8;
+    --root-bg:                 #F2F4F5;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2494,26 +2497,26 @@
     prefersdark:               false;
     color-scheme:              'dark';
     --color-base-100:          #1F262E;
-    --color-base-200:          #161B20;
-    --color-base-300:          #2F3439;
+    --color-base-200:          #14181C;
+    --color-base-300:          #2D3135;
     --color-base-content:      #ECF0F4;
-    --color-primary:           #7FA0BE;
-    --color-primary-content:   #161B20;
-    --color-secondary:         #FB8A3C;
-    --color-secondary-content: #161B20;
-    --color-accent:            #3FB7CB;
-    --color-accent-content:    #161B20;
+    --color-primary:           #E8B341;
+    --color-primary-content:   #14181C;
+    --color-secondary:         #7FA0BE;
+    --color-secondary-content: #14181C;
+    --color-accent:            #EF7D33;
+    --color-accent-content:    #14181C;
     --color-neutral:           #394048;
     --color-neutral-content:   #ECF0F4;
-    --color-info:              #5E9BCF;
-    --color-info-content:      #161B20;
+    --color-info:              #5D9BCE;
+    --color-info-content:      #14181C;
     --color-success:           #60A872;
-    --color-success-content:   #161B20;
-    --color-warning:           #D9B45B;
-    --color-warning-content:   #161B20;
-    --color-error:             #D3625D;
-    --color-error-content:     #161B20;
-    --root-bg:                 #161B20;
+    --color-success-content:   #14181C;
+    --color-warning:           #C5A857;
+    --color-warning-content:   #14181C;
+    --color-error:             #D2625D;
+    --color-error-content:     #14181C;
+    --root-bg:                 #14181C;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2524,34 +2527,34 @@
     --noise:                   0;
 }
 
-/* mood-zen / mood-zen-dark — 美学系 (mood) · 和風・工芸・旅館・ミニマル志向 (mood-zen — 侘び寂び) */
+/* zen / zen-dark — 美学系 (mood) · 和風・工芸・旅館・ミニマル志向 (zen — 侘び寂び) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-zen';
+    name:                      'zen';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F7F5F0;
-    --color-base-300:          #E5E3DE;
+    --color-base-200:          #F1F1EB;
+    --color-base-300:          #E0DFDA;
     --color-base-content:      #2E2C28;
-    --color-primary:           #5E6B54;
+    --color-primary:           #616B59;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #8A7B64;
+    --color-secondary:         #877B67;
     --color-secondary-content: #FFFFFF;
     --color-accent:            #B3432B;
     --color-accent-content:    #FFFFFF;
-    --color-neutral:           #484642;
+    --color-neutral:           #474641;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #488CC2;
+    --color-info:              #478BC1;
     --color-info-content:      #2E2C28;
-    --color-success:           #4C995F;
+    --color-success:           #4B995E;
     --color-success-content:   #2E2C28;
-    --color-warning:           #C4A346;
+    --color-warning:           #C3A345;
     --color-warning-content:   #2E2C28;
-    --color-error:             #D04A42;
+    --color-error:             #D04A41;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F7F5F0;
+    --root-bg:                 #F1F1EB;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2563,7 +2566,7 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-zen-dark';
+    name:                      'zen-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
@@ -2598,34 +2601,34 @@
     --noise:                   0;
 }
 
-/* mood-botanical / mood-botanical-dark — 美学系 (mood) · 花・園芸・オーガニック・コスメ (mood-botanical — 植物園) */
+/* botanical / botanical-dark — 美学系 (mood) · 花・園芸・オーガニック・コスメ (Botanical — greenhouse canvas, leaf × rose) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-botanical';
+    name:                      'botanical';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #F6F8F3;
-    --color-base-300:          #E3E6E1;
+    --color-base-200:          #EFF6EA;
+    --color-base-300:          #DDE5D9;
     --color-base-content:      #24312A;
-    --color-primary:           #2F6B4A;
+    --color-primary:           #2E8A4E;
     --color-primary-content:   #FFFFFF;
-    --color-secondary:         #7A9B57;
-    --color-secondary-content: #24312A;
-    --color-accent:            #C75B7A;
-    --color-accent-content:    #FFFFFF;
-    --color-neutral:           #3F4B44;
+    --color-secondary:         #C75B7A;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #8FA82E;
+    --color-accent-content:    #24312A;
+    --color-neutral:           #3E4B43;
     --color-neutral-content:   #FFFFFF;
     --color-info:              #4A7C8C;
     --color-info-content:      #FFFFFF;
-    --color-success:           #4B995F;
+    --color-success:           #7A9B57;
     --color-success-content:   #24312A;
-    --color-warning:           #B08A2E;
+    --color-warning:           #C3A345;
     --color-warning-content:   #24312A;
-    --color-error:             #D14A42;
+    --color-error:             #D04A41;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #F6F8F3;
+    --root-bg:                 #EFF6EA;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2637,31 +2640,31 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-botanical-dark';
+    name:                      'botanical-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #202B24;
-    --color-base-200:          #17211B;
-    --color-base-300:          #303A34;
+    --color-base-100:          #1E2E23;
+    --color-base-200:          #14231A;
+    --color-base-300:          #2D3C33;
     --color-base-content:      #E9F1EC;
-    --color-primary:           #5FA582;
-    --color-primary-content:   #17211B;
-    --color-secondary:         #9FBE72;
-    --color-secondary-content: #17211B;
-    --color-accent:            #E08BA4;
-    --color-accent-content:    #17211B;
-    --color-neutral:           #3A453E;
+    --color-primary:           #62B385;
+    --color-primary-content:   #14231A;
+    --color-secondary:         #E08BA4;
+    --color-secondary-content: #14231A;
+    --color-accent:            #A8C45E;
+    --color-accent-content:    #14231A;
+    --color-neutral:           #38483D;
     --color-neutral-content:   #E9F1EC;
     --color-info:              #74A8B8;
-    --color-info-content:      #17211B;
-    --color-success:           #60A971;
-    --color-success-content:   #17211B;
-    --color-warning:           #D9B45B;
-    --color-warning-content:   #17211B;
+    --color-info-content:      #14231A;
+    --color-success:           #9FBE72;
+    --color-success-content:   #14231A;
+    --color-warning:           #C6A956;
+    --color-warning-content:   #14231A;
     --color-error:             #D3635C;
-    --color-error-content:     #17211B;
-    --root-bg:                 #17211B;
+    --color-error-content:     #14231A;
+    --root-bg:                 #14231A;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2672,34 +2675,34 @@
     --noise:                   0;
 }
 
-/* mood-pop / mood-pop-dark — 美学系 (mood) · エンタメ・若年層・キャンペーン LP (mood-pop — ドーパミン) */
+/* pop / pop-dark — 美学系 (mood) · エンタメ・若年層・キャンペーン LP (pop — ドーパミン) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-pop';
+    name:                      'pop';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
     --color-base-100:          #FFFFFF;
-    --color-base-200:          #FFFDF8;
-    --color-base-300:          #ECE9E6;
+    --color-base-200:          #FFF5FA;
+    --color-base-300:          #ECE2E8;
     --color-base-content:      #2B2430;
-    --color-primary:           #FF5DA2;
+    --color-primary:           #FF3D9A;
     --color-primary-content:   #2B2430;
-    --color-secondary:         #00C2D1;
-    --color-secondary-content: #2B2430;
+    --color-secondary:         #6741D9;
+    --color-secondary-content: #FFFFFF;
     --color-accent:            #FFC300;
     --color-accent-content:    #2B2430;
-    --color-neutral:           #46404A;
+    --color-neutral:           #463F4B;
     --color-neutral-content:   #FFFFFF;
-    --color-info:              #498DC3;
+    --color-info:              #498CC3;
     --color-info-content:      #2B2430;
     --color-success:           #22CD89;
     --color-success-content:   #2B2430;
-    --color-warning:           #C4A447;
+    --color-warning:           #C4A347;
     --color-warning-content:   #2B2430;
-    --color-error:             #D14B42;
+    --color-error:             #D14A43;
     --color-error-content:     #FFFFFF;
-    --root-bg:                 #FFFDF8;
+    --root-bg:                 #FFF5FA;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2711,7 +2714,7 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-pop-dark';
+    name:                      'pop-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
@@ -2719,9 +2722,9 @@
     --color-base-200:          #241E2E;
     --color-base-300:          #3D3747;
     --color-base-content:      #F6F0FA;
-    --color-primary:           #FF7EB8;
+    --color-primary:           #FF6EB0;
     --color-primary-content:   #241E2E;
-    --color-secondary:         #3FD8E5;
+    --color-secondary:         #9775FA;
     --color-secondary-content: #241E2E;
     --color-accent:            #FFD34D;
     --color-accent-content:    #241E2E;
@@ -2746,10 +2749,10 @@
     --noise:                   0;
 }
 
-/* mood-verdigris / mood-verdigris-dark — 美学系 (mood) · ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト (Claude Verdigris (旧ブランド既定 v0.6.0)) */
+/* verdigris / verdigris-dark — 美学系 (mood) · ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト (Claude Verdigris (旧ブランド既定 v0.6.0)) */
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-verdigris';
+    name:                      'verdigris';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
@@ -2785,7 +2788,7 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'mood-verdigris-dark';
+    name:                      'verdigris-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';

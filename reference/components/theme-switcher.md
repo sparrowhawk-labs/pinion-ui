@@ -34,7 +34,7 @@ None — the icon is rendered by the component (sun in dark theme, moon otherwis
 ### Multi-theme cycle
 
 ```blade
-<x-theme-switcher :themes="['pinion', 'pinion-dark', 'mood-monokai', 'mood-monokai-dark']" size="lg" />
+<x-theme-switcher :themes="['pinion', 'pinion-dark', 'monokai', 'monokai-dark']" size="lg" />
 ```
 
 ### Inside a header

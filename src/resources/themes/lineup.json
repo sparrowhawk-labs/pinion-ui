@@ -5,56 +5,57 @@
     "naming": "<name> = light / <name>-dark = dark。ブランド既定も同法則で pinion / pinion-dark（2026-07-17 改名: pinion-light → pinion。旧 v0.4 の pinion パレットは名前ごと Verdigris に置換）",
     "defaultMode": "light",
     "logoFinal": "docs/logo-candidates/round6/n5-swoosh.png (B-5 swoosh, reactive palette, 2026-07-17 確定)",
-    "moodPrefix": "mood- = ジャンル非依存の美学系テーマ（2026-07-17 確定）。業種/用途テーマは裸名",
+    "moodPrefix": "廃止 (2026-07-19): mood- prefix を外し全テーマ裸名に統一（ユーザー指示）。カテゴリは lineup.json の category メタデータ + pn_theme_groups() のグループ見出し + セレクターのカテゴリ表示で明示。daisyUI 名衝突は synthwave→outrun 改名で回避（ユーザー選択）",
     "finalizedAt": "2026-07-17 (balance 棚卸し + mood 追加まで反映・最終確定)",
-    "brandPalette": "2026-07-17 (夕): ブランド既定 pinion のパレットを Verdigris → reactive 系（GitHub-Light/Dark 隣接・Primer 由来 MIT トークン）へ上書き（ユーザー確信案件）。旧 Verdigris は mood-verdigris として温存。reactive テーマ自体は /visualize 依存のため従来どおり別枠維持"
+    "brandPalette": "2026-07-19: pinion を palette v2 (f7eff78) から Primer 原色へ差し戻し（light #0969DA / dark #4493F8）。secondary のみ teal (#0F766E / #2DD4BF) にして success 緑との近似を解消（ユーザー指示）",
+    "individuality": "2026-07-19: 個性化オーバーホール承認・全カテゴリ 全テーマOK。キャンバス底上げ+mood/コンシューマ大胆 / 色相再割り当て（docs=セピア, factory=アンバー, logistics=紺橙スワップ, food=ライム, security=グラファイト赤, kids=クレヨン, atelier=エスプレッソ, analytics=プラム, civic=朱肉, estate=青焼き紙）/ 共有スウォッチ全廃 (≥3テーマ再利用 28→0)。最接近ペア距離 1.32→1.80。verdigris はパレット不可侵"
   },
   "themes": [
     {
       "name": "pinion",
-      "source": "Reactive family (GitHub-Light/Dark-adjacent, Primer-derived)",
+      "source": "Reactive family (GitHub-Light/Dark-adjacent, Primer-derived) + teal secondary dedup",
       "category": "ブランド既定",
       "llmTrigger": "迷ったらこれ。pinion-ui の顔（クリーン技術文書調・クリームホワイトベース）",
       "brandDefault": true,
       "light": {
-        "bg": "#FEFDFB",
-        "panel": "#FFFFFE",
-        "fg": "#241F1A",
-        "muted": "#59636e",
-        "primary": "#1D4ED8",
+        "bg": "#F6F8FA",
+        "panel": "#FFFFFF",
+        "fg": "#1F2328",
+        "muted": "#59636E",
+        "primary": "#0969DA",
         "secondary": "#0F766E",
-        "accent": "#7C3AED",
+        "accent": "#8250DF",
         "extra": [
           "#CF222E",
-          "#A8650E",
-          "#059669",
-          "#0891B2"
+          "#9A6700",
+          "#1A7F37",
+          "#0969DA"
         ]
       },
       "dark": {
-        "bg": "#0d1117",
-        "panel": "#161b22",
-        "fg": "#e6edf3",
-        "muted": "#8d96a0",
-        "primary": "#818CF8",
+        "bg": "#0D1117",
+        "panel": "#161B22",
+        "fg": "#E6EDF3",
+        "muted": "#8D96A0",
+        "primary": "#4493F8",
         "secondary": "#2DD4BF",
-        "accent": "#A78BFA",
+        "accent": "#A371F7",
         "extra": [
-          "#f85149",
-          "#d29922",
-          "#34D399",
-          "#22D3EE"
+          "#F85149",
+          "#D29922",
+          "#3FB950",
+          "#58A6FF"
         ]
       }
     },
     {
-      "name": "mood-monokai",
+      "name": "monokai",
       "source": "1. Monokai '80s",
       "category": "美学系 (mood)",
       "llmTrigger": "エディタ系・開発者向け UI",
       "brandDefault": false,
       "light": {
-        "bg": "#FAF4F2",
+        "bg": "#FAF1EC",
         "panel": "#FFFFFF",
         "fg": "#29242A",
         "muted": "#8D8A8E",
@@ -83,86 +84,90 @@
       }
     },
     {
-      "name": "mood-synthwave",
-      "source": "2. SynthWave '84",
+      "name": "outrun",
+      "source": "outrun — SynthWave 系ネオン最大化（旧 mood-synthwave。daisyUI synthwave との衝突回避で改名）",
       "category": "美学系 (mood)",
       "llmTrigger": "ネオン・ゲーム・イベント",
       "brandDefault": false,
       "light": {
-        "bg": "#FBF7FF",
+        "bg": "#F4EFFF",
         "panel": "#FFFFFF",
-        "fg": "#2A2139",
-        "muted": "#8E82B5",
-        "primary": "#C736A2",
-        "secondary": "#0FA3A3",
-        "accent": "#C98A00",
+        "fg": "#27203D",
+        "muted": "#8578AD",
+        "primary": "#D613A8",
+        "secondary": "#00B8D4",
+        "accent": "#D98E04",
         "extra": [
-          "#D96A1F",
-          "#7C5FC9",
-          "#1FA06A"
+          "#E4572E",
+          "#6D28D9",
+          "#12B886",
+          "#2F6BFF"
         ]
       },
       "dark": {
-        "bg": "#262335",
-        "panel": "#2A2139",
+        "bg": "#241B3E",
+        "panel": "#2D2250",
         "fg": "#F4F0FF",
         "muted": "#9E93C7",
-        "primary": "#FF7EDB",
-        "secondary": "#36F9F6",
+        "primary": "#FF3EC8",
+        "secondary": "#00E5FF",
         "accent": "#FEDE5D",
         "extra": [
-          "#FF8B39",
-          "#B893CE",
-          "#72F1B8"
+          "#FF7A45",
+          "#8C6BFF",
+          "#3DF5C0",
+          "#5C9DFF"
         ]
       }
     },
     {
-      "name": "mood-vapor",
-      "source": "5. Vaporwave Pastel",
+      "name": "vapor",
+      "source": "Vaporwave — pastel maximal, lavender canvas",
       "category": "美学系 (mood)",
       "llmTrigger": "ソフトなレトロ・Z世代向け",
       "brandDefault": false,
       "light": {
-        "bg": "#FDF6FF",
-        "panel": "#FFFFFF",
-        "fg": "#3A2C55",
-        "muted": "#A292BE",
+        "bg": "#F3E8FF",
+        "panel": "#FCF9FF",
+        "fg": "#46356B",
+        "muted": "#9C8BC0",
         "primary": "#E36BC6",
-        "secondary": "#14A886",
-        "accent": "#E8843C",
+        "secondary": "#58C7C0",
+        "accent": "#F2A65A",
         "extra": [
-          "#8A6FE8",
-          "#2E8FC0",
-          "#7BA828"
+          "#E86A6A",
+          "#E8C46A",
+          "#7BC98A",
+          "#7BA2E8"
         ]
       },
       "dark": {
-        "bg": "#2B2140",
-        "panel": "#342A4C",
+        "bg": "#322753",
+        "panel": "#3C2F63",
         "fg": "#F3EEFF",
         "muted": "#A79BC8",
         "primary": "#FF9DE6",
         "secondary": "#7FFFE0",
         "accent": "#FFC49D",
         "extra": [
-          "#B7A6FF",
-          "#9DE6FF",
-          "#D4FF9D"
+          "#FF8B8B",
+          "#FFE08A",
+          "#A6F0B8",
+          "#A6C8FF"
         ]
       }
     },
     {
-      "name": "mood-bigblue",
+      "name": "bigblue",
       "source": "11. Big Blue '81",
       "category": "美学系 (mood)",
       "llmTrigger": "エンタープライズ・B2B 堅め",
       "brandDefault": false,
       "light": {
-        "bg": "#F4F4F0",
+        "bg": "#F2F2EA",
         "panel": "#FFFFFF",
         "fg": "#21242B",
-        "muted": "#8B909C",
+        "muted": "#878C98",
         "primary": "#0043CE",
         "secondary": "#DA1E28",
         "accent": "#8A3FFC",
@@ -186,35 +191,37 @@
       }
     },
     {
-      "name": "mood-neotokyo",
-      "source": "13. Neo-Tokyo Noir",
+      "name": "neotokyo",
+      "source": "Neo-Tokyo — 朱×藍×金, washi canvas",
       "category": "美学系 (mood)",
       "llmTrigger": "和 × サイバー・ナイトライフ",
       "brandDefault": false,
       "light": {
-        "bg": "#F7F2EA",
-        "panel": "#FFFFFF",
+        "bg": "#F5EEE3",
+        "panel": "#FFFDF8",
         "fg": "#26222B",
         "muted": "#93899A",
         "primary": "#D42B3A",
-        "secondary": "#16717C",
+        "secondary": "#2B4C7E",
         "accent": "#C99A2E",
         "extra": [
           "#7B4FE0",
-          "#E0157E"
+          "#E0157E",
+          "#178A67"
         ]
       },
       "dark": {
-        "bg": "#1C1620",
-        "panel": "#261E2C",
+        "bg": "#191320",
+        "panel": "#241B2E",
         "fg": "#F4EDF7",
         "muted": "#9A8CA8",
         "primary": "#FF4757",
-        "secondary": "#2DD4BF",
+        "secondary": "#6C8CFF",
         "accent": "#F0C34E",
         "extra": [
           "#B893CE",
-          "#FF7EDB"
+          "#FF7EDB",
+          "#2DD4BF"
         ]
       }
     },
@@ -225,7 +232,7 @@
       "llmTrigger": "決済・フィンテック",
       "brandDefault": false,
       "light": {
-        "bg": "#F6F8FB",
+        "bg": "#F5F7FB",
         "panel": "#FFFFFF",
         "fg": "#1A1F36",
         "muted": "#8792A8",
@@ -233,8 +240,8 @@
         "secondary": "#0FA3C8",
         "accent": "#FF7A59",
         "extra": [
-          "#16A34A",
-          "#E11D48"
+          "#1BA35F",
+          "#E5325C"
         ]
       },
       "dark": {
@@ -246,41 +253,45 @@
         "secondary": "#38C7E3",
         "accent": "#FF9578",
         "extra": [
-          "#4ADE80",
-          "#FB7185"
+          "#43CE8B",
+          "#F86A8F"
         ]
       }
     },
     {
       "name": "docs",
-      "source": "S3. Ivory Ink",
+      "source": "docs — Sepia Ink（古紙×インク×リンク青）",
       "category": "SaaS 実用",
       "llmTrigger": "ドキュメント・ナレッジベース",
       "brandDefault": false,
       "light": {
-        "bg": "#F7F6F3",
+        "bg": "#F9F6EF",
         "panel": "#FFFFFF",
-        "fg": "#37352F",
-        "muted": "#9B9890",
-        "primary": "#2383E2",
-        "secondary": "#D9730D",
-        "accent": "#6940A5",
+        "fg": "#3A342C",
+        "muted": "#99917F",
+        "primary": "#8A5A2E",
+        "secondary": "#2383E2",
+        "accent": "#A63A24",
         "extra": [
-          "#0F7B6C",
-          "#E03E3E"
+          "#B23A2E",
+          "#C28E12",
+          "#158A66",
+          "#3D74C9"
         ]
       },
       "dark": {
-        "bg": "#25241F",
-        "panel": "#2E2D27",
-        "fg": "#EFEEE9",
-        "muted": "#9D9A8F",
-        "primary": "#529CCA",
-        "secondary": "#FFA344",
-        "accent": "#9A6DD7",
+        "bg": "#241F17",
+        "panel": "#2E281E",
+        "fg": "#EFE9DC",
+        "muted": "#A29883",
+        "primary": "#C89158",
+        "secondary": "#5CA3E8",
+        "accent": "#D96A4A",
         "extra": [
-          "#4DAB9A",
-          "#FF7369"
+          "#E06052",
+          "#D9A93F",
+          "#4DAB7F",
+          "#6B9AD9"
         ]
       }
     },
@@ -324,29 +335,29 @@
       "llmTrigger": "PM・運用・社内ツール",
       "brandDefault": false,
       "light": {
-        "bg": "#FBFAF7",
+        "bg": "#F6F5EC",
         "panel": "#FFFFFF",
         "fg": "#26251F",
         "muted": "#96917F",
         "primary": "#1D7A46",
-        "secondary": "#8A5A2E",
-        "accent": "#C7A252",
+        "secondary": "#7A5230",
+        "accent": "#C29B3B",
         "extra": [
-          "#2E86AB",
-          "#A855F7"
+          "#2E7FB8",
+          "#9955E8"
         ]
       },
       "dark": {
-        "bg": "#1E211C",
-        "panel": "#272B25",
+        "bg": "#1B211A",
+        "panel": "#242B22",
         "fg": "#EEF0E9",
         "muted": "#98A08C",
         "primary": "#4CAF78",
-        "secondary": "#C89058",
-        "accent": "#E0C070",
+        "secondary": "#BD8A54",
+        "accent": "#D4B45F",
         "extra": [
-          "#5FA8D3",
-          "#C084FC"
+          "#57A0CF",
+          "#B87BF5"
         ]
       }
     },
@@ -357,7 +368,7 @@
       "llmTrigger": "金融・法務エンタープライズ",
       "brandDefault": false,
       "light": {
-        "bg": "#F7F8FA",
+        "bg": "#F6F7FA",
         "panel": "#FFFFFF",
         "fg": "#14213D",
         "muted": "#8C93A6",
@@ -365,8 +376,8 @@
         "secondary": "#B08A2E",
         "accent": "#2E86AB",
         "extra": [
-          "#16A34A",
-          "#DC2626"
+          "#1D9E55",
+          "#C92B3B"
         ]
       },
       "dark": {
@@ -378,8 +389,8 @@
         "secondary": "#D9B45B",
         "accent": "#55B3D9",
         "extra": [
-          "#4ADE80",
-          "#F87171"
+          "#4FCF8D",
+          "#F07A7A"
         ]
       }
     },
@@ -390,7 +401,7 @@
       "llmTrigger": "HR・コミュニティ",
       "brandDefault": false,
       "light": {
-        "bg": "#FFF9F5",
+        "bg": "#FEF6F1",
         "panel": "#FFFFFF",
         "fg": "#33261F",
         "muted": "#A6907F",
@@ -398,12 +409,12 @@
         "secondary": "#14A886",
         "accent": "#F0B840",
         "extra": [
-          "#7B5CB8",
-          "#2E86AB"
+          "#8663C9",
+          "#3E8CB8"
         ]
       },
       "dark": {
-        "bg": "#261C17",
+        "bg": "#281C15",
         "panel": "#302520",
         "fg": "#F5EBE4",
         "muted": "#A98F7D",
@@ -411,8 +422,8 @@
         "secondary": "#35C7A3",
         "accent": "#F5CB60",
         "extra": [
-          "#A488D8",
-          "#5FA8D3"
+          "#AF8FE0",
+          "#69AFD8"
         ]
       }
     },
@@ -423,7 +434,7 @@
       "llmTrigger": "医療・ウェルネス SaaS",
       "brandDefault": false,
       "light": {
-        "bg": "#F4FAFA",
+        "bg": "#F1FAF9",
         "panel": "#FFFFFF",
         "fg": "#1C2B2D",
         "muted": "#84999B",
@@ -432,7 +443,7 @@
         "accent": "#E8843C",
         "extra": [
           "#6B5CA5",
-          "#DC2626"
+          "#D64545"
         ]
       },
       "dark": {
@@ -444,41 +455,41 @@
         "secondary": "#7FD09E",
         "accent": "#F09E5F",
         "extra": [
-          "#A28BE0",
-          "#F87171"
+          "#9C93E5",
+          "#F07C74"
         ]
       }
     },
     {
       "name": "analytics",
-      "source": "S9. Plum Analytics",
+      "source": "analytics — Plum shift（紫渋滞解消・チャート色 extras）",
       "category": "SaaS 実用",
       "llmTrigger": "BI・データ可視化",
       "brandDefault": false,
       "light": {
-        "bg": "#FAF8FF",
+        "bg": "#F8F3FF",
         "panel": "#FFFFFF",
         "fg": "#2A2440",
         "muted": "#948CAE",
-        "primary": "#6D28D9",
+        "primary": "#8324C9",
         "secondary": "#DB2777",
-        "accent": "#F59E0B",
+        "accent": "#EDA118",
         "extra": [
-          "#0891B2",
-          "#16A34A"
+          "#0E93BE",
+          "#1FAE68"
         ]
       },
       "dark": {
-        "bg": "#1B1727",
-        "panel": "#252032",
+        "bg": "#201430",
+        "panel": "#2A1D3E",
         "fg": "#EFEBF9",
         "muted": "#9289AC",
-        "primary": "#A78BFA",
-        "secondary": "#F472B6",
-        "accent": "#FBBF24",
+        "primary": "#BE8FF5",
+        "secondary": "#F765AE",
+        "accent": "#F5B93A",
         "extra": [
-          "#22D3EE",
-          "#4ADE80"
+          "#2FC9E8",
+          "#54D98A"
         ]
       }
     },
@@ -489,7 +500,7 @@
       "llmTrigger": "開発者ツール・API 系",
       "brandDefault": false,
       "light": {
-        "bg": "#F8FAFC",
+        "bg": "#F3F7F9",
         "panel": "#FFFFFF",
         "fg": "#0F172A",
         "muted": "#8B97A8",
@@ -497,8 +508,8 @@
         "secondary": "#475569",
         "accent": "#E11D48",
         "extra": [
-          "#16A34A",
-          "#F59E0B"
+          "#17A05B",
+          "#E89A0C"
         ]
       },
       "dark": {
@@ -510,8 +521,8 @@
         "secondary": "#94A3B8",
         "accent": "#FB7185",
         "extra": [
-          "#4ADE80",
-          "#FBBF24"
+          "#3FD980",
+          "#F2B822"
         ]
       }
     },
@@ -522,7 +533,7 @@
       "llmTrigger": "チャット・コラボレーション",
       "brandDefault": false,
       "light": {
-        "bg": "#FBF9FB",
+        "bg": "#FAF6F9",
         "panel": "#FFFFFF",
         "fg": "#2C2231",
         "muted": "#9A8FA1",
@@ -555,7 +566,7 @@
       "llmTrigger": "マーケ・グロース・LP 系",
       "brandDefault": false,
       "light": {
-        "bg": "#FFFBF4",
+        "bg": "#FFF9EF",
         "panel": "#FFFFFF",
         "fg": "#331F14",
         "muted": "#A6907C",
@@ -564,11 +575,11 @@
         "accent": "#10B981",
         "extra": [
           "#0EA5E9",
-          "#E11D48"
+          "#DE2F55"
         ]
       },
       "dark": {
-        "bg": "#271C12",
+        "bg": "#2A1D10",
         "panel": "#32261A",
         "fg": "#F7EDE2",
         "muted": "#AA9078",
@@ -577,7 +588,7 @@
         "accent": "#34D399",
         "extra": [
           "#38BDF8",
-          "#FB7185"
+          "#F86E90"
         ]
       }
     },
@@ -588,29 +599,29 @@
       "llmTrigger": "EC・リテール・マーケットプレイス",
       "brandDefault": false,
       "light": {
-        "bg": "#FBFAF8",
+        "bg": "#FBF8F4",
         "panel": "#FFFFFF",
         "fg": "#2A2620",
         "muted": "#A0968A",
         "primary": "#E8590C",
         "secondary": "#1D8A5A",
-        "accent": "#2E86AB",
+        "accent": "#3E7FA6",
         "extra": [
-          "#7B5CB8",
-          "#D9B45B"
+          "#6E54B0",
+          "#CFA64A"
         ]
       },
       "dark": {
-        "bg": "#221E19",
+        "bg": "#241E17",
         "panel": "#2C2721",
         "fg": "#F4EFE8",
         "muted": "#A69682",
         "primary": "#FB8A3C",
-        "secondary": "#3FBF87",
-        "accent": "#55B3D9",
+        "secondary": "#37B37F",
+        "accent": "#4FA8CF",
         "extra": [
-          "#A488D8",
-          "#E0C070"
+          "#9C82CF",
+          "#D6B060"
         ]
       }
     },
@@ -621,29 +632,29 @@
       "llmTrigger": "EdTech・学習サービス",
       "brandDefault": false,
       "light": {
-        "bg": "#F7FAFF",
+        "bg": "#F4F8FF",
         "panel": "#FFFFFF",
         "fg": "#1F2A44",
         "muted": "#8C99B3",
         "primary": "#2563EB",
         "secondary": "#F59E0B",
-        "accent": "#10B981",
+        "accent": "#12B76A",
         "extra": [
           "#EC4899",
-          "#7C3AED"
+          "#8B5CF6"
         ]
       },
       "dark": {
-        "bg": "#141B2E",
-        "panel": "#1C2540",
+        "bg": "#131C33",
+        "panel": "#1B2547",
         "fg": "#EAF0FB",
         "muted": "#8C99B8",
         "primary": "#5B8DEF",
         "secondary": "#FBBF24",
-        "accent": "#34D399",
+        "accent": "#30C48D",
         "extra": [
           "#F472B6",
-          "#A78BFA"
+          "#B79CFA"
         ]
       }
     },
@@ -654,49 +665,49 @@
       "llmTrigger": "法務・士業・契約管理",
       "brandDefault": false,
       "light": {
-        "bg": "#F8F7F5",
+        "bg": "#F8F6F2",
         "panel": "#FFFFFF",
         "fg": "#2B2624",
         "muted": "#98908A",
         "primary": "#6B1F2A",
         "secondary": "#3A4A5A",
-        "accent": "#B08A2E",
+        "accent": "#9C7A22",
         "extra": [
           "#1D6A5A",
-          "#8A3FFC"
+          "#7A57C9"
         ]
       },
       "dark": {
-        "bg": "#201C1B",
+        "bg": "#211D1B",
         "panel": "#2A2523",
         "fg": "#F1ECE9",
         "muted": "#A39A93",
         "primary": "#C05A6A",
         "secondary": "#7E96AC",
-        "accent": "#D9B45B",
+        "accent": "#CBA84E",
         "extra": [
           "#4FA898",
-          "#BE95FF"
+          "#A98BE8"
         ]
       }
     },
     {
       "name": "logistics",
-      "source": "logistics — 物流 / モビリティ",
+      "source": "logistics — 海運ネイビー×コンテナオレンジ（primary/secondary スワップ）",
       "category": "業種特化",
       "llmTrigger": "物流・配送・モビリティ",
       "brandDefault": false,
       "light": {
-        "bg": "#F6F7F8",
+        "bg": "#F1F3F3",
         "panel": "#FFFFFF",
         "fg": "#22272E",
         "muted": "#8B939E",
-        "primary": "#F26419",
-        "secondary": "#2E4057",
-        "accent": "#1D8A9A",
+        "primary": "#465B71",
+        "secondary": "#F26419",
+        "accent": "#17879B",
         "extra": [
           "#5A6B7E",
-          "#C7A252"
+          "#BD9741"
         ]
       },
       "dark": {
@@ -704,12 +715,12 @@
         "panel": "#202730",
         "fg": "#ECEFF3",
         "muted": "#8B96A3",
-        "primary": "#FB8A4C",
-        "secondary": "#7E96AC",
-        "accent": "#3FB7CB",
+        "primary": "#8FA6BC",
+        "secondary": "#F97B2E",
+        "accent": "#2FA9BE",
         "extra": [
           "#94A3B8",
-          "#E0C070"
+          "#D8B554"
         ]
       }
     },
@@ -725,11 +736,11 @@
         "fg": "#111111",
         "muted": "#8C8C8C",
         "primary": "#C41E2F",
-        "secondary": "#1A1A1A",
+        "secondary": "#1F1F1F",
         "accent": "#0F62AC",
         "extra": [
-          "#B08A2E",
-          "#1D8A5A"
+          "#B58B24",
+          "#23855F"
         ]
       },
       "dark": {
@@ -741,28 +752,28 @@
         "secondary": "#E0E0E0",
         "accent": "#4F9CE0",
         "extra": [
-          "#D9B45B",
-          "#3FBF87"
+          "#D0AC49",
+          "#46B98A"
         ]
       }
     },
     {
       "name": "security",
-      "source": "security — セキュリティ / 監査",
+      "source": "security — 鉄壁グラファイト×アラート赤（緑渋滞から離脱）",
       "category": "業種特化",
       "llmTrigger": "セキュリティ・監査・認証",
       "brandDefault": false,
       "light": {
-        "bg": "#F5F7F6",
+        "bg": "#F4F6F6",
         "panel": "#FFFFFF",
-        "fg": "#1B2420",
-        "muted": "#85938C",
-        "primary": "#166D4D",
-        "secondary": "#37474F",
-        "accent": "#C0392B",
+        "fg": "#1E272B",
+        "muted": "#85929A",
+        "primary": "#37474F",
+        "secondary": "#C0392B",
+        "accent": "#C98A0B",
         "extra": [
           "#0E7FA8",
-          "#B08A2E"
+          "#1E7B52"
         ]
       },
       "dark": {
@@ -770,44 +781,44 @@
         "panel": "#182226",
         "fg": "#E7F0EB",
         "muted": "#7E948A",
-        "primary": "#35C78B",
-        "secondary": "#78909C",
-        "accent": "#F0605A",
+        "primary": "#92A4AE",
+        "secondary": "#F55B54",
+        "accent": "#E8AB2F",
         "extra": [
-          "#3FB7CB",
-          "#D9B45B"
+          "#38ADC2",
+          "#35C78B"
         ]
       }
     },
     {
       "name": "kids",
-      "source": "kids — 子ども / ファミリー",
+      "source": "kids — クレヨンレインボー（空色×草色×さくらんぼ・バターキャンバス）",
       "category": "業種特化",
       "llmTrigger": "子ども・ファミリー向け",
       "brandDefault": false,
       "light": {
-        "bg": "#FFFDF5",
+        "bg": "#FFF8E1",
         "panel": "#FFFFFF",
         "fg": "#35302E",
         "muted": "#A39B92",
-        "primary": "#FF6B6B",
-        "secondary": "#4ECDC4",
-        "accent": "#FFD93D",
+        "primary": "#339AF0",
+        "secondary": "#40C057",
+        "accent": "#FF6B6B",
         "extra": [
-          "#6C8DFA",
+          "#FFD43B",
           "#B980F0"
         ]
       },
       "dark": {
-        "bg": "#262230",
-        "panel": "#2F2A3D",
-        "fg": "#F5F1FA",
-        "muted": "#A79FBB",
-        "primary": "#FF8787",
-        "secondary": "#6EE7DE",
-        "accent": "#FFE066",
+        "bg": "#2B2820",
+        "panel": "#363126",
+        "fg": "#F5F1E6",
+        "muted": "#A69C88",
+        "primary": "#4DABF7",
+        "secondary": "#51CF66",
+        "accent": "#FF8787",
         "extra": [
-          "#8FA8FF",
+          "#FFE066",
           "#CDA1F5"
         ]
       }
@@ -819,7 +830,7 @@
       "llmTrigger": "ヨガ・瞑想・メンタルケア",
       "brandDefault": false,
       "light": {
-        "bg": "#F8F7F2",
+        "bg": "#F8F7F0",
         "panel": "#FFFFFF",
         "fg": "#2E2F27",
         "muted": "#9AA08D",
@@ -827,7 +838,7 @@
         "secondary": "#9A85C0",
         "accent": "#C7A252",
         "extra": [
-          "#0E8FA3",
+          "#4B99A5",
           "#C98A55"
         ]
       },
@@ -838,30 +849,30 @@
         "muted": "#A0A78F",
         "primary": "#A5BC85",
         "secondary": "#B7A0E0",
-        "accent": "#E0C070",
+        "accent": "#DDBE65",
         "extra": [
-          "#3FB7CB",
+          "#49AEB8",
           "#C98A55"
         ]
       }
     },
     {
       "name": "civic",
-      "source": "civic — 行政 / 公共",
+      "source": "civic — 公用ブルー×朱肉アクセント",
       "category": "業種特化",
       "llmTrigger": "行政・公共・自治体",
       "brandDefault": false,
       "light": {
-        "bg": "#F6F8FA",
+        "bg": "#F5F7F9",
         "panel": "#FFFFFF",
         "fg": "#1F2933",
         "muted": "#8A99A8",
         "primary": "#145DA0",
         "secondary": "#5A7184",
-        "accent": "#1D8A5A",
+        "accent": "#C63D2F",
         "extra": [
-          "#B3382C",
-          "#7B5CB8"
+          "#1E8556",
+          "#7460C9"
         ]
       },
       "dark": {
@@ -871,133 +882,133 @@
         "muted": "#8399AB",
         "primary": "#4F94D4",
         "secondary": "#94A9BC",
-        "accent": "#3FBF87",
+        "accent": "#E85D4A",
         "extra": [
-          "#F0605A",
-          "#A488D8"
+          "#43BC8B",
+          "#9F86DD"
         ]
       }
     },
     {
       "name": "atelier",
-      "source": "atelier — 高級ブランド / D2C",
+      "source": "atelier — エスプレッソ×真鍮×ワイン（黒3兄弟から離脱）",
       "category": "業種特化",
       "llmTrigger": "高級ブランド・D2C・ジュエリー",
       "brandDefault": false,
       "light": {
-        "bg": "#FAF8F5",
+        "bg": "#FAF7F2",
         "panel": "#FFFFFF",
         "fg": "#23201C",
         "muted": "#9B948A",
-        "primary": "#1A1A1A",
-        "secondary": "#B08A2E",
-        "accent": "#6B1F2A",
+        "primary": "#33261C",
+        "secondary": "#B6913B",
+        "accent": "#802A3E",
         "extra": [
-          "#3A4A5A",
-          "#7058BE"
+          "#44536B",
+          "#6A55B8"
         ]
       },
       "dark": {
-        "bg": "#191715",
-        "panel": "#232019",
+        "bg": "#1B1815",
+        "panel": "#262119",
         "fg": "#F2EFE9",
         "muted": "#9C9488",
         "primary": "#E8E2D8",
-        "secondary": "#D9B45B",
-        "accent": "#C05A6A",
+        "secondary": "#D3AC52",
+        "accent": "#B95873",
         "extra": [
-          "#7E96AC",
-          "#A28BE0"
+          "#8A9BB0",
+          "#A991DB"
         ]
       }
     },
     {
       "name": "estate",
-      "source": "estate — 不動産 / 建築 — ブループリント",
+      "source": "estate — ブループリント（青焼き紙キャンバス×コバルト×テラコッタ）",
       "category": "業種特化",
       "llmTrigger": "不動産・建築・設計",
       "brandDefault": false,
       "light": {
-        "bg": "#F5F8FB",
+        "bg": "#EDF4FB",
         "panel": "#FFFFFF",
-        "fg": "#1E2A38",
-        "muted": "#8798AA",
-        "primary": "#1F5FA8",
-        "secondary": "#E8791D",
-        "accent": "#16717C",
+        "fg": "#1C2A3A",
+        "muted": "#7E93A8",
+        "primary": "#1E4F94",
+        "secondary": "#C65D3B",
+        "accent": "#2E8FBE",
         "extra": [
-          "#5A7184",
-          "#B3382C"
+          "#64788C",
+          "#1F8A72"
         ]
       },
       "dark": {
-        "bg": "#141C26",
-        "panel": "#1D2735",
-        "fg": "#E9F0F8",
-        "muted": "#8095AB",
-        "primary": "#5C97D6",
-        "secondary": "#FB9A4C",
-        "accent": "#3FB7CB",
+        "bg": "#10202F",
+        "panel": "#182B3E",
+        "fg": "#E7F0F8",
+        "muted": "#7E95A9",
+        "primary": "#6BA3DC",
+        "secondary": "#E8825C",
+        "accent": "#5BBBE0",
         "extra": [
           "#94A9BC",
-          "#F0605A"
+          "#3FA986"
         ]
       }
     },
     {
       "name": "food",
-      "source": "food — 飲食 / フードテック — シトラスフレッシュ",
+      "source": "food — シトラスライム×トマト（橙渋滞から離脱）",
       "category": "業種特化",
       "llmTrigger": "飲食・フードデリバリー",
       "brandDefault": false,
       "light": {
-        "bg": "#FFFCF5",
+        "bg": "#F9FCE8",
         "panel": "#FFFFFF",
-        "fg": "#33291C",
-        "muted": "#A69378",
-        "primary": "#FF8C42",
-        "secondary": "#97B94E",
+        "fg": "#333A18",
+        "muted": "#9CA36F",
+        "primary": "#7E9B12",
+        "secondary": "#FF8C42",
         "accent": "#E8443A",
         "extra": [
-          "#0E8FA3",
-          "#C736A2"
+          "#2AA5A0",
+          "#D6579E"
         ]
       },
       "dark": {
-        "bg": "#271F14",
-        "panel": "#322817",
-        "fg": "#F7EEE0",
-        "muted": "#AA9578",
-        "primary": "#FFA35C",
-        "secondary": "#B3D06A",
+        "bg": "#252A14",
+        "panel": "#2F3519",
+        "fg": "#F4F7E6",
+        "muted": "#A3AA85",
+        "primary": "#A8C93F",
+        "secondary": "#FFA35C",
         "accent": "#F0655C",
         "extra": [
-          "#3FB7CB",
-          "#F472B6"
+          "#37B3A8",
+          "#E869B5"
         ]
       }
     },
     {
       "name": "travel",
-      "source": "travel — 旅行 / ホスピタリティ — トロピックラグーン",
+      "source": "travel — トロピックラグーン（アクアキャンバス大胆化）",
       "category": "業種特化",
       "llmTrigger": "旅行・ホテル・リゾート",
       "brandDefault": false,
       "light": {
-        "bg": "#F3FBFA",
+        "bg": "#E9F7F4",
         "panel": "#FFFFFF",
         "fg": "#1C3335",
         "muted": "#7FA0A0",
         "primary": "#12A5AB",
         "secondary": "#FF7E6B",
-        "accent": "#D9A62E",
+        "accent": "#E0A32E",
         "extra": [
           "#7B5CB8",
           "#4C9A3F"
         ]
       },
       "dark": {
-        "bg": "#0F2426",
+        "bg": "#0E2528",
         "panel": "#173135",
         "fg": "#E6F5F5",
         "muted": "#78A0A2",
@@ -1022,11 +1033,11 @@
         "fg": "#191913",
         "muted": "#8F8F87",
         "primary": "#1A1A1A",
-        "secondary": "#9DB80E",
+        "secondary": "#AACC00",
         "accent": "#FF4D6D",
         "extra": [
-          "#0070F3",
-          "#22C55E"
+          "#0866FF",
+          "#2BC96B"
         ]
       },
       "dark": {
@@ -1038,8 +1049,8 @@
         "secondary": "#D4E157",
         "accent": "#FF6B87",
         "extra": [
-          "#3291FF",
-          "#4ADE80"
+          "#3F8CFF",
+          "#52E08A"
         ]
       }
     },
@@ -1050,7 +1061,7 @@
       "llmTrigger": "農業・植物工場・グリーンテック",
       "brandDefault": false,
       "light": {
-        "bg": "#F6FAF8",
+        "bg": "#F3FAF6",
         "panel": "#FFFFFF",
         "fg": "#1E2A26",
         "muted": "#86988F",
@@ -1058,8 +1069,8 @@
         "secondary": "#4A6572",
         "accent": "#E8A020",
         "extra": [
-          "#0E8FA3",
-          "#94A3B8"
+          "#1B98B0",
+          "#8FA0B5"
         ]
       },
       "dark": {
@@ -1071,57 +1082,57 @@
         "secondary": "#7E96A3",
         "accent": "#F0B840",
         "extra": [
-          "#3FB7CB",
-          "#94A3B8"
+          "#35B5C7",
+          "#8FA0B5"
         ]
       }
     },
     {
       "name": "factory",
-      "source": "factory — 製造 / インダストリアル — スチールワークス",
+      "source": "factory — ハザードアンバー×グラファイト（青渋滞から離脱・黄スロット新規）",
       "category": "業種特化",
       "llmTrigger": "製造・重工業・設備",
       "brandDefault": false,
       "light": {
-        "bg": "#F4F6F8",
+        "bg": "#F2F4F5",
         "panel": "#FFFFFF",
         "fg": "#232A31",
         "muted": "#8B96A0",
-        "primary": "#3E5C76",
-        "secondary": "#E86A17",
-        "accent": "#1D8A9A",
+        "primary": "#C28410",
+        "secondary": "#3E5C76",
+        "accent": "#DD6B20",
         "extra": [
-          "#94A3B8",
-          "#B08A2E"
+          "#9AA6B0",
+          "#2F8A99"
         ]
       },
       "dark": {
-        "bg": "#161B20",
+        "bg": "#14181C",
         "panel": "#1F262E",
         "fg": "#ECF0F4",
         "muted": "#8B98A5",
-        "primary": "#7FA0BE",
-        "secondary": "#FB8A3C",
-        "accent": "#3FB7CB",
+        "primary": "#E8B341",
+        "secondary": "#7FA0BE",
+        "accent": "#EF7D33",
         "extra": [
-          "#94A3B8",
-          "#D9B45B"
+          "#9AA6B0",
+          "#38AEBB"
         ]
       }
     },
     {
-      "name": "mood-zen",
-      "source": "mood-zen — 侘び寂び",
+      "name": "zen",
+      "source": "zen — 侘び寂び",
       "category": "美学系 (mood)",
       "llmTrigger": "和風・工芸・旅館・ミニマル志向",
       "brandDefault": false,
       "light": {
-        "bg": "#F7F5F0",
+        "bg": "#F1F1EB",
         "panel": "#FFFFFF",
         "fg": "#2E2C28",
         "muted": "#9A958A",
-        "primary": "#5E6B54",
-        "secondary": "#8A7B64",
+        "primary": "#616B59",
+        "secondary": "#877B67",
         "accent": "#B3432B",
         "extra": [
           "#5F8A8B",
@@ -1143,54 +1154,54 @@
       }
     },
     {
-      "name": "mood-botanical",
-      "source": "mood-botanical — 植物園",
+      "name": "botanical",
+      "source": "Botanical — greenhouse canvas, leaf × rose",
       "category": "美学系 (mood)",
       "llmTrigger": "花・園芸・オーガニック・コスメ",
       "brandDefault": false,
       "light": {
-        "bg": "#F6F8F3",
+        "bg": "#EFF6EA",
         "panel": "#FFFFFF",
         "fg": "#24312A",
         "muted": "#8C9C90",
-        "primary": "#2F6B4A",
-        "secondary": "#7A9B57",
-        "accent": "#C75B7A",
+        "primary": "#2E8A4E",
+        "secondary": "#C75B7A",
+        "accent": "#8FA82E",
         "extra": [
-          "#B08A2E",
-          "#4A7C8C"
+          "#4A7C8C",
+          "#7A9B57"
         ]
       },
       "dark": {
-        "bg": "#17211B",
-        "panel": "#202B24",
+        "bg": "#14231A",
+        "panel": "#1E2E23",
         "fg": "#E9F1EC",
         "muted": "#8AA394",
-        "primary": "#5FA582",
-        "secondary": "#9FBE72",
-        "accent": "#E08BA4",
+        "primary": "#62B385",
+        "secondary": "#E08BA4",
+        "accent": "#A8C45E",
         "extra": [
-          "#D9B45B",
-          "#74A8B8"
+          "#74A8B8",
+          "#9FBE72"
         ]
       }
     },
     {
-      "name": "mood-pop",
-      "source": "mood-pop — ドーパミン",
+      "name": "pop",
+      "source": "pop — ドーパミン",
       "category": "美学系 (mood)",
       "llmTrigger": "エンタメ・若年層・キャンペーン LP",
       "brandDefault": false,
       "light": {
-        "bg": "#FFFDF8",
+        "bg": "#FFF5FA",
         "panel": "#FFFFFF",
         "fg": "#2B2430",
         "muted": "#9E93A6",
-        "primary": "#FF5DA2",
-        "secondary": "#00C2D1",
+        "primary": "#FF3D9A",
+        "secondary": "#6741D9",
         "accent": "#FFC300",
         "extra": [
-          "#7C3AED",
+          "#00C2D1",
           "#3DDC97"
         ]
       },
@@ -1199,17 +1210,17 @@
         "panel": "#2E2738",
         "fg": "#F6F0FA",
         "muted": "#A697B3",
-        "primary": "#FF7EB8",
-        "secondary": "#3FD8E5",
+        "primary": "#FF6EB0",
+        "secondary": "#9775FA",
         "accent": "#FFD34D",
         "extra": [
-          "#A78BFA",
+          "#3FD8E5",
           "#5FE8B0"
         ]
       }
     },
     {
-      "name": "mood-verdigris",
+      "name": "verdigris",
       "source": "Claude Verdigris (旧ブランド既定 v0.6.0)",
       "category": "美学系 (mood)",
       "llmTrigger": "ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト",

@@ -50,7 +50,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 
 | Layer | Where it lives | Examples |
 |---|---|---|
-| **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `mood-monokai`, `payments-dark` (36 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
+| **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (37 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
 | **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft` (11 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
@@ -100,11 +100,11 @@ Three ways to automate it (pick any; all call the one command):
 
 Suppress an intentional exception with a `pinion-lint-ignore` comment on the line (or the line above).
 
-## Theme lineup & selection guide (v0.6.0)
+## Theme lineup & selection guide (v0.7.0)
 
-pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 36 themes, each a **light/dark pair**:
+pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 37 themes, each a **light/dark pair**:
 
-- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`). The brand default pair alone is `pinion` / `pinion-dark` — there is **no bare `pinion`** (the old v0.4 `pinion` theme was removed in v0.6.0).
+- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`), and **all names are bare** — the v0.6 `mood-` prefix was dropped in v0.7.0 (`mood-zen` → `zen`, …; `mood-synthwave` became `outrun` to avoid colliding with daisyUI's `synthwave`). A theme's category (Brand / Mood / SaaS / Industry) is metadata: it lives in `lineup.json`, in the Group column below, and as the grouped headings + category chip in `<x-theme-tune-switcher>` — it is no longer encoded in the name.
 - **Default**: `pinion` applies at `:root` automatically when no `data-theme` is set; if the OS prefers dark (`prefers-color-scheme: dark`), `pinion-dark` applies instead (it carries daisyUI's `prefersdark` flag). An explicit `data-theme` on any element always wins over both. To pin light regardless of OS setting, set `data-theme="pinion"` explicitly.
 - **Page canvas vs component face**: every theme paints the page background (`:root`) with its tinted canvas color and puts components on `base-100` (white in light themes) — do **not** hardcode a body background. `bg-base-200` equals the canvas color (recessed wells, hover); `border-base-300` is the matching border tone.
 - **`reactive`** — one extra opt-in, light-only theme (GitHub-Light-adjacent, for report tooling). Not part of the pairs. As of v0.6.1 the brand default `pinion` shares this palette family, so `reactive` mostly matters for the report tooling that hardcodes its name.
@@ -117,15 +117,15 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 | Theme (light / dark) | Group | Use when the app is… |
 |---|---|---|
 | `pinion` / `pinion-dark` | Brand | **The default — anything without a clearer match.** The pinion-ui face: clean white technical-document palette (GitHub-Primer-adjacent blue / green / purple; near-black ink). |
-| `mood-monokai` / `-dark` | Mood | Editor-like or developer-facing UI（エディタ系・開発者向け） |
-| `mood-synthwave` / `-dark` | Mood | Neon, gaming, events（ネオン・ゲーム・イベント） |
-| `mood-vapor` / `-dark` | Mood | Soft retro, Gen-Z products（ソフトなレトロ・Z世代向け） |
-| `mood-bigblue` / `-dark` | Mood | Buttoned-up enterprise / B2B（エンタープライズ・B2B 堅め） |
-| `mood-neotokyo` / `-dark` | Mood | Japanese × cyber, nightlife（和×サイバー・ナイトライフ） |
-| `mood-zen` / `-dark` | Mood | Wabi-sabi, craft, ryokan, minimalist taste（和風・工芸・旅館） |
-| `mood-botanical` / `-dark` | Mood | Flowers, gardening, organic, cosmetics（花・園芸・オーガニック・コスメ） |
-| `mood-pop` / `-dark` | Mood | Entertainment, youth, campaign LPs（エンタメ・若年層・キャンペーン LP） |
-| `mood-verdigris` / `-dark` | Mood | Warm ivory × retro teal-green; calm, warm products（ウォームアイボリー×レトログリーン。旧ブランド既定） |
+| `monokai` / `-dark` | Mood | Editor-like or developer-facing UI（エディタ系・開発者向け） |
+| `outrun` / `-dark` | Mood | Neon, gaming, events（ネオン・ゲーム・イベント） |
+| `vapor` / `-dark` | Mood | Soft retro, Gen-Z products（ソフトなレトロ・Z世代向け） |
+| `bigblue` / `-dark` | Mood | Buttoned-up enterprise / B2B（エンタープライズ・B2B 堅め） |
+| `neotokyo` / `-dark` | Mood | Japanese × cyber, nightlife（和×サイバー・ナイトライフ） |
+| `zen` / `-dark` | Mood | Wabi-sabi, craft, ryokan, minimalist taste（和風・工芸・旅館） |
+| `botanical` / `-dark` | Mood | Flowers, gardening, organic, cosmetics（花・園芸・オーガニック・コスメ） |
+| `pop` / `-dark` | Mood | Entertainment, youth, campaign LPs（エンタメ・若年層・キャンペーン LP） |
+| `verdigris` / `-dark` | Mood | Warm ivory × retro teal-green; calm, warm products（ウォームアイボリー×レトログリーン。旧ブランド既定） |
 | `payments` / `-dark` | SaaS | Payments, fintech（決済・フィンテック） |
 | `docs` / `-dark` | SaaS | Documentation, knowledge base（ドキュメント・ナレッジベース） |
 | `mono` / `-dark` | SaaS | Minimal tools, portfolios（ミニマルツール・ポートフォリオ） |

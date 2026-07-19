@@ -25,7 +25,7 @@ class UiEject extends Command
         {path?* : Files or directories to eject (default: resources/views)}
         {--tune=default : Tune preset whose rendering to freeze}
         {--strength=md : Tune strength (xs|sm|md|lg|xl)}
-        {--theme=pinion : Theme whose colors to freeze (any shipped theme, e.g. pinion|pinion-dark|mood-monokai|reactive)}
+        {--theme=pinion : Theme whose colors to freeze (any shipped theme, e.g. pinion|pinion-dark|monokai|reactive)}
         {--write : Apply the replacements (default is a dry-run preview)}
         {--undo : Restore files from a previous --write run (latest, or --run=<id>)}
         {--run= : Run id for --undo (see --runs)}

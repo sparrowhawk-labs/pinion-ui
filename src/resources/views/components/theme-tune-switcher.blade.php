@@ -88,6 +88,8 @@
             }
             return null;
         },
+        catOf(id) { return this.pairOf(id)?.cat ?? null; },
+        catColor: { Brand: 'bg-primary', Mood: 'bg-accent', SaaS: 'bg-info', Industry: 'bg-secondary' },
         idFor(t) { return this.mode === 'dark' ? t.dark : t.light; },
         apply(id) {
             this.theme = id;
@@ -125,6 +127,14 @@
             <span x-bind:data-theme="theme" class="inline-flex shrink-0 items-center gap-1 px-1.5 py-0.5 rounded-[calc(var(--radius-field)*0.7)] bg-base-100 tune-border border-base-content/20">{!! $dots !!}</span>
             @unless ($compact)
                 <span x-text="theme"></span>
+                {{-- category chip — the lineup uses bare names (no mood- prefix since
+                     v0.7.0), so the selected theme's category is surfaced here --}}
+                <template x-if="grouped && catOf(theme)">
+                    <span class="inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wide text-base-content/45">
+                        <span class="size-1.5 rounded-full" x-bind:class="catColor[catOf(theme)]"></span>
+                        <span x-text="catOf(theme)"></span>
+                    </span>
+                </template>
                 <span x-bind:class="themeOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
             @endunless
         </button>
@@ -133,7 +143,10 @@
             <template x-for="g in groups" x-bind:key="g.label ?? 'flat'">
                 <li>
                     <template x-if="g.label">
-                        <div class="px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-wide text-base-content/40" x-text="g.label"></div>
+                        <div class="flex items-center gap-1.5 px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-wide text-base-content/40">
+                            <span class="size-1.5 rounded-full" x-bind:class="catColor[g.label]"></span>
+                            <span x-text="g.label"></span>
+                        </div>
                     </template>
                     <ul>
                         <template x-for="t in g.items" x-bind:key="t.name">

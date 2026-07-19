@@ -52,10 +52,14 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
-### v0.6.1 — 2026-07-17
+### v0.7.0 — 2026-07-19
+
+- **BREAKING: the `mood-` theme-name prefix is dropped** — aesthetic themes now use bare names like every other group. Rename map (append `-dark` for the dark pair): `mood-monokai` → `monokai`, `mood-synthwave` → **`outrun`** (new word, since bare `synthwave` would collide with daisyUI's stock theme name), `mood-vapor` → `vapor`, `mood-bigblue` → `bigblue`, `mood-neotokyo` → `neotokyo`, `mood-zen` → `zen`, `mood-botanical` → `botanical`, `mood-pop` → `pop`, `mood-verdigris` → `verdigris`. Old `mood-*` values in `data-theme` render unthemed — do the rename. Category (Brand / Mood / SaaS / Industry) is now carried by `lineup.json` metadata, `pn_theme_groups()`, and the grouped `<x-theme-tune-switcher>` (headings + per-category chip), not by the name.
+- **All 35 non-frozen palettes re-tuned for individuality** ("theme distance" overhaul, user-approved per category): every light canvas gains a perceivable tint (consumer/mood themes boldly so); primary hues were re-assigned where crowded (`docs` → sepia ink, `factory` → hazard amber, `logistics` → navy×container-orange swap, `food` → citrus lime, `security` → graphite×alert red, `kids` → crayon sky/grass, `atelier` → espresso, `analytics` → plum, `civic` → vermillion accent, `estate` → blueprint canvas); shared support-color hexes were de-duplicated (28 cross-theme reuses → 0). `verdigris` palette untouched (preservation intent); `mono` unchanged. Nearest-pair OKLCH distance rose 1.32 → 1.80.
+- **Brand `pinion` reverted to the Primer-derived palette** (light primary `#0969DA`, dark `#4493F8`, canvas `#F6F8FA`) — rolling back the interim "palette v2" cream/saturated variant — with one deliberate delta kept: **secondary is teal** (`#0F766E` / `#2DD4BF`) so it no longer near-duplicates the success green.
 
 - **Brand default `pinion` palette replaced again — verdigris → the `reactive` family** (GitHub-Primer-adjacent "clean technical document": white canvas `#f6f8fa`/`#ffffff`, ink `#1f2328`, link-blue primary `#0969da`, green secondary `#1f883d`, purple accent `#8250df`; dark pair is Primer-Dark-adjacent `#0d1117`/`#161b22` with `#4493f8`/`#3fb950`/`#a371f7`). Same-day follow-up to v0.6.0 while nothing downstream had adopted the verdigris default; a deliberate brand call, not a regression fix. Layouts keep working — only colors change.
-- The verdigris palette is **preserved as `mood-verdigris` / `mood-verdigris-dark`** (aesthetic group), so nothing was lost from the lineup (now 37 themes / 74 blocks).
+- The verdigris palette is **preserved as `verdigris` / `verdigris-dark`** (aesthetic group; named `mood-verdigris` until the v0.7.0 prefix drop), so nothing was lost from the lineup (now 37 themes / 74 blocks).
 - The opt-in `reactive` theme itself is unchanged (the /visualize report tooling hardcodes its name); `pinion` is generated from the lineup with the standard token derivation, so the two are near- but not byte-identical (`base-300`/`neutral` differ slightly).
 
 ### v0.6.0 — 2026-07-17
@@ -71,10 +75,10 @@ A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defau
     | `pinion` (v0.4.0 warm-cream palette) | `pinion` (**same name, entirely new verdigris palette** — layouts keep working, colors change) |
     | `light` / `cupcake` / `emerald` / `winter` / `nord` | `pinion`, `mono`, `docs`, or any lineup light |
     | `dark` / `dim` / `night` / `business` | `pinion-dark`, `mono-dark`, `devtool-dark`, or any lineup `-dark` |
-    | `dracula` / `synthwave` / `cyberpunk` | `mood-monokai-dark` / `mood-synthwave-dark` / `mood-neotokyo-dark` |
-    | `corporate` | `mood-bigblue` / `finance` |
-    | `retro` / `valentine` / `pastel` | `mood-pop` / `mood-vapor` / `kids` |
-    | `forest` / `garden` | `mood-botanical` / `agri` / `ops` |
+    | `dracula` / `synthwave` / `cyberpunk` | `monokai-dark` / `outrun-dark` / `neotokyo-dark` |
+    | `corporate` | `bigblue` / `finance` |
+    | `retro` / `valentine` / `pastel` | `pop` / `vapor` / `kids` |
+    | `forest` / `garden` | `botanical` / `agri` / `ops` |
     | `coffee` / `luxury` / `black` | `atelier-dark` / `mono-dark` |
     | a hand-written `@plugin 'daisyui/theme'` block of your own | keep it — consumer theme blocks still work unchanged |
 

@@ -7,6 +7,24 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.7.0] — 2026-07-19
+
+### Changed
+- **BREAKING: `mood-` prefix dropped from theme names** — `mood-zen` → `zen`, `mood-monokai` →
+  `monokai`, …, and `mood-synthwave` → **`outrun`** (avoids daisyUI's stock `synthwave` name).
+  Full rename map in [`SEMVER.md`](./SEMVER.md). Category is now metadata: `lineup.json`,
+  `pn_theme_groups()`, and `<x-theme-tune-switcher>` (group headings + a per-category chip
+  next to the selected theme name).
+- **Theme-individuality overhaul across all 35 non-frozen palettes**: perceivable per-theme
+  canvas tints, primary-hue re-assignments where crowded (docs → sepia, factory → hazard amber,
+  logistics → navy×orange, food → citrus lime, security → graphite×red, kids → crayon,
+  atelier → espresso, analytics → plum, civic → vermillion accent, estate → blueprint canvas),
+  and full de-duplication of support-color hexes (28 cross-theme reuses → 0). Nearest-pair
+  OKLCH distance 1.32 → 1.80. `verdigris` and `mono` palettes unchanged.
+- **Brand `pinion` reverted to the Primer-derived palette** (light `#0969DA` / dark `#4493F8`,
+  `#F6F8FA` canvas), keeping one deliberate delta: teal secondary (`#0F766E` / `#2DD4BF`) so
+  secondary no longer near-duplicates the success green.
+
 ## [0.6.1] — 2026-07-17
 
 ### Changed

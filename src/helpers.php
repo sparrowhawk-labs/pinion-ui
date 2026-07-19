@@ -71,6 +71,7 @@ if (!function_exists('pn_theme_groups')) {
                 'name' => $theme['name'],
                 'light' => $theme['name'],
                 'dark' => $theme['name'] . '-dark',
+                'cat' => $group,
             ];
         }
 
