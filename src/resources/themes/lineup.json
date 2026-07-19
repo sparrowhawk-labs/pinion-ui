@@ -4,7 +4,7 @@
     "daisyuiThemes": "all off — pinion-ui はオリジナル theme のみ出荷（ユーザー確定）",
     "naming": "<name> = light / <name>-dark = dark。ブランド既定も同法則で pinion / pinion-dark（2026-07-17 改名: pinion-light → pinion。旧 v0.4 の pinion パレットは名前ごと Verdigris に置換）",
     "defaultMode": "light",
-    "logoFinal": "docs/logo-candidates/round6/n5-swoosh.png (B-5 swoosh, reactive palette, 2026-07-17 確定)",
+    "logoFinal": "docs/logo-candidates/round8/s7-light-crisp1.png (light, OKLCH L-0.05/C+7%) + s7-dark-bright.png (dark, OKLCH L+0.12 on #000) — S-7 edge-notch bold, 2026-07-19 確定。旧 round6/n5-swoosh は 2026-07-17 の先代",
     "moodPrefix": "廃止 (2026-07-19): mood- prefix を外し全テーマ裸名に統一（ユーザー指示）。カテゴリは lineup.json の category メタデータ + pn_theme_groups() のグループ見出し + セレクターのカテゴリ表示で明示。daisyUI 名衝突は synthwave→outrun 改名で回避（ユーザー選択）",
     "finalizedAt": "2026-07-17 (balance 棚卸し + mood 追加まで反映・最終確定)",
     "brandPalette": "2026-07-19: pinion を palette v2 (f7eff78) から Primer 原色へ差し戻し（light #0969DA / dark #4493F8）。secondary のみ teal (#0F766E / #2DD4BF) にして success 緑との近似を解消（ユーザー指示）",

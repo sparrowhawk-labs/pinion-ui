@@ -1,4 +1,4 @@
-<img src=".github/media/logo.png" alt="" width="56" height="56" align="left">
+<picture><source media="(prefers-color-scheme: dark)" srcset=".github/media/logo-dark.png"><img src=".github/media/logo.png" alt="" width="56" height="56" align="left"></picture>
 
 # Pinion UI
 
