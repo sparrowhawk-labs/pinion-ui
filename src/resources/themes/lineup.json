@@ -1,5 +1,5 @@
 {
-  "lockedAt": "2026-07-17",
+  "lockedAt": "2026-07-19",
   "decision": {
     "daisyuiThemes": "all off — pinion-ui はオリジナル theme のみ出荷（ユーザー確定）",
     "naming": "<name> = light / <name>-dark = dark。ブランド既定も同法則で pinion / pinion-dark（2026-07-17 改名: pinion-light → pinion。旧 v0.4 の pinion パレットは名前ごと Verdigris に置換）",
@@ -14,21 +14,21 @@
       "name": "pinion",
       "source": "Reactive family (GitHub-Light/Dark-adjacent, Primer-derived)",
       "category": "ブランド既定",
-      "llmTrigger": "迷ったらこれ。pinion-ui の顔（クリーン技術文書調・白ベース）",
+      "llmTrigger": "迷ったらこれ。pinion-ui の顔（クリーン技術文書調・クリームホワイトベース）",
       "brandDefault": true,
       "light": {
-        "bg": "#f6f8fa",
-        "panel": "#ffffff",
-        "fg": "#1f2328",
+        "bg": "#FEFDFB",
+        "panel": "#FFFFFE",
+        "fg": "#241F1A",
         "muted": "#59636e",
-        "primary": "#0969da",
-        "secondary": "#1f883d",
-        "accent": "#8250df",
+        "primary": "#1D4ED8",
+        "secondary": "#0F766E",
+        "accent": "#7C3AED",
         "extra": [
-          "#cf222e",
-          "#9a6700",
-          "#1a7f37",
-          "#0969da"
+          "#CF222E",
+          "#A8650E",
+          "#059669",
+          "#0891B2"
         ]
       },
       "dark": {
@@ -36,14 +36,14 @@
         "panel": "#161b22",
         "fg": "#e6edf3",
         "muted": "#8d96a0",
-        "primary": "#4493f8",
-        "secondary": "#3fb950",
-        "accent": "#a371f7",
+        "primary": "#818CF8",
+        "secondary": "#2DD4BF",
+        "accent": "#A78BFA",
         "extra": [
           "#f85149",
           "#d29922",
-          "#3fb950",
-          "#58a6ff"
+          "#34D399",
+          "#22D3EE"
         ]
       }
     },

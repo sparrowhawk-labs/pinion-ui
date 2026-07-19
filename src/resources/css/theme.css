@@ -78,38 +78,38 @@
 
 /* ── BEGIN GENERATED THEME LINEUP — gen-themes.mjs (do not edit by hand) ── */
 /* 37 themes × light/dark = 74 blocks, generated from
-   src/resources/themes/lineup.json (locked 2026-07-17). Regenerate with
+   src/resources/themes/lineup.json (locked 2026-07-19). Regenerate with
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
 
-/* pinion / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（クリーン技術文書調・白ベース） (Reactive family (GitHub-Light/Dark-adjacent, Primer-derived)) */
+/* pinion / pinion-dark — ブランド既定 · 迷ったらこれ。pinion-ui の顔（クリーン技術文書調・クリームホワイトベース） (Reactive family (GitHub-Light/Dark-adjacent, Primer-derived)) */
 
 @plugin 'daisyui/theme' {
     name:                      'pinion';
     default:                   true;
     prefersdark:               false;
     color-scheme:              'light';
-    --color-base-100:          #ffffff;
-    --color-base-200:          #f6f8fa;
-    --color-base-300:          #E3E5E7;
-    --color-base-content:      #1f2328;
-    --color-primary:           #0969da;
-    --color-primary-content:   #ffffff;
-    --color-secondary:         #1f883d;
-    --color-secondary-content: #ffffff;
-    --color-accent:            #8250df;
-    --color-accent-content:    #ffffff;
-    --color-neutral:           #3A3E43;
-    --color-neutral-content:   #ffffff;
-    --color-info:              #0969DA;
-    --color-info-content:      #ffffff;
-    --color-success:           #1A7F37;
-    --color-success-content:   #ffffff;
-    --color-warning:           #9A6700;
-    --color-warning-content:   #ffffff;
+    --color-base-100:          #FFFFFE;
+    --color-base-200:          #FEFDFB;
+    --color-base-300:          #EAE9E7;
+    --color-base-content:      #241F1A;
+    --color-primary:           #1D4ED8;
+    --color-primary-content:   #FFFFFE;
+    --color-secondary:         #0F766E;
+    --color-secondary-content: #FFFFFE;
+    --color-accent:            #7C3AED;
+    --color-accent-content:    #FFFFFE;
+    --color-neutral:           #403B36;
+    --color-neutral-content:   #FFFFFE;
+    --color-info:              #0891B2;
+    --color-info-content:      #241F1A;
+    --color-success:           #059669;
+    --color-success-content:   #241F1A;
+    --color-warning:           #A8650E;
+    --color-warning-content:   #FFFFFE;
     --color-error:             #CF222E;
-    --color-error-content:     #ffffff;
-    --root-bg:                 #f6f8fa;
+    --color-error-content:     #FFFFFE;
+    --root-bg:                 #FEFDFB;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -129,17 +129,17 @@
     --color-base-200:          #0d1117;
     --color-base-300:          #252A31;
     --color-base-content:      #e6edf3;
-    --color-primary:           #4493f8;
+    --color-primary:           #818CF8;
     --color-primary-content:   #0d1117;
-    --color-secondary:         #3fb950;
+    --color-secondary:         #2DD4BF;
     --color-secondary-content: #0d1117;
-    --color-accent:            #a371f7;
+    --color-accent:            #A78BFA;
     --color-accent-content:    #0d1117;
     --color-neutral:           #30353D;
     --color-neutral-content:   #e6edf3;
-    --color-info:              #58A6FF;
+    --color-info:              #22D3EE;
     --color-info-content:      #0d1117;
-    --color-success:           #3FB950;
+    --color-success:           #34D399;
     --color-success-content:   #0d1117;
     --color-warning:           #D29922;
     --color-warning-content:   #0d1117;
