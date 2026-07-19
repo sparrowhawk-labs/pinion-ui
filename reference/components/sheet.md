@@ -96,7 +96,7 @@ All other attributes pass through to the root `<div>`. From S1, `wire:model` is 
 
 ## Toolbar (toolbox)
 
-Operations are **icon-only square buttons** grouped in a soft **toolbox** (`role="toolbar"`), kept minimal: the add-row / add-column icons read "+ a row" / "+ a column". On desktop the `title`/`aria-label` give hover tooltips. On a **phone** (where touch has no hover), a **`?` button** (`sm:hidden`) opens a small guide **modal** naming each operation — a pure inline-Alpine `x-data="{ help:false }"` toggle (no `wire`, no JS factory; the sanctioned leaf-UI pattern, cf. `<x-editor>`'s shortcut popover). Consumers must ship the standard `[x-cloak]{display:none}` rule so the modal doesn't flash on load.
+Operations are **icon-only square buttons** grouped in a soft **toolbox** (`role="toolbar"`), kept minimal: the add-row / add-column icons read "+ a row" / "+ a column". On desktop the `title`/`aria-label` give hover tooltips. On a **phone** (where touch has no hover), a **`?` button** (`sm:hidden`) opens a small guide **modal** naming each operation — a pure inline-Alpine `x-data="{ help:false }"` toggle (no `wire`, no JS factory; the sanctioned leaf-UI pattern, cf. `<x-editor>`'s shortcut popover). The standard `[x-cloak]{display:none}` rule that keeps the modal from flashing on load is bundled in the `pinion-ui.css` preset (v0.7.1+).
 
 ## Slots
 

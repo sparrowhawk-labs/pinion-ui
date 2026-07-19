@@ -139,6 +139,6 @@ Class strings are built by [`TabsComposer::compose($props)`](../../src/Compose/T
 - **State is local to the parent's Alpine scope.** Multiple `<x-tabs>` on the same page don't interfere; each owns its own `x-data="{ activeTab }"`.
 - **Layout uses CSS `order`** — buttons get `order-0` (via `tabBase`) and panels get `order-1` (via `panel`), inside the parent's `flex flex-wrap`. That's how the panel always renders **after** the button row even though `<x-tab>` interleaves the two in source order.
 - **Underline indicator** is drawn with `border-b-2` on the active button itself plus an `::after` pseudo-element on the root that extends the baseline rule across the unused row width. No separate moving indicator.
-- **Panels use `x-show` + `x-cloak`**. Include `[x-cloak]{display:none}` in your CSS (`ui:install` does this) to avoid a flash of all panels on first paint.
+- **Panels use `x-show` + `x-cloak`**. The `[x-cloak]{display:none}` rule that prevents a flash of all panels on first paint is bundled in the `pinion-ui.css` preset (v0.7.1+) — no consumer-side rule needed.
 - **Alpine inside `<x-tab>` slot content**: same trap as anywhere else inside `<x-...>` — use the long form `x-bind:` / `x-on:`, not Blade's `:` / `@` shorthand. See [AGENTS.md](../../AGENTS.md#alpine-inside-x--components--use-the-full-prefix).
 - **Blade `@verbatim` for code samples**: literal `<x-tabs>` / `<x-tab>` inside `<pre>`, `<code>`, or `@section` strings must be wrapped with `@verbatim` and `&lt;` entities, otherwise Blade tries to mount them.

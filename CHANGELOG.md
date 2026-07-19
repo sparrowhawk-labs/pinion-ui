@@ -7,6 +7,19 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.7.1] — 2026-07-19
+
+### Fixed
+- **`[x-cloak] { display: none !important; }` is now bundled in the `pinion-ui.css` preset.**
+  Package components (dropdown, modal, sheet, `<x-theme-tune-switcher>`, … — 21 templates)
+  rely on `x-cloak` to stay hidden until Alpine boots, but the rule that makes `x-cloak`
+  effective was left to the consumer's CSS — apps that never added it saw closed dropdown
+  panels flash open for a frame on every page load. A consumer's own duplicate rule is the
+  identical declaration and remains harmless.
+- **Theme switchers no longer show both mode icons stacked before Alpine initializes.**
+  The dark-branch (sun) icon in `<x-theme-switcher>` and `<x-theme-tune-switcher>`'s mode
+  toggle is now `x-cloak`'d, so pre-init only the light-default moon icon renders.
+
 ## [0.7.0] — 2026-07-19
 
 ### Changed

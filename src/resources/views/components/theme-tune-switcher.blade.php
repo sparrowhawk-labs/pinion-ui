@@ -61,12 +61,14 @@
     // light/dark mode toggle — flips the whole lineup between the <name> / <name>-dark columns.
     // Always leads the bar (leftmost) in both full and compact: the most-used control sits first.
     // (Trade-off, accepted: clicking it while a theme list is open closes the list via click-outside.)
+    // Only the dark-branch (sun) icon is x-cloak'd: pre-Alpine the light-default moon stays
+    // visible, so the button never shows both icons stacked nor collapses empty for a frame.
     $modeBtn = <<<HTML
         <button type="button" x-on:click="setMode(mode === 'dark' ? 'light' : 'dark')"
             class="p-1 rounded-[var(--radius-field)] text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
             x-bind:aria-label="mode === 'dark' ? 'Switch to light themes' : 'Switch to dark themes'"
             x-bind:title="mode === 'dark' ? 'Light themes' : 'Dark themes'">
-            <span x-show="mode === 'dark'">{$sun}</span>
+            <span x-show="mode === 'dark'" x-cloak>{$sun}</span>
             <span x-show="mode !== 'dark'">{$moon}</span>
         </button>
     HTML;

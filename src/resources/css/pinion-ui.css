@@ -365,3 +365,17 @@
    default, + opt-in `reactive`) — shared with the standalone pinion-ui-css
    dist build, see theme.css (generated from src/resources/themes/lineup.json). */
 @import "./theme.css";
+
+/* ==========================================
+   Alpine pre-init guard
+   ==========================================
+   Package components (dropdown, modal, theme-tune-switcher, …) rely on
+   x-cloak to stay hidden until Alpine boots — but x-cloak is a no-op
+   without this rule, and Alpine leaves shipping it to the page's CSS.
+   A consumer that never added it sees closed panels flash OPEN for a
+   frame on load. Bundle it here so the preset's "single import wires
+   everything" contract holds; a duplicate rule in the consumer's own
+   app.css is the identical declaration and therefore harmless. */
+[x-cloak] {
+    display: none !important;
+}

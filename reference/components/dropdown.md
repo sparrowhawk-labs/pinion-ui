@@ -84,7 +84,7 @@ Class strings come from [`DropdownComposer::compose($props)`](../../src/Compose/
 ## Notes
 
 - The dropdown closes automatically on outside click (`@click.outside`) and on `Escape` (`@keydown.escape.window`).
-- The panel uses `x-show` + `x-cloak` with a 150 ms scale/opacity transition. Include `[x-cloak]{display:none}` in your CSS to avoid a flash on first paint.
+- The panel uses `x-show` + `x-cloak` with a 150 ms scale/opacity transition. The `[x-cloak]{display:none}` rule that makes this effective is bundled in the `pinion-ui.css` preset (v0.7.1+); a duplicate rule in your own CSS is harmless.
 - When using the `trigger` slot, the wrapper inserts the slot inside a `<div @click>` — make sure the inner element doesn't `stopPropagation` on click.
 - The chevron on the built-in trigger rotates 180° when open via a bound `:class`.
 - The panel does **not** trap focus. If you need a true menu role with arrow-key navigation, layer ARIA attributes onto the items yourself.

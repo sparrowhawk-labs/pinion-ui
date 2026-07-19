@@ -42,9 +42,12 @@
         'aria-label' => 'Toggle theme',
     ]) }}
 >
-    {{-- Sun icon (shown in dark theme — v0.6.0 lineup convention: dark themes end in "-dark") --}}
+    {{-- Sun icon (shown in dark theme — v0.6.0 lineup convention: dark themes end in "-dark").
+         x-cloak'd (moon is not): pre-Alpine only the light-default moon shows, instead of
+         both icons stacked — mirrors <x-theme-tune-switcher>'s mode button. --}}
     <svg
         x-show="theme === 'dark' || theme.endsWith('-dark')"
+        x-cloak
         x-transition
         class="{{ $iconSize }}"
         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
