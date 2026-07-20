@@ -7,6 +7,18 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.8.5] — 2026-07-20
+
+### Fixed
+- **`<x-dropdown>`'s built-in `label` trigger button could wrap its text
+  across two lines** in a space-constrained flex/grid parent — CJK text has
+  no spaces to anchor a "word", so the browser will break it between any two
+  characters once the button is squeezed below its natural width, instead of
+  keeping the label on one line and letting the layout overflow (the
+  friendlier failure mode). `<x-button>` already carries `whitespace-nowrap`
+  for exactly this reason; the dropdown composer's own trigger button didn't.
+  Added it.
+
 ## [0.8.4] — 2026-07-20
 
 ### Fixed

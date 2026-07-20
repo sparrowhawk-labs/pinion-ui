@@ -34,7 +34,14 @@ class DropdownComposer
     private static function trigger(string $size): string
     {
         return FieldVariants::join(
-            'inline-flex items-center justify-center gap-1.5 font-medium transition-colors',
+            // whitespace-nowrap: without it, a narrow flex/grid parent can
+            // shrink this button below its label's natural width — for CJK
+            // text (breakable between any two characters, unlike
+            // space-separated Latin words) that silently wraps the label
+            // into a ragged multi-line mess instead of just not shrinking.
+            // <x-button> already carries this; the built-in trigger here
+            // didn't.
+            'inline-flex items-center justify-center gap-1.5 font-medium whitespace-nowrap transition-colors',
             'rounded-[var(--radius-field)] border-[length:var(--border)] border-base-300',
             'bg-base-100 text-base-content hover:bg-base-200 cursor-pointer',
             self::triggerSize($size),
