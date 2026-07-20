@@ -1,0 +1,246 @@
+/* ============================================================================
+   feather.css — eased edge-dissolve mask utilities (pn-feather-*)
+   ============================================================================
+   Dissolves an element's content into the page background at one or both
+   edges with NO visible boundary line. Born on the pinion-ui.dev landing
+   hero (2026-07-19): a plain linear mask ramp reads as a hard line — the
+   human eye amplifies the slope discontinuity where a gradient starts
+   (Mach banding). The fix that survived four review rounds is this curve:
+
+       alpha(t) = (1 − smoothstep(t))^2,   smoothstep(t) = 3t² − 2t³
+
+   sampled at t = 0.1 … 0.9. The smoothstep base keeps the ramp's onset
+   derivative at 0 (no Mach band where the fade begins); the ^2 power term
+   sinks the middle (α .25 at the midpoint, .047 at t = .7) so the content
+   melts out fog-like instead of thinning politely.
+
+   Usage (any element whose edge should dissolve — horizontal scrollers,
+   logo marquees, carousels, long-text bottom fades, image blends):
+
+       <div class="pn-feather-r">…</div>
+       <div class="pn-feather-x" style="--pn-feather: 8rem">…</div>
+
+   - pn-feather-{t,b,l,r} fade one edge; pn-feather-x / pn-feather-y fade
+     both horizontal / vertical edges.
+   - `--pn-feather` sets the feather depth (default 4rem). Percentages of
+     the element's own size also work (e.g. --pn-feather: 25%).
+   - Runtime cost is a static compositor mask — zero per-frame work. It
+     replaced a per-frame JS opacity loop on the hero for exactly that
+     reason.
+
+   Caveats:
+   - A mask clips EVERYTHING in the element, including box-shadows and
+     glows of children inside the feather zone.
+   - One mask-image per element: the -x and -y utilities cannot be
+     combined (the later one wins). A true 4-edge vignette would need
+     mask composition — out of scope until a real use case shows up.
+   - The curve is deliberately fixed. If a lighter dissolve is ever
+     needed, add a named variant (e.g. pn-feather-soft) rather than a
+     knob — see the hero design log for the tuning history.
+   ============================================================================ */
+
+@utility pn-feather-r {
+    -webkit-mask-image: linear-gradient(to right,
+        black calc(100% - var(--pn-feather, 4rem)),
+        rgb(0 0 0 / .945) calc(100% - var(--pn-feather, 4rem) * 0.9),
+        rgb(0 0 0 / .803) calc(100% - var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .615) calc(100% - var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .420) calc(100% - var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .25)  calc(100% - var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .124) calc(100% - var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .047) calc(100% - var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .011) calc(100% - var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .001) calc(100% - var(--pn-feather, 4rem) * 0.1),
+        transparent 100%);
+    mask-image: linear-gradient(to right,
+        black calc(100% - var(--pn-feather, 4rem)),
+        rgb(0 0 0 / .945) calc(100% - var(--pn-feather, 4rem) * 0.9),
+        rgb(0 0 0 / .803) calc(100% - var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .615) calc(100% - var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .420) calc(100% - var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .25)  calc(100% - var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .124) calc(100% - var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .047) calc(100% - var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .011) calc(100% - var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .001) calc(100% - var(--pn-feather, 4rem) * 0.1),
+        transparent 100%);
+}
+
+@utility pn-feather-l {
+    -webkit-mask-image: linear-gradient(to right,
+        transparent 0,
+        rgb(0 0 0 / .001) calc(var(--pn-feather, 4rem) * 0.1),
+        rgb(0 0 0 / .011) calc(var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .047) calc(var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .124) calc(var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .25)  calc(var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .420) calc(var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .615) calc(var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .803) calc(var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .945) calc(var(--pn-feather, 4rem) * 0.9),
+        black var(--pn-feather, 4rem));
+    mask-image: linear-gradient(to right,
+        transparent 0,
+        rgb(0 0 0 / .001) calc(var(--pn-feather, 4rem) * 0.1),
+        rgb(0 0 0 / .011) calc(var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .047) calc(var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .124) calc(var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .25)  calc(var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .420) calc(var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .615) calc(var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .803) calc(var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .945) calc(var(--pn-feather, 4rem) * 0.9),
+        black var(--pn-feather, 4rem));
+}
+
+@utility pn-feather-x {
+    -webkit-mask-image: linear-gradient(to right,
+        transparent 0,
+        rgb(0 0 0 / .001) calc(var(--pn-feather, 4rem) * 0.1),
+        rgb(0 0 0 / .011) calc(var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .047) calc(var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .124) calc(var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .25)  calc(var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .420) calc(var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .615) calc(var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .803) calc(var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .945) calc(var(--pn-feather, 4rem) * 0.9),
+        black var(--pn-feather, 4rem),
+        black calc(100% - var(--pn-feather, 4rem)),
+        rgb(0 0 0 / .945) calc(100% - var(--pn-feather, 4rem) * 0.9),
+        rgb(0 0 0 / .803) calc(100% - var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .615) calc(100% - var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .420) calc(100% - var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .25)  calc(100% - var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .124) calc(100% - var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .047) calc(100% - var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .011) calc(100% - var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .001) calc(100% - var(--pn-feather, 4rem) * 0.1),
+        transparent 100%);
+    mask-image: linear-gradient(to right,
+        transparent 0,
+        rgb(0 0 0 / .001) calc(var(--pn-feather, 4rem) * 0.1),
+        rgb(0 0 0 / .011) calc(var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .047) calc(var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .124) calc(var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .25)  calc(var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .420) calc(var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .615) calc(var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .803) calc(var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .945) calc(var(--pn-feather, 4rem) * 0.9),
+        black var(--pn-feather, 4rem),
+        black calc(100% - var(--pn-feather, 4rem)),
+        rgb(0 0 0 / .945) calc(100% - var(--pn-feather, 4rem) * 0.9),
+        rgb(0 0 0 / .803) calc(100% - var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .615) calc(100% - var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .420) calc(100% - var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .25)  calc(100% - var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .124) calc(100% - var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .047) calc(100% - var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .011) calc(100% - var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .001) calc(100% - var(--pn-feather, 4rem) * 0.1),
+        transparent 100%);
+}
+
+@utility pn-feather-b {
+    -webkit-mask-image: linear-gradient(to bottom,
+        black calc(100% - var(--pn-feather, 4rem)),
+        rgb(0 0 0 / .945) calc(100% - var(--pn-feather, 4rem) * 0.9),
+        rgb(0 0 0 / .803) calc(100% - var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .615) calc(100% - var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .420) calc(100% - var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .25)  calc(100% - var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .124) calc(100% - var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .047) calc(100% - var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .011) calc(100% - var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .001) calc(100% - var(--pn-feather, 4rem) * 0.1),
+        transparent 100%);
+    mask-image: linear-gradient(to bottom,
+        black calc(100% - var(--pn-feather, 4rem)),
+        rgb(0 0 0 / .945) calc(100% - var(--pn-feather, 4rem) * 0.9),
+        rgb(0 0 0 / .803) calc(100% - var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .615) calc(100% - var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .420) calc(100% - var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .25)  calc(100% - var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .124) calc(100% - var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .047) calc(100% - var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .011) calc(100% - var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .001) calc(100% - var(--pn-feather, 4rem) * 0.1),
+        transparent 100%);
+}
+
+@utility pn-feather-t {
+    -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0,
+        rgb(0 0 0 / .001) calc(var(--pn-feather, 4rem) * 0.1),
+        rgb(0 0 0 / .011) calc(var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .047) calc(var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .124) calc(var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .25)  calc(var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .420) calc(var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .615) calc(var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .803) calc(var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .945) calc(var(--pn-feather, 4rem) * 0.9),
+        black var(--pn-feather, 4rem));
+    mask-image: linear-gradient(to bottom,
+        transparent 0,
+        rgb(0 0 0 / .001) calc(var(--pn-feather, 4rem) * 0.1),
+        rgb(0 0 0 / .011) calc(var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .047) calc(var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .124) calc(var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .25)  calc(var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .420) calc(var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .615) calc(var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .803) calc(var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .945) calc(var(--pn-feather, 4rem) * 0.9),
+        black var(--pn-feather, 4rem));
+}
+
+@utility pn-feather-y {
+    -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0,
+        rgb(0 0 0 / .001) calc(var(--pn-feather, 4rem) * 0.1),
+        rgb(0 0 0 / .011) calc(var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .047) calc(var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .124) calc(var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .25)  calc(var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .420) calc(var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .615) calc(var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .803) calc(var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .945) calc(var(--pn-feather, 4rem) * 0.9),
+        black var(--pn-feather, 4rem),
+        black calc(100% - var(--pn-feather, 4rem)),
+        rgb(0 0 0 / .945) calc(100% - var(--pn-feather, 4rem) * 0.9),
+        rgb(0 0 0 / .803) calc(100% - var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .615) calc(100% - var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .420) calc(100% - var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .25)  calc(100% - var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .124) calc(100% - var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .047) calc(100% - var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .011) calc(100% - var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .001) calc(100% - var(--pn-feather, 4rem) * 0.1),
+        transparent 100%);
+    mask-image: linear-gradient(to bottom,
+        transparent 0,
+        rgb(0 0 0 / .001) calc(var(--pn-feather, 4rem) * 0.1),
+        rgb(0 0 0 / .011) calc(var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .047) calc(var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .124) calc(var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .25)  calc(var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .420) calc(var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .615) calc(var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .803) calc(var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .945) calc(var(--pn-feather, 4rem) * 0.9),
+        black var(--pn-feather, 4rem),
+        black calc(100% - var(--pn-feather, 4rem)),
+        rgb(0 0 0 / .945) calc(100% - var(--pn-feather, 4rem) * 0.9),
+        rgb(0 0 0 / .803) calc(100% - var(--pn-feather, 4rem) * 0.8),
+        rgb(0 0 0 / .615) calc(100% - var(--pn-feather, 4rem) * 0.7),
+        rgb(0 0 0 / .420) calc(100% - var(--pn-feather, 4rem) * 0.6),
+        rgb(0 0 0 / .25)  calc(100% - var(--pn-feather, 4rem) * 0.5),
+        rgb(0 0 0 / .124) calc(100% - var(--pn-feather, 4rem) * 0.4),
+        rgb(0 0 0 / .047) calc(100% - var(--pn-feather, 4rem) * 0.3),
+        rgb(0 0 0 / .011) calc(100% - var(--pn-feather, 4rem) * 0.2),
+        rgb(0 0 0 / .001) calc(100% - var(--pn-feather, 4rem) * 0.1),
+        transparent 100%);
+}

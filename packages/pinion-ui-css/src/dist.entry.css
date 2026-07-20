@@ -46,6 +46,10 @@
    → the package ships fonts/pixelmplus/ one level above dist/). */
 @import "../../../src/resources/css/tune.css";
 
+/* Eased edge-dissolve mask utilities (pn-feather-*) — same shared source as
+   the Blade preset; kept in the dist by the fixture's feather probes. */
+@import "../../../src/resources/css/feather.css";
+
 /* Purge-guard: the harness fixture names every tune @utility + t-shirt spacing
    probe class so Tailwind JIT keeps the whole shared surface in the dist even
    though no consumer markup is scanned at build time. */

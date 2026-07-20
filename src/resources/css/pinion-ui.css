@@ -225,6 +225,11 @@
 /* Tune design token system (data-tune attribute) */
 @import "./tune.css";
 
+/* Eased edge-dissolve mask utilities (pn-feather-{t,b,l,r,x,y}) — the
+   Mach-band-free (1 − smoothstep)² fade born on the pinion-ui.dev hero.
+   JIT-emitted only when a consumer uses them; depth knob = --pn-feather. */
+@import "./feather.css";
+
 /* Editor prose styles (.pn-prose) for <x-editor>. Block rules that can't be
    utility classes (descendant selectors on ProseMirror nodes), keyed off theme
    color + tune tokens. A few hundred bytes for every consumer; the Tiptap JS

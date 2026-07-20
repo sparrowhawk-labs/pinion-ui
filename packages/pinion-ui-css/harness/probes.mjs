@@ -104,6 +104,13 @@ probe({ id: 'tune-card-pad', className: 'tune-card-pad', capture: PAD_ALL });
 probe({ id: 'tune-modal-body', className: 'tune-modal-body', capture: FSIZE });
 probe({ id: 'tune-modal-title', className: 'tune-modal-title', capture: FSIZE });
 
+/* --- Feather (eased edge-dissolve masks, src/resources/css/feather.css) ---
+   Computed mask-image serializes the full gradient (stops + calc()), so one
+   property per probe both purge-guards the class and pins the exact curve. */
+for (const d of ['t', 'b', 'l', 'r', 'x', 'y']) {
+  probe({ id: `pn-feather-${d}`, className: `pn-feather-${d}`, style: 'width:200px;height:120px', capture: ['mask-image'] });
+}
+
 /* --- Spacing (t-shirt — v0.5 rename, docs/design/spacing-v0.5-tshirt.md) ---
    These are Tailwind spacing-namespace utilities generated from the @theme
    --spacing-<size> keys in tune.css (NOT tune @utility definitions). The

@@ -7,6 +7,18 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.7.2] — 2026-07-19
+
+### Added
+- **`pn-feather-{t,b,l,r,x,y}` — eased edge-dissolve mask utilities** (new
+  `src/resources/css/feather.css`, bundled in the preset and in the
+  `pinion-ui-css` dist). Melts an element's edge into the page background with
+  no visible boundary line: the alpha curve is `(1 − smoothstep)²` sampled at
+  9 stops, so the fade's onset has zero slope (no Mach band) and the middle
+  sinks fog-like. Depth knob `--pn-feather` (default `4rem`). Born on the
+  pinion-ui.dev hero carousel; intended for scroller/marquee edges, long-text
+  bottom fades, and image blends. Docs: AGENTS.md → "Edge dissolve".
+
 ## [0.7.1] — 2026-07-19
 
 ### Fixed

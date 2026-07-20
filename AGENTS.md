@@ -86,6 +86,20 @@ Because the layers are orthogonal, every class string you author — a composer,
 
 When in doubt, pick the tier one level *tighter* than you'd guess — the tune's own strength setting (`data-tune-strength`) already amplifies the gap on airier tunes, so authoring at the "natural" density and letting the tune stretch it reads better than pre-inflating the choice.
 
+### Edge dissolve — `pn-feather-{t,b,l,r,x,y}`
+
+Mask utilities that melt an element's edge into the page background with **no visible boundary line** (the alpha curve is `(1 − smoothstep)²`, sampled so the fade's onset has zero slope — a plain linear fade always shows a Mach-band "line" where it starts). Use them wherever content should trail off instead of being cut: horizontal scroller / carousel / logo-marquee edges, a long-text bottom fade, an image blending into a section.
+
+```html
+<div class="overflow-x-auto pn-feather-x">…</div>          <!-- both horizontal edges -->
+<div class="pn-feather-b" style="--pn-feather: 8rem">…</div> <!-- bottom, custom depth -->
+```
+
+- Depth knob: `--pn-feather` (default `4rem`; `%` of the element also works).
+- One `mask-image` per element — `-x` and `-y` don't combine (later wins).
+- The mask clips **everything** inside the feather zone, including children's box-shadows.
+- Cost is a static compositor mask — zero per-frame work, safe on animated content.
+
 ### Enforcing the rule — `ui:lint` (universal) + automation adapters
 
 The rule is machine-checkable. **`php artisan ui:lint [paths…] [--json]`** is the **universal interface** — pure PHP (no Laravel needed at the core), exits non-zero on violations. It flags excluded daisyUI component classes, fixed/hex colors (ignore `data-theme`), and a root `<html>` missing **`data-theme` / `data-tune`** (the theme × tune cascade root). **Any** CLI agent (Claude Code, Cursor, aider, …), CI, or human runs the same command — so there is **no per-agent adapter to maintain**; agents that want feedback simply call `ui:lint --json` and read the result. Add `--spacing` for the informational rhythmic-vs-optical spacing census (never affects the exit code; in `--json` it appears as a `spacing` key).
