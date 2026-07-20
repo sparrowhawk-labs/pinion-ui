@@ -3,7 +3,7 @@
         "name": "default — bottom-end, md, w-52",
         "props": {},
         "expected": {
-            "root": "relative inline-block self-start justify-self-start",
+            "root": "relative inline-block w-fit",
             "trigger": "inline-flex items-center justify-center gap-1.5 font-medium transition-colors rounded-[var(--radius-field)] border-[length:var(--border)] border-base-300 bg-base-100 text-base-content hover:bg-base-200 cursor-pointer h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)]",
             "menu": "absolute z-40 right-0 top-full mt-1 w-52 bg-base-100 border-[length:var(--border)] border-base-300 rounded-[var(--radius-box)] shadow-[var(--shadow-box)] py-1 overflow-hidden",
             "icon": "w-4 h-4 transition-transform"

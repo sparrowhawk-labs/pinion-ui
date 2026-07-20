@@ -26,7 +26,13 @@ class TooltipComposer
         $position = self::normalisedPosition($position);
 
         return [
-            'root'      => 'relative inline-block',
+            // w-fit: prevents a grid/flex-blockified stretch of this
+            // wrapper (see DropdownComposer for the full explanation) —
+            // without it, `left-1/2` centers the bubble over the stretched
+            // wrapper's midpoint instead of the trigger's. w-fit (not
+            // justify-self-start) so an explicit `place-items-center` on a
+            // consumer's grid still centers the trigger itself.
+            'root'      => 'relative inline-block w-fit',
             'bubble'    => self::bubbleClass($position, $color),
             'arrow'     => self::arrowClass($position, $color),
             'placement' => $position,

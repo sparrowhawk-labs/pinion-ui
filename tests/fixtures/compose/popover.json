@@ -3,7 +3,7 @@
         "name": "default — placement=bottom, width=w-72, arrow=true",
         "props": {},
         "expected": {
-            "root": "relative inline-block",
+            "root": "relative inline-block w-fit",
             "panel": "absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)] p-lg",
             "arrow": "absolute w-2 h-2 rotate-45 bg-base-100 border-base-300 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 border-l border-t",
             "showArrow": true,
@@ -12,7 +12,9 @@
     },
     {
         "name": "placement=top — panel above, arrow on bottom edge",
-        "props": { "placement": "top" },
+        "props": {
+            "placement": "top"
+        },
         "expected": {
             "panel": "absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)] p-lg",
             "arrow": "absolute w-2 h-2 rotate-45 bg-base-100 border-base-300 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b",
@@ -21,7 +23,9 @@
     },
     {
         "name": "placement=right",
-        "props": { "placement": "right" },
+        "props": {
+            "placement": "right"
+        },
         "expected": {
             "panel": "absolute z-50 left-full top-1/2 -translate-y-1/2 ml-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)] p-lg",
             "arrow": "absolute w-2 h-2 rotate-45 bg-base-100 border-base-300 left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 border-l border-b",
@@ -30,7 +34,9 @@
     },
     {
         "name": "placement=left",
-        "props": { "placement": "left" },
+        "props": {
+            "placement": "left"
+        },
         "expected": {
             "panel": "absolute z-50 right-full top-1/2 -translate-y-1/2 mr-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)] p-lg",
             "arrow": "absolute w-2 h-2 rotate-45 bg-base-100 border-base-300 right-0 top-1/2 translate-x-1/2 -translate-y-1/2 border-r border-t",
@@ -39,21 +45,27 @@
     },
     {
         "name": "custom width",
-        "props": { "width": "w-96" },
+        "props": {
+            "width": "w-96"
+        },
         "expected": {
             "panel": "absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-96 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)] p-lg"
         }
     },
     {
         "name": "arrow=false — showArrow flag flips",
-        "props": { "arrow": false },
+        "props": {
+            "arrow": false
+        },
         "expected": {
             "showArrow": false
         }
     },
     {
         "name": "unknown placement falls back to bottom",
-        "props": { "placement": "diagonal" },
+        "props": {
+            "placement": "diagonal"
+        },
         "expected": {
             "placement": "bottom",
             "panel": "absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)] p-lg"
@@ -61,14 +73,19 @@
     },
     {
         "name": "padding=p-1 — tight menu-style panel (for context menus with their own item paddings)",
-        "props": { "padding": "p-1" },
+        "props": {
+            "padding": "p-1"
+        },
         "expected": {
             "panel": "absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)] p-1"
         }
     },
     {
         "name": "padding=p-0 — borderless flush content",
-        "props": { "padding": "p-0", "arrow": false },
+        "props": {
+            "padding": "p-0",
+            "arrow": false
+        },
         "expected": {
             "panel": "absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-[var(--radius-box)] bg-base-100 tune-border border-base-300 shadow-[var(--shadow-box)] p-0",
             "showArrow": false

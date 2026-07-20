@@ -7,6 +7,24 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.8.4] — 2026-07-20
+
+### Fixed
+- **v0.8.3's dropdown grid fix had its own regression, corrected here.**
+  `self-start justify-self-start` (v0.8.3) suppresses grid/flex stretch, but
+  it *hard-codes* `justify-self: start` — so a consumer grid that explicitly
+  sets `place-items-center` (deliberately centering triggers in their cells)
+  got its centering silently overridden back to flush-left. Replaced with
+  `w-fit` (`width: fit-content`): a *definite* size is what actually
+  suppresses stretch per the CSS box-alignment spec, without hard-coding an
+  alignment — an explicit `place-items-center` (or any other alignment) on
+  the consumer's grid/flex is still respected.
+- **Same root-cause fix extended to `<x-popover>` and `<x-tooltip>`** — both
+  share the identical `relative inline-block` wrapper pattern with
+  center-anchored panels (`left-1/2 -translate-x-1/2`), so the same
+  grid/flex stretch silently off-centered their panel/bubble too. Root class
+  now `relative inline-block w-fit` on all three composers.
+
 ## [0.8.3] — 2026-07-20
 
 ### Fixed

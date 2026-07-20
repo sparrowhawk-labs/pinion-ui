@@ -11,16 +11,20 @@ class DropdownComposer
         $width    = $props['width']    ?? 'w-52';
 
         return [
-            // self-start/justify-self-start: a grid item's display is
+            // w-fit (width: fit-content): a grid item's display is
             // blockified (inline-block -> block), so the default
             // `justify-items: stretch` silently stretches this wrapper to
             // the full grid-cell width — `right-0` on the menu then anchors
             // to that stretched edge instead of the trigger's real right
             // edge, drifting the panel sideways in any grid layout (and a
             // column-direction flex parent would do the same via
-            // align-items: stretch on the cross axis). Both utilities are
-            // no-ops outside grid/flex, so they're safe to always include.
-            'root'    => 'relative inline-block self-start justify-self-start',
+            // align-items: stretch on the cross axis). w-fit gives the
+            // wrapper a definite (non-auto) size, which is what actually
+            // suppresses stretch per the CSS box-alignment spec — unlike
+            // `justify-self-start`/`self-start`, it does NOT hard-code
+            // 'start' and so still honours an explicit `place-items-center`
+            // (or any other alignment) a consumer's grid/flex sets.
+            'root'    => 'relative inline-block w-fit',
             'trigger' => self::trigger($size),
             'menu'    => self::menu($position, $width),
             'icon'    => 'w-4 h-4 transition-transform',
