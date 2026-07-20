@@ -1,4 +1,4 @@
-d# Pinion UI — Component Reference
+# Pinion UI — Component Reference
 
 Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers props, slots, examples, and class-composition notes. For **live visual demos** see the [playground repo](https://github.com/sparrowhawk-labs/pinion-ui-playground); for design language (themes, tunes, the three style layers) see the [package README](../../README.md).
 
@@ -64,7 +64,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-tabs>`](./tabs.md) | Tabbed content — parent `<x-tabs>` + nested `<x-tab name label :icon>` children, `underline` / `boxed` / `pill` variants, Alpine-driven panel switching. |
 | [`<x-menu-item>`](./menu-item.md) | Single nav item — active/disabled states, optional icon, renders `<a>` when `href` is set. |
 | [`<x-dropdown>`](./dropdown.md) | Trigger + panel menu built on Alpine — placements, hover/click open, keyboard nav. |
-| [`<x-lang-switcher>`](./lang-switcher.md) | Navbar language switcher — `<x-dropdown>` trigger over `<x-menu-item>` locale links, from a `locales` array. Locale-routing-agnostic (you supply each `href`). |
+| [`<x-lang-switcher>`](./lang-switcher.md) | Navbar language switcher — label + chip trigger + dropdown of server-rendered locale links, same control family as `<x-theme-tune-switcher>`. Locale-routing-agnostic (you supply each `href`). |
 | [`<x-breadcrumb>`](./breadcrumb.md) | Path-style nav from an `$items` array — separators, current-page highlight. |
 | [`<x-sidebar>`](./sidebar.md) | Off-canvas drawer panel — left/right placement, `trigger` slot, focus trap, ESC + backdrop click to close. |
 | [`<x-pagination>`](./pagination.md) | Full pagination — page numbers, ellipsis, first/last/prev/next, sizes. Accepts a Laravel paginator. |
@@ -91,6 +91,7 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 |---|---|
 | [`<x-theme-switcher>`](./theme-switcher.md) | Click-to-cycle theme switcher — pass `:themes` array, persists to `data-theme` on `<html>`. |
 | [`<x-theme-tune-switcher>`](./theme-tune-switcher.md) | `data-theme` × `data-tune` dropdowns (color-dot theme preview + tune preview), live-retune the page. `fixed` / `inline`, localStorage. Pure Alpine. |
+| [`<x-settings-switcher>`](./settings-switcher.md) | Theme × tune × lang consolidated into one trigger + panel — for tight chrome (mobile navbars). Same lineup/storage semantics as `<x-theme-tune-switcher>`, optional server-rendered locale links. |
 
 ## Conventions used in these docs
 

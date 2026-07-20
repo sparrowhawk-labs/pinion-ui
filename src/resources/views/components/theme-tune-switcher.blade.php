@@ -2,7 +2,8 @@
     'position' => 'fixed',   // 'fixed' (floating top-right) | 'inline' (sits in flow)
     'compact' => false,      // icon-only triggers (sun-moon / color-dots chip / Aa) — for mobile or tight chrome
     'drop' => 'down',        // dropdown direction: 'down' | 'up' (use 'up' when the switcher sits at the bottom of the screen)
-    'attribution' => true,   // show the pinion-ui.dev attribution (corner badge + dropdown footers). Opt out with :attribution="false"
+    'attribution' => true,   // show the pinion-ui attribution link pinned at each dropdown's top-right. Opt out with :attribution="false"
+    'link' => 'github',      // attribution link target: 'github' (repo, default) | 'site' (pinion-ui.dev) | any URL
     'storage' => true,       // persist the choice to localStorage
     'storageKey' => 'pn',    // localStorage key prefix
     'themes' => null,        // override with a FLAT list of literal theme ids (disables the grouped lineup + mode toggle)
@@ -40,7 +41,7 @@
     }
     $tuneList  = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft'];
     // compact = icon-only triggers (dots chip / Aa / sun-moon), labels and value text hidden;
-    // hover titles keep the current values discoverable. Attribution stays via the dropdown footers.
+    // hover titles keep the current values discoverable. Attribution stays via the pinned dropdown links.
     $gap  = $compact ? 'gap-1.5' : 'gap-3';
     $pad  = $compact ? 'px-2 py-1.5' : 'px-3 py-2';
     $wrap = $position === 'inline'
@@ -54,9 +55,25 @@
     $sun   = '<svg class="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>';
     $moon  = '<svg class="size-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>';
     // GitHub mark (Simple Icons "github", inlined — kept intentionally small/quiet, this is
-    // attribution, not promotion). Reused for the in-dropdown footer link and the corner badge.
+    // attribution, not promotion). Used by the pinned top-right link inside each dropdown.
     $githubMark = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.42.36.78 1.08.78 2.18 0 1.57-.02 2.84-.02 3.23 0 .3.21.66.79.55A10.51 10.51 0 0023.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg>';
-    $linkHref = 'https://pinion-ui.dev/';
+    $linkHref = match ($link) {
+        'github' => 'https://github.com/sparrowhawk-labs/pinion-ui',
+        'site'   => 'https://pinion-ui.dev/',
+        default  => $link,
+    };
+    // Attribution link — pinned OUTSIDE the scrollable <ul> at each dropdown's top-right,
+    // so it stays visible while the list scrolls. Deliberately faint/small.
+    $attrLink = <<<HTML
+        <div class="flex justify-end px-2.5 pt-1.5 -mb-0.5">
+            <a href="{$linkHref}" target="_blank" rel="noopener"
+                class="inline-flex items-center gap-1 text-[9px] leading-none text-base-content/25 hover:text-base-content/60 transition-colors"
+                title="Built with pinion-ui" aria-label="Built with pinion-ui">
+                <span class="size-2">{$githubMark}</span>
+                <span>pinion-ui</span>
+            </a>
+        </div>
+    HTML;
     $defaultTheme = $grouped ? 'pinion' : ($groupData[0]['items'][0]['light'] ?? 'pinion');
     // light/dark mode toggle — flips the whole lineup between the <name> / <name>-dark columns.
     // Always leads the bar (leftmost) in both full and compact: the most-used control sits first.
@@ -140,8 +157,12 @@
                 <span x-bind:class="themeOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
             @endunless
         </button>
-        <ul x-show="themeOpen" x-cloak x-transition.opacity.duration.100ms role="listbox"
-            class="absolute {{ $dropPos }} z-50 w-64 max-h-80 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
+        <div x-show="themeOpen" x-cloak x-transition.opacity.duration.100ms
+            class="absolute {{ $dropPos }} z-50 w-64 rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden">
+        @if ($attribution)
+            {!! $attrLink !!}
+        @endif
+        <ul role="listbox" class="max-h-80 overflow-y-auto py-1">
             <template x-for="g in groups" x-bind:key="g.label ?? 'flat'">
                 <li>
                     <template x-if="g.label">
@@ -165,17 +186,8 @@
                     </ul>
                 </li>
             </template>
-            @if ($attribution)
-            <li class="flex justify-end px-3 pt-1.5 mt-1 border-t border-base-content/10">
-                <a href="{{ $linkHref }}" target="_blank" rel="noopener"
-                    class="inline-flex items-center gap-1 text-[10px] text-base-content/30 hover:text-base-content/60 transition-colors"
-                    title="Built with pinion-ui" aria-label="Built with pinion-ui">
-                    <span class="size-2.5">{!! $githubMark !!}</span>
-                    <span>pinion-ui</span>
-                </a>
-            </li>
-            @endif
         </ul>
+        </div>
     </div>
 
     {{-- Tune --}}
@@ -192,8 +204,12 @@
                 <span x-bind:class="tuneOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
             @endif
         </button>
-        <ul x-show="tuneOpen" x-cloak x-transition.opacity.duration.100ms role="listbox"
-            class="absolute {{ $dropPos }} z-50 w-60 max-h-96 overflow-y-auto rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
+        <div x-show="tuneOpen" x-cloak x-transition.opacity.duration.100ms
+            class="absolute {{ $dropPos }} z-50 w-60 rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden">
+        @if ($attribution)
+            {!! $attrLink !!}
+        @endif
+        <ul role="listbox" class="max-h-96 overflow-y-auto py-1">
             <template x-for="t in tunes" x-bind:key="t">
                 <li>
                     <button type="button" x-on:click="setTune(t)" role="option" x-bind:aria-selected="tune === t"
@@ -204,29 +220,7 @@
                     </button>
                 </li>
             </template>
-            @if ($attribution)
-            <li class="flex justify-end px-3 pt-1.5 mt-1 border-t border-base-content/10">
-                <a href="{{ $linkHref }}" target="_blank" rel="noopener"
-                    class="inline-flex items-center gap-1 text-[10px] text-base-content/30 hover:text-base-content/60 transition-colors"
-                    title="Built with pinion-ui" aria-label="Built with pinion-ui">
-                    <span class="size-2.5">{!! $githubMark !!}</span>
-                    <span>pinion-ui</span>
-                </a>
-            </li>
-            @endif
         </ul>
+        </div>
     </div>
-
-    {{-- Corner attribution badge — hidden while either dropdown is open so it never
-         sits underneath the open panel (which would make it look overlapped/unreadable).
-         Omitted in compact mode (attribution remains via the dropdown footer links). --}}
-    @if ($attribution && ! $compact)
-    <a href="{{ $linkHref }}" target="_blank" rel="noopener"
-        x-show="!themeOpen && !tuneOpen"
-        class="absolute -bottom-[13px] right-0 inline-flex items-center gap-1 text-[11px] leading-none text-base-content/25 hover:text-base-content/60 transition-colors"
-        title="Built with pinion-ui" aria-label="Built with pinion-ui">
-        <span class="size-2">{!! $githubMark !!}</span>
-        <span>pinion-ui</span>
-    </a>
-    @endif
 </div>

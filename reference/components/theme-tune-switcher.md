@@ -9,9 +9,10 @@ A self-contained **`data-theme` × `data-tune` switcher** — two dropdowns (the
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `position` | `'fixed' \| 'inline'` | `'fixed'` | `fixed` = floating top-right card; `inline` = sits in flow (e.g. a header). |
-| `compact` | `bool` | `false` | Icon-only triggers; labels and value text hidden, current values discoverable via hover `title`. For mobile or tight chrome. The corner attribution badge is omitted (attribution remains via the dropdown footers). In both full and compact the bar order is sun/moon (mode) **first/leftmost**, then theme, then tune. |
+| `compact` | `bool` | `false` | Icon-only triggers; labels and value text hidden, current values discoverable via hover `title`. For mobile or tight chrome. In both full and compact the bar order is sun/moon (mode) **first/leftmost**, then theme, then tune. |
 | `drop` | `'down' \| 'up'` | `'down'` | Dropdown direction. Use `'up'` when the switcher sits at the bottom of the screen (e.g. a compact mobile bar), so the panels open above it. |
-| `attribution` | `bool` | `true` | Show the pinion-ui.dev attribution (corner badge + dropdown footer links). Opt out with `:attribution="false"`. |
+| `attribution` | `bool` | `true` | Show the pinion-ui attribution link, pinned faint/small at each dropdown's **top-right** (outside the scrollable list, so it stays visible while the list scrolls). Opt out with `:attribution="false"`. |
+| `link` | `'github' \| 'site' \| URL` | `'github'` | Attribution link target: `'github'` = the pinion-ui repo (default), `'site'` = pinion-ui.dev, or any URL string. |
 | `storage` | `bool` | `true` | Persist the choice to `localStorage` (so it survives reloads). |
 | `storageKey` | `string` | `'pn'` | localStorage key prefix (`{key}-theme` / `{key}-tune`). |
 | `themes` | `array \| null` | grouped lineup | Override with a FLAT list of literal shipped theme ids (e.g. `['pinion', 'reactive']`). Disables grouping and the light/dark mode toggle. daisyUI stock names don't exist in the build. |

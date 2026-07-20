@@ -7,6 +7,32 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.8.0] — 2026-07-20
+
+### Added
+- **`<x-settings-switcher>`** — theme × tune × lang consolidated into one
+  trigger + panel for tight chrome (mobile navbars): sliders-glyph trigger with
+  a live color-dots chip, panel stacking the grouped theme lineup (+ sun/moon
+  light/dark toggle), the tune list, and an optional server-rendered Lang
+  section. Same storage semantics as `<x-theme-tune-switcher>` (share
+  `storage-key` across the responsive pair).
+- `<x-theme-tune-switcher>` / `<x-settings-switcher>`: new `link` prop for the
+  attribution target — `'github'` (repo, **new default**) / `'site'`
+  (pinion-ui.dev) / any URL.
+
+### Changed
+- **`<x-theme-tune-switcher>` attribution repositioned** — the corner badge
+  (absolutely positioned below the bar) is removed; the in-dropdown footer link
+  moved to a faint pin at each dropdown's **top-right, outside the scrollable
+  list** (stays visible while the theme list scrolls). Default target flipped
+  pinion-ui.dev → GitHub repo. `:attribution="false"` still opts out. Recorded
+  in `SEMVER.md`.
+- **`<x-lang-switcher>` redesigned into the switcher control family** (label +
+  chip trigger + dropdown of server-rendered locale links) so it pairs cleanly
+  with `<x-theme-tune-switcher>` in one header row. All previous props accepted
+  (`size` inert, `position` vertical-axis only); new `label` prop. Recorded in
+  `SEMVER.md`.
+
 ## [0.7.3] — 2026-07-20
 
 ### Fixed

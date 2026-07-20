@@ -1,8 +1,6 @@
 # x-lang-switcher
 
-Navbar-style language switcher — a `<x-dropdown>` trigger (current locale) over a list of `<x-menu-item>` links, one per locale. Locale-routing-agnostic: it never builds a URL itself, it renders whatever `href` each locale entry hands it.
-
-**Playground page**: no dedicated demo page yet — see the [layout header](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/layouts/playground.blade.php) where a hand-rolled locale-chip row currently lives (candidate to migrate to this component).
+Navbar-style language switcher — a label + chip trigger over a dropdown of locale links, in the **same control family as [`<x-theme-tune-switcher>`](./theme-tune-switcher.md)** so the two sit naturally in one header row (v0.8.0 redesign; the previous `<x-dropdown>`-based chrome read as a different control family). Locale-routing-agnostic: it never builds a URL itself, it renders whatever `href` each locale entry hands it. Options are **server-rendered `<a href>` links**, so static exporters (e.g. spatie/laravel-export) and crawlers see every locale without JS.
 
 ## When to use
 
@@ -15,12 +13,13 @@ Navbar-style language switcher — a `<x-dropdown>` trigger (current locale) ove
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `locales` | `array<array{code?:string,label?:string,href?:string,active?:bool}>` | `[]` | One entry per locale. `code` identifies it (matched against `current`), `label` is the rendered text (e.g. `'🇯🇵 JA'`), `href` is the link target (defaults to `'#'` if omitted), `active` optionally marks it directly. |
-| `current` | `string\|null` | `null` | The active locale's `code`. Matched against `locales[].code` to pick the trigger label and highlight the matching menu item. Falls back to an entry with `active => true`, then to `locales[0]`. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'sm'` | Forwarded to the underlying `<x-dropdown>` and `<x-menu-item>` — trigger height/text size and item height/text size. |
-| `position` | `'bottom-end' \| 'bottom-start' \| 'top-end' \| 'top-start'` | `'bottom-end'` | Forwarded to `<x-dropdown>` — menu placement relative to the trigger. |
-| `width` | Tailwind width class | `'w-40'` | Forwarded to `<x-dropdown>` — menu panel width. |
+| `current` | `string\|null` | `null` | The active locale's `code`. Matched against `locales[].code` to pick the trigger label and highlight the matching row. Falls back to an entry with `active => true`, then to `locales[0]`. |
+| `label` | `string` | `'Lang'` | Visible label text left of the trigger. Pass `''` to hide. |
+| `width` | Tailwind width class | `'w-40'` | Dropdown panel width. |
+| `size` | `string` | `'sm'` | **Legacy** (pre-v0.8 `<x-dropdown>` chrome) — accepted for backwards compatibility; the redesigned control has a single size. |
+| `position` | `string` | `'bottom-end'` | **Legacy** — only the vertical axis is honored now: values starting with `top` open the panel upward, everything else opens downward (right-aligned either way). |
 
-All other attributes pass through to the root `<x-dropdown>` element.
+All other attributes pass through to the root element. Needs Alpine on the page (open/close state only).
 
 ## Slots
 
@@ -42,21 +41,21 @@ None — locales are data-driven via the `locales` prop, not slot content.
 />
 ```
 
-### Inside a header
+### Beside the theme/tune switcher in a header
 
 ```blade
-<header class="flex items-center justify-between p-4">
-    <a href="/" class="font-semibold">My App</a>
-    <x-lang-switcher :current="$locale" :locales="$localeLinks" size="sm" position="bottom-end" />
-</header>
+<div class="flex items-center gap-3">
+    <x-theme-tune-switcher position="inline" />
+    <x-lang-switcher :current="$locale" :locales="$localeLinks" />
+</div>
 ```
 
 ## Class composition
 
-Lang-switcher has no Composer of its own — it's a thin composition of [`<x-dropdown>`](./dropdown.md) (trigger + panel chrome) and [`<x-menu-item>`](./menu-item.md) (each locale row), both of which read `DropdownComposer` / `FieldVariants` tune tokens. Override the panel width via `width`, or the trigger/item look by overriding `class` on the two underlying components if you fork this template.
+Fully utility-composed (no Composer), matching `<x-theme-tune-switcher>`: `text-xs` chip trigger with `rounded-[var(--radius-field)]` + `tune-border`, dropdown panel with `rounded-[var(--radius-box)]` + `shadow-[var(--shadow-box)]`, rows as semantic-color links. Never daisyUI component classes.
 
 ## Related
 
-- [`<x-dropdown>`](./dropdown.md) — the generic trigger+panel primitive this component wraps.
-- [`<x-menu-item>`](./menu-item.md) — the per-locale row; renders `<a>` since `href` is always set.
-- [`<x-theme-tune-switcher>`](./theme-tune-switcher.md) — a sibling navbar control for `data-theme` × `data-tune`, useful to pair in the same header row.
+- [`<x-theme-tune-switcher>`](./theme-tune-switcher.md) — sibling navbar control for `data-theme` × `data-tune`; pair in the same header row.
+- [`<x-settings-switcher>`](./settings-switcher.md) — theme × tune × lang consolidated into one panel for tight (mobile) chrome.
+- [`<x-dropdown>`](./dropdown.md) — the generic trigger+panel primitive (used by this component before v0.8.0).
