@@ -1,5 +1,5 @@
 @props([
-    'locales' => [],         // optional Lang section: [['code','label','href'], …] (same shape as <x-lang-switcher>); empty = section hidden
+    'locales' => [],         // optional Lang section: [['code','label','href'], …] (same shape as x-lang-switcher); empty = section hidden
     'current' => null,       // active locale code
     'drop' => 'down',        // panel direction: 'down' | 'up'
     'width' => 'w-72',       // panel width

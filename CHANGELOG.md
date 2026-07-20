@@ -7,6 +7,15 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.8.1] — 2026-07-20
+
+### Fixed
+- `<x-settings-switcher>` 500'd on render ("Undefined variable $component"):
+  a literal `<x-lang-switcher>` inside an `@props` comment was expanded by
+  Blade's component-tag compiler (which runs before directive compilation;
+  only `@php…@endphp` blocks are placeholder-protected). v0.8.0 shipped the
+  broken file — do not use v0.8.0.
+
 ## [0.8.0] — 2026-07-20
 
 ### Added
