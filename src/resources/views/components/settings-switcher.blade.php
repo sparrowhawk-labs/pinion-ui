@@ -58,8 +58,10 @@
     $defaultTheme = $grouped ? 'pinion' : ($groupData[0]['items'][0]['light'] ?? 'pinion');
 @endphp
 
+{{-- tune-exempt: switcher chrome renders tune-neutral (see tune.css); per-option
+     previews inside the panel still track their OWN data-tune/data-theme --}}
 <div
-    {{ $attributes->class(['relative']) }}
+    {{ $attributes->class(['tune-exempt relative']) }}
     x-data="{
         theme: @js((bool) $storage) ? (localStorage.getItem('{{ $storageKey }}-theme') || document.documentElement.dataset.theme || @js($defaultTheme)) : (document.documentElement.dataset.theme || @js($defaultTheme)),
         tune: @js((bool) $storage) ? (localStorage.getItem('{{ $storageKey }}-tune') || document.documentElement.dataset.tune || 'default') : (document.documentElement.dataset.tune || 'default'),
@@ -100,9 +102,9 @@
 >
     <button type="button" x-on:click="open = !open" x-bind:aria-expanded="open"
         aria-label="Theme, tune &amp; language settings"
-        class="text-xs px-2 py-1.5 rounded-[var(--radius-field)] tune-border border-base-300 bg-base-100 hover:bg-base-200 transition-colors flex items-center gap-1.5 cursor-pointer">
+        class="text-xs px-2 py-1.5 rounded border border-base-300 bg-base-100 hover:bg-base-200 transition-colors flex items-center gap-1.5 cursor-pointer">
         {!! $sliders !!}
-        <span x-bind:data-theme="theme" class="inline-flex shrink-0 items-center gap-0.5 px-1 py-0.5 rounded-[calc(var(--radius-field)*0.7)] bg-base-100 tune-border border-base-content/20">
+        <span x-bind:data-theme="theme" class="inline-flex shrink-0 items-center gap-0.5 px-1 py-0.5 rounded bg-base-100 border border-base-content/20">
             <span class="size-1.5 rounded-full bg-primary"></span>
             <span class="size-1.5 rounded-full bg-secondary"></span>
             <span class="size-1.5 rounded-full bg-accent"></span>
@@ -110,7 +112,7 @@
     </button>
 
     <div x-show="open" x-cloak x-transition.opacity.duration.100ms
-        class="absolute {{ $dropPos }} z-50 {{ $width }} rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden">
+        class="absolute {{ $dropPos }} z-50 {{ $width }} rounded-md border border-base-300 bg-base-100 shadow-lg overflow-hidden">
         @if ($attribution)
         {{-- Attribution link — pinned OUTSIDE the scrollable body at the panel's
              top-right, so it stays visible while the sections scroll. --}}
@@ -130,7 +132,7 @@
                     <p class="text-[10px] font-semibold uppercase tracking-wider text-base-content/40">Theme</p>
                     @if ($grouped)
                         <button type="button" x-on:click="setMode(mode === 'dark' ? 'light' : 'dark')"
-                            class="p-1 rounded-[var(--radius-field)] text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
+                            class="p-1 rounded text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
                             x-bind:aria-label="mode === 'dark' ? 'Switch to light themes' : 'Switch to dark themes'"
                             x-bind:title="mode === 'dark' ? 'Light themes' : 'Dark themes'">
                             <span x-show="mode === 'dark'" x-cloak>{!! $sun !!}</span>
@@ -151,9 +153,9 @@
                                 <template x-for="t in g.items" x-bind:key="t.name">
                                     <li>
                                         <button type="button" x-on:click="setTheme(t)" role="option" x-bind:aria-selected="isActive(t)"
-                                            class="flex items-center gap-2.5 w-full px-2 py-1.5 rounded-[var(--radius-field)] text-xs hover:bg-base-200 transition-colors text-left"
+                                            class="flex items-center gap-2.5 w-full px-2 py-1.5 rounded text-xs hover:bg-base-200 transition-colors text-left"
                                             x-bind:class="isActive(t) ? 'bg-base-200 font-semibold' : ''">
-                                            <span x-bind:data-theme="idFor(t)" class="inline-flex shrink-0 items-center gap-1 px-2 py-1.5 rounded-[calc(var(--radius-box)*0.6)] bg-base-100 tune-border border-base-content/20">{!! $dots !!}</span>
+                                            <span x-bind:data-theme="idFor(t)" class="inline-flex shrink-0 items-center gap-1 px-2 py-1.5 rounded-md bg-base-100 border border-base-content/20">{!! $dots !!}</span>
                                             <span x-text="grouped ? t.name : idFor(t)"></span>
                                             <span x-show="isActive(t)">{!! $check !!}</span>
                                         </button>
@@ -171,7 +173,7 @@
                     <template x-for="t in tunes" x-bind:key="t">
                         <li>
                             <button type="button" x-on:click="setTune(t)" role="option" x-bind:aria-selected="tune === t"
-                                class="flex items-center gap-2 w-full px-2 py-1.5 rounded-[var(--radius-field)] hover:bg-base-200 transition-colors text-left"
+                                class="flex items-center gap-2 w-full px-2 py-1.5 rounded hover:bg-base-200 transition-colors text-left"
                                 x-bind:class="tune === t ? 'bg-base-200' : ''">
                                 <span x-bind:data-tune="t" style="font-family: var(--font-heading); font-weight: var(--font-weight-heading, 700);" class="text-sm leading-none" x-text="'Aa ' + t"></span>
                                 <span x-show="tune === t">{!! $check !!}</span>
@@ -189,7 +191,7 @@
                         <li>
                             <a href="{{ $loc['href'] ?? '#' }}" role="option"
                                 aria-selected="{{ ($loc['code'] ?? null) === $activeCode ? 'true' : 'false' }}"
-                                class="flex items-center gap-2.5 w-full px-2 py-1.5 rounded-[var(--radius-field)] text-xs hover:bg-base-200 transition-colors text-left {{ ($loc['code'] ?? null) === $activeCode ? 'bg-base-200 font-semibold' : '' }}">
+                                class="flex items-center gap-2.5 w-full px-2 py-1.5 rounded text-xs hover:bg-base-200 transition-colors text-left {{ ($loc['code'] ?? null) === $activeCode ? 'bg-base-200 font-semibold' : '' }}">
                                 <span>{{ $loc['label'] ?? ($loc['code'] ?? '') }}</span>
                                 @if (($loc['code'] ?? null) === $activeCode)
                                     {!! $check !!}

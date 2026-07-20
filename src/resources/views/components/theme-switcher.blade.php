@@ -37,7 +37,7 @@
     }"
     @click="toggle()"
     {{ $attributes->merge([
-        'class' => "$sizeClasses inline-flex items-center justify-center rounded-[var(--radius-field)] text-base-content hover:bg-base-200 transition-colors cursor-pointer",
+        'class' => "tune-exempt $sizeClasses inline-flex items-center justify-center rounded text-base-content hover:bg-base-200 transition-colors cursor-pointer",
         'type' => 'button',
         'aria-label' => 'Toggle theme',
     ]) }}

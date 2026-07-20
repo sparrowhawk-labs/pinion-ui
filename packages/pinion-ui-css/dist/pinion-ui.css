@@ -1068,6 +1068,12 @@
 [data-tune="draft"] :is(button, input, textarea, select, .tune-border) {
   filter: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='r'%20x='-6%25'%20y='-6%25'%20width='112%25'%20height='112%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.02'%20numOctaves='2'%20seed='7'%20result='n'/%3E%3CfeDisplacementMap%20in='SourceGraphic'%20in2='n'%20scale='2.5'/%3E%3C/filter%3E%3C/svg%3E#r");
 }
+[data-tune] .tune-exempt, [data-tune] .tune-exempt :is(button, input, textarea, select, .tune-border) {
+  filter: none;
+}
+[data-tune] .tune-exempt {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
 [data-tune] {
   font-family: var(--font-body);
   font-size: var(--font-size-base, 1rem);

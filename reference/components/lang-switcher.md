@@ -52,7 +52,7 @@ None — locales are data-driven via the `locales` prop, not slot content.
 
 ## Class composition
 
-Fully utility-composed (no Composer), matching `<x-theme-tune-switcher>`: `text-xs` chip trigger with `rounded-[var(--radius-field)]` + `tune-border`, dropdown panel with `rounded-[var(--radius-box)]` + `shadow-[var(--shadow-box)]`, rows as semantic-color links. Never daisyUI component classes.
+Fully utility-composed (no Composer), matching `<x-theme-tune-switcher>`: `text-xs` chip trigger and dropdown panel with **static** radii/borders/shadows, rows as semantic-color links. Like the rest of the switcher family the chrome is **tune-neutral** (`tune-exempt`, v0.8.2) — site chrome is not restyled by the active tune. Never daisyUI component classes.
 
 ## Related
 

@@ -52,6 +52,10 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.8.2 — 2026-07-20
+
+- **Switcher chrome no longer tracks the active tune** (design rule: site chrome that *changes* the tune must not be re-rendered by it — under `draft`/`pixel` the picker itself became handwriting/wobbly and hard to read). Visible deltas: pinned base font on all four switcher components, no draft rough-filter on their buttons, static radius/border/shadow instead of `--radius-field`/`--radius-box`/`tune-border`/`--shadow-box`, and the tune trigger no longer previews the active tune's typeface (per-option previews in the open dropdown are unchanged). Consumers who *want* tune-reactive picker chrome would need to fork the template. New public escape hatch: `.tune-exempt` in `tune.css`.
+
 ### v0.8.0 — 2026-07-20
 
 - **`<x-theme-tune-switcher>` attribution repositioned + default link flipped to GitHub.** The always-visible corner badge (absolutely positioned below the switcher bar) is **removed**; attribution is now a single faint link pinned at each dropdown's **top-right**, outside the scrollable list (was: a footer row at the bottom of each list, reachable only after scrolling). The link's default target changed `https://pinion-ui.dev/` → **the GitHub repo**; a new `link` prop selects `'github'` (default) / `'site'` (pinion-ui.dev) / any URL. `:attribution="false"` still opts out entirely. Impact: layout that reserved space under the switcher for the badge can reclaim it; consumers wanting the old pinion-ui.dev target pass `link="site"`.

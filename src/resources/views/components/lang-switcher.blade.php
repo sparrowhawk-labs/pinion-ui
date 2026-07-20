@@ -31,18 +31,19 @@
     $check = '<svg class="ml-auto size-3 text-primary shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 01.006 1.414l-7.5 7.6a1 1 0 01-1.42.005l-3.5-3.5a1 1 0 011.414-1.414l2.79 2.79 6.794-6.886a1 1 0 011.416-.009z" clip-rule="evenodd"/></svg>';
 @endphp
 
-<div {{ $attributes->class(['relative inline-flex items-center gap-2']) }}
+{{-- tune-exempt: switcher chrome renders tune-neutral (see tune.css) --}}
+<div {{ $attributes->class(['tune-exempt relative inline-flex items-center gap-2']) }}
     x-data="{ open: false }" x-on:click.outside="open = false" x-on:keydown.escape.window="open = false">
     @if ($label !== '' && $label !== false)
         <label class="text-xs font-medium text-base-content/60">{{ $label }}</label>
     @endif
     <button type="button" x-on:click="open = !open" x-bind:aria-expanded="open" aria-label="Language"
-        class="text-xs px-2 py-1 rounded-[var(--radius-field)] tune-border border-base-300 bg-base-100 hover:bg-base-200 transition-colors flex items-center gap-1.5 cursor-pointer">
+        class="text-xs px-2 py-1 rounded border border-base-300 bg-base-100 hover:bg-base-200 transition-colors flex items-center gap-1.5 cursor-pointer">
         <span class="leading-none">{{ $activeLabel }}</span>
         <span x-bind:class="open ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
     </button>
     <ul x-show="open" x-cloak x-transition.opacity.duration.100ms role="listbox"
-        class="absolute {{ $dropPos }} z-50 {{ $width }} rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] py-1">
+        class="absolute {{ $dropPos }} z-50 {{ $width }} rounded-md border border-base-300 bg-base-100 shadow-lg py-1">
         @foreach ($locales as $loc)
             <li>
                 <a href="{{ $loc['href'] ?? '#' }}" role="option"

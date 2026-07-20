@@ -44,9 +44,13 @@
     // hover titles keep the current values discoverable. Attribution stays via the pinned dropdown links.
     $gap  = $compact ? 'gap-1.5' : 'gap-3';
     $pad  = $compact ? 'px-2 py-1.5' : 'px-3 py-2';
+    // tune-exempt (tune.css): the switcher is site chrome — a control that CHANGES the
+    // tune must not itself be re-rendered by it (pinned base font, no draft rough
+    // filter, static radius/border/shadow instead of tune tokens). Per-option
+    // previews inside the dropdowns still track their OWN data-tune/data-theme.
     $wrap = $position === 'inline'
-        ? "relative inline-flex items-center {$gap}"
-        : "fixed top-3 right-4 z-[900] flex items-center {$gap} {$pad} rounded-[var(--radius-box)] tune-border border-base-content/15 bg-base-100/90 backdrop-blur shadow-[var(--shadow-box)]";
+        ? "tune-exempt relative inline-flex items-center {$gap}"
+        : "tune-exempt fixed top-3 right-4 z-[900] flex items-center {$gap} {$pad} rounded-lg border border-base-content/15 bg-base-100/90 backdrop-blur shadow-sm";
     // drop=up flips both dropdowns above the trigger row (bottom-of-screen placements).
     $dropPos = $drop === 'up' ? 'bottom-full right-0 mb-1' : 'top-full right-0 mt-1';
     $chev  = '<svg class="size-3 text-base-content/50" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>';
@@ -82,7 +86,7 @@
     // visible, so the button never shows both icons stacked nor collapses empty for a frame.
     $modeBtn = <<<HTML
         <button type="button" x-on:click="setMode(mode === 'dark' ? 'light' : 'dark')"
-            class="p-1 rounded-[var(--radius-field)] text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
+            class="p-1 rounded text-base-content/60 hover:bg-base-200 transition-colors cursor-pointer"
             x-bind:aria-label="mode === 'dark' ? 'Switch to light themes' : 'Switch to dark themes'"
             x-bind:title="mode === 'dark' ? 'Light themes' : 'Dark themes'">
             <span x-show="mode === 'dark'" x-cloak>{$sun}</span>
@@ -142,8 +146,8 @@
             <label class="text-xs font-medium text-base-content/60">Theme</label>
         @endunless
         <button type="button" x-on:click="themeOpen = !themeOpen" x-bind:aria-expanded="themeOpen" x-bind:title="theme" aria-label="Theme"
-            class="text-xs px-2 py-1 rounded-[var(--radius-field)] tune-border border-base-300 bg-base-100 hover:bg-base-200 transition-colors flex items-center gap-1.5 cursor-pointer">
-            <span x-bind:data-theme="theme" class="inline-flex shrink-0 items-center gap-1 px-1.5 py-0.5 rounded-[calc(var(--radius-field)*0.7)] bg-base-100 tune-border border-base-content/20">{!! $dots !!}</span>
+            class="text-xs px-2 py-1 rounded border border-base-300 bg-base-100 hover:bg-base-200 transition-colors flex items-center gap-1.5 cursor-pointer">
+            <span x-bind:data-theme="theme" class="inline-flex shrink-0 items-center gap-1 px-1.5 py-0.5 rounded bg-base-100 border border-base-content/20">{!! $dots !!}</span>
             @unless ($compact)
                 <span x-text="theme"></span>
                 {{-- category chip — the lineup uses bare names (no mood- prefix since
@@ -158,7 +162,7 @@
             @endunless
         </button>
         <div x-show="themeOpen" x-cloak x-transition.opacity.duration.100ms
-            class="absolute {{ $dropPos }} z-50 w-64 rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden">
+            class="absolute {{ $dropPos }} z-50 w-64 rounded-md border border-base-300 bg-base-100 shadow-lg overflow-hidden">
         @if ($attribution)
             {!! $attrLink !!}
         @endif
@@ -177,7 +181,7 @@
                                 <button type="button" x-on:click="setTheme(t)" role="option" x-bind:aria-selected="isActive(t)"
                                     class="flex items-center gap-2.5 w-full px-3 py-1.5 text-xs hover:bg-base-200 transition-colors text-left"
                                     x-bind:class="isActive(t) ? 'bg-base-200 font-semibold' : ''">
-                                    <span x-bind:data-theme="idFor(t)" class="inline-flex shrink-0 items-center gap-1 px-2 py-1.5 rounded-[calc(var(--radius-box)*0.6)] bg-base-100 tune-border border-base-content/20">{!! $dots !!}</span>
+                                    <span x-bind:data-theme="idFor(t)" class="inline-flex shrink-0 items-center gap-1 px-2 py-1.5 rounded-md bg-base-100 border border-base-content/20">{!! $dots !!}</span>
                                     <span x-text="grouped ? t.name : idFor(t)"></span>
                                     <span x-show="isActive(t)">{!! $check !!}</span>
                                 </button>
@@ -196,16 +200,19 @@
             <label class="text-xs font-medium text-base-content/60">Tune</label>
         @endunless
         <button type="button" x-on:click="tuneOpen = !tuneOpen" x-bind:aria-expanded="tuneOpen" x-bind:title="tune" aria-label="Tune"
-            class="text-xs px-2 py-1 rounded-[var(--radius-field)] tune-border border-base-300 bg-base-100 hover:bg-base-200 transition-colors flex items-center gap-1.5 cursor-pointer">
+            class="text-xs px-2 py-1 rounded border border-base-300 bg-base-100 hover:bg-base-200 transition-colors flex items-center gap-1.5 cursor-pointer">
+            {{-- trigger shows the tune NAME in the neutral chrome font (no data-tune
+                 binding) — the applied tune must not restyle the switcher itself;
+                 font previews live on the options inside the dropdown --}}
             @if ($compact)
-                <span x-bind:data-tune="tune" class="text-[13px] font-medium leading-none">Aa</span>
+                <span class="text-[13px] font-medium leading-none">Aa</span>
             @else
-                <span x-bind:data-tune="tune" class="leading-none" x-text="tune"></span>
+                <span class="leading-none" x-text="tune"></span>
                 <span x-bind:class="tuneOpen ? 'rotate-180' : ''" class="inline-flex transition-transform">{!! $chev !!}</span>
             @endif
         </button>
         <div x-show="tuneOpen" x-cloak x-transition.opacity.duration.100ms
-            class="absolute {{ $dropPos }} z-50 w-60 rounded-[var(--radius-box)] tune-border border-base-300 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden">
+            class="absolute {{ $dropPos }} z-50 w-60 rounded-md border border-base-300 bg-base-100 shadow-lg overflow-hidden">
         @if ($attribution)
             {!! $attrLink !!}
         @endif

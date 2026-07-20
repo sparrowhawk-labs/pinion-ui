@@ -42,7 +42,7 @@ On select it sets `document.documentElement.dataset.theme` / `.tune` (and persis
 
 ## Class composition
 
-Fully utility-composed (no Composer), matching the switcher family: chip trigger with `rounded-[var(--radius-field)]` + `tune-border`, panel with `rounded-[var(--radius-box)]` + `shadow-[var(--shadow-box)]`, sections divided by `divide-base-200`, rows as semantic-color buttons/links. Never daisyUI component classes.
+Fully utility-composed (no Composer), matching the switcher family: chip trigger and panel with **static** radii/borders/shadows, sections divided by `divide-base-200`, rows as semantic-color buttons/links. The chrome is **tune-neutral** (`tune-exempt`, v0.8.2) — only the per-option previews (`:data-theme` dots, `:data-tune` "Aa" labels) react to their own theme/tune. Never daisyUI component classes.
 
 ## Related
 

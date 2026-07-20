@@ -7,6 +7,28 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.8.2] — 2026-07-20
+
+### Changed
+- **Switcher chrome is now tune-neutral** (`<x-theme-switcher>`,
+  `<x-theme-tune-switcher>`, `<x-lang-switcher>`, `<x-settings-switcher>`):
+  a control that changes the tune is no longer itself re-rendered by it.
+  Chrome font is pinned to the base sans stack (the applied tune's body font
+  — most visibly `draft`'s handwriting — no longer leaks into labels,
+  triggers, and list rows), `draft`'s rough SVG filter no longer wobbles the
+  switcher buttons, and tune-token radii/borders/shadows
+  (`--radius-field`/`--radius-box`/`tune-border`/`--shadow-box`) were replaced
+  with static equivalents. The trigger now shows the current tune's *name* in
+  the neutral font instead of previewing its typeface. Per-option previews
+  inside the dropdowns (color dots per `data-theme`, "Aa" labels per
+  `data-tune`) are unchanged — that's the feature. Recorded in `SEMVER.md`.
+
+### Added
+- `tune.css`: **`.tune-exempt`** escape hatch — mark a subtree as tune-neutral
+  site chrome (pinned base font + effect-level tune styling such as draft's
+  rough filter lifted). Used by the switcher family; available to consumers
+  for their own chrome.
+
 ## [0.8.1] — 2026-07-20
 
 ### Fixed

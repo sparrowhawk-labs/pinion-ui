@@ -39,7 +39,7 @@ On select it sets `document.documentElement.dataset.theme` / `.tune` (and persis
 
 ## Class composition
 
-Fully utility-composed (no Composer): a `bg-base-100/90 backdrop-blur` card (fixed) or bare flex (inline); trigger buttons and dropdown `<ul>`s use semantic colors + tune-token radii. The color-dot preview is `bg-primary`/`bg-secondary`/`bg-accent` inside a `:data-theme` span so each row shows that theme's palette. Never daisyUI component classes.
+Fully utility-composed (no Composer): a `bg-base-100/90 backdrop-blur` card (fixed) or bare flex (inline); trigger buttons and dropdown panels use semantic colors with **static** radii/borders/shadows. The switcher chrome is **tune-neutral** (`tune-exempt`, v0.8.2): a control that changes the tune is not itself re-rendered by it — pinned base font, no draft rough-filter, no tune-token radius/shadow. Only the per-option previews react: the color-dot preview is `bg-primary`/`bg-secondary`/`bg-accent` inside a `:data-theme` span, and each tune option renders its own name under its own `:data-tune`. (The trigger shows the current tune's *name* in the neutral font — it no longer previews the tune's typeface.) Never daisyUI component classes.
 
 ## Related
 
