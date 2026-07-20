@@ -7,6 +7,22 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.8.3] — 2026-07-20
+
+### Fixed
+- **`<x-dropdown>` panel drifted sideways inside a CSS Grid (or a column-direction
+  flex) parent.** A grid/flex item's `inline-block` display is blockified, so the
+  default `justify-items: stretch` (grid) / `align-items: stretch` (flex, cross
+  axis) silently stretched the dropdown's `relative inline-block` wrapper to the
+  full grid-cell/flex-cell size. `position="*-end"` (`right-0`) then anchored to
+  that stretched edge instead of the trigger button's real right edge, drifting
+  the panel right by the leftover cell width — worse the narrower the trigger.
+  `position="*-start"` (`left-0`) coincidentally looked fine since the button
+  sits flush-left in the stretched wrapper. Fixed by adding `self-start
+  justify-self-start` to the composer's `root` class (no-ops outside grid/flex,
+  so safe everywhere). `<x-dropdown>` inside any grid layout (card grids,
+  dashboards, …) now aligns correctly.
+
 ## [0.8.2] — 2026-07-20
 
 ### Changed
