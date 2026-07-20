@@ -21,6 +21,8 @@ Click-to-open menu surface — a trigger (button or arbitrary slot) plus a float
 
 All other attributes pass through to the root `<div>`.
 
+⚠ `position` is a static CSS placement — there is no viewport-collision auto-flip. A `top-*` dropdown near the top of a short/tightly-padded container will render past the container's edge (same for `bottom-*` near a container's bottom). Reserve enough clearance in the container for the panel's actual height, or pick a position that has room.
+
 ## Slots
 
 - **trigger** *(optional)* — custom trigger element. When supplied, `label` is ignored and the wrapper handles the `@click` toggle for you. Useful for avatar triggers, icon-only buttons, or custom-styled buttons.
