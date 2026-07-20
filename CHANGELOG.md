@@ -7,6 +7,23 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.7.3] — 2026-07-20
+
+### Fixed
+- **Component-internal strings now follow the app locale** — `pn_trans()`
+  resolved its locale from `config('pinion-ui.locale')` with a hard `'ja'`
+  default and never consulted `app()->getLocale()`, so pagination labels,
+  the select placeholder, the rating aria-label, table-scroll button labels,
+  and the notification close label rendered in Japanese on every non-Japanese
+  (and every multi-locale) app. The config now defaults to `null` = follow
+  the runtime app locale; setting `pinion-ui.locale` / `PINION_UI_LOCALE`
+  still pins one. Lookup falls back `{locale}` → `en` → callsite default.
+  Recorded as a default flip in `SEMVER.md`.
+
+### Added
+- Bundled `zh-Hans` / `zh-Hant` translation buckets for the component-internal
+  strings (joining `ja` / `en`).
+
 ## [0.7.2] — 2026-07-19
 
 ### Added

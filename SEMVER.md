@@ -52,6 +52,10 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.7.3 — 2026-07-20
+
+- **Default flip: `pinion-ui.locale` now defaults to `null` = follow `app()->getLocale()`** (was hard `'ja'`). `pn_trans()` — the helper behind component-internal strings (pagination Previous/Next + info template + nav aria, select placeholder, rating aria-label, table-scroll button labels, notification close) — previously ignored the app's runtime locale entirely, so any non-Japanese or multi-locale app shipped Japanese strings unless it published the config. New lookup chain: explicit `pinion-ui.locale` (config/`PINION_UI_LOCALE`, still wins when set) → `app()->getLocale()` → `en` bucket → per-callsite fallback. Impact: apps with `app.locale` ≠ `ja` that relied on the implicit Japanese default now get their own locale's strings (or English) — which is the intended behavior; set `PINION_UI_LOCALE=ja` to restore the old output. Japanese-locale apps are unchanged. Bundled translation buckets grew: `ja` / `en` / **`zh-Hans` / `zh-Hant` (new)**.
+
 ### v0.7.0 — 2026-07-19
 
 - **BREAKING: the `mood-` theme-name prefix is dropped** — aesthetic themes now use bare names like every other group. Rename map (append `-dark` for the dark pair): `mood-monokai` → `monokai`, `mood-synthwave` → **`outrun`** (new word, since bare `synthwave` would collide with daisyUI's stock theme name), `mood-vapor` → `vapor`, `mood-bigblue` → `bigblue`, `mood-neotokyo` → `neotokyo`, `mood-zen` → `zen`, `mood-botanical` → `botanical`, `mood-pop` → `pop`, `mood-verdigris` → `verdigris`. Old `mood-*` values in `data-theme` render unthemed — do the rename. Category (Brand / Mood / SaaS / Industry) is now carried by `lineup.json` metadata, `pn_theme_groups()`, and the grouped `<x-theme-tune-switcher>` (headings + per-category chip), not by the name.

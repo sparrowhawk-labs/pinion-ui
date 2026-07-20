@@ -10,8 +10,14 @@ if (!function_exists('pn_trans')) {
      */
     function pn_trans(string $key, ?string $fallback = null): string
     {
-        $locale = config('pinion-ui.locale', 'ja');
-        $value = config("pinion-ui.translations.{$locale}.{$key}");
+        // v0.7.3: when `pinion-ui.locale` is null (the new default), follow
+        // the app's runtime locale — multi-locale apps that switch
+        // App::setLocale() per request get matching component strings.
+        // Setting the config (or PINION_UI_LOCALE) still pins one locale.
+        // Lookup chain: {locale} → en → per-callsite $fallback → key.
+        $locale = config('pinion-ui.locale') ?: app()->getLocale();
+        $value = config("pinion-ui.translations.{$locale}.{$key}")
+            ?? config("pinion-ui.translations.en.{$key}");
 
         if ($value === null) {
             return $fallback ?? $key;

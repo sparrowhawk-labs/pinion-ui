@@ -9,17 +9,21 @@ return [
     |
     | Selects which `translations` bucket below is used for the small set of
     | component-internal strings (pagination "Previous", select placeholder,
-    | rating aria-label, etc). Independent of Laravel's `config('app.locale')`
-    | on purpose — you may want a Japanese app with English UI strings, or
-    | the opposite, without coupling the two.
+    | rating aria-label, etc).
     |
-    | Supported by default: `ja`, `en`. Add more locales by extending the
-    | `translations` array. Falls back to the literal key if the locale or
-    | key is missing.
+    | Default (null, since v0.7.3): follow the app's runtime locale
+    | (`app()->getLocale()`), so multi-locale apps that call App::setLocale()
+    | per request get matching component strings automatically. Set a locale
+    | here (or PINION_UI_LOCALE) to pin one — e.g. a Japanese app with
+    | English UI strings, without coupling the two.
+    |
+    | Bundled: `ja`, `en`, `zh-Hans`, `zh-Hant`. Add more by extending the
+    | `translations` array. Lookup falls back {locale} → en → the literal
+    | key when missing.
     |
     */
 
-    'locale' => env('PINION_UI_LOCALE', 'ja'),
+    'locale' => env('PINION_UI_LOCALE'),
 
     /*
     |---------------------------------------------------------------------------
@@ -76,6 +80,50 @@ return [
                 'next' => 'Next',
                 'info' => ':first–:last of :total',
                 'aria' => 'Pagination',
+            ],
+        ],
+
+        'zh-Hans' => [
+            'select' => [
+                'placeholder' => '请选择',
+            ],
+            'notification' => [
+                'close' => '关闭',
+            ],
+            'rating' => [
+                'none' => '未评分',
+            ],
+            'table_scroll' => [
+                'prev' => '向前滚动',
+                'next' => '向后滚动',
+            ],
+            'pagination' => [
+                'prev' => '上一页',
+                'next' => '下一页',
+                'info' => '共 :total 条中第 :first–:last 条',
+                'aria' => '分页',
+            ],
+        ],
+
+        'zh-Hant' => [
+            'select' => [
+                'placeholder' => '請選擇',
+            ],
+            'notification' => [
+                'close' => '關閉',
+            ],
+            'rating' => [
+                'none' => '未評分',
+            ],
+            'table_scroll' => [
+                'prev' => '向前捲動',
+                'next' => '向後捲動',
+            ],
+            'pagination' => [
+                'prev' => '上一頁',
+                'next' => '下一頁',
+                'info' => '共 :total 筆中第 :first–:last 筆',
+                'aria' => '分頁',
             ],
         ],
 
