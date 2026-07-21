@@ -61,6 +61,7 @@ const truthy = (v) => v === true || v === 1 || v === '1' || v === 'true';
 export function pinionSheet(opts = {}) {
   let flushTimer = null;
   let flushPending = false;
+  let flushQueued = false;  // a debounce flush is scheduled but not yet fired (drained by destroy())
   let colGhost = null;   // transient whole-column drag-image element (built on colDragStart, removed on dragend)
   // The hidden wire:model carrier element, captured in init() (where `this.$refs` is
   // available). flush() uses THIS, not `this.$refs.model`, because flush can be reached
@@ -123,6 +124,19 @@ export function pinionSheet(opts = {}) {
       rootEl = this.$el;            // ditto (rowTr/releaseRowHeight from nested scopes)
       this.flush();   // unconditional seed flush (mirrors data-grid: populates the carrier)
       this.lastState = this.snapshot();   // undo baseline — the first mutation pushes this
+    },
+
+    // Unmount must never drop COMMITTED edits: in debounce mode an edit committed within
+    // debounceMs of the component being removed (modal closed, region morphed away) would
+    // die with its pending timer. Drain it synchronously. Guarded by flushQueued so an
+    // untouched sheet's unmount stays silent (no spurious model event per sheet on page
+    // navigation). An in-flight cell EDITOR is intentionally NOT committed here — an
+    // uncommitted editor dying with the DOM is correct (the host decides via commitEdit).
+    destroy() {
+      if (!flushQueued) return;
+      clearTimeout(flushTimer);
+      flushQueued = false;
+      this.flush();
     },
 
     get rowCount() { return this.rows.length; },
@@ -936,7 +950,8 @@ export function pinionSheet(opts = {}) {
       if (syncMode === 'manual') return;
       if (syncMode === 'debounce') {
         clearTimeout(flushTimer);
-        flushTimer = setTimeout(() => this.flush(), debounceMs);
+        flushQueued = true;
+        flushTimer = setTimeout(() => { flushQueued = false; this.flush(); }, debounceMs);
         return;
       }
       if (flushPending) return;   // 'change': dedupe to one flush per microtask
@@ -944,6 +959,10 @@ export function pinionSheet(opts = {}) {
       queueMicrotask(() => { flushPending = false; this.flush(); });
     },
     flush() {
+      // Any flush drains a scheduled debounce — a direct flush() (e.g. a host flushing
+      // before closing a modal) must not be followed by the stale timer's duplicate.
+      clearTimeout(flushTimer);
+      flushQueued = false;
       const input = modelEl || this.$refs?.model;
       if (!input) return;
       input.value = JSON.stringify(this.rows);
