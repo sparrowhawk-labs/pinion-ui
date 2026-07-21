@@ -68,6 +68,10 @@ export function pinionSheet(opts = {}) {
   // `this` is Alpine's scope proxy and `this.$refs` is undefined — a `this.$refs.model`
   // there silently no-ops the flush. A closure ref works from every call context.
   let modelEl = null;
+  // The component root element, captured in init() for the same reason as modelEl:
+  // rowTr()/releaseRowHeight() run inside commitEdit, which IS reachable from the date
+  // cell's nested calendar-select expression where `this.$root`/`this.$el` are undefined.
+  let rootEl = null;
 
   const sync = String(opts.sync ?? 'debounce:400');
   const syncMode = sync.split(':')[0]; // change | debounce | manual
@@ -116,6 +120,7 @@ export function pinionSheet(opts = {}) {
       this.sel = (this.rows.length && this.cols.length) ? { r: 0, c: 0 } : null;
       this.anchor = this.sel ? { ...this.sel } : null;
       modelEl = this.$refs.model;   // capture once — see the closure note above
+      rootEl = this.$el;            // ditto (rowTr/releaseRowHeight from nested scopes)
       this.flush();   // unconditional seed flush (mirrors data-grid: populates the carrier)
       this.lastState = this.snapshot();   // undo baseline — the first mutation pushes this
     },
@@ -299,7 +304,15 @@ export function pinionSheet(opts = {}) {
       // エディタに置き換わり in-flow コンテンツが消えるため、auto レイアウトのままだと
       // 列幅が再配分されて縮む（textarea エディタで顕在化）— table-fixed 化で防ぐ。
       if (!this.widthsFrozen) this.freezeWidths();
-      if (this.editing) this.commitEdit();
+      // 行高も凍結: 編集中は表示テキストが x-if で外れ、エディタは absolute（フロー外）
+      // のため、複数行に折り返していたセルの行が1行分に収縮する。編集開始前の高さを
+      // <tr> に焼き付け、編集終了で解放する（列幅の freezeWidths と同じ構図）。
+      // 順序が要: 先に新行を凍結（同一行なら既凍結の元高を維持）→ 旧編集を解放なしで
+      // commit → 新行以外を解放。commit を先にすると、同一行の別セルへ移る時に
+      // 旧セルの表示が未復帰のまま測ってしまい、潰れた高さを凍結する。
+      this.freezeRowHeight(r);
+      if (this.editing) this.commitEdit(false);
+      this.releaseRowHeight(r);
       this.collapse(r, c);
       const cur = this.rows[r]?.[this.colKey(c)];
       this.editValue = initial !== null ? initial : (cur ?? '');
@@ -307,16 +320,41 @@ export function pinionSheet(opts = {}) {
       this.editing = { r, c };
       // focus is handled by the input's x-init in the Blade ($nextTick → focus/select).
     },
-    commitEdit() {
+    commitEdit(release = true) {
       if (!this.editing) return;
       const { r, c } = this.editing;
       const key = this.colKey(c);
       const next = castValue(this.editValue, this.colType(c));
       this.editing = null;
+      if (release) this.releaseRowHeight();
       if (this.rows[r] && this.rows[r][key] !== next) { this.rows[r][key] = next; this.schedule(); }
       this.focusGrid();
     },
-    cancelEdit() { this.editing = null; this.focusGrid(); },
+    cancelEdit() { this.editing = null; this.releaseRowHeight(); this.focusGrid(); },
+    rowTr(r) {
+      const td = rootEl && rootEl.querySelector(`td[data-r="${r}"]`);
+      return td ? td.closest('tr') : null;
+    },
+    freezeRowHeight(r) {
+      // 編集セルの属する <tr> に現在の描画高を px で焼き付ける（table の tr height は
+      // 実質 min-height として働く）。既に凍結済みの行は元の高さを維持（同一行内の
+      // セル移動で潰れた高さを測り直さない）。DOM 参照は state に持たず data 属性で
+      // マークし、release 時に querySelector で回収する（Alpine の reactive proxy に
+      // DOM を包ませないため）。
+      const tr = this.rowTr(r);
+      if (!tr || tr.dataset.pnEditHeight) return;
+      tr.style.height = tr.getBoundingClientRect().height + 'px';
+      tr.dataset.pnEditHeight = '1';
+    },
+    releaseRowHeight(exceptR = null) {
+      const keep = exceptR === null ? null : this.rowTr(exceptR);
+      if (!rootEl) return;
+      rootEl.querySelectorAll('tr[data-pn-edit-height]').forEach((tr) => {
+        if (tr === keep) return;
+        tr.style.height = '';
+        delete tr.dataset.pnEditHeight;
+      });
+    },
     editorKey(e) {
       const k = e.key;
       // stopPropagation は必須: commitEdit で editing=null になった後、同じイベントが
