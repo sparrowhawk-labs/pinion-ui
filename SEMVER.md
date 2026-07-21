@@ -52,6 +52,14 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.9.0 — 2026-07-21
+
+- **BREAKING: the `outrun` theme was removed** (`data-theme="outrun"` / `"outrun-dark"` now matches no block and renders unthemed). It sat too close to `vapor` and `monokai` in the Mood group — the same neon-pink retro cluster. No 1:1 replacement; if you were on it, pick another Mood theme (`vapor`, `pop`, `neotokyo`) or one of the three new ones below.
+- **3 new Mood themes added** (additive): **`frost`** (Zenn-like — clean sky-blue on white; engineering blogs / dev docs. Light primary `#0675C9` is an AA-adapted Zenn blue; dark primary `#3EA8FF` is Zenn's actual brand hex, which clears AA on the dark canvas), **`ember`** (claude.ai-like — warm ivory + clay, refined minimal AI-product UI; light primary `#AA5731` is an AA-adapted clay, dark primary `#D97757` is Anthropic's actual clay hex), **`solar`** (Solarized-derived — ivory + blue; editor-like / precise tooling). Each is a light/dark pair. All 24 colors verified WCAG-AA against their canvas, status colors derived from the palette, and no hex shared with the existing lineup.
+- **`pop`'s primary and accent swapped** — primary is now the yellow (`#FFC300` / `#FFD34D`), accent the hot pink (`#FF3D9A` / `#FF6EB0`). `pop` is a dopamine/entertainment theme, so a yellow primary button (dark auto-derived label) reads as a loud CTA. Consumers relying on the old pop primary/accent hues will see them exchanged.
+- **Mood selector order changed** (not a BC break — order is presentation, not API). The Mood group was de-clustered so the three pink themes (`monokai`/`vapor`/`pop`) and three blue themes (`bigblue`/`frost`/`solar`) are spread out instead of stacked at the top. New order: `monokai`, `neotokyo`, `frost`, `ember`, `vapor`, `botanical`, `solar`, `zen`, `pop`, `verdigris`, `bigblue`.
+- Lineup is now **39 themes / 78 `[data-theme]` blocks** (was 37 / 74). CSS golden gate re-run (diff = 0); `eject-table.json` regenerated.
+
 ### v0.8.2 — 2026-07-20
 
 - **Switcher chrome no longer tracks the active tune** (design rule: site chrome that *changes* the tune must not be re-rendered by it — under `draft`/`pixel` the picker itself became handwriting/wobbly and hard to read). Visible deltas: pinned base font on all four switcher components, no draft rough-filter on their buttons, static radius/border/shadow instead of `--radius-field`/`--radius-box`/`tune-border`/`--shadow-box`, and the tune trigger no longer previews the active tune's typeface (per-option previews in the open dropdown are unchanged). Consumers who *want* tune-reactive picker chrome would need to fork the template. New public escape hatch: `.tune-exempt` in `tune.css`.

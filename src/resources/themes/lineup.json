@@ -8,7 +8,8 @@
     "moodPrefix": "廃止 (2026-07-19): mood- prefix を外し全テーマ裸名に統一（ユーザー指示）。カテゴリは lineup.json の category メタデータ + pn_theme_groups() のグループ見出し + セレクターのカテゴリ表示で明示。daisyUI 名衝突は synthwave→outrun 改名で回避（ユーザー選択）",
     "finalizedAt": "2026-07-17 (balance 棚卸し + mood 追加まで反映・最終確定)",
     "brandPalette": "2026-07-19: pinion を palette v2 (f7eff78) から Primer 原色へ差し戻し（light #0969DA / dark #4493F8）。secondary のみ teal (#0F766E / #2DD4BF) にして success 緑との近似を解消（ユーザー指示）",
-    "individuality": "2026-07-19: 個性化オーバーホール承認・全カテゴリ 全テーマOK。キャンバス底上げ+mood/コンシューマ大胆 / 色相再割り当て（docs=セピア, factory=アンバー, logistics=紺橙スワップ, food=ライム, security=グラファイト赤, kids=クレヨン, atelier=エスプレッソ, analytics=プラム, civic=朱肉, estate=青焼き紙）/ 共有スウォッチ全廃 (≥3テーマ再利用 28→0)。最接近ペア距離 1.32→1.80。verdigris はパレット不可侵"
+    "individuality": "2026-07-19: 個性化オーバーホール承認・全カテゴリ 全テーマOK。キャンバス底上げ+mood/コンシューマ大胆 / 色相再割り当て（docs=セピア, factory=アンバー, logistics=紺橙スワップ, food=ライム, security=グラファイト赤, kids=クレヨン, atelier=エスプレッソ, analytics=プラム, civic=朱肉, estate=青焼き紙）/ 共有スウォッチ全廃 (≥3テーマ再利用 28→0)。最接近ペア距離 1.32→1.80。verdigris はパレット不可侵",
+    "v0_9_0": "2026-07-21: outrun 削除（vapor/monokai と近接・BC break）。実用テーマ3種を mood に新設。レビュー指示で frost=Zenn(zenn.dev)風（白地×スカイブルー・light #0675C9 AA化 / dark #3EA8FF Zenn実色）、ember=claude.ai(Claudeアプリ)風（アイボリー×クレイ・light #AA5731 AA化 / dark #D97757 Anthropic実色）に再設計、solar=Solarized系。pop は primary↔accent 入替（primary=イエロー / accent=ピンク）。mood 並びを de-cluster。全パレット WCAG AA・ステータス色は生成器複製で検証・hex 重複ゼロ・距離フロア超（fable 設計）。"
   },
   "themes": [
     {
@@ -84,39 +85,111 @@
       }
     },
     {
-      "name": "outrun",
-      "source": "outrun — SynthWave 系ネオン最大化（旧 mood-synthwave。daisyUI synthwave との衝突回避で改名）",
+      "name": "neotokyo",
+      "source": "Neo-Tokyo — 朱×藍×金, washi canvas",
       "category": "美学系 (mood)",
-      "llmTrigger": "ネオン・ゲーム・イベント",
+      "llmTrigger": "和 × サイバー・ナイトライフ",
       "brandDefault": false,
       "light": {
-        "bg": "#F4EFFF",
-        "panel": "#FFFFFF",
-        "fg": "#27203D",
-        "muted": "#8578AD",
-        "primary": "#D613A8",
-        "secondary": "#00B8D4",
-        "accent": "#D98E04",
+        "bg": "#F5EEE3",
+        "panel": "#FFFDF8",
+        "fg": "#26222B",
+        "muted": "#93899A",
+        "primary": "#D42B3A",
+        "secondary": "#2B4C7E",
+        "accent": "#C99A2E",
         "extra": [
-          "#E4572E",
-          "#6D28D9",
-          "#12B886",
-          "#2F6BFF"
+          "#7B4FE0",
+          "#E0157E",
+          "#178A67"
         ]
       },
       "dark": {
-        "bg": "#241B3E",
-        "panel": "#2D2250",
-        "fg": "#F4F0FF",
-        "muted": "#9E93C7",
-        "primary": "#FF3EC8",
-        "secondary": "#00E5FF",
-        "accent": "#FEDE5D",
+        "bg": "#191320",
+        "panel": "#241B2E",
+        "fg": "#F4EDF7",
+        "muted": "#9A8CA8",
+        "primary": "#FF4757",
+        "secondary": "#6C8CFF",
+        "accent": "#F0C34E",
         "extra": [
-          "#FF7A45",
-          "#8C6BFF",
-          "#3DF5C0",
-          "#5C9DFF"
+          "#B893CE",
+          "#FF7EDB",
+          "#2DD4BF"
+        ]
+      }
+    },
+    {
+      "name": "frost",
+      "source": "Zenn (zenn.dev) 風 — 白地×スカイブルーの技術情報共有系",
+      "category": "美学系 (mood)",
+      "llmTrigger": "技術ブログ・エンジニア向け情報共有・ドキュメント（Zenn 風のクリーンな青）",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F7FAFD",
+        "panel": "#FFFFFF",
+        "fg": "#212B36",
+        "muted": "#5C6B7A",
+        "primary": "#0675C9",
+        "secondary": "#4E42B4",
+        "accent": "#A82C8E",
+        "extra": [
+          "#D64550",
+          "#B37207",
+          "#1F9D5F",
+          "#2F8FD9"
+        ]
+      },
+      "dark": {
+        "bg": "#191E24",
+        "panel": "#232A33",
+        "fg": "#E3E8EE",
+        "muted": "#8B98A8",
+        "primary": "#3EA8FF",
+        "secondary": "#A090F5",
+        "accent": "#D354B8",
+        "extra": [
+          "#F0707B",
+          "#E3A431",
+          "#45C08A",
+          "#61B6F7"
+        ]
+      }
+    },
+    {
+      "name": "ember",
+      "source": "claude.ai (Claude アプリ) 風 — 暖かいアイボリー×クレイ/コーラルの上質ミニマル",
+      "category": "美学系 (mood)",
+      "llmTrigger": "AI プロダクト・上質で温かいミニマル UI（claude.ai 風のアイボリー×クレイ）",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FAF9F5",
+        "panel": "#FEFDFA",
+        "fg": "#262420",
+        "muted": "#6E6A60",
+        "primary": "#AA5731",
+        "secondary": "#756550",
+        "accent": "#45786C",
+        "extra": [
+          "#BE3A30",
+          "#A87716",
+          "#58824B",
+          "#4A6FA5"
+        ]
+      },
+      "dark": {
+        "bg": "#1F1E1D",
+        "panel": "#2B2A27",
+        "fg": "#EDEAE1",
+        "muted": "#A29D90",
+        "primary": "#D97757",
+        "secondary": "#C4AE8F",
+        "accent": "#7FB0A4",
+        "extra": [
+          "#E0806E",
+          "#D9A33C",
+          "#8FAF7E",
+          "#85A8D8"
         ]
       }
     },
@@ -158,6 +231,175 @@
       }
     },
     {
+      "name": "botanical",
+      "source": "Botanical — greenhouse canvas, leaf × rose",
+      "category": "美学系 (mood)",
+      "llmTrigger": "花・園芸・オーガニック・コスメ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#EFF6EA",
+        "panel": "#FFFFFF",
+        "fg": "#24312A",
+        "muted": "#8C9C90",
+        "primary": "#2E8A4E",
+        "secondary": "#C75B7A",
+        "accent": "#8FA82E",
+        "extra": [
+          "#4A7C8C",
+          "#7A9B57"
+        ]
+      },
+      "dark": {
+        "bg": "#14231A",
+        "panel": "#1E2E23",
+        "fg": "#E9F1EC",
+        "muted": "#8AA394",
+        "primary": "#62B385",
+        "secondary": "#E08BA4",
+        "accent": "#A8C45E",
+        "extra": [
+          "#74A8B8",
+          "#9FBE72"
+        ]
+      }
+    },
+    {
+      "name": "solar",
+      "source": "Solarized オマージュ — 精密設計のアイボリー×青を base2/base3 二層キャンバスで翻案",
+      "category": "美学系 (mood)",
+      "llmTrigger": "エディタ系・開発者向け UI・精密なツール系プロダクト",
+      "brandDefault": false,
+      "light": {
+        "bg": "#EFE9D5",
+        "panel": "#FDF6E3",
+        "fg": "#073642",
+        "muted": "#657B83",
+        "primary": "#0A6CB0",
+        "secondary": "#575DB6",
+        "accent": "#BD2C6F",
+        "extra": [
+          "#DC322F",
+          "#B58900",
+          "#859900",
+          "#268BD2"
+        ]
+      },
+      "dark": {
+        "bg": "#002B36",
+        "panel": "#073642",
+        "fg": "#A9BCBC",
+        "muted": "#7E9599",
+        "primary": "#3D9DE0",
+        "secondary": "#8A8FDA",
+        "accent": "#E4699F",
+        "extra": [
+          "#E4574B",
+          "#C29500",
+          "#8CA82E",
+          "#4B9FD8"
+        ]
+      }
+    },
+    {
+      "name": "zen",
+      "source": "zen — 侘び寂び",
+      "category": "美学系 (mood)",
+      "llmTrigger": "和風・工芸・旅館・ミニマル志向",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F1F1EB",
+        "panel": "#FFFFFF",
+        "fg": "#2E2C28",
+        "muted": "#9A958A",
+        "primary": "#616B59",
+        "secondary": "#877B67",
+        "accent": "#B3432B",
+        "extra": [
+          "#5F8A8B",
+          "#8A6FA8"
+        ]
+      },
+      "dark": {
+        "bg": "#211F1C",
+        "panel": "#2A2825",
+        "fg": "#EFEDE7",
+        "muted": "#9E988B",
+        "primary": "#8FA283",
+        "secondary": "#B3A186",
+        "accent": "#D96C4F",
+        "extra": [
+          "#88B5B6",
+          "#A995C7"
+        ]
+      }
+    },
+    {
+      "name": "pop",
+      "source": "pop — ドーパミン",
+      "category": "美学系 (mood)",
+      "llmTrigger": "エンタメ・若年層・キャンペーン LP",
+      "brandDefault": false,
+      "light": {
+        "bg": "#FFF5FA",
+        "panel": "#FFFFFF",
+        "fg": "#2B2430",
+        "muted": "#9E93A6",
+        "primary": "#FFC300",
+        "secondary": "#6741D9",
+        "accent": "#FF3D9A",
+        "extra": [
+          "#00C2D1",
+          "#3DDC97"
+        ]
+      },
+      "dark": {
+        "bg": "#241E2E",
+        "panel": "#2E2738",
+        "fg": "#F6F0FA",
+        "muted": "#A697B3",
+        "primary": "#FFD34D",
+        "secondary": "#9775FA",
+        "accent": "#FF6EB0",
+        "extra": [
+          "#3FD8E5",
+          "#5FE8B0"
+        ]
+      }
+    },
+    {
+      "name": "verdigris",
+      "source": "Claude Verdigris (旧ブランド既定 v0.6.0)",
+      "category": "美学系 (mood)",
+      "llmTrigger": "ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F5F0E8",
+        "panel": "#FFFFFF",
+        "fg": "#29261F",
+        "muted": "#8C8474",
+        "primary": "#0F766E",
+        "secondary": "#C05B2E",
+        "accent": "#A16207",
+        "extra": [
+          "#5F8F6B",
+          "#6B5CA5"
+        ]
+      },
+      "dark": {
+        "bg": "#262421",
+        "panel": "#2F2C28",
+        "fg": "#F0EAE0",
+        "muted": "#9C927F",
+        "primary": "#2DA88F",
+        "secondary": "#E07A4F",
+        "accent": "#D9A441",
+        "extra": [
+          "#93B478",
+          "#A28BE0"
+        ]
+      }
+    },
+    {
       "name": "bigblue",
       "source": "11. Big Blue '81",
       "category": "美学系 (mood)",
@@ -187,41 +429,6 @@
         "extra": [
           "#08BDBA",
           "#F1C21B"
-        ]
-      }
-    },
-    {
-      "name": "neotokyo",
-      "source": "Neo-Tokyo — 朱×藍×金, washi canvas",
-      "category": "美学系 (mood)",
-      "llmTrigger": "和 × サイバー・ナイトライフ",
-      "brandDefault": false,
-      "light": {
-        "bg": "#F5EEE3",
-        "panel": "#FFFDF8",
-        "fg": "#26222B",
-        "muted": "#93899A",
-        "primary": "#D42B3A",
-        "secondary": "#2B4C7E",
-        "accent": "#C99A2E",
-        "extra": [
-          "#7B4FE0",
-          "#E0157E",
-          "#178A67"
-        ]
-      },
-      "dark": {
-        "bg": "#191320",
-        "panel": "#241B2E",
-        "fg": "#F4EDF7",
-        "muted": "#9A8CA8",
-        "primary": "#FF4757",
-        "secondary": "#6C8CFF",
-        "accent": "#F0C34E",
-        "extra": [
-          "#B893CE",
-          "#FF7EDB",
-          "#2DD4BF"
         ]
       }
     },
@@ -1117,138 +1324,6 @@
         "extra": [
           "#9AA6B0",
           "#38AEBB"
-        ]
-      }
-    },
-    {
-      "name": "zen",
-      "source": "zen — 侘び寂び",
-      "category": "美学系 (mood)",
-      "llmTrigger": "和風・工芸・旅館・ミニマル志向",
-      "brandDefault": false,
-      "light": {
-        "bg": "#F1F1EB",
-        "panel": "#FFFFFF",
-        "fg": "#2E2C28",
-        "muted": "#9A958A",
-        "primary": "#616B59",
-        "secondary": "#877B67",
-        "accent": "#B3432B",
-        "extra": [
-          "#5F8A8B",
-          "#8A6FA8"
-        ]
-      },
-      "dark": {
-        "bg": "#211F1C",
-        "panel": "#2A2825",
-        "fg": "#EFEDE7",
-        "muted": "#9E988B",
-        "primary": "#8FA283",
-        "secondary": "#B3A186",
-        "accent": "#D96C4F",
-        "extra": [
-          "#88B5B6",
-          "#A995C7"
-        ]
-      }
-    },
-    {
-      "name": "botanical",
-      "source": "Botanical — greenhouse canvas, leaf × rose",
-      "category": "美学系 (mood)",
-      "llmTrigger": "花・園芸・オーガニック・コスメ",
-      "brandDefault": false,
-      "light": {
-        "bg": "#EFF6EA",
-        "panel": "#FFFFFF",
-        "fg": "#24312A",
-        "muted": "#8C9C90",
-        "primary": "#2E8A4E",
-        "secondary": "#C75B7A",
-        "accent": "#8FA82E",
-        "extra": [
-          "#4A7C8C",
-          "#7A9B57"
-        ]
-      },
-      "dark": {
-        "bg": "#14231A",
-        "panel": "#1E2E23",
-        "fg": "#E9F1EC",
-        "muted": "#8AA394",
-        "primary": "#62B385",
-        "secondary": "#E08BA4",
-        "accent": "#A8C45E",
-        "extra": [
-          "#74A8B8",
-          "#9FBE72"
-        ]
-      }
-    },
-    {
-      "name": "pop",
-      "source": "pop — ドーパミン",
-      "category": "美学系 (mood)",
-      "llmTrigger": "エンタメ・若年層・キャンペーン LP",
-      "brandDefault": false,
-      "light": {
-        "bg": "#FFF5FA",
-        "panel": "#FFFFFF",
-        "fg": "#2B2430",
-        "muted": "#9E93A6",
-        "primary": "#FF3D9A",
-        "secondary": "#6741D9",
-        "accent": "#FFC300",
-        "extra": [
-          "#00C2D1",
-          "#3DDC97"
-        ]
-      },
-      "dark": {
-        "bg": "#241E2E",
-        "panel": "#2E2738",
-        "fg": "#F6F0FA",
-        "muted": "#A697B3",
-        "primary": "#FF6EB0",
-        "secondary": "#9775FA",
-        "accent": "#FFD34D",
-        "extra": [
-          "#3FD8E5",
-          "#5FE8B0"
-        ]
-      }
-    },
-    {
-      "name": "verdigris",
-      "source": "Claude Verdigris (旧ブランド既定 v0.6.0)",
-      "category": "美学系 (mood)",
-      "llmTrigger": "ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト",
-      "brandDefault": false,
-      "light": {
-        "bg": "#F5F0E8",
-        "panel": "#FFFFFF",
-        "fg": "#29261F",
-        "muted": "#8C8474",
-        "primary": "#0F766E",
-        "secondary": "#C05B2E",
-        "accent": "#A16207",
-        "extra": [
-          "#5F8F6B",
-          "#6B5CA5"
-        ]
-      },
-      "dark": {
-        "bg": "#262421",
-        "panel": "#2F2C28",
-        "fg": "#F0EAE0",
-        "muted": "#9C927F",
-        "primary": "#2DA88F",
-        "secondary": "#E07A4F",
-        "accent": "#D9A441",
-        "extra": [
-          "#93B478",
-          "#A28BE0"
         ]
       }
     }

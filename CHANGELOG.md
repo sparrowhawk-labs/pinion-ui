@@ -7,6 +7,41 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.9.0] — 2026-07-21
+
+### Added
+- **3 new Mood themes** (each a light/dark pair): **`frost`** (Zenn-like —
+  clean sky-blue on white, for engineering blogs / dev docs; light primary
+  `#0675C9` is an AA-adapted Zenn blue, dark primary `#3EA8FF` is Zenn's actual
+  brand hex), **`ember`** (claude.ai-like — warm ivory + clay, for refined
+  minimal AI-product UI; light primary `#AA5731` AA-adapted, dark primary
+  `#D97757` = Anthropic's clay), and **`solar`** (Solarized-derived — ivory + blue, for
+  editor-like / precise tooling). All 24 colors are WCAG-AA against their
+  canvas, status colors are derived from each palette, and no hex is shared with
+  the existing lineup.
+
+### Removed
+- **BREAKING: the `outrun` theme was removed** — `data-theme="outrun"` /
+  `"outrun-dark"` now matches no block and renders unthemed. It occupied the
+  same neon-pink retro cluster as `vapor` and `monokai`. No 1:1 replacement;
+  migrate to another Mood theme (`vapor`, `pop`, `neotokyo`) or one of the new
+  `frost` / `ember` / `solar`.
+
+### Changed
+- **`pop` primary ↔ accent swapped** — `pop`'s primary is now the yellow
+  (`#FFC300` / `#FFD34D`) and its accent the hot pink (`#FF3D9A` / `#FF6EB0`).
+  A loud yellow CTA suits the dopamine/entertainment theme; the auto-derived
+  content color keeps button labels readable.
+- **Mood theme selector order de-clustered** — the three pink themes
+  (`monokai` / `vapor` / `pop`) and three blue themes (`bigblue` / `frost` /
+  `solar`) are now spread through the group instead of stacked at the top. New
+  order: `monokai`, `neotokyo`, `frost`, `ember`, `vapor`, `botanical`,
+  `solar`, `zen`, `pop`, `verdigris`, `bigblue`. (Presentation only — the
+  themes themselves are unchanged.)
+- Lineup is now **39 themes / 78 `[data-theme]` blocks** (was 37 / 74). The CSS
+  golden gate was re-run (0 computed-style differences) and `eject-table.json`
+  regenerated.
+
 ## [0.8.5] — 2026-07-20
 
 ### Fixed

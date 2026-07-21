@@ -116,9 +116,9 @@ Suppress an intentional exception with a `pinion-lint-ignore` comment on the lin
 
 ## Theme lineup & selection guide (v0.7.0)
 
-pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 37 themes, each a **light/dark pair**:
+pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 39 themes, each a **light/dark pair**:
 
-- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`), and **all names are bare** — the v0.6 `mood-` prefix was dropped in v0.7.0 (`mood-zen` → `zen`, …; `mood-synthwave` became `outrun` to avoid colliding with daisyUI's `synthwave`). A theme's category (Brand / Mood / SaaS / Industry) is metadata: it lives in `lineup.json`, in the Group column below, and as the grouped headings + category chip in `<x-theme-tune-switcher>` — it is no longer encoded in the name.
+- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`), and **all names are bare** — the v0.6 `mood-` prefix was dropped in v0.7.0 (`mood-zen` → `zen`, …; the whole prefix is gone). A theme's category (Brand / Mood / SaaS / Industry) is metadata: it lives in `lineup.json`, in the Group column below, and as the grouped headings + category chip in `<x-theme-tune-switcher>` — it is no longer encoded in the name.
 - **Default**: `pinion` applies at `:root` automatically when no `data-theme` is set; if the OS prefers dark (`prefers-color-scheme: dark`), `pinion-dark` applies instead (it carries daisyUI's `prefersdark` flag). An explicit `data-theme` on any element always wins over both. To pin light regardless of OS setting, set `data-theme="pinion"` explicitly.
 - **Page canvas vs component face**: every theme paints the page background (`:root`) with its tinted canvas color and puts components on `base-100` (white in light themes) — do **not** hardcode a body background. `bg-base-200` equals the canvas color (recessed wells, hover); `border-base-300` is the matching border tone.
 - **`reactive`** — one extra opt-in, light-only theme (GitHub-Light-adjacent, for report tooling). Not part of the pairs. As of v0.6.1 the brand default `pinion` shares this palette family, so `reactive` mostly matters for the report tooling that hardcodes its name.
@@ -132,14 +132,16 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 |---|---|---|
 | `pinion` / `pinion-dark` | Brand | **The default — anything without a clearer match.** The pinion-ui face: clean white technical-document palette (GitHub-Primer-adjacent blue / green / purple; near-black ink). |
 | `monokai` / `-dark` | Mood | Editor-like or developer-facing UI（エディタ系・開発者向け） |
-| `outrun` / `-dark` | Mood | Neon, gaming, events（ネオン・ゲーム・イベント） |
-| `vapor` / `-dark` | Mood | Soft retro, Gen-Z products（ソフトなレトロ・Z世代向け） |
-| `bigblue` / `-dark` | Mood | Buttoned-up enterprise / B2B（エンタープライズ・B2B 堅め） |
 | `neotokyo` / `-dark` | Mood | Japanese × cyber, nightlife（和×サイバー・ナイトライフ） |
-| `zen` / `-dark` | Mood | Wabi-sabi, craft, ryokan, minimalist taste（和風・工芸・旅館） |
+| `frost` / `-dark` | Mood | Clean sky-blue on white — engineering blogs / dev docs (Zenn-like)（技術ブログ・エンジニア向け情報共有・Zenn 風のクリーンな青） |
+| `ember` / `-dark` | Mood | Warm ivory × clay, refined minimal AI-product UI (claude.ai-like)（AI プロダクト・上質で温かいミニマル UI・claude.ai 風） |
+| `vapor` / `-dark` | Mood | Soft retro, Gen-Z products（ソフトなレトロ・Z世代向け） |
 | `botanical` / `-dark` | Mood | Flowers, gardening, organic, cosmetics（花・園芸・オーガニック・コスメ） |
+| `solar` / `-dark` | Mood | Editor-like / precise developer tooling (Solarized-derived)（エディタ系・開発者向け・精密なツール系） |
+| `zen` / `-dark` | Mood | Wabi-sabi, craft, ryokan, minimalist taste（和風・工芸・旅館） |
 | `pop` / `-dark` | Mood | Entertainment, youth, campaign LPs（エンタメ・若年層・キャンペーン LP） |
 | `verdigris` / `-dark` | Mood | Warm ivory × retro teal-green; calm, warm products（ウォームアイボリー×レトログリーン。旧ブランド既定） |
+| `bigblue` / `-dark` | Mood | Buttoned-up enterprise / B2B（エンタープライズ・B2B 堅め） |
 | `payments` / `-dark` | SaaS | Payments, fintech（決済・フィンテック） |
 | `docs` / `-dark` | SaaS | Documentation, knowledge base（ドキュメント・ナレッジベース） |
 | `mono` / `-dark` | SaaS | Minimal tools, portfolios（ミニマルツール・ポートフォリオ） |

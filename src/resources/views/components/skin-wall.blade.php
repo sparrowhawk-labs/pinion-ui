@@ -19,11 +19,11 @@
     // Curated tune × theme pairs from the v0.6.0 original lineup (daisyUI's
     // built-in themes no longer exist in the build — see theme.css).
     $combos = $combos ?: [
-        ['default','pinion'], ['brutal','mood-monokai-dark'], ['editorial','atelier'], ['tech','devtool-dark'],
-        ['soft','kids'], ['pixel','mood-pop'], ['corporate','mood-bigblue'], ['luxury','atelier-dark'],
-        ['minimal','mono'], ['sharp','mono-dark'], ['draft','pinion'], ['tech','mood-synthwave-dark'],
-        ['soft','mood-vapor'], ['editorial','pinion-dark'], ['brutal','mood-neotokyo-dark'], ['corporate','finance'],
-        ['luxury','legal-dark'], ['minimal','wellness'], ['sharp','payments-dark'], ['pixel','mood-pop-dark'],
+        ['default','pinion'], ['brutal','monokai-dark'], ['editorial','atelier'], ['tech','devtool-dark'],
+        ['soft','kids'], ['pixel','pop'], ['corporate','bigblue'], ['luxury','atelier-dark'],
+        ['minimal','mono'], ['sharp','mono-dark'], ['draft','pinion'], ['tech','frost-dark'],
+        ['soft','vapor'], ['editorial','pinion-dark'], ['brutal','neotokyo-dark'], ['corporate','finance'],
+        ['luxury','legal-dark'], ['minimal','wellness'], ['sharp','payments-dark'], ['pixel','pop-dark'],
         ['default','travel'], ['editorial','media-dark'], ['soft','people'], ['tech','pinion-dark'],
     ];
     $REPEAT  = 3;                              // repeat the set 3× so the centred window never runs off the track ends

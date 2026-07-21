@@ -7,14 +7,14 @@
 
    v0.6.0+ lineup: pinion-ui ships ONLY original themes (daisyUI's built-in
    35 themes are disabled — the preset loads the plugin with `themes: false`).
-   37 themes × light/dark pairs (74 `[data-theme]` blocks), generated from
+   39 themes × light/dark pairs (78 `[data-theme]` blocks), generated from
    src/resources/themes/lineup.json by
    packages/pinion-ui-css/harness/gen-themes.mjs (npm run gen:themes).
 
    Naming: `<name>` = light · `<name>-dark` = dark, all bare names (the
    v0.6 `mood-` prefix was dropped in v0.7.0; categories live in lineup.json
-   metadata and the grouped switcher — `synthwave` became `outrun` to avoid
-   the daisyUI name). The brand default pair is `pinion` / `pinion-dark` —
+   metadata and the grouped switcher). The brand default pair is
+   `pinion` / `pinion-dark` —
    the reactive palette family (GitHub-Primer-adjacent clean technical
    document; the v0.6.0 verdigris palette lives on as `verdigris` — see
    SEMVER.md). `pinion` carries `default: true`, so consumers who do not
@@ -80,7 +80,7 @@
 }
 
 /* ── BEGIN GENERATED THEME LINEUP — gen-themes.mjs (do not edit by hand) ── */
-/* 37 themes × light/dark = 74 blocks, generated from
+/* 39 themes × light/dark = 78 blocks, generated from
    src/resources/themes/lineup.json (locked 2026-07-19). Regenerate with
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
@@ -233,34 +233,34 @@
     --noise:                   0;
 }
 
-/* outrun / outrun-dark — 美学系 (mood) · ネオン・ゲーム・イベント (outrun — SynthWave 系ネオン最大化（旧 mood-synthwave。daisyUI synthwave との衝突回避で改名）) */
+/* neotokyo / neotokyo-dark — 美学系 (mood) · 和 × サイバー・ナイトライフ (Neo-Tokyo — 朱×藍×金, washi canvas) */
 
 @plugin 'daisyui/theme' {
-    name:                      'outrun';
+    name:                      'neotokyo';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'light';
-    --color-base-100:          #FFFFFF;
-    --color-base-200:          #F4EFFF;
-    --color-base-300:          #E2DCEE;
-    --color-base-content:      #27203D;
-    --color-primary:           #D613A8;
-    --color-primary-content:   #FFFFFF;
-    --color-secondary:         #00B8D4;
-    --color-secondary-content: #27203D;
-    --color-accent:            #D98E04;
-    --color-accent-content:    #27203D;
-    --color-neutral:           #413B57;
-    --color-neutral-content:   #FFFFFF;
-    --color-info:              #2F6BFF;
-    --color-info-content:      #FFFFFF;
-    --color-success:           #12B886;
-    --color-success-content:   #27203D;
-    --color-warning:           #C3A349;
-    --color-warning-content:   #27203D;
-    --color-error:             #E4572E;
-    --color-error-content:     #27203D;
-    --root-bg:                 #F4EFFF;
+    --color-base-100:          #FFFDF8;
+    --color-base-200:          #F5EEE3;
+    --color-base-300:          #E2DCD3;
+    --color-base-content:      #26222B;
+    --color-primary:           #D42B3A;
+    --color-primary-content:   #FFFDF8;
+    --color-secondary:         #2B4C7E;
+    --color-secondary-content: #FFFDF8;
+    --color-accent:            #C99A2E;
+    --color-accent-content:    #26222B;
+    --color-neutral:           #413C43;
+    --color-neutral-content:   #FFFDF8;
+    --color-info:              #488BC1;
+    --color-info-content:      #26222B;
+    --color-success:           #178A67;
+    --color-success-content:   #FFFDF8;
+    --color-warning:           #C3A244;
+    --color-warning-content:   #26222B;
+    --color-error:             #D04940;
+    --color-error-content:     #FFFDF8;
+    --root-bg:                 #F5EEE3;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -272,31 +272,179 @@
 }
 
 @plugin 'daisyui/theme' {
-    name:                      'outrun-dark';
+    name:                      'neotokyo-dark';
     default:                   false;
     prefersdark:               false;
     color-scheme:              'dark';
-    --color-base-100:          #2D2250;
-    --color-base-200:          #241B3E;
-    --color-base-300:          #3C3557;
-    --color-base-content:      #F4F0FF;
-    --color-primary:           #FF3EC8;
-    --color-primary-content:   #241B3E;
-    --color-secondary:         #00E5FF;
-    --color-secondary-content: #241B3E;
-    --color-accent:            #FEDE5D;
-    --color-accent-content:    #241B3E;
-    --color-neutral:           #463E69;
-    --color-neutral-content:   #F4F0FF;
-    --color-info:              #5C9DFF;
-    --color-info-content:      #241B3E;
-    --color-success:           #32EFBA;
-    --color-success-content:   #241B3E;
-    --color-warning:           #C7A95D;
-    --color-warning-content:   #241B3E;
-    --color-error:             #FF7A45;
-    --color-error-content:     #241B3E;
-    --root-bg:                 #241B3E;
+    --color-base-100:          #241B2E;
+    --color-base-200:          #191320;
+    --color-base-300:          #322C3A;
+    --color-base-content:      #F4EDF7;
+    --color-primary:           #FF4757;
+    --color-primary-content:   #191320;
+    --color-secondary:         #6C8CFF;
+    --color-secondary-content: #191320;
+    --color-accent:            #F0C34E;
+    --color-accent-content:    #191320;
+    --color-neutral:           #3F3649;
+    --color-neutral-content:   #F4EDF7;
+    --color-info:              #5F9ACF;
+    --color-info-content:      #191320;
+    --color-success:           #2DD4BF;
+    --color-success-content:   #191320;
+    --color-warning:           #C6A758;
+    --color-warning-content:   #191320;
+    --color-error:             #D3615D;
+    --color-error-content:     #191320;
+    --root-bg:                 #191320;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* frost / frost-dark — 美学系 (mood) · 技術ブログ・エンジニア向け情報共有・ドキュメント（Zenn 風のクリーンな青） (Zenn (zenn.dev) 風 — 白地×スカイブルーの技術情報共有系) */
+
+@plugin 'daisyui/theme' {
+    name:                      'frost';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F7FAFD;
+    --color-base-300:          #E4E8EB;
+    --color-base-content:      #212B36;
+    --color-primary:           #0675C9;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #4E42B4;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #A82C8E;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #3C4650;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #2F8FD9;
+    --color-info-content:      #212B36;
+    --color-success:           #1F9D5F;
+    --color-success-content:   #212B36;
+    --color-warning:           #B37207;
+    --color-warning-content:   #FFFFFF;
+    --color-error:             #D64550;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F7FAFD;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'frost-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #232A33;
+    --color-base-200:          #191E24;
+    --color-base-300:          #31363C;
+    --color-base-content:      #E3E8EE;
+    --color-primary:           #3EA8FF;
+    --color-primary-content:   #191E24;
+    --color-secondary:         #A090F5;
+    --color-secondary-content: #191E24;
+    --color-accent:            #D354B8;
+    --color-accent-content:    #191E24;
+    --color-neutral:           #3C434C;
+    --color-neutral-content:   #E3E8EE;
+    --color-info:              #61B6F7;
+    --color-info-content:      #191E24;
+    --color-success:           #45C08A;
+    --color-success-content:   #191E24;
+    --color-warning:           #E3A431;
+    --color-warning-content:   #191E24;
+    --color-error:             #F0707B;
+    --color-error-content:     #191E24;
+    --root-bg:                 #191E24;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* ember / ember-dark — 美学系 (mood) · AI プロダクト・上質で温かいミニマル UI（claude.ai 風のアイボリー×クレイ） (claude.ai (Claude アプリ) 風 — 暖かいアイボリー×クレイ/コーラルの上質ミニマル) */
+
+@plugin 'daisyui/theme' {
+    name:                      'ember';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FEFDFA;
+    --color-base-200:          #FAF9F5;
+    --color-base-300:          #E7E6E2;
+    --color-base-content:      #262420;
+    --color-primary:           #AA5731;
+    --color-primary-content:   #FEFDFA;
+    --color-secondary:         #756550;
+    --color-secondary-content: #FEFDFA;
+    --color-accent:            #45786C;
+    --color-accent-content:    #FEFDFA;
+    --color-neutral:           #413F3B;
+    --color-neutral-content:   #FEFDFA;
+    --color-info:              #4A6FA5;
+    --color-info-content:      #FEFDFA;
+    --color-success:           #58824B;
+    --color-success-content:   #FEFDFA;
+    --color-warning:           #A87716;
+    --color-warning-content:   #262420;
+    --color-error:             #BE3A30;
+    --color-error-content:     #FEFDFA;
+    --root-bg:                 #FAF9F5;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'ember-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #2B2A27;
+    --color-base-200:          #1F1E1D;
+    --color-base-300:          #373634;
+    --color-base-content:      #EDEAE1;
+    --color-primary:           #D97757;
+    --color-primary-content:   #1F1E1D;
+    --color-secondary:         #C4AE8F;
+    --color-secondary-content: #1F1E1D;
+    --color-accent:            #7FB0A4;
+    --color-accent-content:    #1F1E1D;
+    --color-neutral:           #44433F;
+    --color-neutral-content:   #EDEAE1;
+    --color-info:              #85A8D8;
+    --color-info-content:      #1F1E1D;
+    --color-success:           #8FAF7E;
+    --color-success-content:   #1F1E1D;
+    --color-warning:           #D9A33C;
+    --color-warning-content:   #1F1E1D;
+    --color-error:             #E0806E;
+    --color-error-content:     #1F1E1D;
+    --root-bg:                 #1F1E1D;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -381,6 +529,376 @@
     --noise:                   0;
 }
 
+/* botanical / botanical-dark — 美学系 (mood) · 花・園芸・オーガニック・コスメ (Botanical — greenhouse canvas, leaf × rose) */
+
+@plugin 'daisyui/theme' {
+    name:                      'botanical';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #EFF6EA;
+    --color-base-300:          #DDE5D9;
+    --color-base-content:      #24312A;
+    --color-primary:           #2E8A4E;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #C75B7A;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #8FA82E;
+    --color-accent-content:    #24312A;
+    --color-neutral:           #3E4B43;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #4A7C8C;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #7A9B57;
+    --color-success-content:   #24312A;
+    --color-warning:           #C3A345;
+    --color-warning-content:   #24312A;
+    --color-error:             #D04A41;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #EFF6EA;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'botanical-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #1E2E23;
+    --color-base-200:          #14231A;
+    --color-base-300:          #2D3C33;
+    --color-base-content:      #E9F1EC;
+    --color-primary:           #62B385;
+    --color-primary-content:   #14231A;
+    --color-secondary:         #E08BA4;
+    --color-secondary-content: #14231A;
+    --color-accent:            #A8C45E;
+    --color-accent-content:    #14231A;
+    --color-neutral:           #38483D;
+    --color-neutral-content:   #E9F1EC;
+    --color-info:              #74A8B8;
+    --color-info-content:      #14231A;
+    --color-success:           #9FBE72;
+    --color-success-content:   #14231A;
+    --color-warning:           #C6A956;
+    --color-warning-content:   #14231A;
+    --color-error:             #D3635C;
+    --color-error-content:     #14231A;
+    --root-bg:                 #14231A;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* solar / solar-dark — 美学系 (mood) · エディタ系・開発者向け UI・精密なツール系プロダクト (Solarized オマージュ — 精密設計のアイボリー×青を base2/base3 二層キャンバスで翻案) */
+
+@plugin 'daisyui/theme' {
+    name:                      'solar';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FDF6E3;
+    --color-base-200:          #EFE9D5;
+    --color-base-300:          #DBD9C8;
+    --color-base-content:      #073642;
+    --color-primary:           #0A6CB0;
+    --color-primary-content:   #FDF6E3;
+    --color-secondary:         #575DB6;
+    --color-secondary-content: #FDF6E3;
+    --color-accent:            #BD2C6F;
+    --color-accent-content:    #FDF6E3;
+    --color-neutral:           #2D4E57;
+    --color-neutral-content:   #FDF6E3;
+    --color-info:              #268BD2;
+    --color-info-content:      #073642;
+    --color-success:           #859900;
+    --color-success-content:   #073642;
+    --color-warning:           #B58900;
+    --color-warning-content:   #073642;
+    --color-error:             #DC322F;
+    --color-error-content:     #FDF6E3;
+    --root-bg:                 #EFE9D5;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'solar-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #073642;
+    --color-base-200:          #002B36;
+    --color-base-300:          #193D47;
+    --color-base-content:      #A9BCBC;
+    --color-primary:           #3D9DE0;
+    --color-primary-content:   #002B36;
+    --color-secondary:         #8A8FDA;
+    --color-secondary-content: #002B36;
+    --color-accent:            #E4699F;
+    --color-accent-content:    #002B36;
+    --color-neutral:           #224853;
+    --color-neutral-content:   #A9BCBC;
+    --color-info:              #4B9FD8;
+    --color-info-content:      #002B36;
+    --color-success:           #8CA82E;
+    --color-success-content:   #002B36;
+    --color-warning:           #C29500;
+    --color-warning-content:   #002B36;
+    --color-error:             #E4574B;
+    --color-error-content:     #002B36;
+    --root-bg:                 #002B36;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* zen / zen-dark — 美学系 (mood) · 和風・工芸・旅館・ミニマル志向 (zen — 侘び寂び) */
+
+@plugin 'daisyui/theme' {
+    name:                      'zen';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F1F1EB;
+    --color-base-300:          #E0DFDA;
+    --color-base-content:      #2E2C28;
+    --color-primary:           #616B59;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #877B67;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #B3432B;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #474641;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #478BC1;
+    --color-info-content:      #2E2C28;
+    --color-success:           #4B995E;
+    --color-success-content:   #2E2C28;
+    --color-warning:           #C3A345;
+    --color-warning-content:   #2E2C28;
+    --color-error:             #D04A41;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F1F1EB;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'zen-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #2A2825;
+    --color-base-200:          #211F1C;
+    --color-base-300:          #393734;
+    --color-base-content:      #EFEDE7;
+    --color-primary:           #8FA283;
+    --color-primary-content:   #211F1C;
+    --color-secondary:         #B3A186;
+    --color-secondary-content: #211F1C;
+    --color-accent:            #D96C4F;
+    --color-accent-content:    #211F1C;
+    --color-neutral:           #44423E;
+    --color-neutral-content:   #EFEDE7;
+    --color-info:              #5F9CCF;
+    --color-info-content:      #211F1C;
+    --color-success:           #62A972;
+    --color-success-content:   #211F1C;
+    --color-warning:           #C7A956;
+    --color-warning-content:   #211F1C;
+    --color-error:             #D4635C;
+    --color-error-content:     #211F1C;
+    --root-bg:                 #211F1C;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* pop / pop-dark — 美学系 (mood) · エンタメ・若年層・キャンペーン LP (pop — ドーパミン) */
+
+@plugin 'daisyui/theme' {
+    name:                      'pop';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #FFF5FA;
+    --color-base-300:          #ECE2E8;
+    --color-base-content:      #2B2430;
+    --color-primary:           #FFC300;
+    --color-primary-content:   #2B2430;
+    --color-secondary:         #6741D9;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #FF3D9A;
+    --color-accent-content:    #2B2430;
+    --color-neutral:           #463F4B;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #498CC3;
+    --color-info-content:      #2B2430;
+    --color-success:           #22CD89;
+    --color-success-content:   #2B2430;
+    --color-warning:           #C4A347;
+    --color-warning-content:   #2B2430;
+    --color-error:             #D14A43;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #FFF5FA;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'pop-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #2E2738;
+    --color-base-200:          #241E2E;
+    --color-base-300:          #3D3747;
+    --color-base-content:      #F6F0FA;
+    --color-primary:           #FFD34D;
+    --color-primary-content:   #241E2E;
+    --color-secondary:         #9775FA;
+    --color-secondary-content: #241E2E;
+    --color-accent:            #FF6EB0;
+    --color-accent-content:    #241E2E;
+    --color-neutral:           #484152;
+    --color-neutral-content:   #F6F0FA;
+    --color-info:              #609BD1;
+    --color-info-content:      #241E2E;
+    --color-success:           #5FE8B0;
+    --color-success-content:   #241E2E;
+    --color-warning:           #C7A95A;
+    --color-warning-content:   #241E2E;
+    --color-error:             #D4625F;
+    --color-error-content:     #241E2E;
+    --root-bg:                 #241E2E;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* verdigris / verdigris-dark — 美学系 (mood) · ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト (Claude Verdigris (旧ブランド既定 v0.6.0)) */
+
+@plugin 'daisyui/theme' {
+    name:                      'verdigris';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F5F0E8;
+    --color-base-300:          #E3DED6;
+    --color-base-content:      #29261F;
+    --color-primary:           #0F766E;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #C05B2E;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #A16207;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #434039;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #488BC1;
+    --color-info-content:      #29261F;
+    --color-success:           #5F8F6B;
+    --color-success-content:   #29261F;
+    --color-warning:           #C3A345;
+    --color-warning-content:   #29261F;
+    --color-error:             #D04941;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F5F0E8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'verdigris-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #2F2C28;
+    --color-base-200:          #262421;
+    --color-base-300:          #3E3C38;
+    --color-base-content:      #F0EAE0;
+    --color-primary:           #2DA88F;
+    --color-primary-content:   #262421;
+    --color-secondary:         #E07A4F;
+    --color-secondary-content: #262421;
+    --color-accent:            #D9A441;
+    --color-accent-content:    #262421;
+    --color-neutral:           #484540;
+    --color-neutral-content:   #F0EAE0;
+    --color-info:              #609CCF;
+    --color-info-content:      #262421;
+    --color-success:           #93B478;
+    --color-success-content:   #262421;
+    --color-warning:           #C8A957;
+    --color-warning-content:   #262421;
+    --color-error:             #D5635D;
+    --color-error-content:     #262421;
+    --root-bg:                 #262421;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
 /* bigblue / bigblue-dark — 美学系 (mood) · エンタープライズ・B2B 堅め (11. Big Blue '81) */
 
 @plugin 'daisyui/theme' {
@@ -445,80 +963,6 @@
     --color-error:             #D2615D;
     --color-error-content:     #10141F;
     --root-bg:                 #10141F;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-/* neotokyo / neotokyo-dark — 美学系 (mood) · 和 × サイバー・ナイトライフ (Neo-Tokyo — 朱×藍×金, washi canvas) */
-
-@plugin 'daisyui/theme' {
-    name:                      'neotokyo';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'light';
-    --color-base-100:          #FFFDF8;
-    --color-base-200:          #F5EEE3;
-    --color-base-300:          #E2DCD3;
-    --color-base-content:      #26222B;
-    --color-primary:           #D42B3A;
-    --color-primary-content:   #FFFDF8;
-    --color-secondary:         #2B4C7E;
-    --color-secondary-content: #FFFDF8;
-    --color-accent:            #C99A2E;
-    --color-accent-content:    #26222B;
-    --color-neutral:           #413C43;
-    --color-neutral-content:   #FFFDF8;
-    --color-info:              #488BC1;
-    --color-info-content:      #26222B;
-    --color-success:           #178A67;
-    --color-success-content:   #FFFDF8;
-    --color-warning:           #C3A244;
-    --color-warning-content:   #26222B;
-    --color-error:             #D04940;
-    --color-error-content:     #FFFDF8;
-    --root-bg:                 #F5EEE3;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-@plugin 'daisyui/theme' {
-    name:                      'neotokyo-dark';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'dark';
-    --color-base-100:          #241B2E;
-    --color-base-200:          #191320;
-    --color-base-300:          #322C3A;
-    --color-base-content:      #F4EDF7;
-    --color-primary:           #FF4757;
-    --color-primary-content:   #191320;
-    --color-secondary:         #6C8CFF;
-    --color-secondary-content: #191320;
-    --color-accent:            #F0C34E;
-    --color-accent-content:    #191320;
-    --color-neutral:           #3F3649;
-    --color-neutral-content:   #F4EDF7;
-    --color-info:              #5F9ACF;
-    --color-info-content:      #191320;
-    --color-success:           #2DD4BF;
-    --color-success-content:   #191320;
-    --color-warning:           #C6A758;
-    --color-warning-content:   #191320;
-    --color-error:             #D3615D;
-    --color-error-content:     #191320;
-    --root-bg:                 #191320;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2517,302 +2961,6 @@
     --color-error:             #D2625D;
     --color-error-content:     #14181C;
     --root-bg:                 #14181C;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-/* zen / zen-dark — 美学系 (mood) · 和風・工芸・旅館・ミニマル志向 (zen — 侘び寂び) */
-
-@plugin 'daisyui/theme' {
-    name:                      'zen';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'light';
-    --color-base-100:          #FFFFFF;
-    --color-base-200:          #F1F1EB;
-    --color-base-300:          #E0DFDA;
-    --color-base-content:      #2E2C28;
-    --color-primary:           #616B59;
-    --color-primary-content:   #FFFFFF;
-    --color-secondary:         #877B67;
-    --color-secondary-content: #FFFFFF;
-    --color-accent:            #B3432B;
-    --color-accent-content:    #FFFFFF;
-    --color-neutral:           #474641;
-    --color-neutral-content:   #FFFFFF;
-    --color-info:              #478BC1;
-    --color-info-content:      #2E2C28;
-    --color-success:           #4B995E;
-    --color-success-content:   #2E2C28;
-    --color-warning:           #C3A345;
-    --color-warning-content:   #2E2C28;
-    --color-error:             #D04A41;
-    --color-error-content:     #FFFFFF;
-    --root-bg:                 #F1F1EB;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-@plugin 'daisyui/theme' {
-    name:                      'zen-dark';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'dark';
-    --color-base-100:          #2A2825;
-    --color-base-200:          #211F1C;
-    --color-base-300:          #393734;
-    --color-base-content:      #EFEDE7;
-    --color-primary:           #8FA283;
-    --color-primary-content:   #211F1C;
-    --color-secondary:         #B3A186;
-    --color-secondary-content: #211F1C;
-    --color-accent:            #D96C4F;
-    --color-accent-content:    #211F1C;
-    --color-neutral:           #44423E;
-    --color-neutral-content:   #EFEDE7;
-    --color-info:              #5F9CCF;
-    --color-info-content:      #211F1C;
-    --color-success:           #62A972;
-    --color-success-content:   #211F1C;
-    --color-warning:           #C7A956;
-    --color-warning-content:   #211F1C;
-    --color-error:             #D4635C;
-    --color-error-content:     #211F1C;
-    --root-bg:                 #211F1C;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-/* botanical / botanical-dark — 美学系 (mood) · 花・園芸・オーガニック・コスメ (Botanical — greenhouse canvas, leaf × rose) */
-
-@plugin 'daisyui/theme' {
-    name:                      'botanical';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'light';
-    --color-base-100:          #FFFFFF;
-    --color-base-200:          #EFF6EA;
-    --color-base-300:          #DDE5D9;
-    --color-base-content:      #24312A;
-    --color-primary:           #2E8A4E;
-    --color-primary-content:   #FFFFFF;
-    --color-secondary:         #C75B7A;
-    --color-secondary-content: #FFFFFF;
-    --color-accent:            #8FA82E;
-    --color-accent-content:    #24312A;
-    --color-neutral:           #3E4B43;
-    --color-neutral-content:   #FFFFFF;
-    --color-info:              #4A7C8C;
-    --color-info-content:      #FFFFFF;
-    --color-success:           #7A9B57;
-    --color-success-content:   #24312A;
-    --color-warning:           #C3A345;
-    --color-warning-content:   #24312A;
-    --color-error:             #D04A41;
-    --color-error-content:     #FFFFFF;
-    --root-bg:                 #EFF6EA;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-@plugin 'daisyui/theme' {
-    name:                      'botanical-dark';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'dark';
-    --color-base-100:          #1E2E23;
-    --color-base-200:          #14231A;
-    --color-base-300:          #2D3C33;
-    --color-base-content:      #E9F1EC;
-    --color-primary:           #62B385;
-    --color-primary-content:   #14231A;
-    --color-secondary:         #E08BA4;
-    --color-secondary-content: #14231A;
-    --color-accent:            #A8C45E;
-    --color-accent-content:    #14231A;
-    --color-neutral:           #38483D;
-    --color-neutral-content:   #E9F1EC;
-    --color-info:              #74A8B8;
-    --color-info-content:      #14231A;
-    --color-success:           #9FBE72;
-    --color-success-content:   #14231A;
-    --color-warning:           #C6A956;
-    --color-warning-content:   #14231A;
-    --color-error:             #D3635C;
-    --color-error-content:     #14231A;
-    --root-bg:                 #14231A;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-/* pop / pop-dark — 美学系 (mood) · エンタメ・若年層・キャンペーン LP (pop — ドーパミン) */
-
-@plugin 'daisyui/theme' {
-    name:                      'pop';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'light';
-    --color-base-100:          #FFFFFF;
-    --color-base-200:          #FFF5FA;
-    --color-base-300:          #ECE2E8;
-    --color-base-content:      #2B2430;
-    --color-primary:           #FF3D9A;
-    --color-primary-content:   #2B2430;
-    --color-secondary:         #6741D9;
-    --color-secondary-content: #FFFFFF;
-    --color-accent:            #FFC300;
-    --color-accent-content:    #2B2430;
-    --color-neutral:           #463F4B;
-    --color-neutral-content:   #FFFFFF;
-    --color-info:              #498CC3;
-    --color-info-content:      #2B2430;
-    --color-success:           #22CD89;
-    --color-success-content:   #2B2430;
-    --color-warning:           #C4A347;
-    --color-warning-content:   #2B2430;
-    --color-error:             #D14A43;
-    --color-error-content:     #FFFFFF;
-    --root-bg:                 #FFF5FA;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-@plugin 'daisyui/theme' {
-    name:                      'pop-dark';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'dark';
-    --color-base-100:          #2E2738;
-    --color-base-200:          #241E2E;
-    --color-base-300:          #3D3747;
-    --color-base-content:      #F6F0FA;
-    --color-primary:           #FF6EB0;
-    --color-primary-content:   #241E2E;
-    --color-secondary:         #9775FA;
-    --color-secondary-content: #241E2E;
-    --color-accent:            #FFD34D;
-    --color-accent-content:    #241E2E;
-    --color-neutral:           #484152;
-    --color-neutral-content:   #F6F0FA;
-    --color-info:              #609BD1;
-    --color-info-content:      #241E2E;
-    --color-success:           #5FE8B0;
-    --color-success-content:   #241E2E;
-    --color-warning:           #C7A95A;
-    --color-warning-content:   #241E2E;
-    --color-error:             #D4625F;
-    --color-error-content:     #241E2E;
-    --root-bg:                 #241E2E;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-/* verdigris / verdigris-dark — 美学系 (mood) · ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト (Claude Verdigris (旧ブランド既定 v0.6.0)) */
-
-@plugin 'daisyui/theme' {
-    name:                      'verdigris';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'light';
-    --color-base-100:          #FFFFFF;
-    --color-base-200:          #F5F0E8;
-    --color-base-300:          #E3DED6;
-    --color-base-content:      #29261F;
-    --color-primary:           #0F766E;
-    --color-primary-content:   #FFFFFF;
-    --color-secondary:         #C05B2E;
-    --color-secondary-content: #FFFFFF;
-    --color-accent:            #A16207;
-    --color-accent-content:    #FFFFFF;
-    --color-neutral:           #434039;
-    --color-neutral-content:   #FFFFFF;
-    --color-info:              #488BC1;
-    --color-info-content:      #29261F;
-    --color-success:           #5F8F6B;
-    --color-success-content:   #29261F;
-    --color-warning:           #C3A345;
-    --color-warning-content:   #29261F;
-    --color-error:             #D04941;
-    --color-error-content:     #FFFFFF;
-    --root-bg:                 #F5F0E8;
-    --radius-selector:         0.5rem;
-    --radius-field:            0.375rem;
-    --radius-box:              0.5rem;
-    --size-selector:           0.25rem;
-    --size-field:              0.25rem;
-    --border:                  1px;
-    --depth:                   1;
-    --noise:                   0;
-}
-
-@plugin 'daisyui/theme' {
-    name:                      'verdigris-dark';
-    default:                   false;
-    prefersdark:               false;
-    color-scheme:              'dark';
-    --color-base-100:          #2F2C28;
-    --color-base-200:          #262421;
-    --color-base-300:          #3E3C38;
-    --color-base-content:      #F0EAE0;
-    --color-primary:           #2DA88F;
-    --color-primary-content:   #262421;
-    --color-secondary:         #E07A4F;
-    --color-secondary-content: #262421;
-    --color-accent:            #D9A441;
-    --color-accent-content:    #262421;
-    --color-neutral:           #484540;
-    --color-neutral-content:   #F0EAE0;
-    --color-info:              #609CCF;
-    --color-info-content:      #262421;
-    --color-success:           #93B478;
-    --color-success-content:   #262421;
-    --color-warning:           #C8A957;
-    --color-warning-content:   #262421;
-    --color-error:             #D5635D;
-    --color-error-content:     #262421;
-    --root-bg:                 #262421;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
