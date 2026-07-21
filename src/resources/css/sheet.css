@@ -118,6 +118,24 @@
         outline: none;
     }
     .pn-sheet .pn-sheet-editor:focus { outline: none; }
+
+    /* text エディタ（textarea 版）: セルと同幅のまま折り返し、内容に応じて下方向へ
+       オーバーレイ成長する（Sheets 風）。改行はコミットされない（Enter=確定）ため
+       視覚上の折り返し専用。下の行に重なるぶん、僅かな ring で面を持ち上げる。 */
+    .pn-sheet .pn-sheet-editor--area {
+        height: auto;
+        min-height: 100%;
+        bottom: auto;
+        resize: none;
+        overflow: hidden;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        line-height: 1.5;
+        padding-top: calc(var(--px-input-sm) * 0.55);
+        padding-bottom: calc(var(--px-input-sm) * 0.55);
+        z-index: 30;
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-primary) 45%, transparent), 0 4px 12px color-mix(in srgb, var(--color-base-content) 12%, transparent);
+    }
     /* Number editor: hide the native spinners (tiny, and they fight the grid rhythm). */
     .pn-sheet .pn-sheet-editor[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     .pn-sheet .pn-sheet-editor[type="number"]::-webkit-outer-spin-button,

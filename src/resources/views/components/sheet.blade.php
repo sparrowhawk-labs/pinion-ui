@@ -243,7 +243,7 @@
                                 x-on:mouseenter="onCellEnter(r, c)"
                                 x-on:click="onCellClick(r, c, $event)"
                                 x-on:dblclick="beginEdit(r, c)"
-                                @if($contextMenu) x-on:contextmenu.prevent="openCellMenu(r, c, $event)" @endif
+                                @if($contextMenu) x-on:contextmenu="openCellMenu(r, c, $event)" @endif
                                 role="gridcell"
                             >
                                 {{-- One <template x-if> per state×type. They are SIBLINGS (each x-if
@@ -251,22 +251,39 @@
                                      so these must NOT be nested under a shared isEd/display wrapper. --}}
                                 {{-- inline editor (one cell at a time). NOTE: select has NO edit mode — it
                                      is ALWAYS a live <select> in the display branch (no text entry for it). --}}
-                                <template x-if="isEd(r, c) && (col.type === 'text' || col.type === 'number')">
+                                <template x-if="isEd(r, c) && col.type === 'number'">
                                     {{-- type=text (not number) so a partial value like "-" / "." isn't dropped
                                          mid-entry; castValue() coerces to a Number on commit. inputmode brings
                                          up the numeric keypad on mobile. --}}
                                     <input
-                                        class="pn-sheet-editor"
+                                        class="pn-sheet-editor text-right tabular-nums"
                                         x-model="editValue"
                                         type="text"
-                                        x-bind:inputmode="col.type === 'number' ? 'decimal' : null"
-                                        x-bind:class="col.type === 'number' ? 'text-right tabular-nums' : ''"
+                                        inputmode="decimal"
                                         x-init="$nextTick(() => { $el.focus(); if (selectOnFocus && $el.select) $el.select(); else if ($el.setSelectionRange) { const n = $el.value.length; $el.setSelectionRange(n, n); } })"
                                         x-on:keydown="editorKey($event)"
                                         x-on:blur="commitEdit()"
                                         x-on:click.stop
                                         x-on:mousedown.stop
                                     >
+                                </template>
+
+                                {{-- text editor = auto-growing <textarea> (S4): long prose wraps at the CELL's
+                                     width instead of scrolling on one line. Grows downward as an overlay
+                                     (Sheets-style); Enter still COMMITS (editorKey preventDefaults it), so
+                                     cell values stay single-line — the textarea is visual wrapping only. --}}
+                                <template x-if="isEd(r, c) && col.type === 'text'">
+                                    <textarea
+                                        class="pn-sheet-editor pn-sheet-editor--area"
+                                        x-model="editValue"
+                                        rows="1"
+                                        x-init="$nextTick(() => { $el.focus(); if (selectOnFocus && $el.select) $el.select(); else if ($el.setSelectionRange) { const n = $el.value.length; $el.setSelectionRange(n, n); } $el.style.height = 'auto'; $el.style.height = Math.max($el.scrollHeight, $el.parentElement.clientHeight) + 'px'; })"
+                                        x-on:input="$el.style.height = 'auto'; $el.style.height = Math.max($el.scrollHeight, $el.parentElement.clientHeight) + 'px'"
+                                        x-on:keydown="editorKey($event)"
+                                        x-on:blur="commitEdit()"
+                                        x-on:click.stop
+                                        x-on:mousedown.stop
+                                    ></textarea>
                                 </template>
 
                                 {{-- date editor = the <x-calendar> month grid in a fixed popover (fixed

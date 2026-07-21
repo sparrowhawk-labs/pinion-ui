@@ -295,6 +295,10 @@ export function pinionSheet(opts = {}) {
       if (!this.editableCol(c)) return;
       if (this.colType(c) === 'checkbox') return;   // checkboxes toggle on click/Space/Enter, never open an editor
       if (this.colType(c) === 'select') return;     // select is ALWAYS a live <select> — no text-edit mode
+      // 編集開始時に列幅を凍結（列リサイズと同じ lazy freeze）。編集中は表示テキストが
+      // エディタに置き換わり in-flow コンテンツが消えるため、auto レイアウトのままだと
+      // 列幅が再配分されて縮む（textarea エディタで顕在化）— table-fixed 化で防ぐ。
+      if (!this.widthsFrozen) this.freezeWidths();
       if (this.editing) this.commitEdit();
       this.collapse(r, c);
       const cur = this.rows[r]?.[this.colKey(c)];
@@ -315,9 +319,12 @@ export function pinionSheet(opts = {}) {
     cancelEdit() { this.editing = null; this.focusGrid(); },
     editorKey(e) {
       const k = e.key;
-      if (k === 'Enter') { e.preventDefault(); this.commitEdit(); this.moveSelection(1, 0); }
-      else if (k === 'Escape') { e.preventDefault(); this.cancelEdit(); }
-      else if (k === 'Tab') { e.preventDefault(); this.commitEdit(); this.moveSelection(0, e.shiftKey ? -1 : 1); }
+      // stopPropagation は必須: commitEdit で editing=null になった後、同じイベントが
+      // grid の onKey までバブルすると「編集中は editor が処理」ガードを素通りし、
+      // 移動先セルのエディタを Enter が即再オープンしてしまう（潜在バグ・S4 で顕在化）。
+      if (k === 'Enter') { e.preventDefault(); e.stopPropagation(); this.commitEdit(); this.moveSelection(1, 0); }
+      else if (k === 'Escape') { e.preventDefault(); e.stopPropagation(); this.cancelEdit(); }
+      else if (k === 'Tab') { e.preventDefault(); e.stopPropagation(); this.commitEdit(); this.moveSelection(0, e.shiftKey ? -1 : 1); }
     },
     toggleCell(r, c) {
       if (!this.editableCol(c)) return;
@@ -724,6 +731,10 @@ export function pinionSheet(opts = {}) {
       };
     },
     openCellMenu(r, c, e) {
+      // 編集中セルの右クリックは素通し＝ブラウザのネイティブメニュー（コピー/ペースト等）を出す。
+      // 以前は commitEdit() で編集が終了してしまい、テキスト編集中の右クリックが実質使えなかった。
+      if (this.editing && this.isEd(r, c)) return;
+      e.preventDefault();
       if (this.editing) this.commitEdit();
       if (!this.inRange(r, c)) this.collapse(r, c);   // right-click outside the range re-selects
       this.menuAt(e, r, c);
