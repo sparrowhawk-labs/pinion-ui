@@ -7,6 +7,28 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.10.0] — 2026-07-23
+
+### Added
+- **doc-core (`.pn-doc`) body-copy typography** — shared read-document prose CSS
+  ([`src/resources/css/doc-core.css`](./src/resources/css/doc-core.css), imported by
+  `pinion-ui.css` in `@layer components`). The single typographic source that
+  visualize reports and nonblok's Inbox/review read-rendering both render through,
+  replacing their previously-duplicated prose CSS. Inert until a `.pn-doc` element
+  exists; coexists with S7 plates (see the file header for the contract).
+- **mermaid-theme absorbed into this package** — the single source of the mermaid /
+  self-authored-SVG color glue (pn class names, placeholder→CSS-var map, color-mix
+  expressions, themeVariables) now lives at
+  [`scripts/mermaid-theme/`](./scripts/mermaid-theme/) (`tokens.json` = canon data,
+  `core.mjs` = expansion logic, `runtime.template.js` = runtime scaffold), and its
+  build artifacts ship in **[`dist/`](./dist/)**: `dist/mermaid-theme.js` (runtime JS
+  for visualize + nonblok) and `dist/mermaid-theme.json` (expanded JSON for
+  sologentic's PHP renderer). Regenerate with `node scripts/mermaid-theme/build.mjs`.
+  Consumers receive the artifacts via composer + git tag + lockfile (visualize, a
+  non-composer local tool, reads the local clone's `dist/` directly). This replaces
+  the previous bespoke distribution mechanism (`sync.mjs` / `targets.json` / `--check`),
+  which is retired.
+
 ## [0.9.0] — 2026-07-21
 
 ### Added

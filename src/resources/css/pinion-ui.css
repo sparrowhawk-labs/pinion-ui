@@ -253,6 +253,14 @@
    from S1; at S0 only this CSS + the static render ship. */
 @import "./sheet.css";
 
+/* doc-core (.pn-doc) — shared body-copy typography for read-only documents (reports,
+   manuals, hearing sheets, review pages). The single source of truth that visualize and
+   nonblok both render through, replacing their previously-duplicated "serene" prose CSS.
+   @layer components, like .pn-prose/.pn-sheet — a few hundred bytes for every consumer,
+   inert until a `.pn-doc` element exists. See doc-core.css's own header for the full
+   rationale and the S7-plate coexistence contract. */
+@import "./doc-core.css";
+
 /* ==========================================
    range slider (native <input type=range> pseudo-element styling —
    daisyUI-free, CLAUDE.md invariant 6 migration)

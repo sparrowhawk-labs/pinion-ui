@@ -1,0 +1,137 @@
+/* ==========================================
+   pinion-ui — doc-core (.pn-doc) 本文タイポ共通土台
+   ==========================================
+   資料本文（記事・マニュアル・ヒアリングシート・レビューページ等の読み物）の
+   タイポグラフィにおける唯一の真実。visualize（report/site/form の本文コンテナ）
+   と nonblok（.doc-prose に併記）の両方がこれで描画される — 片方の作業で
+   タイポを改善すれば、pinion-ui.css の @import 経由で全消費者へ自動波及する。
+
+   スコープはクラス `.pn-doc` のみ。幅（measure）・背景・カード・余白の外形は
+   含めない — それは各アプリの L3 殻（visualize=紙カード/switcher、nonblok=
+   S7 プレート機構）の領分。ここが持つのは h1〜h4・p・ul/ol・li・a・blockquote・
+   hr・code/pre・table・img/video・pre.mermaid という「本文の中身」だけ。
+
+   基準の見た目は nonblok `.doc-prose` の現行 serene（静寂ミニマル）を出発点に、
+   visualize entry.css の良い点（等幅フォント明示・コードの淡い枠線・独立した
+   「コード」色）を吸収して統合。行間 1.85・リストにマーカーあり。
+
+   規約（editor.css の .pn-prose / sheet.css の .pn-sheet と同じ）:
+     - 色は daisyUI トークン（var(--color-*) → data-theme 追従）のみ。ハードコード色は使わない。
+     - フォントは tune トークン（var(--font-body) / var(--font-mono)）を使う。
+       新規トークンは作らない（book/screenshot 等の書体 identity は各アプリの自由）。
+     - `@layer components` に置く（editor.css/sheet.css と同じ層 — Tailwind ユーティリティで
+       個別に上書きできる）。
+     - nonblok の S7 プレート（plates/washi.css・plates/ink.css）は `.doc-prose` セレクタを
+       override するため、消費側は `.doc-prose` を残したまま `.pn-doc` を併記する
+       （class="doc-prose pn-doc"）。本ファイルはプレート機構に一切関与しない。
+
+   pinion-ui.css の @import で全消費者へ自動波及する。 */
+
+@layer components {
+    .pn-doc {
+        line-height: 1.85;
+        font-family: var(--font-body);
+    }
+    .pn-doc > * + * { margin-top: 0.9em; }
+
+    .pn-doc h1,
+    .pn-doc h2,
+    .pn-doc h3,
+    .pn-doc h4 {
+        font-family: var(--font-body);
+        font-weight: 600;
+        line-height: 1.4;
+    }
+    .pn-doc h1 { font-size: 1.6rem; margin-top: 0; }
+    .pn-doc h2 {
+        font-size: 1.25rem;
+        margin-top: 2.4em;
+        padding-bottom: 0.35em;
+        border-bottom: 1px solid color-mix(in oklab, var(--color-base-content) 10%, transparent);
+    }
+    .pn-doc h3 { font-size: 1.05rem; margin-top: 1.8em; }
+    .pn-doc h4 { font-size: 0.95rem; margin-top: 1.5em; }
+
+    .pn-doc p { line-height: 1.85; }
+
+    .pn-doc ul, .pn-doc ol { padding-left: 1.4em; }
+    .pn-doc ul { list-style: disc; }
+    .pn-doc ol { list-style: decimal; }
+    .pn-doc li + li { margin-top: 0.25em; }
+    .pn-doc li > * + * { margin-top: 0.3em; }
+
+    .pn-doc a {
+        color: var(--color-primary);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+        transition: text-decoration-color 0.12s ease;
+    }
+    .pn-doc a:hover { text-decoration-color: var(--color-primary); }
+
+    .pn-doc blockquote {
+        border-left: 3px solid var(--color-base-300);
+        padding-left: 1em;
+        color: color-mix(in oklab, var(--color-base-content) 70%, var(--color-base-100));
+    }
+
+    .pn-doc hr {
+        border: 0;
+        border-top: 1px solid color-mix(in oklab, var(--color-base-content) 10%, transparent);
+        margin: 2.5em 0;
+    }
+
+    /* code/pre — nonblok 現行を土台に、visualize entry.css の良い点を吸収:
+       等幅フォントの明示（var(--font-mono)）・pre への淡い枠線・inline code の
+       独立した「コード」色（info トーンへ寄せる）。 */
+    .pn-doc code {
+        font-family: var(--font-mono);
+        background: var(--color-base-200);
+        color: color-mix(in oklab, var(--color-base-content) 85%, var(--color-info));
+        border-radius: 4px;
+        padding: 0.1em 0.4em;
+        font-size: 0.86em;
+    }
+    .pn-doc pre {
+        font-family: var(--font-mono);
+        background: var(--color-base-200);
+        border: 1px solid color-mix(in oklab, var(--color-base-content) 8%, transparent);
+        border-radius: var(--radius-box);
+        padding: 1em 1.2em;
+        overflow-x: auto;
+        line-height: 1.55;
+    }
+    .pn-doc pre code {
+        background: transparent;
+        color: inherit;
+        padding: 0;
+        font-size: 0.85em;
+    }
+
+    .pn-doc table { width: 100%; border-collapse: collapse; font-size: 0.92em; display: block; overflow-x: auto; }
+    .pn-doc th,
+    .pn-doc td {
+        border: 1px solid color-mix(in oklab, var(--color-base-content) 12%, transparent);
+        padding: 0.45em 0.8em;
+        text-align: left;
+        vertical-align: top;
+    }
+    .pn-doc th { background: var(--color-base-200); font-weight: 600; white-space: nowrap; }
+
+    .pn-doc img,
+    .pn-doc video {
+        max-width: 100%;
+        border-radius: var(--radius-box);
+        border: 1px solid color-mix(in oklab, var(--color-base-content) 10%, transparent);
+    }
+
+    /* pre.mermaid: 描画前のチラつき防止（未処理の間は隠す）。図そのものの配色は L1（mermaid-theme）が担う。 */
+    .pn-doc pre.mermaid {
+        background: color-mix(in oklab, var(--color-base-content) 3%, var(--color-base-100));
+        border: 1px solid color-mix(in oklab, var(--color-base-content) 8%, transparent);
+        display: flex;
+        justify-content: center;
+        padding: 1.4em;
+    }
+    .pn-doc pre.mermaid:not([data-processed]) { visibility: hidden; min-height: 3em; }
+}

@@ -8,6 +8,8 @@
 
 A Laravel Blade component library (Tailwind v4 + daisyUI v5 + Alpine.js). 46 components — see [`reference/components/index.md`](./reference/components/index.md).
 
+The package also ships the **mermaid/SVG color glue** as build artifacts in [`dist/`](./dist/): `dist/mermaid-theme.js` (runtime JS — inline it inside a `type="module"` mermaid block so figures follow `data-theme`/`data-tune`) and `dist/mermaid-theme.json` (expanded color/theme data for server-side SVG rendering). Canon + regen live in [`scripts/mermaid-theme/`](./scripts/mermaid-theme/) (`node scripts/mermaid-theme/build.mjs`).
+
 ## Calling convention
 
 - **Anonymous (default)**: `<x-button>`, `<x-modal>`, `<x-tabs>`, etc. Use this in app code.
