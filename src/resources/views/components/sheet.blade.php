@@ -11,6 +11,7 @@
     'movableColumns' => false,
     'resizableColumns' => true,
     'contextMenu' => true,
+    'inlineMd' => false,
     'toolbar' => true,
     'sync' => 'debounce:400',
     'addRow' => true,
@@ -335,7 +336,17 @@
                                     </button>
                                 </template>
                                 <template x-if="!isEd(r, c) && col.type !== 'checkbox' && col.type !== 'number' && col.type !== 'select'">
-                                    <span x-text="fmt(row[col.key])"></span>
+                                    @if($inlineMd)
+                                        {{-- opt-in inline-md display (mdInline escapes first → x-html is safe);
+                                             the cell EDITOR still edits the raw source string.
+                                             typeof guard: the Blade is server-rendered but the JS is a built bundle, so a
+                                             long-lived tab can hold a bundle predating mdInline. Without the guard the
+                                             Alpine expression throws and EVERY text cell renders empty; with it, such a
+                                             tab degrades to plain text instead of losing the table's contents. --}}
+                                        <span x-html="typeof mdInline === 'function' ? mdInline(row[col.key]) : fmt(row[col.key])"></span>
+                                    @else
+                                        <span x-text="fmt(row[col.key])"></span>
+                                    @endif
                                 </template>
 
                                 @if($selectableRange)

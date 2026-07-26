@@ -144,6 +144,32 @@ export function pinionSheet(opts = {}) {
     // ── display helpers (used by x-text / x-bind in the Blade) ──
     truthy,
     fmt(v) { return (v === null || v === undefined) ? '' : String(v); },
+    // Opt-in (:inline-md) display renderer for a SAFE inline-markdown subset:
+    // **bold** / *italic* / `code` / [text](url). DISPLAY only — the cell editor
+    // still edits the raw source string. The value is HTML-escaped FIRST, so binding
+    // the output with x-html is XSS-safe; link hrefs are limited to http(s)/mailto/
+    // relative/anchor. Underscore emphasis is deliberately NOT supported (snake_case
+    // cell values would italicize). Trailing step unescapes `\*` `\_` etc. so escaped
+    // punctuation from markdown sources displays as the bare character.
+    mdInline(v) {
+      const esc = this.fmt(v).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+      // 1) code spans out first (their content is raw — no escape processing inside),
+      // 2) then backslash-escaped punctuation (`\*` `\_` …) so it can never act as a
+      //    delimiter (nor pair up as `\*\*` → a bogus <em>), 3) then links/bold/italic.
+      const codes = [];
+      let s = esc.replace(/`([^`]+)`/g, (_, t) => `\x00${codes.push(t) - 1}\x00`);
+      const lits = [];
+      s = s.replace(/\\([\\`*_[\]])/g, (_, ch) => `\x01${lits.push(ch) - 1}\x01`);
+      s = s
+        .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, t, u) =>
+          // inline style, not utility classes — consumer Tailwind builds don't scan vendor JS,
+          // so class-based styling would silently miss (preflight strips default <a> underline).
+          /^(https?:|mailto:|\.{0,2}\/|#)/.test(u) ? `<a href="${u}" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:2px">${t}</a>` : m)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      s = s.replace(/\x01(\d+)\x01/g, (_, i) => lits[i]);
+      return s.replace(/\x00(\d+)\x00/g, (_, i) => `<code>${codes[i]}</code>`);
+    },
     colKey(c) { return this.cols[c]?.key; },
     colType(c) { return this.cols[c]?.type ?? 'text'; },
     editableCol(c) { return opts.editable !== false && this.cols[c]?.editable !== false; },
