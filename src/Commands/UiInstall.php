@@ -123,8 +123,9 @@ class UiInstall extends Command
         $this->line('    2. Run: npm run build');
         $this->line('    3. Use: <x-button color="primary">Click</x-button>');
         $this->newLine();
-        $this->line('  Theme: pinion (warm cream + amber accent) is shipped as the default.');
-        $this->line('  For dark mode or other looks, set <html data-theme="dark"> (or dim/night/…).');
+        $this->line('  Theme: pinion (GitHub-Primer-derived blue) is shipped as the default.');
+        $this->line('  Every theme has a dark pair — for dark mode set <html data-theme="pinion-dark">.');
+        $this->line('  39 themes × light/dark ship built in: zen, frost, ember, … (<name> / <name>-dark).');
         $this->newLine();
         $this->line('  Documentation:');
         $this->line('    - README:     vendor/sparrowhawk-labs/pinion-ui/README.md');

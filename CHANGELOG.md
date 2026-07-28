@@ -7,6 +7,35 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.10.2] — 2026-07-28
+
+### Fixed
+- **`ui:install` printed dark-mode advice that has been wrong since v0.7.0** — its closing
+  notes said `set <html data-theme="dark"> (or dim/night/…)`, but those daisyUI built-in
+  themes were removed in v0.7.0 (`themes: false`); following the advice silently left the
+  app on the default light theme. Now points at the real mechanism (`pinion-dark`, and the
+  `<name>` / `<name>-dark` pairing shared by all 39 themes). The `pinion` default's
+  description ("warm cream + amber accent" — the pre-v0.7.0 palette) was also updated to
+  the current Primer-derived blue. Found by a fresh-app install smoke test (Packagist
+  v0.10.1 → Laravel 13.23), which otherwise passed end-to-end: install, build, render,
+  Alpine interactions, and theme × tune switching all verified against real browser output.
+
+## [0.10.1] — 2026-07-26
+
+### Added
+- **`<x-sheet :inline-md>`** — opt-in **display-time** rendering of a safe inline-markdown
+  subset in text cells: `**bold**` / `*italic*` / `` `code` `` / `[text](url)`. The cell
+  *editor* still edits the raw source string, so the round trip is lossless — for hosts
+  whose canonical cell values are markdown (GFM-table-backed sheets). Off by default.
+  Safety: values are HTML-escaped **before** markup is applied (so the `x-html` render is
+  XSS-safe), link hrefs are limited to `http(s):` / `mailto:` / relative / `#`, underscore
+  emphasis is deliberately unsupported (`snake_case` values must not italicize), and
+  escaped punctuation (`\*`, `\_`) displays as the bare character.
+- A `typeof mdInline === 'function'` guard on that render path: the Blade is
+  server-rendered but `sheet.js` ships as a built bundle, so a long-lived tab can hold a
+  bundle predating `mdInline`. Without the guard the Alpine expression throws and every
+  text cell renders empty; with it, such a tab degrades to plain text.
+
 ## [0.10.0] — 2026-07-23
 
 ### Added
@@ -503,8 +532,24 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 - **`pinion-dark` theme removed** — Pinion now ships only the `pinion` (light) theme.
   Consumers pick any daisyUI standard dark theme via `<html data-theme>`.
 
+[0.10.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.10.0...v0.10.1
+[0.10.0]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.9.0...v0.10.0
+[0.9.0]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.8.5...v0.9.0
+[0.8.5]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.8.4...v0.8.5
+[0.8.4]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.8.3...v0.8.4
+[0.8.3]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.8.2...v0.8.3
+[0.8.2]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.8.1...v0.8.2
+[0.8.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.8.0...v0.8.1
+[0.8.0]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.7.3...v0.8.0
+[0.7.3]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.7.2...v0.7.3
+[0.7.2]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.7.1...v0.7.2
+[0.7.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.7.0...v0.7.1
+[0.7.0]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.6.1...v0.7.0
 [0.6.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.5.0...v0.6.0
+[0.5.0]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.6...v0.5.0
+[0.4.6]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.5...v0.4.6
+[0.4.5]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.4...v0.4.5
 [0.4.4]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.3...v0.4.4
 [0.4.1]: https://github.com/sparrowhawk-labs/pinion-ui/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/sparrowhawk-labs/pinion-ui/releases/tag/v0.4.0
