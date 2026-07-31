@@ -117,6 +117,10 @@
         vertical-align: top;
     }
     .pn-doc th { background: var(--color-base-200); font-weight: 600; white-space: nowrap; }
+    /* Markdown tables require a header row, so "headerless" tables are authored as an
+       all-empty header (`| | |`) — both marked and league/commonmark emit bare <th></th>
+       cells, which render as an empty gray band. Don't draw a thead with no content. */
+    .pn-doc thead:not(:has(th:not(:empty))) { display: none; }
 
     .pn-doc img,
     .pn-doc video {
