@@ -46,19 +46,22 @@ All other attributes pass through to the wrapping `<div>` (e.g. `class`, `x-data
 
 ### Segmented control (Alpine-driven active state)
 
-The wrapper softens hover. To keep the **active** button fully saturated, use `!important` Tailwind utilities so the active state outranks the wrapper's hover override.
+The wrapper softens hover. To keep the **active** button fully saturated, use `!important` Tailwind utilities so the active state outranks the wrapper's hover override — and bind **`aria-pressed`** to the active state. `aria-pressed="true"` is what tells the wrapper to hand the active segment its own trailing border (otherwise that edge is painted by the next button's grey border and the highlight renders with three colored edges and one grey one — fixed in v0.10.2). It is also the correct toggle-group semantics for assistive tech. Bind the *string* `'true'`/`'false'` (a bare boolean would render `aria-pressed=""`, which the CSS attribute selector does not match).
 
 ```blade
 <div x-data="{ active: 'center' }">
     <x-button-group>
         <x-button appearance="outline" color="neutral"
                   x-bind:class="active === 'left'   && '!bg-primary !text-primary-content !border-primary'"
+                  x-bind:aria-pressed="(active === 'left') ? 'true' : 'false'"
                   x-on:click="active = 'left'">Left</x-button>
         <x-button appearance="outline" color="neutral"
                   x-bind:class="active === 'center' && '!bg-primary !text-primary-content !border-primary'"
+                  x-bind:aria-pressed="(active === 'center') ? 'true' : 'false'"
                   x-on:click="active = 'center'">Center</x-button>
         <x-button appearance="outline" color="neutral"
                   x-bind:class="active === 'right'  && '!bg-primary !text-primary-content !border-primary'"
+                  x-bind:aria-pressed="(active === 'right') ? 'true' : 'false'"
                   x-on:click="active = 'right'">Right</x-button>
     </x-button-group>
 </div>

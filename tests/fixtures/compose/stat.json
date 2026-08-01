@@ -14,7 +14,9 @@
     },
     {
         "name": "+ desc — no trend, base desc class only",
-        "props": { "desc": "since last month" },
+        "props": {
+            "desc": "since last month"
+        },
         "expected": {
             "root": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 shadow-[var(--shadow-box)] overflow-hidden",
             "value": "text-3xl font-extrabold whitespace-nowrap text-base-content",
@@ -23,7 +25,9 @@
     },
     {
         "name": "+ valueColor=primary — value gets text-primary, figure tracks color",
-        "props": { "valueColor": "primary" },
+        "props": {
+            "valueColor": "primary"
+        },
         "expected": {
             "value": "text-3xl font-extrabold whitespace-nowrap text-primary",
             "figure": "shrink-0 flex items-center justify-center text-primary"
@@ -31,28 +35,38 @@
     },
     {
         "name": "+ trend=up + trendValue — desc text-success (arrow lives in blade helper)",
-        "props": { "trend": "up", "trendValue": "+12%" },
+        "props": {
+            "trend": "up",
+            "trendValue": "+12%"
+        },
         "expected": {
             "desc": "text-xs whitespace-nowrap text-success"
         }
     },
     {
         "name": "+ trend=down + trendValue — desc text-error",
-        "props": { "trend": "down", "trendValue": "-3%" },
+        "props": {
+            "trend": "down",
+            "trendValue": "-3%"
+        },
         "expected": {
             "desc": "text-xs whitespace-nowrap text-error"
         }
     },
     {
         "name": "trend=flat — desc text-base-content/50",
-        "props": { "trend": "flat" },
+        "props": {
+            "trend": "flat"
+        },
         "expected": {
             "desc": "text-xs whitespace-nowrap text-base-content/50"
         }
     },
     {
         "name": "wrapped=false — root empty (no outer card chrome)",
-        "props": { "wrapped": false },
+        "props": {
+            "wrapped": false
+        },
         "expected": {
             "root": "",
             "inner": "flex items-center justify-between gap-4 px-6 py-4"
@@ -75,7 +89,9 @@
     },
     {
         "name": "valueColor=error — error tone on value/figure",
-        "props": { "valueColor": "error" },
+        "props": {
+            "valueColor": "error"
+        },
         "expected": {
             "value": "text-3xl font-extrabold whitespace-nowrap text-error",
             "figure": "shrink-0 flex items-center justify-center text-error"
@@ -83,12 +99,24 @@
     },
     {
         "name": "valueColor=secondary + wrapped=false — inner only, no root wrapper",
-        "props": { "valueColor": "secondary", "wrapped": false },
+        "props": {
+            "valueColor": "secondary",
+            "wrapped": false
+        },
         "expected": {
             "root": "",
             "inner": "flex items-center justify-between gap-4 px-6 py-4",
             "value": "text-3xl font-extrabold whitespace-nowrap text-secondary",
             "figure": "shrink-0 flex items-center justify-center text-secondary"
+        }
+    },
+    {
+        "name": "wrapped=\"false\" (string, plain attribute) — parsed as boolean false, not truthy string",
+        "props": {
+            "wrapped": "false"
+        },
+        "expected": {
+            "root": ""
         }
     }
 ]

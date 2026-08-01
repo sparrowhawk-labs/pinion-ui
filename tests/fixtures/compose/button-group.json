@@ -3,35 +3,35 @@
         "name": "default — horizontal: inline-flex + radii zeroed except ends + soft hover override",
         "props": {},
         "expected": {
-            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
+            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>[aria-pressed=true]:not(:last-child)]:border-r-[length:var(--border)] [&>[aria-pressed=true]+*]:border-l-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     },
     {
         "name": "orientation=horizontal (explicit) — same as default",
         "props": { "orientation": "horizontal" },
         "expected": {
-            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
+            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>[aria-pressed=true]:not(:last-child)]:border-r-[length:var(--border)] [&>[aria-pressed=true]+*]:border-l-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     },
     {
         "name": "orientation=vertical — flex-col + radii on top/bottom + bottom border collapse",
         "props": { "orientation": "vertical" },
         "expected": {
-            "root": "inline-flex flex-col [&>*]:rounded-none [&>*:first-child]:rounded-t-[var(--radius-field)] [&>*:last-child]:rounded-b-[var(--radius-field)] [&>*:not(:last-child)]:border-b-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
+            "root": "inline-flex flex-col [&>*]:rounded-none [&>*:first-child]:rounded-t-[var(--radius-field)] [&>*:last-child]:rounded-b-[var(--radius-field)] [&>*:not(:last-child)]:border-b-0 [&>[aria-pressed=true]:not(:last-child)]:border-b-[length:var(--border)] [&>[aria-pressed=true]+*]:border-t-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     },
     {
         "name": "unknown orientation → fallback to horizontal",
         "props": { "orientation": "diagonal" },
         "expected": {
-            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
+            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>[aria-pressed=true]:not(:last-child)]:border-r-[length:var(--border)] [&>[aria-pressed=true]+*]:border-l-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     },
     {
         "name": "empty string orientation → fallback to horizontal",
         "props": { "orientation": "" },
         "expected": {
-            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
+            "root": "inline-flex [&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)] [&>*:not(:last-child)]:border-r-0 [&>[aria-pressed=true]:not(:last-child)]:border-r-[length:var(--border)] [&>[aria-pressed=true]+*]:border-l-0 [&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300"
         }
     }
 ]

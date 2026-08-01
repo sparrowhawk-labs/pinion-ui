@@ -1,6 +1,6 @@
 # x-stat
 
-Single statistic block — a label / value / description triple with an optional figure (icon or image) and a trend arrow (↑ / ↓ / →). Wraps in its own card chrome by default; set `wrapped="false"` to drop the outer wrapper when grouping multiple stats with [`<x-stat-group>`](./stat-group.md).
+Single statistic block — a label / value / description triple with an optional figure (icon or image) and a trend arrow (↑ / ↓ / →). Wraps in its own card chrome by default; set `:wrapped="false"` to drop the outer wrapper when grouping multiple stats with [`<x-stat-group>`](./stat-group.md).
 
 **Playground page**: [`pinion-ui-playground/resources/views/pages/stat.blade.php`](https://github.com/sparrowhawk-labs/pinion-ui-playground/blob/main/resources/views/pages/stat.blade.php) — full variant matrix and live demos.
 

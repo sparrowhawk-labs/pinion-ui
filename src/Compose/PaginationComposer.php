@@ -67,9 +67,9 @@ class PaginationComposer
     {
         // Border-left fusion (border-l-0 first:border-l) lives on the per-state
         // classes (itemIdle/itemDisabled/itemStatic), not here — the active item
-        // keeps its own full border on all sides and instead overlaps the
-        // previous item's right border (see itemActive) so two differently
-        // colored borders never sit side by side.
+        // keeps its own full border on all sides, and the item directly BEFORE
+        // it drops its right border instead (see fusedBorder) so two borders
+        // never sit side by side at that seam.
         return FieldVariants::join(
             'rounded-none first:rounded-l-[var(--radius-field)] last:rounded-r-[var(--radius-field)]',
             'inline-flex items-center justify-center font-medium transition-colors',
@@ -79,10 +79,25 @@ class PaginationComposer
         );
     }
 
-    /** Shared border-fusion for "flat" states that visually merge with their neighbors. */
+    /**
+     * Shared border-fusion for "flat" states that visually merge with their
+     * neighbors. Each item keeps its right border and drops its left, so every
+     * seam is exactly one border wide.
+     *
+     * The `has-[…]` rule handles the one seam that scheme can't: the item
+     * directly before the ACTIVE page (marked aria-current="page" in both
+     * pagination blades) also drops its RIGHT border, because the active item
+     * keeps its own full 4-side border. v0.10.1 and earlier instead overlapped
+     * the active item onto this border with a negative margin and painted over
+     * it — which only works for opaque paint. The default `soft` appearance
+     * uses translucent borders (border-primary/40), so the grey border showed
+     * through underneath and the active item's left edge rendered visibly
+     * darker/thicker than its right (found in the 2026-08-01 playground seam
+     * audit). Suppressing the neighbor is paint-independent.
+     */
     private static function fusedBorder(): string
     {
-        return 'border-l-0 first:border-l';
+        return 'border-l-0 first:border-l has-[+[aria-current=page]]:border-r-0';
     }
 
     private static function sizeClasses(string $size): string
@@ -97,11 +112,11 @@ class PaginationComposer
     private static function itemActive(string $appearance, string $color): string
     {
         // The active item keeps its own full border (all 4 sides) rather than
-        // fusing with its neighbor. To avoid a doubled border line where it
-        // meets the previous (differently colored) item, it overlaps that
-        // item's right border by one border-width (-ml) and paints on top of
-        // it (relative z-10, already present per-variant below).
-        return 'relative z-10 -ml-[length:var(--border)] first:ml-0 '.match ("{$appearance}-{$color}") {
+        // fusing with its neighbor; the neighbor before it drops its right
+        // border instead (see fusedBorder), so both of the active item's
+        // vertical edges render its own border color at exactly one border
+        // width. relative z-10 keeps the focus ring painting above siblings.
+        return 'relative z-10 '.match ("{$appearance}-{$color}") {
             'solid-primary'   => 'bg-primary text-primary-content border-primary focus-visible:ring-primary cursor-default',
             'solid-secondary' => 'bg-secondary text-secondary-content border-secondary focus-visible:ring-secondary cursor-default',
             'solid-accent'    => 'bg-accent text-accent-content border-accent focus-visible:ring-accent cursor-default',

@@ -21,7 +21,17 @@ class StatComposer
     {
         $valueColor = $props['valueColor'] ?? null;
         $trend      = $props['trend']      ?? null;
-        $wrapped    = array_key_exists('wrapped', $props) ? (bool) $props['wrapped'] : true;
+        // Boolean-parse rather than (bool)-cast: the plain-attribute form
+        // `wrapped="false"` delivers the STRING "false", which a raw cast
+        // treats as true — so every stat inside an <x-stat-group> silently
+        // kept its own card border+radius and the group rendered doubled
+        // seams (shipped that way in the playground for months before the
+        // 2026-08-01 seam audit caught it). FILTER_VALIDATE_BOOLEAN maps
+        // "false"/"0"/"off"/"no" → false; unrecognizable values fall back
+        // to the old cast so no previously-working call site changes.
+        $wrapped = array_key_exists('wrapped', $props)
+            ? (filter_var($props['wrapped'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? (bool) $props['wrapped'])
+            : true;
 
         return [
             'root'  => $wrapped

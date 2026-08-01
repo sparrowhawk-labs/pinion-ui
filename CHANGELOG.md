@@ -7,6 +7,37 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.10.4] — 2026-08-01
+
+### Fixed
+- **Pagination: the active page rendered with a visibly darker/thicker left edge** in the
+  default `soft` (and `outline`) appearance. The active item used to overlap its neighbor's
+  grey border with a negative margin and paint over it — which only works for opaque paint;
+  translucent active borders (`border-primary/40`) let the grey show through underneath.
+  Now the item *before* the active page drops its right border instead
+  (`:has(+ [aria-current=page])`), so both of the active item's vertical edges are painted
+  by the active item itself, at exactly one border width, in every appearance.
+- **Button group: a highlighted segment's trailing edge stayed grey** (three colored edges,
+  one grey) because inner-border collapse hands every seam to the following child. Mark the
+  active segment `aria-pressed="true"` — the wrapper now returns its trailing border to it
+  and drops the follower's leading border. This is also the correct toggle-group semantics;
+  see the segmented-control example in `reference/components/button-group.md` (bind the
+  *string* `'true'`/`'false'`, not a bare boolean).
+- **`<x-stat wrapped="false">` (plain attribute, string) silently rendered as `wrapped=true`**
+  — the raw `(bool)` cast treats the string `"false"` as truthy, so stats inside an
+  `<x-stat-group>` kept their own card border + radius and the group showed doubled seams
+  and rounded inner corners. `wrapped` is now boolean-parsed (`FILTER_VALIDATE_BOOLEAN`);
+  the documented `:wrapped="false"` form is unchanged and remains preferred.
+
+All three were found by a computed-style seam audit across the playground's 40 component
+pages × 5 theme/tune combos (2026-08-01); the audit now reports zero real anomalies.
+
+## [0.10.3] — 2026-07-30
+
+### Fixed
+- **doc-core: headerless markdown tables rendered a blank header band** — an all-empty
+  `<thead>` is now hidden.
+
 ## [0.10.2] — 2026-07-28
 
 ### Fixed
