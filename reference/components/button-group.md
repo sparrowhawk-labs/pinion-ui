@@ -46,7 +46,7 @@ All other attributes pass through to the wrapping `<div>` (e.g. `class`, `x-data
 
 ### Segmented control (Alpine-driven active state)
 
-The wrapper softens hover. To keep the **active** button fully saturated, use `!important` Tailwind utilities so the active state outranks the wrapper's hover override — and bind **`aria-pressed`** to the active state. `aria-pressed="true"` is what tells the wrapper to hand the active segment its own trailing border (otherwise that edge is painted by the next button's grey border and the highlight renders with three colored edges and one grey one — fixed in v0.10.2). It is also the correct toggle-group semantics for assistive tech. Bind the *string* `'true'`/`'false'` (a bare boolean would render `aria-pressed=""`, which the CSS attribute selector does not match).
+The wrapper softens hover. To keep the **active** button fully saturated, use `!important` Tailwind utilities so the active state outranks the wrapper's hover override — and bind **`aria-pressed`** to the active state. `aria-pressed="true"` is what tells the wrapper to hand the active segment its own trailing border (otherwise that edge is painted by the next button's grey border and the highlight renders with three colored edges and one grey one — fixed in v0.10.4). It is also the correct toggle-group semantics for assistive tech. Bind the *string* `'true'`/`'false'` (a bare boolean would render `aria-pressed=""`, which the CSS attribute selector does not match).
 
 ```blade
 <div x-data="{ active: 'center' }">
@@ -89,6 +89,7 @@ See [`src/Compose/ButtonGroupComposer.php`](../../src/Compose/ButtonGroupCompose
 - **Layout**: `inline-flex` (+ `flex-col` for vertical).
 - **Radii reset + restore**: `[&>*]:rounded-none [&>*:first-child]:rounded-l-[var(--radius-field)] [&>*:last-child]:rounded-r-[var(--radius-field)]` (top/bottom for vertical).
 - **Inner-border collapse**: `[&>*:not(:last-child)]:border-r-0` (bottom for vertical).
+- **Active-item seam ownership** (v0.10.4): `[&>[aria-pressed=true]:not(:last-child)]:border-r-[length:var(--border)] [&>[aria-pressed=true]+*]:border-l-0` — the `aria-pressed="true"` segment takes back its trailing border and the next item drops its leading one, so all four edges of the active segment paint in the active color.
 - **Soft hover**: `[&>*]:hover:bg-base-200 [&>*]:hover:text-base-content [&>*]:hover:border-base-300`.
 
 This replaces the pre-v0.3.3 reliance on daisyUI's `.join` / `.join-item` system, which lost to Tailwind utility specificity in practice (Tailwind's `rounded-[var(--radius-field)]` on each child outranked daisyUI's `:where(...)` selectors). The new approach is self-contained and works regardless of child component.
