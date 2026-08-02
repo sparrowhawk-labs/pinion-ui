@@ -80,7 +80,7 @@
 }
 
 /* ── BEGIN GENERATED THEME LINEUP — gen-themes.mjs (do not edit by hand) ── */
-/* 39 themes × light/dark = 78 blocks, generated from
+/* 40 themes × light/dark = 80 blocks, generated from
    src/resources/themes/lineup.json (locked 2026-07-19). Regenerate with
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
@@ -2961,6 +2961,80 @@
     --color-error:             #D2625D;
     --color-error-content:     #14181C;
     --root-bg:                 #14181C;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* nonblok / nonblok-dark — SaaS 実用 · nonblok アプリ専用ブランド。黒インク×紫アクセント・静寂ミニマル（Apple 調） (nonblok v3 brand (2026-08-01 決定: 黒インク #232025 メイン・紫 #a89bff サブ・クリーム on-ink)) */
+
+@plugin 'daisyui/theme' {
+    name:                      'nonblok';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F7F6F3;
+    --color-base-300:          #E4E3E0;
+    --color-base-content:      #232025;
+    --color-primary:           #6C63C7;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #4B4553;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #A89BFF;
+    --color-accent-content:    #232025;
+    --color-neutral:           #3E3B40;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #0969DA;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #1A7F37;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #9A6700;
+    --color-warning-content:   #FFFFFF;
+    --color-error:             #CF222E;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F7F6F3;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'nonblok-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #232025;
+    --color-base-200:          #151318;
+    --color-base-300:          #2E2C30;
+    --color-base-content:      #F2EFE9;
+    --color-primary:           #A89BFF;
+    --color-primary-content:   #151318;
+    --color-secondary:         #8B85A0;
+    --color-secondary-content: #151318;
+    --color-accent:            #CFC8FF;
+    --color-accent-content:    #151318;
+    --color-neutral:           #3D3A3E;
+    --color-neutral-content:   #F2EFE9;
+    --color-info:              #8FB7FF;
+    --color-info-content:      #151318;
+    --color-success:           #4FBF67;
+    --color-success-content:   #151318;
+    --color-warning:           #D9A23A;
+    --color-warning-content:   #151318;
+    --color-error:             #F87168;
+    --color-error-content:     #151318;
+    --root-bg:                 #151318;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;

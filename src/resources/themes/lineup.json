@@ -1326,6 +1326,42 @@
           "#38AEBB"
         ]
       }
+    },
+    {
+      "name": "nonblok",
+      "source": "nonblok v3 brand (2026-08-01 決定: 黒インク #232025 メイン・紫 #a89bff サブ・クリーム on-ink)",
+      "category": "SaaS 実用",
+      "llmTrigger": "nonblok アプリ専用ブランド。黒インク×紫アクセント・静寂ミニマル（Apple 調）",
+      "light": {
+        "bg": "#F7F6F3",
+        "panel": "#FFFFFF",
+        "fg": "#232025",
+        "muted": "#6F6A76",
+        "primary": "#6C63C7",
+        "secondary": "#4B4553",
+        "accent": "#A89BFF",
+        "extra": [
+          "#CF222E",
+          "#9A6700",
+          "#1A7F37",
+          "#0969DA"
+        ]
+      },
+      "dark": {
+        "bg": "#151318",
+        "panel": "#232025",
+        "fg": "#F2EFE9",
+        "muted": "#A9A4B0",
+        "primary": "#A89BFF",
+        "secondary": "#8B85A0",
+        "accent": "#CFC8FF",
+        "extra": [
+          "#F87168",
+          "#D9A23A",
+          "#4FBF67",
+          "#8FB7FF"
+        ]
+      }
     }
   ]
 }
