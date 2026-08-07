@@ -55,16 +55,21 @@ mermaid.initialize({ startOnLoad: false, theme: 'base', themeVariables: MM_THEME
 // どのテーマ色・light/dark でも読めるようにする（inline 指定に勝つため !important）
 {
   const st = document.createElement('style');
-  st.textContent = '.mermaid svg text.slice{fill:#fff !important;font-weight:700 !important;paint-order:stroke;stroke:rgba(0,0,0,.35);stroke-width:2px;}';
+  st.textContent = '.mermaid svg text.slice{fill:#fff !important;font-weight:700 !important;paint-order:stroke;stroke:rgba(0,0,0,.35);stroke-width:2px;}'
+    // ちらつき抑制: 未描画ノードの生ソーステキストを見せない（JS 実行時のみ注入＝JS無効環境ではソースが見える従来挙動のまま）
+    + '.mermaid:not([data-processed]){visibility:hidden;}';
   document.head.appendChild(st);
 }
 
 // 核: 渡されたノード群を 注入 → 描画 → 色置換
 window.__renderMermaidNodes = async (nodes) => {
   if (!nodes.length) return;
-  for (const n of nodes) n.textContent = mmInject(n.textContent.trim());
+  // ちらつき抑制: mermaid.run が data-processed を付けた時点ではまだ placeholder 色
+  // （#f1〜f6 系の赤）のままで、色置換前に paint が挟まると赤い図が一瞬見える。
+  // 置換完了までインラインの visibility で覆う（CSS 側の :not([data-processed]) と二段構え）。
+  for (const n of nodes) { n.style.visibility = 'hidden'; n.textContent = mmInject(n.textContent.trim()); }
   try { await mermaid.run({ nodes }); } catch (e) {}
-  for (const n of nodes) mmReplaceColors(n);
+  for (const n of nodes) { mmReplaceColors(n); n.style.visibility = ''; }
 };
 // 便利形: scope 内の未描画ノード全部
 window.__renderMermaid = (scope) =>
