@@ -92,6 +92,9 @@
         padding: 0.1em 0.4em;
         font-size: 0.86em;
     }
+    /* inline code の長い無切断トークン（URL 等）が本文幅を突き抜ける対策 —
+       pre 内は overflow-x: auto に任せるため除外（2026-08-10） */
+    .pn-doc :not(pre) > code { overflow-wrap: anywhere; }
     .pn-doc pre {
         font-family: var(--font-mono);
         background: var(--color-base-200);
