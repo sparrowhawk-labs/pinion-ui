@@ -22,6 +22,8 @@ File input with two presentation modes — `inline` (looks like a standard text 
 | `description` | `string \| null` | `null` | Helper text — rendered inside the dropzone, or below the inline field. Hidden while `error` is set. |
 | `helper` | `string \| null` | `null` | Small helper text below the preview list. Hidden while `error` is set. |
 | `placeholder` | `string` | `'Drop a file here or browse'` | Reserved placeholder string (the inline input uses the browser-native chooser button text). |
+| `browseLabel` | `string` | `'Browse'` | Dropzone mode — the colored "browse" link text. Override for localization (e.g. `browse-label="ファイルを選択"`). |
+| `dropHint` | `string` | `'or drag and drop here'` | Dropzone mode — the muted hint text after the browse link (e.g. `drop-hint="またはここにドロップ"`). |
 | `color` | `'neutral' \| 'primary' \| 'secondary' \| 'accent' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'neutral'` | Drives focus / hover / link / progress-bar color. |
 | `appearance` | `'outline' \| 'soft' \| 'underline' \| 'ghost' \| 'dropzone'` | `'outline'` | Shell style. The first four match `<x-input>`; `'dropzone'` switches to the large dashed-border drop zone. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Field height / padding / icon size. |
@@ -69,6 +71,40 @@ This component has no public slots.
 ```blade
 <x-file-upload name="files[]" appearance="dropzone" multiple simulate />
 ```
+
+### Localized dropzone text
+
+```blade
+<x-file-upload
+    appearance="dropzone"
+    label="証明写真"
+    browse-label="ファイルを選択"
+    drop-hint="またはここにドラッグ＆ドロップ"
+    description="PNG / JPG、5MB まで"
+    accept="image/*"
+/>
+```
+
+### Livewire inside a teleported modal (`$wire.upload()`)
+
+`wire:model` on a file input does not work when the markup is teleported to `<body>`
+(as `<x-modal>` does) — Livewire's upload machinery never sees the input. Listen for
+the component's bubbling **`file-upload-change`** CustomEvent instead and hand the
+`File` objects to `$wire.upload()` / `$wire.uploadMultiple()` yourself:
+
+```blade
+<x-file-upload
+    appearance="dropzone"
+    label="Photo"
+    accept="image/*"
+    x-on:file-upload-change="$wire.upload('photo', $event.detail.files[0])"
+/>
+```
+
+`$event.detail.files` is a plain array of the selected `File` objects; the event
+fires on every (re-)selection, bubbles, and coexists with the built-in preview list.
+`$wire` resolves through Alpine's scope chain, so this works inside teleported
+content where DOM-based directives fail.
 
 ## Class composition
 

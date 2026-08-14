@@ -7,6 +7,19 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.10.8] — 2026-08-14
+
+### Added
+- **`<x-file-upload browse-label drop-hint>`** — the dropzone-mode strings ("Browse" /
+  "or drag and drop here") are now props, so they can be localized per call site.
+  Defaults keep the existing English text — no behaviour change.
+- **`<x-file-upload>` dispatches a bubbling `file-upload-change` CustomEvent**
+  (`detail.files` = array of the selected `File` objects) from the native input on every
+  selection. This is the hook for Livewire uploads inside teleported content (e.g.
+  `<x-modal>`), where `wire:model` never reaches the input: listen with
+  `x-on:file-upload-change="$wire.upload('photo', $event.detail.files[0])"`. Coexists
+  with the built-in preview list. See `reference/components/file-upload.md`.
+
 ## [0.10.4] — 2026-08-01
 
 ### Fixed

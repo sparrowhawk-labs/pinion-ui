@@ -7,6 +7,8 @@
     'description' => null,
     'helper' => null,
     'placeholder' => 'Drop a file here or browse',
+    'browseLabel' => 'Browse',
+    'dropHint' => 'or drag and drop here',
     'color' => 'neutral',
     'appearance' => 'outline',
     'size' => 'md',
@@ -58,6 +60,7 @@
                 };
             });
             if (this.simulate) this.runSimulation();
+            event.target.dispatchEvent(new CustomEvent('file-upload-change', { detail: { files: list }, bubbles: true }));
         },
         runSimulation() {
             this.items.forEach(it => {
@@ -91,8 +94,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
             </svg>
             <div>
-                <span class="{{ $c['browseLink'] }}">Browse</span>
-                <span class="text-base-content/60"> or drag and drop here</span>
+                <span class="{{ $c['browseLink'] }}">{{ $browseLabel }}</span>
+                <span class="text-base-content/60"> {{ $dropHint }}</span>
             </div>
             @if($description)
                 <small class="{{ $c['dropzoneHint'] }}">{{ $description }}</small>
