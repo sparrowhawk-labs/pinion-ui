@@ -7,6 +7,19 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.10.9] — 2026-08-14
+
+### Fixed
+- **`<x-modal>`: a panel taller than the viewport was clipped top and bottom**, pushing the
+  `actions` slot (save/cancel buttons) off-screen and unclickable — e.g. a `size="lg"` form
+  with a dozen fields on an 800px-tall window. The panel is now capped at
+  `max-h-[calc(100dvh-2rem)]` (matching the overlay's `p-4` inset) and laid out as a column:
+  the default slot sits in a new scrollable body wrapper (`min-h-0 overflow-y-auto`) while
+  the header and `actions` stay pinned and visible. When content fits, rendering is
+  unchanged. Note: absolutely-positioned flyouts inside the body (e.g. `<x-select>`
+  dropdowns) now extend the body's scroll area instead of overhanging the panel edge —
+  standard modal-body behaviour.
+
 ## [0.10.8] — 2026-08-14
 
 ### Added
