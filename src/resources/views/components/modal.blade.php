@@ -95,8 +95,10 @@
                     </button>
                 @endif
 
-                {{-- Body --}}
-                {{ $slot }}
+                {{-- Body — scrolls when the panel hits its viewport cap --}}
+                <div class="{{ $c['body'] }}">
+                    {{ $slot }}
+                </div>
 
                 {{-- Footer / Actions --}}
                 @if(isset($actions))

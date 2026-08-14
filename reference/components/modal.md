@@ -26,9 +26,9 @@ All other attributes pass through to the outer Alpine scope `<div>`.
 
 ## Slots
 
-- **default** — modal body content. Rendered directly inside the panel below the (optional) header.
+- **default** — modal body content. Rendered in a scrollable body wrapper (`min-h-0 overflow-y-auto`) below the (optional) header. The panel is capped at the viewport height (`max-h-[calc(100dvh-2rem)]`); when content is taller, only the body scrolls — header and `actions` stay visible and clickable.
 - **trigger** — wrapping element clicked to open the modal in place. Optional — omit it if you only open via `$dispatch('open-modal-{id}')`.
-- **actions** — footer slot for action buttons. Rendered with `flex items-center justify-end gap-xs mt-lg`. Each button typically uses `@click="open = false"` to close after handling its action.
+- **actions** — footer slot for action buttons. Rendered with `flex shrink-0 items-center justify-end gap-xs mt-lg`. Each button typically uses `@click="open = false"` to close after handling its action.
 
 ## Examples
 
@@ -110,7 +110,7 @@ Set an explicit `id`, omit the `trigger` slot, and dispatch from any element on 
 
 ## Class composition
 
-Class strings come from [`SparrowhawkLabs\PinionUi\Compose\ModalComposer`](../../src/Compose/ModalComposer.php). Composer returns `overlay`, `backdrop`, `panel` (with embedded `sizeClass`), `header`, `title`, `closeBtn` / `closeIcon` (in-header), `closeBtnFloat` / `closeIconFloat` (titleless), and `actions`. The blade picks between the two close-button styles based on whether `title` is set.
+Class strings come from [`SparrowhawkLabs\PinionUi\Compose\ModalComposer`](../../src/Compose/ModalComposer.php). Composer returns `overlay`, `backdrop`, `panel` (with embedded `sizeClass`), `header`, `title`, `closeBtn` / `closeIcon` (in-header), `closeBtnFloat` / `closeIconFloat` (titleless), `body` (scrollable body wrapper), and `actions`. The blade picks between the two close-button styles based on whether `title` is set.
 
 ## Related
 

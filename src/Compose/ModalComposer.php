@@ -19,6 +19,7 @@ class ModalComposer
             'closeBtnFloat'  => self::closeBtnFloat(),
             'closeIcon'      => self::closeIcon(),
             'closeIconFloat' => self::closeIconFloat(),
+            'body'           => self::body(),
             'actions'        => self::actions(),
         ];
     }
@@ -49,6 +50,10 @@ class ModalComposer
         return FieldVariants::join(
             'relative w-full',
             self::sizeClass($size),
+            // Cap the panel to the viewport (matching the overlay's p-4 inset) and
+            // lay out header / body / actions as a column so only the body scrolls
+            // when content is taller than the screen — actions stay reachable.
+            'flex flex-col max-h-[calc(100dvh-2rem)]',
             'bg-base-100 text-base-content text-[length:var(--text-field-md)]',
             'rounded-[var(--radius-box)] border-[length:var(--border)] border-base-300',
             // Functional overlay: route the decorative character through the
@@ -61,7 +66,7 @@ class ModalComposer
 
     private static function header(): string
     {
-        return 'flex items-center justify-between mb-sm';
+        return 'flex shrink-0 items-center justify-between mb-sm';
     }
 
     private static function title(): string
@@ -107,8 +112,18 @@ class ModalComposer
         return 'w-4 h-4';
     }
 
+    /**
+     * Body wrapper — the only flex child allowed to shrink, so when the panel
+     * hits its viewport cap the body scrolls while header and actions stay
+     * visible. When content fits, the wrapper is inert (no visual change).
+     */
+    private static function body(): string
+    {
+        return 'min-h-0 overflow-y-auto';
+    }
+
     private static function actions(): string
     {
-        return 'flex items-center justify-end gap-xs mt-lg';
+        return 'flex shrink-0 items-center justify-end gap-xs mt-lg';
     }
 }
