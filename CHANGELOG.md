@@ -7,6 +7,26 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.10.10] — 2026-08-16
+
+### Changed
+- **Light-mode `base-200` / `base-300` lightened on the five themes whose page canvas sat
+  visibly darker than every other theme** — `neotokyo`, `zen`, `verdigris`, `bigblue`, `vapor`.
+  Trigger: a `bg-base-200` well (an author box on an article page under `neotokyo`) read as a
+  heavy slab against `base-100` body copy. Measured in OKLab, those five had a
+  panel↔canvas lightness gap of 0.040–0.044 while the brand default `pinion` and the median
+  theme sit at ≈0.022; the palette `bg` of each was mixed toward its `panel` so the gap now
+  lands at 0.021–0.023 (hue/chroma direction preserved). `base-300` and the neutral/status
+  tints derived from `bg` shift by ≤1 hex step accordingly. `solar` has a similar gap but is
+  the canonical Solarized `base3`/`base2` pair and is left intact. Dark variants are unchanged
+  (their gap already matches `pinion-dark`). New light `bg`: neotokyo `#F5EEE3→#FAF5ED`,
+  zen `#F1F1EB→#F8F8F5`, verdigris `#F5F0E8→#FAF7F3`, bigblue `#F2F2EA→#F8F8F4`,
+  vapor `#F3E8FF→#F7F0FF`. Consumers get it via `composer update` + a CSS rebuild — no
+  markup change.
+- `src/resources/eject-table.json` and `packages/pinion-ui-css/dist/pinion-ui.css`
+  regenerated; they now also carry the `nonblok` / `nonblok-dark` theme that had been added
+  to `lineup.json` without a regen.
+
 ## [0.10.9] — 2026-08-14
 
 ### Fixed

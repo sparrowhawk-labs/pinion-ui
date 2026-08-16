@@ -91,7 +91,7 @@
       "llmTrigger": "和 × サイバー・ナイトライフ",
       "brandDefault": false,
       "light": {
-        "bg": "#F5EEE3",
+        "bg": "#FAF5ED",
         "panel": "#FFFDF8",
         "fg": "#26222B",
         "muted": "#93899A",
@@ -200,7 +200,7 @@
       "llmTrigger": "ソフトなレトロ・Z世代向け",
       "brandDefault": false,
       "light": {
-        "bg": "#F3E8FF",
+        "bg": "#F7F0FF",
         "panel": "#FCF9FF",
         "fg": "#46356B",
         "muted": "#9C8BC0",
@@ -307,7 +307,7 @@
       "llmTrigger": "和風・工芸・旅館・ミニマル志向",
       "brandDefault": false,
       "light": {
-        "bg": "#F1F1EB",
+        "bg": "#F8F8F5",
         "panel": "#FFFFFF",
         "fg": "#2E2C28",
         "muted": "#9A958A",
@@ -373,7 +373,7 @@
       "llmTrigger": "ウォームアイボリー × レトログリーン。温かみのある落ち着いたプロダクト",
       "brandDefault": false,
       "light": {
-        "bg": "#F5F0E8",
+        "bg": "#FAF7F3",
         "panel": "#FFFFFF",
         "fg": "#29261F",
         "muted": "#8C8474",
@@ -406,7 +406,7 @@
       "llmTrigger": "エンタープライズ・B2B 堅め",
       "brandDefault": false,
       "light": {
-        "bg": "#F2F2EA",
+        "bg": "#F8F8F4",
         "panel": "#FFFFFF",
         "fg": "#21242B",
         "muted": "#878C98",
