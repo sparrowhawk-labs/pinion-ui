@@ -566,7 +566,7 @@
 [data-tune-strength="xl"] {
   --tune-k: 1.90;
 }
-[data-tune] {
+:root, [data-tune] {
   --td-radius-box: 0rem;
   --td-radius-field: 0rem;
   --td-radius-selector: 0rem;
@@ -754,7 +754,7 @@
   --font-mono: var(--ovr-font-mono,
         var(--td-font-mono, ui-monospace, "SFMono-Regular", monospace));
 }
-[data-tune="default"] {
+:root:not([data-tune]), [data-tune="default"] {
   --td-sh1-y: 1px;
   --td-sh1-blur: 2px;
 }
@@ -984,7 +984,7 @@
     border: 1px solid color-mix(in oklab, currentColor 14%, transparent);
   }
 }
-[data-tune="default"][data-ja="off"] {
+:root[data-ja="off"]:not([data-tune]), [data-tune="default"][data-ja="off"] {
   --td-font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
   --td-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
@@ -1074,11 +1074,11 @@
 [data-tune] .tune-exempt {
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
-[data-tune] {
+:root, [data-tune] {
   font-family: var(--font-body);
   font-size: var(--font-size-base, 1rem);
 }
-[data-tune] :is(h1, h2, h3, h4, h5, h6) {
+:root :is(h1, h2, h3, h4, h5, h6), [data-tune] :is(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-heading);
   font-weight: var(--font-weight-heading);
 }

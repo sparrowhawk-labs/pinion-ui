@@ -7,6 +7,30 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.10.11] — 2026-08-26
+
+### Fixed
+- **Tune tokens no longer break when `<html>` has no `data-tune` attribute.** The
+  public-token resolver block in `tune.css` (which composes `--h-field-*`, `--px-field-*`,
+  `--px-input-*`, `--py-input-*`, `--text-field-*`, radius/border/spacing/font tokens from
+  `--tb-* + --td-* × --tune-k`) only existed under `[data-tune]`, so in a host app that set
+  `data-theme` but omitted `data-tune` every one of those tokens was invalid at
+  computed-value time — declarations like `padding-inline: var(--px-input-md)` were dropped
+  wholesale and component internals (x-button / x-input paddings and heights) collapsed to 0
+  (hit a real consumer app 2026-08-26). The resolver, the delta-zero defaults, and the font
+  application rules now also apply on `:root`, and the `default` tune's delta block gained a
+  `:root:not([data-tune])` arm — **a root without `data-tune` renders exactly as
+  `data-tune="default"`** (verified pixel-identical in a real consumer app, and
+  computed-style-identical in the golden harness). All 275 tuned theme×tune×strength
+  combos are bit-identical to v0.10.10 (69,575 computed values diffed); `data-tune-strength`
+  and `--ovr-*` overrides are untouched.
+- `ui:lint` still flags a root `<html>` missing `data-tune`, but the message no longer
+  claims the cascade breaks — it now recommends declaring the choice explicitly.
+
+### Added
+- Golden harness: a 276th combo with **no** `data-tune`/`data-tune-strength` attribute, plus
+  a selfcheck gate asserting it deep-equals `pinion|default|md` (regression guard for this bug).
+
 ## [0.10.10] — 2026-08-16
 
 ### Changed

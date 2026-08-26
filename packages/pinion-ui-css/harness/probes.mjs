@@ -237,9 +237,19 @@ for (const { size, rem } of CONTAINER_GUARD) {
   }
 }
 
+/* The UNTUNED combo: no data-tune / data-tune-strength attribute at all
+   (tune/strength = '' → capture.mjs REMOVES the attribute). Guards the
+   no-attribute contract: a root without data-tune must render EXACTLY as
+   data-tune="default" at default strength — selfcheck.mjs asserts this
+   combo deep-equals `pinion|default|md` (regression: before v0.10.11 the
+   resolver only existed under [data-tune], so every tune token was invalid
+   in untuned host apps and component padding collapsed to 0). */
+export const UNTUNED_KEY = 'pinion||';
+export const UNTUNED_PARITY_KEY = 'pinion|default|md';
+
 /* Every combination of theme × tune × strength the harness sweeps. */
 export function combos() {
-  const out = [];
+  const out = [{ theme: 'pinion', tune: '', strength: '', key: UNTUNED_KEY }];
   for (const theme of THEMES)
     for (const tune of TUNES)
       for (const strength of STRENGTHS)

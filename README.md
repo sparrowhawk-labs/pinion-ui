@@ -83,6 +83,10 @@ It flags excluded daisyUI **component** classes and **fixed/hex** colors, while 
 <html data-theme="pinion" data-tune="default">
 ```
 
+Both attributes fall back to their defaults when omitted — a root without `data-tune`
+renders exactly as `data-tune="default"` (since v0.10.11) — but declare them explicitly
+so the theme × tune choice is visible at the cascade root (`ui:lint` nudges you to).
+
 ## Quick start
 
 ```blade

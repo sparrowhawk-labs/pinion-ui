@@ -129,9 +129,11 @@ final class ClassVocabularyLinter
 
     /**
      * Flag a root `<html>` tag missing the theme × tune cascade attributes
-     * (invariant: theme via data-theme × tune via data-tune × component). Without
-     * them the cascade silently breaks — colors stop tracking the theme and tune
-     * tokens (shape/space/size) don't apply, so the page *looks* styled but is off.
+     * (invariant: theme via data-theme × tune via data-tune × component). Both
+     * axes fall back to their defaults when omitted (theme `pinion` carries the
+     * daisyUI default flag; an untuned root resolves as the default tune since
+     * v0.10.11), but the choice should be explicit at the cascade root — an
+     * omitted attribute usually means the layout author never picked one.
      * Only fires on files that actually contain an `<html>` tag (i.e. layouts).
      */
     private function lintRootAttributes(string $source): array
@@ -165,8 +167,8 @@ final class ClassVocabularyLinter
         if (! preg_match('/\bdata-tune\s*=/i', $tag)) {
             $out[] = [
                 'line' => $line, 'token' => 'data-tune', 'kind' => 'missing-data-tune',
-                'message' => '<html> is missing data-tune — tune tokens (shape/space/size) will not cascade. '
-                    . 'Add e.g. data-tune="default".',
+                'message' => '<html> is missing data-tune — the default tune applies, but the choice should be '
+                    . 'explicit at the cascade root. Add e.g. data-tune="default".',
             ];
         }
 

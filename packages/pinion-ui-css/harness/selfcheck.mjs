@@ -18,7 +18,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
-import { CONTAINER_GUARD, WIDTH_FAMILY } from './probes.mjs';
+import { CONTAINER_GUARD, WIDTH_FAMILY, UNTUNED_KEY, UNTUNED_PARITY_KEY } from './probes.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
@@ -91,5 +91,31 @@ for (const { size } of CONTAINER_GUARD) {
 }
 if (guardBad) fail(`container-scale guard: ${guardBad} value(s) off the default container scale — --spacing-<size> is shadowing width-family utilities`);
 console.log(`${guardBad ? '✗' : '✓'} container-scale guard: width-family named sizes pinned to Tailwind defaults`);
+
+/* --- untuned-default parity gate ---
+   A root WITHOUT data-tune must render exactly as data-tune="default" at
+   default strength. Every probe value in the UNTUNED combo must equal its
+   counterpart in pinion|default|md. Regression guard for the pre-v0.10.11
+   bug where the token resolver only existed under [data-tune], so untuned
+   host apps got invalid tokens (component padding/height collapsed to 0). */
+let parityBad = 0;
+const untuned = g.data[UNTUNED_KEY];
+const defaultMd = g.data[UNTUNED_PARITY_KEY];
+if (!untuned || !defaultMd) {
+  fail(`untuned parity: combo missing (${UNTUNED_KEY}: ${!!untuned}, ${UNTUNED_PARITY_KEY}: ${!!defaultMd})`);
+} else {
+  for (const id of Object.keys(defaultMd)) {
+    for (const prop of Object.keys(defaultMd[id])) {
+      const dv = defaultMd[id][prop];
+      const uv = untuned[id]?.[prop];
+      if (uv !== dv) {
+        if (parityBad < 8) console.error(`  ✗ untuned ${id}.${prop} = ${JSON.stringify(uv)} (default: ${JSON.stringify(dv)})`);
+        parityBad++;
+      }
+    }
+  }
+  if (parityBad) fail(`untuned parity: ${parityBad} value(s) differ from data-tune="default" — no-attribute root is not the default tune`);
+  console.log(`${parityBad ? '✗' : '✓'} untuned parity: no data-tune attribute ≡ data-tune="default"`);
+}
 
 process.exit(ok ? 0 : 1);

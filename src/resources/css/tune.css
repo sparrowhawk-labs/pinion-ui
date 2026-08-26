@@ -55,8 +55,10 @@
 
      --tb-{token}   BASE / zero-point      set once on :root, constant
      --td-{token}   signed DELTA           set per [data-tune="…"] — the tune's
-                                           character. Defaults to 0 on [data-tune]
-                                           so calc() never sees an undefined delta.
+                                           character. Defaults to 0 on :root AND
+                                           [data-tune] so calc() never sees an
+                                           undefined delta — a root without
+                                           data-tune renders as the default tune.
      --ovr-{token}  consumer OVERRIDE      escape hatch (inline / utility /
                                            data-tune-{axis}). UNSET by default.
 
@@ -99,10 +101,12 @@
 /* --- SPACING THEME KEYS (t-shirt) ---
    Registering --spacing-<size> as theme keys makes Tailwind generate the full
    spacing-namespace utility set for each bucket (p-md, px-lg, gap-sm, mt-2xl,
-   space-y-xl, …). The static values below are the tune-neutral bases — they
-   only apply where NO [data-tune] ancestor exists; inside a tuned subtree the
-   resolver block re-declares the same key with the tune-reactive calc (that
-   re-declaration is load-bearing for nested tunes — see design doc O1).
+   space-y-xl, …). The static values below exist to make Tailwind GENERATE
+   those utilities; at runtime the resolver block re-declares the same keys
+   with the tune-reactive calc on :root and on every [data-tune] scope (the
+   per-scope re-declaration is load-bearing for nested tunes — see design
+   doc O1 — and the :root arm is what keeps a consumer without data-tune on
+   the default tune instead of invalid tokens).
    Size-utility leakage is accepted as harmless (O1) ONLY for the height/size
    family (h-md, size-lg, …) — additive-only, no stock utility shadowed. The
    width family is NOT harmless and is compensated below. */
@@ -272,9 +276,15 @@
 [data-tune-strength="lg"] { --tune-k: 1.45; }
 [data-tune-strength="xl"] { --tune-k: 1.90; }
 
-/* --- PUBLIC-TOKEN RESOLVERS (on every tuned subtree) ---
+/* --- PUBLIC-TOKEN RESOLVERS (on :root and every tuned subtree) ---
    Defaults every --td-* to 0 / base so calc()/var() never see an undefined
-   delta, then resolves each public token: floor( ovr ?? base + delta·k ). */
+   delta, then resolves each public token: floor( ovr ?? base + delta·k ).
+   The :root arm makes the tokens resolve WITHOUT any data-tune attribute
+   (all Δ=0 → default tune); without it, every public token is invalid at
+   computed-value time in an untuned app and component padding/height
+   collapse to 0. On a root that DOES carry data-tune, per-tune delta
+   blocks below still win by source order (equal specificity). */
+:root,
 [data-tune] {
     /* delta defaults (numeric) */
     --td-radius-box: 0rem;
@@ -513,7 +523,13 @@
    final = base + Δ at k=1; only non-zero deltas listed.
    ============================================================================ */
 
-/* default — origin, all Δ = 0; hairline shadow. */
+/* default — origin, all Δ = 0; hairline shadow.
+   The :root:not([data-tune]) arm makes "no attribute" EXACTLY the default
+   tune (hairline shadow included) — a consumer omitting data-tune renders
+   identically to data-tune="default". :not() guards the flat-by-design
+   tunes (minimal/corporate/luxury): without it, a root carrying any other
+   tune would inherit these shadow deltas via the :root match. */
+:root:not([data-tune]),
 [data-tune="default"] {
     --td-sh1-y: 1px;
     --td-sh1-blur: 2px;
@@ -779,6 +795,7 @@
      playful → (dropped)   elegant → editorial   bold → luxury
    ============================================================================ */
 
+:root[data-ja="off"]:not([data-tune]),
 [data-tune="default"][data-ja="off"] {
     --td-font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
     --td-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -887,13 +904,18 @@
     font-family: ui-sans-serif, system-ui, sans-serif;
 }
 
-/* --- Font Application --- */
+/* --- Font Application ---
+   :root arms keep "no attribute = default tune" true for typography too —
+   the resolver above already defines --font-* on :root, so an untuned app
+   gets the default stacks applied, identical to data-tune="default". */
 
+:root,
 [data-tune] {
     font-family: var(--font-body);
     font-size: var(--font-size-base, 1rem);
 }
 
+:root :is(h1, h2, h3, h4, h5, h6),
 [data-tune] :is(h1, h2, h3, h4, h5, h6) {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);

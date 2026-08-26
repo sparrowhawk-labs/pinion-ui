@@ -56,7 +56,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 | **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft` (11 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
-Themes and Tunes mix freely. Both are activated by the `pinion-ui.css` preset (imported into `app.css` by `ui:install`), which bundles the `data-tune` token system from `tune.css`.
+Themes and Tunes mix freely. Both are activated by the `pinion-ui.css` preset (imported into `app.css` by `ui:install`), which bundles the `data-tune` token system from `tune.css`. Both attributes have working defaults when omitted — a root without `data-tune` renders exactly as `data-tune="default"` (since v0.10.11) — but always declare them explicitly on `<html>` so the choice is visible (`ui:lint` flags omission).
 
 ### Class vocabulary — what you actually write
 

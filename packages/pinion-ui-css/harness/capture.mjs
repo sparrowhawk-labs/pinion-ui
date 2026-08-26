@@ -45,8 +45,12 @@ for (const c of allCombos) {
     ({ theme, tune, strength, probeMeta }) => {
       const h = document.documentElement;
       h.setAttribute('data-theme', theme);
-      h.setAttribute('data-tune', tune);
-      h.setAttribute('data-tune-strength', strength);
+      /* '' = the UNTUNED combo: remove the attribute entirely (setting
+         data-tune="" would still match the [data-tune] resolver). */
+      if (tune) h.setAttribute('data-tune', tune);
+      else h.removeAttribute('data-tune');
+      if (strength) h.setAttribute('data-tune-strength', strength);
+      else h.removeAttribute('data-tune-strength');
       const out = {};
       for (const { id, capture } of probeMeta) {
         const el = document.querySelector(`[data-cap="${id}"]`);
