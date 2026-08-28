@@ -6,7 +6,7 @@
 
 ## What this package is
 
-A Laravel Blade component library (Tailwind v4 + daisyUI v5 + Alpine.js). 46 components — see [`reference/components/index.md`](./reference/components/index.md).
+A Laravel Blade component library (Tailwind v4 + daisyUI v5 + Alpine.js). 47 components — see [`reference/components/index.md`](./reference/components/index.md).
 
 The package also ships the **mermaid/SVG color glue** as build artifacts in [`dist/`](./dist/): `dist/mermaid-theme.js` (runtime JS — inline it inside a `type="module"` mermaid block so figures follow `data-theme`/`data-tune`) and `dist/mermaid-theme.json` (expanded color/theme data for server-side SVG rendering). Canon + regen live in [`scripts/mermaid-theme/`](./scripts/mermaid-theme/) (`node scripts/mermaid-theme/build.mjs`).
 
@@ -24,6 +24,9 @@ Two components compose as a parent with nested children rather than driven by a 
 |---|---|---|
 | `<x-tabs>` | `<x-tab name label :icon>{{ slot }}</x-tab>` | One tab button + one panel. |
 | `<x-accordion>` | `<x-accordion-item title :name>{{ slot }}</x-accordion-item>` | One header + one disclosure region. |
+| `<x-table>` | `<x-table.th>` / `<x-table.td>` / `<x-table.empty>` (body rows stay plain `<tr>`) | One header/body cell / the empty-state row. |
+
+**Never hand-roll a `<table>` for data listings — use `<x-table>`** ([`reference/components/table.md`](./reference/components/table.md)). It owns the whole "table in a card" recipe (card face, header row, cell rhythm, hover, last-row border, `tabular-nums` numeric columns, edge padding aligned to `x-card`'s `p-lg`, empty state) that hand-rolled tables re-invent and get subtly wrong. Editable grids are the exception (`<x-data-grid>` / `<x-sheet>`).
 
 ```blade
 <x-tabs variant="boxed">

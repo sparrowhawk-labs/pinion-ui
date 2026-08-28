@@ -7,6 +7,26 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.12.0] — 2026-09-03
+
+### Added
+- **`<x-table>` — data table component** (parent + nested cells, like `<x-tabs>`).
+  Owns the whole "table in a card" recipe that consumer apps kept re-inventing by
+  hand (and getting subtly wrong): card face, header-row styling, cell rhythm,
+  row hover, last-row border removal, right-aligned `tabular-nums` numeric
+  columns, first/last-column edge padding aligned to `x-card`'s `p-lg`, and an
+  empty-state placeholder.
+  - `<x-table size card hover>` + `<x-table.th>` / `<x-table.td numeric action muted align>` / `<x-table.empty>`.
+  - Body rows stay **plain `<tr>`** (`wire:key` / `@forelse` friction-free) —
+    divider/hover rules are injected from `<tbody>` via arbitrary-variant
+    selectors, and edge padding from `<table>` the same way.
+  - `card` defaults to `true` (the table brings its own `tune-border` +
+    `rounded-[var(--radius-box)]` + `bg-base-100` face); pass `:card="false"`
+    to embed in an existing `<x-card :padding="false">`.
+  - `TableComposer` + fixture matrix (`tests/fixtures/compose/table.json`),
+    reference doc (`reference/components/table.md`), AGENTS.md rule
+    ("never hand-roll a `<table>` for data listings").
+
 ## [0.11.0] — 2026-08-30
 
 ### Changed

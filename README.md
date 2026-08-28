@@ -19,7 +19,7 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 
 ## Features
 
-- **46 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
+- **47 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
 - **37 original themes × light/dark** — a brand default (`pinion`/`pinion-dark`) plus mood, SaaS, and industry palettes (`monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
 - **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="monokai-dark" data-tune="soft"`).
 - **11 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `corporate`, `tech`, `brutal`, `editorial`, `luxury`, `pixel`, `draft`. Each preset bundles ~30 CSS custom properties.
@@ -185,7 +185,7 @@ alone.
 
 ## Components
 
-46 components organised into 7 groups. See [`reference/components/index.md`](./reference/components/index.md) for the full API reference (props, slots, examples) per component.
+47 components organised into 7 groups. See [`reference/components/index.md`](./reference/components/index.md) for the full API reference (props, slots, examples) per component.
 
 ### Form (15)
 `button`, `button-group`, `input`, `textarea`, `select`, `checkbox`, `radio`, `radio-group`, `toggle`, `file-upload`, `rating`, `range-slider`, `input-number`, `input-group`, `pin-input`

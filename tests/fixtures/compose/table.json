@@ -1,0 +1,48 @@
+[
+    {
+        "name": "default — md density, own card shell, hover rows",
+        "props": {},
+        "expected": {
+            "shell": "rounded-[var(--radius-box)] tune-border border-base-content/10 bg-base-100 text-base-content overflow-x-auto",
+            "table": "w-full text-sm [&_th:first-child]:pl-lg [&_th:last-child]:pr-lg [&_td:first-child]:pl-lg [&_td:last-child]:pr-lg",
+            "headRow": "border-b-[length:var(--border)] border-base-content/10 text-left text-xs text-base-content/45",
+            "tbody": "[&>tr]:border-b [&>tr]:border-base-content/10 [&>tr:last-child]:border-b-0 [&>tr]:transition-colors [&>tr:not(.pn-table-empty):hover]:bg-base-200/60",
+            "th": "py-sm px-sm font-medium align-middle",
+            "td": "py-md px-sm align-middle",
+            "empty": "py-xl px-lg text-center"
+        }
+    },
+    {
+        "name": "size=sm — compact rows, xs body text",
+        "props": { "size": "sm" },
+        "expected": {
+            "table": "w-full text-xs [&_th:first-child]:pl-lg [&_th:last-child]:pr-lg [&_td:first-child]:pl-lg [&_td:last-child]:pr-lg",
+            "th": "py-xs px-sm font-medium align-middle",
+            "td": "py-sm px-sm align-middle",
+            "empty": "py-lg px-lg text-center"
+        }
+    },
+    {
+        "name": "size=lg — roomy rows",
+        "props": { "size": "lg" },
+        "expected": {
+            "th": "py-sm px-sm font-medium align-middle",
+            "td": "py-lg px-sm align-middle",
+            "empty": "py-2xl px-lg text-center"
+        }
+    },
+    {
+        "name": "card=false — bare table for embedding in an existing x-card",
+        "props": { "card": false },
+        "expected": {
+            "shell": "overflow-x-auto"
+        }
+    },
+    {
+        "name": "hover=false — static rows, dividers only",
+        "props": { "hover": false },
+        "expected": {
+            "tbody": "[&>tr]:border-b [&>tr]:border-base-content/10 [&>tr:last-child]:border-b-0"
+        }
+    }
+]
