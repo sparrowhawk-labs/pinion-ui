@@ -7,6 +7,23 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.10.12] — 2026-08-28
+
+### Fixed
+- **`ui:lint` no longer flags Alpine state values as daisyUI component classes.** Two
+  extraction bugs made JS string literals inside Alpine directives look like class
+  strings (hit a real consumer app 2026-08-28 — `view === 'diff'` and `tab === '…'`
+  were reported as excluded `diff` / `tab` component classes):
+  1. The static `class="…"` regex also matched the tail of `:class=` / `x-bind:class=`,
+     whitespace-splitting the whole JS expression so bare identifiers (`tab`) became
+     phantom class tokens — and real hits inside ternary branches were double-counted.
+     A lookbehind now leaves those attributes to the dynamic-binding extractor.
+  2. The dynamic-binding extractor pulled *every* quoted literal out of the expression,
+     including comparison/assignment right-hand sides (`view === 'diff'`, `tab = 'x'`).
+     A literal whose preceding non-space character is `=` is now skipped as a state
+     value. Ternary branches (`cond ? 'btn' : '…'`) and object keys
+     (`{ 'tab-active': open }`) are still linted as class strings.
+
 ## [0.10.11] — 2026-08-26
 
 ### Fixed

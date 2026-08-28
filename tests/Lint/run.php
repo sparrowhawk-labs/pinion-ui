@@ -73,6 +73,13 @@ check($linter, 'variant prefixes', '<button class="hover:btn-primary md:bg-blue-
 // ── POSITIVE: dynamic bindings ─────────────────────────────────────────────
 check($linter, ':class ternary', '<a :class="$active ? \'btn-primary\' : \'btn-ghost\'">x</a>', ['btn-primary', 'btn-ghost']);
 check($linter, '@class array', '@class([\'badge\', \'badge-error\' => $hasError])', ['badge', 'badge-error']);
+check($linter, ':class real class in ternary branch, no dupes', '<div :class="view === \'x\' ? \'btn btn-primary\' : \'px-2\'">x</div>', ['btn', 'btn-primary']);
+check($linter, ':class object key still flagged', '<div :class="{ \'tab-active\': open }">x</div>', ['tab-active']);
+
+// ── NEGATIVE: Alpine state values are not class strings (cadence-v2 2026-08-28) ──
+check($linter, 'comparison RHS in x-bind:class', '<div x-on:click="view = \'diff\'" x-bind:class="view === \'diff\' ? \'bg-base-300/60 px-2\' : \'px-2\'">x</div>', []);
+check($linter, 'x-data / x-on state values', '<button x-data="{ tab: \'concept\' }" x-on:click="tab = \'{{ $key }}\'">x</button>', []);
+check($linter, 'assignment RHS not flagged, branch still is', '<div :class="mode !== \'tab\' ? \'flex\' : \'card\'">x</div>', ['card']);
 
 // ── NEGATIVE: plain Tailwind is fine ───────────────────────────────────────
 check($linter, 'plain utilities', '<div class="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-md">x</div>', []);

@@ -196,8 +196,11 @@ final class ClassVocabularyLinter
     {
         $out = [];
 
-        // static: class="..." and class='...'
-        if (preg_match_all('/\bclass\s*=\s*(["\'])(.*?)\1/s', $source, $m, PREG_OFFSET_CAPTURE)) {
+        // static: class="..." and class='...'. The lookbehind keeps this from also
+        // matching the tail of `:class=` / `x-bind:class=` — those hold a JS
+        // expression, and whitespace-splitting it turns bare identifiers
+        // (`tab === 'x'` -> `tab`) into phantom class tokens.
+        if (preg_match_all('/(?<![:\w-])class\s*=\s*(["\'])(.*?)\1/s', $source, $m, PREG_OFFSET_CAPTURE)) {
             foreach ($m[2] as $cap) {
                 $out[] = [$cap[0], $cap[1]];
             }
@@ -225,13 +228,23 @@ final class ClassVocabularyLinter
         return $out;
     }
 
-    /** Extract single- and double-quoted substrings from an expression. */
+    /**
+     * Extract single- and double-quoted substrings from an expression — but only
+     * those in class-string position. A literal that is the right-hand side of a
+     * comparison or assignment (`view === 'diff'`, `tab = 'x'`) is a state VALUE,
+     * not a class list; its preceding non-space character is always `=`, so those
+     * are skipped. Ternary branches (after `?` / `:`) and object keys stay in.
+     */
     private function innerLiterals(string $expr): array
     {
         $lits = [];
-        if (preg_match_all('/"([^"]*)"|\'([^\']*)\'/', $expr, $m)) {
-            foreach ($m[1] as $i => $dq) {
-                $lits[] = $dq !== '' ? $dq : $m[2][$i];
+        if (preg_match_all('/"([^"]*)"|\'([^\']*)\'/', $expr, $m, PREG_OFFSET_CAPTURE)) {
+            foreach ($m[0] as $i => [, $off]) {
+                if (str_ends_with(rtrim(substr($expr, 0, $off)), '=')) {
+                    continue;
+                }
+                $dq = $m[1][$i][0];
+                $lits[] = $dq !== '' ? $dq : $m[2][$i][0];
             }
         }
 
