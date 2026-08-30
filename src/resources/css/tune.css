@@ -1,7 +1,7 @@
 /* ========================================
    pinion-ui Tune — back-compat entry point
    ========================================
-   Since v0.10.13 the tune system is split in two:
+   Since v0.11.0 the tune system is split in two:
      tune-fonts.css  self-hosted @font-face declarations (PixelMplus woff2)
      tune-core.css   the entire tune token system (shape/spacing/font/sizing)
    This file preserves the historical single-import contract: importing

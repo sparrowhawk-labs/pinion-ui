@@ -1,18 +1,18 @@
 /* ========================================
    pinion-ui Tune — self-hosted @font-face declarations
    ========================================
-   Split out of tune.css (v0.10.13) so consumers can opt out of the bundled
+   Split out of tune.css (v0.11.0) so consumers can opt out of the bundled
    font files: import tune-core.css instead of tune.css to get the full tune
    token system with zero font assets in the build output.
 
    --- Self-hosted Pixel Fonts (PixelMplus by itouhiro, M+ FONT LICENSE) ---
    Coarser Japanese pixel alternative to Google's DotGothic16. Used by the
    pixel/arcade tunes when data-ja is on (default). Only PixelMplus10 (10px
-   grid) ships since v0.10.13 — PixelMplus12 was dropped when the pixel tune
+   grid) ships since v0.11.0 — PixelMplus12 was dropped when the pixel tune
    unified on the coarser face (owner decision, 2026-08-30); it remains
    available upstream (itouhiro/PixelMplus) if ever needed again.
 
-   Delivery (v0.10.13): woff2 + unicode-range split, Google-Fonts style.
+   Delivery (v0.11.0): woff2 + unicode-range split, Google-Fonts style.
    Each face is TWO @font-face rules for the SAME family/weight:
      1. full-glyph woff2 (~200-270KB) — JIS level 1+2 kanji, kana, everything.
      2. latin subset woff2 (~3-5KB) — declared LAST so it wins for latin

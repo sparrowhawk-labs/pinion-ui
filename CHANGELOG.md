@@ -7,6 +7,50 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.11.0] — 2026-08-30
+
+### Changed
+- **PixelMplus ships as lazy-split woff2 instead of raw TTF — the pixel tune's font
+  cost on a latin-only page drops from ~1MB (gzipped TTF) to ~7KB.** Each face is now
+  two `@font-face` rules for the same family/weight: a full-glyph woff2 (~200KB, JIS
+  level 1+2 kanji intact — nothing subset away) plus a latin-subset woff2 (~3.5KB)
+  declared last with `unicode-range`, Google-Fonts style. Browsers fetch only the
+  file whose range matches characters actually painted, so the full file loads
+  lazily the moment CJK text renders. Both range lists are generated from the fonts'
+  *actual cmap* — PixelMplus has no U+2014 EM DASH (JIS uses U+2015), and declaring
+  a range the font can't serve makes browsers fetch latin *then* full for nothing on
+  one stray em dash (measured: 260KB wasted). Trigger: pinion-ui.dev's mobile LP
+  measured 6.1s FCP / 6.3s LCP on throttled 4G with 62%+ of transfer being fonts
+  (2026-08-29 ads-LP investigation).
+- **`tune.css` split in three** (BC-transparent): `tune-fonts.css` (the PixelMplus
+  `@font-face` set), `tune-core.css` (the entire token system), and `tune.css` itself
+  as a two-import shim preserving the historical single-import contract. Importing
+  `tune-core.css` alone gives the full tune system with zero font assets in the build.
+- **Font unification (owner-reviewed visual decision, 2026-08-30):** the pixel tune's
+  body/mono unify on **PixelMplus10** (PixelMplus12 dropped — the 10px/12px grid
+  distinction read as noise at real sizes) and the draft tune's Japanese handwriting
+  fallback unifies on **Yomogi** (Zen Kurenaido dropped — near-indistinguishable
+  pairing). Reviewed and deliberately kept: brutal's M PLUS 1p, tech's M PLUS 1 Code.
+  BC note: any consumer CSS referencing the `PixelMplus12` family name now falls
+  through to the stack fallback — see `SEMVER.md`.
+- **Source TTFs removed from the repo** (4.7MB → 535KB of font assets). The woff2
+  files retain every glyph; originals remain upstream (itouhiro/PixelMplus) and in
+  git history. M+ FONT LICENSE retained alongside; the fonts README documents the
+  conversion provenance.
+
+### Added
+- **`src/resources/tune-fonts.json` — machine-readable tune→font-family manifest**, so
+  consumers can build Google Fonts links for only the tunes they use instead of an
+  all-tunes link (~2MB of font CSS, 96% CJK). Per family: `css2` URL fragment,
+  `cjk` flag (lazy-load candidates), `selfHosted` (PixelMplus10), `fallbackOnly`
+  (DotGothic16). Recipe in README "Loading the fonts". The golden harness purge-guard
+  now cross-checks the manifest against `tune-core.css` in both directions.
+
+### Docs
+- README: new "Loading the fonts" section; the Tune presets table updated to the
+  v2 lineup (it still listed pre-v2 names — playful/elegant/bold — and fonts like
+  DM Sans/Fredoka that no longer exist in the CSS).
+
 ## [0.10.12] — 2026-08-28
 
 ### Fixed

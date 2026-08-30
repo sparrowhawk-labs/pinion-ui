@@ -54,7 +54,7 @@ M+ FONT LICENSEについては、配布物に含まれる
 woff2 delivery (pinion-ui)
 --------------------------
 
-pinion-ui v0.10.13以降、配信用に TTF から woff2 を生成して同梱しています
+pinion-ui v0.11.0以降、配信用に TTF から woff2 を生成して同梱しています
 （fonttools/pyftsubset による形式変換・グリフは削っていません）。
 同梱は **PixelMplus10 のみ**です — pixel tune の書体統一（2026-08-30
 オーナー決定）により PixelMplus12 は同梱をやめました（上流

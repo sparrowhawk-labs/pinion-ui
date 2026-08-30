@@ -52,6 +52,23 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.11.0 — 2026-08-30
+
+- **`PixelMplus12` family removed** (pixel-tune unification on PixelMplus10, owner-reviewed).
+  The tune stacks no longer reference it and its `@font-face`/woff2 files are gone; consumer
+  CSS naming `PixelMplus12` directly falls through to its next stack entry. `PixelMplus10`
+  keeps working everywhere and now covers the pixel tune's heading *and* body/mono.
+- **Pixel/draft tune visual defaults changed**: pixel body/mono render in PixelMplus10
+  (was PixelMplus12 — slightly coarser dots at the same sizes); draft's Japanese-glyph
+  fallback is Yomogi for body/mono too (was Zen Kurenaido — near-identical handwriting).
+  No markup or token names changed; this is a rendered-glyph change only.
+- **Source TTFs no longer ship in the package.** Anything reaching into
+  `vendor/…/src/resources/fonts/pixelmplus/*.ttf` must switch to the woff2 files
+  (full-glyph; same coverage) or fetch the TTFs upstream (itouhiro/PixelMplus).
+- Not a break, but load-bearing for upgrades: `tune.css` became a shim importing
+  `tune-fonts.css` + `tune-core.css`. The single-import contract and all computed styles
+  are unchanged (golden harness: 276 combos × 69,828 values identical).
+
 ### v0.9.0 — 2026-07-21
 
 - **BREAKING: the `outrun` theme was removed** (`data-theme="outrun"` / `"outrun-dark"` now matches no block and renders unthemed). It sat too close to `vapor` and `monokai` in the Mood group — the same neon-pink retro cluster. No 1:1 replacement; if you were on it, pick another Mood theme (`vapor`, `pop`, `neotokyo`) or one of the three new ones below.
