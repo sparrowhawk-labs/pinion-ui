@@ -1,0 +1,71 @@
+/* ========================================
+   pinion-ui Tune — self-hosted @font-face declarations
+   ========================================
+   Split out of tune.css (v0.10.13) so consumers can opt out of the bundled
+   font files: import tune-core.css instead of tune.css to get the full tune
+   token system with zero font assets in the build output.
+
+   --- Self-hosted Pixel Fonts (PixelMplus by itouhiro, M+ FONT LICENSE) ---
+   Coarser Japanese pixel alternative to Google's DotGothic16. Used by the
+   pixel/arcade tunes when data-ja is on (default). Only PixelMplus10 (10px
+   grid) ships since v0.10.13 — PixelMplus12 was dropped when the pixel tune
+   unified on the coarser face (owner decision, 2026-08-30); it remains
+   available upstream (itouhiro/PixelMplus) if ever needed again.
+
+   Delivery (v0.10.13): woff2 + unicode-range split, Google-Fonts style.
+   Each face is TWO @font-face rules for the SAME family/weight:
+     1. full-glyph woff2 (~200-270KB) — JIS level 1+2 kanji, kana, everything.
+     2. latin subset woff2 (~3-5KB) — declared LAST so it wins for latin
+        codepoints (CSS font matching: the last matching @font-face for a
+        codepoint takes precedence).
+   The browser fetches only the file(s) whose range matches characters
+   actually rendered: a latin-only page costs ~5KB per face; the full file
+   is fetched lazily the moment Japanese text is painted. No glyphs are
+   ever dropped — this is lazy loading, not subsetting away coverage.
+
+   Both unicode-range lists are generated from the fonts' ACTUAL cmap
+   (all faces share one 7,251-char cmap; latin = exact, full = cmap
+   ranges merged with gap<=256). Never declare a range the font can't
+   serve: PixelMplus has no U+2014 EM DASH (JIS uses U+2015), and a
+   declared-but-missing codepoint makes the browser download the face,
+   find no glyph, then download the NEXT face in the family — one stray
+   em dash on a latin page would pull the 260KB full file for nothing.
+   With cmap-true ranges, unsupported characters skip PixelMplus entirely
+   and go straight to the stack fallback (DotGothic16 → …).
+   Regenerate the lists from fontTools getBestCmap() if the TTFs change.
+   ======================================== */
+
+/* PixelMplus10 — full (JP) */
+@font-face {
+    font-family: 'PixelMplus10';
+    src: url('../fonts/pixelmplus/PixelMplus10-Regular.woff2') format('woff2');
+    unicode-range: U+0391-0451, U+2103-2312, U+2460-266F, U+3000-30FF, U+3231-33CD, U+4E00-9FA0, U+FF01-FFE5;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PixelMplus10';
+    src: url('../fonts/pixelmplus/PixelMplus10-Bold.woff2') format('woff2');
+    unicode-range: U+0391-0451, U+2103-2312, U+2460-266F, U+3000-30FF, U+3231-33CD, U+4E00-9FA0, U+FF01-FFE5;
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+/* PixelMplus10 — latin subset (must come after full: last match wins) */
+@font-face {
+    font-family: 'PixelMplus10';
+    src: url('../fonts/pixelmplus/PixelMplus10-Regular.latin.woff2') format('woff2');
+    unicode-range: U+0001-007F, U+00A0-00FF, U+2010, U+2015, U+2018-2019, U+201C-201D, U+2020-2021, U+2025-2026, U+2030, U+2032-2033, U+203B, U+203E;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PixelMplus10';
+    src: url('../fonts/pixelmplus/PixelMplus10-Bold.latin.woff2') format('woff2');
+    unicode-range: U+0001-007F, U+00A0-00FF, U+2010, U+2015, U+2018-2019, U+201C-201D, U+2020-2021, U+2025-2026, U+2030, U+2032-2033, U+203B, U+203E;
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

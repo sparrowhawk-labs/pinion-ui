@@ -469,28 +469,32 @@
 }
 @font-face {
   font-family: 'PixelMplus10';
-  src: url('../fonts/pixelmplus/PixelMplus10-Regular.ttf') format('truetype');
+  src: url('../fonts/pixelmplus/PixelMplus10-Regular.woff2') format('woff2');
+  unicode-range: U+0391-0451, U+2103-2312, U+2460-266F, U+3000-30FF, U+3231-33CD, U+4E00-9FA0, U+FF01-FFE5;
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'PixelMplus10';
-  src: url('../fonts/pixelmplus/PixelMplus10-Bold.ttf') format('truetype');
+  src: url('../fonts/pixelmplus/PixelMplus10-Bold.woff2') format('woff2');
+  unicode-range: U+0391-0451, U+2103-2312, U+2460-266F, U+3000-30FF, U+3231-33CD, U+4E00-9FA0, U+FF01-FFE5;
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'PixelMplus12';
-  src: url('../fonts/pixelmplus/PixelMplus12-Regular.ttf') format('truetype');
+  font-family: 'PixelMplus10';
+  src: url('../fonts/pixelmplus/PixelMplus10-Regular.latin.woff2') format('woff2');
+  unicode-range: U+0001-007F, U+00A0-00FF, U+2010, U+2015, U+2018-2019, U+201C-201D, U+2020-2021, U+2025-2026, U+2030, U+2032-2033, U+203B, U+203E;
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'PixelMplus12';
-  src: url('../fonts/pixelmplus/PixelMplus12-Bold.ttf') format('truetype');
+  font-family: 'PixelMplus10';
+  src: url('../fonts/pixelmplus/PixelMplus10-Bold.latin.woff2') format('woff2');
+  unicode-range: U+0001-007F, U+00A0-00FF, U+2010, U+2015, U+2018-2019, U+201C-201D, U+2020-2021, U+2025-2026, U+2030, U+2032-2033, U+203B, U+203E;
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -957,8 +961,8 @@
         calc(3px * var(--tune-k)) calc(3px * var(--tune-k)) 0 var(--shadow-ink));
   --font-size-base: 1.125rem;
   --td-font-heading: "PixelMplus10", "DotGothic16", "Press Start 2P", cursive;
-  --td-font-body: "PixelMplus12", "DotGothic16", "Press Start 2P", cursive;
-  --td-font-mono: "PixelMplus12", "DotGothic16", "Press Start 2P", monospace;
+  --td-font-body: "PixelMplus10", "DotGothic16", "Press Start 2P", cursive;
+  --td-font-mono: "PixelMplus10", "DotGothic16", "Press Start 2P", monospace;
 }
 [data-tune="draft"] {
   --td-border: 0.5px;
@@ -969,8 +973,8 @@
   --td-sh1-blur: 6px;
   --shadow-color: rgb(0 0 0 / 0.08);
   --td-font-heading: "Patrick Hand", "Yomogi", ui-sans-serif, system-ui, sans-serif;
-  --td-font-body: "Patrick Hand", "Zen Kurenaido", ui-sans-serif, system-ui, sans-serif;
-  --td-font-mono: "Patrick Hand", "Zen Kurenaido", ui-monospace, monospace;
+  --td-font-body: "Patrick Hand", "Yomogi", ui-sans-serif, system-ui, sans-serif;
+  --td-font-mono: "Patrick Hand", "Yomogi", ui-monospace, monospace;
 }
 [data-tune="draft"] {
   --radius-box: 14px 8px 16px 6px / 8px 16px 6px 14px;
@@ -1023,8 +1027,8 @@
 }
 [data-tune="pixel"][data-ja="off"] {
   --td-font-heading: "Press Start 2P", "PixelMplus10", cursive;
-  --td-font-body: "Press Start 2P", "PixelMplus12", cursive;
-  --td-font-mono: "Press Start 2P", "PixelMplus12", monospace;
+  --td-font-body: "Press Start 2P", "PixelMplus10", cursive;
+  --td-font-mono: "Press Start 2P", "PixelMplus10", monospace;
 }
 [data-tune="draft"][data-ja="off"] {
   --td-font-heading: "Patrick Hand", ui-sans-serif, system-ui, sans-serif;

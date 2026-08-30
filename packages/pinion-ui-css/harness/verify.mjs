@@ -30,7 +30,7 @@ const structural = [
      blocks (light + dark + a non-brand pair member) AND reactive survived. */
   ...THEMES.map((t) => [`theme: ${t}`, css.includes(`[data-theme="${t}"]`) || css.includes(`[data-theme=${t}]`)]),
   ['font: PixelMplus10', css.includes('PixelMplus10')],
-  ['font: PixelMplus12', css.includes('PixelMplus12')],
+  ['font: PixelMplus12 dropped (v0.10.13 unification)', !css.includes('PixelMplus12')],
   ['@font-face present', css.includes('@font-face')],
 ];
 
