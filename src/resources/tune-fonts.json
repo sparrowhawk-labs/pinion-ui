@@ -1,0 +1,41 @@
+{
+  "$comment": "Machine-readable map of which font families each tune requires, so consumers can load ONLY the fonts for the tunes they actually use instead of an all-tunes Google Fonts link (the all-in link is ~2MB of CSS, 96% of it CJK families). Recipe: collect the families of your tunes, drop selfHosted (bundled via tune-fonts.css) and fallbackOnly ones, then build https://fonts.googleapis.com/css2?family=<css2 values joined with &family=>&display=swap — one <link> for cjk:false families, and a second, lazily-loaded <link> (media=print + onload=this.media='all') for cjk:true families so multi-hundred-KB CJK CSS never blocks first paint. Keep this file in sync with the --td-font-* stacks in tune-core.css (guarded by packages/pinion-ui-css/harness/verify.mjs).",
+  "version": 1,
+  "families": {
+    "Inter": { "css2": "Inter:wght@400;500;600;700", "cjk": false },
+    "Instrument Sans": { "css2": "Instrument+Sans:wght@400;500;600", "cjk": false },
+    "IBM Plex Sans": { "css2": "IBM+Plex+Sans:wght@300;400;500;600;700", "cjk": false },
+    "IBM Plex Mono": { "css2": "IBM+Plex+Mono:wght@400;500", "cjk": false },
+    "JetBrains Mono": { "css2": "JetBrains+Mono:wght@400;500;700", "cjk": false },
+    "Space Grotesk": { "css2": "Space+Grotesk:wght@400;500;700", "cjk": false },
+    "Space Mono": { "css2": "Space+Mono:wght@400;700", "cjk": false },
+    "Playfair Display": { "css2": "Playfair+Display:wght@400;500;600;700;800", "cjk": false },
+    "Source Serif 4": { "css2": "Source+Serif+4:opsz,wght@8..60,400;8..60,600", "cjk": false },
+    "Hanken Grotesk": { "css2": "Hanken+Grotesk:wght@300;400;500;600", "cjk": false },
+    "Quicksand": { "css2": "Quicksand:wght@400;500;600;700", "cjk": false },
+    "Nunito": { "css2": "Nunito:wght@400;600;700;800", "cjk": false },
+    "Patrick Hand": { "css2": "Patrick+Hand", "cjk": false },
+    "Press Start 2P": { "css2": "Press+Start+2P", "cjk": false },
+    "Noto Sans JP": { "css2": "Noto+Sans+JP:wght@400;500;700", "cjk": true },
+    "Shippori Mincho": { "css2": "Shippori+Mincho:wght@400;500;700", "cjk": true },
+    "Zen Maru Gothic": { "css2": "Zen+Maru+Gothic:wght@400;500;700", "cjk": true },
+    "Yomogi": { "css2": "Yomogi", "cjk": true },
+    "M PLUS 1p": { "css2": "M+PLUS+1p:wght@400;500;700", "cjk": true },
+    "M PLUS 1 Code": { "css2": "M+PLUS+1+Code:wght@400;500;700", "cjk": true },
+    "DotGothic16": { "css2": "DotGothic16", "cjk": true, "fallbackOnly": true },
+    "PixelMplus10": { "selfHosted": true, "cjk": true }
+  },
+  "tunes": {
+    "default": ["Inter", "Noto Sans JP"],
+    "minimal": ["Inter", "Noto Sans JP"],
+    "sharp": ["Instrument Sans", "Noto Sans JP"],
+    "corporate": ["IBM Plex Sans", "IBM Plex Mono", "Noto Sans JP"],
+    "tech": ["JetBrains Mono", "M PLUS 1 Code", "IBM Plex Sans", "Noto Sans JP"],
+    "brutal": ["Space Grotesk", "Space Mono", "M PLUS 1p"],
+    "editorial": ["Playfair Display", "Source Serif 4", "Shippori Mincho"],
+    "luxury": ["Hanken Grotesk", "Inter", "Noto Sans JP"],
+    "soft": ["Quicksand", "Nunito", "Zen Maru Gothic"],
+    "pixel": ["PixelMplus10", "DotGothic16", "Press Start 2P"],
+    "draft": ["Patrick Hand", "Yomogi"]
+  }
+}

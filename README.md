@@ -22,7 +22,7 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 - **46 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
 - **37 original themes × light/dark** — a brand default (`pinion`/`pinion-dark`) plus mood, SaaS, and industry palettes (`monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
 - **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="monokai-dark" data-tune="soft"`).
-- **11 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `playful`, `corporate`, `brutal`, `elegant`, `bold`, `pixel`, `tech`. Each preset bundles ~30 CSS custom properties.
+- **11 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `corporate`, `tech`, `brutal`, `editorial`, `luxury`, `pixel`, `draft`. Each preset bundles ~30 CSS custom properties.
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
 - **Compose-layer architecture** — class strings live in typed PHP composers (`InputComposer`, `SelectComposer`, etc.), not scattered in Blade. Variants/sizes/states stay testable and refactor-safe.
 - **Dual-use output** — render via `<x-button>` or copy the rendered HTML; it's plain Tailwind + daisyUI + Alpine.
@@ -126,7 +126,7 @@ Components are registered as **anonymous components** (no prefix needed) for the
 | Layer | Attribute / Prop | Controls | Examples |
 |-------|------------------|----------|----------|
 | **Theme** | `data-theme` | Color palette | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (37 original light/dark pairs — see `AGENTS.md` for the catalog) |
-| **Tune** | `data-tune` | Shape, spacing, font, component sizing | `default`, `tech`, `elegant`, `playful` |
+| **Tune** | `data-tune` | Shape, spacing, font, component sizing | `default`, `tech`, `editorial`, `soft` |
 | **Component** | Blade props | Variant, size, behavior | `variant="primary"`, `size="lg"`, `dismissible` |
 
 Theme and Tune are fully orthogonal — any combination works.
@@ -135,17 +135,17 @@ Theme and Tune are fully orthogonal — any combination works.
 
 | Tune | Shape | Font (heading / body) | Sizing | Character |
 |------|-------|-----------------------|--------|-----------|
-| **default** | standard radius | Inter / Inter + Noto Sans JP | standard | Neutral, all-purpose |
-| **minimal** | small radius, no shadow | Inter / Inter + Noto Sans JP | airy spacing, smaller text | Clean, restrained |
-| **sharp** | no radius | DM Sans + Noto Sans JP | slightly smaller | Geometric, precise |
-| **soft** | large radius | Nunito + Zen Maru Gothic | slightly larger | Soft, rounded |
-| **playful** | maximum radius | Fredoka / Quicksand + Zen Maru Gothic | larger | Playful, pop |
-| **corporate** | small radius, no shadow | Source Sans 3 + Noto Sans JP | compact | Solid, business |
-| **brutal** | no radius, thick borders | Space Grotesk + M PLUS 1p | slightly larger | Raw, impactful |
-| **elegant** | standard radius, hairline borders | Playfair Display / Lora + Shippori Mincho | standard (wider) | Refined, serif |
-| **bold** | standard radius, thick borders | Montserrat + Noto Sans JP (w900) | slightly larger | Heavy, strong |
-| **pixel** | no radius, thick borders | Press Start 2P + DotGothic16 | slightly larger | Retro, dotted |
-| **tech** | tiny radius, no shadow | JetBrains Mono / IBM Plex Sans + M PLUS 1 Code | compact | Technical, dense |
+| **default** | standard radius | Inter + Noto Sans JP | standard | Neutral, all-purpose |
+| **minimal** | small radius, no shadow | Inter + Noto Sans JP | airy spacing, smaller text | Quiet, restrained |
+| **sharp** | no radius, hairline shadow | Instrument Sans + Noto Sans JP | slightly tighter | Geometric, precise |
+| **soft** | large radius, soft-blur shadow | Quicksand / Nunito + Zen Maru Gothic | slightly larger | Soft, rounded, warm |
+| **corporate** | small radius, flat | IBM Plex Sans + Noto Sans JP | compact | Solid, business |
+| **tech** | micro-radius, no shadow | JetBrains Mono / IBM Plex Sans + M PLUS 1 Code | compact | Dev console, dense |
+| **brutal** | hard square, thick borders, hard-offset shadow | Space Grotesk / Space Mono + M PLUS 1p | slightly larger | Raw, impactful |
+| **editorial** | standard radius, hairline shadow | Playfair Display / Source Serif 4 + Shippori Mincho | larger type scale, roomy | Refined, serif |
+| **luxury** | generous radius, pill CTA, soft shadow | Hanken Grotesk / Inter + Noto Sans JP | standard | Thin display, premium |
+| **pixel** | no radius, thick borders, hard-offset shadow | PixelMplus10 + DotGothic16 / Press Start 2P | big leading, discrete text ladder | Dot-matrix arcade |
+| **draft** | wobble radius, drafty line | Patrick Hand + Yomogi | roomy leading | Excalidraw hand-drawn |
 
 Each preset writes CSS custom properties across four categories:
 
@@ -153,6 +153,35 @@ Each preset writes CSS custom properties across four categories:
 - **Spacing** — `--spacing-3xs` … `--spacing-7xl` (t-shirt ramp; drives `p-md`, `gap-lg`, `space-y-xl`, …)
 - **Font** — `--font-heading`, `--font-body`, `--font-mono`, `--font-weight-heading`
 - **Component Size** — `--h-field-{xs,sm,md,lg}`, `--px-field-{xs,sm,md,lg}`, `--text-field-{xs,sm,md,lg}`
+
+### Loading the fonts (per-tune, not all-in)
+
+Tunes *reference* font families; only **PixelMplus10** (the `pixel` tune's
+Japanese pixel font) is bundled — as woff2 with a Google-Fonts-style
+`unicode-range` split, so a page that paints only latin text costs ~7KB and
+the full-glyph file (~200KB, JIS level 1+2 intact) loads lazily the moment
+CJK text renders. Every other family is expected from Google Fonts, and
+**you should load only the families for the tunes you actually use**: the
+all-tunes link is ~2MB of CSS, 96% of it CJK families your app may never
+render.
+
+[`src/resources/tune-fonts.json`](./src/resources/tune-fonts.json) is the
+machine-readable map (kept in sync with `tune-core.css` by the golden
+harness). Recipe:
+
+1. Collect `tunes[<your tunes>]`, look each family up in `families`.
+2. Skip `selfHosted` (bundled) and `fallbackOnly` (resilience-only) entries.
+3. Join the `css2` values into
+   `https://fonts.googleapis.com/css2?family=…&family=…&display=swap` —
+   one `<link>` for `cjk: false` families, and a second one for
+   `cjk: true` families loaded lazily
+   (`media="print" onload="this.media='all'"` + `<noscript>` fallback), so
+   multi-hundred-KB CJK font CSS never blocks first paint.
+
+CSS entry points: `tune.css` = fonts + tokens (the historical single
+import, what the preset uses); `tune-core.css` = tokens only (zero font
+assets in your build); `tune-fonts.css` = the PixelMplus `@font-face` set
+alone.
 
 ## Components
 

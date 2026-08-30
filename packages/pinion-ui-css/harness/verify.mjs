@@ -30,9 +30,30 @@ const structural = [
      blocks (light + dark + a non-brand pair member) AND reactive survived. */
   ...THEMES.map((t) => [`theme: ${t}`, css.includes(`[data-theme="${t}"]`) || css.includes(`[data-theme=${t}]`)]),
   ['font: PixelMplus10', css.includes('PixelMplus10')],
-  ['font: PixelMplus12 dropped (v0.10.13 unification)', !css.includes('PixelMplus12')],
+  ['font: PixelMplus12 dropped (v0.11.0 unification)', !css.includes('PixelMplus12')],
   ['@font-face present', css.includes('@font-face')],
 ];
+
+/* --- tune-fonts.json manifest ⇄ tune-core.css cross-check (v0.11.0) ---
+   The manifest is what consumers use to build per-tune Google Fonts links,
+   so every webfont family named in a --td-font-* stack must be declared in
+   it, and vice versa (a manifest family no stack references is dead weight
+   or a stale rename). Generic keywords / system stacks are not webfonts. */
+const manifest = JSON.parse(readFileSync(
+  join(here, '..', '..', '..', 'src', 'resources', 'tune-fonts.json'), 'utf8'));
+const GENERIC = new Set(['SFMono-Regular']); // quoted but never a webfont
+const cssFamilies = new Set(
+  [...css.matchAll(/--td-font-(?:heading|body|mono):\s*([^;]+);/g)]
+    .flatMap(([, stack]) => [...stack.matchAll(/"([^"]+)"/g)].map((m) => m[1]))
+    .filter((f) => !GENERIC.has(f)),
+);
+const manifestFamilies = new Set(Object.keys(manifest.families));
+const notInManifest = [...cssFamilies].filter((f) => !manifestFamilies.has(f));
+const notInCss = [...manifestFamilies].filter((f) => !cssFamilies.has(f));
+structural.push(
+  [`tune-fonts.json covers all CSS families${notInManifest.length ? ` (missing: ${notInManifest.join(', ')})` : ''}`, notInManifest.length === 0],
+  [`tune-fonts.json has no stale families${notInCss.length ? ` (stale: ${notInCss.join(', ')})` : ''}`, notInCss.length === 0],
+);
 
 let ok = true;
 
