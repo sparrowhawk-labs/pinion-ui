@@ -7,6 +7,20 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.12.1] — 2026-09-03
+
+### Fixed
+- **`<x-table.th>` / `<x-table.td>` with `numeric` or `action` no longer wrap.** Both now
+  carry `whitespace-nowrap`: when a key column takes `w-full`, the remaining columns
+  collapse to min-content and CJK header labels (「テーマ」「1日枠」) broke one character
+  per line, and `5 / 10` fractions split at the space (hit in a real consumer ledger
+  2026-09-03). Numbers and short labels are never meant to wrap. An explicit `align`
+  still overrides (and drops the nowrap) as documented.
+
+### Docs
+- `reference/components/table.md`: "key column absorbs the width" recipe (`w-full` on the
+  key `th`, optional `pl-2xl` on the clustered cells).
+
 ## [0.12.0] — 2026-09-03
 
 ### Added

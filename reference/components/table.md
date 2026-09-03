@@ -35,9 +35,9 @@ All other attributes pass through to the shell `<div>` — `class` for margins, 
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `numeric` | `bool` | `false` | Right-aligns; on `td` also adds `tabular-nums` so digit columns line up. Use for counts, amounts, dates-as-numbers. |
-| `action` | `bool` | `false` | Right-aligns; on `td` also adds `whitespace-nowrap`. Use for the trailing buttons/links column (on the matching `th`, usually with an empty slot: `<x-table.th action />`). |
-| `align` | `'left' \| 'center' \| 'right' \| null` | `null` | Explicit override; wins over `numeric`/`action`. |
+| `numeric` | `bool` | `false` | Right-aligns + `whitespace-nowrap` (numbers and short labels never wrap, even when another column is `w-full`); on `td` also adds `tabular-nums` so digit columns line up. Use for counts, amounts, dates-as-numbers. |
+| `action` | `bool` | `false` | Right-aligns + `whitespace-nowrap`. Use for the trailing buttons/links column (on the matching `th`, usually with an empty slot: `<x-table.th action />`). |
+| `align` | `'left' \| 'center' \| 'right' \| null` | `null` | Explicit override; wins over `numeric`/`action` (and drops their `whitespace-nowrap` — add it back via `class` if needed). |
 | `muted` (`td` only) | `bool` | `false` | `text-base-content/60` — secondary figures that shouldn't compete with the key column. |
 
 `size` flows from the parent via `@aware` — never pass it on cells.
@@ -146,6 +146,18 @@ Mixed columns — link column, plain numerics, a styled fraction, a pill link, a
 ```
 
 `:card="false"` drops the table's own border/rounding; the first/last-column `pl-lg`/`pr-lg` keep cell text aligned with the card header's `p-lg`.
+
+### Key column absorbs the width, numeric columns cluster right
+
+Give the key column `w-full`; the other columns shrink to their content (they never wrap — `numeric`/`action` carry `whitespace-nowrap`). Add `pl-2xl` on the clustered cells if you want more air between them than the default `px-sm`.
+
+```blade
+<x-slot:head>
+    <x-table.th class="w-full">Track</x-table.th>
+    <x-table.th numeric class="pl-2xl">Themes</x-table.th>
+    <x-table.th action class="pl-2xl" />
+</x-slot:head>
+```
 
 ### Compact / roomy density
 

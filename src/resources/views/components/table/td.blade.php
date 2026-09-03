@@ -16,7 +16,7 @@
         $align === 'center'          => 'text-center',
         $align === 'right'           => 'text-right',
         $align === 'left'            => 'text-left',
-        (bool) $numeric, (bool) $action => 'text-right',
+        (bool) $numeric, (bool) $action => 'text-right whitespace-nowrap',
         default                      => '',
     };
 @endphp
@@ -25,6 +25,5 @@
     $c['td'],
     $alignClass,
     'tabular-nums' => $numeric,
-    'whitespace-nowrap' => $action,
     'text-base-content/60' => $muted,
 ]) }}>{{ $slot }}</td>
