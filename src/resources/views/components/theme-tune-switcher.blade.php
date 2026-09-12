@@ -2,6 +2,7 @@
     'position' => 'fixed',   // 'fixed' (floating top-right) | 'inline' (sits in flow)
     'compact' => false,      // icon-only triggers (sun-moon / color-dots chip / Aa) — for mobile or tight chrome
     'drop' => 'down',        // dropdown direction: 'down' | 'up' (use 'up' when the switcher sits at the bottom of the screen)
+    'align' => 'right',      // dropdown horizontal anchor: 'right' (default, for top-right chrome) | 'left' (use when the switcher sits near the LEFT edge, e.g. a sidebar footer — a right-anchored 256px menu would run off-screen)
     'attribution' => true,   // show the pinion-ui attribution link pinned at each dropdown's top-right. Opt out with :attribution="false"
     'link' => 'github',      // attribution link target: 'github' (repo, default) | 'site' (pinion-ui.dev) | any URL
     'storage' => true,       // persist the choice to localStorage
@@ -52,7 +53,8 @@
         ? "tune-exempt relative inline-flex items-center {$gap}"
         : "tune-exempt fixed top-3 right-4 z-[900] flex items-center {$gap} {$pad} rounded-lg border border-base-content/15 bg-base-100/90 backdrop-blur shadow-sm";
     // drop=up flips both dropdowns above the trigger row (bottom-of-screen placements).
-    $dropPos = $drop === 'up' ? 'bottom-full right-0 mb-1' : 'top-full right-0 mt-1';
+    $side    = $align === 'left' ? 'left-0' : 'right-0';
+    $dropPos = $drop === 'up' ? "bottom-full {$side} mb-1" : "top-full {$side} mt-1";
     $chev  = '<svg class="size-3 text-base-content/50" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z" clip-rule="evenodd"/></svg>';
     $check = '<svg class="ml-auto size-3 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 5.29a1 1 0 01.006 1.414l-7.5 7.6a1 1 0 01-1.42.005l-3.5-3.5a1 1 0 011.414-1.414l2.79 2.79 6.794-6.886a1 1 0 011.416-.009z" clip-rule="evenodd"/></svg>';
     $dots  = '<span class="size-2 rounded-full bg-primary"></span><span class="size-2 rounded-full bg-secondary"></span><span class="size-2 rounded-full bg-accent"></span>';
