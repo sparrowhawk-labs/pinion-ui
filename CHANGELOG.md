@@ -7,7 +7,7 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
-## [Unreleased]
+## [0.13.0] — 2026-09-12
 
 ### Added
 - **`<x-menu-divider>`** — full-bleed `role="separator"` rule (`my-1 border-t border-base-content/10`)
@@ -18,6 +18,10 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   `position` applies. For sidebar-column footers and form rows, where the default
   `inline-block w-fit` + `w-52` root/panel could only hang off one edge. Default `false`
   (previous output unchanged). Fixture cases added.
+- **`<x-theme-tune-switcher align>`** — horizontal anchor for the theme/tune dropdowns:
+  `'right'` (default, unchanged) | `'left'`. Use `align="left"` when the switcher sits near
+  the left edge (a sidebar footer): a right-anchored 256px panel would run off-screen.
+  Composes with `drop="up"`.
 
 ### Docs
 - Panel-padding rule: dropdown panels carry `py-1` only — rows bring their own `px`, so a

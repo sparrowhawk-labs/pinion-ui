@@ -11,6 +11,7 @@ A self-contained **`data-theme` × `data-tune` switcher** — two dropdowns (the
 | `position` | `'fixed' \| 'inline'` | `'fixed'` | `fixed` = floating top-right card; `inline` = sits in flow (e.g. a header). |
 | `compact` | `bool` | `false` | Icon-only triggers; labels and value text hidden, current values discoverable via hover `title`. For mobile or tight chrome. In both full and compact the bar order is sun/moon (mode) **first/leftmost**, then theme, then tune. |
 | `drop` | `'down' \| 'up'` | `'down'` | Dropdown direction. Use `'up'` when the switcher sits at the bottom of the screen (e.g. a compact mobile bar), so the panels open above it. |
+| `align` | `'right' \| 'left'` | `'right'` | Dropdown horizontal anchor. Use `'left'` when the switcher sits near the LEFT edge (e.g. a sidebar footer) — a right-anchored 256px panel would run off-screen. Composes with `drop`. |
 | `attribution` | `bool` | `true` | Show the pinion-ui attribution link, pinned faint/small at each dropdown's **top-right** (outside the scrollable list, so it stays visible while the list scrolls). Opt out with `:attribution="false"`. |
 | `link` | `'github' \| 'site' \| URL` | `'github'` | Attribution link target: `'github'` = the pinion-ui repo (default), `'site'` = pinion-ui.dev, or any URL string. |
 | `storage` | `bool` | `true` | Persist the choice to `localStorage` (so it survives reloads). |
