@@ -3,6 +3,7 @@
     'position' => 'bottom-end',
     'size' => 'md',
     'width' => 'w-52',
+    'block' => false,
 ])
 
 @php
@@ -10,6 +11,7 @@
         'position' => $position,
         'size' => $size,
         'width' => $width,
+        'block' => $block,
     ]);
 @endphp
 

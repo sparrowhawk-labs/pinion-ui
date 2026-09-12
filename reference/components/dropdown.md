@@ -17,7 +17,8 @@ Click-to-open menu surface — a trigger (button or arbitrary slot) plus a float
 | `label` | `string \| null` | `null` | Convenience: render a built-in trigger button with this label and a rotating chevron. Ignored if the `trigger` slot is supplied. |
 | `position` | `'bottom-end' \| 'bottom-start' \| 'top-end' \| 'top-start'` | `'bottom-end'` | Panel placement relative to the trigger. `*-end` aligns the panel's right edge to the trigger; `*-start` aligns the left edge. `top-*` opens upward. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the built-in trigger button (height / padding / text size via tune tokens). No effect when using the `trigger` slot. |
-| `width` | `string` | `'w-52'` | Tailwind width class applied to the panel. Pass any class string — `w-64`, `w-80`, `min-w-[12rem] w-max`, etc. |
+| `width` | `string` | `'w-52'` | Tailwind width class applied to the panel. Pass any class string — `w-64`, `w-80`, `min-w-[12rem] w-max`, etc. Ignored when `block` is set. |
+| `block` | `bool` | `false` | Fill the parent: the root becomes `block w-full` and the panel pins to both edges (`left-0 right-0`), so it spans the parent's full width — sidebar-column footers, form rows. Only the vertical half of `position` applies (`bottom-*` / `top-*`); `width` is ignored. |
 
 All other attributes pass through to the root `<div>`.
 
@@ -62,6 +63,18 @@ All other attributes pass through to the root `<div>`.
 </x-dropdown>
 ```
 
+### Full-width of the parent (sidebar footer)
+
+```blade
+<div class="w-64">
+    <x-dropdown label="Settings" position="top-start" block>
+        <x-menu-item icon="user">Profile</x-menu-item>
+        <x-menu-divider />
+        <x-menu-item icon="logout">Sign out</x-menu-item>
+    </x-dropdown>
+</div>
+```
+
 ### Wider panel
 
 ```blade
@@ -80,6 +93,7 @@ Class strings come from [`DropdownComposer::compose($props)`](../../src/Compose/
 ## Related
 
 - [`<x-menu-item>`](./menu-item.md) — the standard row component for the panel body.
+- [`<x-menu-divider>`](./menu-divider.md) — full-bleed separator between item groups.
 - [`<x-sidebar>`](./sidebar.md) — for fuller off-canvas navigation.
 - [`<x-tooltip>`](./tooltip.md) — for hover-only informational popovers.
 
@@ -89,4 +103,5 @@ Class strings come from [`DropdownComposer::compose($props)`](../../src/Compose/
 - The panel uses `x-show` + `x-cloak` with a 150 ms scale/opacity transition. The `[x-cloak]{display:none}` rule that makes this effective is bundled in the `pinion-ui.css` preset (v0.7.1+); a duplicate rule in your own CSS is harmless.
 - When using the `trigger` slot, the wrapper inserts the slot inside a `<div @click>` — make sure the inner element doesn't `stopPropagation` on click.
 - The chevron on the built-in trigger rotates 180° when open via a bound `:class`.
+- The panel carries `py-1` only — **no horizontal padding**. Rows (`<x-menu-item>`) bring their own `px`, so a `<x-menu-divider>` reaches both panel edges. Don't add `px-*` to the panel or wrap items in a padded `<div>`; a divider inside it stops short of the edges.
 - The panel does **not** trap focus. If you need a true menu role with arrow-key navigation, layer ARIA attributes onto the items yourself.

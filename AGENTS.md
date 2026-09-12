@@ -184,6 +184,7 @@ Canonical machine-readable source: `src/resources/themes/lineup.json` (name, cat
 - `rating-half` requires the explicit `rating-{size}` class even at default size, or half-star widths collapse. `RatingComposer` always emits it.
 - `<x-collapse>` defaults to **no icon** since v0.2.1 — opt in with `icon="arrow"` or `icon="plus"`.
 - `<x-tooltip>` no longer uses daisyUI's CSS `tooltip` / `data-tip` system (dropped in v0.3.11 for an Alpine + custom-arrow approach; daisyUI's `tooltip` CSS is excluded from the build). The `text` / `position` / `color` / `open` props are unchanged.
+- **Dropdown / menu panels take no horizontal padding.** `<x-dropdown>`'s panel is `py-1` only; the spacing belongs to the rows (`<x-menu-item>` carries its own `px`), and separators are `<x-menu-divider>` (full-bleed `border-t`). Don't add `px-*` to the panel or wrap rows in a padded `<div>` — a divider inside it stops short of the panel edges. Need the panel to span its parent (sidebar footer)? `<x-dropdown block>`.
 - Several components ship **locale-aware aria/label defaults** resolved through `pn_trans()` → `config('pinion-ui.locale')` (default `ja`; an `en` bucket also ships). Components that pull defaults this way:
   - `<x-notification-system>` — toast dismiss button (`notification.close`)
   - `<x-rating>` — clear-radio aria-label (`rating.none`)

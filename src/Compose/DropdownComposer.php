@@ -9,6 +9,7 @@ class DropdownComposer
         $position = $props['position'] ?? 'bottom-end';
         $size     = $props['size']     ?? 'md';
         $width    = $props['width']    ?? 'w-52';
+        $block    = (bool) ($props['block'] ?? false);
 
         return [
             // w-fit (width: fit-content): a grid item's display is
@@ -24,9 +25,11 @@ class DropdownComposer
             // `justify-self-start`/`self-start`, it does NOT hard-code
             // 'start' and so still honours an explicit `place-items-center`
             // (or any other alignment) a consumer's grid/flex sets.
-            'root'    => 'relative inline-block w-fit',
+            // block: the dropdown fills its parent (sidebar column, form
+            // row) and the panel spans that full width — `width` is ignored.
+            'root'    => $block ? 'relative block w-full' : 'relative inline-block w-fit',
             'trigger' => self::trigger($size),
-            'menu'    => self::menu($position, $width),
+            'menu'    => self::menu($position, $width, $block),
             'icon'    => 'w-4 h-4 transition-transform',
         ];
     }
@@ -57,19 +60,24 @@ class DropdownComposer
         };
     }
 
-    private static function menu(string $position, string $width): string
+    private static function menu(string $position, string $width, bool $block = false): string
     {
         return FieldVariants::join(
             'absolute z-40',
-            self::positionClasses($position),
-            $width,
+            self::positionClasses($position, $block),
+            $block ? '' : $width,
             'bg-base-100 border-[length:var(--border)] border-base-300',
             'rounded-[var(--radius-box)] shadow-[var(--shadow-box)] py-1 overflow-hidden',
         );
     }
 
-    private static function positionClasses(string $position): string
+    private static function positionClasses(string $position, bool $block = false): string
     {
+        if ($block) {
+            // Both edges pinned to the (w-full) root; only the vertical half of `position` applies.
+            return 'left-0 right-0 ' . (str_starts_with($position, 'top') ? 'bottom-full mb-1' : 'top-full mt-1');
+        }
+
         return match ($position) {
             'bottom-start' => 'left-0 top-full mt-1',
             'top-end'      => 'right-0 bottom-full mb-1',

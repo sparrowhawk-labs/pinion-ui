@@ -7,6 +7,22 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [Unreleased]
+
+### Added
+- **`<x-menu-divider>`** — full-bleed `role="separator"` rule (`my-1 border-t border-base-content/10`)
+  for grouping `<x-menu-item>` rows inside `<x-dropdown>` / sidebar navs. Lighter than
+  `<x-divider>` (no label, no flex wrapper). Class merges via `$attributes->merge`.
+- **`<x-dropdown block>`** — fill-the-parent form: root becomes `block w-full`, the panel
+  pins to both edges (`left-0 right-0`) and ignores `width`; only the vertical half of
+  `position` applies. For sidebar-column footers and form rows, where the default
+  `inline-block w-fit` + `w-52` root/panel could only hang off one edge. Default `false`
+  (previous output unchanged). Fixture cases added.
+
+### Docs
+- Panel-padding rule: dropdown panels carry `py-1` only — rows bring their own `px`, so a
+  divider reaches the panel edges. Recorded in `AGENTS.md`, `dropdown.md`, `menu-divider.md`.
+
 ## [0.12.1] — 2026-09-03
 
 ### Fixed

@@ -64,7 +64,8 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 |---|---|
 | [`<x-tabs>`](./tabs.md) | Tabbed content — parent `<x-tabs>` + nested `<x-tab name label :icon>` children, `underline` / `boxed` / `pill` variants, Alpine-driven panel switching. |
 | [`<x-menu-item>`](./menu-item.md) | Single nav item — active/disabled states, optional icon, renders `<a>` when `href` is set. |
-| [`<x-dropdown>`](./dropdown.md) | Trigger + panel menu built on Alpine — placements, hover/click open, keyboard nav. |
+| [`<x-menu-divider>`](./menu-divider.md) | Full-bleed `role="separator"` rule between menu-item groups inside a dropdown / sidebar nav. |
+| [`<x-dropdown>`](./dropdown.md) | Trigger + panel menu built on Alpine — placements, hover/click open, keyboard nav; `block` fills the parent width. |
 | [`<x-lang-switcher>`](./lang-switcher.md) | Navbar language switcher — label + chip trigger + dropdown of server-rendered locale links, same control family as `<x-theme-tune-switcher>`. Locale-routing-agnostic (you supply each `href`). |
 | [`<x-breadcrumb>`](./breadcrumb.md) | Path-style nav from an `$items` array — separators, current-page highlight. |
 | [`<x-sidebar>`](./sidebar.md) | Off-canvas drawer panel — left/right placement, `trigger` slot, focus trap, ESC + backdrop click to close. |
