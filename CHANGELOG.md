@@ -7,6 +7,15 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.14.3] — 2026-09-13
+
+### Changed
+- **`carbon` / `glyph` / `noir` pulled slightly apart** so the set reads as three characters instead of one:
+  `carbon` = steel-cool charcoal (a step of blue in every grey, accent `#A7ADB3`), `glyph` = the hardest
+  pure black × pure white (fg `#FFFFFF`, accent `#D0D0D6`), `noir` = sepia warm black with a tan accent
+  (`#B49A7E`). Primary stays a dark tone of the base in dark mode (v0.14.2 rule); all `*-content`
+  pairs ≥ 5:1.
+
 ## [0.14.2] — 2026-09-13
 
 ### Changed
