@@ -19,7 +19,7 @@
     // which is a simple light/dark toggle button.)
     //
     // v0.6.0: the default list is the shipped 36-theme lineup, grouped
-    // (Brand / Mood / SaaS / Industry) via pn_theme_groups() — the same
+    // (Brand / Mood / SaaS / Industry / Tonal) via pn_theme_groups() — the same
     // lineup.json that generates the theme CSS, so this picker cannot drift.
     // Each lineup entry is a light/dark PAIR (`<name>` / `<name>-dark`); a
     // sun/moon mode toggle switches the whole picker between the two columns.
@@ -114,7 +114,7 @@
             return null;
         },
         catOf(id) { return this.pairOf(id)?.cat ?? null; },
-        catColor: { Brand: 'bg-primary', Mood: 'bg-accent', SaaS: 'bg-info', Industry: 'bg-secondary' },
+        catColor: { Brand: 'bg-primary', Mood: 'bg-accent', SaaS: 'bg-info', Industry: 'bg-secondary', Tonal: 'bg-neutral' },
         idFor(t) { return this.mode === 'dark' ? t.dark : t.light; },
         apply(id) {
             this.theme = id;

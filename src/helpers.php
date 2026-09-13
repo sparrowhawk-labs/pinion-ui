@@ -62,6 +62,7 @@ if (!function_exists('pn_theme_groups')) {
             '美学系 (mood)' => 'Mood',
             'SaaS 実用' => 'SaaS',
             '業種特化' => 'Industry',
+            'トーナル (tonal)' => 'Tonal',
         ];
 
         $lineup = json_decode(

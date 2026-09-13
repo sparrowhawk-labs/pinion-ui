@@ -7,6 +7,20 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.15.0] — 2026-09-13
+
+### Added
+- **New theme category `トーナル (tonal)` → switcher group `Tonal`** (chip color `bg-neutral`). Tone-on-tone
+  palettes: `primary` / `secondary` / `accent` share the base hue, and in dark mode `primary` stays a dark
+  tone so `bg-primary` surfaces (rails, primary buttons) never invert to a light panel. `carbon` / `glyph` /
+  `noir` move from Mood into this group.
+- **Three tonal pairs derived from existing moods**: `tide` (`solar`'s teal × ivory), `nocturne`
+  (`neotokyo`'s indigo-violet night), `clay` (`ember` / claude.ai-like ivory × clay). Status colors reuse
+  the parent theme's `extra[]`. Lineup is now 46 pairs (`pn_theme_groups()` returns a 5th key `Tonal`).
+
+### Changed
+- `AGENTS.md` / `README.md` lineup counts and the category list updated (Brand / Mood / SaaS / Industry / Tonal).
+
 ## [0.14.3] — 2026-09-13
 
 ### Changed

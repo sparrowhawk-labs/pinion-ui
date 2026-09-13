@@ -1367,7 +1367,7 @@
     {
       "name": "carbon",
       "source": "Monochrome set (2026-09-13): 鋼の冷灰。青みを一段のせた炭。primary/secondary/accent は base と同色系",
-      "category": "美学系 (mood)",
+      "category": "トーナル (tonal)",
       "llmTrigger": "ミニマル・無個性の既定 dark。色相ゼロの炭グレー。アプリの標準 dark に",
       "brandDefault": false,
       "light": {
@@ -1394,7 +1394,7 @@
     {
       "name": "glyph",
       "source": "Monochrome set (2026-09-13): Nothing 風。最も硬い純黒×純白・色味ゼロ・LED の白",
-      "category": "美学系 (mood)",
+      "category": "トーナル (tonal)",
       "llmTrigger": "Nothing Phone 風の純黒 dark。冷たい白と青みグレー。mono UI 文字・ドット表現と合わせる",
       "brandDefault": false,
       "light": {
@@ -1421,7 +1421,7 @@
     {
       "name": "noir",
       "source": "Monochrome set (2026-09-13): セピアの暖黒。フィルムの粒子と活字。タンのアクセント",
-      "category": "美学系 (mood)",
+      "category": "トーナル (tonal)",
       "llmTrigger": "暖色寄りの黒 dark。フィルム・活字の質感。単色でシックに",
       "brandDefault": false,
       "light": {
@@ -1443,6 +1443,117 @@
         "secondary": "#362B22",
         "accent": "#B49A7E",
         "extra": []
+      }
+    },
+    {
+      "name": "tide",
+      "source": "Tonal set (2026-09-13): solar のティール×アイボリーを同系色で。Solarized の海",
+      "category": "トーナル (tonal)",
+      "llmTrigger": "solar の色調で静かに。primary/secondary/accent が base のティール系。エディタ・精密ツール",
+      "brandDefault": false,
+      "light": {
+        "bg": "#EBE6D6",
+        "panel": "#FAF4E2",
+        "fg": "#073642",
+        "muted": "#6B7F85",
+        "primary": "#17414C",
+        "secondary": "#3D6470",
+        "accent": "#47747F",
+        "extra": [
+          "#DC322F",
+          "#B58900",
+          "#859900",
+          "#268BD2"
+        ]
+      },
+      "dark": {
+        "bg": "#00232C",
+        "panel": "#063440",
+        "fg": "#A9BCBC",
+        "muted": "#7E9599",
+        "primary": "#0C3F4B",
+        "secondary": "#0F4654",
+        "accent": "#6FA6B1",
+        "extra": [
+          "#E4574B",
+          "#C29500",
+          "#8CA82E",
+          "#4B9FD8"
+        ]
+      }
+    },
+    {
+      "name": "nocturne",
+      "source": "Tonal set (2026-09-13): neotokyo の藍紫の夜を同系色で。朱・金は status に退く",
+      "category": "トーナル (tonal)",
+      "llmTrigger": "neotokyo の色調で静かに。藍紫の base に同系の primary/secondary/accent。夜・和×サイバーの余韻",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F2EDF4",
+        "panel": "#FCFAFD",
+        "fg": "#26222B",
+        "muted": "#8E8497",
+        "primary": "#2F2739",
+        "secondary": "#5B4F6A",
+        "accent": "#7D6C90",
+        "extra": [
+          "#D42B3A",
+          "#C99A2E",
+          "#178A67",
+          "#2B4C7E"
+        ]
+      },
+      "dark": {
+        "bg": "#161120",
+        "panel": "#211A2D",
+        "fg": "#ECE4F2",
+        "muted": "#9A8CA8",
+        "primary": "#2B2239",
+        "secondary": "#3C2F4E",
+        "accent": "#A28DC2",
+        "extra": [
+          "#FF4757",
+          "#F0C34E",
+          "#2DD4BF",
+          "#6C8CFF"
+        ]
+      }
+    },
+    {
+      "name": "clay",
+      "source": "Tonal set (2026-09-13): ember（claude.ai 風）のアイボリー×クレイを同系色で。テラコッタは accent に薄く",
+      "category": "トーナル (tonal)",
+      "llmTrigger": "claude.ai の色調で静かに。暖いアイボリー／こげ茶の base に同系の primary/secondary、クレイの accent。AI プロダクト",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F5F1E9",
+        "panel": "#FDFBF6",
+        "fg": "#2A2520",
+        "muted": "#7A6F62",
+        "primary": "#3A2F27",
+        "secondary": "#6E5A49",
+        "accent": "#93634D",
+        "extra": [
+          "#BE3A30",
+          "#A87716",
+          "#58824B",
+          "#4A6FA5"
+        ]
+      },
+      "dark": {
+        "bg": "#1E1B18",
+        "panel": "#2A2622",
+        "fg": "#EDE6DA",
+        "muted": "#A29A8C",
+        "primary": "#2F2A25",
+        "secondary": "#43392F",
+        "accent": "#C9927A",
+        "extra": [
+          "#E0806E",
+          "#D9A33C",
+          "#8FAF7E",
+          "#85A8D8"
+        ]
       }
     }
   ]

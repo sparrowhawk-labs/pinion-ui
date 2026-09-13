@@ -80,7 +80,7 @@
 }
 
 /* ── BEGIN GENERATED THEME LINEUP — gen-themes.mjs (do not edit by hand) ── */
-/* 43 themes × light/dark = 86 blocks, generated from
+/* 46 themes × light/dark = 92 blocks, generated from
    src/resources/themes/lineup.json (locked 2026-07-19). Regenerate with
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
@@ -3045,7 +3045,7 @@
     --noise:                   0;
 }
 
-/* carbon / carbon-dark — 美学系 (mood) · ミニマル・無個性の既定 dark。色相ゼロの炭グレー。アプリの標準 dark に (Monochrome set (2026-09-13): 鋼の冷灰。青みを一段のせた炭。primary/secondary/accent は base と同色系) */
+/* carbon / carbon-dark — トーナル (tonal) · ミニマル・無個性の既定 dark。色相ゼロの炭グレー。アプリの標準 dark に (Monochrome set (2026-09-13): 鋼の冷灰。青みを一段のせた炭。primary/secondary/accent は base と同色系) */
 
 @plugin 'daisyui/theme' {
     name:                      'carbon';
@@ -3119,7 +3119,7 @@
     --noise:                   0;
 }
 
-/* glyph / glyph-dark — 美学系 (mood) · Nothing Phone 風の純黒 dark。冷たい白と青みグレー。mono UI 文字・ドット表現と合わせる (Monochrome set (2026-09-13): Nothing 風。最も硬い純黒×純白・色味ゼロ・LED の白) */
+/* glyph / glyph-dark — トーナル (tonal) · Nothing Phone 風の純黒 dark。冷たい白と青みグレー。mono UI 文字・ドット表現と合わせる (Monochrome set (2026-09-13): Nothing 風。最も硬い純黒×純白・色味ゼロ・LED の白) */
 
 @plugin 'daisyui/theme' {
     name:                      'glyph';
@@ -3193,7 +3193,7 @@
     --noise:                   0;
 }
 
-/* noir / noir-dark — 美学系 (mood) · 暖色寄りの黒 dark。フィルム・活字の質感。単色でシックに (Monochrome set (2026-09-13): セピアの暖黒。フィルムの粒子と活字。タンのアクセント) */
+/* noir / noir-dark — トーナル (tonal) · 暖色寄りの黒 dark。フィルム・活字の質感。単色でシックに (Monochrome set (2026-09-13): セピアの暖黒。フィルムの粒子と活字。タンのアクセント) */
 
 @plugin 'daisyui/theme' {
     name:                      'noir';
@@ -3257,6 +3257,228 @@
     --color-error:             #D1605A;
     --color-error-content:     #110D0A;
     --root-bg:                 #110D0A;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* tide / tide-dark — トーナル (tonal) · solar の色調で静かに。primary/secondary/accent が base のティール系。エディタ・精密ツール (Tonal set (2026-09-13): solar のティール×アイボリーを同系色で。Solarized の海) */
+
+@plugin 'daisyui/theme' {
+    name:                      'tide';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FAF4E2;
+    --color-base-200:          #EBE6D6;
+    --color-base-300:          #D8D7C9;
+    --color-base-content:      #073642;
+    --color-primary:           #17414C;
+    --color-primary-content:   #FAF4E2;
+    --color-secondary:         #3D6470;
+    --color-secondary-content: #FAF4E2;
+    --color-accent:            #47747F;
+    --color-accent-content:    #FAF4E2;
+    --color-neutral:           #2C4E57;
+    --color-neutral-content:   #FAF4E2;
+    --color-info:              #268BD2;
+    --color-info-content:      #073642;
+    --color-success:           #859900;
+    --color-success-content:   #073642;
+    --color-warning:           #B58900;
+    --color-warning-content:   #073642;
+    --color-error:             #DC322F;
+    --color-error-content:     #FAF4E2;
+    --root-bg:                 #EBE6D6;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'tide-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #063440;
+    --color-base-200:          #00232C;
+    --color-base-300:          #17363E;
+    --color-base-content:      #A9BCBC;
+    --color-primary:           #0C3F4B;
+    --color-primary-content:   #A9BCBC;
+    --color-secondary:         #0F4654;
+    --color-secondary-content: #A9BCBC;
+    --color-accent:            #6FA6B1;
+    --color-accent-content:    #00232C;
+    --color-neutral:           #214751;
+    --color-neutral-content:   #A9BCBC;
+    --color-info:              #4B9FD8;
+    --color-info-content:      #00232C;
+    --color-success:           #8CA82E;
+    --color-success-content:   #00232C;
+    --color-warning:           #C29500;
+    --color-warning-content:   #00232C;
+    --color-error:             #E4574B;
+    --color-error-content:     #00232C;
+    --root-bg:                 #00232C;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* nocturne / nocturne-dark — トーナル (tonal) · neotokyo の色調で静かに。藍紫の base に同系の primary/secondary/accent。夜・和×サイバーの余韻 (Tonal set (2026-09-13): neotokyo の藍紫の夜を同系色で。朱・金は status に退く) */
+
+@plugin 'daisyui/theme' {
+    name:                      'nocturne';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FCFAFD;
+    --color-base-200:          #F2EDF4;
+    --color-base-300:          #E0DBE2;
+    --color-base-content:      #26222B;
+    --color-primary:           #2F2739;
+    --color-primary-content:   #FCFAFD;
+    --color-secondary:         #5B4F6A;
+    --color-secondary-content: #FCFAFD;
+    --color-accent:            #7D6C90;
+    --color-accent-content:    #FCFAFD;
+    --color-neutral:           #403C45;
+    --color-neutral-content:   #FCFAFD;
+    --color-info:              #416498;
+    --color-info-content:      #FCFAFD;
+    --color-success:           #178A67;
+    --color-success-content:   #FCFAFD;
+    --color-warning:           #C99A2E;
+    --color-warning-content:   #26222B;
+    --color-error:             #D42B3A;
+    --color-error-content:     #FCFAFD;
+    --root-bg:                 #F2EDF4;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'nocturne-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #211A2D;
+    --color-base-200:          #161120;
+    --color-base-300:          #2F2939;
+    --color-base-content:      #ECE4F2;
+    --color-primary:           #2B2239;
+    --color-primary-content:   #ECE4F2;
+    --color-secondary:         #3C2F4E;
+    --color-secondary-content: #ECE4F2;
+    --color-accent:            #A28DC2;
+    --color-accent-content:    #161120;
+    --color-neutral:           #3B3447;
+    --color-neutral-content:   #ECE4F2;
+    --color-info:              #6C8CFF;
+    --color-info-content:      #161120;
+    --color-success:           #2DD4BF;
+    --color-success-content:   #161120;
+    --color-warning:           #F0C34E;
+    --color-warning-content:   #161120;
+    --color-error:             #FF4757;
+    --color-error-content:     #161120;
+    --root-bg:                 #161120;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* clay / clay-dark — トーナル (tonal) · claude.ai の色調で静かに。暖いアイボリー／こげ茶の base に同系の primary/secondary、クレイの accent。AI プロダクト (Tonal set (2026-09-13): ember（claude.ai 風）のアイボリー×クレイを同系色で。テラコッタは accent に薄く) */
+
+@plugin 'daisyui/theme' {
+    name:                      'clay';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FDFBF6;
+    --color-base-200:          #F5F1E9;
+    --color-base-300:          #E3DFD7;
+    --color-base-content:      #2A2520;
+    --color-primary:           #3A2F27;
+    --color-primary-content:   #FDFBF6;
+    --color-secondary:         #6E5A49;
+    --color-secondary-content: #FDFBF6;
+    --color-accent:            #93634D;
+    --color-accent-content:    #FDFBF6;
+    --color-neutral:           #443F3A;
+    --color-neutral-content:   #FDFBF6;
+    --color-info:              #4A6FA5;
+    --color-info-content:      #FDFBF6;
+    --color-success:           #58824B;
+    --color-success-content:   #FDFBF6;
+    --color-warning:           #A87716;
+    --color-warning-content:   #2A2520;
+    --color-error:             #BE3A30;
+    --color-error-content:     #FDFBF6;
+    --root-bg:                 #F5F1E9;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'clay-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #2A2622;
+    --color-base-200:          #1E1B18;
+    --color-base-300:          #36332F;
+    --color-base-content:      #EDE6DA;
+    --color-primary:           #2F2A25;
+    --color-primary-content:   #EDE6DA;
+    --color-secondary:         #43392F;
+    --color-secondary-content: #EDE6DA;
+    --color-accent:            #C9927A;
+    --color-accent-content:    #1E1B18;
+    --color-neutral:           #433F3A;
+    --color-neutral-content:   #EDE6DA;
+    --color-info:              #85A8D8;
+    --color-info-content:      #1E1B18;
+    --color-success:           #8FAF7E;
+    --color-success-content:   #1E1B18;
+    --color-warning:           #D9A33C;
+    --color-warning-content:   #1E1B18;
+    --color-error:             #E0806E;
+    --color-error-content:     #1E1B18;
+    --root-bg:                 #1E1B18;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;

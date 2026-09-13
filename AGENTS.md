@@ -55,7 +55,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 
 | Layer | Where it lives | Examples |
 |---|---|---|
-| **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (37 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
+| **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (46 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
 | **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft` (11 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
@@ -121,9 +121,9 @@ Suppress an intentional exception with a `pinion-lint-ignore` comment on the lin
 
 ## Theme lineup & selection guide (v0.7.0)
 
-pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 39 themes, each a **light/dark pair**:
+pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 46 themes, each a **light/dark pair** (Tonal = tone-on-tone sets since v0.15.0: primary / secondary / accent share the base hue, and in dark mode primary stays dark so `bg-primary` surfaces never invert):
 
-- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`), and **all names are bare** — the v0.6 `mood-` prefix was dropped in v0.7.0 (`mood-zen` → `zen`, …; the whole prefix is gone). A theme's category (Brand / Mood / SaaS / Industry) is metadata: it lives in `lineup.json`, in the Group column below, and as the grouped headings + category chip in `<x-theme-tune-switcher>` — it is no longer encoded in the name.
+- **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`), and **all names are bare** — the v0.6 `mood-` prefix was dropped in v0.7.0 (`mood-zen` → `zen`, …; the whole prefix is gone). A theme's category (Brand / Mood / SaaS / Industry / Tonal) is metadata: it lives in `lineup.json`, in the Group column below, and as the grouped headings + category chip in `<x-theme-tune-switcher>` — it is no longer encoded in the name.
 - **Default**: `pinion` applies at `:root` automatically when no `data-theme` is set; if the OS prefers dark (`prefers-color-scheme: dark`), `pinion-dark` applies instead (it carries daisyUI's `prefersdark` flag). An explicit `data-theme` on any element always wins over both. To pin light regardless of OS setting, set `data-theme="pinion"` explicitly.
 - **Page canvas vs component face**: every theme paints the page background (`:root`) with its tinted canvas color and puts components on `base-100` (white in light themes) — do **not** hardcode a body background. `bg-base-200` equals the canvas color (recessed wells, hover); `border-base-300` is the matching border tone.
 - **`reactive`** — one extra opt-in, light-only theme (GitHub-Light-adjacent, for report tooling). Not part of the pairs. As of v0.6.1 the brand default `pinion` shares this palette family, so `reactive` mostly matters for the report tooling that hardcodes its name.
@@ -150,6 +150,12 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 | `payments` / `-dark` | SaaS | Payments, fintech（決済・フィンテック） |
 | `docs` / `-dark` | SaaS | Documentation, knowledge base（ドキュメント・ナレッジベース） |
 | `mono` / `-dark` | SaaS | Minimal tools, portfolios（ミニマルツール・ポートフォリオ） |
+| `carbon` / `-dark` | Tonal | Steel-cool charcoal; primary/secondary/accent in the base hue, dark primary stays dark（鋼の冷灰・同系色・反転しない） |
+| `glyph` / `-dark` | Tonal | Hardest pure black × pure white, Nothing-like（純黒×純白・Nothing 風） |
+| `noir` / `-dark` | Tonal | Sepia warm black, tan accent（セピアの暖黒・タン） |
+| `tide` / `-dark` | Tonal | `solar`'s teal × ivory, tone-on-tone（solar の色調を同系色で） |
+| `nocturne` / `-dark` | Tonal | `neotokyo`'s indigo-violet night, tone-on-tone（neotokyo の藍紫を同系色で） |
+| `clay` / `-dark` | Tonal | `ember` (claude.ai-like) ivory × clay, tone-on-tone（claude.ai 風を同系色で） |
 | `ops` / `-dark` | SaaS | PM, operations, internal tools（PM・運用・社内ツール） |
 | `finance` / `-dark` | SaaS | Finance / legal enterprise（金融・法務エンタープライズ） |
 | `people` / `-dark` | SaaS | HR, community（HR・コミュニティ） |
