@@ -1385,9 +1385,9 @@
         "panel": "#151515",
         "fg": "#E6E6E6",
         "muted": "#7C7C7C",
-        "primary": "#E6E6E6",
-        "secondary": "#A3A3A3",
-        "accent": "#F5F5F5",
+        "primary": "#1E1E1E",
+        "secondary": "#2C2C2C",
+        "accent": "#9E9E9E",
         "extra": []
       }
     },
@@ -1412,9 +1412,9 @@
         "panel": "#101011",
         "fg": "#F2F2F2",
         "muted": "#8E8E93",
-        "primary": "#FFFFFF",
-        "secondary": "#8E8E93",
-        "accent": "#D9D9DE",
+        "primary": "#161617",
+        "secondary": "#232326",
+        "accent": "#9A9AA0",
         "extra": []
       }
     },
@@ -1439,9 +1439,9 @@
         "panel": "#181513",
         "fg": "#E9E2D9",
         "muted": "#857B72",
-        "primary": "#E9E2D9",
-        "secondary": "#A69C91",
-        "accent": "#C9B8A6",
+        "primary": "#201C19",
+        "secondary": "#2E2825",
+        "accent": "#9C9086",
         "extra": []
       }
     }

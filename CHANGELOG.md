@@ -7,6 +7,15 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.14.2] — 2026-09-13
+
+### Changed
+- **`carbon-dark` / `glyph-dark` / `noir-dark`: `primary` / `secondary` are now *dark* tones** of the base
+  family (`#1E1E1E` / `#161617` / `#201C19` primary; secondary one step lighter) instead of near-white,
+  and `accent` is a mid grey. A `bg-primary` surface (sidebar rail, primary button) therefore stays dark
+  on these themes rather than inverting to a light panel. `*-content` still resolves to the light `fg`
+  (contrast 11–16:1). Light variants unchanged.
+
 ## [0.14.1] — 2026-09-13
 
 ### Changed
