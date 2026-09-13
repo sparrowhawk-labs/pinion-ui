@@ -7,6 +7,14 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.16.0] — 2026-09-13
+
+### Removed
+- **`nonblok` / `nonblok-dark`** (the app-brand pair added in 0.9.x) — the nonblok app now uses `solar` and
+  the Tonal set, so the brand palette has no consumer. `data-theme="nonblok"` renders as the default theme
+  from this release. Lineup is 45 pairs; `eject-table.json` entries dropped. Minor bump per SEMVER
+  (removals only at minor boundaries during 0.x).
+
 ## [0.15.1] — 2026-09-13
 
 ### Changed

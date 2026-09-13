@@ -55,7 +55,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 
 | Layer | Where it lives | Examples |
 |---|---|---|
-| **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (46 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
+| **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (45 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
 | **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft` (11 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
@@ -121,7 +121,7 @@ Suppress an intentional exception with a `pinion-lint-ignore` comment on the lin
 
 ## Theme lineup & selection guide (v0.7.0)
 
-pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 46 themes, each a **light/dark pair** (Tonal = tone-on-tone sets since v0.15.0: primary / secondary / accent share the base hue, and in dark mode primary stays dark so `bg-primary` surfaces never invert):
+pinion-ui ships **only original themes**. daisyUI's built-in themes are disabled (`themes: false`) — setting `data-theme="dracula"` or `"light"` does nothing. The lineup is 45 themes, each a **light/dark pair** (Tonal = tone-on-tone sets since v0.15.0: primary / secondary / accent share the base hue, and in dark mode primary stays dark so `bg-primary` surfaces never invert):
 
 - **Naming**: `<name>` = light, `<name>-dark` = dark (`payments` / `payments-dark`), and **all names are bare** — the v0.6 `mood-` prefix was dropped in v0.7.0 (`mood-zen` → `zen`, …; the whole prefix is gone). A theme's category (Brand / Mood / SaaS / Industry / Tonal) is metadata: it lives in `lineup.json`, in the Group column below, and as the grouped headings + category chip in `<x-theme-tune-switcher>` — it is no longer encoded in the name.
 - **Default**: `pinion` applies at `:root` automatically when no `data-theme` is set; if the OS prefers dark (`prefers-color-scheme: dark`), `pinion-dark` applies instead (it carries daisyUI's `prefersdark` flag). An explicit `data-theme` on any element always wins over both. To pin light regardless of OS setting, set `data-theme="pinion"` explicitly.

@@ -20,7 +20,7 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 ## Features
 
 - **47 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
-- **46 original themes × light/dark** — a brand default (`pinion`/`pinion-dark`) plus mood, SaaS, and industry palettes (`monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
+- **45 original themes × light/dark** — a brand default (`pinion`/`pinion-dark`) plus mood, SaaS, and industry palettes (`monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
 - **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="monokai-dark" data-tune="soft"`).
 - **11 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `corporate`, `tech`, `brutal`, `editorial`, `luxury`, `pixel`, `draft`. Each preset bundles ~30 CSS custom properties.
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
@@ -60,7 +60,7 @@ npm install && npm run build
 @source "../**/*.js";
 ```
 
-> **Do not add your own `@plugin "daisyui";` line** (remove it if an earlier setup added one — `ui:install` does this for you). The preset loads daisyUI with `themes: false` plus a full component exclude list: daisyUI *color token utilities* stay fully available (`bg-primary`, `text-base-content`, `data-theme`), but daisyUI *component classes* (`.btn`, `.card`, `.alert`, …) and daisyUI's *built-in themes* (`light`, `dark`, `dracula`, …) are not generated — the pinion-ui lineup (46 originals × light/dark + `reactive`) is the only theme source. A standalone full plugin would silently re-enable every daisyUI component class and theme.
+> **Do not add your own `@plugin "daisyui";` line** (remove it if an earlier setup added one — `ui:install` does this for you). The preset loads daisyUI with `themes: false` plus a full component exclude list: daisyUI *color token utilities* stay fully available (`bg-primary`, `text-base-content`, `data-theme`), but daisyUI *component classes* (`.btn`, `.card`, `.alert`, …) and daisyUI's *built-in themes* (`light`, `dark`, `dracula`, …) are not generated — the pinion-ui lineup (45 originals × light/dark + `reactive`) is the only theme source. A standalone full plugin would silently re-enable every daisyUI component class and theme.
 
 > **Why a preset?**
 > Pinion UI's Compose layer keeps class strings inside PHP (e.g. `bg-primary text-primary-content peer-checked:border-primary/70`). Tailwind v4's default scan only sees `*.blade.php` / `*.js`, so without the preset's `@source` rules those classes are silently dropped from the build. The preset's `@source` paths resolve from the preset file's own location — add a new component in the package and consumer apps keep working, no `app.css` re-edit needed.
@@ -125,7 +125,7 @@ Components are registered as **anonymous components** (no prefix needed) for the
 
 | Layer | Attribute / Prop | Controls | Examples |
 |-------|------------------|----------|----------|
-| **Theme** | `data-theme` | Color palette | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (46 original light/dark pairs — see `AGENTS.md` for the catalog) |
+| **Theme** | `data-theme` | Color palette | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (45 original light/dark pairs — see `AGENTS.md` for the catalog) |
 | **Tune** | `data-tune` | Shape, spacing, font, component sizing | `default`, `tech`, `editorial`, `soft` |
 | **Component** | Blade props | Variant, size, behavior | `variant="primary"`, `size="lg"`, `dismissible` |
 
