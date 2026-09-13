@@ -7,6 +7,17 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.14.1] — 2026-09-13
+
+### Changed
+- **`mono` / `mono-dark` base ramp is now strictly monotonic** — `base-100` → `base-200` → `base-300`
+  get progressively darker in both modes (light `#FFFFFF` → `#F5F5F5` → `#DFDFDF`; dark `#161616` →
+  `#0E0E0E` → `#070707`). Previously `base-200` was *lighter* than `base-100` in light mode and
+  `base-300` lighter than both in dark mode. Consumers styling borders with `border-base-300` on
+  `mono-dark` will see a darker (recessed) rule instead of a lighter one.
+- `gen-themes.mjs` accepts an optional per-palette `base300` in `lineup.json` (opt-in override of the
+  derived `mix(bg→fg)` value); only `mono.dark` uses it so far.
+
 ## [0.14.0] — 2026-09-13
 
 ### Added

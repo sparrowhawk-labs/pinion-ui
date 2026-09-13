@@ -12,7 +12,8 @@
      base-100 = panel (daisyUI component face) · base-200 = bg (page canvas,
      recessed face) · --root-bg = bg (daisyUI v5 paints :root with
      var(--root-bg, base-100) — this is what makes "tinted page, white cards"
-     work with zero consumer CSS) · base-300 = mix(bg→fg, 8% light / 14% dark)
+     work with zero consumer CSS) · base-300 = mix(bg→fg, 8% light / 14% dark), or the palette's
+     explicit `base300` when set
      · base-content = fg · *-content = max-WCAG-contrast pick among
      {fg, bg, panel} · neutral = mix(fg 85%, bg 15%) light / mix(panel 85%,
      fg 15%) dark · status colors = palette extra[] hue-matched first
@@ -154,7 +155,9 @@ function block(theme, mode) {
   const id = themeId(theme.name, mode);
   const isDefault = theme.brandDefault === true && mode === 'light';
   const isPrefersdark = theme.brandDefault === true && mode === 'dark';
-  const base300 = mix(p.bg, p.fg, mode === 'light' ? 0.08 : 0.14);
+  // opt-in per-theme override (lineup.json `base300`) for palettes that want a strictly
+  // monotonic base-100 → 200 → 300 ramp (e.g. mono: 300 darker than bg in dark mode)
+  const base300 = p.base300 ?? mix(p.bg, p.fg, mode === 'light' ? 0.08 : 0.14);
   const neutral = mode === 'light' ? mix(p.fg, p.bg, 0.15) : mix(p.panel, p.fg, 0.15);
   const status = statusColors(mode, p);
   const line = (k, v) => `    ${(k + ':').padEnd(27)}${v};`;

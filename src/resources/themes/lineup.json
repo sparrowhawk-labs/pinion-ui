@@ -509,8 +509,8 @@
       "llmTrigger": "ミニマルツール・ポートフォリオ",
       "brandDefault": false,
       "light": {
-        "bg": "#FFFFFF",
-        "panel": "#FAFAFA",
+        "bg": "#F5F5F5",
+        "panel": "#FFFFFF",
         "fg": "#0A0A0A",
         "muted": "#8F8F8F",
         "primary": "#171717",
@@ -522,8 +522,8 @@
         ]
       },
       "dark": {
-        "bg": "#0A0A0A",
-        "panel": "#141414",
+        "bg": "#0E0E0E",
+        "panel": "#161616",
         "fg": "#F5F5F5",
         "muted": "#7A7A7A",
         "primary": "#EDEDED",
@@ -532,7 +532,8 @@
         "extra": [
           "#50E3C2",
           "#F5A623"
-        ]
+        ],
+        "base300": "#070707"
       }
     },
     {
