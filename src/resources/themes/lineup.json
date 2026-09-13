@@ -1362,6 +1362,87 @@
           "#8FB7FF"
         ]
       }
+    },
+    {
+      "name": "carbon",
+      "source": "Monochrome set (2026-09-13): 中立の炭。primary/secondary/accent を base と同色系に置く「個性のない既定」",
+      "category": "美学系 (mood)",
+      "llmTrigger": "ミニマル・無個性の既定 dark。色相ゼロの炭グレー。アプリの標準 dark に",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F2F2F2",
+        "panel": "#FFFFFF",
+        "fg": "#111111",
+        "muted": "#7C7C7C",
+        "primary": "#111111",
+        "secondary": "#4D4D4D",
+        "accent": "#262626",
+        "extra": []
+      },
+      "dark": {
+        "bg": "#0B0B0B",
+        "panel": "#151515",
+        "fg": "#E6E6E6",
+        "muted": "#7C7C7C",
+        "primary": "#E6E6E6",
+        "secondary": "#A3A3A3",
+        "accent": "#F5F5F5",
+        "extra": []
+      }
+    },
+    {
+      "name": "glyph",
+      "source": "Monochrome set (2026-09-13): Nothing 風の純黒×冷白。ドットマトリクス・LED の白",
+      "category": "美学系 (mood)",
+      "llmTrigger": "Nothing Phone 風の純黒 dark。冷たい白と青みグレー。mono UI 文字・ドット表現と合わせる",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F7F7F8",
+        "panel": "#FFFFFF",
+        "fg": "#000000",
+        "muted": "#6E6E73",
+        "primary": "#000000",
+        "secondary": "#6E6E73",
+        "accent": "#1C1C1E",
+        "extra": []
+      },
+      "dark": {
+        "bg": "#050505",
+        "panel": "#101011",
+        "fg": "#F2F2F2",
+        "muted": "#8E8E93",
+        "primary": "#FFFFFF",
+        "secondary": "#8E8E93",
+        "accent": "#D9D9DE",
+        "extra": []
+      }
+    },
+    {
+      "name": "noir",
+      "source": "Monochrome set (2026-09-13): 煙った暖黒。セピアに寄った黒と生成りの白",
+      "category": "美学系 (mood)",
+      "llmTrigger": "暖色寄りの黒 dark。フィルム・活字の質感。単色でシックに",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F3EFEA",
+        "panel": "#FBF9F6",
+        "fg": "#1A1613",
+        "muted": "#857B72",
+        "primary": "#1A1613",
+        "secondary": "#5C534B",
+        "accent": "#3D342E",
+        "extra": []
+      },
+      "dark": {
+        "bg": "#0E0C0B",
+        "panel": "#181513",
+        "fg": "#E9E2D9",
+        "muted": "#857B72",
+        "primary": "#E9E2D9",
+        "secondary": "#A69C91",
+        "accent": "#C9B8A6",
+        "extra": []
+      }
     }
   ]
 }
