@@ -182,6 +182,10 @@ function block(theme, mode) {
     ...colorPair('warning', status.warning),
     ...colorPair('error', status.error),
     line('--root-bg', p.bg),
+    // Tonal palettes: primary is a surface tone, so text that would be `primary`-colored
+    // (links in .pn-doc / .pn-prose) reads from --pn-link = accent instead. Other
+    // categories omit it and the CSS falls back to var(--color-primary).
+    ...(theme.category === 'トーナル (tonal)' ? [line('--pn-link', p.accent)] : []),
     line('--radius-selector', '0.5rem'),
     line('--radius-field', '0.375rem'),
     line('--radius-box', '0.5rem'),

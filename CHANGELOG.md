@@ -7,6 +7,16 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.16.2] — 2026-09-13
+
+### Fixed
+- **Links unreadable on Tonal themes** — `.pn-doc a` / `.pn-prose a` were `primary`-colored; on Tonal
+  themes primary is a surface tone (≈1.1–1.3:1 against the canvas). Tonal theme blocks now emit
+  **`--pn-link`** (= accent, 4.5–13:1 against base-100/200) and both link rules read
+  `var(--pn-link, var(--color-primary))` — other themes are unchanged. `tide` / `nocturne` light accents
+  nudged darker (`#3F6B76` / `#74627F`) so the link meets 4.5:1 on `base-200` too. Use the same token
+  for any primary-colored text of your own; `AGENTS.md` documents it.
+
 ## [0.16.1] — 2026-09-13
 
 ### Fixed

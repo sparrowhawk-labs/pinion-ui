@@ -221,14 +221,15 @@
     }
 
     .pn-prose a {
-        color: var(--color-primary);
+        /* --pn-link is set by Tonal themes (accent) where primary is a surface tone; others fall back to primary */
+        color: var(--pn-link, var(--color-primary));
         text-decoration: underline;
-        text-decoration-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+        text-decoration-color: color-mix(in oklab, var(--pn-link, var(--color-primary)) 40%, transparent);
         text-underline-offset: 3px;
         transition: text-decoration-color 0.12s ease;
     }
     .pn-prose a:hover {
-        text-decoration-color: var(--color-primary);
+        text-decoration-color: var(--pn-link, var(--color-primary));
     }
 
     /* Custom mark added in editor.js (bespoke schema extension). */
