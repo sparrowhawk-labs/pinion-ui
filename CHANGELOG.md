@@ -7,6 +7,14 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.16.1] — 2026-09-13
+
+### Fixed
+- **Editor caret invisible on Tonal themes** — `.pn-prose` used `caret-color: var(--color-primary)`; on
+  Tonal themes `primary` is a surface tone of the base, so the caret (and the primary-tinted
+  `::selection` band) vanished into the page. Caret now follows `--color-base-content` and selection is
+  an 18 % band of the text color — visible on all 45 pairs.
+
 ## [0.16.0] — 2026-09-13
 
 ### Removed

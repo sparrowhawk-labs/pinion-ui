@@ -41,7 +41,9 @@
         line-break: strict;
         overflow-wrap: anywhere;
         color: var(--color-base-content);
-        caret-color: var(--color-primary);
+        /* Caret follows the text color, not `primary`: in Tonal themes primary is a
+           surface tone of the base, so a primary caret vanishes into the page. */
+        caret-color: var(--color-base-content);
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
     }
@@ -49,9 +51,10 @@
         outline: none;
     }
 
-    /* Selection picks up the theme accent, softly. */
+    /* Selection is a soft band of the text color — visible on every theme
+       (a primary-tinted band disappears on Tonal themes). */
     .pn-prose ::selection {
-        background: color-mix(in oklab, var(--color-primary) 22%, transparent);
+        background: color-mix(in oklab, var(--color-base-content) 18%, transparent);
     }
 
     /* Typographic rhythm: airy between siblings, even more breathing room ABOVE
