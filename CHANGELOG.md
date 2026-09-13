@@ -7,6 +7,14 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.15.1] — 2026-09-13
+
+### Changed
+- **Tonal light variants: `primary` / `secondary` are now light tones of the base** (one and two steps
+  darker than the canvas — e.g. `noir` `#E6DED2` / `#D8CEC0`, `carbon` `#E2E5E7` / `#D3D7DA`) instead of
+  near-`fg` darks, mirroring the dark-mode rule from v0.14.2. A `bg-primary` surface now flips with the
+  mode (light rail on light, dark rail on dark). `*-content` resolves to `fg` (≥ 12:1). `accent` unchanged.
+
 ## [0.15.0] — 2026-09-13
 
 ### Added
