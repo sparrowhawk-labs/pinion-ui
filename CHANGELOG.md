@@ -7,6 +7,40 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.17.0] — 2026-09-14
+
+### Added
+- **`--pn-ink` — primary as a foreground color, on every theme.** Each of the 90 generated theme blocks
+  now carries `--pn-ink`: `primary` itself when it already reads at ≥ 4.5:1 against both `base-100` and
+  `base-200`, otherwise `primary` with its OKLCH lightness pushed toward `base-content` until it reaches 5.0:1
+  (hue/chroma kept — a touch past AA so the ink reads clearly). One invariant rule in `gen-themes.mjs`,
+  no category branch; the generator throws if a palette cannot reach it. 58 blocks are byte-identical to primary; the 12 Tonal blocks and 20
+  light/dark blocks whose primary failed AA as text (`pop` 1.6:1, `vapor`, `kids`, `growth`, …) get a
+  readable one.
+- **`text-ink-primary` / `bg-ink-primary`** — explicit aliases (side effect of the `--color-ink-primary`
+  theme key that powers the routing below).
+- `ui:eject` — `ink` column in `eject-table.json`; foreground uses of `primary` (and `bg-ink-primary`) eject to the ink hex.
+
+### Changed
+- **Foreground utilities of `primary` are routed to `--pn-ink` by the preset** — `text-primary[/N]`,
+  `border-{,t,b,l,r,x,y}-primary[/N]`, `ring-primary[/N]`, `outline-` / `decoration-` / `fill-` /
+  `stroke-` / `caret-primary`, and the translucent band `bg-primary/N` with N ≤ 50 now resolve to
+  `var(--pn-ink, var(--color-primary))`. Surfaces are untouched (`bg-primary`, `bg-primary/N` N > 50,
+  `text-primary-content`), so the Tonal sidebar rail still flips with the mode. Implemented as paired
+  functional `@utility` blocks in `pinion-ui.css` (plain + opacity form) — the only shape that wins
+  Tailwind v4's utility ordering against the core color utilities; rationale in the file and in
+  `AGENTS.md` → Ink. Visible effect: on the 32 blocks above, primary-colored text / borders / focus
+  rings / soft badges / active tabs / links become readable; everywhere else nothing changes.
+- **`--pn-link` is replaced by `--pn-ink`** (v0.16.2 emitted it for Tonal blocks only). `.pn-doc a` /
+  `.pn-prose a` read `var(--pn-ink, var(--color-primary))` — same rendering on Tonal themes (ink ≈ the
+  accent it used), and `editor.css` / `sheet.css` / `data-grid.css` foreground uses of
+  `var(--color-primary)` (task-list hover border, inline-code tint, drop indicators, focus rings,
+  selection bands, sort arrows, range borders) follow the same token.
+- **Indicator fills use `bg-ink-primary`** — progress / upload bar fills (`ProgressComposer`, `FileUploadComposer`),
+  stepper and timeline `done` connectors, the sheet / data-grid fill-handle, and the `.pn-range` /
+  `.pn-range-primary` track color were opaque `primary`, invisible against a Tonal track. Checked checkbox /
+  radio / toggle fills, tooltip arrows and theme-swatch dots stay `bg-primary` (surface + `-content` mark).
+
 ## [0.16.2] — 2026-09-13
 
 ### Fixed

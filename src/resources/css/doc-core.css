@@ -61,14 +61,14 @@
     .pn-doc li > * + * { margin-top: 0.3em; }
 
     .pn-doc a {
-        /* --pn-link is set by Tonal themes (accent) where primary is a surface tone; others fall back to primary */
-        color: var(--pn-link, var(--color-primary));
+        /* --pn-ink: primary as foreground (every theme; see pinion-ui.css → ink) */
+        color: var(--pn-ink, var(--color-primary));
         text-decoration: underline;
         text-underline-offset: 3px;
-        text-decoration-color: color-mix(in oklab, var(--pn-link, var(--color-primary)) 40%, transparent);
+        text-decoration-color: color-mix(in oklab, var(--pn-ink, var(--color-primary)) 40%, transparent);
         transition: text-decoration-color 0.12s ease;
     }
-    .pn-doc a:hover { text-decoration-color: var(--pn-link, var(--color-primary)); }
+    .pn-doc a:hover { text-decoration-color: var(--pn-ink, var(--color-primary)); }
 
     .pn-doc blockquote {
         border-left: 3px solid var(--color-base-300);

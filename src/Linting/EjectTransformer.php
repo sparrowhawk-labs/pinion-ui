@@ -111,6 +111,15 @@ final class EjectTransformer
         'caret', 'accent', 'shadow',
     ];
 
+    /**
+     * Utility prefixes where `primary` is a FOREGROUND (text / line / ring). With an `ink`
+     * entry in the theme slice these eject to the ink hex instead of primary — the same
+     * re-routing pinion-ui.css does at build time (see its "ink" section), so an ejected
+     * page keeps reading on Tonal themes. `bg` joins the list only with an opacity ≤ 50
+     * (a translucent band); opaque `bg-primary` and `bg-primary/90` stay a surface.
+     */
+    private const INK_PROPS = ['text', 'border', 'ring', 'outline', 'decoration', 'fill', 'stroke', 'caret'];
+
     private const IGNORE_MARKER = 'pinion-lint-ignore';
 
     /** Longest-first semantic color names, built from the injected theme colors. */
@@ -122,7 +131,10 @@ final class EjectTransformer
      */
     public function __construct(private array $tokens, private array $colors = [])
     {
-        $this->colorNames = array_keys($colors);
+        if (isset($colors['ink'])) {
+            $this->colors['ink-primary'] = $colors['ink']; // `bg-ink-primary` alias (opaque ink fill)
+        }
+        $this->colorNames = array_keys($this->colors);
         usort($this->colorNames, fn ($a, $b) => strlen($b) <=> strlen($a));
     }
 
@@ -266,8 +278,15 @@ final class EjectTransformer
             foreach (self::COLOR_PROPS as $prop) {
                 if ($base === "{$prop}-{$name}" || str_starts_with($base, "{$prop}-{$name}/")) {
                     $opacity = substr($base, strlen("{$prop}-{$name}"));
+                    $hex = $this->colors[$name];
+                    if ($name === 'primary' && isset($this->colors['ink'])) {
+                        $band = $prop === 'bg' && $opacity !== '' && (int) ltrim($opacity, '/') <= 50;
+                        if ($band || in_array($prop, self::INK_PROPS, true)) {
+                            $hex = $this->colors['ink'];
+                        }
+                    }
 
-                    return ['to' => $wrap("{$prop}-[{$this->colors[$name]}]{$opacity}")];
+                    return ['to' => $wrap("{$prop}-[{$hex}]{$opacity}")];
                 }
             }
         }

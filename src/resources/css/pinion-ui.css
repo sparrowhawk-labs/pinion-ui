@@ -293,7 +293,7 @@
     border: none;
     cursor: pointer;
     vertical-align: middle;
-    color: var(--color-primary);
+    color: var(--pn-ink, var(--color-primary));
     --range-fill: 0%;
     --range-thumb-size: calc(var(--size-selector, 0.25rem) * 6);
     --range-thumb-border: 0.25rem;
@@ -358,7 +358,7 @@
 }
 
 /* colors — same semantic set as every other pinion-ui component */
-.pn-range-primary   { color: var(--color-primary);   --range-thumb-color: var(--color-primary-content); }
+.pn-range-primary   { color: var(--pn-ink, var(--color-primary));   --range-thumb-color: var(--color-primary-content); }
 .pn-range-secondary { color: var(--color-secondary); --range-thumb-color: var(--color-secondary-content); }
 .pn-range-accent    { color: var(--color-accent);    --range-thumb-color: var(--color-accent-content); }
 .pn-range-neutral   { color: var(--color-neutral);   --range-thumb-color: var(--color-neutral-content); }
@@ -378,6 +378,73 @@
    default, + opt-in `reactive`) — shared with the standalone pinion-ui-css
    dist build, see theme.css (generated from src/resources/themes/lineup.json). */
 @import "./theme.css";
+
+/* ==========================================
+   ink — primary as a FOREGROUND color (v0.17.0)
+   ==========================================
+   `primary` is a SURFACE token: on Tonal themes it is a tone one step off
+   the canvas (≈1.1–1.3:1 against base-100), and on several light themes a
+   saturated hue that fails AA as text (pop's yellow is 1.6:1). Every theme
+   block therefore also carries `--pn-ink` (gen-themes.mjs): primary itself
+   when it already reads at ≥ 4.5:1 on base-100 AND base-200, otherwise
+   primary with its lightness pushed toward base-content until 5.0:1.
+   The invariant is structural, not a vocabulary: components keep writing
+   `text-primary`, and the utilities below re-route the FOREGROUND uses of
+   `primary` to `var(--pn-ink, var(--color-primary))`:
+
+     text-primary[/N]  border-{,t,b,l,r,x,y}-primary[/N]  ring-primary[/N]
+     outline-primary   decoration-primary  fill-primary  stroke-primary
+     caret-primary     bg-primary/N with N ≤ 50 (a translucent band)
+
+   Untouched (surface): `bg-primary`, `bg-primary/N` with N > 50 (the solid
+   hover `hover:bg-primary/90`), `text-primary-content`, gradients, shadows.
+
+   Mechanics — why this is a pair of functional `@utility` blocks per property
+   and not a plain override: Tailwind v4 emits BOTH the core utility and ours
+   for the same candidate and orders them by (variant, property order,
+   declaration count desc, candidate, registration). A static
+   `@utility text-primary` is parsed before the functional core one and
+   loses; a functional `text-*` registered after core wins the tie — but only
+   when its declaration count matches core's, so the plain form and the
+   opacity form live in separate blocks (a block that never calls
+   --modifier() ignores `text-primary/70`; a block that does ignores
+   `text-primary`). `--value(--color-ink-*)` is the guard that keeps these
+   from matching `text-red-500` / `text-lg`: only `--color-ink-primary`
+   exists in the theme, so only `*-primary` resolves. Verified against
+   tailwindcss 4.3 (see AGENTS.md → Ink). Side effect: the theme key also
+   yields `text-ink-primary` / `bg-ink-primary` as explicit aliases.
+
+   The bg/N band uses a clamp() step so one utility covers both ranges:
+   N ≤ 50 → ink at N%, N > 50 → primary at N% (identical to core). */
+@theme inline reference {
+    --color-ink-primary: var(--pn-ink, var(--color-primary));
+}
+@utility text-* { color: --value(--color-ink-*); }
+@utility text-* { color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility border-* { border-color: --value(--color-ink-*); }
+@utility border-* { border-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility border-t-* { border-top-color: --value(--color-ink-*); }
+@utility border-t-* { border-top-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility border-b-* { border-bottom-color: --value(--color-ink-*); }
+@utility border-b-* { border-bottom-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility border-l-* { border-left-color: --value(--color-ink-*); }
+@utility border-l-* { border-left-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility border-r-* { border-right-color: --value(--color-ink-*); }
+@utility border-r-* { border-right-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility border-x-* { border-inline-color: --value(--color-ink-*); }
+@utility border-x-* { border-inline-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility border-y-* { border-block-color: --value(--color-ink-*); }
+@utility border-y-* { border-block-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility ring-* { --tw-ring-color: --value(--color-ink-*); }
+@utility ring-* { --tw-ring-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility outline-* { outline-color: --value(--color-ink-*); }
+@utility outline-* { outline-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility decoration-* { text-decoration-color: --value(--color-ink-*); }
+@utility decoration-* { text-decoration-color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
+@utility fill-* { fill: --value(--color-ink-*); }
+@utility stroke-* { stroke: --value(--color-ink-*); }
+@utility caret-* { caret-color: --value(--color-ink-*); }
+@utility bg-* { background-color: color-mix(in oklab, color-mix(in oklab, --value(--color-ink-*) clamp(0%, (51 - --modifier(integer)) * 1000%, 100%), var(--color-primary)) calc(--modifier(integer) * 1%), transparent); }
 
 /* ==========================================
    Alpine pre-init guard

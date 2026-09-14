@@ -9,7 +9,7 @@
             "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none cursor-pointer pr-3 placeholder:text-base-content/40 text-base-content text-[length:var(--text-field-md)] file:mr-3 file:border-0 file:bg-base-200 file:text-base-content file:font-medium file:cursor-pointer hover:file:bg-base-300 transition-colors file:px-4 file:py-2",
             "dropzoneIcon": "",
             "browseLink": "font-semibold text-primary hover:underline",
-            "progressFill": "h-full bg-primary transition-[width] duration-300 ease-out",
+            "progressFill": "h-full bg-ink-primary transition-[width] duration-300 ease-out",
             "hint": "text-[length:var(--text-field-xs)] text-base-content/50"
         }
     },
@@ -19,7 +19,7 @@
         "expected": {
             "field": "flex items-stretch overflow-clip transition-colors rounded-[var(--radius-field)] bg-primary/10 tune-border border-transparent focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
             "browseLink": "font-semibold text-primary hover:underline",
-            "progressFill": "h-full bg-primary transition-[width] duration-300 ease-out"
+            "progressFill": "h-full bg-ink-primary transition-[width] duration-300 ease-out"
         }
     },
     {
@@ -96,7 +96,7 @@
             "previewName": "absolute inset-x-0 bottom-0 px-2 pt-6 pb-2 bg-gradient-to-t from-black/70 via-black/40 to-transparent text-white text-[length:var(--text-field-xs)] truncate",
             "previewRemove": "absolute top-1.5 right-1.5 size-6 inline-flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-error transition-colors cursor-pointer",
             "progressTrack": "absolute bottom-0 inset-x-0 h-1 bg-black/30 overflow-hidden",
-            "progressFill": "h-full bg-primary transition-[width] duration-300 ease-out"
+            "progressFill": "h-full bg-ink-primary transition-[width] duration-300 ease-out"
         }
     }
 ]

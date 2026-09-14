@@ -30,7 +30,7 @@
         "props": { "value": 40, "color": "primary" },
         "expected": {
             "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
-            "fill": "h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
+            "fill": "h-full rounded-full bg-ink-primary transition-[width] duration-300 ease-out"
         }
     },
     {

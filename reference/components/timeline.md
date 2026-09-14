@@ -18,7 +18,7 @@ Vertical (default) or horizontal timeline of events, built on plain Tailwind CSS
 | `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | `vertical` → `timeline-vertical`. `horizontal` → `timeline-horizontal` (events laid out left-to-right). |
 | `compact` | `bool` | `false` | Adds `timeline-compact` for tighter spacing — drops every item to the start side. |
 | `snap` | `bool` | `false` | Adds `timeline-snap-icon` so middle icons align to the start of the box rather than the centerline. |
-| `appearance` | `'solid' \| 'soft'` | `'solid'` | Saturation of the done/default state. `'solid'` (default — full `text-primary` icons + `bg-primary` connector) makes the completion chain stand out. Opt into `'soft'` (`text-primary/70` + `bg-primary/30`) for a calmer look when many done items stack and the saturated trail feels heavy. `current` and `upcoming` states are unaffected. |
+| `appearance` | `'solid' \| 'soft'` | `'solid'` | Saturation of the done/default state. `'solid'` (default — full `text-primary` icons + `bg-ink-primary` connector) makes the completion chain stand out. Opt into `'soft'` (`text-primary/70` + `bg-primary/30`) for a calmer look when many done items stack and the saturated trail feels heavy. `current` and `upcoming` states are unaffected. |
 
 All other attributes pass through to the root `<ul>`.
 

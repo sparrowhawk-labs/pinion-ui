@@ -113,6 +113,7 @@
     --color-error:             #CF222E;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F6F8FA;
+    --pn-ink:                  #0969DA;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -149,6 +150,7 @@
     --color-error:             #F85149;
     --color-error-content:     #0D1117;
     --root-bg:                 #0D1117;
+    --pn-ink:                  #4493F8;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -187,6 +189,7 @@
     --color-error:             #E16032;
     --color-error-content:     #29242A;
     --root-bg:                 #FAF1EC;
+    --pn-ink:                  #C3275D;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -223,6 +226,7 @@
     --color-error:             #FC9867;
     --color-error-content:     #221F22;
     --root-bg:                 #2D2A2E;
+    --pn-ink:                  #FF6188;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -261,6 +265,7 @@
     --color-error:             #D14A41;
     --color-error-content:     #FFFDF8;
     --root-bg:                 #FAF5ED;
+    --pn-ink:                  #D42B3A;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -297,6 +302,7 @@
     --color-error:             #D3615D;
     --color-error-content:     #191320;
     --root-bg:                 #191320;
+    --pn-ink:                  #FF4757;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -335,6 +341,7 @@
     --color-error:             #D64550;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F7FAFD;
+    --pn-ink:                  #0675C9;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -371,6 +378,7 @@
     --color-error:             #F0707B;
     --color-error-content:     #191E24;
     --root-bg:                 #191E24;
+    --pn-ink:                  #3EA8FF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -409,6 +417,7 @@
     --color-error:             #BE3A30;
     --color-error-content:     #FEFDFA;
     --root-bg:                 #FAF9F5;
+    --pn-ink:                  #AA5731;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -445,6 +454,7 @@
     --color-error:             #E0806E;
     --color-error-content:     #1F1E1D;
     --root-bg:                 #1F1E1D;
+    --pn-ink:                  #D97757;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -483,6 +493,7 @@
     --color-error:             #E86A6A;
     --color-error-content:     #46356B;
     --root-bg:                 #F7F0FF;
+    --pn-ink:                  #AD3894;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -519,6 +530,7 @@
     --color-error:             #FF8B8B;
     --color-error-content:     #322753;
     --root-bg:                 #322753;
+    --pn-ink:                  #FF9DE6;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -557,6 +569,7 @@
     --color-error:             #D04A41;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #EFF6EA;
+    --pn-ink:                  #16783E;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -593,6 +606,7 @@
     --color-error:             #D3635C;
     --color-error-content:     #14231A;
     --root-bg:                 #14231A;
+    --pn-ink:                  #62B385;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -631,6 +645,7 @@
     --color-error:             #DC322F;
     --color-error-content:     #FDF6E3;
     --root-bg:                 #EFE9D5;
+    --pn-ink:                  #0A6CB0;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -667,6 +682,7 @@
     --color-error:             #E4574B;
     --color-error-content:     #002B36;
     --root-bg:                 #002B36;
+    --pn-ink:                  #49A8EB;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -705,6 +721,7 @@
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F8F8F5;
+    --pn-ink:                  #616B59;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -741,6 +758,7 @@
     --color-error:             #D4635C;
     --color-error-content:     #211F1C;
     --root-bg:                 #211F1C;
+    --pn-ink:                  #8FA283;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -779,6 +797,7 @@
     --color-error:             #D14A43;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FFF5FA;
+    --pn-ink:                  #876600;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -815,6 +834,7 @@
     --color-error:             #D4625F;
     --color-error-content:     #241E2E;
     --root-bg:                 #241E2E;
+    --pn-ink:                  #FFD34D;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -853,6 +873,7 @@
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FAF7F3;
+    --pn-ink:                  #0F766E;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -889,6 +910,7 @@
     --color-error:             #D5635D;
     --color-error-content:     #262421;
     --root-bg:                 #262421;
+    --pn-ink:                  #2DA88F;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -927,6 +949,7 @@
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F8F8F4;
+    --pn-ink:                  #0043CE;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -963,6 +986,7 @@
     --color-error:             #D2615D;
     --color-error-content:     #10141F;
     --root-bg:                 #10141F;
+    --pn-ink:                  #4589FF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1001,6 +1025,7 @@
     --color-error:             #E5325C;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F5F7FB;
+    --pn-ink:                  #5B50F4;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1037,6 +1062,7 @@
     --color-error:             #F86A8F;
     --color-error-content:     #151929;
     --root-bg:                 #151929;
+    --pn-ink:                  #8A84FF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1075,6 +1101,7 @@
     --color-error:             #B23A2E;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F9F6EF;
+    --pn-ink:                  #8A5A2E;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1111,6 +1138,7 @@
     --color-error:             #E06052;
     --color-error-content:     #241F17;
     --root-bg:                 #241F17;
+    --pn-ink:                  #C89158;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1149,6 +1177,7 @@
     --color-error:             #D04A42;
     --color-error-content:     #0A0A0A;
     --root-bg:                 #F5F5F5;
+    --pn-ink:                  #171717;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1185,6 +1214,7 @@
     --color-error:             #D1605B;
     --color-error-content:     #0E0E0E;
     --root-bg:                 #0E0E0E;
+    --pn-ink:                  #EDEDED;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1223,6 +1253,7 @@
     --color-error:             #D04A41;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F6F5EC;
+    --pn-ink:                  #1D7A46;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1259,6 +1290,7 @@
     --color-error:             #D3635C;
     --color-error-content:     #1B211A;
     --root-bg:                 #1B211A;
+    --pn-ink:                  #4CAF78;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1297,6 +1329,7 @@
     --color-error:             #C92B3B;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F6F7FA;
+    --pn-ink:                  #1D3461;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1333,6 +1366,7 @@
     --color-error:             #F07A7A;
     --color-error-content:     #0D1526;
     --root-bg:                 #0D1526;
+    --pn-ink:                  #638FDE;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1371,6 +1405,7 @@
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FEF6F1;
+    --pn-ink:                  #C03B32;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1407,6 +1442,7 @@
     --color-error:             #D5625B;
     --color-error-content:     #281C15;
     --root-bg:                 #281C15;
+    --pn-ink:                  #F08074;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1445,6 +1481,7 @@
     --color-error:             #D64545;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F1FAF9;
+    --pn-ink:                  #007688;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1481,6 +1518,7 @@
     --color-error:             #F07C74;
     --color-error-content:     #152325;
     --root-bg:                 #152325;
+    --pn-ink:                  #3FB7CB;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1519,6 +1557,7 @@
     --color-error:             #D14A44;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F8F3FF;
+    --pn-ink:                  #8324C9;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1555,6 +1594,7 @@
     --color-error:             #D36160;
     --color-error-content:     #201430;
     --root-bg:                 #201430;
+    --pn-ink:                  #BE8FF5;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1593,6 +1633,7 @@
     --color-error:             #D04A43;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F3F7F9;
+    --pn-ink:                  #00748F;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1629,6 +1670,7 @@
     --color-error:             #D2625F;
     --color-error-content:     #0F172A;
     --root-bg:                 #0F172A;
+    --pn-ink:                  #22D3EE;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1667,6 +1709,7 @@
     --color-error:             #E01E5A;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FAF6F9;
+    --pn-ink:                  #611F69;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1703,6 +1746,7 @@
     --color-error:             #F06487;
     --color-error-content:     #221726;
     --root-bg:                 #221726;
+    --pn-ink:                  #C275D0;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1741,6 +1785,7 @@
     --color-error:             #DE2F55;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FFF9EF;
+    --pn-ink:                  #B34E00;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1777,6 +1822,7 @@
     --color-error:             #F86E90;
     --color-error-content:     #2A1D10;
     --root-bg:                 #2A1D10;
+    --pn-ink:                  #FB923C;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1815,6 +1861,7 @@
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FBF8F4;
+    --pn-ink:                  #BC4400;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1851,6 +1898,7 @@
     --color-error:             #D4625C;
     --color-error-content:     #241E17;
     --root-bg:                 #241E17;
+    --pn-ink:                  #FB8A3C;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1889,6 +1937,7 @@
     --color-error:             #D04B43;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F4F8FF;
+    --pn-ink:                  #2563EB;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1925,6 +1974,7 @@
     --color-error:             #D26360;
     --color-error-content:     #131C33;
     --root-bg:                 #131C33;
+    --pn-ink:                  #5B8DEF;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1963,6 +2013,7 @@
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F8F6F2;
+    --pn-ink:                  #6B1F2A;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -1999,6 +2050,7 @@
     --color-error:             #D4625C;
     --color-error-content:     #211D1B;
     --root-bg:                 #211D1B;
+    --pn-ink:                  #DE7484;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2037,6 +2089,7 @@
     --color-error:             #D04A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F1F3F3;
+    --pn-ink:                  #465B71;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2073,6 +2126,7 @@
     --color-error:             #D3625D;
     --color-error-content:     #171B20;
     --root-bg:                 #171B20;
+    --pn-ink:                  #8FA6BC;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2111,6 +2165,7 @@
     --color-error:             #D14B43;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FFFFFF;
+    --pn-ink:                  #C41E2F;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2147,6 +2202,7 @@
     --color-error:             #D2615B;
     --color-error-content:     #131313;
     --root-bg:                 #131313;
+    --pn-ink:                  #F0455A;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2185,6 +2241,7 @@
     --color-error:             #D04A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F4F6F6;
+    --pn-ink:                  #37474F;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2221,6 +2278,7 @@
     --color-error:             #D2625C;
     --color-error-content:     #10171A;
     --root-bg:                 #10171A;
+    --pn-ink:                  #92A4AE;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2259,6 +2317,7 @@
     --color-error:             #D14A40;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FFF8E1;
+    --pn-ink:                  #006EB9;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2295,6 +2354,7 @@
     --color-error:             #D5645D;
     --color-error-content:     #2B2820;
     --root-bg:                 #2B2820;
+    --pn-ink:                  #4DABF7;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2333,6 +2393,7 @@
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F8F7F0;
+    --pn-ink:                  #5E7045;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2369,6 +2430,7 @@
     --color-error:             #D4635C;
     --color-error-content:     #22241D;
     --root-bg:                 #22241D;
+    --pn-ink:                  #A5BC85;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2407,6 +2469,7 @@
     --color-error:             #D04A43;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F5F7F9;
+    --pn-ink:                  #145DA0;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2443,6 +2506,7 @@
     --color-error:             #D2625E;
     --color-error-content:     #121A22;
     --root-bg:                 #121A22;
+    --pn-ink:                  #4F94D4;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2481,6 +2545,7 @@
     --color-error:             #D14A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FAF7F2;
+    --pn-ink:                  #33261C;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2517,6 +2582,7 @@
     --color-error:             #D3625B;
     --color-error-content:     #1B1815;
     --root-bg:                 #1B1815;
+    --pn-ink:                  #E8E2D8;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2555,6 +2621,7 @@
     --color-error:             #D04A43;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #EDF4FB;
+    --pn-ink:                  #1E4F94;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2591,6 +2658,7 @@
     --color-error:             #D2635F;
     --color-error-content:     #10202F;
     --root-bg:                 #10202F;
+    --pn-ink:                  #6BA3DC;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2629,6 +2697,7 @@
     --color-error:             #D14B40;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F9FCE8;
+    --pn-ink:                  #5E7500;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2665,6 +2734,7 @@
     --color-error:             #D5645B;
     --color-error-content:     #252A14;
     --root-bg:                 #252A14;
+    --pn-ink:                  #A8C93F;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2703,6 +2773,7 @@
     --color-error:             #D04B42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #E9F7F4;
+    --pn-ink:                  #007479;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2739,6 +2810,7 @@
     --color-error:             #D3645E;
     --color-error-content:     #0E2528;
     --root-bg:                 #0E2528;
+    --pn-ink:                  #3FC7CD;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2777,6 +2849,7 @@
     --color-error:             #D14B43;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #FFFFFF;
+    --pn-ink:                  #1A1A1A;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2813,6 +2886,7 @@
     --color-error:             #D2615B;
     --color-error-content:     #141412;
     --root-bg:                 #141412;
+    --pn-ink:                  #EFEFE7;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2851,6 +2925,7 @@
     --color-error:             #D04B42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F3FAF6;
+    --pn-ink:                  #007A55;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2887,6 +2962,7 @@
     --color-error:             #D2625C;
     --color-error-content:     #121B18;
     --root-bg:                 #121B18;
+    --pn-ink:                  #2DD49B;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2925,6 +3001,7 @@
     --color-error:             #D04A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #F2F4F5;
+    --pn-ink:                  #8F5F00;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2961,6 +3038,7 @@
     --color-error:             #D2625D;
     --color-error-content:     #14181C;
     --root-bg:                 #14181C;
+    --pn-ink:                  #E8B341;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -2999,7 +3077,7 @@
     --color-error:             #D04A42;
     --color-error-content:     #FFFFFF;
     --root-bg:                 #EFF1F2;
-    --pn-link:                 #5E656B;
+    --pn-ink:                  #656769;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3036,7 +3114,7 @@
     --color-error:             #D1605B;
     --color-error-content:     #0C0D0E;
     --root-bg:                 #0C0D0E;
-    --pn-link:                 #A7ADB3;
+    --pn-ink:                  #85898B;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3075,7 +3153,7 @@
     --color-error:             #D14B43;
     --color-error-content:     #000000;
     --root-bg:                 #FAFAFA;
-    --pn-link:                 #6E6E76;
+    --pn-ink:                  #6D6C6C;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3112,7 +3190,7 @@
     --color-error:             #CF5F59;
     --color-error-content:     #050505;
     --root-bg:                 #050505;
-    --pn-link:                 #D0D0D6;
+    --pn-ink:                  #818284;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3151,7 +3229,7 @@
     --color-error:             #D04940;
     --color-error-content:     #FAF6EF;
     --root-bg:                 #F1EBE2;
-    --pn-link:                 #7C6650;
+    --pn-ink:                  #6A6359;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3188,7 +3266,7 @@
     --color-error:             #D1605A;
     --color-error-content:     #110D0A;
     --root-bg:                 #110D0A;
-    --pn-link:                 #B49A7E;
+    --pn-ink:                  #90867E;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3227,7 +3305,7 @@
     --color-error:             #DC322F;
     --color-error-content:     #FAF4E2;
     --root-bg:                 #EBE6D6;
-    --pn-link:                 #3F6B76;
+    --pn-ink:                  #67604F;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3264,7 +3342,7 @@
     --color-error:             #E4574B;
     --color-error-content:     #00232C;
     --root-bg:                 #00232C;
-    --pn-link:                 #6FA6B1;
+    --pn-ink:                  #76A6B3;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3303,7 +3381,7 @@
     --color-error:             #D42B3A;
     --color-error-content:     #FCFAFD;
     --root-bg:                 #F2EDF4;
-    --pn-link:                 #74627F;
+    --pn-ink:                  #6A636D;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3340,7 +3418,7 @@
     --color-error:             #FF4757;
     --color-error-content:     #161120;
     --root-bg:                 #161120;
-    --pn-link:                 #A28DC2;
+    --pn-ink:                  #9288A4;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3379,7 +3457,7 @@
     --color-error:             #BE3A30;
     --color-error-content:     #FDFBF6;
     --root-bg:                 #F5F1E9;
-    --pn-link:                 #93634D;
+    --pn-ink:                  #6D665C;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3416,7 +3494,7 @@
     --color-error:             #E0806E;
     --color-error-content:     #1E1B18;
     --root-bg:                 #1E1B18;
-    --pn-link:                 #C9927A;
+    --pn-ink:                  #9A948D;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;

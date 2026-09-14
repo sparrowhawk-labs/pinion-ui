@@ -55,7 +55,7 @@ class ProgressComposer
     private static function colorClass(?string $color): string
     {
         return match ($color) {
-            'primary'   => 'bg-primary',
+            'primary'   => 'bg-ink-primary',
             'secondary' => 'bg-secondary',
             'accent'    => 'bg-accent',
             'info'      => 'bg-info',

@@ -102,7 +102,7 @@ class StepperComposer
     private static function stateConnectors(): string
     {
         return implode('|', [
-            'done=bg-primary',
+            'done=bg-ink-primary',
             'current=bg-base-content/20',
             'upcoming=bg-base-content/20',
             'default=bg-base-content/20',

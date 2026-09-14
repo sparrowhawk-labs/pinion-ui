@@ -104,7 +104,7 @@
         "props": {},
         "expected": {
             "stateColors": "done=text-primary|current=text-base-content|upcoming=text-base-content/40|default=text-primary",
-            "hrColors": "done=bg-primary|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-primary"
+            "hrColors": "done=bg-ink-primary|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-ink-primary"
         }
     },
     {
@@ -122,7 +122,7 @@
             "root": "flex flex-row relative gap-sm",
             "li": "grid grid-cols-[1fr_auto_1fr] grid-rows-[0_auto_1fr] items-center relative",
             "stateColors": "done=text-primary|current=text-base-content|upcoming=text-base-content/40|default=text-primary",
-            "hrColors": "done=bg-primary|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-primary"
+            "hrColors": "done=bg-ink-primary|current=bg-base-content/30|upcoming=bg-base-content/15|default=bg-ink-primary"
         }
     },
     {

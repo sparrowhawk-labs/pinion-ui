@@ -70,11 +70,13 @@ const COLOR_NAMES = [
   'base-100', 'base-200', 'base-300', 'base-content',
   'info', 'info-content', 'success', 'success-content',
   'warning', 'warning-content', 'error', 'error-content',
+  'ink', // primary as foreground — --pn-ink from the theme block (see gen-themes.mjs / pinion-ui.css "ink")
 ];
+const colorVar = (n) => (n === 'ink' ? 'var(--pn-ink, var(--color-primary))' : `var(--color-${n})`);
 
 const css = readFileSync(cssPath, 'utf8');
 const tokenEls = TOKEN_PROBES.map(([id, , style]) => `<div data-tok="${id}" style="${style}">·</div>`).join('\n');
-const colorEls = COLOR_NAMES.map((n) => `<div data-col="${n}" style="background-color:var(--color-${n})">·</div>`).join('\n');
+const colorEls = COLOR_NAMES.map((n) => `<div data-col="${n}" style="background-color:${colorVar(n)}">·</div>`).join('\n');
 const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>${css}</style></head>
 <body>${tokenEls}\n${colorEls}<canvas id="cv" width="1" height="1"></canvas></body></html>`;
 

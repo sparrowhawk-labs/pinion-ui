@@ -175,14 +175,14 @@ class FileUploadComposer
     private static function progressFill(string $color): string
     {
         return match ($color) {
-            'primary'   => 'h-full bg-primary transition-[width] duration-300 ease-out',
+            'primary'   => 'h-full bg-ink-primary transition-[width] duration-300 ease-out',
             'secondary' => 'h-full bg-secondary transition-[width] duration-300 ease-out',
             'accent'    => 'h-full bg-accent transition-[width] duration-300 ease-out',
             'info'      => 'h-full bg-info transition-[width] duration-300 ease-out',
             'success'   => 'h-full bg-success transition-[width] duration-300 ease-out',
             'warning'   => 'h-full bg-warning transition-[width] duration-300 ease-out',
             'error'     => 'h-full bg-error transition-[width] duration-300 ease-out',
-            default     => 'h-full bg-primary transition-[width] duration-300 ease-out',
+            default     => 'h-full bg-ink-primary transition-[width] duration-300 ease-out',
         };
     }
 

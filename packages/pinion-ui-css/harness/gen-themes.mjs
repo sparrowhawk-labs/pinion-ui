@@ -18,7 +18,10 @@
      {fg, bg, panel} · neutral = mix(fg 85%, bg 15%) light / mix(panel 85%,
      fg 15%) dark · status colors = palette extra[] hue-matched first
      (deterministic, one color one role), else per-mode OKLCH anchors mixed
-     10% toward bg for theme temperature, L clamped per mode.
+     10% toward bg for theme temperature, L clamped per mode
+     · --pn-ink = primary as FOREGROUND: primary if >= 4.5:1 on base-100 and
+     base-200, else primary's lightness pushed toward base-content until 5.0:1
+     (hue/chroma kept; every theme, no category branch — see inkFor).
 
    Color math (sRGB ↔ OKLab/OKLCH, WCAG contrast) is self-contained — no deps.
    ============================================================================ */
@@ -109,6 +112,27 @@ function contentFor(color, { fg, bg, panel }) {
   return [fg, bg, panel].reduce((best, c) => (contrast(color, c) > contrast(color, best) ? c : best), fg);
 }
 
+/* ---------------- ink derivation (primary as foreground) ---------------- */
+const INK_TRIGGER = 4.5; // WCAG AA (normal text): a primary that passes this on base-100 AND base-200 is left alone
+const INK_TARGET = 5.0;  // a primary that fails is pushed to this — a touch past AA so the ink reads clearly (user choice, 2026-09-14)
+const inkWorst = (hex, p) => Math.min(contrast(hex, p.panel), contrast(hex, p.bg));
+/**
+ * primary when it already passes INK_TRIGGER; otherwise primary's OKLCH lightness moved
+ * toward base-content by the smallest step (binary search) that reaches INK_TARGET,
+ * hue/chroma kept. Throws when even base-content's lightness cannot reach it — a palette
+ * bug, not a runtime fallback: the CSS side has no second rule to hide behind.
+ */
+function inkFor(primary, p) {
+  if (inkWorst(primary, p) >= INK_TRIGGER) return primary;
+  const [L0, C, H] = hex2lch(primary);
+  const L1 = hex2lch(p.fg)[0];
+  const at = (t) => lch2hex([L0 + (L1 - L0) * t, C, H]);
+  if (inkWorst(at(1), p) < INK_TARGET) throw new Error(`ink: ${primary} cannot reach ${INK_TARGET}:1 on ${p.panel}/${p.bg} even at base-content lightness`);
+  let lo = 0, hi = 1;
+  for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; inkWorst(at(mid), p) >= INK_TARGET ? (hi = mid) : (lo = mid); }
+  return at(hi);
+}
+
 /* ---------------- status derivation ---------------- */
 const STATUS_ORDER = ['error', 'warning', 'success', 'info'];
 const STATUS_HUE = { error: 27, warning: 90, success: 150, info: 245 };
@@ -160,6 +184,7 @@ function block(theme, mode) {
   const base300 = p.base300 ?? mix(p.bg, p.fg, mode === 'light' ? 0.08 : 0.14);
   const neutral = mode === 'light' ? mix(p.fg, p.bg, 0.15) : mix(p.panel, p.fg, 0.15);
   const status = statusColors(mode, p);
+  const ink = inkFor(p.primary, p);
   const line = (k, v) => `    ${(k + ':').padEnd(27)}${v};`;
   const colorPair = (k, v) => [line(`--color-${k}`, v), line(`--color-${k}-content`, contentFor(v, p))];
 
@@ -182,10 +207,14 @@ function block(theme, mode) {
     ...colorPair('warning', status.warning),
     ...colorPair('error', status.error),
     line('--root-bg', p.bg),
-    // Tonal palettes: primary is a surface tone, so text that would be `primary`-colored
-    // (links in .pn-doc / .pn-prose) reads from --pn-link = accent instead. Other
-    // categories omit it and the CSS falls back to var(--color-primary).
-    ...(theme.category === 'トーナル (tonal)' ? [line('--pn-link', p.accent)] : []),
+    // --pn-ink: primary as a FOREGROUND color (text / border / ring / thin band). Same
+    // rule for every theme, no category branch: primary itself when it already reads
+    // at >= INK_TRIGGER (4.5) against base-100 AND base-200, otherwise primary with its
+    // OKLCH lightness pushed toward base-content until it reaches INK_TARGET (5.0)
+    // (hue and chroma kept). pinion-ui.css routes text-primary / border-primary /
+    // ring-primary / bg-primary/<=50 … to var(--pn-ink, var(--color-primary)), so
+    // `bg-primary` surfaces are untouched and 58/90 blocks are byte-identical.
+    line('--pn-ink', ink),
     line('--radius-selector', '0.5rem'),
     line('--radius-field', '0.375rem'),
     line('--radius-box', '0.5rem'),

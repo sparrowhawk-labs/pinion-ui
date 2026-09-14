@@ -85,6 +85,13 @@ check($t, 'opacity modifier', '<div class="bg-primary/10 border-base-content/60"
 check($t, 'longest name wins', '<span class="text-base-content bg-base-100">x</span>', '<span class="text-[#131110] bg-[#fcfaf6]">x</span>');
 check($t, 'variant color', '<a class="hover:bg-error/20">x</a>', '<a class="hover:bg-[#cc2233]/20">x</a>');
 
+// ink: primary as foreground ejects to the ink hex (text / border / ring / band ≤ 50); surfaces stay primary
+$ink = new EjectTransformer($tokens, $colors + ['ink' => '#7a7a7c']);
+check($ink, 'ink: text/border/ring', '<a class="text-primary border-primary hover:ring-primary/30">x</a>', '<a class="text-[#7a7a7c] border-[#7a7a7c] hover:ring-[#7a7a7c]/30">x</a>');
+check($ink, 'ink: band ≤ 50 vs surface', '<div class="bg-primary/10 bg-primary/50 bg-primary/90 bg-primary text-primary-content">x</div>', '<div class="bg-[#7a7a7c]/10 bg-[#7a7a7c]/50 bg-[#e08814]/90 bg-[#e08814] text-[#ffffff]">x</div>');
+check($ink, 'ink: bg-ink-primary alias', '<div class="bg-ink-primary">x</div>', '<div class="bg-[#7a7a7c]">x</div>');
+check($t, 'no ink in slice: primary unchanged', '<a class="text-primary bg-primary/10">x</a>', '<a class="text-[#e08814] bg-[#e08814]/10">x</a>');
+
 // fonts + untouched vanilla
 check($t, 'fonts reported not converted', '<h1 class="font-heading font-weight-heading">x</h1>', '<h1 class="font-heading font-weight-heading">x</h1>', 2);
 check($t, 'vanilla passes through', '<div class="flex p-4 text-sm rounded-lg bg-white">x</div>', '<div class="flex p-4 text-sm rounded-lg bg-white">x</div>');

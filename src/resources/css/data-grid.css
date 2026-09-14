@@ -61,7 +61,7 @@
     background-color: var(--color-base-100) !important;
 }
 .pn-data-grid.tabulator .tabulator-col.tabulator-range-selected {
-    background-color: color-mix(in oklab, var(--color-primary) 14%, var(--color-base-100)) !important;
+    background-color: color-mix(in oklab, var(--pn-ink, var(--color-primary)) 14%, var(--color-base-100)) !important;
     color: var(--color-base-content) !important;
 }
 .pn-data-grid.tabulator .tabulator-col.tabulator-sortable.tabulator-col-sorter-element:hover {
@@ -75,10 +75,10 @@
     border-bottom-color: color-mix(in oklab, var(--color-base-content) 35%, transparent) !important;
 }
 .pn-data-grid.tabulator [aria-sort=ascending] .tabulator-arrow {
-    border-bottom-color: var(--color-primary) !important;
+    border-bottom-color: var(--pn-ink, var(--color-primary)) !important;
 }
 .pn-data-grid.tabulator [aria-sort=descending] .tabulator-arrow {
-    border-top-color: var(--color-primary) !important;
+    border-top-color: var(--pn-ink, var(--color-primary)) !important;
 }
 
 /* Rows — Tabulator marks these !important, so we must too. */
@@ -93,7 +93,7 @@
     background: color-mix(in oklab, var(--color-base-content) 6%, var(--color-base-100)) !important;
 }
 .pn-data-grid.tabulator .tabulator-row.tabulator-selected {
-    background: color-mix(in oklab, var(--color-primary) 16%, var(--color-base-100)) !important;
+    background: color-mix(in oklab, var(--pn-ink, var(--color-primary)) 16%, var(--color-base-100)) !important;
 }
 
 /* Cell + frozen separators */
@@ -120,14 +120,14 @@
 /* Spreadsheet range selection box + fill handle (v6 range module) */
 .pn-data-grid.tabulator .tabulator-range,
 .pn-data-grid.tabulator .tabulator-range-overlay .tabulator-range {
-    border-color: var(--color-primary);
+    border-color: var(--pn-ink, var(--color-primary));
 }
 .pn-data-grid.tabulator .tabulator-range.tabulator-range-active:after {
-    background-color: var(--color-primary);
+    background-color: var(--pn-ink, var(--color-primary));
 }
 /* selected range cells (not the row-number header) get a faint primary wash */
 .pn-data-grid.tabulator .tabulator-cell.tabulator-range-selected:not(.tabulator-range-row-header) {
-    background-color: color-mix(in oklab, var(--color-primary) 12%, transparent) !important;
+    background-color: color-mix(in oklab, var(--pn-ink, var(--color-primary)) 12%, transparent) !important;
 }
 
 /* pinion-styled checkbox cell (custom pnCheckFormatter in data-grid.js) — matches
@@ -146,7 +146,7 @@
     transition: background-color 0.12s ease, border-color 0.12s ease;
 }
 .pn-data-grid.tabulator .tabulator-cell:hover .pn-grid-check {
-    border-color: var(--color-primary);
+    border-color: var(--pn-ink, var(--color-primary));
 }
 .pn-data-grid.tabulator .pn-grid-check.is-checked {
     background: var(--color-primary);
@@ -196,7 +196,7 @@
     opacity: 1;
 }
 .pn-data-grid.tabulator .pn-grid-num-btn:hover {
-    color: var(--color-primary);
+    color: var(--pn-ink, var(--color-primary));
     background: color-mix(in oklab, var(--color-base-content) 8%, transparent);
 }
 
@@ -226,7 +226,7 @@
 .pn-data-grid.tabulator .tabulator-cell.tabulator-editing select {
     background: var(--color-base-100);
     color: var(--color-base-content);
-    border-color: var(--color-primary);
+    border-color: var(--pn-ink, var(--color-primary));
 }
 
 /* List editor (select) popup tracks the theme. Unscoped because Tabulator appends the
@@ -239,6 +239,6 @@
 }
 .tabulator-edit-list .tabulator-edit-list-item.active,
 .tabulator-edit-list .tabulator-edit-list-item:hover {
-    background: color-mix(in oklab, var(--color-primary) 16%, transparent);
+    background: color-mix(in oklab, var(--pn-ink, var(--color-primary)) 16%, transparent);
     color: var(--color-base-content);
 }

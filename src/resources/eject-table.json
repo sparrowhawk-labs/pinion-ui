@@ -6,7 +6,7 @@
     "strengths": 5,
     "themes": 79,
     "tokens": 39,
-    "colors": 20
+    "colors": 21
   },
   "tokens": {
     "default|xs": {
@@ -2286,7 +2286,8 @@
       "warning": "#9a6700",
       "warning-content": "#ffffff",
       "error": "#cf222e",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#0969da"
     },
     "pinion-dark": {
       "primary": "#4493f8",
@@ -2308,7 +2309,8 @@
       "warning": "#d29922",
       "warning-content": "#0d1117",
       "error": "#f85149",
-      "error-content": "#0d1117"
+      "error-content": "#0d1117",
+      "ink": "#4493f8"
     },
     "monokai": {
       "primary": "#e14775",
@@ -2330,7 +2332,8 @@
       "warning": "#c4a345",
       "warning-content": "#29242a",
       "error": "#e16032",
-      "error-content": "#29242a"
+      "error-content": "#29242a",
+      "ink": "#c3275d"
     },
     "monokai-dark": {
       "primary": "#ff6188",
@@ -2352,7 +2355,8 @@
       "warning": "#c9aa59",
       "warning-content": "#221f22",
       "error": "#fc9867",
-      "error-content": "#221f22"
+      "error-content": "#221f22",
+      "ink": "#ff6188"
     },
     "neotokyo": {
       "primary": "#d42b3a",
@@ -2374,7 +2378,8 @@
       "warning": "#c4a345",
       "warning-content": "#26222b",
       "error": "#d14a41",
-      "error-content": "#fffdf8"
+      "error-content": "#fffdf8",
+      "ink": "#d42b3a"
     },
     "neotokyo-dark": {
       "primary": "#ff4757",
@@ -2396,7 +2401,8 @@
       "warning": "#c6a758",
       "warning-content": "#191320",
       "error": "#d3615d",
-      "error-content": "#191320"
+      "error-content": "#191320",
+      "ink": "#ff4757"
     },
     "frost": {
       "primary": "#0675c9",
@@ -2418,7 +2424,8 @@
       "warning": "#b37207",
       "warning-content": "#ffffff",
       "error": "#d64550",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#0675c9"
     },
     "frost-dark": {
       "primary": "#3ea8ff",
@@ -2440,7 +2447,8 @@
       "warning": "#e3a431",
       "warning-content": "#191e24",
       "error": "#f0707b",
-      "error-content": "#191e24"
+      "error-content": "#191e24",
+      "ink": "#3ea8ff"
     },
     "ember": {
       "primary": "#aa5731",
@@ -2462,7 +2470,8 @@
       "warning": "#a87716",
       "warning-content": "#262420",
       "error": "#be3a30",
-      "error-content": "#fefdfa"
+      "error-content": "#fefdfa",
+      "ink": "#aa5731"
     },
     "ember-dark": {
       "primary": "#d97757",
@@ -2484,7 +2493,8 @@
       "warning": "#d9a33c",
       "warning-content": "#1f1e1d",
       "error": "#e0806e",
-      "error-content": "#1f1e1d"
+      "error-content": "#1f1e1d",
+      "ink": "#d97757"
     },
     "vapor": {
       "primary": "#e36bc6",
@@ -2506,7 +2516,8 @@
       "warning": "#cda94f",
       "warning-content": "#46356b",
       "error": "#e86a6a",
-      "error-content": "#46356b"
+      "error-content": "#46356b",
+      "ink": "#ad3894"
     },
     "vapor-dark": {
       "primary": "#ff9de6",
@@ -2528,7 +2539,8 @@
       "warning": "#eacb75",
       "warning-content": "#322753",
       "error": "#ff8b8b",
-      "error-content": "#322753"
+      "error-content": "#322753",
+      "ink": "#ff9de6"
     },
     "botanical": {
       "primary": "#2e8a4e",
@@ -2550,7 +2562,8 @@
       "warning": "#c3a345",
       "warning-content": "#24312a",
       "error": "#d04a41",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#16783e"
     },
     "botanical-dark": {
       "primary": "#62b385",
@@ -2572,7 +2585,8 @@
       "warning": "#c6a956",
       "warning-content": "#14231a",
       "error": "#d3635c",
-      "error-content": "#14231a"
+      "error-content": "#14231a",
+      "ink": "#62b385"
     },
     "solar": {
       "primary": "#0a6cb0",
@@ -2594,7 +2608,8 @@
       "warning": "#b58900",
       "warning-content": "#073642",
       "error": "#dc322f",
-      "error-content": "#fdf6e3"
+      "error-content": "#fdf6e3",
+      "ink": "#0a6cb0"
     },
     "solar-dark": {
       "primary": "#3d9de0",
@@ -2616,7 +2631,8 @@
       "warning": "#c29500",
       "warning-content": "#002b36",
       "error": "#e4574b",
-      "error-content": "#002b36"
+      "error-content": "#002b36",
+      "ink": "#49a8eb"
     },
     "zen": {
       "primary": "#616b59",
@@ -2638,7 +2654,8 @@
       "warning": "#c4a447",
       "warning-content": "#2e2c28",
       "error": "#d14a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#616b59"
     },
     "zen-dark": {
       "primary": "#8fa283",
@@ -2660,7 +2677,8 @@
       "warning": "#c7a956",
       "warning-content": "#211f1c",
       "error": "#d4635c",
-      "error-content": "#211f1c"
+      "error-content": "#211f1c",
+      "ink": "#8fa283"
     },
     "pop": {
       "primary": "#ffc300",
@@ -2682,7 +2700,8 @@
       "warning": "#c4a347",
       "warning-content": "#2b2430",
       "error": "#d14a43",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#876600"
     },
     "pop-dark": {
       "primary": "#ffd34d",
@@ -2704,7 +2723,8 @@
       "warning": "#c7a95a",
       "warning-content": "#241e2e",
       "error": "#d4625f",
-      "error-content": "#241e2e"
+      "error-content": "#241e2e",
+      "ink": "#ffd34d"
     },
     "verdigris": {
       "primary": "#0f766e",
@@ -2726,7 +2746,8 @@
       "warning": "#c4a346",
       "warning-content": "#29261f",
       "error": "#d14a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#0f766e"
     },
     "verdigris-dark": {
       "primary": "#2da88f",
@@ -2748,7 +2769,8 @@
       "warning": "#c8a957",
       "warning-content": "#262421",
       "error": "#d5635d",
-      "error-content": "#262421"
+      "error-content": "#262421",
+      "ink": "#2da88f"
     },
     "bigblue": {
       "primary": "#0043ce",
@@ -2770,7 +2792,8 @@
       "warning": "#b28600",
       "warning-content": "#21242b",
       "error": "#d14a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#0043ce"
     },
     "bigblue-dark": {
       "primary": "#4589ff",
@@ -2792,7 +2815,8 @@
       "warning": "#f1c21b",
       "warning-content": "#10141f",
       "error": "#d2615d",
-      "error-content": "#10141f"
+      "error-content": "#10141f",
+      "ink": "#4589ff"
     },
     "payments": {
       "primary": "#635bff",
@@ -2814,7 +2838,8 @@
       "warning": "#c4a348",
       "warning-content": "#1a1f36",
       "error": "#e5325c",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#5b50f4"
     },
     "payments-dark": {
       "primary": "#8a84ff",
@@ -2836,7 +2861,8 @@
       "warning": "#c5a859",
       "warning-content": "#151929",
       "error": "#f86a8f",
-      "error-content": "#151929"
+      "error-content": "#151929",
+      "ink": "#8a84ff"
     },
     "docs": {
       "primary": "#8a5a2e",
@@ -2858,7 +2884,8 @@
       "warning": "#c28e12",
       "warning-content": "#3a342c",
       "error": "#b23a2e",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#8a5a2e"
     },
     "docs-dark": {
       "primary": "#c89158",
@@ -2880,7 +2907,8 @@
       "warning": "#d9a93f",
       "warning-content": "#241f17",
       "error": "#e06052",
-      "error-content": "#241f17"
+      "error-content": "#241f17",
+      "ink": "#c89158"
     },
     "mono": {
       "primary": "#171717",
@@ -2902,7 +2930,8 @@
       "warning": "#ea9b06",
       "warning-content": "#0a0a0a",
       "error": "#d14b43",
-      "error-content": "#0a0a0a"
+      "error-content": "#0a0a0a",
+      "ink": "#171717"
     },
     "mono-dark": {
       "primary": "#ededed",
@@ -2924,7 +2953,8 @@
       "warning": "#f5a623",
       "warning-content": "#0a0a0a",
       "error": "#d0605a",
-      "error-content": "#0a0a0a"
+      "error-content": "#0a0a0a",
+      "ink": "#ededed"
     },
     "ops": {
       "primary": "#1d7a46",
@@ -2946,7 +2976,8 @@
       "warning": "#c4a345",
       "warning-content": "#26251f",
       "error": "#d04a41",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#1d7a46"
     },
     "ops-dark": {
       "primary": "#4caf78",
@@ -2968,7 +2999,8 @@
       "warning": "#c6a956",
       "warning-content": "#1b211a",
       "error": "#d3635c",
-      "error-content": "#1b211a"
+      "error-content": "#1b211a",
+      "ink": "#4caf78"
     },
     "finance": {
       "primary": "#1d3461",
@@ -2990,7 +3022,8 @@
       "warning": "#c4a348",
       "warning-content": "#14213d",
       "error": "#c92b3b",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#1d3461"
     },
     "finance-dark": {
       "primary": "#4f79c7",
@@ -3012,7 +3045,8 @@
       "warning": "#c4a859",
       "warning-content": "#0d1526",
       "error": "#f07a7a",
-      "error-content": "#0d1526"
+      "error-content": "#0d1526",
+      "ink": "#638fde"
     },
     "people": {
       "primary": "#e65f52",
@@ -3034,7 +3068,8 @@
       "warning": "#c4a346",
       "warning-content": "#33261f",
       "error": "#d14a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#c03b32"
     },
     "people-dark": {
       "primary": "#f08074",
@@ -3056,7 +3091,8 @@
       "warning": "#c8a855",
       "warning-content": "#281c15",
       "error": "#d5625b",
-      "error-content": "#281c15"
+      "error-content": "#281c15",
+      "ink": "#f08074"
     },
     "health": {
       "primary": "#0e8fa3",
@@ -3078,7 +3114,8 @@
       "warning": "#c3a447",
       "warning-content": "#1c2b2d",
       "error": "#d64545",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#007688"
     },
     "health-dark": {
       "primary": "#3fb7cb",
@@ -3100,7 +3137,8 @@
       "warning": "#c6a958",
       "warning-content": "#152325",
       "error": "#f07c74",
-      "error-content": "#152325"
+      "error-content": "#152325",
+      "ink": "#3fb7cb"
     },
     "analytics": {
       "primary": "#8324c9",
@@ -3122,7 +3160,8 @@
       "warning": "#c4a348",
       "warning-content": "#2a2440",
       "error": "#d14a44",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#8324c9"
     },
     "analytics-dark": {
       "primary": "#be8ff5",
@@ -3144,7 +3183,8 @@
       "warning": "#c7a85b",
       "warning-content": "#201430",
       "error": "#d36160",
-      "error-content": "#201430"
+      "error-content": "#201430",
+      "ink": "#be8ff5"
     },
     "devtool": {
       "primary": "#0891b2",
@@ -3166,7 +3206,8 @@
       "warning": "#e89a0c",
       "warning-content": "#0f172a",
       "error": "#d04a43",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#00748f"
     },
     "devtool-dark": {
       "primary": "#22d3ee",
@@ -3188,7 +3229,8 @@
       "warning": "#f2b822",
       "warning-content": "#0f172a",
       "error": "#d2625f",
-      "error-content": "#0f172a"
+      "error-content": "#0f172a",
+      "ink": "#22d3ee"
     },
     "comms": {
       "primary": "#611f69",
@@ -3210,7 +3252,8 @@
       "warning": "#c4a347",
       "warning-content": "#2c2231",
       "error": "#e01e5a",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#611f69"
     },
     "comms-dark": {
       "primary": "#b366c0",
@@ -3232,7 +3275,8 @@
       "warning": "#c7a858",
       "warning-content": "#221726",
       "error": "#f06487",
-      "error-content": "#221726"
+      "error-content": "#221726",
+      "ink": "#c275d0"
     },
     "growth": {
       "primary": "#f97316",
@@ -3254,7 +3298,8 @@
       "warning": "#c4a446",
       "warning-content": "#331f14",
       "error": "#de2f55",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#b34e00"
     },
     "growth-dark": {
       "primary": "#fb923c",
@@ -3276,7 +3321,8 @@
       "warning": "#c8a854",
       "warning-content": "#2a1d10",
       "error": "#f86e90",
-      "error-content": "#2a1d10"
+      "error-content": "#2a1d10",
+      "ink": "#fb923c"
     },
     "commerce": {
       "primary": "#e8590c",
@@ -3298,7 +3344,8 @@
       "warning": "#cfa64a",
       "warning-content": "#2a2620",
       "error": "#d14a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#bc4400"
     },
     "commerce-dark": {
       "primary": "#fb8a3c",
@@ -3320,7 +3367,8 @@
       "warning": "#d6b060",
       "warning-content": "#241e17",
       "error": "#d4625c",
-      "error-content": "#241e17"
+      "error-content": "#241e17",
+      "ink": "#fb8a3c"
     },
     "education": {
       "primary": "#2563eb",
@@ -3342,7 +3390,8 @@
       "warning": "#c3a448",
       "warning-content": "#1f2a44",
       "error": "#d04b43",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#2563eb"
     },
     "education-dark": {
       "primary": "#5b8def",
@@ -3364,7 +3413,8 @@
       "warning": "#c5a95b",
       "warning-content": "#131c33",
       "error": "#d26360",
-      "error-content": "#131c33"
+      "error-content": "#131c33",
+      "ink": "#5b8def"
     },
     "legal": {
       "primary": "#6b1f2a",
@@ -3386,7 +3436,8 @@
       "warning": "#c4a346",
       "warning-content": "#2b2624",
       "error": "#d14a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#6b1f2a"
     },
     "legal-dark": {
       "primary": "#c05a6a",
@@ -3408,7 +3459,8 @@
       "warning": "#c7a956",
       "warning-content": "#211d1b",
       "error": "#d4625c",
-      "error-content": "#211d1b"
+      "error-content": "#211d1b",
+      "ink": "#de7484"
     },
     "logistics": {
       "primary": "#465b71",
@@ -3430,7 +3482,8 @@
       "warning": "#bd9741",
       "warning-content": "#22272e",
       "error": "#d04a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#465b71"
     },
     "logistics-dark": {
       "primary": "#8fa6bc",
@@ -3452,7 +3505,8 @@
       "warning": "#d8b554",
       "warning-content": "#171b20",
       "error": "#d3625d",
-      "error-content": "#171b20"
+      "error-content": "#171b20",
+      "ink": "#8fa6bc"
     },
     "media": {
       "primary": "#c41e2f",
@@ -3474,7 +3528,8 @@
       "warning": "#b58b24",
       "warning-content": "#111111",
       "error": "#d14b43",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#c41e2f"
     },
     "media-dark": {
       "primary": "#f0455a",
@@ -3496,7 +3551,8 @@
       "warning": "#d0ac49",
       "warning-content": "#131313",
       "error": "#d2615b",
-      "error-content": "#131313"
+      "error-content": "#131313",
+      "ink": "#f0455a"
     },
     "security": {
       "primary": "#37474f",
@@ -3518,7 +3574,8 @@
       "warning": "#c3a347",
       "warning-content": "#1e272b",
       "error": "#d04a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#37474f"
     },
     "security-dark": {
       "primary": "#92a4ae",
@@ -3540,7 +3597,8 @@
       "warning": "#c5a856",
       "warning-content": "#10171a",
       "error": "#d2625c",
-      "error-content": "#10171a"
+      "error-content": "#10171a",
+      "ink": "#92a4ae"
     },
     "kids": {
       "primary": "#339af0",
@@ -3562,7 +3620,8 @@
       "warning": "#d0aa00",
       "warning-content": "#35302e",
       "error": "#d14a40",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#006eb9"
     },
     "kids-dark": {
       "primary": "#4dabf7",
@@ -3584,7 +3643,8 @@
       "warning": "#ebcc50",
       "warning-content": "#2b2820",
       "error": "#d5645d",
-      "error-content": "#2b2820"
+      "error-content": "#2b2820",
+      "ink": "#4dabf7"
     },
     "wellness": {
       "primary": "#7c8f62",
@@ -3606,7 +3666,8 @@
       "warning": "#c4a346",
       "warning-content": "#2e2f27",
       "error": "#d14a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#5e7045"
     },
     "wellness-dark": {
       "primary": "#a5bc85",
@@ -3628,7 +3689,8 @@
       "warning": "#c7a956",
       "warning-content": "#22241d",
       "error": "#d4635c",
-      "error-content": "#22241d"
+      "error-content": "#22241d",
+      "ink": "#a5bc85"
     },
     "civic": {
       "primary": "#145da0",
@@ -3650,7 +3712,8 @@
       "warning": "#c4a347",
       "warning-content": "#1f2933",
       "error": "#d04a43",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#145da0"
     },
     "civic-dark": {
       "primary": "#4f94d4",
@@ -3672,7 +3735,8 @@
       "warning": "#c5a858",
       "warning-content": "#121a22",
       "error": "#d2625e",
-      "error-content": "#121a22"
+      "error-content": "#121a22",
+      "ink": "#4f94d4"
     },
     "atelier": {
       "primary": "#33261c",
@@ -3694,7 +3758,8 @@
       "warning": "#c4a346",
       "warning-content": "#23201c",
       "error": "#d14a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#33261c"
     },
     "atelier-dark": {
       "primary": "#e8e2d8",
@@ -3716,7 +3781,8 @@
       "warning": "#c6a855",
       "warning-content": "#1b1815",
       "error": "#d3625b",
-      "error-content": "#1b1815"
+      "error-content": "#1b1815",
+      "ink": "#e8e2d8"
     },
     "estate": {
       "primary": "#1e4f94",
@@ -3738,7 +3804,8 @@
       "warning": "#c3a348",
       "warning-content": "#1c2a3a",
       "error": "#d04a43",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#1e4f94"
     },
     "estate-dark": {
       "primary": "#6ba3dc",
@@ -3760,7 +3827,8 @@
       "warning": "#c5a95a",
       "warning-content": "#10202f",
       "error": "#d2635f",
-      "error-content": "#10202f"
+      "error-content": "#10202f",
+      "ink": "#6ba3dc"
     },
     "food": {
       "primary": "#7e9b12",
@@ -3782,7 +3850,8 @@
       "warning": "#c4a444",
       "warning-content": "#333a18",
       "error": "#d14b40",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#5e7500"
     },
     "food-dark": {
       "primary": "#a8c93f",
@@ -3804,7 +3873,8 @@
       "warning": "#c8aa54",
       "warning-content": "#252a14",
       "error": "#d5645b",
-      "error-content": "#252a14"
+      "error-content": "#252a14",
+      "ink": "#a8c93f"
     },
     "travel": {
       "primary": "#12a5ab",
@@ -3826,7 +3896,8 @@
       "warning": "#c3a347",
       "warning-content": "#1c3335",
       "error": "#d04b42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#007479"
     },
     "travel-dark": {
       "primary": "#3fc7cd",
@@ -3848,7 +3919,8 @@
       "warning": "#c5aa58",
       "warning-content": "#0e2528",
       "error": "#d3645e",
-      "error-content": "#0e2528"
+      "error-content": "#0e2528",
+      "ink": "#3fc7cd"
     },
     "creative": {
       "primary": "#1a1a1a",
@@ -3870,7 +3942,8 @@
       "warning": "#c4a448",
       "warning-content": "#191913",
       "error": "#d14b43",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#1a1a1a"
     },
     "creative-dark": {
       "primary": "#efefe7",
@@ -3892,7 +3965,8 @@
       "warning": "#c5a755",
       "warning-content": "#141412",
       "error": "#d2615b",
-      "error-content": "#141412"
+      "error-content": "#141412",
+      "ink": "#efefe7"
     },
     "agri": {
       "primary": "#00b37e",
@@ -3914,7 +3988,8 @@
       "warning": "#c3a447",
       "warning-content": "#1e2a26",
       "error": "#d04b42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#007a55"
     },
     "agri-dark": {
       "primary": "#2dd49b",
@@ -3936,7 +4011,8 @@
       "warning": "#c5a856",
       "warning-content": "#121b18",
       "error": "#d2625c",
-      "error-content": "#121b18"
+      "error-content": "#121b18",
+      "ink": "#2dd49b"
     },
     "factory": {
       "primary": "#c28410",
@@ -3958,7 +4034,8 @@
       "warning": "#c3a347",
       "warning-content": "#232a31",
       "error": "#d04a42",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#8f5f00"
     },
     "factory-dark": {
       "primary": "#e8b341",
@@ -3980,7 +4057,8 @@
       "warning": "#c5a857",
       "warning-content": "#14181c",
       "error": "#d2625d",
-      "error-content": "#14181c"
+      "error-content": "#14181c",
+      "ink": "#e8b341"
     },
     "reactive": {
       "primary": "#0969da",
@@ -4002,7 +4080,8 @@
       "warning": "#9a6700",
       "warning-content": "#ffffff",
       "error": "#cf222e",
-      "error-content": "#ffffff"
+      "error-content": "#ffffff",
+      "ink": "#0969da"
     }
   }
 }

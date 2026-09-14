@@ -187,7 +187,7 @@ class TimelineComposer
      */
     private static function hrColors(string $appearance): string
     {
-        $done = $appearance === 'solid' ? 'bg-primary' : 'bg-primary/30';
+        $done = $appearance === 'solid' ? 'bg-ink-primary' : 'bg-primary/30';
 
         return implode('|', [
             "done={$done}",
