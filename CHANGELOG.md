@@ -7,6 +7,17 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.17.1] — 2026-09-14
+
+### Fixed
+- **`eject-table.json` regenerated** from the reference build (browser-measured): now 91 themes — the 12
+  Tonal blocks were missing since v0.15.0 — with the `ink` column captured live (`glyph-dark` → `#818284`)
+  and `mono` / `mono-dark` base tones current. Tune tokens are unchanged.
+- **`@sparrowhawk-labs/pinion-ui-css` dist rebuilt** with the v0.17.0 theme blocks (`--pn-ink` on all 90);
+  golden gate identical (69,828 computed values).
+- A self-referencing `packages/pinion-ui-css/node_modules` symlink was tracked by mistake (since
+  2026-07-21) and shipped in the dist; removed from the tree (it was already in `.gitignore`).
+
 ## [0.17.0] — 2026-09-14
 
 ### Added

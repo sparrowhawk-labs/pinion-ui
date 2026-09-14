@@ -302,6 +302,9 @@
   .tune-border {
     border-width: var(--border);
   }
+  .border-primary {
+    border-color: var(--color-primary);
+  }
   .bg-primary {
     background-color: var(--color-primary);
   }
@@ -465,6 +468,16 @@
   }
   .font-weight-heading {
     font-weight: var(--font-weight-heading);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .ring {
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .ring-primary {
+    --tw-ring-color: var(--color-primary);
   }
 }
 @font-face {
@@ -1240,6 +1253,7 @@
     --color-error: #CF222E;
     --color-error-content: #FFFFFF;
     --root-bg: #F6F8FA;
+    --pn-ink: #0969DA;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1275,6 +1289,7 @@
       --color-error: #F85149;
       --color-error-content: #0D1117;
       --root-bg: #0D1117;
+      --pn-ink: #4493F8;
       --radius-selector: 0.5rem;
       --radius-field: 0.375rem;
       --radius-box: 0.5rem;
@@ -1310,6 +1325,7 @@
     --color-error: #F85149;
     --color-error-content: #0D1117;
     --root-bg: #0D1117;
+    --pn-ink: #4493F8;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1344,6 +1360,7 @@
     --color-error: #E16032;
     --color-error-content: #29242A;
     --root-bg: #FAF1EC;
+    --pn-ink: #C3275D;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1378,6 +1395,7 @@
     --color-error: #FC9867;
     --color-error-content: #221F22;
     --root-bg: #2D2A2E;
+    --pn-ink: #FF6188;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1412,6 +1430,7 @@
     --color-error: #D14A41;
     --color-error-content: #FFFDF8;
     --root-bg: #FAF5ED;
+    --pn-ink: #D42B3A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1446,6 +1465,7 @@
     --color-error: #D3615D;
     --color-error-content: #191320;
     --root-bg: #191320;
+    --pn-ink: #FF4757;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1480,6 +1500,7 @@
     --color-error: #D64550;
     --color-error-content: #FFFFFF;
     --root-bg: #F7FAFD;
+    --pn-ink: #0675C9;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1514,6 +1535,7 @@
     --color-error: #F0707B;
     --color-error-content: #191E24;
     --root-bg: #191E24;
+    --pn-ink: #3EA8FF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1548,6 +1570,7 @@
     --color-error: #BE3A30;
     --color-error-content: #FEFDFA;
     --root-bg: #FAF9F5;
+    --pn-ink: #AA5731;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1582,6 +1605,7 @@
     --color-error: #E0806E;
     --color-error-content: #1F1E1D;
     --root-bg: #1F1E1D;
+    --pn-ink: #D97757;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1616,6 +1640,7 @@
     --color-error: #E86A6A;
     --color-error-content: #46356B;
     --root-bg: #F7F0FF;
+    --pn-ink: #AD3894;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1650,6 +1675,7 @@
     --color-error: #FF8B8B;
     --color-error-content: #322753;
     --root-bg: #322753;
+    --pn-ink: #FF9DE6;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1684,6 +1710,7 @@
     --color-error: #D04A41;
     --color-error-content: #FFFFFF;
     --root-bg: #EFF6EA;
+    --pn-ink: #16783E;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1718,6 +1745,7 @@
     --color-error: #D3635C;
     --color-error-content: #14231A;
     --root-bg: #14231A;
+    --pn-ink: #62B385;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1752,6 +1780,7 @@
     --color-error: #DC322F;
     --color-error-content: #FDF6E3;
     --root-bg: #EFE9D5;
+    --pn-ink: #0A6CB0;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1786,6 +1815,7 @@
     --color-error: #E4574B;
     --color-error-content: #002B36;
     --root-bg: #002B36;
+    --pn-ink: #49A8EB;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1820,6 +1850,7 @@
     --color-error: #D14A42;
     --color-error-content: #FFFFFF;
     --root-bg: #F8F8F5;
+    --pn-ink: #616B59;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1854,6 +1885,7 @@
     --color-error: #D4635C;
     --color-error-content: #211F1C;
     --root-bg: #211F1C;
+    --pn-ink: #8FA283;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1888,6 +1920,7 @@
     --color-error: #D14A43;
     --color-error-content: #FFFFFF;
     --root-bg: #FFF5FA;
+    --pn-ink: #876600;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1922,6 +1955,7 @@
     --color-error: #D4625F;
     --color-error-content: #241E2E;
     --root-bg: #241E2E;
+    --pn-ink: #FFD34D;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1956,6 +1990,7 @@
     --color-error: #D14A42;
     --color-error-content: #FFFFFF;
     --root-bg: #FAF7F3;
+    --pn-ink: #0F766E;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1990,6 +2025,7 @@
     --color-error: #D5635D;
     --color-error-content: #262421;
     --root-bg: #262421;
+    --pn-ink: #2DA88F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2024,6 +2060,7 @@
     --color-error: #D14A42;
     --color-error-content: #FFFFFF;
     --root-bg: #F8F8F4;
+    --pn-ink: #0043CE;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2058,6 +2095,7 @@
     --color-error: #D2615D;
     --color-error-content: #10141F;
     --root-bg: #10141F;
+    --pn-ink: #4589FF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2092,6 +2130,7 @@
     --color-error: #E5325C;
     --color-error-content: #FFFFFF;
     --root-bg: #F5F7FB;
+    --pn-ink: #5B50F4;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2126,6 +2165,7 @@
     --color-error: #F86A8F;
     --color-error-content: #151929;
     --root-bg: #151929;
+    --pn-ink: #8A84FF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2160,6 +2200,7 @@
     --color-error: #B23A2E;
     --color-error-content: #FFFFFF;
     --root-bg: #F9F6EF;
+    --pn-ink: #8A5A2E;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2194,6 +2235,7 @@
     --color-error: #E06052;
     --color-error-content: #241F17;
     --root-bg: #241F17;
+    --pn-ink: #C89158;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2207,9 +2249,9 @@
 @layer base {
   :root:has(input.theme-controller[value=mono]:checked),[data-theme="mono"] {
     color-scheme: light;
-    --color-base-100: #FAFAFA;
-    --color-base-200: #FFFFFF;
-    --color-base-300: #E8E8E8;
+    --color-base-100: #FFFFFF;
+    --color-base-200: #F5F5F5;
+    --color-base-300: #DFDFDF;
     --color-base-content: #0A0A0A;
     --color-primary: #171717;
     --color-primary-content: #FFFFFF;
@@ -2217,17 +2259,18 @@
     --color-secondary-content: #FFFFFF;
     --color-accent: #7928CA;
     --color-accent-content: #FFFFFF;
-    --color-neutral: #272727;
+    --color-neutral: #262626;
     --color-neutral-content: #FFFFFF;
-    --color-info: #488DC3;
+    --color-info: #488CC2;
     --color-info-content: #0A0A0A;
     --color-success: #2AC9A9;
     --color-success-content: #0A0A0A;
     --color-warning: #EA9B06;
     --color-warning-content: #0A0A0A;
-    --color-error: #D14B43;
+    --color-error: #D04A42;
     --color-error-content: #0A0A0A;
-    --root-bg: #FFFFFF;
+    --root-bg: #F5F5F5;
+    --pn-ink: #171717;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2241,27 +2284,28 @@
 @layer base {
   :root:has(input.theme-controller[value=mono-dark]:checked),[data-theme="mono-dark"] {
     color-scheme: dark;
-    --color-base-100: #141414;
-    --color-base-200: #0A0A0A;
-    --color-base-300: #242424;
+    --color-base-100: #161616;
+    --color-base-200: #0E0E0E;
+    --color-base-300: #070707;
     --color-base-content: #F5F5F5;
     --color-primary: #EDEDED;
-    --color-primary-content: #0A0A0A;
+    --color-primary-content: #0E0E0E;
     --color-secondary: #3291FF;
-    --color-secondary-content: #0A0A0A;
+    --color-secondary-content: #0E0E0E;
     --color-accent: #BF5AF2;
-    --color-accent-content: #0A0A0A;
-    --color-neutral: #303030;
+    --color-accent-content: #0E0E0E;
+    --color-neutral: #323232;
     --color-neutral-content: #F5F5F5;
-    --color-info: #5C99CC;
-    --color-info-content: #0A0A0A;
+    --color-info: #5D99CC;
+    --color-info-content: #0E0E0E;
     --color-success: #50E3C2;
-    --color-success-content: #0A0A0A;
+    --color-success-content: #0E0E0E;
     --color-warning: #F5A623;
-    --color-warning-content: #0A0A0A;
-    --color-error: #D0605A;
-    --color-error-content: #0A0A0A;
-    --root-bg: #0A0A0A;
+    --color-warning-content: #0E0E0E;
+    --color-error: #D1605B;
+    --color-error-content: #0E0E0E;
+    --root-bg: #0E0E0E;
+    --pn-ink: #EDEDED;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2296,6 +2340,7 @@
     --color-error: #D04A41;
     --color-error-content: #FFFFFF;
     --root-bg: #F6F5EC;
+    --pn-ink: #1D7A46;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2330,6 +2375,7 @@
     --color-error: #D3635C;
     --color-error-content: #1B211A;
     --root-bg: #1B211A;
+    --pn-ink: #4CAF78;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2364,6 +2410,7 @@
     --color-error: #C92B3B;
     --color-error-content: #FFFFFF;
     --root-bg: #F6F7FA;
+    --pn-ink: #1D3461;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2398,6 +2445,7 @@
     --color-error: #F07A7A;
     --color-error-content: #0D1526;
     --root-bg: #0D1526;
+    --pn-ink: #638FDE;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2432,6 +2480,7 @@
     --color-error: #D14A42;
     --color-error-content: #FFFFFF;
     --root-bg: #FEF6F1;
+    --pn-ink: #C03B32;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2466,6 +2515,7 @@
     --color-error: #D5625B;
     --color-error-content: #281C15;
     --root-bg: #281C15;
+    --pn-ink: #F08074;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2500,6 +2550,7 @@
     --color-error: #D64545;
     --color-error-content: #FFFFFF;
     --root-bg: #F1FAF9;
+    --pn-ink: #007688;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2534,6 +2585,7 @@
     --color-error: #F07C74;
     --color-error-content: #152325;
     --root-bg: #152325;
+    --pn-ink: #3FB7CB;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2568,6 +2620,7 @@
     --color-error: #D14A44;
     --color-error-content: #FFFFFF;
     --root-bg: #F8F3FF;
+    --pn-ink: #8324C9;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2602,6 +2655,7 @@
     --color-error: #D36160;
     --color-error-content: #201430;
     --root-bg: #201430;
+    --pn-ink: #BE8FF5;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2636,6 +2690,7 @@
     --color-error: #D04A43;
     --color-error-content: #FFFFFF;
     --root-bg: #F3F7F9;
+    --pn-ink: #00748F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2670,6 +2725,7 @@
     --color-error: #D2625F;
     --color-error-content: #0F172A;
     --root-bg: #0F172A;
+    --pn-ink: #22D3EE;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2704,6 +2760,7 @@
     --color-error: #E01E5A;
     --color-error-content: #FFFFFF;
     --root-bg: #FAF6F9;
+    --pn-ink: #611F69;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2738,6 +2795,7 @@
     --color-error: #F06487;
     --color-error-content: #221726;
     --root-bg: #221726;
+    --pn-ink: #C275D0;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2772,6 +2830,7 @@
     --color-error: #DE2F55;
     --color-error-content: #FFFFFF;
     --root-bg: #FFF9EF;
+    --pn-ink: #B34E00;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2806,6 +2865,7 @@
     --color-error: #F86E90;
     --color-error-content: #2A1D10;
     --root-bg: #2A1D10;
+    --pn-ink: #FB923C;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2840,6 +2900,7 @@
     --color-error: #D14A42;
     --color-error-content: #FFFFFF;
     --root-bg: #FBF8F4;
+    --pn-ink: #BC4400;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2874,6 +2935,7 @@
     --color-error: #D4625C;
     --color-error-content: #241E17;
     --root-bg: #241E17;
+    --pn-ink: #FB8A3C;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2908,6 +2970,7 @@
     --color-error: #D04B43;
     --color-error-content: #FFFFFF;
     --root-bg: #F4F8FF;
+    --pn-ink: #2563EB;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2942,6 +3005,7 @@
     --color-error: #D26360;
     --color-error-content: #131C33;
     --root-bg: #131C33;
+    --pn-ink: #5B8DEF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2976,6 +3040,7 @@
     --color-error: #D14A42;
     --color-error-content: #FFFFFF;
     --root-bg: #F8F6F2;
+    --pn-ink: #6B1F2A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3010,6 +3075,7 @@
     --color-error: #D4625C;
     --color-error-content: #211D1B;
     --root-bg: #211D1B;
+    --pn-ink: #DE7484;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3044,6 +3110,7 @@
     --color-error: #D04A42;
     --color-error-content: #FFFFFF;
     --root-bg: #F1F3F3;
+    --pn-ink: #465B71;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3078,6 +3145,7 @@
     --color-error: #D3625D;
     --color-error-content: #171B20;
     --root-bg: #171B20;
+    --pn-ink: #8FA6BC;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3112,6 +3180,7 @@
     --color-error: #D14B43;
     --color-error-content: #FFFFFF;
     --root-bg: #FFFFFF;
+    --pn-ink: #C41E2F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3146,6 +3215,7 @@
     --color-error: #D2615B;
     --color-error-content: #131313;
     --root-bg: #131313;
+    --pn-ink: #F0455A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3180,6 +3250,7 @@
     --color-error: #D04A42;
     --color-error-content: #FFFFFF;
     --root-bg: #F4F6F6;
+    --pn-ink: #37474F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3214,6 +3285,7 @@
     --color-error: #D2625C;
     --color-error-content: #10171A;
     --root-bg: #10171A;
+    --pn-ink: #92A4AE;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3248,6 +3320,7 @@
     --color-error: #D14A40;
     --color-error-content: #FFFFFF;
     --root-bg: #FFF8E1;
+    --pn-ink: #006EB9;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3282,6 +3355,7 @@
     --color-error: #D5645D;
     --color-error-content: #2B2820;
     --root-bg: #2B2820;
+    --pn-ink: #4DABF7;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3316,6 +3390,7 @@
     --color-error: #D14A42;
     --color-error-content: #FFFFFF;
     --root-bg: #F8F7F0;
+    --pn-ink: #5E7045;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3350,6 +3425,7 @@
     --color-error: #D4635C;
     --color-error-content: #22241D;
     --root-bg: #22241D;
+    --pn-ink: #A5BC85;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3384,6 +3460,7 @@
     --color-error: #D04A43;
     --color-error-content: #FFFFFF;
     --root-bg: #F5F7F9;
+    --pn-ink: #145DA0;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3418,6 +3495,7 @@
     --color-error: #D2625E;
     --color-error-content: #121A22;
     --root-bg: #121A22;
+    --pn-ink: #4F94D4;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3452,6 +3530,7 @@
     --color-error: #D14A42;
     --color-error-content: #FFFFFF;
     --root-bg: #FAF7F2;
+    --pn-ink: #33261C;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3486,6 +3565,7 @@
     --color-error: #D3625B;
     --color-error-content: #1B1815;
     --root-bg: #1B1815;
+    --pn-ink: #E8E2D8;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3520,6 +3600,7 @@
     --color-error: #D04A43;
     --color-error-content: #FFFFFF;
     --root-bg: #EDF4FB;
+    --pn-ink: #1E4F94;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3554,6 +3635,7 @@
     --color-error: #D2635F;
     --color-error-content: #10202F;
     --root-bg: #10202F;
+    --pn-ink: #6BA3DC;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3588,6 +3670,7 @@
     --color-error: #D14B40;
     --color-error-content: #FFFFFF;
     --root-bg: #F9FCE8;
+    --pn-ink: #5E7500;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3622,6 +3705,7 @@
     --color-error: #D5645B;
     --color-error-content: #252A14;
     --root-bg: #252A14;
+    --pn-ink: #A8C93F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3656,6 +3740,7 @@
     --color-error: #D04B42;
     --color-error-content: #FFFFFF;
     --root-bg: #E9F7F4;
+    --pn-ink: #007479;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3690,6 +3775,7 @@
     --color-error: #D3645E;
     --color-error-content: #0E2528;
     --root-bg: #0E2528;
+    --pn-ink: #3FC7CD;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3724,6 +3810,7 @@
     --color-error: #D14B43;
     --color-error-content: #FFFFFF;
     --root-bg: #FFFFFF;
+    --pn-ink: #1A1A1A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3758,6 +3845,7 @@
     --color-error: #D2615B;
     --color-error-content: #141412;
     --root-bg: #141412;
+    --pn-ink: #EFEFE7;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3792,6 +3880,7 @@
     --color-error: #D04B42;
     --color-error-content: #FFFFFF;
     --root-bg: #F3FAF6;
+    --pn-ink: #007A55;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3826,6 +3915,7 @@
     --color-error: #D2625C;
     --color-error-content: #121B18;
     --root-bg: #121B18;
+    --pn-ink: #2DD49B;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3860,6 +3950,7 @@
     --color-error: #D04A42;
     --color-error-content: #FFFFFF;
     --root-bg: #F2F4F5;
+    --pn-ink: #8F5F00;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3894,6 +3985,7 @@
     --color-error: #D2625D;
     --color-error-content: #14181C;
     --root-bg: #14181C;
+    --pn-ink: #E8B341;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3905,29 +3997,30 @@
   }
 }
 @layer base {
-  :root:has(input.theme-controller[value=nonblok]:checked),[data-theme="nonblok"] {
+  :root:has(input.theme-controller[value=carbon]:checked),[data-theme="carbon"] {
     color-scheme: light;
     --color-base-100: #FFFFFF;
-    --color-base-200: #F7F6F3;
-    --color-base-300: #E4E3E0;
-    --color-base-content: #232025;
-    --color-primary: #6C63C7;
-    --color-primary-content: #FFFFFF;
-    --color-secondary: #4B4553;
-    --color-secondary-content: #FFFFFF;
-    --color-accent: #A89BFF;
-    --color-accent-content: #232025;
-    --color-neutral: #3E3B40;
+    --color-base-200: #EFF1F2;
+    --color-base-300: #DBDDDE;
+    --color-base-content: #121416;
+    --color-primary: #E2E5E7;
+    --color-primary-content: #121416;
+    --color-secondary: #D3D7DA;
+    --color-secondary-content: #121416;
+    --color-accent: #5E656B;
+    --color-accent-content: #FFFFFF;
+    --color-neutral: #2D2F31;
     --color-neutral-content: #FFFFFF;
-    --color-info: #0969DA;
-    --color-info-content: #FFFFFF;
-    --color-success: #1A7F37;
-    --color-success-content: #FFFFFF;
-    --color-warning: #9A6700;
-    --color-warning-content: #FFFFFF;
-    --color-error: #CF222E;
+    --color-info: #478BC2;
+    --color-info-content: #121416;
+    --color-success: #4B995F;
+    --color-success-content: #121416;
+    --color-warning: #C3A347;
+    --color-warning-content: #121416;
+    --color-error: #D04A42;
     --color-error-content: #FFFFFF;
-    --root-bg: #F7F6F3;
+    --root-bg: #EFF1F2;
+    --pn-ink: #656769;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3939,29 +4032,380 @@
   }
 }
 @layer base {
-  :root:has(input.theme-controller[value=nonblok-dark]:checked),[data-theme="nonblok-dark"] {
+  :root:has(input.theme-controller[value=carbon-dark]:checked),[data-theme="carbon-dark"] {
     color-scheme: dark;
-    --color-base-100: #232025;
-    --color-base-200: #151318;
-    --color-base-300: #2E2C30;
-    --color-base-content: #F2EFE9;
-    --color-primary: #A89BFF;
-    --color-primary-content: #151318;
-    --color-secondary: #8B85A0;
-    --color-secondary-content: #151318;
-    --color-accent: #CFC8FF;
-    --color-accent-content: #151318;
-    --color-neutral: #3D3A3E;
-    --color-neutral-content: #F2EFE9;
-    --color-info: #8FB7FF;
-    --color-info-content: #151318;
-    --color-success: #4FBF67;
-    --color-success-content: #151318;
-    --color-warning: #D9A23A;
-    --color-warning-content: #151318;
-    --color-error: #F87168;
-    --color-error-content: #151318;
-    --root-bg: #151318;
+    --color-base-100: #161819;
+    --color-base-200: #0C0D0E;
+    --color-base-300: #242527;
+    --color-base-content: #E4E6E8;
+    --color-primary: #1F2224;
+    --color-primary-content: #E4E6E8;
+    --color-secondary: #2E3235;
+    --color-secondary-content: #E4E6E8;
+    --color-accent: #A7ADB3;
+    --color-accent-content: #0C0D0E;
+    --color-neutral: #303233;
+    --color-neutral-content: #E4E6E8;
+    --color-info: #5C99CC;
+    --color-info-content: #0C0D0E;
+    --color-success: #5FA670;
+    --color-success-content: #0C0D0E;
+    --color-warning: #C4A654;
+    --color-warning-content: #0C0D0E;
+    --color-error: #D1605B;
+    --color-error-content: #0C0D0E;
+    --root-bg: #0C0D0E;
+    --pn-ink: #85898B;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=glyph]:checked),[data-theme="glyph"] {
+    color-scheme: light;
+    --color-base-100: #FFFFFF;
+    --color-base-200: #FAFAFA;
+    --color-base-300: #E0E0E0;
+    --color-base-content: #000000;
+    --color-primary: #EDEDED;
+    --color-primary-content: #000000;
+    --color-secondary: #DEDEE0;
+    --color-secondary-content: #000000;
+    --color-accent: #6E6E76;
+    --color-accent-content: #FFFFFF;
+    --color-neutral: #0B0B0B;
+    --color-neutral-content: #FFFFFF;
+    --color-info: #488CC3;
+    --color-info-content: #000000;
+    --color-success: #4C9A60;
+    --color-success-content: #000000;
+    --color-warning: #C4A447;
+    --color-warning-content: #000000;
+    --color-error: #D14B43;
+    --color-error-content: #000000;
+    --root-bg: #FAFAFA;
+    --pn-ink: #6D6C6C;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=glyph-dark]:checked),[data-theme="glyph-dark"] {
+    color-scheme: dark;
+    --color-base-100: #0E0E0F;
+    --color-base-200: #050505;
+    --color-base-300: #1F1F1F;
+    --color-base-content: #FFFFFF;
+    --color-primary: #141416;
+    --color-primary-content: #FFFFFF;
+    --color-secondary: #1F1F22;
+    --color-secondary-content: #FFFFFF;
+    --color-accent: #D0D0D6;
+    --color-accent-content: #050505;
+    --color-neutral: #2B2B2C;
+    --color-neutral-content: #FFFFFF;
+    --color-info: #5B98CB;
+    --color-info-content: #050505;
+    --color-success: #5EA56E;
+    --color-success-content: #050505;
+    --color-warning: #C3A553;
+    --color-warning-content: #050505;
+    --color-error: #CF5F59;
+    --color-error-content: #050505;
+    --root-bg: #050505;
+    --pn-ink: #818284;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=noir]:checked),[data-theme="noir"] {
+    color-scheme: light;
+    --color-base-100: #FAF6EF;
+    --color-base-200: #F1EBE2;
+    --color-base-300: #DED7CF;
+    --color-base-content: #1C1410;
+    --color-primary: #E6DED2;
+    --color-primary-content: #1C1410;
+    --color-secondary: #D8CEC0;
+    --color-secondary-content: #1C1410;
+    --color-accent: #7C6650;
+    --color-accent-content: #FAF6EF;
+    --color-neutral: #372F2A;
+    --color-neutral-content: #FAF6EF;
+    --color-info: #478BC1;
+    --color-info-content: #1C1410;
+    --color-success: #4B985D;
+    --color-success-content: #1C1410;
+    --color-warning: #C3A244;
+    --color-warning-content: #1C1410;
+    --color-error: #D04940;
+    --color-error-content: #FAF6EF;
+    --root-bg: #F1EBE2;
+    --pn-ink: #6A6359;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=noir-dark]:checked),[data-theme="noir-dark"] {
+    color-scheme: dark;
+    --color-base-100: #1C1611;
+    --color-base-200: #110D0A;
+    --color-base-300: #2A2520;
+    --color-base-content: #EADFCF;
+    --color-primary: #241C16;
+    --color-primary-content: #EADFCF;
+    --color-secondary: #362B22;
+    --color-secondary-content: #EADFCF;
+    --color-accent: #B49A7E;
+    --color-accent-content: #110D0A;
+    --color-neutral: #362F29;
+    --color-neutral-content: #EADFCF;
+    --color-info: #5D99CC;
+    --color-info-content: #110D0A;
+    --color-success: #60A66F;
+    --color-success-content: #110D0A;
+    --color-warning: #C5A653;
+    --color-warning-content: #110D0A;
+    --color-error: #D1605A;
+    --color-error-content: #110D0A;
+    --root-bg: #110D0A;
+    --pn-ink: #90867E;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=tide]:checked),[data-theme="tide"] {
+    color-scheme: light;
+    --color-base-100: #FAF4E2;
+    --color-base-200: #EBE6D6;
+    --color-base-300: #D8D7C9;
+    --color-base-content: #073642;
+    --color-primary: #DFD8C4;
+    --color-primary-content: #073642;
+    --color-secondary: #CFC7B0;
+    --color-secondary-content: #073642;
+    --color-accent: #3F6B76;
+    --color-accent-content: #FAF4E2;
+    --color-neutral: #2C4E57;
+    --color-neutral-content: #FAF4E2;
+    --color-info: #268BD2;
+    --color-info-content: #073642;
+    --color-success: #859900;
+    --color-success-content: #073642;
+    --color-warning: #B58900;
+    --color-warning-content: #073642;
+    --color-error: #DC322F;
+    --color-error-content: #FAF4E2;
+    --root-bg: #EBE6D6;
+    --pn-ink: #67604F;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=tide-dark]:checked),[data-theme="tide-dark"] {
+    color-scheme: dark;
+    --color-base-100: #063440;
+    --color-base-200: #00232C;
+    --color-base-300: #17363E;
+    --color-base-content: #A9BCBC;
+    --color-primary: #0C3F4B;
+    --color-primary-content: #A9BCBC;
+    --color-secondary: #0F4654;
+    --color-secondary-content: #A9BCBC;
+    --color-accent: #6FA6B1;
+    --color-accent-content: #00232C;
+    --color-neutral: #214751;
+    --color-neutral-content: #A9BCBC;
+    --color-info: #4B9FD8;
+    --color-info-content: #00232C;
+    --color-success: #8CA82E;
+    --color-success-content: #00232C;
+    --color-warning: #C29500;
+    --color-warning-content: #00232C;
+    --color-error: #E4574B;
+    --color-error-content: #00232C;
+    --root-bg: #00232C;
+    --pn-ink: #76A6B3;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=nocturne]:checked),[data-theme="nocturne"] {
+    color-scheme: light;
+    --color-base-100: #FCFAFD;
+    --color-base-200: #F2EDF4;
+    --color-base-300: #E0DBE2;
+    --color-base-content: #26222B;
+    --color-primary: #E5DEE9;
+    --color-primary-content: #26222B;
+    --color-secondary: #D6CCDC;
+    --color-secondary-content: #26222B;
+    --color-accent: #74627F;
+    --color-accent-content: #FCFAFD;
+    --color-neutral: #403C45;
+    --color-neutral-content: #FCFAFD;
+    --color-info: #416498;
+    --color-info-content: #FCFAFD;
+    --color-success: #178A67;
+    --color-success-content: #FCFAFD;
+    --color-warning: #C99A2E;
+    --color-warning-content: #26222B;
+    --color-error: #D42B3A;
+    --color-error-content: #FCFAFD;
+    --root-bg: #F2EDF4;
+    --pn-ink: #6A636D;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=nocturne-dark]:checked),[data-theme="nocturne-dark"] {
+    color-scheme: dark;
+    --color-base-100: #211A2D;
+    --color-base-200: #161120;
+    --color-base-300: #2F2939;
+    --color-base-content: #ECE4F2;
+    --color-primary: #2B2239;
+    --color-primary-content: #ECE4F2;
+    --color-secondary: #3C2F4E;
+    --color-secondary-content: #ECE4F2;
+    --color-accent: #A28DC2;
+    --color-accent-content: #161120;
+    --color-neutral: #3B3447;
+    --color-neutral-content: #ECE4F2;
+    --color-info: #6C8CFF;
+    --color-info-content: #161120;
+    --color-success: #2DD4BF;
+    --color-success-content: #161120;
+    --color-warning: #F0C34E;
+    --color-warning-content: #161120;
+    --color-error: #FF4757;
+    --color-error-content: #161120;
+    --root-bg: #161120;
+    --pn-ink: #9288A4;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=clay]:checked),[data-theme="clay"] {
+    color-scheme: light;
+    --color-base-100: #FDFBF6;
+    --color-base-200: #F5F1E9;
+    --color-base-300: #E3DFD7;
+    --color-base-content: #2A2520;
+    --color-primary: #EAE3D7;
+    --color-primary-content: #2A2520;
+    --color-secondary: #DCD3C3;
+    --color-secondary-content: #2A2520;
+    --color-accent: #93634D;
+    --color-accent-content: #FDFBF6;
+    --color-neutral: #443F3A;
+    --color-neutral-content: #FDFBF6;
+    --color-info: #4A6FA5;
+    --color-info-content: #FDFBF6;
+    --color-success: #58824B;
+    --color-success-content: #FDFBF6;
+    --color-warning: #A87716;
+    --color-warning-content: #2A2520;
+    --color-error: #BE3A30;
+    --color-error-content: #FDFBF6;
+    --root-bg: #F5F1E9;
+    --pn-ink: #6D665C;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=clay-dark]:checked),[data-theme="clay-dark"] {
+    color-scheme: dark;
+    --color-base-100: #2A2622;
+    --color-base-200: #1E1B18;
+    --color-base-300: #36332F;
+    --color-base-content: #EDE6DA;
+    --color-primary: #2F2A25;
+    --color-primary-content: #EDE6DA;
+    --color-secondary: #43392F;
+    --color-secondary-content: #EDE6DA;
+    --color-accent: #C9927A;
+    --color-accent-content: #1E1B18;
+    --color-neutral: #433F3A;
+    --color-neutral-content: #EDE6DA;
+    --color-info: #85A8D8;
+    --color-info-content: #1E1B18;
+    --color-success: #8FAF7E;
+    --color-success-content: #1E1B18;
+    --color-warning: #D9A33C;
+    --color-warning-content: #1E1B18;
+    --color-error: #E0806E;
+    --color-error-content: #1E1B18;
+    --root-bg: #1E1B18;
+    --pn-ink: #9A948D;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3987,12 +4431,91 @@
   inherits: false;
   initial-value: solid;
 }
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-space-y-reverse: 0;
       --tw-space-x-reverse: 0;
       --tw-border-style: solid;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
     }
   }
 }
