@@ -43,7 +43,7 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 ### Fixed
 - **`<x-checkbox>` corner now follows the tune** — the box used `rounded-[var(--size-selector)]`, a fixed
   0.25rem scalar that only the spinner / range *size* ramp is meant to consume, so square tunes (`sharp`,
-  `brutal`, `pixel`, `dot`) rendered a 4px-rounded checkbox next to a square radio. It is now
+  `brutal`, `pixel`, `proto`) rendered a 4px-rounded checkbox next to a square radio. It is now
   `rounded-[min(var(--radius-selector),0.25rem)]`: the corner follows `--radius-selector` *downwards only* —
   `default` / `soft` / `luxury` / `editorial` / `tech` (selector radius 4px) keep their 4px, `corporate` gets
   2px, the square tunes get 0.
