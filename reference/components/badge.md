@@ -15,7 +15,7 @@ Small inline label for status, counts, or category tags. Renders `<span>` with e
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | Semantic color. For `appearance="dot"` this drives the dot color only; the chip stays neutral. |
-| `appearance` | `'solid' \| 'outline' \| 'soft' \| 'base-100' \| 'base-200' \| 'base-300' \| 'dot'` | `'soft'` | Visual style. `solid` filled; `outline` border-only; `soft` tinted bg + colored text; `base-*` surface bg + colored text; `dot` neutral chip with a colored dot prefix. |
+| `appearance` | `'solid' \| 'outline' \| 'soft' \| 'base-100' \| 'base-200' \| 'base-300' \| 'dot' \| 'wire'` | `'soft'` | Visual style. `solid` filled; `outline` border-only; `soft` tinted bg + colored text; `base-*` surface bg + colored text; `dot` neutral chip with a colored dot prefix.  `wire` (v0.17.2) is the minimal / retro-future variant: transparent with a neutral hairline (`border-base-content/45`); the colour appears only as the fill on check / hover. Corner radius follows the tune (square under `sharp` / `tech`). Text carries the colour, letters tracked. |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Controls text size, padding, and gap. |
 | `icon` | `string \| null` | `null` | Pinion-icons name rendered left of the slot. Ignored when `appearance="dot"` (the dot takes the leading spot). |
 | `pill` | `bool` | `false` | Use a fully rounded (`rounded-full`) shape instead of the default selector radius. |

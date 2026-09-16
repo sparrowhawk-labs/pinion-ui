@@ -23,7 +23,7 @@ class ToggleComposer
             'row' => 'inline-flex items-center gap-3',
             'input' => 'peer sr-only',
             'track' => self::track($size, $appearance, $effectiveColor, $showStateLabel),
-            'thumb' => self::thumb($size),
+            'thumb' => self::thumb($size, $appearance),
             'stateOn' => $showStateLabel ? self::stateLabel($size, $effectiveColor, 'on') : '',
             'stateOff' => $showStateLabel ? self::stateLabel($size, $effectiveColor, 'off') : '',
             'label' => self::label($size, $error, $disabled),
@@ -67,9 +67,12 @@ class ToggleComposer
         // signal, while soft flips it — track stays muted, thumb takes the
         // full `{color}` on check (Preline pattern). Driven from the track via
         // the same descendant selector trick as travel.
-        $thumbColor = $appearance === 'soft'
-            ? "peer-checked:[&_.xy-thumb]:bg-{$color}"
-            : '';
+        $thumbColor = match ($appearance) {
+            'soft' => "peer-checked:[&_.xy-thumb]:bg-{$color}",
+            // wire: thumb is base-content at rest and inverts to base-100 once the rail fills.
+            'wire' => 'peer-checked:[&_.xy-thumb]:bg-base-100',
+            default => '',
+        };
 
         $stateFade = $hasStateLabel
             ? 'peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0'
@@ -91,12 +94,16 @@ class ToggleComposer
             'soft' =>
                 "bg-base-200 border-base-content/10 peer-checked:bg-{$color}/15 peer-checked:border-{$color}/30",
 
+            // wire (v0.17.2): transparent rail + hairline; fills with the colour on check.
+            'wire' =>
+                "bg-transparent border-base-content/45 peer-checked:bg-{$color} peer-checked:border-{$color}",
+
             default =>
                 'bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary',
         };
     }
 
-    private static function thumb(string $size): string
+    private static function thumb(string $size, string $appearance = 'solid'): string
     {
         $sizeClass = match ($size) {
             'sm' => 'size-4',
@@ -105,11 +112,11 @@ class ToggleComposer
         };
 
         // No peer-checked here — track drives translate-x via [&_.xy-thumb].
-        return self::join(
-            'xy-thumb',
-            $sizeClass,
-            'absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none'
-        );
+        // wire: a flat base-content block, no shadow (colour inverts from the track on check).
+        $look = $appearance === 'wire'
+            ? 'absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-content border-[length:var(--border)] border-transparent shadow-none transition-transform pointer-events-none'
+            : 'absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none';
+        return self::join('xy-thumb', $sizeClass, $look);
     }
 
     private static function stateLabel(string $size, string $color, string $kind): string

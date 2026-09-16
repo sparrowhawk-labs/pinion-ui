@@ -1,7 +1,7 @@
 [
     {
         "name": "default — outline neutral md",
-        "props": {},
+        "props": [],
         "expected": {
             "wrapper": "flex items-stretch transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
             "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 peer text-[length:var(--text-field-md)] px-[var(--px-input-md)]",
@@ -12,7 +12,10 @@
     },
     {
         "name": "error overrides color",
-        "props": { "color": "primary", "error": "required" },
+        "props": {
+            "color": "primary",
+            "error": "required"
+        },
         "expected": {
             "wrapper": "flex items-stretch transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-error focus-within:ring-1 focus-within:ring-error h-[var(--h-field-md)]",
             "labelColor": "text-error",
@@ -21,7 +24,11 @@
     },
     {
         "name": "soft primary lg",
-        "props": { "appearance": "soft", "color": "primary", "size": "lg" },
+        "props": {
+            "appearance": "soft",
+            "color": "primary",
+            "size": "lg"
+        },
         "expected": {
             "wrapper": "flex items-stretch transition-colors rounded-[var(--radius-field)] bg-primary/10 tune-border border-transparent focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-lg)]",
             "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 peer text-[length:var(--text-field-lg)] px-[var(--px-input-lg)]"
@@ -29,45 +36,87 @@
     },
     {
         "name": "underline — no radius",
-        "props": { "appearance": "underline" },
+        "props": {
+            "appearance": "underline"
+        },
         "expected": {
             "wrapper": "flex items-stretch transition-colors bg-transparent border-b border-base-300 focus-within:border-primary h-[var(--h-field-md)]"
         }
     },
     {
         "name": "disabled",
-        "props": { "disabled": true },
+        "props": {
+            "disabled": true
+        },
         "expected": {
             "wrapper": "flex items-stretch transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary opacity-60 cursor-not-allowed h-[var(--h-field-md)]"
         }
     },
     {
         "name": "icon left replaces px with pl-10",
-        "props": { "hasIconLeft": true },
+        "props": {
+            "hasIconLeft": true
+        },
         "expected": {
             "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 peer text-[length:var(--text-field-md)] pl-10"
         }
     },
     {
         "name": "icon right adds pr-10",
-        "props": { "hasIconRight": true },
+        "props": {
+            "hasIconRight": true
+        },
         "expected": {
             "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 peer text-[length:var(--text-field-md)] px-[var(--px-input-md)] pr-10"
         }
     },
     {
         "name": "floating md with label adds floating pad",
-        "props": { "floating": true, "hasLabel": true },
+        "props": {
+            "floating": true,
+            "hasLabel": true
+        },
         "expected": {
             "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 peer text-[length:var(--text-field-md)] px-[var(--px-input-md)] pt-4 pb-0.5"
         }
     },
     {
         "name": "sm size",
-        "props": { "size": "sm" },
+        "props": {
+            "size": "sm"
+        },
         "expected": {
             "wrapper": "flex items-stretch transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-sm)]",
             "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 peer text-[length:var(--text-field-sm)] px-[var(--px-input-sm)]"
+        }
+    },
+    {
+        "name": "wire — neutral md",
+        "props": {
+            "appearance": "wire"
+        },
+        "expected": {
+            "wrapper": "flex items-stretch transition-colors rounded-[var(--radius-field)] bg-transparent tune-border border-base-content/45 focus-within:border-base-content h-[var(--h-field-md)]",
+            "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 peer text-[length:var(--text-field-md)] px-[var(--px-input-md)]",
+            "addonBase": "flex items-center shrink-0 bg-base-200 text-base-content/60 px-[var(--px-input-md)] text-[length:var(--text-field-md)]",
+            "floatingLabel": "absolute left-[var(--px-input-md)] top-1/2 -translate-y-1/2 text-base-content/50 pointer-events-none origin-[0_0] transition-all duration-150 text-[length:var(--text-field-md)] peer-focus:top-1 peer-focus:translate-y-0 peer-focus:text-[length:var(--text-field-xs)] peer-focus:text-base-content/60 peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[length:var(--text-field-xs)] peer-[:not(:placeholder-shown)]:text-base-content/60",
+            "labelColor": "text-base-content",
+            "hintColor": "text-base-content/50"
+        }
+    },
+    {
+        "name": "wire — error overrides color",
+        "props": {
+            "appearance": "wire",
+            "error": "required"
+        },
+        "expected": {
+            "wrapper": "flex items-stretch transition-colors rounded-[var(--radius-field)] bg-transparent tune-border border-error focus-within:border-error h-[var(--h-field-md)]",
+            "inputClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 peer text-[length:var(--text-field-md)] px-[var(--px-input-md)]",
+            "addonBase": "flex items-center shrink-0 bg-base-200 text-base-content/60 px-[var(--px-input-md)] text-[length:var(--text-field-md)]",
+            "floatingLabel": "absolute left-[var(--px-input-md)] top-1/2 -translate-y-1/2 text-base-content/50 pointer-events-none origin-[0_0] transition-all duration-150 text-[length:var(--text-field-md)] peer-focus:top-1 peer-focus:translate-y-0 peer-focus:text-[length:var(--text-field-xs)] peer-focus:text-base-content/60 peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[length:var(--text-field-xs)] peer-[:not(:placeholder-shown)]:text-base-content/60",
+            "labelColor": "text-error",
+            "hintColor": "text-error"
         }
     }
 ]

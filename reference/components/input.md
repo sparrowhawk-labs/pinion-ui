@@ -21,7 +21,7 @@ Text input with label, hint/error, prefix/suffix slots, optional leading/trailin
 | `error` | `string \| null` | `null` | Error message below the field. Overrides `hint` and flips the field to the `error` color. |
 | `cornerHint` | `string \| null` | `null` | Small right-aligned text on the label row (e.g. "Optional"). Only shown with a non-floating `label`. |
 | `color` | `'neutral' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'neutral'` | Drives the field's focus / border accent via `FieldVariants`. |
-| `appearance` | `'outline' \| 'soft' \| 'underline' \| 'ghost'` | `'outline'` | Field shell style. `outline` border-only, `soft` tinted bg, `underline` bottom-border only, `ghost` transparent + hover surface. |
+| `appearance` | `'outline' \| 'soft' \| 'underline' \| 'ghost' \| 'wire'` | `'outline'` | Field shell style. `outline` border-only, `soft` tinted bg, `underline` bottom-border only, `ghost` transparent + hover surface.  `wire` (v0.17.2) is the minimal / retro-future variant: transparent with a neutral hairline (`border-base-content/45`); the colour appears only as the fill on check / hover. Corner radius follows the tune (square under `sharp` / `tech`). Focus sharpens the line to `base-content` (or the colour); no ring. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Field height / padding / text size via `--h-field-*`, `--px-input-*`, `--text-field-*` tune tokens. |
 | `iconLeft` | `string \| null` | `null` | Pinion-icons name rendered inside the input, left side. |
 | `iconRight` | `string \| null` | `null` | Pinion-icons name rendered inside the input, right side. |

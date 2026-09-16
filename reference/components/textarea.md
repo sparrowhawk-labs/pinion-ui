@@ -20,7 +20,7 @@ Multi-line text input that shares the same field shell as `<x-input>` (color × 
 | `error` | `string \| null` | `null` | Error message below the field. Overrides `hint` and flips to the `error` color. |
 | `cornerHint` | `string \| null` | `null` | Small right-aligned text on the label row (e.g. "Optional"). |
 | `color` | `'neutral' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'neutral'` | Drives the field's focus / border accent. |
-| `appearance` | `'outline' \| 'soft' \| 'underline' \| 'ghost'` | `'outline'` | Field shell style — same set as `<x-input>`. |
+| `appearance` | `'outline' \| 'soft' \| 'underline' \| 'ghost' \| 'wire'` | `'outline'` | Field shell style — same set as `<x-input>`.  `wire` (v0.17.2) is the minimal / retro-future variant: transparent with a neutral hairline (`border-base-content/45`); the colour appears only as the fill on check / hover. Corner radius follows the tune (square under `sharp` / `tech`). |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Text size / padding. Height is governed by `rows` and content. |
 | `rows` | `int` | `3` | Native `rows` attribute — initial visible line count. |
 | `maxlength` | `int \| null` | `null` | Native `maxlength`. When set, the counter (right-aligned hint) shows `count / max`. |

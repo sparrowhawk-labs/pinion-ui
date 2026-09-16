@@ -40,7 +40,10 @@ class RadioComposer
             default => 'size-4',
         };
 
-        $base = 'relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current';
+        // wire: the box follows the tune's selector radius (square under sharp / tech) instead of
+        // being forced round — the inner dot keeps it readable as a radio.
+        $shape = $appearance === 'wire' ? 'rounded-[var(--radius-selector)]' : 'rounded-full';
+        $base = "relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] {$shape} transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current";
 
         // Reveal the inner dot when the peer input is checked.
         $dotState = 'peer-checked:[&_.xy-dot]:scale-100';
@@ -65,6 +68,10 @@ class RadioComposer
             in_array($appearance, ['base-100', 'base-200', 'base-300'], true) =>
                 "bg-{$appearance} border-base-content/15 text-{$tone}/80 peer-checked:border-{$tone}/70",
 
+            // wire (v0.17.2): transparent + hairline; the dot (bg-current) takes the tone, border follows.
+            $appearance === 'wire' =>
+                "bg-transparent border-base-content/45 text-{$tone} peer-checked:border-{$tone}",
+
             default =>
                 'bg-base-100 border-base-content/10 text-primary-content peer-checked:bg-primary peer-checked:border-primary',
         };
@@ -77,7 +84,8 @@ class RadioComposer
             'lg' => 'size-2.5',
             default => 'size-2',
         };
-        return self::join('xy-dot', $sizeClass, 'rounded-full bg-current scale-0 transition-transform');
+        $shape = $appearance === 'wire' ? 'rounded-[var(--radius-selector)]' : 'rounded-full';
+        return self::join('xy-dot', $sizeClass, $shape, 'bg-current scale-0 transition-transform');
     }
 
     private static function label(string $size, ?string $error, bool $disabled): string

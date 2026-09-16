@@ -19,7 +19,7 @@ Single checkbox with an inline label and optional description. Wraps a native `<
 | `label` | `string \| null` | `null` | Inline label text. Falls back to the default slot if both are absent. |
 | `description` | `string \| null` | `null` | Secondary text rendered below the label (and indented to align with it). |
 | `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | Drives the checked-state color. |
-| `appearance` | `'soft' \| 'solid' \| 'base-100' \| 'base-200' \| 'base-300'` | `'soft'` | Visual style of the box. `soft` tinted, `solid` fills with `color` on check, `base-*` matches a surface tone. |
+| `appearance` | `'soft' \| 'solid' \| 'base-100' \| 'base-200' \| 'base-300' \| 'wire'` | `'soft'` | Visual style of the box. `soft` tinted, `solid` fills with `color` on check, `base-*` matches a surface tone.  `wire` (v0.17.2) is the minimal / retro-future variant: transparent with a neutral hairline (`border-base-content/45`); the colour appears only as the fill on check / hover. Corner radius follows the tune (square under `sharp` / `tech`). No check glyph — the box itself fills. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Box / label size. |
 | `error` | `string \| null` | `null` | When truthy, flips the visual + label to the `error` color. (No message is rendered — combine with a wrapper / `<x-radio-group>`-style field if you need one.) |
 | `indeterminate` | `bool` | `false` | Mount with `indeterminate = true` (the visual shows a dash instead of a check). Set via a tiny Alpine `x-init`. |

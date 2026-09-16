@@ -43,6 +43,17 @@
         'outline-warning'   => 'bg-transparent text-warning border-warning hover:bg-warning hover:text-warning-content focus-visible:ring-warning',
         'outline-error'     => 'bg-transparent text-error border-error hover:bg-error hover:text-error-content focus-visible:ring-error',
 
+        // wire (v0.17.2): transparent + neutral hairline, text in base-content; the colour only
+        // appears as the fill on hover / active. Minimal, retro-future.
+        'wire-primary'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-primary hover:text-primary-content hover:border-primary focus-visible:ring-primary',
+        'wire-secondary' => 'bg-transparent text-base-content border-base-content/45 hover:bg-secondary hover:text-secondary-content hover:border-secondary focus-visible:ring-secondary',
+        'wire-accent'    => 'bg-transparent text-base-content border-base-content/45 hover:bg-accent hover:text-accent-content hover:border-accent focus-visible:ring-accent',
+        'wire-neutral'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-base-content hover:text-base-100 hover:border-base-content focus-visible:ring-base-content',
+        'wire-info'      => 'bg-transparent text-base-content border-base-content/45 hover:bg-info hover:text-info-content hover:border-info focus-visible:ring-info',
+        'wire-success'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-success hover:text-success-content hover:border-success focus-visible:ring-success',
+        'wire-warning'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-warning hover:text-warning-content hover:border-warning focus-visible:ring-warning',
+        'wire-error'     => 'bg-transparent text-base-content border-base-content/45 hover:bg-error hover:text-error-content hover:border-error focus-visible:ring-error',
+
         // base-100: primary surface bg + colored text + base-content/50 border, hover=base-200
         'base-100-primary'   => 'bg-base-100 text-primary border-base-content/10 hover:bg-base-200 focus-visible:ring-primary',
         'base-100-secondary' => 'bg-base-100 text-secondary border-base-content/10 hover:bg-base-200 focus-visible:ring-secondary',

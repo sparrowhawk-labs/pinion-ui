@@ -44,7 +44,10 @@ class CheckboxComposer
         $base = 'relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current';
 
         // Show/hide the inner SVGs based on the peer input's state.
-        $svgState = 'peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100';
+        // wire: no glyph at all — the box itself fills with the tone on check.
+        $svgState = $appearance === 'wire'
+            ? ''
+            : 'peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100';
 
         return self::join($sizeClass, $base, $svgState, self::appearanceColor($appearance, $color));
     }
@@ -65,6 +68,10 @@ class CheckboxComposer
 
             in_array($appearance, ['base-100', 'base-200', 'base-300'], true) =>
                 "bg-{$appearance} border-base-content/15 text-{$tone}/80 peer-checked:border-{$tone}/70",
+
+            // wire (v0.17.2): transparent + hairline, solid fill on check. Minimal / retro-future.
+            $appearance === 'wire' =>
+                "bg-transparent border-base-content/45 text-{$tone} peer-checked:bg-{$tone} peer-checked:border-{$tone}",
 
             default =>
                 'bg-base-100 border-base-content/10 text-primary-content peer-checked:bg-primary peer-checked:border-primary',

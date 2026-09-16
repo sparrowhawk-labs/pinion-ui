@@ -99,10 +99,50 @@
     },
     {
         "name": "stateLabel ignored on appearance=soft (color contrast insufficient)",
-        "props": { "stateLabel": true, "appearance": "soft", "color": "warning" },
+        "props": {
+            "stateLabel": true,
+            "appearance": "soft",
+            "color": "warning"
+        },
         "expected": {
             "stateOn": "",
             "stateOff": ""
+        }
+    },
+    {
+        "name": "wire — primary md (hairline rail, base-content thumb inverts)",
+        "props": {
+            "appearance": "wire"
+        },
+        "expected": {
+            "wrapper": "block cursor-pointer",
+            "row": "inline-flex items-center gap-3",
+            "input": "peer sr-only",
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-base-100 bg-transparent border-base-content/45 peer-checked:bg-primary peer-checked:border-primary",
+            "thumb": "xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-content border-[length:var(--border)] border-transparent shadow-none transition-transform pointer-events-none",
+            "stateOn": "",
+            "stateOff": "",
+            "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
+            "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
+        }
+    },
+    {
+        "name": "wire — success sm",
+        "props": {
+            "appearance": "wire",
+            "color": "success",
+            "size": "sm"
+        },
+        "expected": {
+            "wrapper": "block cursor-pointer",
+            "row": "inline-flex items-center gap-3",
+            "input": "peer sr-only",
+            "track": "h-5 w-9 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-base-100 bg-transparent border-base-content/45 peer-checked:bg-success peer-checked:border-success",
+            "thumb": "xy-thumb size-4 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-content border-[length:var(--border)] border-transparent shadow-none transition-transform pointer-events-none",
+            "stateOn": "",
+            "stateOff": "",
+            "label": "text-[length:var(--text-field-xs)] text-base-content select-none leading-snug",
+            "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
         }
     }
 ]

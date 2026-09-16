@@ -28,6 +28,14 @@ class FieldVariants
             'underline-warning' => 'bg-transparent border-b border-warning',
             'underline-error'   => 'bg-transparent border-b border-error',
 
+            // wire (v0.17.2): transparent shell + hairline; focus sharpens the line, no ring.
+            'wire-neutral' => 'bg-transparent tune-border border-base-content/45 focus-within:border-base-content',
+            'wire-primary' => 'bg-transparent tune-border border-primary focus-within:border-primary',
+            'wire-info'    => 'bg-transparent tune-border border-info focus-within:border-info',
+            'wire-success' => 'bg-transparent tune-border border-success focus-within:border-success',
+            'wire-warning' => 'bg-transparent tune-border border-warning focus-within:border-warning',
+            'wire-error'   => 'bg-transparent tune-border border-error focus-within:border-error',
+
             'ghost-neutral' => 'bg-transparent tune-border border-transparent hover:bg-base-200/60 focus-within:bg-base-200',
             'ghost-primary' => 'bg-transparent tune-border border-transparent hover:bg-primary/5 focus-within:bg-primary/10',
             'ghost-info'    => 'bg-transparent tune-border border-transparent hover:bg-info/5 focus-within:bg-info/10',

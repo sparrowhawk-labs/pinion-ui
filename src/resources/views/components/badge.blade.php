@@ -49,6 +49,16 @@
         'soft-warning'   => 'bg-warning/15 text-warning border-transparent',
         'soft-error'     => 'bg-error/15 text-error border-transparent',
 
+        // wire (v0.17.2): transparent + neutral hairline, text carries the colour, letters tracked
+        'wire-primary'   => 'bg-transparent text-primary border-base-content/45 tracking-wider',
+        'wire-secondary' => 'bg-transparent text-secondary border-base-content/45 tracking-wider',
+        'wire-accent'    => 'bg-transparent text-accent border-base-content/45 tracking-wider',
+        'wire-neutral'   => 'bg-transparent text-base-content border-base-content/45 tracking-wider',
+        'wire-info'      => 'bg-transparent text-info border-base-content/45 tracking-wider',
+        'wire-success'   => 'bg-transparent text-success border-base-content/45 tracking-wider',
+        'wire-warning'   => 'bg-transparent text-warning border-base-content/45 tracking-wider',
+        'wire-error'     => 'bg-transparent text-error border-base-content/45 tracking-wider',
+
         // base-100: primary surface bg + colored text + base-content/10 border
         'base-100-primary'   => 'bg-base-100 text-primary border-base-content/10',
         'base-100-secondary' => 'bg-base-100 text-secondary border-base-content/10',

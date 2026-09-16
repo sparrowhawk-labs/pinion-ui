@@ -103,6 +103,13 @@
 @source inline("border-base-content/{10,15}");
 @source inline("peer-checked:border-{primary,secondary,accent,info,success,warning,error,base-content}/70");
 
+/* Wire (v0.17.2): hairline + fill-on-state family (checkbox / radio / toggle / fields / button / badge).
+   Interpolated pieces only — the blade-literal button/badge strings are scanned via @source. */
+@source inline("border-base-content/45");
+@source inline("text-{primary,secondary,accent,info,success,warning,error,base-content}");
+@source inline("peer-checked:{bg,border}-base-content");
+@source inline("peer-checked:[&_.xy-thumb]:bg-base-100");
+
 /* Toggle soft variant — thumb takes full colour on check (descendant of
    track, see ToggleComposer). Solid keeps the thumb at bg-base-100 so no
    recolour utility is needed for it. */

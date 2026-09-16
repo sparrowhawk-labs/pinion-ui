@@ -19,7 +19,7 @@ iOS-style switch for boolean state. Renders a native `<input type="checkbox" rol
 | `label` | `string \| null` | `null` | Inline label text. Falls back to the default slot. |
 | `description` | `string \| null` | `null` | Secondary text rendered below the row. |
 | `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | Drives the checked-state color (rail in `solid`, thumb in `soft`). |
-| `appearance` | `'solid' \| 'soft'` | `'solid'` | `solid` flows color into the rail and keeps the thumb white. `soft` keeps the rail muted and flows color into the thumb. |
+| `appearance` | `'solid' \| 'soft' \| 'wire'` | `'solid'` | `solid` flows color into the rail and keeps the thumb white. `soft` keeps the rail muted and flows color into the thumb.  `wire` (v0.17.2) is the minimal / retro-future variant: transparent with a neutral hairline (`border-base-content/45`); the colour appears only as the fill on check / hover. Corner radius follows the tune (square under `sharp` / `tech`). The thumb is a flat `base-content` block that inverts to `base-100` once the rail fills. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Track / thumb size. |
 | `error` | `string \| null` | `null` | When truthy, flips the visual + label to the `error` color. |
 | `disabled` | `bool` | `false` | Native `disabled` + visual dim. |

@@ -19,7 +19,7 @@ Single radio input with an inline label and optional description. Wraps a native
 | `label` | `string \| null` | `null` | Inline label text. Falls back to the default slot if both are absent. |
 | `description` | `string \| null` | `null` | Secondary text rendered below the label (indented to align). |
 | `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | Drives the checked-state color. |
-| `appearance` | `'solid' \| 'soft' \| 'base-100' \| 'base-200' \| 'base-300'` | `'solid'` | Visual style of the circle. `solid` fills on check, `soft` tinted, `base-*` matches a surface tone. |
+| `appearance` | `'solid' \| 'soft' \| 'base-100' \| 'base-200' \| 'base-300' \| 'wire'` | `'solid'` | Visual style of the circle. `solid` fills on check, `soft` tinted, `base-*` matches a surface tone.  `wire` (v0.17.2) is the minimal / retro-future variant: transparent with a neutral hairline (`border-base-content/45`); the colour appears only as the fill on check / hover. Corner radius follows the tune (square under `sharp` / `tech`). The box follows the tune's selector radius instead of being forced round; the inner dot (same shape) carries the colour. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Circle / label size. |
 | `error` | `string \| null` | `null` | When truthy, flips the visual + label to the `error` color. |
 | `disabled` | `bool` | `false` | Native `disabled` + visual dim. |
