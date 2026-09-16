@@ -781,6 +781,9 @@
 [data-tune="soft"] {
   --td-space-2xs: 0.125rem;
 }
+[data-tune="proto"] {
+  --td-space-2xs: 0.125rem;
+}
 [data-tune="editorial"] {
   --td-space-2xs: 0.0625rem;
 }
@@ -994,6 +997,27 @@
   --radius-field: 10px 6px 12px 5px / 6px 12px 5px 10px;
   --radius-selector: 18px 12px 20px 10px / 12px 20px 10px 18px;
 }
+[data-tune="proto"] {
+  --td-radius-box: 1rem;
+  --td-radius-field: 0.875rem;
+  --td-radius-selector: -1rem;
+  --td-tracking-heading: 0.03em;
+  --td-fwh: -400;
+  --td-type-scale-ratio: 0.05;
+  --td-leading-body: 0.05;
+  --td-space-4xl: 1rem;
+  --td-space-2xl: 1rem;
+  --td-space-lg: 0.5rem;
+  --td-h-field-md: 0.125rem;
+  --td-h-field-lg: 0.125rem;
+  --td-px-field-md: 0.25rem;
+  --td-px-field-lg: 0.25rem;
+  --td-px-input-md: 0.25rem;
+  --td-px-input-lg: 0.25rem;
+  --td-font-heading: "Doto", "IBM Plex Sans JP", ui-sans-serif, system-ui, sans-serif;
+  --td-font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  --td-font-mono: "DM Mono", "M PLUS 1 Code", ui-monospace, monospace;
+}
 [data-tune="corporate"] .tune-corporate-surface {
   box-shadow: none;
   border: 1px solid currentColor;
@@ -1048,6 +1072,11 @@
   --td-font-body: "Patrick Hand", ui-sans-serif, system-ui, sans-serif;
   --td-font-mono: "Patrick Hand", ui-monospace, monospace;
 }
+[data-tune="proto"][data-ja="off"] {
+  --td-font-heading: "Doto", ui-sans-serif, system-ui, sans-serif;
+  --td-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --td-font-mono: "DM Mono", ui-monospace, monospace;
+}
 [data-tune-shadow="none"] {
   --ovr-shadow-box: none;
   --ovr-shadow-field: none;
@@ -1101,6 +1130,13 @@
 }
 [data-tune="pixel"] .tune-optical-center {
   transform: translateX(0.08em);
+}
+[data-tune="proto"] :is(h1, h2, h3), [data-tune="proto"] .font-heading {
+  font-variation-settings: "ROND" 100, "wght" 600;
+}
+[data-tune="proto"] :is(h4, h5, h6) {
+  font-family: var(--font-body);
+  font-weight: 500;
 }
 @layer base {
   @property --radialprogress {
