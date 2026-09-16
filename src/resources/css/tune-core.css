@@ -513,6 +513,7 @@
    one block (not scattered) since the tier is subtle and read as a set. */
 [data-tune="minimal"]   { --td-space-2xs:  0.125rem; }
 [data-tune="soft"]      { --td-space-2xs:  0.125rem; }
+[data-tune="proto"]       { --td-space-2xs:  0.125rem; }
 [data-tune="editorial"] { --td-space-2xs:  0.0625rem; }
 [data-tune="luxury"]    { --td-space-2xs:  0.0625rem; }
 [data-tune="draft"]     { --td-space-2xs:  0.0625rem; }
@@ -751,6 +752,36 @@
     --radius-selector: 18px 12px 20px 10px / 12px 20px 10px 18px;
 }
 
+/* proto — Nothing-OS flavour (a prototype with its internals showing):
+   capsule tiles, pill fields, SQUARE selectors, hairline + flat, airy.
+   Display headings pair a dot-matrix Latin face (Doto ≈ Ndot, round dots via
+   the ROND axis — LED matrix, not pixel's arcade bitmap, pushed to 600 by
+   the variation rule below) with a hairline Japanese face (IBM Plex Sans JP
+   200) — heading weight is 200 so the static CJK face stays thin while the
+   variable Doto is driven to 600. Inter body; DM Mono for labels/values. */
+[data-tune="proto"] {
+    --td-radius-box: 1rem;            /* → 1.5rem (24px) capsule tile */
+    --td-radius-field: 0.875rem;      /* → 1.25rem — pill at md/lg field heights, soft corners on textarea */
+    --td-radius-selector: -1rem;      /* → 0 — square badge / radio (wire) / tab pill */
+    --td-tracking-heading: 0.03em;    /* → 0.02em (dot glyphs need air) */
+    --td-fwh: -400;                   /* → 200 — the CJK heading face is hairline; Doto is lifted to 600 below */
+    --td-type-scale-ratio: 0.05;      /* → 1.25 — larger display tiers keep the dots legible */
+    --td-leading-body: 0.05;          /* → 1.65 */
+    --td-space-4xl: 1rem;             /* → 6rem */
+    --td-space-2xl: 1rem;             /* → 4rem */
+    --td-space-lg: 0.5rem;            /* → 2rem */
+    --td-h-field-md: 0.125rem;        /* → 2.625rem (42px) phone-first touch height */
+    --td-h-field-lg: 0.125rem;
+    --td-px-field-md: 0.25rem;        /* → 1.25rem — a pill needs side room */
+    --td-px-field-lg: 0.25rem;
+    --td-px-input-md: 0.25rem;        /* → 1rem */
+    --td-px-input-lg: 0.25rem;
+    /* flat: no --td-sh* deltas (base is flat). */
+    --td-font-heading: "Doto", "IBM Plex Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: "DM Mono", "M PLUS 1 Code", ui-monospace, monospace;
+}
+
 /* corporate MECE surface treatment — flat 1px contrast-border, no shadow.
    Survives a weight-override or system-fallback font (separator is structural,
    not font/weight). Apply via class tune-corporate-surface on card surfaces. */
@@ -827,6 +858,12 @@
     --td-font-mono: "Patrick Hand", ui-monospace, monospace;
 }
 
+[data-tune="proto"][data-ja="off"] {
+    --td-font-heading: "Doto", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: "DM Mono", ui-monospace, monospace;
+}
+
 /* ============================================================================
    AXIS MACROS — ship exactly THREE (shadow / radius / density) + strength.
    Emitted AFTER all presets, specificity (0,1,0). Each writes ONLY --ovr-*
@@ -897,6 +934,23 @@
    text-box center; nudge horizontally when flex-centering is visibly off. */
 [data-tune="pixel"] .tune-optical-center {
     transform: translateX(0.08em);
+}
+
+/* proto: Doto's variation axes — round dots (ROND 100) and weight 600 — so
+   headings read as an LED matrix, not square pixels (pixel's territory).
+   font-variation-settings only reaches variable faces, so the static
+   hairline CJK face keeps the tune's 200 heading weight untouched. The
+   dot-matrix face carries the DISPLAY tiers only (h1–h3); h4–h6 fall back
+   to the body face at medium weight, so card titles and form-section
+   headings stay quiet and legible. (k-independent: the face is proto's
+   identity, not strength-scaled.) */
+[data-tune="proto"] :is(h1, h2, h3),
+[data-tune="proto"] .font-heading {
+    font-variation-settings: "ROND" 100, "wght" 600;
+}
+[data-tune="proto"] :is(h4, h5, h6) {
+    font-family: var(--font-body);
+    font-weight: 500;
 }
 
 

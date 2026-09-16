@@ -37,7 +37,7 @@
             ),
         ]];
     }
-    $tuneList = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft'];
+    $tuneList = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft', 'proto'];
     $activeCode = collect($locales)->first(fn ($l) => ($l['code'] ?? null) === $current)['code']
         ?? collect($locales)->first(fn ($l) => $l['active'] ?? false)['code']
         ?? null;

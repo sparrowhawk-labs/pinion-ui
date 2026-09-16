@@ -36,7 +36,7 @@ function arg(name, def) {
 const cssPath = resolve(root, arg('css', 'build/reference.css'));
 const outPath = resolve(root, arg('out', '../../src/resources/eject-table.json'));
 
-const TUNES = ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft'];
+const TUNES = ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft', 'proto'];
 const STRENGTHS = ['xs', 'sm', 'md', 'lg', 'xl'];
 /* v0.6.0: colors are captured for the FULL lineup (36 × light/dark from
    lineup.json) + reactive, so `ui:eject --theme=<any shipped theme>` works. */

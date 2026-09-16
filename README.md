@@ -22,7 +22,7 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 - **47 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
 - **45 original themes × light/dark** — a brand default (`pinion`/`pinion-dark`) plus mood, SaaS, and industry palettes (`monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
 - **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="monokai-dark" data-tune="soft"`).
-- **11 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `corporate`, `tech`, `brutal`, `editorial`, `luxury`, `pixel`, `draft`. Each preset bundles ~30 CSS custom properties.
+- **12 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `corporate`, `tech`, `brutal`, `editorial`, `luxury`, `pixel`, `draft`, `proto`. Each preset bundles ~30 CSS custom properties.
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
 - **Compose-layer architecture** — class strings live in typed PHP composers (`InputComposer`, `SelectComposer`, etc.), not scattered in Blade. Variants/sizes/states stay testable and refactor-safe.
 - **Dual-use output** — render via `<x-button>` or copy the rendered HTML; it's plain Tailwind + daisyUI + Alpine.
@@ -146,6 +146,7 @@ Theme and Tune are fully orthogonal — any combination works.
 | **luxury** | generous radius, pill CTA, soft shadow | Hanken Grotesk / Inter + Noto Sans JP | standard | Thin display, premium |
 | **pixel** | no radius, thick borders, hard-offset shadow | PixelMplus10 + DotGothic16 / Press Start 2P | big leading, discrete text ladder | Dot-matrix arcade |
 | **draft** | wobble radius, drafty line | Patrick Hand + Yomogi | roomy leading | Excalidraw hand-drawn |
+| **proto** | capsule tiles (24px), pill fields, square selectors, hairline, flat | Doto 600 (dot-matrix, h1–h3) + IBM Plex Sans JP 200 / Inter + Noto Sans JP, DM Mono | airy, larger type scale | Nothing-OS: LED-matrix display over a hairline Japanese face |
 
 Each preset writes CSS custom properties across four categories:
 

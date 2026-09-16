@@ -56,7 +56,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 | Layer | Where it lives | Examples |
 |---|---|---|
 | **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (45 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
-| **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft` (11 presets) |
+| **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft`, `proto` (12 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 
 Themes and Tunes mix freely. Both are activated by the `pinion-ui.css` preset (imported into `app.css` by `ui:install`), which bundles the `data-tune` token system from `tune.css` (since v0.11.0 a shim over `tune-fonts.css` = self-hosted PixelMplus `@font-face` + `tune-core.css` = tokens only). Both attributes have working defaults when omitted — a root without `data-tune` renders exactly as `data-tune="default"` (since v0.10.11) — but always declare them explicitly on `<html>` so the choice is visible (`ui:lint` flags omission). Webfonts are NOT auto-loaded: build per-tune Google Fonts links from `src/resources/tune-fonts.json` (recipe in README "Loading the fonts") instead of an all-tunes link — CJK families are ~330KB of font CSS each, so load only what your tunes use and lazy-load the CJK `<link>`.

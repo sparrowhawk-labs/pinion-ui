@@ -30,6 +30,16 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   afterglow) and **`nixie`** (charcoal canvas; nixie-tube orange / cold blue-white / violet). Tonal:
   **`midnight`** (navy, tone-on-tone) and **`glacier`** (icy cyan-white, tone-on-tone). Lineup: 53 themes /
   106 blocks.
+- **`proto` tune** — the Nothing-OS shape/type companion to the wire family and the Nothing theme set (12th
+  preset; "a prototype with its internals showing"). Capsule tiles (`--radius-box` 24px), pill fields
+  (`--radius-field` 20px → a pill at md/lg field heights, soft corners on textareas), **square selectors**
+  (`--radius-selector` 0), hairline border, flat (no shadow), airy rhythm (`lg` 2rem / `2xl` 4rem / `4xl` 6rem),
+  42px md fields with extra side room. Type: display headings h1–h3 pair **Doto** (open dot-matrix face ≈ Ndot,
+  round dots via its `ROND` axis, driven to weight 600 through `font-variation-settings`) with a hairline
+  **IBM Plex Sans JP 200** for Japanese (heading weight 200 — the variation rule only reaches the variable Latin
+  face, so the static CJK face stays thin); h4–h6 use the body face at weight 500; Inter body; **DM Mono** for
+  labels/values; `data-ja="off"` drops the CJK families. Registered in `tune-fonts.json` (Doto / IBM Plex Sans
+  JP / DM Mono), both switchers, the css-package harness (`probes` / `eject-table`), and the README tune table.
 ### Fixed
 - **`<x-checkbox>` corner now follows the tune** — the box used `rounded-[var(--size-selector)]`, a fixed
   0.25rem scalar that only the spinner / range *size* ramp is meant to consume, so square tunes (`sharp`,

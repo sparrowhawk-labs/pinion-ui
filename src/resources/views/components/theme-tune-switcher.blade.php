@@ -40,7 +40,7 @@
             ),
         ]];
     }
-    $tuneList  = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft'];
+    $tuneList  = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft', 'proto'];
     // compact = icon-only triggers (dots chip / Aa / sun-moon), labels and value text hidden;
     // hover titles keep the current values discoverable. Attribution stays via the pinned dropdown links.
     $gap  = $compact ? 'gap-1.5' : 'gap-3';

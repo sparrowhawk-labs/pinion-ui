@@ -52,7 +52,7 @@ function distinctAcrossTunes(theme, strength, id, prop) {
   }
   return vals;
 }
-/* radius and font are guaranteed to differ across the 11 tunes (sharp r=0 vs
+/* radius and font are guaranteed to differ across the 12 tunes (sharp r=0 vs
    soft/luxury large; pixel font vs editorial serif). Treat these as HARD. */
 const HARD = [['radius-box', 'border-top-left-radius'], ['font-heading', 'font-family']];
 const SOFT = [['shadow-box', 'box-shadow'], ['py-4xl', 'padding-top'], ['tune-btn-md', 'height']];
@@ -60,11 +60,11 @@ const SOFT = [['shadow-box', 'box-shadow'], ['py-4xl', 'padding-top'], ['tune-bt
 for (const [id, prop] of HARD) {
   const n = distinctAcrossTunes('pinion', 'xl', id, prop).size;
   if (n < 2) fail(`sensitivity(HARD): ${id}.${prop} has ${n} distinct value across tunes — harness may be blind`);
-  console.log(`${n < 2 ? '✗' : '✓'} sensitivity: ${id}.${prop} → ${n} distinct across 11 tunes`);
+  console.log(`${n < 2 ? '✗' : '✓'} sensitivity: ${id}.${prop} → ${n} distinct across 12 tunes`);
 }
 for (const [id, prop] of SOFT) {
   const n = distinctAcrossTunes('pinion', 'xl', id, prop).size;
-  console.log(`  · ${id}.${prop} → ${n} distinct across 11 tunes`);
+  console.log(`  · ${id}.${prop} → ${n} distinct across 12 tunes`);
 }
 
 /* --- container-scale guard (host-app view) ---

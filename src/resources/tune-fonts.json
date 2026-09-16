@@ -23,6 +23,9 @@
     "M PLUS 1p": { "css2": "M+PLUS+1p:wght@400;500;700", "cjk": true },
     "M PLUS 1 Code": { "css2": "M+PLUS+1+Code:wght@400;500;700", "cjk": true },
     "DotGothic16": { "css2": "DotGothic16", "cjk": true, "fallbackOnly": true },
+    "Doto": { "css2": "Doto:ROND,wght@0..100,100..900", "cjk": false },
+    "IBM Plex Sans JP": { "css2": "IBM+Plex+Sans+JP:wght@200", "cjk": true },
+    "DM Mono": { "css2": "DM+Mono:wght@400;500", "cjk": false },
     "PixelMplus10": { "selfHosted": true, "cjk": true }
   },
   "tunes": {
@@ -36,6 +39,7 @@
     "luxury": ["Hanken Grotesk", "Inter", "Noto Sans JP"],
     "soft": ["Quicksand", "Nunito", "Zen Maru Gothic"],
     "pixel": ["PixelMplus10", "DotGothic16", "Press Start 2P"],
-    "draft": ["Patrick Hand", "Yomogi"]
+    "draft": ["Patrick Hand", "Yomogi"],
+    "proto": ["Doto", "IBM Plex Sans JP", "DM Mono", "Inter", "M PLUS 1 Code", "Noto Sans JP"]
   }
 }

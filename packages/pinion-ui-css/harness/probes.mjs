@@ -33,7 +33,7 @@ export const THEMES = ['pinion', 'pinion-dark', 'reactive', 'monokai', 'payments
 
 export const TUNES = [
   'default', 'minimal', 'sharp', 'corporate', 'tech',
-  'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft',
+  'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft', 'proto',
 ];
 
 export const STRENGTHS = ['xs', 'sm', 'md', 'lg', 'xl'];
