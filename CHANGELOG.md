@@ -7,6 +7,36 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.17.2] — 2026-09-16
+
+### Added
+- **`appearance="wire"`** — a minimal / retro-future variant family (Nothing-phone flavour) added to
+  `<x-checkbox>`, `<x-radio>`, `<x-toggle>`, `<x-input>`, `<x-textarea>`, `<x-button>` and `<x-badge>`.
+  Transparent shell + neutral hairline (`border-base-content/45`); the colour appears only as the fill on
+  check / hover. Corner radius follows the tune (square under `sharp` / `tech`), so the family stays
+  orthogonal to theme × tune. Checkbox has no glyph (the box fills); radio's box and inner dot follow the
+  tune's selector radius; toggle's thumb is a flat `base-content` block that inverts once the rail fills;
+  fields sharpen the hairline on focus instead of showing a ring. Safelist gains `border-base-content/45`,
+  the plain `text-{tone}` set, `peer-checked:{bg,border}-base-content` and
+  `peer-checked:[&_.xy-thumb]:bg-base-100`.
+
+- **4 Nothing-flavoured themes** (2026-09-16 "Nothing set"), each as a `<name>` / `<name>-dark` pair —
+  Mood: **`led`** (pure monochrome canvas; indicator-light amber primary / phosphor-green secondary / red
+  accent) and **`synth`** (monochrome canvas; CMY neon — magenta / cyan / yellow). Tonal: **`moss`**
+  (olive-grey, tone-on-tone) and **`quartz`** (rose-grey, tone-on-tone). Generated via `gen:themes` (ink
+  and status colours validated), `eject-table.json` regenerated, css-package golden gate re-run. Lineup is
+  now 49 themes / 98 blocks; the theme-tune switcher picks them up from `lineup.json` automatically.
+
+### Fixed
+- **`<x-toggle>` thumb travel is now border-aware** — `translate-x-{4,5,6}` assumed a hairline rail; under a
+  thick tune border (`tech` = 3px) the thumb overshot the inner edge by up to 2px on the checked side. Travel is
+  now `calc({1,1.25,1.5}rem - 2 * var(--border))`, so the on/off gaps are symmetric on every tune. Class string
+  change only (fixtures updated); no visual change on tunes with a 1px border.
+- **`<x-toggle stateLabel>` — the OFF / ON text no longer runs under the thumb.** On `md` the vacated half
+  is only ~20px wide, so a 9px label at a 4px inset touched (and on wide-glyph tunes overlapped) the thumb
+  edge. `md` now uses 8px at a 2px inset, `lg` keeps 10px at a 3px inset; measured ≥ 0px clearance on every
+  tune. Class string change only (fixtures updated).
+
 ## [0.17.1] — 2026-09-14
 
 ### Fixed
