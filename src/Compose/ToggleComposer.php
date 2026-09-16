@@ -51,12 +51,15 @@ class ToggleComposer
         // Thumb / state-label sit *inside* the track, so they aren't direct
         // siblings of `<input class="peer">` and `peer-checked:` won't reach
         // them on its own. Drive their state changes via descendant selectors
-        // declared on the track itself (which IS a sibling). Travel distance:
-        //   sm: 9 − 4 − 1 = 4    md: 11 − 5 − 1 = 5    lg: 13 − 6 − 1 = 6
+        // declared on the track itself (which IS a sibling). Travel distance
+        // (track − thumb − 2 × offset, in rem): sm 1 / md 1.25 / lg 1.5 — minus
+        // 2 × the tune's border width, because `left-0.5` is measured from the
+        // padding box: with a thick tune border (tech = 3px) a fixed travel
+        // pushed the thumb past the inner edge on the checked side (v0.17.2).
         $thumbTravel = match ($size) {
-            'sm' => 'peer-checked:[&_.xy-thumb]:translate-x-4',
-            'lg' => 'peer-checked:[&_.xy-thumb]:translate-x-6',
-            default => 'peer-checked:[&_.xy-thumb]:translate-x-5',
+            'sm' => 'peer-checked:[&_.xy-thumb]:translate-x-[calc(1rem-2*var(--border))]',
+            'lg' => 'peer-checked:[&_.xy-thumb]:translate-x-[calc(1.5rem-2*var(--border))]',
+            default => 'peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))]',
         };
 
         // Soft inverts the colour flow vs solid: solid keeps the thumb white
@@ -115,10 +118,18 @@ class ToggleComposer
         // OFF sits at the right (empty side when the thumb is on the left).
         // Initial visibility — track flips it via descendant selector on peer-checked.
         $marker = $kind === 'on' ? 'xy-state-on' : 'xy-state-off';
-        $position = $kind === 'on' ? 'left-1' : 'right-1';
         $visibility = $kind === 'on' ? 'opacity-0' : 'opacity-100';
 
-        $sizeClass = $size === 'lg' ? 'text-[10px]' : 'text-[9px]';
+        // The label lives in the half the thumb has vacated. On md the free zone is only
+        // ~20px wide, so a 9px "OFF" at right-1 ran under the thumb's edge (v0.17.2 fix):
+        // md drops to 8px / 2px inset, lg keeps 10px but sits 3px in.
+        // ON sits ~1.5px further in than OFF: the "O" glyph's side bearing makes an equal inset
+        // read as too far left (user review, 2026-09-16).
+        $position = match ($size) {
+            'lg' => $kind === 'on' ? 'left-[4.5px]' : 'right-[3px]',
+            default => $kind === 'on' ? 'left-[3.5px]' : 'right-0.5',
+        };
+        $sizeClass = $size === 'lg' ? 'text-[10px]' : 'text-[8px]';
 
         // Track turns $color when checked → ON uses contrast color.
         // Track is base-300 when unchecked → OFF uses muted base-content.

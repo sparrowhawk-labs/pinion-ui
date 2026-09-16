@@ -1,12 +1,12 @@
 [
     {
         "name": "default — solid primary md",
-        "props": {},
+        "props": [],
         "expected": {
             "wrapper": "block cursor-pointer",
             "row": "inline-flex items-center gap-3",
             "input": "peer sr-only",
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-5 bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary",
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary",
             "thumb": "xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
@@ -14,16 +14,23 @@
     },
     {
         "name": "soft warning — thumb takes the color (Preline-style inversion)",
-        "props": { "appearance": "soft", "color": "warning" },
+        "props": {
+            "appearance": "soft",
+            "color": "warning"
+        },
         "expected": {
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-5 peer-checked:[&_.xy-thumb]:bg-warning bg-base-200 border-base-content/10 peer-checked:bg-warning/15 peer-checked:border-warning/30"
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-warning bg-base-200 border-base-content/10 peer-checked:bg-warning/15 peer-checked:border-warning/30"
         }
     },
     {
         "name": "solid success size lg",
-        "props": { "appearance": "solid", "color": "success", "size": "lg" },
+        "props": {
+            "appearance": "solid",
+            "color": "success",
+            "size": "lg"
+        },
         "expected": {
-            "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-6 bg-base-300 border-base-content/10 peer-checked:bg-success peer-checked:border-success",
+            "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.5rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-success peer-checked:border-success",
             "thumb": "xy-thumb size-6 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-md)] text-base-content select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
@@ -31,18 +38,25 @@
     },
     {
         "name": "solid neutral disabled",
-        "props": { "color": "neutral", "disabled": true },
+        "props": {
+            "color": "neutral",
+            "disabled": true
+        },
         "expected": {
             "wrapper": "block cursor-not-allowed opacity-60",
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-5 bg-base-300 border-base-content/10 peer-checked:bg-neutral peer-checked:border-neutral",
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-neutral peer-checked:border-neutral",
             "label": "text-[length:var(--text-field-sm)] text-base-content/60 select-none leading-snug"
         }
     },
     {
         "name": "size=sm error overrides color",
-        "props": { "color": "info", "size": "sm", "error": "x" },
+        "props": {
+            "color": "info",
+            "size": "sm",
+            "error": "x"
+        },
         "expected": {
-            "track": "h-5 w-9 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-4 bg-base-300 border-base-content/10 peer-checked:bg-error peer-checked:border-error",
+            "track": "h-5 w-9 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-error peer-checked:border-error",
             "thumb": "xy-thumb size-4 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-xs)] text-error select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-error leading-snug"
@@ -50,25 +64,34 @@
     },
     {
         "name": "stateLabel solid primary md",
-        "props": { "stateLabel": true },
+        "props": {
+            "stateLabel": true
+        },
         "expected": {
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-5 peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary",
-            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-1 text-[9px] opacity-0 text-primary-content",
-            "stateOff": "xy-state-off absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none right-1 text-[9px] opacity-100 text-base-content/60"
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary",
+            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-[3.5px] text-[8px] opacity-0 text-primary-content",
+            "stateOff": "xy-state-off absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none right-0.5 text-[8px] opacity-100 text-base-content/60"
         }
     },
     {
         "name": "stateLabel solid success lg",
-        "props": { "stateLabel": true, "color": "success", "size": "lg" },
+        "props": {
+            "stateLabel": true,
+            "color": "success",
+            "size": "lg"
+        },
         "expected": {
-            "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-6 peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-success peer-checked:border-success",
-            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-1 text-[10px] opacity-0 text-success-content",
-            "stateOff": "xy-state-off absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none right-1 text-[10px] opacity-100 text-base-content/60"
+            "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.5rem-2*var(--border))] peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-success peer-checked:border-success",
+            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-[4.5px] text-[10px] opacity-0 text-success-content",
+            "stateOff": "xy-state-off absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none right-[3px] text-[10px] opacity-100 text-base-content/60"
         }
     },
     {
         "name": "stateLabel ignored on size=sm (track too narrow)",
-        "props": { "stateLabel": true, "size": "sm" },
+        "props": {
+            "stateLabel": true,
+            "size": "sm"
+        },
         "expected": {
             "stateOn": "",
             "stateOff": ""
