@@ -503,6 +503,76 @@
       }
     },
     {
+      "name": "phosphor",
+      "source": "Nothing set (2026-09-16): CRT の蛍光体。純モノクロの地に緑の走査線・シアン・オレンジの残光",
+      "category": "美学系 (mood)",
+      "llmTrigger": "レトロフューチャーの CRT。黒白の地にフォスファー緑 primary、シアン secondary、オレンジ accent。ターミナル・監視・SF",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F1F3EF",
+        "panel": "#FFFFFF",
+        "fg": "#0F1410",
+        "muted": "#66706A",
+        "primary": "#1F8F3A",
+        "secondary": "#0E7F99",
+        "accent": "#D3551A",
+        "extra": [
+          "#C43A2E",
+          "#B8860B",
+          "#3D6FC0"
+        ]
+      },
+      "dark": {
+        "bg": "#070A08",
+        "panel": "#101511",
+        "fg": "#EAF4EC",
+        "muted": "#7F9486",
+        "primary": "#33FF6A",
+        "secondary": "#4DE8FF",
+        "accent": "#FF7A1A",
+        "extra": [
+          "#FF5C5C",
+          "#FFD23F",
+          "#6C9BFF"
+        ]
+      }
+    },
+    {
+      "name": "nixie",
+      "source": "Nothing set (2026-09-16): ニキシー管の橙の灯と冷たい青白い光。炭の地",
+      "category": "美学系 (mood)",
+      "llmTrigger": "レトロフューチャーの真空管。炭の地にニキシー橙 primary、青白 secondary、菫 accent。計器・時計・オーディオ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F3F1EE",
+        "panel": "#FFFFFF",
+        "fg": "#17140F",
+        "muted": "#736C62",
+        "primary": "#D2560A",
+        "secondary": "#2F6FA8",
+        "accent": "#6D4FC4",
+        "extra": [
+          "#C7302B",
+          "#B48A0C",
+          "#2F8A57"
+        ]
+      },
+      "dark": {
+        "bg": "#0C0B0A",
+        "panel": "#161412",
+        "fg": "#F3EEE6",
+        "muted": "#948A7C",
+        "primary": "#FF7A1A",
+        "secondary": "#9BD3FF",
+        "accent": "#B48CFF",
+        "extra": [
+          "#FF6363",
+          "#FFD24D",
+          "#5FD39A"
+        ]
+      }
+    },
+    {
       "name": "payments",
       "source": "S2. Slate Violet",
       "category": "SaaS 実用",
@@ -1661,6 +1731,80 @@
           "#D4AB48",
           "#86BC8E",
           "#8FA9D6"
+        ]
+      }
+    },
+    {
+      "name": "midnight",
+      "source": "Nothing set (2026-09-16): 紺の同系色。深夜の計器盤。primary/secondary は地と同系、accent は鋼の青",
+      "category": "トーナル (tonal)",
+      "llmTrigger": "トーナルの紺。carbon（無彩の炭）より青く nocturne（藍紫）より寒色。金融・セキュリティ・夜間 UI",
+      "brandDefault": false,
+      "light": {
+        "bg": "#E7EAF0",
+        "panel": "#F4F6F9",
+        "fg": "#101828",
+        "muted": "#66708A",
+        "primary": "#D8DEE9",
+        "secondary": "#C2CBDB",
+        "accent": "#3B4C6B",
+        "extra": [
+          "#C43C3C",
+          "#B7891F",
+          "#3F8A5B",
+          "#3F73B8"
+        ]
+      },
+      "dark": {
+        "bg": "#0A1020",
+        "panel": "#121A2C",
+        "fg": "#E4E9F3",
+        "muted": "#8591AB",
+        "primary": "#1A2439",
+        "secondary": "#26324A",
+        "accent": "#93A8CC",
+        "extra": [
+          "#EF6E6E",
+          "#E2B44A",
+          "#6FC08C",
+          "#7FA8F0"
+        ]
+      }
+    },
+    {
+      "name": "glacier",
+      "source": "Nothing set (2026-09-16): 氷のシアン白。透明な筐体越しの光。primary/secondary は地と同系、accent は氷河の青緑",
+      "category": "トーナル (tonal)",
+      "llmTrigger": "トーナルの氷シアン。midnight（紺）より明るく緑寄り、tide（黄みのアイボリー）より冷たい。清潔・医療機器・冷蔵・北欧",
+      "brandDefault": false,
+      "light": {
+        "bg": "#E1EEF1",
+        "panel": "#F2F9FA",
+        "fg": "#0B1B1F",
+        "muted": "#5F7B82",
+        "primary": "#CDE2E6",
+        "secondary": "#B3D1D7",
+        "accent": "#25788B",
+        "extra": [
+          "#C6403B",
+          "#B58A1B",
+          "#3E8C62",
+          "#3B7FBF"
+        ]
+      },
+      "dark": {
+        "bg": "#061417",
+        "panel": "#0E2126",
+        "fg": "#E3F2F5",
+        "muted": "#7A9AA2",
+        "primary": "#132A30",
+        "secondary": "#1E3B42",
+        "accent": "#79CBDE",
+        "extra": [
+          "#F07070",
+          "#E3B94F",
+          "#6CC49A",
+          "#7FB6F0"
         ]
       }
     }

@@ -151,6 +151,8 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 | `bigblue` / `-dark` | Mood | Buttoned-up enterprise / B2B（エンタープライズ・B2B 堅め） |
 | `led` / `-dark` | Mood | Retro-future hardware: monochrome canvas, indicator-light amber / phosphor green / red（レトロフューチャーの機器。モノクロ地に表示灯のアンバー・緑・赤。ガジェット・IoT・ダッシュボード） |
 | `synth` / `-dark` | Mood | Retro-future neon: monochrome canvas, CMY magenta / cyan / yellow（レトロフューチャーのネオン。モノクロ地に CMY。音楽・イベント・クリエイティブ） |
+| `phosphor` / `-dark` | Mood | Retro-future CRT: monochrome canvas, phosphor green / cyan / orange afterglow（レトロフューチャーの CRT。モノクロ地に蛍光体の緑・シアン・橙。ターミナル・監視・SF） |
+| `nixie` / `-dark` | Mood | Retro-future vacuum tube: charcoal canvas, nixie orange / cold blue-white / violet（レトロフューチャーの真空管。炭の地にニキシー橙・青白・菫。計器・時計・オーディオ） |
 | `payments` / `-dark` | SaaS | Payments, fintech（決済・フィンテック） |
 | `docs` / `-dark` | SaaS | Documentation, knowledge base（ドキュメント・ナレッジベース） |
 | `mono` / `-dark` | SaaS | Minimal tools, portfolios（ミニマルツール・ポートフォリオ） |
@@ -162,6 +164,8 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 | `clay` / `-dark` | Tonal | `ember` (claude.ai-like) ivory × clay, tone-on-tone（claude.ai 風を同系色で） |
 | `moss` / `-dark` | Tonal | Olive-grey, tone-on-tone — calm hardware, outdoor, tools（オリーブ灰の同系色。落ち着いた機器・アウトドア・工具） |
 | `quartz` / `-dark` | Tonal | Rose-grey, tone-on-tone — soft devices, beauty, daily goods（薔薇灰の同系色。やわらかい機器・美容・生活雑貨） |
+| `midnight` / `-dark` | Tonal | Navy, tone-on-tone — night instrument panel（紺の同系色。深夜の計器盤。金融・セキュリティ・夜間 UI） |
+| `glacier` / `-dark` | Tonal | Icy cyan-white, tone-on-tone — clean, clinical, Nordic（氷シアンの同系色。清潔・医療機器・冷蔵・北欧） |
 | `ops` / `-dark` | SaaS | PM, operations, internal tools（PM・運用・社内ツール） |
 | `finance` / `-dark` | SaaS | Finance / legal enterprise（金融・法務エンタープライズ） |
 | `people` / `-dark` | SaaS | HR, community（HR・コミュニティ） |

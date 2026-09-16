@@ -26,6 +26,10 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   (olive-grey, tone-on-tone) and **`quartz`** (rose-grey, tone-on-tone). Generated via `gen:themes` (ink
   and status colours validated), `eject-table.json` regenerated, css-package golden gate re-run. Lineup is
   now 49 themes / 98 blocks; the theme-tune switcher picks them up from `lineup.json` automatically.
+- **4 more in the same set** — Mood: **`phosphor`** (monochrome canvas; CRT phosphor green / cyan / orange
+  afterglow) and **`nixie`** (charcoal canvas; nixie-tube orange / cold blue-white / violet). Tonal:
+  **`midnight`** (navy, tone-on-tone) and **`glacier`** (icy cyan-white, tone-on-tone). Lineup: 53 themes /
+  106 blocks.
 
 ### Fixed
 - **`<x-toggle>` thumb travel is now border-aware** — `translate-x-{4,5,6}` assumed a hairline rail; under a
