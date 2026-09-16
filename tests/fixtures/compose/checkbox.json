@@ -6,7 +6,7 @@
             "wrapper": "block cursor-pointer",
             "row": "flex items-center gap-2",
             "input": "peer sr-only",
-            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-primary/10 border-transparent text-primary/80 peer-checked:bg-primary/15 peer-checked:border-primary/30",
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-primary/10 border-transparent text-primary/80 peer-checked:bg-primary/15 peer-checked:border-primary/30",
             "checkmark": "xy-check size-3 absolute opacity-0 transition-opacity pointer-events-none",
             "indeterminate": "xy-dash size-3 absolute opacity-0 transition-opacity pointer-events-none",
             "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
@@ -20,7 +20,7 @@
             "color": "warning"
         },
         "expected": {
-            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-warning/10 border-transparent text-warning/80 peer-checked:bg-warning/15 peer-checked:border-warning/30"
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-warning/10 border-transparent text-warning/80 peer-checked:bg-warning/15 peer-checked:border-warning/30"
         }
     },
     {
@@ -30,7 +30,7 @@
             "color": "primary"
         },
         "expected": {
-            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-base-100 border-base-content/15 text-primary/80 peer-checked:border-primary/70"
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-base-100 border-base-content/15 text-primary/80 peer-checked:border-primary/70"
         }
     },
     {
@@ -41,7 +41,7 @@
             "size": "lg"
         },
         "expected": {
-            "visualBox": "size-5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-base-200 border-base-content/15 text-success/80 peer-checked:border-success/70",
+            "visualBox": "size-5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-base-200 border-base-content/15 text-success/80 peer-checked:border-success/70",
             "checkmark": "xy-check size-3.5 absolute opacity-0 transition-opacity pointer-events-none",
             "label": "text-[length:var(--text-field-md)] text-base-content select-none leading-snug",
             "description": "ml-7 mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
@@ -56,7 +56,7 @@
         },
         "expected": {
             "wrapper": "block cursor-not-allowed opacity-60",
-            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-base-300 border-base-content/15 text-base-content/80 peer-checked:border-base-content/70",
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-base-300 border-base-content/15 text-base-content/80 peer-checked:border-base-content/70",
             "label": "text-[length:var(--text-field-sm)] text-base-content/60 select-none leading-snug"
         }
     },
@@ -68,7 +68,7 @@
             "error": "x"
         },
         "expected": {
-            "visualBox": "size-3.5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-error/10 border-transparent text-error/80 peer-checked:bg-error/15 peer-checked:border-error/30",
+            "visualBox": "size-3.5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-check]:opacity-100 peer-indeterminate:[&_.xy-dash]:opacity-100 bg-error/10 border-transparent text-error/80 peer-checked:bg-error/15 peer-checked:border-error/30",
             "label": "text-[length:var(--text-field-xs)] text-error select-none leading-snug",
             "description": "ml-[22px] mt-1 text-[length:var(--text-field-xs)] text-error leading-snug"
         }
@@ -82,7 +82,7 @@
             "wrapper": "block cursor-pointer",
             "row": "flex items-center gap-2",
             "input": "peer sr-only",
-            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current bg-transparent border-base-content/45 text-primary peer-checked:bg-primary peer-checked:border-primary",
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current bg-transparent border-base-content/45 text-primary peer-checked:bg-primary peer-checked:border-primary",
             "checkmark": "xy-check size-3 absolute opacity-0 transition-opacity pointer-events-none",
             "indeterminate": "xy-dash size-3 absolute opacity-0 transition-opacity pointer-events-none",
             "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
@@ -100,7 +100,7 @@
             "wrapper": "block cursor-pointer",
             "row": "flex items-center gap-2",
             "input": "peer sr-only",
-            "visualBox": "size-3.5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current bg-transparent border-base-content/45 text-base-content peer-checked:bg-base-content peer-checked:border-base-content",
+            "visualBox": "size-3.5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current bg-transparent border-base-content/45 text-base-content peer-checked:bg-base-content peer-checked:border-base-content",
             "checkmark": "xy-check size-2.5 absolute opacity-0 transition-opacity pointer-events-none",
             "indeterminate": "xy-dash size-2.5 absolute opacity-0 transition-opacity pointer-events-none",
             "label": "text-[length:var(--text-field-xs)] text-base-content select-none leading-snug",

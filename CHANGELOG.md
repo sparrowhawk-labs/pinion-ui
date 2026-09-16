@@ -30,8 +30,14 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   afterglow) and **`nixie`** (charcoal canvas; nixie-tube orange / cold blue-white / violet). Tonal:
   **`midnight`** (navy, tone-on-tone) and **`glacier`** (icy cyan-white, tone-on-tone). Lineup: 53 themes /
   106 blocks.
-
 ### Fixed
+- **`<x-checkbox>` corner now follows the tune** — the box used `rounded-[var(--size-selector)]`, a fixed
+  0.25rem scalar that only the spinner / range *size* ramp is meant to consume, so square tunes (`sharp`,
+  `brutal`, `pixel`, `dot`) rendered a 4px-rounded checkbox next to a square radio. It is now
+  `rounded-[min(var(--radius-selector),0.25rem)]`: the corner follows `--radius-selector` *downwards only* —
+  `default` / `soft` / `luxury` / `editorial` / `tech` (selector radius 4px) keep their 4px, `corporate` gets
+  2px, the square tunes get 0.
+  (Using the raw token would make the default checkbox a full circle, indistinguishable from a radio.)
 - **`<x-toggle>` thumb travel is now border-aware** — `translate-x-{4,5,6}` assumed a hairline rail; under a
   thick tune border (`tech` = 3px) the thumb overshot the inner edge by up to 2px on the checked side. Travel is
   now `calc({1,1.25,1.5}rem - 2 * var(--border))`, so the on/off gaps are symmetric on every tune. Class string

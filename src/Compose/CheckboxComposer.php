@@ -41,7 +41,7 @@ class CheckboxComposer
             default => 'size-4',
         };
 
-        $base = 'relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--size-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current';
+        $base = 'relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current';
 
         // Show/hide the inner SVGs based on the peer input's state.
         // wire: no glyph at all — the box itself fills with the tone on check.
