@@ -80,7 +80,7 @@
 }
 
 /* ── BEGIN GENERATED THEME LINEUP — gen-themes.mjs (do not edit by hand) ── */
-/* 45 themes × light/dark = 90 blocks, generated from
+/* 49 themes × light/dark = 98 blocks, generated from
    src/resources/themes/lineup.json (locked 2026-07-19). Regenerate with
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
@@ -987,6 +987,158 @@
     --color-error-content:     #10141F;
     --root-bg:                 #10141F;
     --pn-ink:                  #4589FF;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* led / led-dark — 美学系 (mood) · レトロフューチャー・機器の表示灯。黒白の地にアンバー primary、緑 secondary、赤 accent。ダッシュボード・IoT・ガジェット (Nothing set (2026-09-16): インジケータ LED。純モノクロの地にアンバー／フォスファー緑／赤の点灯色だけ) */
+
+@plugin 'daisyui/theme' {
+    name:                      'led';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F2F2F0;
+    --color-base-300:          #DDDDDB;
+    --color-base-content:      #101010;
+    --color-primary:           #D08F00;
+    --color-primary-content:   #101010;
+    --color-secondary:         #1D8F45;
+    --color-secondary-content: #101010;
+    --color-accent:            #D9261C;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #2C2C2B;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #1E6FB3;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #2F8F4E;
+    --color-success-content:   #101010;
+    --color-warning:           #C48A00;
+    --color-warning-content:   #101010;
+    --color-error:             #D04A42;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F2F2F0;
+    --pn-ink:                  #8B5F00;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'led-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #151515;
+    --color-base-200:          #090909;
+    --color-base-300:          #232323;
+    --color-base-content:      #F4F4F2;
+    --color-primary:           #FFB000;
+    --color-primary-content:   #090909;
+    --color-secondary:         #35E36B;
+    --color-secondary-content: #090909;
+    --color-accent:            #FF3B3B;
+    --color-accent-content:    #090909;
+    --color-neutral:           #313130;
+    --color-neutral-content:   #F4F4F2;
+    --color-info:              #4DA3FF;
+    --color-info-content:      #090909;
+    --color-success:           #52D97A;
+    --color-success-content:   #090909;
+    --color-warning:           #FBC548;
+    --color-warning-content:   #090909;
+    --color-error:             #D0605A;
+    --color-error-content:     #090909;
+    --root-bg:                 #090909;
+    --pn-ink:                  #FFB000;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* synth / synth-dark — 美学系 (mood) · レトロフューチャー・ネオン。黒白の地にマゼンタ primary、シアン secondary、イエロー accent。音楽・イベント・クリエイティブ (Nothing set (2026-09-16): 純モノクロの地に CMY ネオン（マゼンタ／シアン／イエロー）。VHS・シンセの発光) */
+
+@plugin 'daisyui/theme' {
+    name:                      'synth';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F4F4F6;
+    --color-base-300:          #DFDFE1;
+    --color-base-content:      #101014;
+    --color-primary:           #C41CA8;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #0F8FA6;
+    --color-secondary-content: #101014;
+    --color-accent:            #B89600;
+    --color-accent-content:    #101014;
+    --color-neutral:           #2C2C30;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #3468C8;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #2A8F5E;
+    --color-success-content:   #101014;
+    --color-warning:           #C3A347;
+    --color-warning-content:   #101014;
+    --color-error:             #D5305C;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F4F4F6;
+    --pn-ink:                  #C41CA8;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'synth-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #141418;
+    --color-base-200:          #09090B;
+    --color-base-300:          #232325;
+    --color-base-content:      #F5F5F8;
+    --color-primary:           #FF3DDC;
+    --color-primary-content:   #09090B;
+    --color-secondary:         #29E3FF;
+    --color-secondary-content: #09090B;
+    --color-accent:            #FFE83D;
+    --color-accent-content:    #09090B;
+    --color-neutral:           #303034;
+    --color-neutral-content:   #F5F5F8;
+    --color-info:              #5B8CFF;
+    --color-info-content:      #09090B;
+    --color-success:           #4CE5A0;
+    --color-success-content:   #09090B;
+    --color-warning:           #C4A654;
+    --color-warning-content:   #09090B;
+    --color-error:             #FF5A7A;
+    --color-error-content:     #09090B;
+    --root-bg:                 #09090B;
+    --pn-ink:                  #FF3DDC;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;
@@ -3495,6 +3647,158 @@
     --color-error-content:     #1E1B18;
     --root-bg:                 #1E1B18;
     --pn-ink:                  #9A948D;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* moss / moss-dark — トーナル (tonal) · トーナルのオリーブ灰。落ち着いた機器・アウトドア・工具。tide（青緑）より暖かく botanical（緑）より無彩 (Nothing set (2026-09-16): オリーブ寄りの灰。軍用機器・CMF のカーキ。primary/secondary は地と同系) */
+
+@plugin 'daisyui/theme' {
+    name:                      'moss';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #F6F7F1;
+    --color-base-200:          #ECEEE6;
+    --color-base-300:          #D9DBD3;
+    --color-base-content:      #1B1F17;
+    --color-primary:           #DDE1D3;
+    --color-primary-content:   #1B1F17;
+    --color-secondary:         #C9CFBC;
+    --color-secondary-content: #1B1F17;
+    --color-accent:            #5C6A4B;
+    --color-accent-content:    #F6F7F1;
+    --color-neutral:           #353931;
+    --color-neutral-content:   #F6F7F1;
+    --color-info:              #4F7C93;
+    --color-info-content:      #F6F7F1;
+    --color-success:           #4F8A3E;
+    --color-success-content:   #1B1F17;
+    --color-warning:           #B48A1E;
+    --color-warning-content:   #1B1F17;
+    --color-error:             #B8412F;
+    --color-error-content:     #F6F7F1;
+    --root-bg:                 #ECEEE6;
+    --pn-ink:                  #63665A;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'moss-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #1A1E17;
+    --color-base-200:          #111410;
+    --color-base-300:          #292D28;
+    --color-base-content:      #E6E9DE;
+    --color-primary:           #262C22;
+    --color-primary-content:   #E6E9DE;
+    --color-secondary:         #343C2F;
+    --color-secondary-content: #E6E9DE;
+    --color-accent:            #A5B48C;
+    --color-accent-content:    #111410;
+    --color-neutral:           #343830;
+    --color-neutral-content:   #E6E9DE;
+    --color-info:              #7FAABF;
+    --color-info-content:      #111410;
+    --color-success:           #8DBA72;
+    --color-success-content:   #111410;
+    --color-warning:           #D2A83C;
+    --color-warning-content:   #111410;
+    --color-error:             #E0705D;
+    --color-error-content:     #111410;
+    --root-bg:                 #111410;
+    --pn-ink:                  #878E82;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* quartz / quartz-dark — トーナル (tonal) · トーナルの薔薇灰。やわらかい機器・美容・生活雑貨。nocturne（藍紫）より明るく people（珊瑚）より無彩 (Nothing set (2026-09-16): 薔薇灰。ミルク色の筐体と淡い紅。primary/secondary は地と同系) */
+
+@plugin 'daisyui/theme' {
+    name:                      'quartz';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #F9F6F7;
+    --color-base-200:          #EFEAEC;
+    --color-base-300:          #DCD7D9;
+    --color-base-content:      #1F191C;
+    --color-primary:           #E4DBDF;
+    --color-primary-content:   #1F191C;
+    --color-secondary:         #D3C7CC;
+    --color-secondary-content: #1F191C;
+    --color-accent:            #7B5B66;
+    --color-accent-content:    #F9F6F7;
+    --color-neutral:           #393336;
+    --color-neutral-content:   #F9F6F7;
+    --color-info:              #5877A8;
+    --color-info-content:      #F9F6F7;
+    --color-success:           #4E8E58;
+    --color-success-content:   #1F191C;
+    --color-warning:           #B58A24;
+    --color-warning-content:   #1F191C;
+    --color-error:             #C0453D;
+    --color-error-content:     #F9F6F7;
+    --root-bg:                 #EFEAEC;
+    --pn-ink:                  #696165;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'quartz-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #201A1D;
+    --color-base-200:          #171214;
+    --color-base-300:          #302A2D;
+    --color-base-content:      #EFE6EA;
+    --color-primary:           #2B2327;
+    --color-primary-content:   #EFE6EA;
+    --color-secondary:         #3A2F34;
+    --color-secondary-content: #EFE6EA;
+    --color-accent:            #C9A6B3;
+    --color-accent-content:    #171214;
+    --color-neutral:           #3A3437;
+    --color-neutral-content:   #EFE6EA;
+    --color-info:              #8FA9D6;
+    --color-info-content:      #171214;
+    --color-success:           #86BC8E;
+    --color-success-content:   #171214;
+    --color-warning:           #D4AB48;
+    --color-warning-content:   #171214;
+    --color-error:             #E27A70;
+    --color-error-content:     #171214;
+    --root-bg:                 #171214;
+    --pn-ink:                  #93888D;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;

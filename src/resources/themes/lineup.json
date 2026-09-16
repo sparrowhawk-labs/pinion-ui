@@ -433,6 +433,76 @@
       }
     },
     {
+      "name": "led",
+      "source": "Nothing set (2026-09-16): インジケータ LED。純モノクロの地にアンバー／フォスファー緑／赤の点灯色だけ",
+      "category": "美学系 (mood)",
+      "llmTrigger": "レトロフューチャー・機器の表示灯。黒白の地にアンバー primary、緑 secondary、赤 accent。ダッシュボード・IoT・ガジェット",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F2F2F0",
+        "panel": "#FFFFFF",
+        "fg": "#101010",
+        "muted": "#6E6E6A",
+        "primary": "#D08F00",
+        "secondary": "#1D8F45",
+        "accent": "#D9261C",
+        "extra": [
+          "#1E6FB3",
+          "#2F8F4E",
+          "#C48A00"
+        ]
+      },
+      "dark": {
+        "bg": "#090909",
+        "panel": "#151515",
+        "fg": "#F4F4F2",
+        "muted": "#8C8C88",
+        "primary": "#FFB000",
+        "secondary": "#35E36B",
+        "accent": "#FF3B3B",
+        "extra": [
+          "#4DA3FF",
+          "#52D97A",
+          "#FFC94D"
+        ]
+      }
+    },
+    {
+      "name": "synth",
+      "source": "Nothing set (2026-09-16): 純モノクロの地に CMY ネオン（マゼンタ／シアン／イエロー）。VHS・シンセの発光",
+      "category": "美学系 (mood)",
+      "llmTrigger": "レトロフューチャー・ネオン。黒白の地にマゼンタ primary、シアン secondary、イエロー accent。音楽・イベント・クリエイティブ",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F4F4F6",
+        "panel": "#FFFFFF",
+        "fg": "#101014",
+        "muted": "#6C6C75",
+        "primary": "#C41CA8",
+        "secondary": "#0F8FA6",
+        "accent": "#B89600",
+        "extra": [
+          "#D5305C",
+          "#2A8F5E",
+          "#3468C8"
+        ]
+      },
+      "dark": {
+        "bg": "#09090B",
+        "panel": "#141418",
+        "fg": "#F5F5F8",
+        "muted": "#8D8D98",
+        "primary": "#FF3DDC",
+        "secondary": "#29E3FF",
+        "accent": "#FFE83D",
+        "extra": [
+          "#FF5A7A",
+          "#4CE5A0",
+          "#5B8CFF"
+        ]
+      }
+    },
+    {
       "name": "payments",
       "source": "S2. Slate Violet",
       "category": "SaaS 実用",
@@ -1517,6 +1587,80 @@
           "#D9A33C",
           "#8FAF7E",
           "#85A8D8"
+        ]
+      }
+    },
+    {
+      "name": "moss",
+      "source": "Nothing set (2026-09-16): オリーブ寄りの灰。軍用機器・CMF のカーキ。primary/secondary は地と同系",
+      "category": "トーナル (tonal)",
+      "llmTrigger": "トーナルのオリーブ灰。落ち着いた機器・アウトドア・工具。tide（青緑）より暖かく botanical（緑）より無彩",
+      "brandDefault": false,
+      "light": {
+        "bg": "#ECEEE6",
+        "panel": "#F6F7F1",
+        "fg": "#1B1F17",
+        "muted": "#6F766A",
+        "primary": "#DDE1D3",
+        "secondary": "#C9CFBC",
+        "accent": "#5C6A4B",
+        "extra": [
+          "#B8412F",
+          "#B48A1E",
+          "#4F8A3E",
+          "#4F7C93"
+        ]
+      },
+      "dark": {
+        "bg": "#111410",
+        "panel": "#1A1E17",
+        "fg": "#E6E9DE",
+        "muted": "#8B937F",
+        "primary": "#262C22",
+        "secondary": "#343C2F",
+        "accent": "#A5B48C",
+        "extra": [
+          "#E0705D",
+          "#D2A83C",
+          "#8DBA72",
+          "#7FAABF"
+        ]
+      }
+    },
+    {
+      "name": "quartz",
+      "source": "Nothing set (2026-09-16): 薔薇灰。ミルク色の筐体と淡い紅。primary/secondary は地と同系",
+      "category": "トーナル (tonal)",
+      "llmTrigger": "トーナルの薔薇灰。やわらかい機器・美容・生活雑貨。nocturne（藍紫）より明るく people（珊瑚）より無彩",
+      "brandDefault": false,
+      "light": {
+        "bg": "#EFEAEC",
+        "panel": "#F9F6F7",
+        "fg": "#1F191C",
+        "muted": "#7C7075",
+        "primary": "#E4DBDF",
+        "secondary": "#D3C7CC",
+        "accent": "#7B5B66",
+        "extra": [
+          "#C0453D",
+          "#B58A24",
+          "#4E8E58",
+          "#5877A8"
+        ]
+      },
+      "dark": {
+        "bg": "#171214",
+        "panel": "#201A1D",
+        "fg": "#EFE6EA",
+        "muted": "#9A8C92",
+        "primary": "#2B2327",
+        "secondary": "#3A2F34",
+        "accent": "#C9A6B3",
+        "extra": [
+          "#E27A70",
+          "#D4AB48",
+          "#86BC8E",
+          "#8FA9D6"
         ]
       }
     }

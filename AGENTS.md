@@ -149,6 +149,8 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 | `pop` / `-dark` | Mood | Entertainment, youth, campaign LPs（エンタメ・若年層・キャンペーン LP） |
 | `verdigris` / `-dark` | Mood | Warm ivory × retro teal-green; calm, warm products（ウォームアイボリー×レトログリーン。旧ブランド既定） |
 | `bigblue` / `-dark` | Mood | Buttoned-up enterprise / B2B（エンタープライズ・B2B 堅め） |
+| `led` / `-dark` | Mood | Retro-future hardware: monochrome canvas, indicator-light amber / phosphor green / red（レトロフューチャーの機器。モノクロ地に表示灯のアンバー・緑・赤。ガジェット・IoT・ダッシュボード） |
+| `synth` / `-dark` | Mood | Retro-future neon: monochrome canvas, CMY magenta / cyan / yellow（レトロフューチャーのネオン。モノクロ地に CMY。音楽・イベント・クリエイティブ） |
 | `payments` / `-dark` | SaaS | Payments, fintech（決済・フィンテック） |
 | `docs` / `-dark` | SaaS | Documentation, knowledge base（ドキュメント・ナレッジベース） |
 | `mono` / `-dark` | SaaS | Minimal tools, portfolios（ミニマルツール・ポートフォリオ） |
@@ -158,6 +160,8 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 | `tide` / `-dark` | Tonal | `solar`'s teal × ivory, tone-on-tone（solar の色調を同系色で） |
 | `nocturne` / `-dark` | Tonal | `neotokyo`'s indigo-violet night, tone-on-tone（neotokyo の藍紫を同系色で） |
 | `clay` / `-dark` | Tonal | `ember` (claude.ai-like) ivory × clay, tone-on-tone（claude.ai 風を同系色で） |
+| `moss` / `-dark` | Tonal | Olive-grey, tone-on-tone — calm hardware, outdoor, tools（オリーブ灰の同系色。落ち着いた機器・アウトドア・工具） |
+| `quartz` / `-dark` | Tonal | Rose-grey, tone-on-tone — soft devices, beauty, daily goods（薔薇灰の同系色。やわらかい機器・美容・生活雑貨） |
 | `ops` / `-dark` | SaaS | PM, operations, internal tools（PM・運用・社内ツール） |
 | `finance` / `-dark` | SaaS | Finance / legal enterprise（金融・法務エンタープライズ） |
 | `people` / `-dark` | SaaS | HR, community（HR・コミュニティ） |
