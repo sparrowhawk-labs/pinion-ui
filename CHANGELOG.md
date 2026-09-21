@@ -7,6 +7,20 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.18.0] — 2026-09-21
+
+### Added
+- **`data-text-scale="a" | "b"`** — opt-in responsive root text. Narrow screens fit fewer characters
+  per line; lowering the ROOT font-size shrinks every rem-authored value at once (glyphs, t-shirt
+  spacing, field heights, radii), so a phone gets a proportionally denser page rather than a desktop
+  layout with smaller type. Two ladders — `a` gentle (−0.8 / −1.2 / −1.6 / −2.0px at 768 / 425 / 375 /
+  320) and `b` stepped (−1.0 / −2.0 / −3.0px at 768 / 375 / 320) — both written as a **subtraction**
+  from the tune's own `--font-size-base`, so they compose with `minimal` (.9375rem) and `pixel`
+  (1.125rem) instead of replacing them, and they preserve a reader's browser font-size setting (on
+  the root element `1rem` *is* that setting). The mechanism is one custom property, `--pn-text-trim`
+  (0 by default), subtracted in the single root `font-size` declaration — apps can set it directly
+  for a bespoke ladder. **Without the attribute nothing changes.**
+
 ## [0.17.2] — 2026-09-16
 
 ### Added

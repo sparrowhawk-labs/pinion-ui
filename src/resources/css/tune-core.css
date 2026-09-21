@@ -920,8 +920,42 @@
 :root,
 [data-tune] {
     font-family: var(--font-body);
-    font-size: var(--font-size-base, 1rem);
+    /* --pn-text-trim is the responsive root-text scale (see below). 0 by default,
+       so this is identical to plain var(--font-size-base, 1rem) unless a page
+       opts in with [data-text-scale]. */
+    font-size: calc(var(--font-size-base, 1rem) - var(--pn-text-trim, 0px));
 }
+
+/* --- Responsive root text scale — [data-text-scale="a" | "b"] ------------
+   OPT-IN. Without the attribute nothing changes (--pn-text-trim stays 0).
+
+   Narrow screens fit fewer characters per line. Lowering the ROOT font-size is
+   the one lever that shrinks everything authored in rem at once — not just the
+   glyphs but the t-shirt spacing, field heights and radii too — so a phone gets
+   a proportionally denser page instead of a desktop layout with smaller text.
+   Doing it per-element instead always drifts: some paddings follow, others don't.
+
+   Two ladders, both expressed as a subtraction from the tune's own base so they
+   compose with --font-size-base (minimal .9375rem / pixel 1.125rem) instead of
+   replacing it:
+
+     a  gentle   768:-0.8  425:-1.2  375:-1.6  320:-2.0   (15.2 / 14.8 / 14.4 / 14.0 at a 16px base)
+     b  stepped  768:-1.0            375:-2.0  320:-3.0   (15.0 /        14.0 / 13.0 at a 16px base)
+
+   Subtracting px (rather than setting px) keeps a reader's own browser font-size
+   setting intact: on the root element 1rem IS that setting, so the ladder shifts
+   with it instead of overwriting it.
+
+   Widest first, narrowest last — every rule is a max-width, so at 320px all of
+   them match and the last one wins. They do not stack. */
+@media (width <= 768px) { [data-text-scale="a"] { --pn-text-trim: 0.8px; } }
+@media (width <= 425px) { [data-text-scale="a"] { --pn-text-trim: 1.2px; } }
+@media (width <= 375px) { [data-text-scale="a"] { --pn-text-trim: 1.6px; } }
+@media (width <= 320px) { [data-text-scale="a"] { --pn-text-trim: 2px; } }
+
+@media (width <= 768px) { [data-text-scale="b"] { --pn-text-trim: 1px; } }
+@media (width <= 375px) { [data-text-scale="b"] { --pn-text-trim: 2px; } }
+@media (width <= 320px) { [data-text-scale="b"] { --pn-text-trim: 3px; } }
 
 :root :is(h1, h2, h3, h4, h5, h6),
 [data-tune] :is(h1, h2, h3, h4, h5, h6) {

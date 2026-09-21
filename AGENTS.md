@@ -58,6 +58,16 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 | **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (45 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
 | **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft`, `proto` (12 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
+| **Responsive root text** (opt-in) | `<html data-text-scale="a\|b">` | drops the ROOT font-size on narrow screens, so everything authored in rem — glyphs, t-shirt spacing, field heights — shrinks together. Omit for no change. |
+
+**Responsive root text — `data-text-scale` (v0.18.0).** Opt-in, orthogonal to theme × tune, and a no-op unless you set it. Narrow screens fit fewer characters per line; lowering the *root* font-size is the one lever that shrinks a page proportionally, because every rem-authored value follows at once (per-element shrinking always drifts — some paddings follow, others don't). Two ladders, both written as a subtraction from the tune's own `--font-size-base` so they compose with `minimal` (.9375rem) and `pixel` (1.125rem) instead of replacing them:
+
+| value | ≤768px | ≤425px | ≤375px | ≤320px | at a 16px base |
+|---|---|---|---|---|---|
+| `a` | −0.8px | −1.2px | −1.6px | −2.0px | 15.2 / 14.8 / 14.4 / 14.0 |
+| `b` | −1.0px | −1.0px | −2.0px | −3.0px | 15.0 / 15.0 / 14.0 / 13.0 |
+
+The mechanism is one custom property, `--pn-text-trim` (0 by default), subtracted in the single root `font-size` declaration — so an app can also set it directly for a bespoke ladder. Subtracting px rather than setting px preserves the reader's own browser font-size setting: on the root element `1rem` *is* that setting, so the ladder shifts with it.
 
 Themes and Tunes mix freely. Both are activated by the `pinion-ui.css` preset (imported into `app.css` by `ui:install`), which bundles the `data-tune` token system from `tune.css` (since v0.11.0 a shim over `tune-fonts.css` = self-hosted PixelMplus `@font-face` + `tune-core.css` = tokens only). Both attributes have working defaults when omitted — a root without `data-tune` renders exactly as `data-tune="default"` (since v0.10.11) — but always declare them explicitly on `<html>` so the choice is visible (`ui:lint` flags omission). Webfonts are NOT auto-loaded: build per-tune Google Fonts links from `src/resources/tune-fonts.json` (recipe in README "Loading the fonts") instead of an all-tunes link — CJK families are ~330KB of font CSS each, so load only what your tunes use and lazy-load the CJK `<link>`.
 
