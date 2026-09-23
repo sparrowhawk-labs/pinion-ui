@@ -19,4 +19,5 @@
 
 # Contributor doc (CLAUDE.md) — kept local-only, never published
 /CLAUDE.md
+/TASKS.md
 composer.lock
