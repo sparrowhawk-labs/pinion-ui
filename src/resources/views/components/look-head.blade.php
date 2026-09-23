@@ -1,5 +1,5 @@
 {{--
-    <x-look-head /> — apply the visitor's theme × tune BEFORE first paint (v0.19.0).
+    <x-look-head /> — apply the visitor's theme × tune BEFORE first paint (v0.20.0).
 
     Put it early in <head>, before @vite. Order of precedence:
       1. ?theme= / ?tune= (allowlist-checked; also remembered)

@@ -99,7 +99,7 @@ if (!function_exists('pn_tunes')) {
 
 if (!function_exists('pn_backdrops')) {
     /**
-     * <x-backdrop> patterns (v0.19.0). Each takes an optional size suffix
+     * <x-backdrop> patterns (v0.20.0). Each takes an optional size suffix
      * (`grid-s`, `flow-l`); `m` when omitted. `flow` is the animated one.
      */
     function pn_backdrops(): array
@@ -154,7 +154,7 @@ if (!function_exists('pn_theme_groups_for')) {
 
 if (!function_exists('pn_look_resolve')) {
     /**
-     * Resolve the page's theme × tune (v0.19.0). Pure: no config, no request.
+     * Resolve the page's theme × tune (v0.20.0). Pure: no config, no request.
      *
      * `$look` is the `pinion-ui.look` config block; `$query` is the request's
      * query string. `?theme=` / `?tune=` win when `query` is on AND the value

@@ -1,6 +1,6 @@
 # x-backdrop
 
-A **page background** behind everything — textures, still glow, and the animated `flow` (two theme-colored glows drifting on unrelated periods). Colors come from the theme only (`base-content` ink; `accent` / `secondary` for `flow`), so a backdrop follows `data-theme` and no hex is written. The SVG textures are used as **masks** for the same reason. `flow` stops under `prefers-reduced-motion`. Lifted from SendSignal, where each pattern was tried on a real page (v0.19.0).
+A **page background** behind everything — textures, still glow, and the animated `flow` (two theme-colored glows drifting on unrelated periods). Colors come from the theme only (`base-content` ink; `accent` / `secondary` for `flow`), so a backdrop follows `data-theme` and no hex is written. The SVG textures are used as **masks** for the same reason. `flow` stops under `prefers-reduced-motion`. Lifted from SendSignal, where each pattern was tried on a real page (v0.20.0).
 
 Put it **once, right after `<body>`**. It is a real fixed element (`z-index:-1`, `pointer-events:none`) rather than `body::before`/`::after`, so pages never compete for the free pseudo-element.
 

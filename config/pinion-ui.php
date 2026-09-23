@@ -27,7 +27,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Look — theme × tune for the whole app (v0.19.0)
+    | Look — theme × tune for the whole app (v0.20.0)
     |--------------------------------------------------------------------------
     |
     | One place for the page's default look, the allowlist, and how the

@@ -1,6 +1,6 @@
 # x-look-head
 
-Applies the visitor's **theme × tune before first paint** (v0.19.0). Without it, a remembered dark theme shows as the server default for one frame and then flips — the switchers only run after Alpine boots. Put it early in `<head>`, **before `@vite`**.
+Applies the visitor's **theme × tune before first paint** (v0.20.0). Without it, a remembered dark theme shows as the server default for one frame and then flips — the switchers only run after Alpine boots. Put it early in `<head>`, **before `@vite`**.
 
 Precedence: `?theme=` / `?tune=` (allowlist-checked, and remembered) → the choice the switchers stored in `localStorage` → what the server put on `<html>`.
 

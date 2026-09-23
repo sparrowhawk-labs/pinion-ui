@@ -8,7 +8,7 @@
     'storage' => true,       // persist the choice to localStorage
     'storageKey' => null,    // localStorage key prefix (default: config pinion-ui.look.storage_key, else 'pn')
     'themes' => null,        // override with a FLAT list of literal theme ids (disables the grouped lineup + mode toggle)
-    'families' => null,      // v0.19.0: narrow the GROUPED lineup to these families (bare names), mode toggle kept. Default: config pinion-ui.look.themes
+    'families' => null,      // v0.20.0: narrow the GROUPED lineup to these families (bare names), mode toggle kept. Default: config pinion-ui.look.themes
     'tunes' => null,         // override the tune list (array)
 ])
 
@@ -23,7 +23,7 @@
     // shipped lineup grouped via pn_theme_groups(), each entry a light/dark pair, with a
     // sun/moon mode toggle in the Theme section heading. `:themes="[...]"` (flat literal
     // ids) restores an ungrouped single list and hides the mode toggle.
-    // v0.19.0: defaults follow config('pinion-ui.look') so the switchers, pn_look()
+    // v0.20.0: defaults follow config('pinion-ui.look') so the switchers, pn_look()
     // and <x-look-head /> agree on the allowlist and the storage key.
     try { $pnLook = (array) config('pinion-ui.look', []); } catch (\Throwable) { $pnLook = []; }
     $families ??= $pnLook['themes'] ?? null;

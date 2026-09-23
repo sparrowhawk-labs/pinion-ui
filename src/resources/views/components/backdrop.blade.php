@@ -1,5 +1,5 @@
 {{--
-    <x-backdrop /> — a page background behind everything (v0.19.0).
+    <x-backdrop /> — a page background behind everything (v0.20.0).
 
     <x-backdrop />                  pattern from config('pinion-ui.look.backdrop') / ?bg=
     <x-backdrop pattern="flow" />   two theme-colored glows drifting (animated)
