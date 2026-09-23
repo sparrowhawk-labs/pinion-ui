@@ -1,0 +1,168 @@
+/* ==========================================
+   <x-backdrop> — page backgrounds, including the animated `flow` (v0.19.0)
+   ==========================================
+   Lifted from SendSignal (2026-09-21), where each pattern was tried on the real page.
+
+   Every color is a theme token (base-content for ink, accent/secondary for the flow
+   glows), so a backdrop follows data-theme and no hex is written anywhere. The SVG
+   textures are used as MASKS for the same reason: the SVG only says where ink goes.
+
+   Structure: one fixed element behind the page (z-index:-1, pointer-events:none) with
+   two <i> layers. It is a real element on purpose — SendSignal drew on body::before /
+   ::after, and every page then had to know which pseudo-element was free.
+
+   Pattern = data-pattern, density = data-size (s|m|l, default m).
+   `flow` stops under prefers-reduced-motion. */
+
+@layer components {
+  .pn-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    background-color: var(--pn-backdrop-base, var(--color-base-200));
+    --pn-ink: color-mix(in oklab, var(--color-base-content) 5%, transparent);
+  }
+  .pn-backdrop[data-local] { position: absolute; }
+  .pn-backdrop > i { position: absolute; inset: 0; display: block; background-repeat: repeat; }
+
+  .pn-backdrop[data-pattern="grid"][data-size="s"] > i:first-child {
+    background-image: linear-gradient(var(--pn-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-ink) 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+  .pn-backdrop[data-pattern="grid"][data-size="m"] > i:first-child {
+    background-image: linear-gradient(var(--pn-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-ink) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .pn-backdrop[data-pattern="grid"][data-size="l"] > i:first-child {
+    background-image: linear-gradient(var(--pn-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-ink) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .pn-backdrop[data-pattern="dot"] > i:first-child {
+    background-image: radial-gradient(color-mix(in oklab, var(--color-base-content) 12%, transparent) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  /* dot matrix — one uniform lattice (mixing dot sizes read as noise) */
+  .pn-backdrop[data-pattern="ndot"] > i:first-child {
+    background-image: radial-gradient(circle at center, color-mix(in oklab, var(--color-base-content) 11%, transparent) 1.2px, transparent 1.4px);
+    background-size: 18px 18px;
+  }
+  .pn-backdrop[data-pattern="ring"] > i:first-child {
+    background-image: radial-gradient(circle at center, transparent 0 3.2px, color-mix(in oklab, var(--color-base-content) 14%, transparent) 3.2px 4.2px, transparent 4.3px);
+    background-size: 44px 44px;
+  }
+  /* only the crossings of a 32px grid */
+  .pn-backdrop[data-pattern="cross"] > i:first-child {
+    background-image: linear-gradient(color-mix(in oklab, var(--color-base-content) 16%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--color-base-content) 16%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+    -webkit-mask-image: radial-gradient(circle 3.5px at 0 0, #000 99%, transparent 100%);
+    mask-image: radial-gradient(circle 3.5px at 0 0, #000 99%, transparent 100%);
+    -webkit-mask-size: 32px 32px;
+    mask-size: 32px 32px;
+  }
+  .pn-backdrop[data-pattern="rule"] > i:first-child {
+    background-image: linear-gradient(var(--pn-ink) 1px, transparent 1px);
+    background-size: 100% 28px;
+  }
+  .pn-backdrop[data-pattern="diag"] > i:first-child {
+    background-image: repeating-linear-gradient(45deg, var(--pn-ink) 0 1px, transparent 1px 14px);
+  }
+
+  /* SVG textures — the SVG is a mask; the ink is base-content at --pn-tex-ink */
+  .pn-backdrop[data-pattern="paper"] > i:first-child,
+  .pn-backdrop[data-pattern="chev"] > i:first-child,
+  .pn-backdrop[data-pattern="sig"] > i:first-child {
+    background-color: color-mix(in oklab, var(--color-base-content) var(--pn-tex-ink), transparent);
+    -webkit-mask-image: var(--pn-tex);
+    mask-image: var(--pn-tex);
+    -webkit-mask-size: var(--pn-tex-size);
+    mask-size: var(--pn-tex-size);
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+  }
+  .pn-backdrop[data-pattern="paper"] { --pn-tex: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cg%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23000%22%3E%3Cpath%20opacity%3D%22.5%22%20d%3D%22M96%2095h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-9-10h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm9-10v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-9-10h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm9-10v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-9-10h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm9-10v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-10%200v-9h-9v9h9zm-9-10h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9zm10%200h9v-9h-9v9z%22%20%2F%3E%3Cpath%20d%3D%22M6%205V0H5v5H0v1h5v94h1V6h94V5H6z%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+  .pn-backdrop[data-pattern="paper"][data-size="s"] { --pn-tex-size: 56px 56px; --pn-tex-ink: 9%; }
+  .pn-backdrop[data-pattern="paper"][data-size="m"] { --pn-tex-size: 96px 96px; --pn-tex-ink: 11%; }
+  .pn-backdrop[data-pattern="paper"][data-size="l"] { --pn-tex-size: 150px 150px; --pn-tex-ink: 13%; }
+  .pn-backdrop[data-pattern="chev"] { --pn-tex: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2212%22%20viewBox%3D%220%200%2020%2012%22%3E%3Cg%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22charlie-brown%22%20fill%3D%22%23000%22%3E%3Cpath%20d%3D%22M9.8%2012L0%202.2V.8l10%2010%2010-10v1.4L10.2%2012h-.4zm-4%200L0%206.2V4.8L7.2%2012H5.8zm8.4%200L20%206.2V4.8L12.8%2012h1.4zM9.8%200l.2.2.2-.2h-.4zm-4%200L10%204.2%2014.2%200h-1.4L10%202.8%207.2%200H5.8z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+  .pn-backdrop[data-pattern="chev"][data-size="s"] { --pn-tex-size: 20px 12px; --pn-tex-ink: 7%; }
+  .pn-backdrop[data-pattern="chev"][data-size="m"] { --pn-tex-size: 40px 24px; --pn-tex-ink: 9%; }
+  .pn-backdrop[data-pattern="chev"][data-size="l"] { --pn-tex-size: 64px 38px; --pn-tex-ink: 11%; }
+  .pn-backdrop[data-pattern="sig"] { --pn-tex: url("data:image/svg+xml,%3Csvg%20width%3D%2284px%22%20height%3D%2248px%22%20viewBox%3D%220%200%2084%2048%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%20%3Cdefs%3E%3C%2Fdefs%3E%20%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%20%3Cg%20id%3D%22signal%22%20fill%3D%22%23000000%22%3E%20%3Cpath%20d%3D%22M0%2C0%20L12%2C0%20L12%2C6%20L0%2C6%20L0%2C0%20Z%20M28%2C8%20L40%2C8%20L40%2C14%20L28%2C14%20L28%2C8%20Z%20M42%2C0%20L54%2C0%20L54%2C6%20L42%2C6%20L42%2C0%20Z%20M56%2C0%20L68%2C0%20L68%2C6%20L56%2C6%20L56%2C0%20Z%20M56%2C8%20L68%2C8%20L68%2C14%20L56%2C14%20L56%2C8%20Z%20M42%2C8%20L54%2C8%20L54%2C14%20L42%2C14%20L42%2C8%20Z%20M42%2C24%20L54%2C24%20L54%2C30%20L42%2C30%20L42%2C24%20Z%20M56%2C16%20L68%2C16%20L68%2C22%20L56%2C22%20L56%2C16%20Z%20M70%2C16%20L82%2C16%20L82%2C22%20L70%2C22%20L70%2C16%20Z%20M70%2C0%20L82%2C0%20L82%2C6%20L70%2C6%20L70%2C0%20Z%20M28%2C32%20L40%2C32%20L40%2C38%20L28%2C38%20L28%2C32%20Z%20M14%2C16%20L26%2C16%20L26%2C22%20L14%2C22%20L14%2C16%20Z%20M0%2C24%20L12%2C24%20L12%2C30%20L0%2C30%20L0%2C24%20Z%20M0%2C32%20L12%2C32%20L12%2C38%20L0%2C38%20L0%2C32%20Z%20M14%2C32%20L26%2C32%20L26%2C38%20L14%2C38%20L14%2C32%20Z%20M28%2C40%20L40%2C40%20L40%2C46%20L28%2C46%20L28%2C40%20Z%20M14%2C40%20L26%2C40%20L26%2C46%20L14%2C46%20L14%2C40%20Z%20M42%2C40%20L54%2C40%20L54%2C46%20L42%2C46%20L42%2C40%20Z%20M56%2C32%20L68%2C32%20L68%2C38%20L56%2C38%20L56%2C32%20Z%20M56%2C24%20L68%2C24%20L68%2C30%20L56%2C30%20L56%2C24%20Z%20M70%2C32%20L82%2C32%20L82%2C38%20L70%2C38%20L70%2C32%20Z%20M70%2C40%20L82%2C40%20L82%2C46%20L70%2C46%20L70%2C40%20Z%20M14%2C24%20L26%2C24%20L26%2C30%20L14%2C30%20L14%2C24%20Z%20M28%2C16%20L40%2C16%20L40%2C22%20L28%2C22%20L28%2C16%20Z%20M14%2C8%20L26%2C8%20L26%2C14%20L14%2C14%20L14%2C8%20Z%20M0%2C8%20L12%2C8%20L12%2C14%20L0%2C14%20L0%2C8%20Z%22%20id%3D%22Combined-Shape%22%3E%3C%2Fpath%3E%20%3C%2Fg%3E%20%3C%2Fg%3E%20%3C%2Fsvg%3E"); }
+  .pn-backdrop[data-pattern="sig"][data-size="s"] { --pn-tex-size: 42px 24px; --pn-tex-ink: 8%; }
+  .pn-backdrop[data-pattern="sig"][data-size="m"] { --pn-tex-size: 84px 48px; --pn-tex-ink: 10%; }
+  .pn-backdrop[data-pattern="sig"][data-size="l"] { --pn-tex-size: 126px 72px; --pn-tex-ink: 12%; }
+
+  /* glow — still, asymmetric light (off-centre on purpose: centred reads as a target) */
+  .pn-backdrop[data-pattern="glow"][data-size="s"] > i:first-child {
+    background-repeat: no-repeat;
+    background-image:
+      radial-gradient(48% 52% at 24% 20%, color-mix(in oklab, var(--color-base-content) 11%, transparent) 0%, color-mix(in oklab, var(--color-base-content) 6%, transparent) 42%, color-mix(in oklab, var(--color-base-content) 2%, transparent) 72%, transparent 100%),
+      radial-gradient(44% 48% at 80% 84%, color-mix(in oklab, var(--color-base-content) 8%, transparent) 0%, color-mix(in oklab, var(--color-base-content) 4%, transparent) 45%, transparent 100%);
+  }
+  .pn-backdrop[data-pattern="glow"][data-size="m"] > i:first-child {
+    background-repeat: no-repeat;
+    background-image:
+      radial-gradient(50% 54% at 22% 16%, color-mix(in oklab, var(--color-base-content) 18%, transparent) 0%, color-mix(in oklab, var(--color-base-content) 10%, transparent) 40%, color-mix(in oklab, var(--color-base-content) 3%, transparent) 70%, transparent 100%),
+      radial-gradient(46% 50% at 82% 86%, color-mix(in oklab, var(--color-base-content) 13%, transparent) 0%, color-mix(in oklab, var(--color-base-content) 6%, transparent) 45%, transparent 100%),
+      linear-gradient(112deg, color-mix(in oklab, var(--color-base-content) 5%, transparent) 0%, transparent 46%, transparent 60%, color-mix(in oklab, var(--color-base-content) 4%, transparent) 100%);
+  }
+  .pn-backdrop[data-pattern="glow"][data-size="l"] > i:first-child {
+    background-repeat: no-repeat;
+    background-image:
+      radial-gradient(52% 56% at 18% 12%, color-mix(in oklab, var(--color-base-content) 28%, transparent) 0%, color-mix(in oklab, var(--color-base-content) 16%, transparent) 38%, color-mix(in oklab, var(--color-base-content) 5%, transparent) 70%, transparent 100%),
+      radial-gradient(48% 52% at 86% 90%, color-mix(in oklab, var(--color-base-content) 20%, transparent) 0%, color-mix(in oklab, var(--color-base-content) 10%, transparent) 44%, transparent 100%),
+      linear-gradient(112deg, color-mix(in oklab, var(--color-base-content) 8%, transparent) 0%, transparent 44%, transparent 58%, color-mix(in oklab, var(--color-base-content) 6%, transparent) 100%);
+  }
+
+  /* flow — two theme-colored glows drifting on unrelated periods (20s / 26s) so the
+     loop is never noticed. The layers are 2.2x the viewport (inset:-60%): moving a
+     viewport-sized layer exposes its edge as a straight line. Only transform animates. */
+  .pn-backdrop[data-pattern="flow"] {
+    --pn-glow-a: var(--color-accent, var(--color-base-content));
+    --pn-glow-b: var(--color-secondary, var(--color-base-content));
+  }
+  .pn-backdrop[data-pattern="flow"] > i {
+    inset: -60%;
+    background-repeat: no-repeat;
+    will-change: transform;
+  }
+  .pn-backdrop[data-pattern="flow"] > i:first-child {
+    background-image: radial-gradient(24% 28% at 38% 34%,
+      color-mix(in oklab, var(--pn-glow-a) 22%, transparent) 0%,
+      color-mix(in oklab, var(--pn-glow-a) 10%, transparent) 26%,
+      color-mix(in oklab, var(--pn-glow-a) 3%, transparent) 50%,
+      color-mix(in oklab, var(--pn-glow-a) 1%, transparent) 74%,
+      transparent 100%);
+    animation: pn-drift-a var(--pn-flow-a, 20s) ease-in-out infinite;
+  }
+  .pn-backdrop[data-pattern="flow"] > i:last-child {
+    background-image: radial-gradient(21% 25% at 64% 66%,
+      color-mix(in oklab, var(--pn-glow-b) 17%, transparent) 0%,
+      color-mix(in oklab, var(--pn-glow-b) 8%, transparent) 28%,
+      color-mix(in oklab, var(--pn-glow-b) 2%, transparent) 52%,
+      color-mix(in oklab, var(--pn-glow-b) 1%, transparent) 76%,
+      transparent 100%);
+    animation: pn-drift-b var(--pn-flow-b, 26s) ease-in-out infinite;
+  }
+  .pn-backdrop[data-pattern="flow"][data-size="s"] { --pn-flow-a: 40s; --pn-flow-b: 53s; }
+  .pn-backdrop[data-pattern="flow"][data-size="l"] { --pn-flow-a: 12s; --pn-flow-b: 16s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pn-backdrop[data-pattern="flow"] > i { animation: none; }
+  }
+}
+
+@keyframes pn-drift-a {
+  0%   { transform: translate3d(-7%, -5%, 0) scale(1); }
+  33%  { transform: translate3d(5%, 3%, 0) scale(1.12); }
+  66%  { transform: translate3d(-4%, 7%, 0) scale(0.94); }
+  100% { transform: translate3d(-7%, -5%, 0) scale(1); }
+}
+@keyframes pn-drift-b {
+  0%   { transform: translate3d(6%, 4%, 0) scale(1); }
+  40%  { transform: translate3d(-5%, -3%, 0) scale(0.92); }
+  72%  { transform: translate3d(3%, -6%, 0) scale(1.14); }
+  100% { transform: translate3d(6%, 4%, 0) scale(1); }
+}

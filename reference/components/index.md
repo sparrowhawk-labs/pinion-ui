@@ -94,6 +94,8 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-theme-switcher>`](./theme-switcher.md) | Click-to-cycle theme switcher — pass `:themes` array, persists to `data-theme` on `<html>`. |
 | [`<x-theme-tune-switcher>`](./theme-tune-switcher.md) | `data-theme` × `data-tune` dropdowns (color-dot theme preview + tune preview), live-retune the page. `fixed` / `inline`, localStorage. Pure Alpine. |
 | [`<x-settings-switcher>`](./settings-switcher.md) | Theme × tune × lang consolidated into one trigger + panel — for tight chrome (mobile navbars). Same lineup/storage semantics as `<x-theme-tune-switcher>`, optional server-rendered locale links. |
+| [`<x-look-head>`](./look-head.md) | Applies the remembered / `?theme=` look before first paint. Pairs with `pn_look()` on `<html>` and the switchers (shared `pinion-ui.look` config). |
+| [`<x-backdrop>`](./backdrop.md) | Page background: textures, still glow, animated `flow`. Theme tokens only; `?bg=` to try; stops under reduced motion. |
 
 ## Conventions used in these docs
 

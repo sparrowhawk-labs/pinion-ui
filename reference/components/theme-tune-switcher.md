@@ -15,7 +15,8 @@ A self-contained **`data-theme` × `data-tune` switcher** — two dropdowns (the
 | `attribution` | `bool` | `true` | Show the pinion-ui attribution link, pinned faint/small at each dropdown's **top-right** (outside the scrollable list, so it stays visible while the list scrolls). Opt out with `:attribution="false"`. |
 | `link` | `'github' \| 'site' \| URL` | `'github'` | Attribution link target: `'github'` = the pinion-ui repo (default), `'site'` = pinion-ui.dev, or any URL string. |
 | `storage` | `bool` | `true` | Persist the choice to `localStorage` (so it survives reloads). |
-| `storageKey` | `string` | `'pn'` | localStorage key prefix (`{key}-theme` / `{key}-tune`). |
+| `storageKey` | `string \| null` | `look.storage_key` → `'pn'` | localStorage key prefix (`{key}-theme` / `{key}-tune`). Defaults to `config('pinion-ui.look.storage_key')` so it matches [`<x-look-head>`](./look-head.md). |
+| `families` | `array \| null` | `look.themes` | v0.19.0: narrow the GROUPED lineup to these families (bare names); the light/dark toggle stays. Defaults to `config('pinion-ui.look.themes')`. |
 | `themes` | `array \| null` | grouped lineup | Override with a FLAT list of literal shipped theme ids (e.g. `['pinion', 'reactive']`). Disables grouping and the light/dark mode toggle. daisyUI stock names don't exist in the build. |
 | `tunes` | `array \| null` | all tunes | Override the tune list. |
 

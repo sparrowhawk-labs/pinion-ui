@@ -7,6 +7,30 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [Unreleased]
+
+### Added
+- **`config('pinion-ui.look')`** — one place for the app's default theme × tune, the allowlist
+  (theme FAMILIES + tunes), whether `?theme=` / `?tune=` may override, the localStorage key, and the
+  default `<x-backdrop>`. Read by `pn_look()`, `<x-look-head>` and both switchers, so they cannot
+  disagree. Without the block nothing changes (built-in defaults).
+- **`pn_look()`** — resolves the look for the current request. Values outside the allowlist fall back
+  to the default (an unknown `data-theme` would drop every color). Never throws, so a stale config
+  cache cannot take the app — or artisan — down.
+- **`<x-look-head />`** — applies the remembered / `?theme=` look before first paint (no flash of the
+  default theme). A shared link wins over the recipient's remembered choice.
+- **`<x-backdrop />`** — page backgrounds: `flow` (two theme-colored glows drifting, animated; stops
+  under reduced motion), `glow`, `grid`, `dot`, `ndot`, `ring`, `cross`, `rule`, `diag`, and the SVG
+  textures `paper` / `chev` / `sig`, each with `-s|-m|-l` density. Theme tokens only. `?bg=` to try.
+- **`families`** prop on `<x-theme-tune-switcher>` / `<x-settings-switcher>` — narrows the grouped
+  lineup to given families while keeping the light/dark toggle (the flat `themes` prop drops both).
+- Helpers `pn_tunes()`, `pn_theme_groups_for()`, `pn_backdrops()`, `pn_backdrop_parse()`,
+  `pn_look_resolve()`.
+
+### Changed
+- The switchers' `storageKey` and tune list now default to `pinion-ui.look` (falling back to `'pn'` and
+  every tune, i.e. unchanged when the block is absent).
+
 ## [0.18.0] — 2026-09-21
 
 ### Added

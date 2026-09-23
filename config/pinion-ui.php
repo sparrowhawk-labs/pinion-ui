@@ -26,6 +26,41 @@ return [
     'locale' => env('PINION_UI_LOCALE'),
 
     /*
+    |--------------------------------------------------------------------------
+    | Look — theme × tune for the whole app (v0.19.0)
+    |--------------------------------------------------------------------------
+    |
+    | One place for the page's default look, the allowlist, and how the
+    | visitor's choice is remembered. Read by pn_look() (server: put it on
+    | <html>), <x-look-head /> (client: applies the remembered choice BEFORE
+    | first paint, so there is no flash of the default theme), and the two
+    | switchers (their lineup + storage key default to these values).
+    |
+    | themes  null = the whole lineup, or a list of FAMILIES (bare names —
+    |         `glacier` allows both `glacier` and `glacier-dark`).
+    | tunes   null = every tune, or a list of tune ids.
+    | query   true = `?theme=` / `?tune=` override (allowlist-checked). A
+    |         link you share wins over the recipient's remembered choice.
+    | storage_key  localStorage prefix (`<key>-theme`, `<key>-tune`).
+    | backdrop / backdrops  the default <x-backdrop> pattern and the `?bg=`
+    |         allowlist (null = every pattern). `flow` is the animated one.
+    |
+    */
+
+    'look' => [
+        'themes' => null,
+        'theme' => env('PINION_THEME', 'pinion'),
+        'tunes' => null,
+        'tune' => env('PINION_TUNE', 'default'),
+        'query' => true,
+        'storage_key' => 'pn',
+        // <x-backdrop> with no pattern prop: 'none' | 'flow' | 'grid-s' … (pn_backdrops())
+        'backdrop' => env('PINION_BACKDROP', 'none'),
+        'backdrops' => null,
+    ],
+
+
+    /*
     |---------------------------------------------------------------------------
     | Component string translations
     |---------------------------------------------------------------------------

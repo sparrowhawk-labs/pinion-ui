@@ -268,6 +268,10 @@
    rationale and the S7-plate coexistence contract. */
 @import "./doc-core.css";
 
+/* backdrop (.pn-backdrop) — <x-backdrop> page backgrounds incl. the animated `flow`.
+   Theme tokens only; inert until an <x-backdrop> is on the page. See backdrop.css. */
+@import "./backdrop.css";
+
 /* ==========================================
    range slider (native <input type=range> pseudo-element styling —
    daisyUI-free, CLAUDE.md invariant 6 migration)

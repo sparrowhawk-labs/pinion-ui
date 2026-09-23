@@ -6,8 +6,9 @@
     'attribution' => true,   // show the pinion-ui attribution link pinned at each dropdown's top-right. Opt out with :attribution="false"
     'link' => 'github',      // attribution link target: 'github' (repo, default) | 'site' (pinion-ui.dev) | any URL
     'storage' => true,       // persist the choice to localStorage
-    'storageKey' => 'pn',    // localStorage key prefix
+    'storageKey' => null,    // localStorage key prefix (default: config pinion-ui.look.storage_key, else 'pn')
     'themes' => null,        // override with a FLAT list of literal theme ids (disables the grouped lineup + mode toggle)
+    'families' => null,      // v0.19.0: narrow the GROUPED lineup to these families (bare names), mode toggle kept. Default: config pinion-ui.look.themes
     'tunes' => null,         // override the tune list (array)  — default below
 ])
 
@@ -25,10 +26,16 @@
     // sun/moon mode toggle switches the whole picker between the two columns.
     // Passing `:themes="[...]"` (flat literal ids) restores the old
     // ungrouped single-list behaviour and hides the mode toggle.
+    // v0.19.0: defaults follow config('pinion-ui.look') so the switchers, pn_look()
+    // and <x-look-head /> agree on the allowlist and the storage key.
+    try { $pnLook = (array) config('pinion-ui.look', []); } catch (\Throwable) { $pnLook = []; }
+    $families ??= $pnLook['themes'] ?? null;
+    $tunes ??= $pnLook['tunes'] ?? null;
+    $storageKey ??= $pnLook['storage_key'] ?? 'pn';
     $grouped = $themes === null;
     if ($grouped) {
         $groupData = [];
-        foreach (pn_theme_groups() as $label => $items) {
+        foreach (pn_theme_groups_for($families) as $label => $items) {
             $groupData[] = ['label' => $label, 'items' => array_values($items)];
         }
     } else {
@@ -40,7 +47,7 @@
             ),
         ]];
     }
-    $tuneList  = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft', 'proto'];
+    $tuneList  = $tunes ?? pn_tunes();
     // compact = icon-only triggers (dots chip / Aa / sun-moon), labels and value text hidden;
     // hover titles keep the current values discoverable. Attribution stays via the pinned dropdown links.
     $gap  = $compact ? 'gap-1.5' : 'gap-3';
@@ -80,7 +87,7 @@
             </a>
         </div>
     HTML;
-    $defaultTheme = $grouped ? 'pinion' : ($groupData[0]['items'][0]['light'] ?? 'pinion');
+    $defaultTheme = $grouped ? ($pnLook['theme'] ?? 'pinion') : ($groupData[0]['items'][0]['light'] ?? 'pinion');
     // light/dark mode toggle — flips the whole lineup between the <name> / <name>-dark columns.
     // Always leads the bar (leftmost) in both full and compact: the most-used control sits first.
     // (Trade-off, accepted: clicking it while a theme list is open closes the list via click-outside.)

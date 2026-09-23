@@ -6,8 +6,9 @@
     'attribution' => true,   // show the pinion-ui attribution link pinned at the panel's top-right. Opt out with :attribution="false"
     'link' => 'github',      // attribution link target: 'github' (repo, default) | 'site' (pinion-ui.dev) | any URL
     'storage' => true,       // persist the choice to localStorage
-    'storageKey' => 'pn',    // localStorage key prefix
+    'storageKey' => null,    // localStorage key prefix (default: config pinion-ui.look.storage_key, else 'pn')
     'themes' => null,        // override with a FLAT list of literal theme ids (disables the grouped lineup + mode toggle)
+    'families' => null,      // v0.19.0: narrow the GROUPED lineup to these families (bare names), mode toggle kept. Default: config pinion-ui.look.themes
     'tunes' => null,         // override the tune list (array)
 ])
 
@@ -22,10 +23,16 @@
     // shipped lineup grouped via pn_theme_groups(), each entry a light/dark pair, with a
     // sun/moon mode toggle in the Theme section heading. `:themes="[...]"` (flat literal
     // ids) restores an ungrouped single list and hides the mode toggle.
+    // v0.19.0: defaults follow config('pinion-ui.look') so the switchers, pn_look()
+    // and <x-look-head /> agree on the allowlist and the storage key.
+    try { $pnLook = (array) config('pinion-ui.look', []); } catch (\Throwable) { $pnLook = []; }
+    $families ??= $pnLook['themes'] ?? null;
+    $tunes ??= $pnLook['tunes'] ?? null;
+    $storageKey ??= $pnLook['storage_key'] ?? 'pn';
     $grouped = $themes === null;
     if ($grouped) {
         $groupData = [];
-        foreach (pn_theme_groups() as $label => $items) {
+        foreach (pn_theme_groups_for($families) as $label => $items) {
             $groupData[] = ['label' => $label, 'items' => array_values($items)];
         }
     } else {
@@ -37,7 +44,7 @@
             ),
         ]];
     }
-    $tuneList = $tunes ?? ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft', 'proto'];
+    $tuneList = $tunes ?? pn_tunes();
     $activeCode = collect($locales)->first(fn ($l) => ($l['code'] ?? null) === $current)['code']
         ?? collect($locales)->first(fn ($l) => $l['active'] ?? false)['code']
         ?? null;
@@ -55,7 +62,7 @@
         'site'   => 'https://pinion-ui.dev/',
         default  => $link,
     };
-    $defaultTheme = $grouped ? 'pinion' : ($groupData[0]['items'][0]['light'] ?? 'pinion');
+    $defaultTheme = $grouped ? ($pnLook['theme'] ?? 'pinion') : ($groupData[0]['items'][0]['light'] ?? 'pinion');
 @endphp
 
 {{-- tune-exempt: switcher chrome renders tune-neutral (see tune.css); per-option
