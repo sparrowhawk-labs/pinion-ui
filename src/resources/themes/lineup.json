@@ -1807,6 +1807,39 @@
           "#7FB6F0"
         ]
       }
+    },
+    {
+      "name": "signal",
+      "source": "SendSignal OGP 案 4「ドットの S」(2026-09-24): 点のグリッドを敷いた紙に墨の点、表示灯の赤を一点だけ。primary/secondary は紙の同系、赤は error にだけ置く",
+      "category": "トーナル (tonal)",
+      "llmTrigger": "トーナルの紙と墨。glyph（純白×純黒・冷たい）より温かい無彩の紙、赤は状態表示（error）にだけ出る。ドット表現・表示灯・判定や検査のツール",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F2F2EF",
+        "panel": "#FAFAF8",
+        "fg": "#0D0D0D",
+        "muted": "#8A8A86",
+        "primary": "#E4E4E0",
+        "secondary": "#CFCFCA",
+        "accent": "#5C5C58",
+        "base300": "#C9C9C4",
+        "extra": [
+          "#E0322B"
+        ]
+      },
+      "dark": {
+        "bg": "#0D0D0C",
+        "panel": "#171716",
+        "fg": "#F2F2EF",
+        "muted": "#8A8A86",
+        "primary": "#1F1F1D",
+        "secondary": "#2C2C29",
+        "accent": "#A6A6A1",
+        "base300": "#353531",
+        "extra": [
+          "#E0322B"
+        ]
+      }
     }
   ]
 }

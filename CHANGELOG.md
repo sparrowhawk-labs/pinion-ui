@@ -7,6 +7,15 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.19.0] — 2026-09-24
+
+### Added
+- **`signal` / `signal-dark`** — a Tonal theme: achromatic warm paper (`#F2F2EF`) × ink (`#0D0D0D`),
+  primary / secondary as paper tones one step off the canvas, accent a deep grey, and a single red
+  (`#E0322B`) carried only as the `error` status colour — the red reads as an indicator lamp, never as a
+  surface or a link. The dark mode inverts paper and ink (`#0D0D0C` / `#F2F2EF`); its red is lifted to
+  `#EA3D34` by the lineup-wide dark status lightness floor. Lineup: 54 themes / 108 blocks.
+
 ## [0.18.0] — 2026-09-21
 
 ### Added
