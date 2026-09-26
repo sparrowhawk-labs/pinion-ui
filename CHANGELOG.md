@@ -7,6 +7,22 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.21.0] — Unreleased
+
+### Removed — BREAKING
+- **`<x-editor>`, `<x-sheet>`, `<x-data-grid>`, `<x-calendar>` (+ `<x-calendar-grid>`) moved to
+  `sparrowhawk-labs/pinion-sections`** (private, Sparrowhawk Labs products only). Gone from this
+  package: their Blade views, `src/resources/js/{editor,sheet,data-grid,calendar}.js`,
+  `src/resources/css/{editor,sheet,data-grid}.css` (no longer `@import`ed by the `pinion-ui.css`
+  preset — `.pn-prose` / `.pn-sheet` / `.pn-data-grid` rules are not in the bundle any more),
+  `SparrowhawkLabs\PinionUi\Compose\{Editor,Sheet,DataGrid,Calendar}Composer`, their reference
+  pages and fixtures, and the standalone `demo/` (an `<x-editor>` demo).
+- **`ui:install --editor` / `--data-grid` / `--sheet` / `--calendar` removed.** Apps that used them:
+  `composer require sparrowhawk-labs/pinion-sections`, then `php artisan sections:install --editor …`
+  — it re-points existing `app.js` imports from `vendor/sparrowhawk-labs/pinion-ui/src/resources/js/…`
+  and adds the CSS. The tag names (`<x-editor>` etc.) are unchanged there. Apps that never used these
+  four components are unaffected.
+
 ## [0.20.0] — 2026-09-24
 
 ### Added

@@ -2,6 +2,8 @@
 
 Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers props, slots, examples, and class-composition notes. For **live visual demos** see the [playground repo](https://github.com/sparrowhawk-labs/pinion-ui-playground); for design language (themes, tunes, the three style layers) see the [package README](../../README.md).
 
+> `<x-editor>` · `<x-sheet>` · `<x-data-grid>` · `<x-calendar>` moved to the private `sparrowhawk-labs/pinion-sections` package in v0.21.0 (wired by its `sections:install`).
+
 ## Form
 
 | Component | Description |
@@ -22,8 +24,6 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-input-number>`](./input-number.md) | Quantity selector — `<input type="number">` flanked by joined ± buttons. min/max/step clamped both in HTML attrs and Alpine inc/dec logic. Native spinner arrows hidden. |
 | [`<x-input-group>`](./input-group.md) | Generic horizontal joiner for form-shaped children — select+input, input+button, multi-input rows. Self-contained Tailwind join (no daisyUI `.join`). Exposes an `addon` helper class for text decorators. |
 | [`<x-pin-input>`](./pin-input.md) | OTP / verification code — N single-character boxes with auto-advance, backspace-back, arrow nav, paste-to-fill. `numeric` / `alphanumeric` type, optional `masked`. Combined value submits via hidden input. |
-| [`<x-calendar>`](./calendar.md) | Minimal month-grid date picker — a trigger button + popover, ISO `YYYY-MM-DD` via `wire:model`. Pure Alpine (no dep); the same grid is reused as the `<x-sheet>` date-cell editor. **Opt-in JS** — run `ui:install --calendar`. |
-| [`<x-editor>`](./editor.md) | Headless rich-text editor (Tiptap / ProseMirror), styled purely with theme × tune tokens. MVP blocks: headings, lists, task list, blockquote, code, link + bold/italic/code/highlight marks. Emits a versioned JSON envelope for `wire:model`. **Opt-in JS** — run `ui:install --editor`. |
 
 ## Data display
 
@@ -40,8 +40,6 @@ Per-component API docs for `sparrowhawk-labs/pinion-ui`. Each linked page covers
 | [`<x-table>`](./table.md) | Data table — parent `<x-table>` + nested `<x-table.th>` / `<x-table.td numeric/action/muted>` / `<x-table.empty>` cells over plain `<tr>` rows. Owns the card face, header/hover/divider styling, `tabular-nums` numeric columns, edge padding, and empty state. |
 | [`<x-table-scroll>`](./table-scroll.md) | Overflow-x wrapper for tables that keeps the page from flexing on narrow viewports. |
 | [`<x-terminal>`](./terminal.md) | Fake terminal window with a typewriter reveal — demos a CLI step (`artisan tinker`, a seeder run, …) without a real terminal recording. Commands type char-by-char, output lines appear instantly; default slot reveals on finish (`terminal-done` event). |
-| [`<x-data-grid>`](./data-grid.md) | Spreadsheet-style editable grid (Tabulator): per-type inline editors, range selection + clipboard + fill, sortable/resizable/reorderable columns. Emits a JSON row-array for `wire:model`. **Opt-in JS** — run `ui:install --data-grid`. |
-| [`<x-sheet>`](./sheet.md) | Locality-of-Behavior spreadsheet — same API + data contract as `<x-data-grid>`, but the grid behavior is hand-written in Alpine+Tailwind (no Tabulator). Coexists with `<x-data-grid>`. *(staged build: S0 static render shipped; behavior + `ui:install --sheet` from S1)* |
 | [`<x-timeline>`](./timeline.md) | Vertical timeline of events — per-item `state` (`done`/`current`/`upcoming`), `appearance="solid"` default (saturated done-chain), `'soft'` opt-in for muted connector colours. |
 | [`<x-stat>`](./stat.md) | Single statistic block — label / value / change indicator. |
 | [`<x-stat-group>`](./stat-group.md) | Joins multiple `<x-stat :wrapped="false">` into one bordered/divided card — horizontal, vertical, or responsive. |

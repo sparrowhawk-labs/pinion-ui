@@ -5,8 +5,9 @@
    reactive theme blocks, the full tune token system, and every tune @utility
    as plain classes — WITHOUT Tailwind preflight (the dist must not reset a
    host page's base styles) and WITHOUT the Blade/Compose @source globs, the
-   Composer safelist, or the opt-in component stylesheets (editor/data-grid/
-   sheet.css) — per the locked v0.5.0 design (repo CLAUDE.md).
+   Composer safelist, or any component stylesheet (editor/data-grid/sheet.css
+   were never in the dist and moved to pinion-sections in v0.21.0) — per the
+   locked v0.5.0 design (repo CLAUDE.md).
 
    Gate: harness/capture.mjs --css dist/pinion-ui.css diffed against the
    reference golden must be 0 (see README).

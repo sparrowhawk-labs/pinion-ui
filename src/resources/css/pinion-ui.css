@@ -237,33 +237,15 @@
    JIT-emitted only when a consumer uses them; depth knob = --pn-feather. */
 @import "./feather.css";
 
-/* Editor prose styles (.pn-prose) for <x-editor>. Block rules that can't be
-   utility classes (descendant selectors on ProseMirror nodes), keyed off theme
-   color + tune tokens. A few hundred bytes for every consumer; the Tiptap JS
-   engine stays opt-in (see ui:install --editor) so non-editor apps pay no JS
-   bundle cost. */
-@import "./editor.css";
-
-/* data-grid theme (.pn-data-grid) for <x-data-grid>. Overrides Tabulator's own
-   selectors (.tabulator-header/-row/-range/…) with daisyUI/tune tokens so the grid
-   tracks data-theme × data-tune (Tabulator v6 ships literal-hex CSS with no runtime
-   variables). A few hundred bytes for every consumer and inert for non-grid apps;
-   the Tabulator JS + base CSS stay opt-in (ui:install --data-grid). */
-@import "./data-grid.css";
-
-/* sheet styles (.pn-sheet) for <x-sheet> — the Locality-of-Behavior spreadsheet that
-   COEXISTS with <x-data-grid>. Unlike data-grid.css (which fights Tabulator's unlayered
-   hex CSS), <x-sheet> owns its own <table> markup, so its descendant rules (grid lines,
-   sticky header, the composed checkbox glyph) live CLEANLY under @layer components — like
-   editor.css's .pn-prose. A few hundred bytes for every consumer; inert until <x-sheet>
-   is used. The behavior (Alpine `pinionSheet` factory) will be opt-in (ui:install --sheet)
-   from S1; at S0 only this CSS + the static render ship. */
-@import "./sheet.css";
+/* <x-editor> / <x-data-grid> / <x-sheet> / <x-calendar> and their stylesheets
+   (editor.css / data-grid.css / sheet.css) moved to the private
+   sparrowhawk-labs/pinion-sections package in v0.21.0 — its `sections:install`
+   adds their CSS to the host app.css. */
 
 /* doc-core (.pn-doc) — shared body-copy typography for read-only documents (reports,
    manuals, hearing sheets, review pages). The single source of truth that visualize and
    nonblok both render through, replacing their previously-duplicated "serene" prose CSS.
-   @layer components, like .pn-prose/.pn-sheet — a few hundred bytes for every consumer,
+   @layer components — a few hundred bytes for every consumer,
    inert until a `.pn-doc` element exists. See doc-core.css's own header for the full
    rationale and the S7-plate coexistence contract. */
 @import "./doc-core.css";

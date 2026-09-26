@@ -7,7 +7,7 @@ Data table — the standard way to render tabular records (admin ledgers, dashbo
 ## When to use
 
 - Any read-mostly tabular listing: admin indexes, reports, ranking/ledger views.
-- Editable spreadsheet-like data → [`<x-data-grid>`](./data-grid.md) / [`<x-sheet>`](./sheet.md) instead.
+- Editable spreadsheet-like data → `<x-data-grid>` / `<x-sheet>` instead (private `sparrowhawk-labs/pinion-sections` since v0.21.0).
 - Wide tables on narrow viewports: the shell already scrolls (`overflow-x-auto`); wrap in [`<x-table-scroll>`](./table-scroll.md) only when you want the fade + button affordance.
 
 ## Components
@@ -176,7 +176,7 @@ See [`src/Compose/TableComposer.php`](../../src/Compose/TableComposer.php). Retu
 ## Related
 
 - [`<x-table-scroll>`](./table-scroll.md) — fade + button horizontal-scroll affordance for very wide tables.
-- [`<x-data-grid>`](./data-grid.md) / [`<x-sheet>`](./sheet.md) — *editable* spreadsheet-style grids; `x-table` is read-mostly display.
+- `<x-data-grid>` / `<x-sheet>` (private `sparrowhawk-labs/pinion-sections` since v0.21.0) — *editable* spreadsheet-style grids; `x-table` is read-mostly display.
 - [`<x-pagination>`](./pagination.md) — pair under the table for long listings.
 - [`<x-card>`](./card.md) — wrap with `:padding="false"` + `<x-table :card="false">` when you need card header/footer chrome.
 

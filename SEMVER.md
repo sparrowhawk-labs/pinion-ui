@@ -52,6 +52,15 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.21.0 — unreleased
+
+- **Four components removed** — `<x-editor>`, `<x-sheet>`, `<x-data-grid>`, `<x-calendar>`
+  (+ `<x-calendar-grid>`) moved to the private `sparrowhawk-labs/pinion-sections` package, together
+  with their JS modules, stylesheets (dropped from the `pinion-ui.css` preset), Composer classes and
+  the `ui:install --editor/--data-grid/--sheet/--calendar` flags. A breaking change for apps using
+  them (install pinion-sections + `sections:install`; tag names unchanged); no rendered change for
+  any other component.
+
 ### v0.11.0 — 2026-08-30
 
 - **`PixelMplus12` family removed** (pixel-tune unification on PixelMplus10, owner-reviewed).

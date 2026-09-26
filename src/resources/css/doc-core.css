@@ -15,11 +15,11 @@
    visualize entry.css の良い点（等幅フォント明示・コードの淡い枠線・独立した
    「コード」色）を吸収して統合。行間 1.85・リストにマーカーあり。
 
-   規約（editor.css の .pn-prose / sheet.css の .pn-sheet と同じ）:
+   規約（pinion-sections の editor.css .pn-prose / sheet.css .pn-sheet と同じ）:
      - 色は daisyUI トークン（var(--color-*) → data-theme 追従）のみ。ハードコード色は使わない。
      - フォントは tune トークン（var(--font-body) / var(--font-mono)）を使う。
        新規トークンは作らない（book/screenshot 等の書体 identity は各アプリの自由）。
-     - `@layer components` に置く（editor.css/sheet.css と同じ層 — Tailwind ユーティリティで
+     - `@layer components` に置く（pinion-sections の editor.css/sheet.css と同じ層 — Tailwind ユーティリティで
        個別に上書きできる）。
      - nonblok の S7 プレート（plates/washi.css・plates/ink.css）は `.doc-prose` セレクタを
        override するため、消費側は `.doc-prose` を残したまま `.pn-doc` を併記する
