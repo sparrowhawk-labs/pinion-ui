@@ -7,7 +7,7 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
-## [0.21.0] — Unreleased
+## [0.21.0] — 2026-09-26
 
 ### Removed — BREAKING
 - **`<x-editor>`, `<x-sheet>`, `<x-data-grid>`, `<x-calendar>` (+ `<x-calendar-grid>`) moved to
