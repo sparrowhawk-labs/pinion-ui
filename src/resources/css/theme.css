@@ -80,7 +80,7 @@
 }
 
 /* ── BEGIN GENERATED THEME LINEUP — gen-themes.mjs (do not edit by hand) ── */
-/* 54 themes × light/dark = 108 blocks, generated from
+/* 55 themes × light/dark = 110 blocks, generated from
    src/resources/themes/lineup.json (locked 2026-07-19). Regenerate with
    `npm run gen:themes` in packages/pinion-ui-css after editing lineup.json.
    Derivation rules: docs/design/theme-lineup-v2-implementation.md (internal). */
@@ -4179,6 +4179,82 @@
     --color-error-content:     #0D0D0C;
     --root-bg:                 #0D0D0C;
     --pn-ink:                  #878885;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+/* macaron / macaron-dark — 美学系 (mood) · やわらかい・かわいい・親しみやすい診断やフォーム。生成りの地にネイビー primary、セージ secondary、テラコッタ accent。tune は plush が相性よい (Macaron x plush (2026-10-07): ココア色の文字・生成りの地・マカロンのパステルを濃くした原色。診断ページなど丸くやわらかい UI 向け) */
+
+@plugin 'daisyui/theme' {
+    name:                      'macaron';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'light';
+    --color-base-100:          #FFFFFF;
+    --color-base-200:          #F7F1E8;
+    --color-base-300:          #E8E1D8;
+    --color-base-content:      #4A3A31;
+    --color-primary:           #3E5F96;
+    --color-primary-content:   #FFFFFF;
+    --color-secondary:         #5F8A63;
+    --color-secondary-content: #FFFFFF;
+    --color-accent:            #C4674F;
+    --color-accent-content:    #FFFFFF;
+    --color-neutral:           #625249;
+    --color-neutral-content:   #FFFFFF;
+    --color-info:              #4A7BC8;
+    --color-info-content:      #FFFFFF;
+    --color-success:           #4E8A5A;
+    --color-success-content:   #FFFFFF;
+    --color-warning:           #A07A1A;
+    --color-warning-content:   #FFFFFF;
+    --color-error:             #B9453B;
+    --color-error-content:     #FFFFFF;
+    --root-bg:                 #F7F1E8;
+    --pn-ink:                  #3E5F96;
+    --radius-selector:         0.5rem;
+    --radius-field:            0.375rem;
+    --radius-box:              0.5rem;
+    --size-selector:           0.25rem;
+    --size-field:              0.25rem;
+    --border:                  1px;
+    --depth:                   1;
+    --noise:                   0;
+}
+
+@plugin 'daisyui/theme' {
+    name:                      'macaron-dark';
+    default:                   false;
+    prefersdark:               false;
+    color-scheme:              'dark';
+    --color-base-100:          #3A353B;
+    --color-base-200:          #2E2A2F;
+    --color-base-300:          #464144;
+    --color-base-content:      #F3E9DA;
+    --color-primary:           #9DBDE6;
+    --color-primary-content:   #2E2A2F;
+    --color-secondary:         #A9CBA6;
+    --color-secondary-content: #2E2A2F;
+    --color-accent:            #EFB4A4;
+    --color-accent-content:    #2E2A2F;
+    --color-neutral:           #534D50;
+    --color-neutral-content:   #F3E9DA;
+    --color-info:              #8FCBE0;
+    --color-info-content:      #2E2A2F;
+    --color-success:           #9ED1A4;
+    --color-success-content:   #2E2A2F;
+    --color-warning:           #E9C75B;
+    --color-warning-content:   #2E2A2F;
+    --color-error:             #F08A80;
+    --color-error-content:     #2E2A2F;
+    --root-bg:                 #2E2A2F;
+    --pn-ink:                  #9DBDE6;
     --radius-selector:         0.5rem;
     --radius-field:            0.375rem;
     --radius-box:              0.5rem;

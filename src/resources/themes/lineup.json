@@ -1840,6 +1840,43 @@
           "#E0322B"
         ]
       }
+    },
+    {
+      "name": "macaron",
+      "source": "Macaron x plush (2026-10-07): ココア色の文字・生成りの地・マカロンのパステルを濃くした原色。診断ページなど丸くやわらかい UI 向け",
+      "category": "美学系 (mood)",
+      "llmTrigger": "やわらかい・かわいい・親しみやすい診断やフォーム。生成りの地にネイビー primary、セージ secondary、テラコッタ accent。tune は plush が相性よい",
+      "brandDefault": false,
+      "light": {
+        "bg": "#F7F1E8",
+        "panel": "#FFFFFF",
+        "fg": "#4A3A31",
+        "muted": "#8B7B70",
+        "primary": "#3E5F96",
+        "secondary": "#5F8A63",
+        "accent": "#C4674F",
+        "extra": [
+          "#B9453B",
+          "#A07A1A",
+          "#4E8A5A",
+          "#4A7BC8"
+        ]
+      },
+      "dark": {
+        "bg": "#2E2A2F",
+        "panel": "#3A353B",
+        "fg": "#F3E9DA",
+        "muted": "#A79B92",
+        "primary": "#9DBDE6",
+        "secondary": "#A9CBA6",
+        "accent": "#EFB4A4",
+        "extra": [
+          "#F08A80",
+          "#E9C75B",
+          "#9ED1A4",
+          "#8FCBE0"
+        ]
+      }
     }
   ]
 }
