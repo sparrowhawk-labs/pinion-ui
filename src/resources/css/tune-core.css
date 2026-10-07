@@ -513,6 +513,7 @@
    one block (not scattered) since the tier is subtle and read as a set. */
 [data-tune="minimal"]   { --td-space-2xs:  0.125rem; }
 [data-tune="soft"]      { --td-space-2xs:  0.125rem; }
+[data-tune="plush"]     { --td-space-2xs:  0.125rem; }
 [data-tune="proto"]       { --td-space-2xs:  0.125rem; }
 [data-tune="editorial"] { --td-space-2xs:  0.0625rem; }
 [data-tune="luxury"]    { --td-space-2xs:  0.0625rem; }
@@ -700,6 +701,37 @@
     --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
 }
 
+/* plush — soft's cushioned sibling: rounder box/field, heavier rounded
+   headings, and a pillowy shadow (wide blur + near contact + inner highlight). */
+[data-tune="plush"] {
+    --td-radius-box: 0.875rem;        /* → 22px */
+    --td-radius-field: 0.625rem;      /* → 16px */
+    --td-tracking-heading: 0.005em;
+    --td-leading-body: 0.1;           /* → 1.7 */
+    --td-fwh: 100;                    /* → 700 */
+    --td-space-4xl: 1rem;         /* → 6rem */
+    --td-space-lg: 0.5rem;       /* → 2rem */
+    --td-px-input-md: 0rem;              /* roomy already via base */
+    /* far blur + near contact + inner top highlight, blur driven by damped --shadow-k. */
+    --shadow-box: var(--ovr-shadow-box,
+        0 calc(10px * var(--shadow-k)) calc(30px * var(--shadow-k)) rgb(0 0 0 / 0.10),
+        0 calc(2px * var(--shadow-k)) calc(6px * var(--shadow-k)) rgb(0 0 0 / 0.06),
+        inset 0 1px 0 rgb(255 255 255 / 0.5));
+    --shadow-field: var(--ovr-shadow-field,
+        0 calc(2px * var(--shadow-k)) calc(8px * var(--shadow-k)) rgb(0 0 0 / 0.05),
+        0 1px calc(2px * var(--shadow-k)) rgb(0 0 0 / 0.04));
+    --td-font-heading: "Fredoka", "M PLUS Rounded 1c", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Nunito", "M PLUS Rounded 1c", ui-sans-serif, system-ui, sans-serif;
+    --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
+}
+/* dark themes: a white inner highlight reads as a glare on dark panels — soften it. */
+[data-theme$="-dark"][data-tune="plush"] {
+    --shadow-box: var(--ovr-shadow-box,
+        0 calc(10px * var(--shadow-k)) calc(30px * var(--shadow-k)) rgb(0 0 0 / 0.10),
+        0 calc(2px * var(--shadow-k)) calc(6px * var(--shadow-k)) rgb(0 0 0 / 0.06),
+        inset 0 1px 0 rgb(255 255 255 / 0.06));
+}
+
 /* pixel — dot-matrix arcade. square, thick border, hard-offset, big leading.
    discrete text ladder (smallest 12px), page scale 1.125rem (both k-exempt). */
 [data-tune="pixel"] {
@@ -841,6 +873,11 @@
 
 [data-tune="soft"][data-ja="off"] {
     --td-font-heading: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-tune="plush"][data-ja="off"] {
+    --td-font-heading: "Fredoka", ui-sans-serif, system-ui, sans-serif;
     --td-font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
 }
 

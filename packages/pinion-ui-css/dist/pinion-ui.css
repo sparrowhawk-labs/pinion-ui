@@ -781,6 +781,9 @@
 [data-tune="soft"] {
   --td-space-2xs: 0.125rem;
 }
+[data-tune="plush"] {
+  --td-space-2xs: 0.125rem;
+}
 [data-tune="proto"] {
   --td-space-2xs: 0.125rem;
 }
@@ -956,6 +959,32 @@
   --td-font-body: "Nunito", "Zen Maru Gothic", ui-sans-serif, system-ui, sans-serif;
   --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
 }
+[data-tune="plush"] {
+  --td-radius-box: 0.875rem;
+  --td-radius-field: 0.625rem;
+  --td-tracking-heading: 0.005em;
+  --td-leading-body: 0.1;
+  --td-fwh: 100;
+  --td-space-4xl: 1rem;
+  --td-space-lg: 0.5rem;
+  --td-px-input-md: 0rem;
+  --shadow-box: var(--ovr-shadow-box,
+        0 calc(10px * var(--shadow-k)) calc(30px * var(--shadow-k)) rgb(0 0 0 / 0.10),
+        0 calc(2px * var(--shadow-k)) calc(6px * var(--shadow-k)) rgb(0 0 0 / 0.06),
+        inset 0 1px 0 rgb(255 255 255 / 0.5));
+  --shadow-field: var(--ovr-shadow-field,
+        0 calc(2px * var(--shadow-k)) calc(8px * var(--shadow-k)) rgb(0 0 0 / 0.05),
+        0 1px calc(2px * var(--shadow-k)) rgb(0 0 0 / 0.04));
+  --td-font-heading: "Fredoka", "M PLUS Rounded 1c", ui-sans-serif, system-ui, sans-serif;
+  --td-font-body: "Nunito", "M PLUS Rounded 1c", ui-sans-serif, system-ui, sans-serif;
+  --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
+}
+[data-theme$="-dark"][data-tune="plush"] {
+  --shadow-box: var(--ovr-shadow-box,
+        0 calc(10px * var(--shadow-k)) calc(30px * var(--shadow-k)) rgb(0 0 0 / 0.10),
+        0 calc(2px * var(--shadow-k)) calc(6px * var(--shadow-k)) rgb(0 0 0 / 0.06),
+        inset 0 1px 0 rgb(255 255 255 / 0.06));
+}
 [data-tune="pixel"] {
   --td-radius-box: -0.5rem;
   --td-radius-field: -0.375rem;
@@ -1060,6 +1089,10 @@
 }
 [data-tune="soft"][data-ja="off"] {
   --td-font-heading: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+  --td-font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+[data-tune="plush"][data-ja="off"] {
+  --td-font-heading: "Fredoka", ui-sans-serif, system-ui, sans-serif;
   --td-font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
 }
 [data-tune="pixel"][data-ja="off"] {
@@ -5107,6 +5140,76 @@
     --color-error-content: #0D0D0C;
     --root-bg: #0D0D0C;
     --pn-ink: #878885;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=macaron]:checked),[data-theme="macaron"] {
+    color-scheme: light;
+    --color-base-100: #FFFFFF;
+    --color-base-200: #F7F1E8;
+    --color-base-300: #E8E1D8;
+    --color-base-content: #4A3A31;
+    --color-primary: #3E5F96;
+    --color-primary-content: #FFFFFF;
+    --color-secondary: #5F8A63;
+    --color-secondary-content: #FFFFFF;
+    --color-accent: #C4674F;
+    --color-accent-content: #FFFFFF;
+    --color-neutral: #625249;
+    --color-neutral-content: #FFFFFF;
+    --color-info: #4A7BC8;
+    --color-info-content: #FFFFFF;
+    --color-success: #4E8A5A;
+    --color-success-content: #FFFFFF;
+    --color-warning: #A07A1A;
+    --color-warning-content: #FFFFFF;
+    --color-error: #B9453B;
+    --color-error-content: #FFFFFF;
+    --root-bg: #F7F1E8;
+    --pn-ink: #3E5F96;
+    --radius-selector: 0.5rem;
+    --radius-field: 0.375rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+}
+@layer base {
+  :root:has(input.theme-controller[value=macaron-dark]:checked),[data-theme="macaron-dark"] {
+    color-scheme: dark;
+    --color-base-100: #3A353B;
+    --color-base-200: #2E2A2F;
+    --color-base-300: #464144;
+    --color-base-content: #F3E9DA;
+    --color-primary: #9DBDE6;
+    --color-primary-content: #2E2A2F;
+    --color-secondary: #A9CBA6;
+    --color-secondary-content: #2E2A2F;
+    --color-accent: #EFB4A4;
+    --color-accent-content: #2E2A2F;
+    --color-neutral: #534D50;
+    --color-neutral-content: #F3E9DA;
+    --color-info: #8FCBE0;
+    --color-info-content: #2E2A2F;
+    --color-success: #9ED1A4;
+    --color-success-content: #2E2A2F;
+    --color-warning: #E9C75B;
+    --color-warning-content: #2E2A2F;
+    --color-error: #F08A80;
+    --color-error-content: #2E2A2F;
+    --root-bg: #2E2A2F;
+    --pn-ink: #9DBDE6;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;

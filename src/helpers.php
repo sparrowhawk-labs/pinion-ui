@@ -93,7 +93,7 @@ if (!function_exists('pn_tunes')) {
      */
     function pn_tunes(): array
     {
-        return ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'pixel', 'draft', 'proto'];
+        return ['default', 'minimal', 'sharp', 'corporate', 'tech', 'brutal', 'editorial', 'luxury', 'soft', 'plush', 'pixel', 'draft', 'proto'];
     }
 }
 
