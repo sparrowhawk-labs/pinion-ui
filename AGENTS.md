@@ -56,7 +56,7 @@ Per-component docs cover the full prop tables and slot contracts: [`reference/co
 | Layer | Where it lives | Examples |
 |---|---|---|
 | **Theme** (color palette) | `<html data-theme="...">` | `pinion`, `pinion-dark`, `monokai`, `payments-dark` (54 original light/dark pairs — see the theme lineup section below; daisyUI's built-in themes do **not** exist in the build) |
-| **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft`, `proto` (12 presets) |
+| **Tune** (shape / space / font) | `<html data-tune="...">` | `default`, `minimal`, `tech`, `editorial`, `soft`, `plush`, `proto` (13 presets) |
 | **Component** (variant / size / state) | Blade props | `color="primary"`, `size="lg"`, `dismissible` |
 | **Responsive root text** (opt-in) | `<html data-text-scale="a\|b">` | drops the ROOT font-size on narrow screens, so everything authored in rem — glyphs, t-shirt spacing, field heights — shrinks together. Omit for no change. |
 
@@ -158,6 +158,7 @@ Match the app's domain/vibe against the trigger column; when nothing clearly mat
 | `solar` / `-dark` | Mood | Editor-like / precise developer tooling (Solarized-derived)（エディタ系・開発者向け・精密なツール系） |
 | `zen` / `-dark` | Mood | Wabi-sabi, craft, ryokan, minimalist taste（和風・工芸・旅館） |
 | `pop` / `-dark` | Mood | Entertainment, youth, campaign LPs（エンタメ・若年層・キャンペーン LP） |
+| `macaron` / `-dark` | Mood | Friendly diagnostics, quizzes, forms with soft clay illustration — pair with `plush`（やわらかい診断・クイズ・フォーム。tune は plush） |
 | `verdigris` / `-dark` | Mood | Warm ivory × retro teal-green; calm, warm products（ウォームアイボリー×レトログリーン。旧ブランド既定） |
 | `bigblue` / `-dark` | Mood | Buttoned-up enterprise / B2B（エンタープライズ・B2B 堅め） |
 | `led` / `-dark` | Mood | Retro-future hardware: monochrome canvas, indicator-light amber / phosphor green / red（レトロフューチャーの機器。モノクロ地に表示灯のアンバー・緑・赤。ガジェット・IoT・ダッシュボード） |

@@ -7,6 +7,22 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.22.0] — 2026-10-07
+
+### Added
+- **Theme `macaron` / `macaron-dark`** (Mood) — cream canvas, cocoa ink, denim primary, sage
+  secondary, terracotta accent; pastel-leaning dark variant. For friendly diagnostics, quizzes and
+  forms with soft illustration. Pairs with `plush`.
+- **Tune `plush`** — clay-like: `soft` as the base, larger box radius (≈22px), two-layer soft shadow
+  plus a faint top highlight (dimmed on `*-dark` themes), heavier headings, slightly looser leading.
+  Fonts: Fredoka (headings) / Nunito (body) + M PLUS Rounded 1c (Japanese).
+
+### Fixed
+- `eject-table.json` regenerated — the `signal` / `signal-dark` rows had stale values (pinion's);
+  no CSS output changes.
+
+No existing theme or tune changes value (dist gate: zero computed-style differences).
+
 ## [0.21.0] — 2026-09-26
 
 ### Removed — BREAKING

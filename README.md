@@ -22,7 +22,7 @@ By [Sparrowhawk Labs](https://sparrowhawk-labs.dev) — part of the `pinion-*` s
 - **47 components** — buttons, inputs, selects, checkboxes, radios, toggles, textareas, file-upload, rating, range-slider, input-number, input-group, pin-input, dropdowns, popovers, modals, tabs, sidebars, accordions, collapses, alerts, badges, avatars, cards, tooltips, breadcrumbs, paginations, timelines, indicators, steppers, stats, skeletons, spinners, notification toasts, hero sections, theme-switcher, and more.
 - **45 original themes × light/dark** — a brand default (`pinion`/`pinion-dark`) plus mood, SaaS, and industry palettes (`monokai`, `payments`, `atelier`, …), each shipped as a `<name>` / `<name>-dark` pair. daisyUI's built-in themes are deliberately not bundled — the lineup is the color system.
 - **Three orthogonal style layers** — `data-theme` for color, `data-tune` for shape/space/font, Blade props for component variant. Mix freely (`data-theme="monokai-dark" data-tune="soft"`).
-- **12 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `corporate`, `tech`, `brutal`, `editorial`, `luxury`, `pixel`, `draft`, `proto`. Each preset bundles ~30 CSS custom properties.
+- **13 Tune presets** — `default`, `minimal`, `sharp`, `soft`, `plush`, `corporate`, `tech`, `brutal`, `editorial`, `luxury`, `pixel`, `draft`, `proto`. Each preset bundles ~30 CSS custom properties.
 - **Drop-in CSS preset** — one `@import` wires Tailwind `@source` globs (Blade + Compose-layer PHP) and Tune tokens together. No more "did I scan the right paths?" debugging.
 - **Compose-layer architecture** — class strings live in typed PHP composers (`InputComposer`, `SelectComposer`, etc.), not scattered in Blade. Variants/sizes/states stay testable and refactor-safe.
 - **Dual-use output** — render via `<x-button>` or copy the rendered HTML; it's plain Tailwind + daisyUI + Alpine.
@@ -139,6 +139,7 @@ Theme and Tune are fully orthogonal — any combination works.
 | **minimal** | small radius, no shadow | Inter + Noto Sans JP | airy spacing, smaller text | Quiet, restrained |
 | **sharp** | no radius, hairline shadow | Instrument Sans + Noto Sans JP | slightly tighter | Geometric, precise |
 | **soft** | large radius, soft-blur shadow | Quicksand / Nunito + Zen Maru Gothic | slightly larger | Soft, rounded, warm |
+| **plush** | extra-large box radius, two-layer soft shadow + top highlight | Fredoka / Nunito + M PLUS Rounded 1c | slightly larger, heavier headings | Clay-like, plump, friendly |
 | **corporate** | small radius, flat | IBM Plex Sans + Noto Sans JP | compact | Solid, business |
 | **tech** | micro-radius, no shadow | JetBrains Mono / IBM Plex Sans + M PLUS 1 Code | compact | Dev console, dense |
 | **brutal** | hard square, thick borders, hard-offset shadow | Space Grotesk / Space Mono + M PLUS 1p | slightly larger | Raw, impactful |

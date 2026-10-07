@@ -52,7 +52,11 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
-### v0.21.0 — unreleased
+### v0.22.0 — 2026-10-07
+
+- Additive only (theme `macaron`, tune `plush`). No BC notes.
+
+### v0.21.0 — 2026-09-26
 
 - **Four components removed** — `<x-editor>`, `<x-sheet>`, `<x-data-grid>`, `<x-calendar>`
   (+ `<x-calendar-grid>`) moved to the private `sparrowhawk-labs/pinion-sections` package, together
