@@ -1,0 +1,65 @@
+name: Release
+
+# Creates a GitHub Release for every v* tag so the repo's "Latest" badge tracks
+# Packagist. Body = the matching CHANGELOG.md section; falls back to the commit
+# list since the previous tag when there is no section (or no CHANGELOG).
+# Idempotent: an existing Release for the tag is left untouched.
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to (re)process, e.g. v0.22.0'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.tag || github.ref }}
+
+      - name: Build release notes
+        id: notes
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          set -eu
+          VER="${TAG#v}"
+          if [ -f CHANGELOG.md ] && grep -q "^## \[$VER\]" CHANGELOG.md; then
+            awk -v v="$VER" '
+              $0 ~ "^## \\[" v "\\]" { on=1; next }
+              on && /^## \[/ { exit }
+              on { print }
+            ' CHANGELOG.md | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' > notes.md
+            echo "source=changelog" >> "$GITHUB_OUTPUT"
+          else
+            PREV=$(git tag --sort=-v:refname | grep '^v' | awk -v t="$TAG" 'f{print; exit} $0==t{f=1}')
+            { echo "_No CHANGELOG entry for this version — commits since ${PREV:-the first commit}:_"; echo
+              git log ${PREV:+$PREV..}"$TAG" --format='- %s'; } > notes.md
+            echo "source=git-log" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -f CHANGELOG.md ]; then
+            printf '\n---\nFull history: [CHANGELOG.md](https://github.com/%s/blob/main/CHANGELOG.md)\n' "$GITHUB_REPOSITORY" >> notes.md
+          fi
+          echo "::group::Release notes for $TAG (source: see GITHUB_OUTPUT)"
+          cat notes.md
+          echo "::endgroup::"
+
+      - name: Create release (skip if it exists)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $TAG already exists — skipping."
+            exit 0
+          fi
+          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --verify-tag --title "$TAG" --notes-file notes.md
