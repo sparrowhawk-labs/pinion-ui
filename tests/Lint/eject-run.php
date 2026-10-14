@@ -92,6 +92,13 @@ check($ink, 'ink: band ≤ 50 vs surface', '<div class="bg-primary/10 bg-primary
 check($ink, 'ink: bg-ink-primary alias', '<div class="bg-ink-primary">x</div>', '<div class="bg-[#7a7a7c]">x</div>');
 check($t, 'no ink in slice: primary unchanged', '<a class="text-primary bg-primary/10">x</a>', '<a class="text-[#e08814] bg-[#e08814]/10">x</a>');
 
+// ink for all eight colors (v0.23.0): `ink-<name>` columns re-route the other seven the same way
+$ink8 = new EjectTransformer($tokens, $colors + ['ink' => '#7a7a7c', 'ink-error' => '#aa1122', 'ink-neutral' => '#878886', 'neutral' => '#323231']);
+check($ink8, 'ink-all: error text/border/ring/band', '<a class="text-error border-error/40 bg-error/15 hover:ring-error">x</a>', '<a class="text-[#aa1122] border-[#aa1122]/40 bg-[#aa1122]/15 hover:ring-[#aa1122]">x</a>');
+check($ink8, 'ink-all: error surfaces untouched', '<div class="bg-error bg-error/90 text-error-content">x</div>', '<div class="bg-[#cc2233] bg-[#cc2233]/90 text-error-content">x</div>', 0);
+check($ink8, 'ink-all: bg-ink-neutral alias', '<div class="bg-ink-neutral text-neutral">x</div>', '<div class="bg-[#878886] text-[#878886]">x</div>');
+check($ink, 'ink-all: legacy slice (ink only) leaves error', '<a class="text-error">x</a>', '<a class="text-[#cc2233]">x</a>');
+
 // fonts + untouched vanilla
 check($t, 'fonts reported not converted', '<h1 class="font-heading font-weight-heading">x</h1>', '<h1 class="font-heading font-weight-heading">x</h1>', 2);
 check($t, 'vanilla passes through', '<div class="flex p-4 text-sm rounded-lg bg-white">x</div>', '<div class="flex p-4 text-sm rounded-lg bg-white">x</div>');

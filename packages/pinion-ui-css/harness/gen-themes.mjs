@@ -19,9 +19,12 @@
      fg 15%) dark · status colors = palette extra[] hue-matched first
      (deterministic, one color one role), else per-mode OKLCH anchors mixed
      10% toward bg for theme temperature, L clamped per mode
-     · --pn-ink = primary as FOREGROUND: primary if >= 4.5:1 on base-100 and
-     base-200, else primary's lightness pushed toward base-content until 5.0:1
-     (hue/chroma kept; every theme, no category branch — see inkFor).
+     · ink = each semantic color as FOREGROUND: the color itself if >= 4.5:1 on
+     base-100 and base-200, else its lightness pushed toward base-content until
+     5.0:1 (hue/chroma kept; every theme, no category or color branch — see
+     inkFor). Emitted as --pn-ink (primary; historical public name) and
+     --pn-ink-<name> for secondary / accent / neutral / info / success /
+     warning / error (v0.23.0).
 
    Color math (sRGB ↔ OKLab/OKLCH, WCAG contrast) is self-contained — no deps.
    ============================================================================ */
@@ -112,22 +115,22 @@ function contentFor(color, { fg, bg, panel }) {
   return [fg, bg, panel].reduce((best, c) => (contrast(color, c) > contrast(color, best) ? c : best), fg);
 }
 
-/* ---------------- ink derivation (primary as foreground) ---------------- */
-const INK_TRIGGER = 4.5; // WCAG AA (normal text): a primary that passes this on base-100 AND base-200 is left alone
-const INK_TARGET = 5.0;  // a primary that fails is pushed to this — a touch past AA so the ink reads clearly (user choice, 2026-09-14)
+/* ---------------- ink derivation (semantic colors as foreground) ---------------- */
+const INK_TRIGGER = 4.5; // WCAG AA (normal text): a color that passes this on base-100 AND base-200 is left alone
+const INK_TARGET = 5.0;  // a color that fails is pushed to this — a touch past AA so the ink reads clearly (user choice, 2026-09-14)
 const inkWorst = (hex, p) => Math.min(contrast(hex, p.panel), contrast(hex, p.bg));
 /**
- * primary when it already passes INK_TRIGGER; otherwise primary's OKLCH lightness moved
+ * the color when it already passes INK_TRIGGER; otherwise its OKLCH lightness moved
  * toward base-content by the smallest step (binary search) that reaches INK_TARGET,
  * hue/chroma kept. Throws when even base-content's lightness cannot reach it — a palette
  * bug, not a runtime fallback: the CSS side has no second rule to hide behind.
  */
-function inkFor(primary, p) {
-  if (inkWorst(primary, p) >= INK_TRIGGER) return primary;
-  const [L0, C, H] = hex2lch(primary);
+function inkFor(color, p) {
+  if (inkWorst(color, p) >= INK_TRIGGER) return color;
+  const [L0, C, H] = hex2lch(color);
   const L1 = hex2lch(p.fg)[0];
   const at = (t) => lch2hex([L0 + (L1 - L0) * t, C, H]);
-  if (inkWorst(at(1), p) < INK_TARGET) throw new Error(`ink: ${primary} cannot reach ${INK_TARGET}:1 on ${p.panel}/${p.bg} even at base-content lightness`);
+  if (inkWorst(at(1), p) < INK_TARGET) throw new Error(`ink: ${color} cannot reach ${INK_TARGET}:1 on ${p.panel}/${p.bg} even at base-content lightness`);
   let lo = 0, hi = 1;
   for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; inkWorst(at(mid), p) >= INK_TARGET ? (hi = mid) : (lo = mid); }
   return at(hi);
@@ -184,7 +187,8 @@ function block(theme, mode) {
   const base300 = p.base300 ?? mix(p.bg, p.fg, mode === 'light' ? 0.08 : 0.14);
   const neutral = mode === 'light' ? mix(p.fg, p.bg, 0.15) : mix(p.panel, p.fg, 0.15);
   const status = statusColors(mode, p);
-  const ink = inkFor(p.primary, p);
+  const inkOf = { primary: p.primary, secondary: p.secondary, accent: p.accent, neutral, ...status };
+  const ink = Object.fromEntries(Object.entries(inkOf).map(([k, v]) => [k, inkFor(v, p)]));
   const line = (k, v) => `    ${(k + ':').padEnd(27)}${v};`;
   const colorPair = (k, v) => [line(`--color-${k}`, v), line(`--color-${k}-content`, contentFor(v, p))];
 
@@ -207,14 +211,16 @@ function block(theme, mode) {
     ...colorPair('warning', status.warning),
     ...colorPair('error', status.error),
     line('--root-bg', p.bg),
-    // --pn-ink: primary as a FOREGROUND color (text / border / ring / thin band). Same
-    // rule for every theme, no category branch: primary itself when it already reads
-    // at >= INK_TRIGGER (4.5) against base-100 AND base-200, otherwise primary with its
-    // OKLCH lightness pushed toward base-content until it reaches INK_TARGET (5.0)
-    // (hue and chroma kept). pinion-ui.css routes text-primary / border-primary /
-    // ring-primary / bg-primary/<=50 … to var(--pn-ink, var(--color-primary)), so
-    // `bg-primary` surfaces are untouched and 58/90 blocks are byte-identical.
-    line('--pn-ink', ink),
+    // ink: each semantic color as a FOREGROUND color (text / border / ring / thin band).
+    // Same rule for every theme and every color, no category or color branch: the color
+    // itself when it already reads at >= INK_TRIGGER (4.5) against base-100 AND base-200,
+    // otherwise the color with its OKLCH lightness pushed toward base-content until it
+    // reaches INK_TARGET (5.0) (hue and chroma kept). pinion-ui.css routes text-<x> /
+    // border-<x> / ring-<x> / bg-<x>/<=50 … to var(--pn-ink[-<x>], var(--color-<x>)), so
+    // `bg-<x>` surfaces are untouched. `--pn-ink` keeps its v0.17.0 name for primary
+    // (pinion-sections reads it); the other seven are `--pn-ink-<name>` (v0.23.0).
+    line('--pn-ink', ink.primary),
+    ...['secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error'].map((k) => line(`--pn-ink-${k}`, ink[k])),
     line('--radius-selector', '0.5rem'),
     line('--radius-field', '0.375rem'),
     line('--radius-box', '0.5rem'),

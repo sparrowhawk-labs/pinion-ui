@@ -112,11 +112,13 @@ final class EjectTransformer
     ];
 
     /**
-     * Utility prefixes where `primary` is a FOREGROUND (text / line / ring). With an `ink`
-     * entry in the theme slice these eject to the ink hex instead of primary — the same
-     * re-routing pinion-ui.css does at build time (see its "ink" section), so an ejected
-     * page keeps reading on Tonal themes. `bg` joins the list only with an opacity ≤ 50
-     * (a translucent band); opaque `bg-primary` and `bg-primary/90` stay a surface.
+     * Utility prefixes where a semantic color is a FOREGROUND (text / line / ring). With an
+     * ink entry in the theme slice (`ink` for primary, `ink-<name>` for the other seven —
+     * v0.23.0) these eject to the ink hex instead of the color — the same re-routing
+     * pinion-ui.css does at build time (see its "ink" section), so an ejected page keeps
+     * reading on Tonal themes. `bg` joins the list only with an opacity ≤ 50 (a translucent
+     * band); opaque `bg-<name>` and `bg-<name>/90` stay a surface. A table that carries only
+     * the `ink` column (pre-0.23.0) re-routes primary alone.
      */
     private const INK_PROPS = ['text', 'border', 'ring', 'outline', 'decoration', 'fill', 'stroke', 'caret'];
 
@@ -279,10 +281,11 @@ final class EjectTransformer
                 if ($base === "{$prop}-{$name}" || str_starts_with($base, "{$prop}-{$name}/")) {
                     $opacity = substr($base, strlen("{$prop}-{$name}"));
                     $hex = $this->colors[$name];
-                    if ($name === 'primary' && isset($this->colors['ink'])) {
+                    $inkKey = $name === 'primary' ? 'ink' : "ink-{$name}";
+                    if (isset($this->colors[$inkKey])) {
                         $band = $prop === 'bg' && $opacity !== '' && (int) ltrim($opacity, '/') <= 50;
                         if ($band || in_array($prop, self::INK_PROPS, true)) {
-                            $hex = $this->colors['ink'];
+                            $hex = $this->colors[$inkKey];
                         }
                     }
 

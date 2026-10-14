@@ -70,9 +70,15 @@ const COLOR_NAMES = [
   'base-100', 'base-200', 'base-300', 'base-content',
   'info', 'info-content', 'success', 'success-content',
   'warning', 'warning-content', 'error', 'error-content',
-  'ink', // primary as foreground — --pn-ink from the theme block (see gen-themes.mjs / pinion-ui.css "ink")
+  // semantic colors as foreground — --pn-ink (primary) / --pn-ink-<name> from the theme block
+  // (see gen-themes.mjs / pinion-ui.css "ink"). `ink` keeps its v0.17.0 column name.
+  'ink', 'ink-secondary', 'ink-accent', 'ink-neutral', 'ink-info', 'ink-success', 'ink-warning', 'ink-error',
 ];
-const colorVar = (n) => (n === 'ink' ? 'var(--pn-ink, var(--color-primary))' : `var(--color-${n})`);
+const colorVar = (n) => {
+  if (n === 'ink') return 'var(--pn-ink, var(--color-primary))';
+  if (n.startsWith('ink-')) return `var(--pn-${n}, var(--color-${n.slice(4)}))`;
+  return `var(--color-${n})`;
+};
 
 const css = readFileSync(cssPath, 'utf8');
 const tokenEls = TOKEN_PROBES.map(([id, , style]) => `<div data-tok="${id}" style="${style}">·</div>`).join('\n');

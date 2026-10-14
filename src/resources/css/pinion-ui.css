@@ -352,13 +352,13 @@
 
 /* colors — same semantic set as every other pinion-ui component */
 .pn-range-primary   { color: var(--pn-ink, var(--color-primary));   --range-thumb-color: var(--color-primary-content); }
-.pn-range-secondary { color: var(--color-secondary); --range-thumb-color: var(--color-secondary-content); }
-.pn-range-accent    { color: var(--color-accent);    --range-thumb-color: var(--color-accent-content); }
-.pn-range-neutral   { color: var(--color-neutral);   --range-thumb-color: var(--color-neutral-content); }
-.pn-range-info      { color: var(--color-info);      --range-thumb-color: var(--color-info-content); }
-.pn-range-success   { color: var(--color-success);   --range-thumb-color: var(--color-success-content); }
-.pn-range-warning   { color: var(--color-warning);   --range-thumb-color: var(--color-warning-content); }
-.pn-range-error     { color: var(--color-error);     --range-thumb-color: var(--color-error-content); }
+.pn-range-secondary { color: var(--pn-ink-secondary, var(--color-secondary)); --range-thumb-color: var(--color-secondary-content); }
+.pn-range-accent    { color: var(--pn-ink-accent, var(--color-accent)); --range-thumb-color: var(--color-accent-content); }
+.pn-range-neutral   { color: var(--pn-ink-neutral, var(--color-neutral)); --range-thumb-color: var(--color-neutral-content); }
+.pn-range-info      { color: var(--pn-ink-info, var(--color-info)); --range-thumb-color: var(--color-info-content); }
+.pn-range-success   { color: var(--pn-ink-success, var(--color-success)); --range-thumb-color: var(--color-success-content); }
+.pn-range-warning   { color: var(--pn-ink-warning, var(--color-warning)); --range-thumb-color: var(--color-warning-content); }
+.pn-range-error     { color: var(--pn-ink-error, var(--color-error)); --range-thumb-color: var(--color-error-content); }
 
 /* sizes — same 4/5/6(default)/7/8 × --size-selector scale daisyUI used, so
    the thumb still tracks the tune system's selector-size token. */
@@ -373,24 +373,27 @@
 @import "./theme.css";
 
 /* ==========================================
-   ink — primary as a FOREGROUND color (v0.17.0)
+   ink — semantic colors as a FOREGROUND (v0.17.0 primary, v0.23.0 all eight)
    ==========================================
-   `primary` is a SURFACE token: on Tonal themes it is a tone one step off
-   the canvas (≈1.1–1.3:1 against base-100), and on several light themes a
-   saturated hue that fails AA as text (pop's yellow is 1.6:1). Every theme
-   block therefore also carries `--pn-ink` (gen-themes.mjs): primary itself
-   when it already reads at ≥ 4.5:1 on base-100 AND base-200, otherwise
-   primary with its lightness pushed toward base-content until 5.0:1.
-   The invariant is structural, not a vocabulary: components keep writing
-   `text-primary`, and the utilities below re-route the FOREGROUND uses of
-   `primary` to `var(--pn-ink, var(--color-primary))`:
+   `primary` and its siblings are SURFACE tokens: on Tonal themes primary /
+   secondary are a tone one step off the canvas (≈1.1–1.4:1 against base-100),
+   `neutral` on every dark theme is a near-canvas 1.3–1.5:1, and a light
+   `warning` is typically a 2.3:1 yellow that fails AA as text (pop's primary
+   is 1.6:1). Every theme block therefore also carries an ink per color
+   (gen-themes.mjs): `--pn-ink` for primary (historical public name) and
+   `--pn-ink-<name>` for secondary / accent / neutral / info / success /
+   warning / error — the color itself when it already reads at ≥ 4.5:1 on
+   base-100 AND base-200, otherwise the color with its lightness pushed toward
+   base-content until 5.0:1. The invariant is structural, not a vocabulary:
+   components keep writing `text-warning`, and the utilities below re-route
+   the FOREGROUND uses of each color to `var(--pn-ink-<x>, var(--color-<x>))`:
 
-     text-primary[/N]  border-{,t,b,l,r,x,y}-primary[/N]  ring-primary[/N]
-     outline-primary   decoration-primary  fill-primary  stroke-primary
-     caret-primary     bg-primary/N with N ≤ 50 (a translucent band)
+     text-<x>[/N]  border-{,t,b,l,r,x,y}-<x>[/N]  ring-<x>[/N]
+     outline-<x>   decoration-<x>  fill-<x>  stroke-<x>
+     caret-<x>     bg-<x>/N with N ≤ 50 (a translucent band)
 
-   Untouched (surface): `bg-primary`, `bg-primary/N` with N > 50 (the solid
-   hover `hover:bg-primary/90`), `text-primary-content`, gradients, shadows.
+   Untouched (surface): `bg-<x>`, `bg-<x>/N` with N > 50 (the solid hover
+   `hover:bg-<x>/90`), `text-<x>-content`, gradients, shadows.
 
    Mechanics — why this is a pair of functional `@utility` blocks per property
    and not a plain override: Tailwind v4 emits BOTH the core utility and ours
@@ -402,15 +405,25 @@
    opacity form live in separate blocks (a block that never calls
    --modifier() ignores `text-primary/70`; a block that does ignores
    `text-primary`). `--value(--color-ink-*)` is the guard that keeps these
-   from matching `text-red-500` / `text-lg`: only `--color-ink-primary`
-   exists in the theme, so only `*-primary` resolves. Verified against
-   tailwindcss 4.3 (see AGENTS.md → Ink). Side effect: the theme key also
-   yields `text-ink-primary` / `bg-ink-primary` as explicit aliases.
+   from matching `text-red-500` / `text-lg`: only the eight `--color-ink-<x>`
+   keys exist in the theme, so only `*-<x>` resolves. Verified against
+   tailwindcss 4.3 (see AGENTS.md → Ink). Side effect: the theme keys also
+   yield `text-ink-<x>` / `bg-ink-<x>` as explicit aliases.
 
    The bg/N band uses a clamp() step so one utility covers both ranges:
-   N ≤ 50 → ink at N%, N > 50 → primary at N% (identical to core). */
+   N ≤ 50 → ink at N%, N > 50 → the surface color at N% (identical to core).
+   The surface side is a second `--value(--color-*)` in the same declaration;
+   Tailwind resolves each independently and drops the declaration when either
+   is unresolved, so `bg-red-500/10` and `bg-ink-primary/10` stay core's. */
 @theme inline reference {
-    --color-ink-primary: var(--pn-ink, var(--color-primary));
+    --color-ink-primary:   var(--pn-ink, var(--color-primary));
+    --color-ink-secondary: var(--pn-ink-secondary, var(--color-secondary));
+    --color-ink-accent:    var(--pn-ink-accent, var(--color-accent));
+    --color-ink-neutral:   var(--pn-ink-neutral, var(--color-neutral));
+    --color-ink-info:      var(--pn-ink-info, var(--color-info));
+    --color-ink-success:   var(--pn-ink-success, var(--color-success));
+    --color-ink-warning:   var(--pn-ink-warning, var(--color-warning));
+    --color-ink-error:     var(--pn-ink-error, var(--color-error));
 }
 @utility text-* { color: --value(--color-ink-*); }
 @utility text-* { color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }
@@ -437,7 +450,7 @@
 @utility fill-* { fill: --value(--color-ink-*); }
 @utility stroke-* { stroke: --value(--color-ink-*); }
 @utility caret-* { caret-color: --value(--color-ink-*); }
-@utility bg-* { background-color: color-mix(in oklab, color-mix(in oklab, --value(--color-ink-*) clamp(0%, (51 - --modifier(integer)) * 1000%, 100%), var(--color-primary)) calc(--modifier(integer) * 1%), transparent); }
+@utility bg-* { background-color: color-mix(in oklab, color-mix(in oklab, --value(--color-ink-*) clamp(0%, (51 - --modifier(integer)) * 1000%, 100%), --value(--color-*)) calc(--modifier(integer) * 1%), transparent); }
 
 /* ==========================================
    Alpine pre-init guard

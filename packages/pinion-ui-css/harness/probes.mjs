@@ -175,6 +175,13 @@ const COLORS = [
 for (const c of COLORS) {
   probe({ id: `color-${c}`, style: `color:var(--color-${c})`, capture: ['color'] });
 }
+/* ink — each semantic color as a foreground (--pn-ink for primary, --pn-ink-<name>
+   for the other seven; see gen-themes.mjs / pinion-ui.css "ink"). Same inline
+   var() form the preset's re-routed utilities resolve to. */
+for (const c of ['primary', 'secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error']) {
+  const token = c === 'primary' ? '--pn-ink' : `--pn-ink-${c}`;
+  probe({ id: `ink-${c}`, style: `color:var(${token}, var(--color-${c}))`, capture: ['color'] });
+}
 
 /* =====================================================================
    3) Tune token probes that no @utility exposes directly — read them
