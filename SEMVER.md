@@ -52,6 +52,18 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.23.0 — 2026-10-14
+
+- **Default flip — foreground uses of the seven non-primary semantic colors read through
+  `--pn-ink-<name>`** (`text-` / `border-` / `ring-` / `outline-` / `decoration-` / `fill-` / `stroke-` /
+  `caret-<name>` and `bg-<name>/N` with N ≤ 50). The v0.17.0 primary rule applied to `secondary`,
+  `accent`, `neutral`, `info`, `success`, `warning`, `error`; surfaces (`bg-<name>`, `bg-<name>/N` N > 50,
+  `text-<name>-content`) are unchanged. Most visible: `warning` text / borders / soft bands turn olive on
+  54 of 55 light themes; `text-neutral` / `border-neutral` turn mid-grey on every dark theme. No class
+  string or markup changes; `pinion` light and `reactive` render identically. Opt back to the raw color
+  in hand-written CSS with `var(--color-<name>)`; there is no class-level opt-out, by design (the ink is
+  the guarantee that `text-<name>` reads on every theme).
+
 ### v0.22.0 — 2026-10-07
 
 - Additive only (theme `macaron`, tune `plush`). No BC notes.

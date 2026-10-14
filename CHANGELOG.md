@@ -7,6 +7,42 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.23.0] — 2026-10-14
+
+### Added
+- **`--pn-ink-<name>` — every semantic color as a foreground, on every theme.** Each of the 110
+  generated theme blocks now carries `--pn-ink-secondary`, `-accent`, `-neutral`, `-info`, `-success`,
+  `-warning` and `-error` next to the existing `--pn-ink` (primary, name unchanged): the color itself
+  when it already reads at ≥ 4.5:1 against both `base-100` and `base-200`, otherwise its OKLCH lightness
+  pushed toward `base-content` until 5.0:1 (hue/chroma kept) — the v0.17.0 rule, no per-color branch.
+  `gen-themes.mjs` derives all eight; it still throws if a palette cannot reach the target (none does).
+- **`text-ink-<name>` / `bg-ink-<name>`** for all eight colors (side effect of the `--color-ink-*` theme
+  keys). Use `bg-ink-<name>` for an opaque fill that must read as a line or indicator.
+- `ui:eject` — `ink-secondary` … `ink-error` columns in `eject-table.json`; foreground uses of the seven
+  colors (and `bg-ink-<name>`) eject to the ink hex. A table with only the `ink` column still ejects
+  primary as before.
+- Harness: eight `ink-*` probes (inline `var(--pn-ink…)`), so the golden now covers the ink tokens.
+
+### Changed
+- **Foreground utilities of `secondary` / `accent` / `neutral` / `info` / `success` / `warning` / `error`
+  are routed to their ink by the preset** — `text-<name>[/N]`, `border-{,t,b,l,r,x,y}-<name>[/N]`,
+  `ring-<name>[/N]`, `outline-` / `decoration-` / `fill-` / `stroke-` / `caret-<name>`, and the translucent
+  band `bg-<name>/N` with N ≤ 50 now resolve to `var(--pn-ink-<name>, var(--color-<name>))`. Surfaces are
+  untouched (`bg-<name>`, `bg-<name>/N` N > 50, `text-<name>-content`). Same paired functional `@utility`
+  blocks as v0.17.0; the band utility resolves its N > 50 surface per color via a second `--value()`.
+  Blocks that change (light / dark): secondary 38 / 13, accent 32 / 6, neutral 0 / 55, info 48 / 3,
+  success 52 / 0, warning 54 / 0, error 46 / 30. `pinion` (light) and `reactive` are byte-identical.
+- **`warning` is the most visible change**: on 54 of 55 light blocks a yellow that failed as text
+  (`pop` `#C4A347` 2.3:1) becomes an olive (`#846700`) — the lineup converges on what `pinion` already
+  does (`#9A6700`, GitHub attention.fg). `bg-warning` buttons and `text-warning-content` stay yellow.
+- **`neutral` on dark themes**: `neutral` is a near-canvas surface there (1.3–1.5:1), so `text-neutral`,
+  `border-neutral`, the `border-t/l-neutral` accent bars and the divider label were unreadable; they now
+  resolve to a mid grey on all 55 dark blocks. Light blocks are unchanged.
+- Side effect, same as primary since v0.17.0: `solid-<name>` variants write `bg-<name> border-<name>`,
+  so where ink ≠ color the solid button / badge / alert / card / pagination / indicator / tooltip gains a
+  1px darker (light) or lighter (dark) edge.
+- `.pn-range-<color>` track and thumb ring use the ink of their color (were the surface color).
+
 ## [0.22.0] — 2026-10-07
 
 ### Added

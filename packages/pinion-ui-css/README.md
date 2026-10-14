@@ -5,7 +5,7 @@ React / Vue / Astro / vanilla consumers import with zero build tooling, generate
 from the SAME `src/resources/css/*` the Blade preset uses (so it can't drift).
 
 > **Status: Phase 1 SHIPPED (2026-07-13).** `dist/pinion-ui.css` exists and passes
-> the golden gate: **27,170 computed values (110 combos × 122 probes) identical**
+> the golden gate: **85,086 computed values (326 combos × 136 probes, incl. the 8 `ink-*` probes) identical**
 > to the Blade reference build, with 91/91 tune utilities surviving purge, both
 > theme blocks, self-hosted PixelMplus, no preflight, no daisyUI built-in themes.
 > Design is LOCKED in the repo `CLAUDE.md` ("v0.5.0 design — LOCKED 2026-06-25").
