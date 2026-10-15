@@ -52,6 +52,14 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.23.1 — 2026-10-15
+
+- **Default flip — `solid` variants render `border-transparent` instead of `border-<name>`** (button,
+  badge, alert, card, indicator, pagination active item, tooltip, notification solid, stepper `done`,
+  checked solid checkbox / radio / toggle). Shipped as a patch: the border was an unintended ink-colored
+  rim on themes where ink ≠ color (a v0.23.0 / v0.17.0 side effect), the box size is unchanged, and no
+  class string a consumer targets by name changes. `pinion` light renders identically (ink = color).
+
 ### v0.23.0 — 2026-10-14
 
 - **Default flip — foreground uses of the seven non-primary semantic colors read through

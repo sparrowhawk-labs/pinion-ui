@@ -86,7 +86,7 @@ None — array-driven.
 See [`src/Compose/StepperComposer.php`](../../src/Compose/StepperComposer.php). Returns `root`, `item`, `circle`, `connector`, `label`, `desc`, `stateColors`, `stateConnectors`, `orientation`, `variant`. Pipe-joined `stateColors` / `stateConnectors` maps are consumed via the helper `StepperComposer::pick($map, $state)` (same pattern as `<x-timeline>`).
 
 State → circle colours:
-- **done**: `bg-primary border-primary text-primary-content` + checkmark icon
+- **done**: `bg-primary border-transparent text-primary-content` + checkmark icon (`border-transparent` since v0.23.1 — `border-primary` is the ink and rimmed the fill where ink ≠ primary)
 - **current**: `bg-base-100 border-primary text-primary` + number
 - **upcoming**: `bg-base-100 border-base-content/20 text-base-content/40` + number
 

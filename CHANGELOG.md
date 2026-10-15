@@ -7,6 +7,18 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.23.1] — 2026-10-15
+
+### Fixed
+- **Solid faces no longer carry a 1px ink rim.** Every `solid` variant wrote `bg-<name> border-<name>`;
+  since `border-<name>` resolves to `--pn-ink-<name>` (v0.23.0, primary since v0.17.0) the border was
+  a different color than the face on every theme where ink ≠ color — a dark hairline around solid
+  buttons, badges, alerts, cards, indicator chips, the active pagination item, the tooltip bubble and
+  arrow, solid toasts, the stepper `done` circle and the checked solid checkbox / radio / toggle. Those
+  now write `border-transparent` (border *width* unchanged, so nothing moves; the face paints under
+  the transparent border). `outline` / `soft` / `wire` / `ghost` variants are untouched. No markup
+  changes; fixtures regenerated; css package dist gate: zero computed-style differences.
+
 ## [0.23.0] — 2026-10-14
 
 ### Added
