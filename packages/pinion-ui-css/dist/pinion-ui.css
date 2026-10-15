@@ -855,8 +855,8 @@
   --td-text-field-sm: -0.0625rem;
   --td-text-field-md: -0.0625rem;
   --td-text-field-lg: -0.0625rem;
-  --td-font-heading: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-  --td-font-body: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  --td-font-heading: "IBM Plex Sans", "BIZ UDPGothic", ui-sans-serif, system-ui, sans-serif;
+  --td-font-body: "IBM Plex Sans", "BIZ UDPGothic", ui-sans-serif, system-ui, sans-serif;
   --td-font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 [data-tune="tech"] {
@@ -914,8 +914,8 @@
   --td-space-lg: 0.5rem;
   --td-sh1-y: 1px;
   --td-sh1-blur: 2px;
-  --td-font-heading: "Playfair Display", "Shippori Mincho", ui-serif, Georgia, serif;
-  --td-font-body: "Source Serif 4", "Shippori Mincho", ui-serif, Georgia, serif;
+  --td-font-heading: "Playfair Display", "BIZ UDPMincho", ui-serif, Georgia, serif;
+  --td-font-body: "Source Serif 4", "BIZ UDPMincho", ui-serif, Georgia, serif;
   --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
 }
 [data-tune="luxury"] {

@@ -140,10 +140,10 @@ Theme and Tune are fully orthogonal — any combination works.
 | **sharp** | no radius, hairline shadow | Instrument Sans + Noto Sans JP | slightly tighter | Geometric, precise |
 | **soft** | large radius, soft-blur shadow | Quicksand / Nunito + Zen Maru Gothic | slightly larger | Soft, rounded, warm |
 | **plush** | extra-large box radius, two-layer soft shadow + top highlight | Fredoka / Nunito + M PLUS Rounded 1c | slightly larger, heavier headings | Clay-like, plump, friendly |
-| **corporate** | small radius, flat | IBM Plex Sans + Noto Sans JP | compact | Solid, business |
+| **corporate** | small radius, flat | IBM Plex Sans + BIZ UDPGothic | compact | Solid, business |
 | **tech** | micro-radius, no shadow | JetBrains Mono / IBM Plex Sans + M PLUS 1 Code | compact | Dev console, dense |
 | **brutal** | hard square, thick borders, hard-offset shadow | Space Grotesk / Space Mono + M PLUS 1p | slightly larger | Raw, impactful |
-| **editorial** | standard radius, hairline shadow | Playfair Display / Source Serif 4 + Shippori Mincho | larger type scale, roomy | Refined, serif |
+| **editorial** | standard radius, hairline shadow | Playfair Display / Source Serif 4 + BIZ UDPMincho | larger type scale, roomy | Refined, serif |
 | **luxury** | generous radius, pill CTA, soft shadow | Hanken Grotesk / Inter + Noto Sans JP | standard | Thin display, premium |
 | **pixel** | no radius, thick borders, hard-offset shadow | PixelMplus10 + DotGothic16 / Press Start 2P | big leading, discrete text ladder | Dot-matrix arcade |
 | **draft** | wobble radius, drafty line | Patrick Hand + Yomogi | roomy leading | Excalidraw hand-drawn |

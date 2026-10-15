@@ -7,6 +7,16 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [Unreleased]
+
+### Changed
+- **`corporate` and `editorial` tunes use BIZ UD for Japanese.** `corporate` falls back to `BIZ UDPGothic`
+  (was `Noto Sans JP`) and `editorial` to `BIZ UDPMincho` (was `Shippori Mincho`); both are Morisawa-made,
+  OFL, on Google Fonts. Latin faces are unchanged (IBM Plex Sans / Playfair Display / Source Serif 4), and
+  the `data-ja="off"` stacks are untouched. `tune-fonts.json` and the css package dist are updated in
+  step; `Shippori Mincho` is dropped from the family list (no tune uses it). Consumers that load fonts
+  from the map get the new families automatically; others must add the two families to their link.
+
 ## [0.23.3] — 2026-10-15
 
 ### Fixed

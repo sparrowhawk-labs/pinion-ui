@@ -588,8 +588,8 @@
     --td-text-field-md: -0.0625rem;   /* → 0.8125rem (13px) */
     --td-text-field-lg: -0.0625rem;
     /* shadow → none (flat): no --td-sh* deltas (base is flat). */
-    --td-font-heading: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
-    --td-font-body: "IBM Plex Sans", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+    --td-font-heading: "IBM Plex Sans", "BIZ UDPGothic", ui-sans-serif, system-ui, sans-serif;
+    --td-font-body: "IBM Plex Sans", "BIZ UDPGothic", ui-sans-serif, system-ui, sans-serif;
     --td-font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 
@@ -656,8 +656,8 @@
     --td-space-lg: 0.5rem;       /* → 2rem */
     --td-sh1-y: 1px;                  /* hairline */
     --td-sh1-blur: 2px;
-    --td-font-heading: "Playfair Display", "Shippori Mincho", ui-serif, Georgia, serif;
-    --td-font-body: "Source Serif 4", "Shippori Mincho", ui-serif, Georgia, serif;
+    --td-font-heading: "Playfair Display", "BIZ UDPMincho", ui-serif, Georgia, serif;
+    --td-font-body: "Source Serif 4", "BIZ UDPMincho", ui-serif, Georgia, serif;
     --td-font-mono: ui-monospace, "SFMono-Regular", monospace;
 }
 
