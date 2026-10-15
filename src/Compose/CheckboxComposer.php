@@ -71,7 +71,7 @@ class CheckboxComposer
 
             // wire (v0.17.2): transparent + hairline, solid fill on check. Minimal / retro-future.
             $appearance === 'wire' =>
-                "bg-transparent border-base-content/45 text-{$tone} peer-checked:bg-{$tone} peer-checked:border-transparent",
+                "bg-transparent border-base-content/45 text-{$tone} peer-checked:bg-{$tone} peer-checked:border-{$tone}",
 
             default =>
                 'bg-base-100 border-base-content/10 text-primary-content peer-checked:bg-primary peer-checked:border-primary',

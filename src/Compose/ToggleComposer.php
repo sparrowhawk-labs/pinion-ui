@@ -96,7 +96,7 @@ class ToggleComposer
 
             // wire (v0.17.2): transparent rail + hairline; fills with the colour on check.
             'wire' =>
-                "bg-transparent border-base-content/45 peer-checked:bg-{$color} peer-checked:border-transparent",
+                "bg-transparent border-base-content/45 peer-checked:bg-{$color} peer-checked:border-{$color}",
 
             default =>
                 'bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary',
