@@ -7,7 +7,7 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
-## [Unreleased]
+## [0.24.0] — 2026-10-15
 
 ### Changed
 - **`corporate` and `editorial` tunes use BIZ UD for Japanese.** `corporate` falls back to `BIZ UDPGothic`

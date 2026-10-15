@@ -52,6 +52,13 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.24.0 — 2026-10-15
+
+- **Default flip — the Japanese fallback face of two tunes changes.** `corporate` now falls back to
+  `BIZ UDPGothic` (was `Noto Sans JP`) and `editorial` to `BIZ UDPMincho` (was `Shippori Mincho`). Latin
+  faces, sizes and the `data-ja="off"` stacks are unchanged; no class string changes. Apps that load fonts
+  by hand must add the two families to their link (or use `tune-fonts.json`).
+
 ### v0.23.3 — 2026-10-15
 
 - **Partial reversal of the v0.23.2 default flip — the checked `wire` checkbox / toggle writes
