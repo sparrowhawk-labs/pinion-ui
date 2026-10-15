@@ -52,6 +52,15 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.23.3 — 2026-10-15
+
+- **Partial reversal of the v0.23.2 default flip — the checked `wire` checkbox / toggle writes
+  `peer-checked:border-<name>` again** (v0.23.2 had made it `peer-checked:border-transparent`). `wire` is the
+  line-drawn variant; its outline is the signal even when the face fills on check, so the ink rim is
+  intended there (as it always was on the `wire` radio). The v0.23.2 flips for progress / upload fills and
+  the hovered `outline` / `wire` button stand. Shipped as a patch: a two-day-old patch-level default is
+  restored to its prior value, sizes are unchanged, and no class string a consumer targets by name changes.
+
 ### v0.23.2 — 2026-10-15
 
 - **Default flip — progress / upload fills write `bg-ink-<name>` for all eight colors** (was `bg-<name>`

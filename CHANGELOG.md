@@ -7,6 +7,18 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.23.3] — 2026-10-15
+
+### Fixed
+- **The checked `wire` checkbox / toggle keeps its outline.** v0.23.2 wrote `peer-checked:border-transparent`
+  on the filled `wire` box / track, treating it like the `solid` checked state. That misread the variant:
+  `wire` is the line-drawn appearance, and a checked `wire` control without its outline reads as a `solid`
+  one — the outline is what makes it `wire`. Back to the v0.23.1 `peer-checked:border-<name>` (the ink), so
+  the fill keeps a 1px ink rim where ink ≠ color, exactly as the `wire` radio always did. The other two
+  v0.23.2 changes (ink progress / upload fills, `hover:border-transparent` on the hovered `outline` / `wire`
+  button) are unchanged. No markup changes; fixtures regenerated; css package dist gate: zero
+  computed-style differences.
+
 ## [0.23.2] — 2026-10-15
 
 ### Fixed
