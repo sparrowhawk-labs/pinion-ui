@@ -7,11 +7,11 @@ name: Release
 
 on:
   push:
-    tags: ['v*']
+    tags: ['v*', 'css-v*']
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Existing tag to (re)process, e.g. v0.22.0'
+        description: 'Existing tag to (re)process, e.g. v0.22.0 or css-v0.5.0'
         required: true
 
 permissions:
@@ -32,22 +32,29 @@ jobs:
           TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           set -eu
-          VER="${TAG#v}"
-          if [ -f CHANGELOG.md ] && grep -q "^## \[$VER\]" CHANGELOG.md; then
+          # Tag families: "v*" = the Composer package (CHANGELOG.md at the root),
+          # "css-v*" = @sparrowhawk-labs/pinion-ui-css (packages/pinion-ui-css/CHANGELOG.md).
+          PREFIX="${TAG%%[0-9]*}"          # "v" or "css-v"
+          VER="${TAG#"$PREFIX"}"
+          case "$PREFIX" in
+            css-v) CHANGELOG=packages/pinion-ui-css/CHANGELOG.md ;;
+            *)     CHANGELOG=CHANGELOG.md ;;
+          esac
+          if [ -f "$CHANGELOG" ] && grep -q "^## \[$VER\]" "$CHANGELOG"; then
             awk -v v="$VER" '
               $0 ~ "^## \\[" v "\\]" { on=1; next }
               on && /^## \[/ { exit }
               on { print }
-            ' CHANGELOG.md | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' > notes.md
+            ' "$CHANGELOG" | sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' > notes.md
             echo "source=changelog" >> "$GITHUB_OUTPUT"
           else
-            PREV=$(git tag --sort=-v:refname | grep '^v' | awk -v t="$TAG" 'f{print; exit} $0==t{f=1}')
+            PREV=$(git tag --sort=-v:refname | grep "^${PREFIX}[0-9]" | awk -v t="$TAG" 'f{print; exit} $0==t{f=1}')
             { echo "_No CHANGELOG entry for this version — commits since ${PREV:-the first commit}:_"; echo
               git log ${PREV:+$PREV..}"$TAG" --format='- %s'; } > notes.md
             echo "source=git-log" >> "$GITHUB_OUTPUT"
           fi
-          if [ -f CHANGELOG.md ]; then
-            printf '\n---\nFull history: [CHANGELOG.md](https://github.com/%s/blob/main/CHANGELOG.md)\n' "$GITHUB_REPOSITORY" >> notes.md
+          if [ -f "$CHANGELOG" ]; then
+            printf '\n---\nFull history: [%s](https://github.com/%s/blob/main/%s)\n' "$CHANGELOG" "$GITHUB_REPOSITORY" "$CHANGELOG" >> notes.md
           fi
           echo "::group::Release notes for $TAG (source: see GITHUB_OUTPUT)"
           cat notes.md
