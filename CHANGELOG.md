@@ -7,6 +7,26 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.23.2] — 2026-10-15
+
+### Fixed
+- **Progress / upload fills read as ink for every color.** `<x-progress color="…">` and the
+  `<x-file-upload>` progress bar wrote `bg-<name>` for the seven non-primary colors (primary has been
+  `bg-ink-primary` since v0.17.0); a fill is a line, not a surface, so a `warning` bar was the raw
+  2.3:1 yellow on light themes and `neutral` nearly vanished on dark ones. All eight (and the unset
+  default, neutral) now write `bg-ink-<name>`. Yellow bars shift toward olive on light themes — the
+  same v0.23.0 rule the text already follows.
+- **No ink rim on the hovered `outline` / `wire` button.** Both variants fill with the color on hover
+  while keeping `border-<name>` (outline) or switching to `hover:border-<name>` (wire) — the ink, so
+  the hovered face carried the same 1px rim v0.23.1 removed from `solid`. Both now add
+  `hover:border-transparent`; the resting state (`border-<name>` on outline, the neutral hairline on
+  wire) is unchanged.
+- **No ink rim on the checked `wire` checkbox / toggle.** `appearance="wire"` fills the box / track on
+  check and wrote `peer-checked:border-<name>` next to it; now `peer-checked:border-transparent`, like
+  the solid checked state since v0.23.1. The `wire` radio is untouched: it never fills (the dot is the
+  mark), so its `peer-checked:border-<name>` *is* the outline. No markup changes; fixtures
+  regenerated; css package dist gate: zero computed-style differences.
+
 ## [0.23.1] — 2026-10-15
 
 ### Fixed

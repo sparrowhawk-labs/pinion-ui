@@ -52,6 +52,16 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.23.2 — 2026-10-15
+
+- **Default flip — progress / upload fills write `bg-ink-<name>` for all eight colors** (was `bg-<name>`
+  for the seven non-primary ones), **hovered `outline` / `wire` buttons write `hover:border-transparent`**,
+  and **the checked `wire` checkbox / toggle writes `peer-checked:border-transparent`** (was
+  `peer-checked:border-<name>`; the `wire` radio keeps it — it never fills). Shipped as a patch for the
+  same reason as v0.23.1: an ink-colored rim or a surface-colored line was the unintended v0.23.0
+  side effect, sizes are unchanged, and no class string a consumer targets by name changes. Visible
+  shift: yellow `warning` / `pop` primary bars go olive on light themes (the v0.23.0 rule).
+
 ### v0.23.1 — 2026-10-15
 
 - **Default flip — `solid` variants render `border-transparent` instead of `border-<name>`** (button,
