@@ -24,14 +24,14 @@
 
     $variantClasses = match("{$appearance}-{$color}") {
         // solid
-        'solid-primary'   => 'bg-primary text-primary-content tune-border border-primary',
-        'solid-secondary' => 'bg-secondary text-secondary-content tune-border border-secondary',
-        'solid-accent'    => 'bg-accent text-accent-content tune-border border-accent',
-        'solid-neutral'   => 'bg-neutral text-neutral-content tune-border border-neutral',
-        'solid-info'      => 'bg-info text-info-content tune-border border-info',
-        'solid-success'   => 'bg-success text-success-content tune-border border-success',
-        'solid-warning'   => 'bg-warning text-warning-content tune-border border-warning',
-        'solid-error'     => 'bg-error text-error-content tune-border border-error',
+        'solid-primary'   => 'bg-primary text-primary-content tune-border border-transparent',
+        'solid-secondary' => 'bg-secondary text-secondary-content tune-border border-transparent',
+        'solid-accent'    => 'bg-accent text-accent-content tune-border border-transparent',
+        'solid-neutral'   => 'bg-neutral text-neutral-content tune-border border-transparent',
+        'solid-info'      => 'bg-info text-info-content tune-border border-transparent',
+        'solid-success'   => 'bg-success text-success-content tune-border border-transparent',
+        'solid-warning'   => 'bg-warning text-warning-content tune-border border-transparent',
+        'solid-error'     => 'bg-error text-error-content tune-border border-transparent',
 
         // outline
         'outline-primary'   => 'bg-transparent text-primary tune-border border-primary',

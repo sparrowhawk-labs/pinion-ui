@@ -89,7 +89,7 @@ class ToggleComposer
         // indicator can't double as a surface, so they were removed.
         return match ($appearance) {
             'solid' =>
-                "bg-base-300 border-base-content/10 peer-checked:bg-{$color} peer-checked:border-{$color}",
+                "bg-base-300 border-base-content/10 peer-checked:bg-{$color} peer-checked:border-transparent",
 
             'soft' =>
                 "bg-base-200 border-base-content/10 peer-checked:bg-{$color}/15 peer-checked:border-{$color}/30",

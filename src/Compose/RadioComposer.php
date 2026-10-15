@@ -60,7 +60,7 @@ class RadioComposer
 
         return match (true) {
             $appearance === 'solid' =>
-                "bg-base-100 border-base-content/10 text-{$color}-content peer-checked:bg-{$color} peer-checked:border-{$color}",
+                "bg-base-100 border-base-content/10 text-{$color}-content peer-checked:bg-{$color} peer-checked:border-transparent",
 
             $appearance === 'soft' =>
                 "bg-{$tone}/10 border-transparent text-{$tone}/80 peer-checked:bg-{$tone}/15 peer-checked:border-{$tone}/30",

@@ -106,10 +106,10 @@ class NotificationSystemComposer
     public static function variant(string $appearance, string $type): string
     {
         return match ("{$appearance}-{$type}") {
-            'solid-info'    => 'bg-info text-info-content border-info',
-            'solid-success' => 'bg-success text-success-content border-success',
-            'solid-warning' => 'bg-warning text-warning-content border-warning',
-            'solid-error'   => 'bg-error text-error-content border-error',
+            'solid-info'    => 'bg-info text-info-content border-transparent',
+            'solid-success' => 'bg-success text-success-content border-transparent',
+            'solid-warning' => 'bg-warning text-warning-content border-transparent',
+            'solid-error'   => 'bg-error text-error-content border-transparent',
 
             'outline-info'    => 'bg-base-100 text-base-content border-info',
             'outline-success' => 'bg-base-100 text-base-content border-success',

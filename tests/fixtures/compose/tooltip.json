@@ -49,8 +49,8 @@
             "color": "primary"
         },
         "expected": {
-            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-primary-content border-primary",
-            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-primary border-primary"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-primary-content border-transparent",
+            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-primary border-transparent"
         }
     },
     {
@@ -59,8 +59,8 @@
             "color": "neutral"
         },
         "expected": {
-            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-neutral text-neutral-content border-neutral",
-            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-neutral border-neutral"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] tune-border bottom-full left-1/2 -translate-x-1/2 mb-2 bg-neutral text-neutral-content border-transparent",
+            "arrow": "absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-neutral border-transparent"
         }
     },
     {
@@ -90,8 +90,8 @@
             "position": "left"
         },
         "expected": {
-            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] tune-border right-full top-1/2 -translate-y-1/2 mr-2 bg-error text-error-content border-error",
-            "arrow": "absolute w-2 h-2 rotate-45 right-0 top-1/2 translate-x-1/2 -translate-y-1/2 border-r border-t bg-error border-error"
+            "bubble": "absolute z-50 pointer-events-none whitespace-nowrap max-w-xs px-2 py-1 text-xs rounded-[var(--radius-field)] tune-border right-full top-1/2 -translate-y-1/2 mr-2 bg-error text-error-content border-transparent",
+            "arrow": "absolute w-2 h-2 rotate-45 right-0 top-1/2 translate-x-1/2 -translate-y-1/2 border-r border-t bg-error border-transparent"
         }
     },
     {

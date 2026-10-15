@@ -67,16 +67,18 @@ class TooltipComposer
     private static function bubbleColorClass(?string $color): string
     {
         // bg + text-content + border on the bubble. The arrow shares the
-        // same bg and border colour so the join is seamless.
+        // same bg and border colour so the join is seamless. Semantic colours
+        // use border-transparent (v0.23.1): border-<x> resolves to the ink,
+        // which differs from bg-<x> on most themes and drew a 1px rim.
         return match ($color) {
-            'primary'   => 'bg-primary text-primary-content border-primary',
-            'secondary' => 'bg-secondary text-secondary-content border-secondary',
-            'accent'    => 'bg-accent text-accent-content border-accent',
-            'info'      => 'bg-info text-info-content border-info',
-            'success'   => 'bg-success text-success-content border-success',
-            'warning'   => 'bg-warning text-warning-content border-warning',
-            'error'     => 'bg-error text-error-content border-error',
-            'neutral'   => 'bg-neutral text-neutral-content border-neutral',
+            'primary'   => 'bg-primary text-primary-content border-transparent',
+            'secondary' => 'bg-secondary text-secondary-content border-transparent',
+            'accent'    => 'bg-accent text-accent-content border-transparent',
+            'info'      => 'bg-info text-info-content border-transparent',
+            'success'   => 'bg-success text-success-content border-transparent',
+            'warning'   => 'bg-warning text-warning-content border-transparent',
+            'error'     => 'bg-error text-error-content border-transparent',
+            'neutral'   => 'bg-neutral text-neutral-content border-transparent',
             'base-100'  => 'bg-base-100 text-base-content border-base-300',
             'base-200'  => 'bg-base-200 text-base-content border-base-300',
             'base-300'  => 'bg-base-300 text-base-content border-base-content/20',
@@ -89,7 +91,7 @@ class TooltipComposer
         // 8px square rotated 45° -> diamond. Position at the bubble edge facing
         // the trigger, nudged half its size INTO the trigger so its two visible
         // edges read as the bubble's pointing tip. Border on those two edges
-        // matches the bubble border colour.
+        // matches the bubble border colour (transparent for semantic colours).
         [$pos, $borders] = match ($position) {
             'right'  => ['left-0 top-1/2 -translate-x-1/2 -translate-y-1/2', 'border-l border-b'],
             'bottom' => ['top-0 left-1/2 -translate-x-1/2 -translate-y-1/2',  'border-l border-t'],
@@ -109,14 +111,14 @@ class TooltipComposer
     {
         // bg + border colour for the arrow. Mirrors the bubble.
         return match ($color) {
-            'primary'   => 'bg-primary border-primary',
-            'secondary' => 'bg-secondary border-secondary',
-            'accent'    => 'bg-accent border-accent',
-            'info'      => 'bg-info border-info',
-            'success'   => 'bg-success border-success',
-            'warning'   => 'bg-warning border-warning',
-            'error'     => 'bg-error border-error',
-            'neutral'   => 'bg-neutral border-neutral',
+            'primary'   => 'bg-primary border-transparent',
+            'secondary' => 'bg-secondary border-transparent',
+            'accent'    => 'bg-accent border-transparent',
+            'info'      => 'bg-info border-transparent',
+            'success'   => 'bg-success border-transparent',
+            'warning'   => 'bg-warning border-transparent',
+            'error'     => 'bg-error border-transparent',
+            'neutral'   => 'bg-neutral border-transparent',
             'base-100'  => 'bg-base-100 border-base-300',
             'base-200'  => 'bg-base-200 border-base-300',
             'base-300'  => 'bg-base-300 border-base-content/20',

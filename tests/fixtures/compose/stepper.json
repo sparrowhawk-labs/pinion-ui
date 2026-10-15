@@ -62,7 +62,7 @@
         "name": "stateColors map contains all 4 states in order",
         "props": {},
         "expected": {
-            "stateColors": "done=bg-primary border-primary text-primary-content|current=bg-base-100 border-primary text-primary|upcoming=bg-base-100 border-base-content/20 text-base-content/40|default=bg-base-100 border-base-content/20 text-base-content/40",
+            "stateColors": "done=bg-primary border-transparent text-primary-content|current=bg-base-100 border-primary text-primary|upcoming=bg-base-100 border-base-content/20 text-base-content/40|default=bg-base-100 border-base-content/20 text-base-content/40",
             "stateConnectors": "done=bg-ink-primary|current=bg-base-content/20|upcoming=bg-base-content/20|default=bg-base-content/20"
         }
     }

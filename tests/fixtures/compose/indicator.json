@@ -4,7 +4,7 @@
         "props": [],
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-transparent"
         }
     },
     {
@@ -14,7 +14,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-transparent"
         }
     },
     {
@@ -24,7 +24,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-0 start-0 -translate-y-1/2 -translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "absolute z-10 top-0 start-0 -translate-y-1/2 -translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-transparent"
         }
     },
     {
@@ -35,7 +35,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "absolute z-10 top-1/2 start-1/2 -translate-y-1/2 -translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-transparent"
         }
     },
     {
@@ -45,7 +45,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 bottom-0 start-0 translate-y-1/2 -translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "absolute z-10 bottom-0 start-0 translate-y-1/2 -translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-error text-error-content border-transparent"
         }
     },
     {
@@ -56,7 +56,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-0 start-1/2 -translate-y-1/2 -translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "absolute z-10 top-0 start-1/2 -translate-y-1/2 -translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-transparent"
         }
     },
     {
@@ -66,7 +66,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-neutral text-neutral-content border-neutral"
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-neutral text-neutral-content border-transparent"
         }
     },
     {
@@ -77,7 +77,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-neutral text-neutral-content border-neutral"
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-neutral text-neutral-content border-transparent"
         }
     },
     {
@@ -141,7 +141,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 w-5 p-0 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 w-5 p-0 rounded-full tune-border bg-error text-error-content border-transparent"
         }
     },
     {
@@ -164,7 +164,7 @@
         },
         "expected": {
             "root": "relative inline-flex w-fit",
-            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-error"
+            "item": "absolute z-10 top-0 end-0 -translate-y-1/2 translate-x-1/2 block h-3 w-3 p-0 rounded-full tune-border bg-error text-error-content border-transparent"
         }
     }
 ]

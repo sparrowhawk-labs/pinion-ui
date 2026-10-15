@@ -117,14 +117,14 @@ class PaginationComposer
         // vertical edges render its own border color at exactly one border
         // width. relative z-10 keeps the focus ring painting above siblings.
         return 'relative z-10 '.match ("{$appearance}-{$color}") {
-            'solid-primary'   => 'bg-primary text-primary-content border-primary focus-visible:ring-primary cursor-default',
-            'solid-secondary' => 'bg-secondary text-secondary-content border-secondary focus-visible:ring-secondary cursor-default',
-            'solid-accent'    => 'bg-accent text-accent-content border-accent focus-visible:ring-accent cursor-default',
-            'solid-neutral'   => 'bg-neutral text-neutral-content border-neutral focus-visible:ring-neutral cursor-default',
-            'solid-info'      => 'bg-info text-info-content border-info focus-visible:ring-info cursor-default',
-            'solid-success'   => 'bg-success text-success-content border-success focus-visible:ring-success cursor-default',
-            'solid-warning'   => 'bg-warning text-warning-content border-warning focus-visible:ring-warning cursor-default',
-            'solid-error'     => 'bg-error text-error-content border-error focus-visible:ring-error cursor-default',
+            'solid-primary'   => 'bg-primary text-primary-content border-transparent focus-visible:ring-primary cursor-default',
+            'solid-secondary' => 'bg-secondary text-secondary-content border-transparent focus-visible:ring-secondary cursor-default',
+            'solid-accent'    => 'bg-accent text-accent-content border-transparent focus-visible:ring-accent cursor-default',
+            'solid-neutral'   => 'bg-neutral text-neutral-content border-transparent focus-visible:ring-neutral cursor-default',
+            'solid-info'      => 'bg-info text-info-content border-transparent focus-visible:ring-info cursor-default',
+            'solid-success'   => 'bg-success text-success-content border-transparent focus-visible:ring-success cursor-default',
+            'solid-warning'   => 'bg-warning text-warning-content border-transparent focus-visible:ring-warning cursor-default',
+            'solid-error'     => 'bg-error text-error-content border-transparent focus-visible:ring-error cursor-default',
 
             'outline-primary'   => 'bg-base-100 text-primary border-primary focus-visible:ring-primary cursor-default',
             'outline-secondary' => 'bg-base-100 text-secondary border-secondary focus-visible:ring-secondary cursor-default',

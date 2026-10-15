@@ -24,14 +24,14 @@
 
     $variantClasses = match("{$appearance}-{$color}") {
         // solid: bg-color + content text
-        'solid-primary'   => 'bg-primary text-primary-content border-primary hover:bg-primary/90 focus-visible:ring-primary',
-        'solid-secondary' => 'bg-secondary text-secondary-content border-secondary hover:bg-secondary/90 focus-visible:ring-secondary',
-        'solid-accent'    => 'bg-accent text-accent-content border-accent hover:bg-accent/90 focus-visible:ring-accent',
-        'solid-neutral'   => 'bg-neutral text-neutral-content border-neutral hover:bg-neutral/90 focus-visible:ring-neutral',
-        'solid-info'      => 'bg-info text-info-content border-info hover:bg-info/90 focus-visible:ring-info',
-        'solid-success'   => 'bg-success text-success-content border-success hover:bg-success/90 focus-visible:ring-success',
-        'solid-warning'   => 'bg-warning text-warning-content border-warning hover:bg-warning/90 focus-visible:ring-warning',
-        'solid-error'     => 'bg-error text-error-content border-error hover:bg-error/90 focus-visible:ring-error',
+        'solid-primary'   => 'bg-primary text-primary-content border-transparent hover:bg-primary/90 focus-visible:ring-primary',
+        'solid-secondary' => 'bg-secondary text-secondary-content border-transparent hover:bg-secondary/90 focus-visible:ring-secondary',
+        'solid-accent'    => 'bg-accent text-accent-content border-transparent hover:bg-accent/90 focus-visible:ring-accent',
+        'solid-neutral'   => 'bg-neutral text-neutral-content border-transparent hover:bg-neutral/90 focus-visible:ring-neutral',
+        'solid-info'      => 'bg-info text-info-content border-transparent hover:bg-info/90 focus-visible:ring-info',
+        'solid-success'   => 'bg-success text-success-content border-transparent hover:bg-success/90 focus-visible:ring-success',
+        'solid-warning'   => 'bg-warning text-warning-content border-transparent hover:bg-warning/90 focus-visible:ring-warning',
+        'solid-error'     => 'bg-error text-error-content border-transparent hover:bg-error/90 focus-visible:ring-error',
 
         // outline: transparent bg, colored border/text, invert on hover
         'outline-primary'   => 'bg-transparent text-primary border-primary hover:bg-primary hover:text-primary-content focus-visible:ring-primary',
@@ -109,7 +109,7 @@
         'ghost-info', 'ghost-success', 'ghost-warning', 'ghost-error'
             => 'bg-transparent text-base-content border-transparent hover:bg-base-200 focus-visible:ring-base-300',
 
-        default => 'bg-primary text-primary-content border-primary hover:bg-primary/90 focus-visible:ring-primary',
+        default => 'bg-primary text-primary-content border-transparent hover:bg-primary/90 focus-visible:ring-primary',
     };
 
     $stateClasses = ($disabled || $loading) ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer';

@@ -6,7 +6,7 @@
             "wrapper": "block cursor-pointer",
             "row": "flex items-center gap-2",
             "input": "peer sr-only",
-            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-base-100 border-base-content/10 text-primary-content peer-checked:bg-primary peer-checked:border-primary",
+            "visualBox": "size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-base-100 border-base-content/10 text-primary-content peer-checked:bg-primary peer-checked:border-transparent",
             "dot": "xy-dot size-2 rounded-full bg-current scale-0 transition-transform",
             "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
             "description": "ml-6 mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
@@ -57,7 +57,7 @@
             "error": "x"
         },
         "expected": {
-            "visualBox": "size-3.5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-base-100 border-base-content/10 text-error-content peer-checked:bg-error peer-checked:border-error",
+            "visualBox": "size-3.5 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-base-100 border-base-content/10 text-error-content peer-checked:bg-error peer-checked:border-transparent",
             "dot": "xy-dot size-1.5 rounded-full bg-current scale-0 transition-transform",
             "label": "text-[length:var(--text-field-xs)] text-error select-none leading-snug",
             "description": "ml-[22px] mt-1 text-[length:var(--text-field-xs)] text-error leading-snug"

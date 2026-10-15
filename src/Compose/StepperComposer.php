@@ -88,7 +88,7 @@ class StepperComposer
     private static function stateColors(): string
     {
         return implode('|', [
-            'done=bg-primary border-primary text-primary-content',
+            'done=bg-primary border-transparent text-primary-content',
             'current=bg-base-100 border-primary text-primary',
             'upcoming=bg-base-100 border-base-content/20 text-base-content/40',
             'default=bg-base-100 border-base-content/20 text-base-content/40',

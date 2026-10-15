@@ -94,14 +94,14 @@ class IndicatorComposer
 
         $variant = match ("{$appearance}-{$color}") {
             // solid — filled chip, alert-strength (default)
-            'solid-primary'   => 'bg-primary text-primary-content border-primary',
-            'solid-secondary' => 'bg-secondary text-secondary-content border-secondary',
-            'solid-accent'    => 'bg-accent text-accent-content border-accent',
-            'solid-neutral'   => 'bg-neutral text-neutral-content border-neutral',
-            'solid-info'      => 'bg-info text-info-content border-info',
-            'solid-success'   => 'bg-success text-success-content border-success',
-            'solid-warning'   => 'bg-warning text-warning-content border-warning',
-            'solid-error'     => 'bg-error text-error-content border-error',
+            'solid-primary'   => 'bg-primary text-primary-content border-transparent',
+            'solid-secondary' => 'bg-secondary text-secondary-content border-transparent',
+            'solid-accent'    => 'bg-accent text-accent-content border-transparent',
+            'solid-neutral'   => 'bg-neutral text-neutral-content border-transparent',
+            'solid-info'      => 'bg-info text-info-content border-transparent',
+            'solid-success'   => 'bg-success text-success-content border-transparent',
+            'solid-warning'   => 'bg-warning text-warning-content border-transparent',
+            'solid-error'     => 'bg-error text-error-content border-transparent',
 
             // soft — tinted bubble
             'soft-primary'   => 'bg-primary/15 text-primary border-transparent',
