@@ -5,7 +5,7 @@
         "expected": {
             "root": "w-full flex flex-col gap-1",
             "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
-            "fill": "h-full rounded-full bg-neutral w-1/3 animate-progress-indeterminate",
+            "fill": "h-full rounded-full bg-ink-neutral w-1/3 animate-progress-indeterminate",
             "label": "flex items-center justify-end text-xs text-base-content/60 tabular-nums"
         }
     },
@@ -14,7 +14,7 @@
         "props": { "value": 50 },
         "expected": {
             "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
-            "fill": "h-full rounded-full bg-neutral transition-[width] duration-300 ease-out"
+            "fill": "h-full rounded-full bg-ink-neutral transition-[width] duration-300 ease-out"
         }
     },
     {
@@ -22,7 +22,7 @@
         "props": { "value": 3, "max": 10 },
         "expected": {
             "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
-            "fill": "h-full rounded-full bg-neutral transition-[width] duration-300 ease-out"
+            "fill": "h-full rounded-full bg-ink-neutral transition-[width] duration-300 ease-out"
         }
     },
     {
@@ -38,7 +38,7 @@
         "props": { "value": 7, "max": 10, "color": "success", "size": "lg", "showLabel": true, "labelFormat": "fraction" },
         "expected": {
             "track": "w-full bg-base-300 rounded-full overflow-hidden h-4",
-            "fill": "h-full rounded-full bg-success transition-[width] duration-300 ease-out"
+            "fill": "h-full rounded-full bg-ink-success transition-[width] duration-300 ease-out"
         }
     },
     {
@@ -46,7 +46,7 @@
         "props": { "value": 25, "size": "xs" },
         "expected": {
             "track": "w-full bg-base-300 rounded-full overflow-hidden h-1",
-            "fill": "h-full rounded-full bg-neutral transition-[width] duration-300 ease-out"
+            "fill": "h-full rounded-full bg-ink-neutral transition-[width] duration-300 ease-out"
         }
     },
     {
@@ -54,7 +54,7 @@
         "props": { "value": null },
         "expected": {
             "track": "w-full bg-base-300 rounded-full overflow-hidden h-3",
-            "fill": "h-full rounded-full bg-neutral w-1/3 animate-progress-indeterminate"
+            "fill": "h-full rounded-full bg-ink-neutral w-1/3 animate-progress-indeterminate"
         }
     },
     {
@@ -62,7 +62,7 @@
         "props": { "value": 90, "color": "error", "size": "sm" },
         "expected": {
             "track": "w-full bg-base-300 rounded-full overflow-hidden h-2",
-            "fill": "h-full rounded-full bg-error transition-[width] duration-300 ease-out"
+            "fill": "h-full rounded-full bg-ink-error transition-[width] duration-300 ease-out"
         }
     }
 ]

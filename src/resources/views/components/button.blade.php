@@ -34,25 +34,25 @@
         'solid-error'     => 'bg-error text-error-content border-transparent hover:bg-error/90 focus-visible:ring-error',
 
         // outline: transparent bg, colored border/text, invert on hover
-        'outline-primary'   => 'bg-transparent text-primary border-primary hover:bg-primary hover:text-primary-content focus-visible:ring-primary',
-        'outline-secondary' => 'bg-transparent text-secondary border-secondary hover:bg-secondary hover:text-secondary-content focus-visible:ring-secondary',
-        'outline-accent'    => 'bg-transparent text-accent border-accent hover:bg-accent hover:text-accent-content focus-visible:ring-accent',
+        'outline-primary'   => 'bg-transparent text-primary border-primary hover:bg-primary hover:text-primary-content hover:border-transparent focus-visible:ring-primary',
+        'outline-secondary' => 'bg-transparent text-secondary border-secondary hover:bg-secondary hover:text-secondary-content hover:border-transparent focus-visible:ring-secondary',
+        'outline-accent'    => 'bg-transparent text-accent border-accent hover:bg-accent hover:text-accent-content hover:border-transparent focus-visible:ring-accent',
         'outline-neutral'   => 'bg-transparent text-base-content border-base-content/10 hover:bg-base-content hover:text-base-100 focus-visible:ring-base-content',
-        'outline-info'      => 'bg-transparent text-info border-info hover:bg-info hover:text-info-content focus-visible:ring-info',
-        'outline-success'   => 'bg-transparent text-success border-success hover:bg-success hover:text-success-content focus-visible:ring-success',
-        'outline-warning'   => 'bg-transparent text-warning border-warning hover:bg-warning hover:text-warning-content focus-visible:ring-warning',
-        'outline-error'     => 'bg-transparent text-error border-error hover:bg-error hover:text-error-content focus-visible:ring-error',
+        'outline-info'      => 'bg-transparent text-info border-info hover:bg-info hover:text-info-content hover:border-transparent focus-visible:ring-info',
+        'outline-success'   => 'bg-transparent text-success border-success hover:bg-success hover:text-success-content hover:border-transparent focus-visible:ring-success',
+        'outline-warning'   => 'bg-transparent text-warning border-warning hover:bg-warning hover:text-warning-content hover:border-transparent focus-visible:ring-warning',
+        'outline-error'     => 'bg-transparent text-error border-error hover:bg-error hover:text-error-content hover:border-transparent focus-visible:ring-error',
 
         // wire (v0.17.2): transparent + neutral hairline, text in base-content; the colour only
         // appears as the fill on hover / active. Minimal, retro-future.
-        'wire-primary'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-primary hover:text-primary-content hover:border-primary focus-visible:ring-primary',
-        'wire-secondary' => 'bg-transparent text-base-content border-base-content/45 hover:bg-secondary hover:text-secondary-content hover:border-secondary focus-visible:ring-secondary',
-        'wire-accent'    => 'bg-transparent text-base-content border-base-content/45 hover:bg-accent hover:text-accent-content hover:border-accent focus-visible:ring-accent',
+        'wire-primary'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-primary hover:text-primary-content hover:border-transparent focus-visible:ring-primary',
+        'wire-secondary' => 'bg-transparent text-base-content border-base-content/45 hover:bg-secondary hover:text-secondary-content hover:border-transparent focus-visible:ring-secondary',
+        'wire-accent'    => 'bg-transparent text-base-content border-base-content/45 hover:bg-accent hover:text-accent-content hover:border-transparent focus-visible:ring-accent',
         'wire-neutral'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-base-content hover:text-base-100 hover:border-base-content focus-visible:ring-base-content',
-        'wire-info'      => 'bg-transparent text-base-content border-base-content/45 hover:bg-info hover:text-info-content hover:border-info focus-visible:ring-info',
-        'wire-success'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-success hover:text-success-content hover:border-success focus-visible:ring-success',
-        'wire-warning'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-warning hover:text-warning-content hover:border-warning focus-visible:ring-warning',
-        'wire-error'     => 'bg-transparent text-base-content border-base-content/45 hover:bg-error hover:text-error-content hover:border-error focus-visible:ring-error',
+        'wire-info'      => 'bg-transparent text-base-content border-base-content/45 hover:bg-info hover:text-info-content hover:border-transparent focus-visible:ring-info',
+        'wire-success'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-success hover:text-success-content hover:border-transparent focus-visible:ring-success',
+        'wire-warning'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-warning hover:text-warning-content hover:border-transparent focus-visible:ring-warning',
+        'wire-error'     => 'bg-transparent text-base-content border-base-content/45 hover:bg-error hover:text-error-content hover:border-transparent focus-visible:ring-error',
 
         // base-100: primary surface bg + colored text + base-content/50 border, hover=base-200
         'base-100-primary'   => 'bg-base-100 text-primary border-base-content/10 hover:bg-base-200 focus-visible:ring-primary',

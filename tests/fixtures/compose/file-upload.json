@@ -39,7 +39,7 @@
             "field": "flex flex-col items-center justify-center gap-2 text-center rounded-[var(--radius-box)] tune-border border-dashed border-base-300 bg-base-100 transition-colors cursor-pointer hover:border-success focus-within:border-success focus-within:ring-1 focus-within:ring-success px-10 py-12",
             "dropzoneIcon": "size-14 text-base-content/40",
             "browseLink": "font-semibold text-success hover:underline",
-            "progressFill": "h-full bg-success transition-[width] duration-300 ease-out"
+            "progressFill": "h-full bg-ink-success transition-[width] duration-300 ease-out"
         }
     },
     {
@@ -49,7 +49,7 @@
             "labelText": "text-error text-[length:var(--text-field-sm)] font-medium",
             "field": "flex items-stretch overflow-clip transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-error focus-within:ring-1 focus-within:ring-error h-[var(--h-field-md)]",
             "browseLink": "font-semibold text-error hover:underline",
-            "progressFill": "h-full bg-error transition-[width] duration-300 ease-out",
+            "progressFill": "h-full bg-ink-error transition-[width] duration-300 ease-out",
             "hint": "text-[length:var(--text-field-xs)] text-error"
         }
     },

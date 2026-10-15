@@ -56,17 +56,17 @@ class ProgressComposer
     {
         return match ($color) {
             'primary'   => 'bg-ink-primary',
-            'secondary' => 'bg-secondary',
-            'accent'    => 'bg-accent',
-            'info'      => 'bg-info',
-            'success'   => 'bg-success',
-            'warning'   => 'bg-warning',
-            'error'     => 'bg-error',
-            'neutral'   => 'bg-neutral',
+            'secondary' => 'bg-ink-secondary',
+            'accent'    => 'bg-ink-accent',
+            'info'      => 'bg-ink-info',
+            'success'   => 'bg-ink-success',
+            'warning'   => 'bg-ink-warning',
+            'error'     => 'bg-ink-error',
+            'neutral'   => 'bg-ink-neutral',
             // Div fill has no native fallback color the way <progress> did,
             // so the unset case needs an explicit default (was the browser's
             // stock progress-bar grey before).
-            default     => 'bg-neutral',
+            default     => 'bg-ink-neutral',
         };
     }
 
