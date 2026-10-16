@@ -1,0 +1,104 @@
+{
+  "title": "pinion-ui wire の checked に輪郭を戻す — 前後比較（v0.23.3）",
+  "heading": "wire の checked に輪郭を戻す（v0.23.2 → v0.23.3）",
+  "old": "旧 v0.23.2",
+  "new": "新 v0.23.3",
+  "intro": [
+    "<b>何を見るか</b> — v0.23.2 ③で wire の checkbox / toggle の checked を <code>peer-checked:border-transparent</code> にしたが、wire は線描きの変種で checked でも輪郭が要る（ユーザー判断 2026-10-15）。v0.23.3 で v0.23.1 の <code>peer-checked:border-&lt;x&gt;</code>（ink）に戻す。radio の wire は v0.23.2 でも据え置きなので不変（参考行）。",
+    "<b>見え方</b> — 輪郭（ink）と塗り（色）が同じテーマ（pinion light など）では旧新に差がない。差が出るのは ink≠色のテーマ: pop の light、各 dark の neutral、light の warning など。新では塗りの外に 1px の濃い輪郭が戻る。"
+  ],
+  "themes": [
+    [
+      "pinion",
+      "ブランド既定 · light"
+    ],
+    [
+      "pinion-dark",
+      "ブランド既定 · dark"
+    ],
+    [
+      "pop",
+      "黄 primary（ink≠色の代表） · light"
+    ],
+    [
+      "pop-dark",
+      "黄 primary（ink≠色の代表） · dark"
+    ],
+    [
+      "vapor",
+      "Mood · light"
+    ],
+    [
+      "vapor-dark",
+      "Mood · dark"
+    ],
+    [
+      "kids",
+      "Mood · light"
+    ],
+    [
+      "kids-dark",
+      "Mood · dark"
+    ],
+    [
+      "signal",
+      "Tonal 無彩 · light"
+    ],
+    [
+      "signal-dark",
+      "Tonal 無彩 · dark"
+    ],
+    [
+      "frost",
+      "Zenn 風 · light"
+    ],
+    [
+      "frost-dark",
+      "Zenn 風 · dark"
+    ]
+  ],
+  "rewrite": [
+    [
+      "peer-checked:border-{tone}",
+      "peer-checked:border-transparent"
+    ]
+  ],
+  "rows": [
+    {
+      "label": "checkbox wire（checked）",
+      "compose": {
+        "class": "Checkbox",
+        "props": {
+          "appearance": "wire",
+          "color": "{c}"
+        }
+      },
+      "tone_neutral": "base-content",
+      "html": "<label for=\"{id}\" class=\"{{wrapper}}\"><span class=\"{{row}}\"><input type=\"checkbox\" id=\"{id}\" class=\"{{input}}\" checked><span class=\"{{visualBox}}\"><svg class=\"{{checkmark}}\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5 13l4 4L19 7\"/></svg></span></span></label>"
+    },
+    {
+      "label": "toggle wire（checked）",
+      "compose": {
+        "class": "Toggle",
+        "props": {
+          "appearance": "wire",
+          "color": "{c}"
+        }
+      },
+      "html": "<label for=\"{id}\" class=\"{{wrapper}}\"><span class=\"{{row}}\"><input type=\"checkbox\" role=\"switch\" id=\"{id}\" class=\"{{input}}\" checked><span class=\"{{track}}\"><span class=\"{{thumb}}\"></span></span></span></label>"
+    },
+    {
+      "label": "radio wire（checked・参考＝不変）",
+      "compose": {
+        "class": "Radio",
+        "props": {
+          "appearance": "wire",
+          "color": "{c}"
+        }
+      },
+      "tone_neutral": "base-content",
+      "rewrite": [],
+      "html": "<label for=\"{id}\" class=\"{{wrapper}}\"><span class=\"{{row}}\"><input type=\"radio\" id=\"{id}\" class=\"{{input}}\" checked><span class=\"{{visualBox}}\"><span class=\"{{dot}}\"></span></span></span></label>"
+    }
+  ]
+}

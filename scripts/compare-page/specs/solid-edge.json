@@ -1,0 +1,117 @@
+{
+  "title": "pinion-ui solid の縁 — 前後比較（v0.23.1）",
+  "heading": "solid の縁（v0.23.0 → v0.23.1）",
+  "old": "旧 v0.23.0",
+  "new": "新 v0.23.1",
+  "intro": [
+    "<b>何を見るか</b> — v0.23.0 で <code>border-&lt;x&gt;</code> は ink（読める濃さに寄せた色）に解決されるため、面と同色のはずの solid の縁が ink≠元色のテーマで 1px の線として見えていた（primary は v0.17.0 から）。v0.23.1 は solid の縁を <code>border-transparent</code> にし、面がそのまま外周まで塗られる。幅は変わらない（透明な縁の下まで面が塗られる）。",
+    "<b>対象</b> — button / badge / alert / card / indicator / pagination（active） / tooltip（吹き出しと矢印） / toast（notification solid） / stepper（done の丸） / checkbox・radio・toggle（solid の checked）。outline / soft / wire / ghost は変えていない。"
+  ],
+  "themes": [
+    [
+      "pinion",
+      "ブランド既定 · light"
+    ],
+    [
+      "pinion-dark",
+      "ブランド既定 · dark"
+    ],
+    [
+      "pop",
+      "mood · light"
+    ],
+    [
+      "pop-dark",
+      "mood · dark"
+    ],
+    [
+      "vapor",
+      "mood · light"
+    ],
+    [
+      "vapor-dark",
+      "mood · dark"
+    ],
+    [
+      "frost",
+      "tonal · light"
+    ],
+    [
+      "frost-dark",
+      "tonal · dark"
+    ],
+    [
+      "signal",
+      "tonal · light"
+    ],
+    [
+      "signal-dark",
+      "tonal · dark"
+    ],
+    [
+      "kids",
+      "mood · light"
+    ],
+    [
+      "kids-dark",
+      "mood · dark"
+    ]
+  ],
+  "rewrite": [
+    [
+      "border-transparent",
+      "border-{c}"
+    ]
+  ],
+  "rows": [
+    {
+      "label": "button",
+      "html": "<button class=\"inline-flex items-center justify-center whitespace-nowrap font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)] h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 bg-{c} text-{c}-content border-transparent\">Button</button>"
+    },
+    {
+      "label": "badge",
+      "html": "<span class=\"inline-flex items-center font-medium tune-border whitespace-nowrap rounded-[var(--radius-selector)] text-xs leading-none px-2 py-1 gap-1 bg-{c} text-{c}-content border-transparent\">Badge</span>"
+    },
+    {
+      "label": "alert",
+      "html": "<div class=\"flex gap-2 rounded-[var(--radius-box)] tune-border min-h-[var(--h-field-md)] px-[var(--px-field-md)] py-[var(--px-field-md)] text-[length:var(--text-field-md)] bg-{c} text-{c}-content border-transparent\" role=\"alert\">Alert — solid</div>"
+    },
+    {
+      "label": "card",
+      "html": "<div class=\"rounded-[var(--radius-box)] tune-border overflow-hidden bg-{c} text-{c}-content border-transparent\"><div class=\"p-3 text-sm\">Card</div></div>"
+    },
+    {
+      "label": "indicator",
+      "html": "<span class=\"inline-flex items-center justify-center whitespace-nowrap text-xs leading-none font-medium h-5 min-w-[1.25rem] px-1.5 rounded-full tune-border bg-{c} text-{c}-content border-transparent\">3</span>"
+    },
+    {
+      "label": "pagination active",
+      "html": "<nav class=\"flex\"><span class=\"rounded-none first:rounded-l-[var(--radius-field)] last:rounded-r-[var(--radius-field)] inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] h-[var(--h-field-md)] min-w-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 border-l-0 first:border-l has-[+[aria-current=page]]:border-r-0 bg-base-100 text-base-content border-base-content/10\">1</span><span aria-current=\"page\" class=\"rounded-none first:rounded-l-[var(--radius-field)] last:rounded-r-[var(--radius-field)] inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] h-[var(--h-field-md)] min-w-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 relative z-10 bg-{c} text-{c}-content border-transparent\">2</span><span class=\"rounded-none first:rounded-l-[var(--radius-field)] last:rounded-r-[var(--radius-field)] inline-flex items-center justify-center font-medium transition-colors border-[length:var(--border)] h-[var(--h-field-md)] min-w-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 border-l-0 first:border-l has-[+[aria-current=page]]:border-r-0 bg-base-100 text-base-content border-base-content/10\">3</span></nav>"
+    },
+    {
+      "label": "tooltip",
+      "html": "<span class=\"inline-block mb-2\"><span class=\"relative inline-block whitespace-nowrap px-2 py-1 text-xs rounded-[var(--radius-field)] tune-border bg-{c} text-{c}-content border-transparent\">Tooltip<span class=\"absolute w-2 h-2 rotate-45 bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 border-r border-b bg-{c} border-transparent\"></span></span></span>"
+    },
+    {
+      "label": "toast（notification solid）",
+      "only": [
+        "info",
+        "success",
+        "warning",
+        "error"
+      ],
+      "html": "<div class=\"flex items-start min-h-[var(--h-field-md)] px-[var(--px-field-md)] py-2.5 text-[length:var(--text-field-md)] gap-3 rounded-[var(--radius-box)] tune-border bg-{c} text-{c}-content border-transparent\">Toast</div>"
+    },
+    {
+      "label": "stepper done",
+      "only": [
+        "primary"
+      ],
+      "html": "<span class=\"w-9 h-9 rounded-full border-2 shrink-0 flex items-center justify-center text-sm font-semibold bg-{c} text-{c}-content border-transparent\">1</span>"
+    },
+    {
+      "label": "checkbox / radio / toggle（checked）",
+      "html": "<label class=\"inline-flex items-center gap-2\"><input type=\"checkbox\" checked class=\"peer sr-only\"><span class=\"size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-checked:[&_.xy-check]:opacity-100 bg-base-100 border-base-content/10 text-{c}-content peer-checked:bg-{c} peer-checked:border-transparent\"><svg class=\"xy-check size-3 absolute opacity-0\" viewBox=\"0 0 12 12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M2 6l3 3 5-6\"/></svg></span></label><label class=\"inline-flex items-center gap-2 ml-3\"><input type=\"radio\" checked class=\"peer sr-only\"><span class=\"size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-full transition-colors peer-checked:[&_.xy-dot]:scale-100 bg-base-100 border-base-content/10 text-{c}-content peer-checked:bg-{c} peer-checked:border-transparent\"><span class=\"xy-dot size-2 rounded-full bg-current scale-0\"></span></span></label><label class=\"inline-flex items-center ml-3\"><input type=\"checkbox\" checked class=\"peer sr-only\"><span class=\"h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-{c} peer-checked:border-transparent\"><span class=\"xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none\"></span></span></label>"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "title": "pinion-ui ink の残り3件 — 前後比較（v0.23.2）",
+  "heading": "ink の残り3件（v0.23.1 → v0.23.2）",
+  "old": "旧 v0.23.1",
+  "new": "新 v0.23.2",
+  "intro": [
+    "<b>何を見るか</b> — ① progress / upload の fill を <code>bg-ink-&lt;x&gt;</code> に（黄の warning はオリーブに寄る＝v0.23.0 で承認済みの規則）。② outline / wire ボタンの hover で面が塗られる時、<code>border-&lt;x&gt;</code>（ink）の 1px 縁が残っていたので <code>hover:border-transparent</code> に。③ wire の checkbox / toggle は checked で面が塗られるので solid（v0.23.1）と同じく縁を透明に。radio の wire は塗らない（縁そのものが輪郭）ので据え置き。",
+    "<b>見え方</b> — 「hover 状態」の行は hover 時の class を素で当てている（マウスを乗せなくても hover の見え方）。旧と新で差が出るのは ink≠色のテーマ（pop の light・各 dark の neutral など）。"
+  ],
+  "themes": [
+    [
+      "pinion",
+      "ブランド既定 · light"
+    ],
+    [
+      "pinion-dark",
+      "ブランド既定 · dark"
+    ],
+    [
+      "pop",
+      "黄 primary（ink≠色の代表） · light"
+    ],
+    [
+      "pop-dark",
+      "黄 primary（ink≠色の代表） · dark"
+    ],
+    [
+      "vapor",
+      "Mood · light"
+    ],
+    [
+      "vapor-dark",
+      "Mood · dark"
+    ],
+    [
+      "kids",
+      "Mood · light"
+    ],
+    [
+      "kids-dark",
+      "Mood · dark"
+    ],
+    [
+      "signal",
+      "Tonal 無彩 · light"
+    ],
+    [
+      "signal-dark",
+      "Tonal 無彩 · dark"
+    ],
+    [
+      "frost",
+      "Zenn 風 · light"
+    ],
+    [
+      "frost-dark",
+      "Zenn 風 · dark"
+    ]
+  ],
+  "rewrite": [],
+  "rows": [
+    {
+      "label": "progress fill",
+      "html": "<div class=\"w-full flex flex-col gap-1 w-40\"><div class=\"w-full bg-base-300 rounded-full overflow-hidden h-3\"><div class=\"h-full rounded-full bg-ink-{c} transition-[width] duration-300 ease-out\" style=\"width:60%\"></div></div></div>",
+      "rewrite": [
+        [
+          "bg-ink-{c}",
+          "bg-{c}"
+        ]
+      ]
+    },
+    {
+      "label": "upload progress",
+      "html": "<div class=\"h-1 w-full bg-base-300/60 rounded-full overflow-hidden w-40\"><div class=\"h-full bg-ink-{c} transition-[width] duration-300 ease-out\" style=\"width:60%\"></div></div>",
+      "rewrite": [
+        [
+          "bg-ink-{c}",
+          "bg-{c}"
+        ]
+      ]
+    },
+    {
+      "label": "button outline（hover 状態）",
+      "html": "<span class=\"inline-flex items-center justify-center whitespace-nowrap font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)] h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 bg-{c} text-{c}-content border-transparent\">Outline</span>",
+      "rewrite": [
+        [
+          "border-transparent",
+          "border-{c}"
+        ]
+      ],
+      "html_by_color": {
+        "neutral": "<span class=\"inline-flex items-center justify-center whitespace-nowrap font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)] h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 bg-base-content text-base-100 border-base-content/10\">Outline</span>"
+      }
+    },
+    {
+      "label": "button wire（hover 状態）",
+      "html": "<span class=\"inline-flex items-center justify-center whitespace-nowrap font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)] h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 bg-{c} text-{c}-content border-transparent\">Wire</span>",
+      "rewrite": [
+        [
+          "border-transparent",
+          "border-{c}"
+        ]
+      ],
+      "html_by_color": {
+        "neutral": "<span class=\"inline-flex items-center justify-center whitespace-nowrap font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)] h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 bg-base-content text-base-100 border-base-content\">Wire</span>"
+      }
+    },
+    {
+      "label": "button outline（通常・参考）",
+      "html": "<span class=\"inline-flex items-center justify-center whitespace-nowrap font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)] h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 bg-transparent text-{c} border-{c}\">Outline</span>",
+      "rewrite": [],
+      "html_by_color": {
+        "neutral": "<span class=\"inline-flex items-center justify-center whitespace-nowrap font-medium tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-[var(--radius-field)] border-[length:var(--border)] h-[var(--h-field-md)] px-[var(--px-field-md)] text-[length:var(--text-field-md)] gap-2 bg-transparent text-base-content border-base-content/10\">Outline</span>"
+      }
+    },
+    {
+      "label": "checkbox wire（checked）",
+      "html": "<label for=\"{id}\" class=\"block cursor-pointer\"><span class=\"flex items-center gap-2\"><input type=\"checkbox\" id=\"{id}\" class=\"peer sr-only\" checked><span class=\"size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[min(var(--radius-selector),0.25rem)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current bg-transparent border-base-content/45 text-{tone} peer-checked:bg-{tone} peer-checked:border-transparent\"><svg class=\"xy-check size-3 absolute opacity-0 transition-opacity pointer-events-none\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5 13l4 4L19 7\"/></svg></span></span></label>",
+      "tone_neutral": "base-content",
+      "rewrite": [
+        [
+          "peer-checked:border-transparent",
+          "peer-checked:border-{tone}"
+        ]
+      ]
+    },
+    {
+      "label": "toggle wire（checked）",
+      "html": "<label for=\"{id}\" class=\"block cursor-pointer\"><span class=\"inline-flex items-center gap-3\"><input type=\"checkbox\" role=\"switch\" id=\"{id}\" class=\"peer sr-only\" checked><span class=\"h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-base-100 bg-transparent border-base-content/45 peer-checked:bg-{c} peer-checked:border-transparent\"><span class=\"xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-content border-[length:var(--border)] border-transparent shadow-none transition-transform pointer-events-none\"></span></span></span></label>",
+      "rewrite": [
+        [
+          "peer-checked:border-transparent",
+          "peer-checked:border-{c}"
+        ]
+      ]
+    },
+    {
+      "label": "radio wire（checked・据え置き）",
+      "html": "<label for=\"{id}\" class=\"block cursor-pointer\"><span class=\"flex items-center gap-2\"><input type=\"radio\" id=\"{id}\" class=\"peer sr-only\" checked><span class=\"size-4 relative shrink-0 inline-flex items-center justify-center border-[length:var(--border)] rounded-[var(--radius-selector)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-dot]:scale-100 bg-transparent border-base-content/45 text-{tone} peer-checked:border-{tone}\"><span class=\"xy-dot size-2 rounded-[var(--radius-selector)] bg-current scale-0 transition-transform\"></span></span></span></label>",
+      "tone_neutral": "base-content",
+      "rewrite": []
+    }
+  ],
+  "note": "Snapshot of the v0.23.1 → v0.23.2 markup as literal templates (the live Composer has moved on since: v0.23.3 restored the wire outline)."
+}
