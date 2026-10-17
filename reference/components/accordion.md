@@ -28,7 +28,7 @@ All other attributes pass through to the root `<div>` (`id`, `wire:ignore`, etc.
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `title` | `string` | `''` | Header button text. |
-| `name` | `string \| null` | auto | Identifier for the item in the parent's `open` state. When `null`, a per-render `item_<8 hex>` is generated. Provide an explicit `name` if you want to control which item is open from the outside (e.g. server-side default), or to make the open state deterministic across renders. |
+| `name` | `string \| null` | auto | Identifier for the item in the parent's `open` state. When `null`, `item_<n>` is generated (`item_1`, `item_2`, … counted per request; v0.25.0). Provide an explicit `name` if you want to control which item is open from the outside (e.g. server-side default), or to make the open state deterministic across renders. |
 
 `size` and `multiple` are not declared on `<x-accordion-item>` as props; they're inherited from the parent via Blade `@aware`.
 
@@ -132,7 +132,7 @@ Class strings are built by [`AccordionComposer::compose($props)`](../../src/Comp
 
 - **State is local to the parent's Alpine scope.** Multiple `<x-accordion>` on the same page don't interfere; each owns its own `x-data="{ open }"`.
 - **Children require `x-collapse`.** Wired automatically by `ui:install` (registers `@alpinejs/collapse`); if you bypass `ui:install`, register it yourself in `resources/js/app.js`.
-- **Open-state identifier**: when you omit `name`, a fresh `item_<hex>` is generated each render. That's fine for static content, but if items are reordered or re-rendered (e.g. Livewire) the open state will reset. Provide an explicit `name` (slug, model id, anything stable) to anchor the state.
+- **Open-state identifier**: when you omit `name`, `item_<n>` is generated per render (deterministic since v0.25.0, Livewire-scoped inside a Livewire component). That's fine for static content, but if items are reordered the open state will follow the position, not the item. Provide an explicit `name` (slug, model id, anything stable) to anchor the state.
 - **Single-open click-the-open-item closes it** — there is no always-one-open enforcement. Toggle logic is `open === '<key>' ? null : '<key>'`.
 - **Alpine inside `<x-accordion-item>` slot content**: same trap as anywhere else inside `<x-...>` — use the long form `x-bind:` / `x-on:`, not Blade's `:` / `@` shorthand. See [AGENTS.md](../../AGENTS.md#alpine-inside-x--components--use-the-full-prefix).
 - **Blade `@verbatim` for code samples**: literal `<x-accordion>` / `<x-accordion-item>` inside `<pre>`, `<code>`, or `@section` strings must be wrapped with `@verbatim` and `&lt;` entities, otherwise Blade tries to mount them.
