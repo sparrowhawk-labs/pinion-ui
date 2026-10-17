@@ -14,6 +14,11 @@ class ToggleComposer
         $stateLabel = $props['stateLabel'] ?? false;
 
         $effectiveColor = $error ? 'error' : $color;
+        // neutral → base-content for every appearance (v0.25.1; wire since v0.24.1). The checkbox /
+        // radio keep `neutral` on `solid` because their `-content` glyph still reads; a toggle has no
+        // glyph — only the rail colour and the thumb's travel — and on dark themes `neutral` is a
+        // near-base grey (≈1.2:1 against base-300), so a checked neutral switch looked unchecked.
+        $tone = $effectiveColor === 'neutral' ? 'base-content' : $effectiveColor;
 
         // State label requires solid track for color contrast and md/lg track for room.
         $showStateLabel = $stateLabel && $appearance === 'solid' && in_array($size, ['md', 'lg'], true);
@@ -22,10 +27,10 @@ class ToggleComposer
             'wrapper' => self::wrapper($disabled),
             'row' => 'inline-flex items-center gap-3',
             'input' => 'peer sr-only',
-            'track' => self::track($size, $appearance, $effectiveColor, $showStateLabel),
+            'track' => self::track($size, $appearance, $tone, $showStateLabel),
             'thumb' => self::thumb($size, $appearance),
-            'stateOn' => $showStateLabel ? self::stateLabel($size, $effectiveColor, 'on') : '',
-            'stateOff' => $showStateLabel ? self::stateLabel($size, $effectiveColor, 'off') : '',
+            'stateOn' => $showStateLabel ? self::stateLabel($size, $tone, 'on') : '',
+            'stateOff' => $showStateLabel ? self::stateLabel($size, $tone, 'off') : '',
             'label' => self::label($size, $error, $disabled),
             'description' => self::description($size, $error),
         ];
@@ -83,8 +88,7 @@ class ToggleComposer
 
     private static function appearanceColor(string $appearance, string $color): string
     {
-        $tone = ($color === 'neutral' && $appearance === 'wire') ? 'base-content' : $color;
-
+        // $color is already the tone (neutral → base-content, see compose()).
         // Two appearances only — solid (colour flows into the rail) and soft
         // (colour flows into the thumb, via track descendant selector above).
         // base-100/200/300 don't carry a clean semantic for switches: a state
@@ -97,10 +101,8 @@ class ToggleComposer
                 "bg-base-200 border-base-content/10 peer-checked:bg-{$color}/15 peer-checked:border-{$color}/30",
 
             // wire (v0.17.2): transparent rail + hairline; fills with the colour on check.
-            // neutral → base-content like the wire checkbox / radio (v0.24.1): on dark themes
-            // `neutral` is a near-base grey, so the checked rail and the base-100 thumb vanished.
             'wire' =>
-                "bg-transparent border-base-content/45 peer-checked:bg-{$tone} peer-checked:border-{$tone}",
+                "bg-transparent border-base-content/45 peer-checked:bg-{$color} peer-checked:border-{$color}",
 
             default =>
                 'bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary',
@@ -142,9 +144,10 @@ class ToggleComposer
         };
         $sizeClass = $size === 'lg' ? 'text-[10px]' : 'text-[8px]';
 
-        // Track turns $color when checked → ON uses contrast color.
-        // Track is base-300 when unchecked → OFF uses muted base-content.
-        $colorClass = $kind === 'on' ? "text-{$color}-content" : 'text-base-content/60';
+        // Track turns $color when checked → ON uses contrast color (base-100 on the base-content
+        // rail that `neutral` maps to). Track is base-300 when unchecked → OFF uses muted base-content.
+        $onClass = $color === 'base-content' ? 'text-base-100' : "text-{$color}-content";
+        $colorClass = $kind === 'on' ? $onClass : 'text-base-content/60';
 
         return self::join(
             $marker,

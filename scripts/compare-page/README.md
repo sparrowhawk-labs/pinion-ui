@@ -17,7 +17,8 @@ scripts/compare-page/
     ├── solid-edge.json      v0.23.1 — solid faces lose their ink rim
     ├── ink-rest.json        v0.23.2 — ink fills, hovered outline / wire, wire checked
     ├── wire-outline.json    v0.23.3 — checked wire keeps its outline (live Composer)
-    └── toggle-neutral.json  v0.24.1 — wire toggle neutral → base-content (live Composer)
+    ├── toggle-neutral.json  v0.24.1 — wire toggle neutral → base-content (live Composer)
+    └── toggle-solid-soft.json v0.25.1 — solid / soft toggle neutral → base-content (live Composer)
 ```
 
 ## Usage

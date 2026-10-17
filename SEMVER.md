@@ -52,6 +52,15 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.25.1 — 2026-10-18
+
+- **Default flip — the checked `solid` / `soft` toggle with `color="neutral"` paints `base-content`** (was
+  `neutral`), completing the v0.24.1 change for `wire`: `solid` rail `peer-checked:bg-base-content`, `soft`
+  rail `bg-base-content/15` + thumb `bg-base-content`, `stateLabel` ON text `text-base-100`. Shipped as a
+  patch: on dark themes the previous value rendered a checked switch indistinguishable from an unchecked one,
+  the other seven colors are unchanged, and no class string a consumer targets by name changes. The checkbox /
+  radio `solid` neutral is deliberately not flipped (its `-content` glyph carries the state).
+
 ### v0.25.0 — 2026-10-18
 
 - **Not a default flip — generated id values change.** Fourteen components (`input`, `textarea`, `select`,

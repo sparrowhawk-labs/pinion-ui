@@ -1,0 +1,138 @@
+{
+  "title": "pinion-ui toggle solid / soft の neutral tone — 前後比較（v0.25.1）",
+  "heading": "toggle solid / soft の neutral を base-content に（v0.25.0 → v0.25.1）",
+  "old": "旧 v0.25.0（neutral）",
+  "new": "新 v0.25.1（base-content）",
+  "intro": [
+    "<b>何を見るか</b> — v0.24.1 で toggle の wire は neutral を <code>base-content</code> に寄せた。残る solid / soft の <code>color=\"neutral\"</code> も dark テーマで未チェックと区別できないため、v0.25.1 で toggle は solid / soft / wire とも neutral → base-content に。差は neutral 列だけ（他の色は不変）。",
+    "<b>数値と判断</b> — 全 dark テーマで neutral と base-300（未チェックのレール）の差は約 1.2:1。soft は thumb が <code>bg-neutral</code> で沈み、solid はレール色がほぼ変わらず thumb の位置だけが手がかりだった。checkbox / radio の solid は neutral-content の印で状態が読めるので据え置き（toggle には印が無い）。人の判断（2026-10-18）= 両方寄せる。"
+  ],
+  "themes": [
+    [
+      "pinion",
+      "ブランド既定 · light"
+    ],
+    [
+      "pinion-dark",
+      "ブランド既定 · dark"
+    ],
+    [
+      "pop",
+      "黄 primary · light"
+    ],
+    [
+      "pop-dark",
+      "黄 primary · dark"
+    ],
+    [
+      "vapor",
+      "Mood · light"
+    ],
+    [
+      "vapor-dark",
+      "Mood · dark"
+    ],
+    [
+      "kids",
+      "Mood · light"
+    ],
+    [
+      "kids-dark",
+      "Mood · dark"
+    ],
+    [
+      "signal",
+      "Tonal 無彩 · light"
+    ],
+    [
+      "signal-dark",
+      "Tonal 無彩 · dark"
+    ],
+    [
+      "frost",
+      "Zenn 風 · light"
+    ],
+    [
+      "frost-dark",
+      "Zenn 風 · dark"
+    ]
+  ],
+  "rewrite": [
+    [
+      "peer-checked:[&_.xy-thumb]:bg-base-content",
+      "peer-checked:[&_.xy-thumb]:bg-neutral"
+    ],
+    [
+      "peer-checked:bg-base-content/15",
+      "peer-checked:bg-neutral/15"
+    ],
+    [
+      "peer-checked:border-base-content/30",
+      "peer-checked:border-neutral/30"
+    ],
+    [
+      "peer-checked:bg-base-content ",
+      "peer-checked:bg-neutral "
+    ]
+  ],
+  "rows": [
+    {
+      "label": "toggle soft（checked）",
+      "compose": {
+        "class": "Toggle",
+        "props": {
+          "appearance": "soft",
+          "color": "{c}"
+        }
+      },
+      "html": "<label for=\"{id}\" class=\"{{wrapper}}\"><span class=\"{{row}}\"><input type=\"checkbox\" role=\"switch\" id=\"{id}\" class=\"{{input}}\" checked><span class=\"{{track}}\"><span class=\"{{thumb}}\"></span></span></span></label>"
+    },
+    {
+      "label": "toggle soft（unchecked・参考＝不変）",
+      "compose": {
+        "class": "Toggle",
+        "props": {
+          "appearance": "soft",
+          "color": "{c}"
+        }
+      },
+      "rewrite": [],
+      "html": "<label for=\"{id}\" class=\"{{wrapper}}\"><span class=\"{{row}}\"><input type=\"checkbox\" role=\"switch\" id=\"{id}\" class=\"{{input}}\"><span class=\"{{track}}\"><span class=\"{{thumb}}\"></span></span></span></label>"
+    },
+    {
+      "label": "toggle solid（checked）",
+      "compose": {
+        "class": "Toggle",
+        "props": {
+          "appearance": "solid",
+          "color": "{c}"
+        }
+      },
+      "html": "<label for=\"{id}\" class=\"{{wrapper}}\"><span class=\"{{row}}\"><input type=\"checkbox\" role=\"switch\" id=\"{id}\" class=\"{{input}}\" checked><span class=\"{{track}}\"><span class=\"{{thumb}}\"></span></span></span></label>"
+    },
+    {
+      "label": "toggle solid（unchecked・参考＝不変）",
+      "compose": {
+        "class": "Toggle",
+        "props": {
+          "appearance": "solid",
+          "color": "{c}"
+        }
+      },
+      "rewrite": [],
+      "html": "<label for=\"{id}\" class=\"{{wrapper}}\"><span class=\"{{row}}\"><input type=\"checkbox\" role=\"switch\" id=\"{id}\" class=\"{{input}}\"><span class=\"{{track}}\"><span class=\"{{thumb}}\"></span></span></span></label>"
+    },
+    {
+      "label": "checkbox soft（checked・参考＝base-content 規則）",
+      "compose": {
+        "class": "Checkbox",
+        "props": {
+          "appearance": "soft",
+          "color": "{c}"
+        }
+      },
+      "rewrite": [],
+      "html": "<label for=\"{id}\" class=\"{{wrapper}}\"><span class=\"{{row}}\"><input type=\"checkbox\" id=\"{id}\" class=\"{{input}}\" checked><span class=\"{{visualBox}}\"><svg class=\"{{checkmark}}\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5 13l4 4L19 7\"/></svg></span></span></label>"
+    }
+  ]
+}

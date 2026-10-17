@@ -37,14 +37,14 @@
         }
     },
     {
-        "name": "solid neutral disabled",
+        "name": "solid neutral disabled (tone base-content, v0.25.1)",
         "props": {
             "color": "neutral",
             "disabled": true
         },
         "expected": {
             "wrapper": "block cursor-not-allowed opacity-60",
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-neutral peer-checked:border-transparent",
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-base-content peer-checked:border-transparent",
             "label": "text-[length:var(--text-field-sm)] text-base-content/60 select-none leading-snug"
         }
     },
@@ -146,7 +146,7 @@
         }
     },
     {
-        "name": "wire — neutral md (tone base-content like the wire checkbox / radio, v0.24.1)",
+        "name": "wire — neutral md (tone base-content, v0.24.1)",
         "props": {
             "appearance": "wire",
             "color": "neutral"
@@ -161,6 +161,31 @@
             "stateOff": "",
             "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
+        }
+    },
+    {
+        "name": "soft neutral md (thumb and rail take base-content, v0.25.1)",
+        "props": {
+            "appearance": "soft",
+            "color": "neutral"
+        },
+        "expected": {
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-base-content bg-base-200 border-base-content/10 peer-checked:bg-base-content/15 peer-checked:border-base-content/30",
+            "thumb": "xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
+            "stateOn": "",
+            "stateOff": ""
+        }
+    },
+    {
+        "name": "stateLabel solid neutral md — ON label is base-100 on the base-content rail (v0.25.1)",
+        "props": {
+            "color": "neutral",
+            "stateLabel": true
+        },
+        "expected": {
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-base-content peer-checked:border-transparent",
+            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-[3.5px] text-[8px] opacity-0 text-base-100",
+            "stateOff": "xy-state-off absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none right-0.5 text-[8px] opacity-100 text-base-content/60"
         }
     }
 ]
