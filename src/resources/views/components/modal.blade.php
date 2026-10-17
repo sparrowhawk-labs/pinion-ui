@@ -7,7 +7,7 @@
 ])
 
 @php
-    $modalId = $id ?? 'modal_' . uniqid();
+    $modalId = $id ?? pn_id('modal');
     $c = \SparrowhawkLabs\PinionUi\Compose\ModalComposer::compose([
         'size' => $size,
     ]);

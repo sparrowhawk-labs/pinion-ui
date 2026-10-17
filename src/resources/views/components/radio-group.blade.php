@@ -15,7 +15,7 @@
 ])
 
 @php
-    $groupId = $attributes->get('id', ($name ? $name . '_group' : 'radio_group_') . uniqid());
+    $groupId = $attributes->get('id') ?? pn_id($name ? $name . '_group' : 'radio_group');
     $orientationClass = $orientation === 'horizontal'
         ? 'flex flex-wrap gap-x-6 gap-y-2'
         : 'flex flex-col gap-2';

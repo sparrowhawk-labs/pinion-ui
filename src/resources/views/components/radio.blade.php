@@ -14,7 +14,7 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\RadioComposer;
 
-    $radioId = $attributes->get('id', ($name ? $name . '_' . ($value ?? '') . '_' : 'radio_') . uniqid());
+    $radioId = $attributes->get('id') ?? pn_id($name ? $name . '_' . ($value ?? '') : 'radio');
 
     $c = RadioComposer::compose([
         'color' => $color,

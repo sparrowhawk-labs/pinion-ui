@@ -34,6 +34,7 @@
         "test": [
             "@php tests/Compose/run.php",
             "@php tests/Look/run.php",
+            "@php tests/Id/run.php",
             "@php tests/Lint/run.php",
             "@php tests/Lint/spacing-run.php",
             "@php tests/Lint/migrate-run.php",

@@ -8,7 +8,7 @@
 ])
 
 @php
-    $sidebarId = $id ?? 'sidebar_' . uniqid();
+    $sidebarId = $id ?? pn_id('sidebar');
     $c = \SparrowhawkLabs\PinionUi\Compose\SidebarComposer::compose([
         'side'     => $side,
         'size'     => $size,

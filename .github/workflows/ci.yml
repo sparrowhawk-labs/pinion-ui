@@ -33,3 +33,6 @@ jobs:
 
       - name: Run Compose fixture suite
         run: php tests/Compose/run.php
+
+      - name: Id helper
+        run: php tests/Id/run.php

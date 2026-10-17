@@ -17,7 +17,7 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\RangeSliderComposer;
 
-    $inputId  = $attributes->get('id', ($name ? $name . '_' : 'range_') . uniqid());
+    $inputId  = $attributes->get('id') ?? pn_id($name ?: 'range');
     $hintText = $error ?: $hint;
     $current  = $value !== null ? $value : $min;
 

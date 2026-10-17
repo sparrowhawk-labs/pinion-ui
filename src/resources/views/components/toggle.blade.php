@@ -15,7 +15,7 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\ToggleComposer;
 
-    $toggleId = $attributes->get('id', ($name ? $name . '_' : 'toggle_') . uniqid());
+    $toggleId = $attributes->get('id') ?? pn_id($name ?: 'toggle');
 
     $c = ToggleComposer::compose([
         'color' => $color,

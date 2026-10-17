@@ -19,7 +19,7 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\TextareaComposer;
 
-    $textareaId   = $attributes->get('id', ($name ? $name . '_' : 'textarea_') . uniqid());
+    $textareaId   = $attributes->get('id') ?? pn_id($name ?: 'textarea');
     $hintText     = $error ?: $hint;
     $showCounter  = $counter || $maxlength !== null;
     $needsAlpine  = $autoresize || $showCounter;

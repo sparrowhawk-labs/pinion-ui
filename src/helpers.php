@@ -231,3 +231,97 @@ if (!function_exists('pn_look')) {
         return pn_look_resolve($look, $query);
     }
 }
+
+if (!function_exists('pn_id')) {
+    /**
+     * Deterministic default id for a component (v0.25.0, replaces `uniqid()`).
+     *
+     * Returns `{base}_{n}` where `n` counts occurrences of `base` within the
+     * current request (`email_1`, `email_2`, …). Inside a rendering Livewire
+     * component the id is prefixed with that component's id
+     * (`{livewireId}-email_1`), so a partial re-render — a separate request
+     * whose counters restart at 1 — reproduces the same ids it rendered the
+     * first time and cannot collide with ids elsewhere on the page.
+     *
+     * `base` is sanitised to `[A-Za-z0-9_-]` (`user[email]` → `user_email`).
+     * The counters live on the current Request's attribute bag, so every
+     * request (PHP-FPM, Octane, spatie/laravel-export's in-process crawler)
+     * starts from 1 without any middleware or reset hook; with no container
+     * (plain PHP) a process-wide static is used instead. `pn_id_reset()`
+     * clears whichever store is active.
+     *
+     * Deterministic, but not an API: pass an explicit `id` when something
+     * outside the component references it.
+     */
+    function pn_id(string $base): string
+    {
+        $base = trim((string) preg_replace('/[^A-Za-z0-9_-]+/', '_', $base), '_');
+        if ($base === '') {
+            $base = 'pn';
+        }
+
+        $scope = '';
+        if (function_exists('app')) {
+            try {
+                if (app()->bound('livewire') && ($component = app('livewire')->current())) {
+                    // Attribute names are lower-cased by the HTML parser; Livewire ids
+                    // are mixed-case, and modal/sidebar embed the id in an event name.
+                    $scope = strtolower((string) $component->getId()) . '-';
+                }
+            } catch (\Throwable) {
+                $scope = '';
+            }
+        }
+
+        $store = pn_id_store();
+        $key = $scope . $base;
+        $n = ((int) ($store[$key] ?? 0)) + 1;
+        $store[$key] = $n;
+
+        return "{$scope}{$base}_{$n}";
+    }
+}
+
+if (!function_exists('pn_id_reset')) {
+    /**
+     * Forget every `pn_id()` counter of the current request (or of the
+     * process when there is no request). For tests, console rendering of
+     * several documents in one process, and code-sample tooling that wants
+     * each snippet to start at `_1`.
+     */
+    function pn_id_reset(): void
+    {
+        $store = pn_id_store();
+        $store->exchangeArray([]);
+    }
+}
+
+if (!function_exists('pn_id_store')) {
+    /**
+     * @internal Counter store for pn_id(): the current Request's attribute bag
+     * when a container with a bound request exists, otherwise a static.
+     */
+    function pn_id_store(): \ArrayObject
+    {
+        static $fallback = null;
+
+        if (function_exists('app')) {
+            try {
+                if (app()->bound('request')) {
+                    $attributes = app('request')->attributes;
+                    $store = $attributes->get('pinion-ui.ids');
+                    if (!$store instanceof \ArrayObject) {
+                        $store = new \ArrayObject();
+                        $attributes->set('pinion-ui.ids', $store);
+                    }
+
+                    return $store;
+                }
+            } catch (\Throwable) {
+                // fall through to the static store
+            }
+        }
+
+        return $fallback ??= new \ArrayObject();
+    }
+}

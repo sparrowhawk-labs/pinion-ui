@@ -19,7 +19,7 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\SelectComposer;
 
-    $selectId = $attributes->get('id', ($name ? $name . '_' : 'select_') . uniqid());
+    $selectId = $attributes->get('id') ?? pn_id($name ?: 'select');
     $hintText = $error ?: $hint;
 
     // Custom mode replaces the native trigger with an Alpine-driven UI; it

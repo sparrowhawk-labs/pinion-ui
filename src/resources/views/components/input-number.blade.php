@@ -18,7 +18,7 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\InputNumberComposer;
 
-    $inputId  = $attributes->get('id', ($name ? $name . '_' : 'inputnum_') . uniqid());
+    $inputId  = $attributes->get('id') ?? pn_id($name ?: 'inputnum');
     $hintText = $error ?: $hint;
 
     $minJs  = $min !== null ? (string) $min : 'null';

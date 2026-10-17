@@ -21,7 +21,7 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\InputComposer;
 
-    $inputId  = $attributes->get('id', ($name ? $name . '_' : 'input_') . uniqid());
+    $inputId  = $attributes->get('id') ?? pn_id($name ?: 'input');
     $hintText = $error ?: $hint;
 
     $c = InputComposer::compose([

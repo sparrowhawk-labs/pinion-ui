@@ -21,7 +21,7 @@
 @php
     use SparrowhawkLabs\PinionUi\Compose\FileUploadComposer;
 
-    $fileId = $attributes->get('id', ($name ? $name . '_' : 'file_') . uniqid());
+    $fileId = $attributes->get('id') ?? pn_id($name ?: 'file');
     $isDropzone = $appearance === 'dropzone';
     $isGrid = $previewLayout === 'grid';
     $c = FileUploadComposer::compose([
