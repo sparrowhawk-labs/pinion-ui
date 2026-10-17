@@ -70,6 +70,6 @@ The checked dot scales in via `peer-checked:[&_.xy-dot]:scale-100` against the `
 
 ## Notes
 
-- The auto-generated `id` combines `name`, `value`, and `uniqid()` so manual groups don't collide; pass an explicit `id="..."` to override.
+- The auto-generated `id` is `{name}_{value}_{n}` (`plan_pro_1`, counted per request; v0.25.0) so manual groups don't collide; pass an explicit `id="..."` to override.
 - `appearance="soft"` with `color="neutral"` uses `base-content` rather than the (invisible) `neutral` tone for contrast — same trick `<x-checkbox>` and `<x-toggle>` use.
 - The visual is fully CSS-driven; there's no Alpine on this component.

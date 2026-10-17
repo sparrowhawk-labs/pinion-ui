@@ -88,5 +88,5 @@ Class strings live in [`src/Compose/InputComposer.php`](../../src/Compose/InputC
 ## Notes
 
 - `error` takes priority over `hint` and `color` — passing both shows the error and the field switches to the `error` palette.
-- The auto-generated `id` includes `uniqid()` to keep label `for=` unique; pass an explicit `id="..."` attribute to override.
+- The auto-generated `id` is `{name}_{n}` — `email_1`, `email_2`, … counted per request (`input_1` without a name; `{livewireId}-email_1` inside a Livewire component). Deterministic (v0.25.0), but not an API — pass an explicit `id="..."` when something else references it.
 - Floating label requires the input to have a placeholder for the CSS-only state machine — the blade injects `placeholder=" "` automatically when `floating` + `label` are set.

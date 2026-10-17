@@ -52,6 +52,16 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.25.0 — 2026-10-18
+
+- **Not a default flip — generated id values change.** Twelve components (`input`, `textarea`, `select`,
+  `input-number`, `range-slider`, `toggle`, `file-upload`, `checkbox`, `radio`, `radio-group`, `modal`,
+  `sidebar`) now generate `{name}_{n}` (`email_1`) instead of `{name}_<uniqid()>`; inside a Livewire
+  component the id is `{livewireId}-{name}_{n}`. No prop default and no class string changes; an explicit
+  `id` still wins. The old suffix was random on every render, so nothing could have depended on a specific
+  value; what changes is the shape (`user[email]` is now sanitised to `user_email_1` for every component,
+  not only `checkbox`). Views already published with `ui:eject` keep `uniqid()` until re-ejected.
+
 ### v0.24.0 — 2026-10-15
 
 - **Default flip — the Japanese fallback face of two tunes changes.** `corporate` now falls back to

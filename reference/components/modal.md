@@ -16,7 +16,7 @@ Alpine-driven dialog with backdrop, focus trap, scroll lock, and ESC + click-out
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `id` | `string \| null` | auto (`'modal_' . uniqid()`) | Unique identifier. Used to build the open/close event names: `open-modal-{id}` and `close-modal-{id}`. Set explicitly when you want to open the modal from another component. |
+| `id` | `string \| null` | auto (`modal_1`, `modal_2`, … per request) | Unique identifier. Used to build the open/close event names: `open-modal-{id}` and `close-modal-{id}`. The generated id is stable within one render but not across pages — always set it explicitly when you `$dispatch` from elsewhere. |
 | `title` | `string \| null` | `null` | Optional heading. When set, renders a header row with the title on the left and (if `showClose`) a × on the right. When omitted and `showClose=true`, the × floats absolutely at the panel's top-right corner so body content starts at the top padding (no empty header row). |
 | `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'md'` | Max-width class — `max-w-sm` / `max-w-lg` / `max-w-2xl` / `max-w-4xl` / `max-w-full mx-4`. |
 | `showClose` | `bool` | `true` | Whether to render the × close button. Set to `false` for dialogs that must be confirmed via the `actions` slot. |

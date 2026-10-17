@@ -7,6 +7,35 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.25.0] — 2026-10-18
+
+### Changed
+- **Generated ids are deterministic.** The default `id` of `<x-input>`, `<x-textarea>`, `<x-select>`,
+  `<x-input-number>`, `<x-range-slider>`, `<x-toggle>`, `<x-file-upload>`, `<x-checkbox>`, `<x-radio>`,
+  `<x-radio-group>`, `<x-modal>` and `<x-sidebar>` was `{name}_<uniqid()>` — a fresh random suffix on every
+  render. It is now `{name}_{n}` where `n` counts occurrences of that base within the request (`email_1`,
+  `email_2`, … and `input_1` / `modal_1` / `sidebar_1` when there is no name). Inside a rendering Livewire
+  component the id is prefixed with the component id (`{livewireId}-email_1`) so a partial re-render reproduces
+  the ids it rendered the first time and cannot collide with the rest of the page. The base is sanitised to
+  `[A-Za-z0-9_-]` for every component (`user[email]` → `user_email_1`; previously only `<x-checkbox>` did this).
+  An explicit `id` still wins, as before. The ids are deterministic but not an API — keep passing `id` when
+  something outside the component references it. Motivation: static exports (spatie/laravel-export) and
+  snapshot tooling now produce byte-identical HTML run after run, and code-sample caches keyed on rendered
+  markup stop missing on every request. Views published with `ui:eject` before this release keep `uniqid()`.
+- New helpers `pn_id(string $base): string` and `pn_id_reset(): void` (`src/helpers.php`). The counters
+  live on the current Request's attribute bag (PHP-FPM, Octane and the export crawler each start at `_1`
+  with no middleware); outside a container a process-wide static is used. `pn_id_reset()` clears them —
+  for tests and for console code that renders several documents in one process.
+
+### Fixed
+- `<x-modal>` / `<x-sidebar>` without an explicit `id` inside a Livewire component changed their
+  `open-modal-{id}` / `open-sidebar-{id}` event names on every re-render; the Livewire-scoped counter keeps
+  them stable.
+
+### Tests
+- `tests/Id/run.php` — 13 checks on `pn_id()` (sequence, sanitising, reset, static fallback). Wired into
+  `composer test` and CI.
+
 ## [0.24.0] — 2026-10-15
 
 ### Changed

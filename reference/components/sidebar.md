@@ -15,7 +15,7 @@ Off-canvas drawer panel that slides in from the left or right. The panel is tele
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `id` | `string \| null` | `null` | Unique id used for the open/close events (`open-sidebar-{id}` / `close-sidebar-{id}`). When `null`, a random `sidebar_<uniqid>` is generated — supply your own if you need to dispatch events from elsewhere. |
+| `id` | `string \| null` | `null` | Unique id used for the open/close events (`open-sidebar-{id}` / `close-sidebar-{id}`). When `null`, `sidebar_<n>` is generated (`sidebar_1`, `sidebar_2`, … per request; stable within one render, not across pages) — supply your own if you need to dispatch events from elsewhere. |
 | `side` | `'left' \| 'right'` | `'left'` | Which edge the panel slides in from. The close button stays in the panel's top-right regardless. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Panel width — `sm`=`w-64`, `md`=`w-80`, `lg`=`w-96`. |
 | `backdrop` | `bool` | `true` | When `true`, dims the page with `bg-black/50` and captures pointer events. When `false`, the overlay becomes `pointer-events-none` so the page stays interactive while the drawer is open (useful for inspector panels). |
