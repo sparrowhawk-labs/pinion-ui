@@ -13,8 +13,8 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 - **Generated ids are deterministic.** The default `id` of `<x-input>`, `<x-textarea>`, `<x-select>`,
   `<x-input-number>`, `<x-range-slider>`, `<x-toggle>`, `<x-file-upload>`, `<x-checkbox>`, `<x-radio>`,
   `<x-radio-group>`, `<x-modal>` and `<x-sidebar>` was `{name}_<uniqid()>` — a fresh random suffix on every
-  render. It is now `{name}_{n}` where `n` counts occurrences of that base within the request (`email_1`,
-  `email_2`, … and `input_1` / `modal_1` / `sidebar_1` when there is no name). Inside a rendering Livewire
+  render — and `<x-accordion-item>` (without `name`) and `<x-collapse>` used `random_bytes` the same way. It is now `{name}_{n}` where `n` counts occurrences of that base within the request (`email_1`,
+  `email_2`, … and `input_1` / `modal_1` / `sidebar_1` / `item_1` / `collapse_1` when there is no name). Inside a rendering Livewire
   component the id is prefixed with the component id (`{livewireId}-email_1`) so a partial re-render reproduces
   the ids it rendered the first time and cannot collide with the rest of the page. The base is sanitised to
   `[A-Za-z0-9_-]` for every component (`user[email]` → `user_email_1`; previously only `<x-checkbox>` did this).

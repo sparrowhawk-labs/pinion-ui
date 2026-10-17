@@ -54,9 +54,10 @@ A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defau
 
 ### v0.25.0 — 2026-10-18
 
-- **Not a default flip — generated id values change.** Twelve components (`input`, `textarea`, `select`,
+- **Not a default flip — generated id values change.** Fourteen components (`input`, `textarea`, `select`,
   `input-number`, `range-slider`, `toggle`, `file-upload`, `checkbox`, `radio`, `radio-group`, `modal`,
-  `sidebar`) now generate `{name}_{n}` (`email_1`) instead of `{name}_<uniqid()>`; inside a Livewire
+  `sidebar`, `accordion-item`, `collapse`) now generate `{name}_{n}` (`email_1`, `item_1`, `collapse_1`)
+  instead of a random suffix (`uniqid()` / `random_bytes`); inside a Livewire
   component the id is `{livewireId}-{name}_{n}`. No prop default and no class string changes; an explicit
   `id` still wins. The old suffix was random on every render, so nothing could have depended on a specific
   value; what changes is the shape (`user[email]` is now sanitised to `user_email_1` for every component,

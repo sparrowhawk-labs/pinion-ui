@@ -10,7 +10,7 @@
         'icon' => $icon,
         'bordered' => $bordered,
     ]);
-    $id = 'collapse-'.bin2hex(random_bytes(4));
+    $id = pn_id('collapse');
 @endphp
 
 <div {{ $attributes->class([$c['root']]) }}>

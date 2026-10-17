@@ -12,7 +12,7 @@
     $c = \SparrowhawkLabs\PinionUi\Compose\AccordionComposer::compose([
         'size' => $size,
     ]);
-    $itemKey = $name ?? 'item_'.bin2hex(random_bytes(4));
+    $itemKey = $name ?? pn_id('item');
     $openExpr = $multiple
         ? "open.includes('{$itemKey}')"
         : "open === '{$itemKey}'";
