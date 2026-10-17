@@ -22,21 +22,21 @@
     pointer-events: none;
     overflow: hidden;
     background-color: var(--pn-backdrop-base, var(--color-base-200));
-    --pn-ink: color-mix(in oklab, var(--color-base-content) 5%, transparent);
+    --pn-backdrop-ink: color-mix(in oklab, var(--color-base-content) 5%, transparent);
   }
   .pn-backdrop[data-local] { position: absolute; }
   .pn-backdrop > i { position: absolute; inset: 0; display: block; background-repeat: repeat; }
 
   .pn-backdrop[data-pattern="grid"][data-size="s"] > i:first-child {
-    background-image: linear-gradient(var(--pn-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-ink) 1px, transparent 1px);
+    background-image: linear-gradient(var(--pn-backdrop-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-backdrop-ink) 1px, transparent 1px);
     background-size: 8px 8px;
   }
   .pn-backdrop[data-pattern="grid"][data-size="m"] > i:first-child {
-    background-image: linear-gradient(var(--pn-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-ink) 1px, transparent 1px);
+    background-image: linear-gradient(var(--pn-backdrop-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-backdrop-ink) 1px, transparent 1px);
     background-size: 24px 24px;
   }
   .pn-backdrop[data-pattern="grid"][data-size="l"] > i:first-child {
-    background-image: linear-gradient(var(--pn-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-ink) 1px, transparent 1px);
+    background-image: linear-gradient(var(--pn-backdrop-ink) 1px, transparent 1px), linear-gradient(90deg, var(--pn-backdrop-ink) 1px, transparent 1px);
     background-size: 64px 64px;
   }
   .pn-backdrop[data-pattern="dot"] > i:first-child {
@@ -62,11 +62,11 @@
     mask-size: 32px 32px;
   }
   .pn-backdrop[data-pattern="rule"] > i:first-child {
-    background-image: linear-gradient(var(--pn-ink) 1px, transparent 1px);
+    background-image: linear-gradient(var(--pn-backdrop-ink) 1px, transparent 1px);
     background-size: 100% 28px;
   }
   .pn-backdrop[data-pattern="diag"] > i:first-child {
-    background-image: repeating-linear-gradient(45deg, var(--pn-ink) 0 1px, transparent 1px 14px);
+    background-image: repeating-linear-gradient(45deg, var(--pn-backdrop-ink) 0 1px, transparent 1px 14px);
   }
 
   /* SVG textures — the SVG is a mask; the ink is base-content at --pn-tex-ink */

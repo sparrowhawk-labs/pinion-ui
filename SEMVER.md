@@ -52,6 +52,13 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.24.1 — 2026-10-18
+
+- **Default flip — the checked `wire` toggle with `color="neutral"` fills with `base-content`** (was `neutral`),
+  matching the `wire` checkbox / radio. Shipped as a patch: on dark themes the previous value rendered a
+  checked switch indistinguishable from an unchecked one, `solid` / `soft` toggles and the other seven colors
+  are unchanged, and no class string a consumer targets by name changes.
+
 ### v0.24.0 — 2026-10-15
 
 - **Default flip — the Japanese fallback face of two tunes changes.** `corporate` now falls back to
