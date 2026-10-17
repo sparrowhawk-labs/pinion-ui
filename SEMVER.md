@@ -63,6 +63,13 @@ A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defau
   value; what changes is the shape (`user[email]` is now sanitised to `user_email_1` for every component,
   not only `checkbox`). Views already published with `ui:eject` keep `uniqid()` until re-ejected.
 
+### v0.24.1 — 2026-10-18
+
+- **Default flip — the checked `wire` toggle with `color="neutral"` fills with `base-content`** (was `neutral`),
+  matching the `wire` checkbox / radio. Shipped as a patch: on dark themes the previous value rendered a
+  checked switch indistinguishable from an unchecked one, `solid` / `soft` toggles and the other seven colors
+  are unchanged, and no class string a consumer targets by name changes.
+
 ### v0.24.0 — 2026-10-15
 
 - **Default flip — the Japanese fallback face of two tunes changes.** `corporate` now falls back to

@@ -83,6 +83,8 @@ class ToggleComposer
 
     private static function appearanceColor(string $appearance, string $color): string
     {
+        $tone = ($color === 'neutral' && $appearance === 'wire') ? 'base-content' : $color;
+
         // Two appearances only — solid (colour flows into the rail) and soft
         // (colour flows into the thumb, via track descendant selector above).
         // base-100/200/300 don't carry a clean semantic for switches: a state
@@ -95,8 +97,10 @@ class ToggleComposer
                 "bg-base-200 border-base-content/10 peer-checked:bg-{$color}/15 peer-checked:border-{$color}/30",
 
             // wire (v0.17.2): transparent rail + hairline; fills with the colour on check.
+            // neutral → base-content like the wire checkbox / radio (v0.24.1): on dark themes
+            // `neutral` is a near-base grey, so the checked rail and the base-100 thumb vanished.
             'wire' =>
-                "bg-transparent border-base-content/45 peer-checked:bg-{$color} peer-checked:border-{$color}",
+                "bg-transparent border-base-content/45 peer-checked:bg-{$tone} peer-checked:border-{$tone}",
 
             default =>
                 'bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary',

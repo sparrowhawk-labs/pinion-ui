@@ -82,5 +82,5 @@ The visual box uses `peer-checked:` / `peer-indeterminate:` against the `sr-only
 ## Notes
 
 - Color × appearance permutations are pre-listed in the Tailwind safelist (`@source inline` in `pinion-ui.css`), so interpolating `bg-{color}` etc. is safe.
-- `appearance="soft"` with `color="neutral"` uses `base-content` rather than the (invisible) `neutral` tone for contrast — same trick `<x-radio>` and `<x-toggle>` use.
+- `appearance="soft"` with `color="neutral"` uses `base-content` rather than the (invisible) `neutral` tone for contrast — same trick `<x-radio>` uses (and `<x-toggle appearance="wire">` since v0.24.1; the `solid` / `soft` toggle keeps `neutral`).
 - For a counted multi-select with a hint and error message, wrap several `<x-checkbox>` in your own fieldset.

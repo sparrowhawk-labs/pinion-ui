@@ -36,6 +36,24 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 - `tests/Id/run.php` — 13 checks on `pn_id()` (sequence, sanitising, reset, static fallback). Wired into
   `composer test` and CI.
 
+## [0.24.1] — 2026-10-18
+
+### Fixed
+- **Checked `wire` toggle with `color="neutral"` fills with `base-content`.** It wrote `peer-checked:bg-neutral
+  peer-checked:border-neutral`; on dark themes `neutral` is a near-base grey, so the checked rail and its
+  `base-100` thumb sank into the page and a checked switch looked unchecked. Now the `wire` toggle routes
+  `neutral` → `base-content` exactly as the `wire` checkbox / radio already did (`solid` / `soft` toggles are
+  unchanged). Fixture added; before / after page: `scripts/compare-page/specs/toggle-neutral.json`.
+- **`outline-neutral` / `wire-neutral` buttons write `hover:border-transparent`** like the other seven colors
+  (they were `border-base-content/10` kept / `hover:border-base-content`). No visible change — the rim was the
+  fill's own color — the variant map is simply uniform now.
+
+### Changed
+- **`backdrop.css` no longer redefines `--pn-ink` locally.** `.pn-backdrop` used the public ink token name for
+  its own 5 % `base-content` mix (`--pn-ink` is the primary ink read by pinion-sections). Renamed to the
+  private `--pn-backdrop-ink`; only the backdrop's own `<i>` layers read it, so nothing downstream changes.
+  The css package does not bundle `backdrop.css` (dist gate: zero differences).
+
 ## [0.24.0] — 2026-10-15
 
 ### Changed
