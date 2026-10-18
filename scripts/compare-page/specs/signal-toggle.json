@@ -1,14 +1,14 @@
 {
   "meta": {
-    "name": "signal の toggle（案①②③）",
-    "version": "候補",
-    "compared": "無彩色テーマで checked が読めない toggle: 据え置き／塗りを ink に／テーマ色を ink 値に",
+    "name": "signal の toggle（塗りを ink に）",
+    "version": "v0.25.2",
+    "compared": "無彩色テーマで読めない toggle: ②塗りを ink に採用（①据え置き・③テーマ色は不採用）",
     "page": "pinion-signal-toggle"
   },
   "title": "pinion-ui toggle × signal（無彩色テーマ）— 案①②③の比較",
   "heading": "signal / signal-dark の toggle: ①据え置き ②checked の塗りを ink に ③テーマ色を ink 値に",
-  "old": "旧＝案①（v0.25.1 のまま）",
-  "new": "新＝案②（checked の塗りを ink）",
+  "old": "旧 v0.25.1（＝案①）",
+  "new": "新 v0.25.2（＝案②・採用）",
   "intro": [
     "<b>何を見るか</b> — signal は primary / secondary が紙の同系色（レール vs 未チェック 1.3:1・thumb vs レール 1.1〜1.4:1）なので、toggle は checked でも読めない。各セルの上段が <b>案①</b>（現行 v0.25.1）、下段が <b>案②</b>（solid / wire のレール・soft の thumb の checked の塗りを <code>bg-ink-&lt;x&gt;</code> に。progress の fill と同じ規則。ON 文字は base-100）。",
     "<b>案③</b> は <code>signal-x3</code> / <code>signal-dark-x3</code> の節: lineup.json の primary / secondary を ink 値（light #686764 / #686763・dark #878885 / #878884）に置き換えたテーマ。toggle だけでなく button 行（最下段）も変わる＝影響範囲はテーマ全体（SendSignal 本番を含む）。この節では上段・下段がほぼ同じに見えるのが正しい（ink ＝ 色になるため）。",

@@ -6,7 +6,7 @@
             "wrapper": "block cursor-pointer",
             "row": "inline-flex items-center gap-3",
             "input": "peer sr-only",
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-transparent",
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-ink-primary peer-checked:border-transparent",
             "thumb": "xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-sm)] text-base-content select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
@@ -19,7 +19,7 @@
             "color": "warning"
         },
         "expected": {
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-warning bg-base-200 border-base-content/10 peer-checked:bg-warning/15 peer-checked:border-warning/30"
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-ink-warning bg-base-200 border-base-content/10 peer-checked:bg-warning/15 peer-checked:border-warning/30"
         }
     },
     {
@@ -30,7 +30,7 @@
             "size": "lg"
         },
         "expected": {
-            "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.5rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-success peer-checked:border-transparent",
+            "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.5rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-ink-success peer-checked:border-transparent",
             "thumb": "xy-thumb size-6 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-md)] text-base-content select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-base-content/60 leading-snug"
@@ -56,7 +56,7 @@
             "error": "x"
         },
         "expected": {
-            "track": "h-5 w-9 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-error peer-checked:border-transparent",
+            "track": "h-5 w-9 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1rem-2*var(--border))] bg-base-300 border-base-content/10 peer-checked:bg-ink-error peer-checked:border-transparent",
             "thumb": "xy-thumb size-4 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-100 border-[length:var(--border)] border-base-content/10 shadow-[var(--shadow-field)] transition-transform pointer-events-none",
             "label": "text-[length:var(--text-field-xs)] text-error select-none leading-snug",
             "description": "mt-1 text-[length:var(--text-field-xs)] text-error leading-snug"
@@ -68,8 +68,8 @@
             "stateLabel": true
         },
         "expected": {
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-transparent",
-            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-[3.5px] text-[8px] opacity-0 text-primary-content",
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-ink-primary peer-checked:border-transparent",
+            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-[3.5px] text-[8px] opacity-0 text-base-100",
             "stateOff": "xy-state-off absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none right-0.5 text-[8px] opacity-100 text-base-content/60"
         }
     },
@@ -81,8 +81,8 @@
             "size": "lg"
         },
         "expected": {
-            "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.5rem-2*var(--border))] peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-success peer-checked:border-transparent",
-            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-[4.5px] text-[10px] opacity-0 text-success-content",
+            "track": "h-7 w-13 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.5rem-2*var(--border))] peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0 bg-base-300 border-base-content/10 peer-checked:bg-ink-success peer-checked:border-transparent",
+            "stateOn": "xy-state-on absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none left-[4.5px] text-[10px] opacity-0 text-base-100",
             "stateOff": "xy-state-off absolute top-1/2 -translate-y-1/2 font-bold tracking-tight leading-none uppercase transition-opacity pointer-events-none right-[3px] text-[10px] opacity-100 text-base-content/60"
         }
     },
@@ -118,7 +118,7 @@
             "wrapper": "block cursor-pointer",
             "row": "inline-flex items-center gap-3",
             "input": "peer sr-only",
-            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-base-100 bg-transparent border-base-content/45 peer-checked:bg-primary peer-checked:border-primary",
+            "track": "h-6 w-11 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1.25rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-base-100 bg-transparent border-base-content/45 peer-checked:bg-ink-primary peer-checked:border-primary",
             "thumb": "xy-thumb size-5 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-content border-[length:var(--border)] border-transparent shadow-none transition-transform pointer-events-none",
             "stateOn": "",
             "stateOff": "",
@@ -137,7 +137,7 @@
             "wrapper": "block cursor-pointer",
             "row": "inline-flex items-center gap-3",
             "input": "peer sr-only",
-            "track": "h-5 w-9 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-base-100 bg-transparent border-base-content/45 peer-checked:bg-success peer-checked:border-success",
+            "track": "h-5 w-9 relative inline-block shrink-0 border-[length:var(--border)] rounded-[var(--radius-field)] transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-current peer-checked:[&_.xy-thumb]:translate-x-[calc(1rem-2*var(--border))] peer-checked:[&_.xy-thumb]:bg-base-100 bg-transparent border-base-content/45 peer-checked:bg-ink-success peer-checked:border-success",
             "thumb": "xy-thumb size-4 absolute top-1/2 left-0.5 -translate-y-1/2 rounded-[var(--radius-field)] bg-base-content border-[length:var(--border)] border-transparent shadow-none transition-transform pointer-events-none",
             "stateOn": "",
             "stateOff": "",

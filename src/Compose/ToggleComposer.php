@@ -19,6 +19,12 @@ class ToggleComposer
         // glyph — only the rail colour and the thumb's travel — and on dark themes `neutral` is a
         // near-base grey (≈1.2:1 against base-300), so a checked neutral switch looked unchecked.
         $tone = $effectiveColor === 'neutral' ? 'base-content' : $effectiveColor;
+        // The checked fill (solid / wire rail, soft thumb) is the toggle's only state signal — a fill
+        // that must read as a line, like the progress bar (v0.23.2) — so it takes the ink: on Tonal
+        // themes `primary` / `secondary` sit ≈1.1–1.4:1 off the canvas and a checked switch looked
+        // unchecked (signal / signal-dark). Ink is ≥ 4.5:1 against base-100 by construction, so the
+        // base-100 thumb and the ON label always read on it. base-content has no ink alias.
+        $fill = $tone === 'base-content' ? 'base-content' : "ink-{$tone}";
 
         // State label requires solid track for color contrast and md/lg track for room.
         $showStateLabel = $stateLabel && $appearance === 'solid' && in_array($size, ['md', 'lg'], true);
@@ -27,7 +33,7 @@ class ToggleComposer
             'wrapper' => self::wrapper($disabled),
             'row' => 'inline-flex items-center gap-3',
             'input' => 'peer sr-only',
-            'track' => self::track($size, $appearance, $tone, $showStateLabel),
+            'track' => self::track($size, $appearance, $tone, $fill, $showStateLabel),
             'thumb' => self::thumb($size, $appearance),
             'stateOn' => $showStateLabel ? self::stateLabel($size, $tone, 'on') : '',
             'stateOff' => $showStateLabel ? self::stateLabel($size, $tone, 'off') : '',
@@ -43,7 +49,7 @@ class ToggleComposer
         return self::join($base, $cursorClass);
     }
 
-    private static function track(string $size, string $appearance, string $color, bool $hasStateLabel): string
+    private static function track(string $size, string $appearance, string $color, string $fill, bool $hasStateLabel): string
     {
         $sizeClass = match ($size) {
             'sm' => 'h-5 w-9',
@@ -73,7 +79,7 @@ class ToggleComposer
         // full `{color}` on check (Preline pattern). Driven from the track via
         // the same descendant selector trick as travel.
         $thumbColor = match ($appearance) {
-            'soft' => "peer-checked:[&_.xy-thumb]:bg-{$color}",
+            'soft' => "peer-checked:[&_.xy-thumb]:bg-{$fill}",
             // wire: thumb is base-content at rest and inverts to base-100 once the rail fills.
             'wire' => 'peer-checked:[&_.xy-thumb]:bg-base-100',
             default => '',
@@ -83,10 +89,10 @@ class ToggleComposer
             ? 'peer-checked:[&_.xy-state-on]:opacity-100 peer-checked:[&_.xy-state-off]:opacity-0'
             : '';
 
-        return self::join($sizeClass, $base, $thumbTravel, $thumbColor, $stateFade, self::appearanceColor($appearance, $color));
+        return self::join($sizeClass, $base, $thumbTravel, $thumbColor, $stateFade, self::appearanceColor($appearance, $color, $fill));
     }
 
-    private static function appearanceColor(string $appearance, string $color): string
+    private static function appearanceColor(string $appearance, string $color, string $fill): string
     {
         // $color is already the tone (neutral → base-content, see compose()).
         // Two appearances only — solid (colour flows into the rail) and soft
@@ -95,14 +101,14 @@ class ToggleComposer
         // indicator can't double as a surface, so they were removed.
         return match ($appearance) {
             'solid' =>
-                "bg-base-300 border-base-content/10 peer-checked:bg-{$color} peer-checked:border-transparent",
+                "bg-base-300 border-base-content/10 peer-checked:bg-{$fill} peer-checked:border-transparent",
 
             'soft' =>
                 "bg-base-200 border-base-content/10 peer-checked:bg-{$color}/15 peer-checked:border-{$color}/30",
 
             // wire (v0.17.2): transparent rail + hairline; fills with the colour on check.
             'wire' =>
-                "bg-transparent border-base-content/45 peer-checked:bg-{$color} peer-checked:border-{$color}",
+                "bg-transparent border-base-content/45 peer-checked:bg-{$fill} peer-checked:border-{$color}",
 
             default =>
                 'bg-base-300 border-base-content/10 peer-checked:bg-primary peer-checked:border-primary',
@@ -144,10 +150,9 @@ class ToggleComposer
         };
         $sizeClass = $size === 'lg' ? 'text-[10px]' : 'text-[8px]';
 
-        // Track turns $color when checked → ON uses contrast color (base-100 on the base-content
-        // rail that `neutral` maps to). Track is base-300 when unchecked → OFF uses muted base-content.
-        $onClass = $color === 'base-content' ? 'text-base-100' : "text-{$color}-content";
-        $colorClass = $kind === 'on' ? $onClass : 'text-base-content/60';
+        // Track turns ink-$color (or base-content) when checked; both are ≥ 4.5:1 against base-100,
+        // so ON is base-100. Track is base-300 when unchecked → OFF uses muted base-content.
+        $colorClass = $kind === 'on' ? 'text-base-100' : 'text-base-content/60';
 
         return self::join(
             $marker,

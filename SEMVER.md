@@ -52,6 +52,18 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.25.2 — 2026-10-18
+
+- **Default flip — the checked toggle fill is ink.** `solid` / `wire` rail `peer-checked:bg-ink-<color>`, `soft`
+  thumb `peer-checked:[&_.xy-thumb]:bg-ink-<color>` (were `bg-<color>`), `stateLabel` ON text `text-base-100`
+  (was `text-<color>-content`). `neutral` → `base-content` as before. Shipped as a patch: on `signal` /
+  `signal-dark` a checked `primary` / `secondary` switch was indistinguishable from an unchecked one, no class a
+  consumer targets by name changes, and the markup is identical. Visible on every theme block where ink ≠ color
+  (of 111: `primary` 45, `secondary` 51, `accent` 38, `info` 51, `success` 52, `warning` 54, `error` 76 — most of
+  them a small lightness step; clearly visible (≥ 1.5:1 between color and ink) in `primary` 33, `secondary` 36,
+  `accent` 22, `info` 20, `success` 36, `warning` 50, `error` 2). Checkbox / radio fills are unchanged (their
+  `-content` glyph carries the state).
+
 ### v0.25.1 — 2026-10-18
 
 - **Default flip — the checked `solid` / `soft` toggle with `color="neutral"` paints `base-content`** (was

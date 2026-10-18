@@ -7,6 +7,22 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.25.2] — 2026-10-18
+
+### Fixed
+- **`<x-toggle>`'s checked fill takes the ink.** The rail of `solid` / `wire` and the thumb of `soft` now paint
+  `bg-ink-<color>` when checked (was `bg-<color>`), and the `stateLabel` ON text is `base-100` for every color
+  (was `<color>-content`). A toggle is a state lamp, not a surface: its only signal is the fill under a
+  `base-100` thumb, so it follows the progress / upload fill rule (v0.23.2). On the achromatic Tonal theme
+  `signal` / `signal-dark` the `primary` / `secondary` rail sat at 1.3:1 against the unchecked rail and the thumb at
+  1.1–1.4:1 against the rail — a checked switch was unreadable in both modes. Ink is ≥ 4.5:1 against `base-100`
+  by construction, so the thumb and the ON label now read everywhere (`signal-dark` solid primary: rail 3.45:1,
+  thumb 5.03:1). Where ink = color (most saturated primaries on light themes) nothing changes; where it differs
+  the ON color shifts toward the theme's text color — `ember` / `pop` light `warning` yellow → olive, `pop`'s yellow
+  `primary` → dark. Default flip, recorded in `SEMVER.md` with the counts. `neutral` keeps `base-content`
+  (v0.25.1). Fixtures updated; before / after page and the rejected alternatives (keep as is / recolor the
+  theme): `scripts/compare-page/specs/signal-toggle.json`.
+
 ## [0.25.1] — 2026-10-18
 
 ### Fixed
