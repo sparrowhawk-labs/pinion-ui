@@ -195,6 +195,23 @@ if (is_array($intro)) {
 $firstTheme = $themes[0][0];
 $firstTune = $tunes[0][0];
 $title = $spec['title'] ?? 'pinion-ui compare';
+
+// extra_css: a hand-written stylesheet (path relative to the spec) copied to
+// <out>/extra.css and linked after page.css — for theme variants that do not
+// exist in the preset (e.g. a candidate palette under `[data-theme=foo-x3]`).
+$extraLink = '';
+if (!empty($spec['extra_css'])) {
+    $extraSrc = dirname($specPath) . '/' . $spec['extra_css'];
+    if (!is_file($extraSrc)) {
+        throw new RuntimeException("extra_css not found: $extraSrc");
+    }
+    if (!is_dir($outDir) && !mkdir($outDir, 0777, true)) {
+        fwrite(STDERR, "cannot create $outDir\n");
+        exit(1);
+    }
+    copy($extraSrc, "$outDir/extra.css");
+    $extraLink = '<link rel="stylesheet" href="extra.css">';
+}
 $heading = $spec['heading'] ?? $title;
 
 $html = <<<HTML
@@ -202,7 +219,7 @@ $html = <<<HTML
 <html lang="ja" data-theme="{$firstTheme}" data-tune="{$firstTune}">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{$title}</title>
-<link rel="stylesheet" href="page.css">
+<link rel="stylesheet" href="page.css">{$extraLink}
 <style>#bar{position:sticky;top:0;z-index:50;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;padding:.5rem .75rem;background:#111;color:#eee;font:13px system-ui,sans-serif}#bar a{color:#9cf}#bar button{font:inherit;padding:.25rem .75rem;border-radius:.375rem;border:1px solid #555;background:#222;color:#eee;cursor:pointer}#bar button[aria-pressed=true]{background:#2563eb;border-color:#2563eb}main.zoom{zoom:2}</style>
 </head>
 <body class="bg-base-200">

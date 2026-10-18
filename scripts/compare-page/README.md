@@ -13,12 +13,15 @@ scripts/compare-page/
 ├── gen.php        spec JSON → index.html
 ├── build.sh       gen.php + Tailwind CLI → index.html + page.css
 ├── shots.sh       ×2 screenshots of chosen theme sections (playwright-cli)
+├── index.php      specs/*.json `meta` → the index page (Markdown + visualize-build)
 └── specs/         the pages built so far (regression inputs + examples)
+    ├── ink-all.json         v0.23.0 — meta only (page predates this tool; not a build input)
     ├── solid-edge.json      v0.23.1 — solid faces lose their ink rim
     ├── ink-rest.json        v0.23.2 — ink fills, hovered outline / wire, wire checked
     ├── wire-outline.json    v0.23.3 — checked wire keeps its outline (live Composer)
     ├── toggle-neutral.json  v0.24.1 — wire toggle neutral → base-content (live Composer)
-    └── toggle-solid-soft.json v0.25.1 — solid / soft toggle neutral → base-content (live Composer)
+    ├── toggle-solid-soft.json v0.25.1 — solid / soft toggle neutral → base-content (live Composer)
+    └── signal-toggle.json   候補 — achromatic `signal`: keep / ink fill / theme hex (+ .extra.css)
 ```
 
 ## Usage
@@ -30,7 +33,17 @@ scripts/compare-page/build.sh scripts/compare-page/specs/wire-outline.json ~/out
 # 2. optional ×2 evidence shots of the themes where ink ≠ color
 scripts/compare-page/shots.sh ~/out/pinion-wire-outline pop pop-dark kids signal-dark
 scripts/compare-page/shots.sh ~/out/pinion-wire-outline vapor --tune brutal
+
+# 3. regenerate the index of all pages (~/claude/docs/visualized/pinion-compare-index.html)
+php scripts/compare-page/index.php --write --rebuild
 ```
+
+`index.php` reads the `meta` block of every spec and writes
+`~/claude/docs/visualized/src/pinion-compare-index.md` (`--out` / `--pages` /
+`--html` override the paths; without `--write` it prints the Markdown). Rows are
+ordered 候補 first, then newest version. A spec without `meta` is skipped with a
+warning; `name` > 32 or `compared` > 64 characters fails the run (content
+contract). Never add a row to the Markdown by hand.
 
 Requirements: `php` ≥ 8.1, `node_modules` in `packages/pinion-ui-css`
 (`npm install` there). In a git worktree without node_modules, point
@@ -48,6 +61,16 @@ on exit, so `git status` stays clean.
 
 ```jsonc
 {
+  "meta": {                                       // index.php only — see above
+    "name": "toggle wire の neutral",             // ≤ 32 chars, the link text
+    "version": "v0.24.1",                         // or "候補" for an undecided comparison
+    "compared": "wire の neutral を base-content に", // ≤ 64 chars
+    "page": "pinion-toggle-neutral",              // output dir under ~/claude/docs/visualized
+    "scale": "…"                                  // optional; default = themes × colors × rows + shots
+  },
+  "extra_css": "signal-toggle.extra.css",         // optional: copied to <out>/extra.css, linked
+                                                  //   after page.css — candidate theme blocks
+                                                  //   (`[data-theme=signal-x3]`) the preset lacks
   "title":   "<title> of the page",
   "heading": "bold text in the sticky bar",
   "old": "旧 v0.23.2", "new": "新 v0.23.3",       // column sub-headers

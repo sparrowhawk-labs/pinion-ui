@@ -1,4 +1,10 @@
 {
+  "meta": {
+    "name": "solid の縁",
+    "version": "v0.23.1",
+    "compared": "solid の `border-<x>` を `border-transparent` に（塗った面に縁なし）",
+    "page": "pinion-solid-edge"
+  },
   "title": "pinion-ui solid の縁 — 前後比較（v0.23.1）",
   "heading": "solid の縁（v0.23.0 → v0.23.1）",
   "old": "旧 v0.23.0",

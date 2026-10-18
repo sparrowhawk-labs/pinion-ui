@@ -1,4 +1,10 @@
 {
+  "meta": {
+    "name": "wire の checked に輪郭を戻す",
+    "version": "v0.23.3",
+    "compared": "checkbox / toggle の wire checked を `border-<x>`（ink）に戻す",
+    "page": "pinion-wire-outline"
+  },
   "title": "pinion-ui wire の checked に輪郭を戻す — 前後比較（v0.23.3）",
   "heading": "wire の checked に輪郭を戻す（v0.23.2 → v0.23.3）",
   "old": "旧 v0.23.2",

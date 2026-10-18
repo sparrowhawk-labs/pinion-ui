@@ -1,4 +1,10 @@
 {
+  "meta": {
+    "name": "toggle wire の neutral",
+    "version": "v0.24.1",
+    "compared": "wire の neutral を base-content に。差は neutral 列だけ",
+    "page": "pinion-toggle-neutral"
+  },
   "title": "pinion-ui toggle wire の neutral tone — 前後比較（v0.24.1）",
   "heading": "toggle wire の neutral を base-content に（v0.24.0 → v0.24.1）",
   "old": "旧 v0.24.0（neutral）",

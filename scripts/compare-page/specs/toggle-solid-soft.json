@@ -1,4 +1,10 @@
 {
+  "meta": {
+    "name": "toggle solid / soft の neutral",
+    "version": "v0.25.1",
+    "compared": "solid / soft の neutral を base-content に（wire に続き toggle 全部）",
+    "page": "pinion-toggle-solid-soft"
+  },
   "title": "pinion-ui toggle solid / soft の neutral tone — 前後比較（v0.25.1）",
   "heading": "toggle solid / soft の neutral を base-content に（v0.25.0 → v0.25.1）",
   "old": "旧 v0.25.0（neutral）",

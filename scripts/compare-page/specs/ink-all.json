@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "name": "全色 ink",
+    "version": "v0.23.0",
+    "compared": "`--pn-ink-<x>` を primary から 8 色へ広げる（ゲート用）",
+    "page": "pinion-ink-all",
+    "scale": "before.css / after.css の切替"
+  },
+  "note": "v0.23.0 のページは compare-page 以前に手で作った。この spec は一覧（index.php）のためのメタだけで、build.sh には渡さない。"
+}

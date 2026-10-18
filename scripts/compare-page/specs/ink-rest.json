@@ -1,4 +1,10 @@
 {
+  "meta": {
+    "name": "ink の残り3件",
+    "version": "v0.23.2",
+    "compared": "progress / upload の fill・hover した outline / wire・wire checked",
+    "page": "pinion-ink-rest"
+  },
   "title": "pinion-ui ink の残り3件 — 前後比較（v0.23.2）",
   "heading": "ink の残り3件（v0.23.1 → v0.23.2）",
   "old": "旧 v0.23.1",
