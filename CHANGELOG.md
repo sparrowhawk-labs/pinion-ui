@@ -21,6 +21,10 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 
 ## [0.25.0] — 2026-10-18
 
+> **Packagist note:** the `v0.25.0` tag was re-pointed after an accidental early push, and Packagist kept the first
+> reference (`5465ca5`, the v0.24.1 tree) because published versions are immutable. **Installing exactly `0.25.0` from
+> Packagist does not contain the deterministic ids** — require `^0.25.1` (its reference is correct and includes everything below).
+
 ### Changed
 - **Generated ids are deterministic.** The default `id` of `<x-input>`, `<x-textarea>`, `<x-select>`,
   `<x-input-number>`, `<x-range-slider>`, `<x-toggle>`, `<x-file-upload>`, `<x-checkbox>`, `<x-radio>`,
@@ -49,6 +53,8 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
   `composer test` and CI.
 
 ## [0.24.1] — 2026-10-18
+
+> **Packagist note:** Packagist's `v0.24.1` points at the pre-amend commit `225752f` (same content, different SHA). Harmless, but prefer `^0.25.1`.
 
 ### Fixed
 - **Checked `wire` toggle with `color="neutral"` fills with `base-content`.** It wrote `peer-checked:bg-neutral
