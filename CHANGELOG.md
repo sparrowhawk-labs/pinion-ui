@@ -7,7 +7,18 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.25.3] — 2026-10-19
+
+### Fixed
+- **v0.25.2's ink toggle fill was never generated in consumer builds.** `ToggleComposer` emits
+  `peer-checked:bg-ink-<color>` / `peer-checked:[&_.xy-thumb]:bg-ink-<color>` by PHP interpolation, but the
+  preset's `@source inline` safelist only listed the `bg-<color>` forms, so Tailwind dropped the ink variants
+  and every checked toggle (except `neutral`) rendered as OFF. Two safelist lines added. Found by the
+  playground sync's Playwright check before deploy; **v0.25.2 should not be used.**
+
 ## [0.25.2] — 2026-10-18
+
+> **Do not use v0.25.2** — the ink toggle fill is missing from consumer builds (safelist); fixed in v0.25.3.
 
 ### Fixed
 - **`<x-toggle>`'s checked fill takes the ink.** The rail of `solid` / `wire` and the thumb of `soft` now paint
