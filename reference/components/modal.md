@@ -62,6 +62,8 @@ All other attributes pass through to the outer Alpine scope `<div>`.
 
 When `title` is omitted, the × button is anchored absolutely to the panel's top-right corner — body content starts at the top padding without leaving an empty header row. Useful for lightbox / gallery / image preview patterns.
 
+Both × buttons have a fixed 44px touch target (an invisible, centred `::before`) while keeping their visual size. For the floating one, that target reaches about 12px into the body's top-right corner — keep links, inputs and other controls out of a ~32px square there.
+
 ```blade
 <x-modal>
     <x-slot:trigger>

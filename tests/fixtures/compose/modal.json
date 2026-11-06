@@ -9,7 +9,7 @@
             "panel": "relative w-full max-w-lg flex flex-col max-h-[calc(100dvh-2rem)] bg-base-100 text-base-content text-[length:var(--text-field-md)] rounded-[var(--radius-box)] border-[length:var(--border)] border-base-300 shadow-[0_10px_30px_-8px_rgb(0_0_0_/_0.18),var(--shadow-box)] p-lg",
             "header": "flex shrink-0 items-center justify-between mb-sm",
             "title": "text-[length:var(--text-field-lg)] font-semibold text-base-content",
-            "closeBtn": "text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200",
+            "closeBtn": "text-base-content/50 hover:text-base-content transition-colors relative rounded-[var(--radius-field)] p-1 hover:bg-base-200 before:absolute before:left-1/2 before:top-1/2 before:size-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
             "closeIcon": "w-5 h-5",
             "body": "min-h-0 overflow-y-auto",
             "actions": "flex shrink-0 items-center justify-end gap-xs mt-lg"
@@ -71,10 +71,18 @@
             "backdrop": "absolute inset-0 bg-black/50",
             "header": "flex shrink-0 items-center justify-between mb-sm",
             "title": "text-[length:var(--text-field-lg)] font-semibold text-base-content",
-            "closeBtn": "text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-1 hover:bg-base-200",
+            "closeBtn": "text-base-content/50 hover:text-base-content transition-colors relative rounded-[var(--radius-field)] p-1 hover:bg-base-200 before:absolute before:left-1/2 before:top-1/2 before:size-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
             "closeIcon": "w-5 h-5",
             "body": "min-h-0 overflow-y-auto",
             "actions": "flex shrink-0 items-center justify-end gap-xs mt-lg"
+        }
+    },
+    {
+        "name": "close buttons — 44px hit area via ::before (visual size unchanged)",
+        "props": {},
+        "expected": {
+            "closeBtnFloat": "absolute top-lg right-lg z-10 text-base-content/50 hover:text-base-content transition-colors rounded-[var(--radius-field)] p-0.5 hover:bg-base-200 before:absolute before:left-1/2 before:top-1/2 before:size-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
+            "closeIconFloat": "w-4 h-4"
         }
     }
 ]

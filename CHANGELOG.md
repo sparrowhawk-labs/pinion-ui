@@ -7,6 +7,20 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.25.4] — 2026-11-06
+
+### Fixed
+- **`<x-modal>`'s × is now a 44px touch target.** Both close buttons (in-header and the floating one used when
+  `title` is omitted) keep their visual size but carry an invisible, centred `::before` of a fixed 44px square
+  (WCAG 2.5.5 / Apple HIG). It is fixed px rather than an `-inset-*` growth because the button follows the
+  tune's rem scale (on `minimal` an inset growth reached only ~41px). Only `<x-modal>` changed; the sidebar's ×
+  is untouched.
+- **Consumers who patched the × with their own `::before` rule must remove it.** A rule such as
+  `[role="dialog"] > button[aria-label="Close"]::before { content: ""; position: absolute; inset: -12px; }` wins
+  over the new `top`/`left` and combines with the new size and translate, shifting the hit area ~22px up-left.
+- **Titleless modals: the floating ×'s hit area now covers a ~32px square of the body's top-right corner**
+  (was ~20px). Leave that corner free of links, inputs or other controls.
+
 ## [0.25.3] — 2026-10-19
 
 ### Fixed

@@ -78,7 +78,8 @@ class ModalComposer
     {
         return FieldVariants::join(
             'text-base-content/50 hover:text-base-content transition-colors',
-            'rounded-[var(--radius-field)] p-1 hover:bg-base-200',
+            'relative rounded-[var(--radius-field)] p-1 hover:bg-base-200',
+            "before:absolute before:left-1/2 before:top-1/2 before:size-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
         );
     }
 
@@ -92,6 +93,11 @@ class ModalComposer
      * variant there is no neighboring title to anchor to, so we shrink to
      * `p-0.5 + w-4 h-4` (~20px square) — quieter, less "stamp pasted on the
      * corner" feel. See `closeIconFloat`.
+     *
+     * Hit area: both × buttons keep their visual size (~28px / ~20px) but carry an
+     * invisible, centred `::before` of a fixed 44px square (WCAG 2.5.5 / Apple HIG).
+     * Fixed px on purpose — the button's own size follows the tune's rem scale, so
+     * an `-inset-*` growth would fall short of 44px on smaller tunes.
      */
     private static function closeBtnFloat(): string
     {
@@ -99,6 +105,7 @@ class ModalComposer
             'absolute top-lg right-lg z-10',
             'text-base-content/50 hover:text-base-content transition-colors',
             'rounded-[var(--radius-field)] p-0.5 hover:bg-base-200',
+            "before:absolute before:left-1/2 before:top-1/2 before:size-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-['']",
         );
     }
 
