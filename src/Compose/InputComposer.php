@@ -38,7 +38,7 @@ class InputComposer
             default => 'h-[var(--h-field-md)]',
         };
         $disabledClass = $disabled ? 'opacity-60 cursor-not-allowed' : '';
-        return FieldVariants::join('flex items-stretch transition-colors', $radius, $variant, $disabledClass, $height);
+        return FieldVariants::join('flex items-stretch transition-colors', FieldVariants::CLIP, $radius, $variant, $disabledClass, $height);
     }
 
     private static function text(string $size): string

@@ -93,7 +93,8 @@
         @endif
 
         @if(isset($append))
-            <div class="shrink-0 flex items-stretch">
+            {{-- The shell clips (overflow-clip), so focus rings inside append draw inset. --}}
+            <div class="shrink-0 flex items-stretch [&_:focus-visible]:ring-inset [&_:focus-visible]:ring-offset-0">
                 {{ $append }}
             </div>
         @endif

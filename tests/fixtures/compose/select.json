@@ -3,7 +3,7 @@
         "name": "default — outline neutral md",
         "props": {},
         "expected": {
-            "wrapper": "relative flex items-center transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
+            "wrapper": "relative flex items-center transition-colors overflow-clip rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
             "selectClass": "flex-1 min-w-0 w-full bg-transparent border-0 outline-none appearance-none leading-tight text-[length:var(--text-field-md)] pl-[var(--px-input-md)] pr-9",
             "labelColor": "text-base-content",
             "hintColor": "text-base-content/50"
@@ -13,7 +13,7 @@
         "name": "error overrides color",
         "props": { "color": "primary", "error": "required" },
         "expected": {
-            "wrapper": "relative flex items-center transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-error focus-within:ring-1 focus-within:ring-error h-[var(--h-field-md)]",
+            "wrapper": "relative flex items-center transition-colors overflow-clip rounded-[var(--radius-field)] bg-base-100 tune-border border-error focus-within:ring-1 focus-within:ring-error h-[var(--h-field-md)]",
             "labelColor": "text-error",
             "hintColor": "text-error"
         }
@@ -30,7 +30,7 @@
         "name": "floating md with label",
         "props": { "floating": true, "hasLabel": true },
         "expected": {
-            "wrapper": "relative flex items-stretch transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
+            "wrapper": "relative flex items-stretch transition-colors overflow-clip rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]",
             "selectClass": "flex-1 min-w-0 w-full h-full bg-transparent border-0 outline-none appearance-none leading-none text-[length:var(--text-field-md)] pl-[var(--px-input-md)] pr-9 pt-4 pb-0.5",
             "floatingLabel": "absolute left-[var(--px-input-md)] top-1 text-[length:var(--text-field-xs)] text-base-content/60 pointer-events-none"
         }
@@ -39,21 +39,21 @@
         "name": "floating sm bumps wrapper to h-field-md",
         "props": { "floating": true, "hasLabel": true, "size": "sm" },
         "expected": {
-            "wrapper": "relative flex items-stretch transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]"
+            "wrapper": "relative flex items-stretch transition-colors overflow-clip rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary h-[var(--h-field-md)]"
         }
     },
     {
         "name": "underline sm — no radius",
         "props": { "appearance": "underline", "size": "sm" },
         "expected": {
-            "wrapper": "relative flex items-center transition-colors bg-transparent border-b border-base-300 focus-within:border-primary h-[var(--h-field-sm)]"
+            "wrapper": "relative flex items-center transition-colors overflow-clip bg-transparent border-b border-base-300 focus-within:border-primary h-[var(--h-field-sm)]"
         }
     },
     {
         "name": "disabled",
         "props": { "disabled": true },
         "expected": {
-            "wrapper": "relative flex items-center transition-colors rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary opacity-60 cursor-not-allowed h-[var(--h-field-md)]"
+            "wrapper": "relative flex items-center transition-colors overflow-clip rounded-[var(--radius-field)] bg-base-100 tune-border border-base-300 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary opacity-60 cursor-not-allowed h-[var(--h-field-md)]"
         }
     },
     {

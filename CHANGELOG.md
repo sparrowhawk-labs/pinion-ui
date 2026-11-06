@@ -7,6 +7,18 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.26.1] — 2026-11-06
+
+### Fixed
+- **Autofill background no longer pokes out of rounded `<x-input>` / native single-row `<x-select>` corners.**
+  The field wrapper owns border + radius and the inner control is transparent, but the browser's autofill paints
+  the control's own (square) background. The wrapper now carries `overflow-clip` (`FieldVariants::CLIP`), which
+  clips to its inner curve — and stays square at the seams `<x-input-group>` joins, so no gaps appear there or
+  beside `prefix` / `suffix`. Focus rings inside `<x-input>`'s `append` slot are drawn inset so the clip doesn't
+  cut them. `<x-textarea>`, list-mode and custom-mode `<x-select>` are unchanged (the clip would cut the resize
+  grip, corner options or the dropdown). Consumers who patched this with their own `input { border-radius: … }`
+  rule can drop it.
+
 ## [0.26.0] — 2026-11-06
 
 ### Changed

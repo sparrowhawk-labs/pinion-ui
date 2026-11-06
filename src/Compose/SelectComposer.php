@@ -74,7 +74,7 @@ class SelectComposer
             : ($isFloating ? 'flex items-stretch' : 'flex items-center');
 
         $disabledClass = $disabled ? 'opacity-60 cursor-not-allowed' : '';
-        return FieldVariants::join('relative', $layout, 'transition-colors', $radius, $variant, $disabledClass, $height);
+        return FieldVariants::join('relative', $layout, 'transition-colors', $isList ? '' : FieldVariants::CLIP, $radius, $variant, $disabledClass, $height);
     }
 
     private static function selectClass(string $size, bool $isList, bool $isFloating): string

@@ -52,6 +52,14 @@ class FieldVariants
         return $appearance === 'underline' ? '' : 'rounded-[var(--radius-field)]';
     }
 
+    /**
+     * Clip for a bordered field wrapper (v0.26.1). The wrapper owns border + radius and
+     * the bare control inside is transparent, but the browser's autofill paints the
+     * control's own square background past the rounded corners. Clipping at the wrapper
+     * follows its inner curve, and stays correct when <x-input-group> squares the seams.
+     */
+    public const CLIP = 'overflow-clip';
+
     public static function labelColor(?string $error): string
     {
         return $error ? 'text-error' : 'text-base-content';

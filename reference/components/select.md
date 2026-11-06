@@ -97,3 +97,4 @@ Shell variants come from `FieldVariants`, shared with `<x-input>` / `<x-textarea
 - `custom` + `floating` is rejected (the floating-label pattern depends on the visible native `<select>`); the blade falls back to the standard custom UI.
 - In `multiple` mode the `name` is automatically suffixed with `[]` so Laravel receives an array.
 - Custom mode keeps the native `<select>` `sr-only` for screen readers and form submission; an Alpine `init()` mirrors the option list at mount.
+- The native single-row shell carries `overflow-clip` (v0.26.1) so autofill stays inside the rounded corners. List mode (`multiple` / `rows`) and custom mode do not (corner options and the dropdown must not be cut).
