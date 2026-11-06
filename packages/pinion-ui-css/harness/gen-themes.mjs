@@ -115,6 +115,17 @@ function contentFor(color, { fg, bg, panel }) {
   return [fg, bg, panel].reduce((best, c) => (contrast(color, c) > contrast(color, best) ? c : best), fg);
 }
 
+/* ---------------- solid primary fill (tonal palettes) ---------------- */
+// A tonal palette sets primary to the same family as the surface on purpose, so a
+// filled `<x-button>` (solid × primary) disappears into the page (~1.05–1.18:1).
+// Below SOLID_TRIGGER the solid fill switches to base-content mixed 15% toward bg
+// (dark on light, light on dark); every other use of primary is untouched. Data rule,
+// no category branch: today it catches exactly the 22 tonal blocks (next lowest 1.51).
+// Emitted for EVERY theme (primary itself when not tonal) so a nested [data-theme]
+// never inherits a tonal parent's fill.
+const SOLID_TRIGGER = 1.3;
+const solidFor = (p) => (inkWorst(p.primary, p) < SOLID_TRIGGER ? mix(p.fg, p.bg, 0.15) : p.primary);
+
 /* ---------------- ink derivation (semantic colors as foreground) ---------------- */
 const INK_TRIGGER = 4.5; // WCAG AA (normal text): a color that passes this on base-100 AND base-200 is left alone
 const INK_TARGET = 5.0;  // a color that fails is pushed to this — a touch past AA so the ink reads clearly (user choice, 2026-09-14)
@@ -189,6 +200,7 @@ function block(theme, mode) {
   const status = statusColors(mode, p);
   const inkOf = { primary: p.primary, secondary: p.secondary, accent: p.accent, neutral, ...status };
   const ink = Object.fromEntries(Object.entries(inkOf).map(([k, v]) => [k, inkFor(v, p)]));
+  const solid = solidFor(p);
   const line = (k, v) => `    ${(k + ':').padEnd(27)}${v};`;
   const colorPair = (k, v) => [line(`--color-${k}`, v), line(`--color-${k}-content`, contentFor(v, p))];
 
@@ -221,6 +233,10 @@ function block(theme, mode) {
     // (pinion-sections reads it); the other seven are `--pn-ink-<name>` (v0.23.0).
     line('--pn-ink', ink.primary),
     ...['secondary', 'accent', 'neutral', 'info', 'success', 'warning', 'error'].map((k) => line(`--pn-ink-${k}`, ink[k])),
+    // solid primary fill (see solidFor): the base-content side for tonal palettes,
+    // primary itself otherwise. <x-button> solid × primary reads it.
+    line('--pn-solid-primary', solid),
+    line('--pn-solid-primary-content', contentFor(solid, p)),
     line('--radius-selector', '0.5rem'),
     line('--radius-field', '0.375rem'),
     line('--radius-box', '0.5rem'),

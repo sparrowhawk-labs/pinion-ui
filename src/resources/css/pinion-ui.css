@@ -427,6 +427,11 @@
     --color-ink-success:   var(--pn-ink-success, var(--color-success));
     --color-ink-warning:   var(--pn-ink-warning, var(--color-warning));
     --color-ink-error:     var(--pn-ink-error, var(--color-error));
+    /* Solid primary fill for <x-button> (v0.26.0). Tonal themes emit
+       --pn-solid-primary (base-content side) because their primary sits on the
+       surface's own tone; every other theme falls back to primary. */
+    --color-solid-primary:         var(--pn-solid-primary, var(--color-primary));
+    --color-solid-primary-content: var(--pn-solid-primary-content, var(--color-primary-content));
 }
 @utility text-* { color: --value(--color-ink-*); }
 @utility text-* { color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }

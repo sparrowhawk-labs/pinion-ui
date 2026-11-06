@@ -1300,6 +1300,8 @@
     --color-base-content: #1f2328;
     --color-primary: #0969da;
     --color-primary-content: #ffffff;
+    --pn-solid-primary: #0969da;
+    --pn-solid-primary-content: #ffffff;
     --color-secondary: #1f883d;
     --color-secondary-content: #ffffff;
     --color-accent: #8250df;
@@ -1356,6 +1358,8 @@
     --pn-ink-success: #1A7F37;
     --pn-ink-warning: #9A6700;
     --pn-ink-error: #CF222E;
+    --pn-solid-primary: #0969DA;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1399,6 +1403,8 @@
       --pn-ink-success: #3FB950;
       --pn-ink-warning: #D29922;
       --pn-ink-error: #F85149;
+      --pn-solid-primary: #4493F8;
+      --pn-solid-primary-content: #0D1117;
       --radius-selector: 0.5rem;
       --radius-field: 0.375rem;
       --radius-box: 0.5rem;
@@ -1442,6 +1448,8 @@
     --pn-ink-success: #3FB950;
     --pn-ink-warning: #D29922;
     --pn-ink-error: #F85149;
+    --pn-solid-primary: #4493F8;
+    --pn-solid-primary-content: #0D1117;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1484,6 +1492,8 @@
     --pn-ink-success: #00774C;
     --pn-ink-warning: #806400;
     --pn-ink-error: #BA3D00;
+    --pn-solid-primary: #E14775;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1526,6 +1536,8 @@
     --pn-ink-success: #A9DC76;
     --pn-ink-warning: #C9AA59;
     --pn-ink-error: #FC9867;
+    --pn-solid-primary: #FF6188;
+    --pn-solid-primary-content: #221F22;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1568,6 +1580,8 @@
     --pn-ink-success: #007858;
     --pn-ink-warning: #836600;
     --pn-ink-error: #BF3932;
+    --pn-solid-primary: #D42B3A;
+    --pn-solid-primary-content: #FFFDF8;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1610,6 +1624,8 @@
     --pn-ink-success: #2DD4BF;
     --pn-ink-warning: #C6A758;
     --pn-ink-error: #DE6A66;
+    --pn-solid-primary: #FF4757;
+    --pn-solid-primary-content: #191320;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1652,6 +1668,8 @@
     --pn-ink-success: #007C47;
     --pn-ink-warning: #986000;
     --pn-ink-error: #C63544;
+    --pn-solid-primary: #0675C9;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1694,6 +1712,8 @@
     --pn-ink-success: #45C08A;
     --pn-ink-warning: #E3A431;
     --pn-ink-error: #F0707B;
+    --pn-solid-primary: #3EA8FF;
+    --pn-solid-primary-content: #191E24;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1736,6 +1756,8 @@
     --pn-ink-success: #4D7640;
     --pn-ink-warning: #906300;
     --pn-ink-error: #BE3A30;
+    --pn-solid-primary: #AA5731;
+    --pn-solid-primary-content: #FEFDFA;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1778,6 +1800,8 @@
     --pn-ink-success: #8FAF7E;
     --pn-ink-warning: #D9A33C;
     --pn-ink-error: #E0806E;
+    --pn-solid-primary: #D97757;
+    --pn-solid-primary-content: #1F1E1D;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1820,6 +1844,8 @@
     --pn-ink-success: #26763C;
     --pn-ink-warning: #826400;
     --pn-ink-error: #B73D42;
+    --pn-solid-primary: #E36BC6;
+    --pn-solid-primary-content: #46356B;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1862,6 +1888,8 @@
     --pn-ink-success: #99E2AB;
     --pn-ink-warning: #EACB75;
     --pn-ink-error: #FF8B8B;
+    --pn-solid-primary: #FF9DE6;
+    --pn-solid-primary-content: #322753;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1904,6 +1932,8 @@
     --pn-ink-success: #53712E;
     --pn-ink-warning: #816500;
     --pn-ink-error: #BE3832;
+    --pn-solid-primary: #2E8A4E;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1946,6 +1976,8 @@
     --pn-ink-success: #9FBE72;
     --pn-ink-warning: #C6A956;
     --pn-ink-error: #EA776F;
+    --pn-solid-primary: #62B385;
+    --pn-solid-primary-content: #14231A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -1988,6 +2020,8 @@
     --pn-ink-success: #5A6900;
     --pn-ink-warning: #7D5D00;
     --pn-ink-error: #C50F19;
+    --pn-solid-primary: #0A6CB0;
+    --pn-solid-primary-content: #FDF6E3;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2030,6 +2064,8 @@
     --pn-ink-success: #8CA82E;
     --pn-ink-warning: #C29500;
     --pn-ink-error: #FF7768;
+    --pn-solid-primary: #3D9DE0;
+    --pn-solid-primary-content: #002B36;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2072,6 +2108,8 @@
     --pn-ink-success: #2A7942;
     --pn-ink-warning: #836800;
     --pn-ink-error: #C13B35;
+    --pn-solid-primary: #616B59;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2114,6 +2152,8 @@
     --pn-ink-success: #62A972;
     --pn-ink-warning: #C7A956;
     --pn-ink-error: #E8746C;
+    --pn-solid-primary: #8FA283;
+    --pn-solid-primary-content: #211F1C;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2156,6 +2196,8 @@
     --pn-ink-success: #007A4F;
     --pn-ink-warning: #846700;
     --pn-ink-error: #C13A36;
+    --pn-solid-primary: #FFC300;
+    --pn-solid-primary-content: #2B2430;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2198,6 +2240,8 @@
     --pn-ink-success: #5FE8B0;
     --pn-ink-warning: #C7A95A;
     --pn-ink-error: #EA7671;
+    --pn-solid-primary: #FFD34D;
+    --pn-solid-primary-content: #241E2E;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2240,6 +2284,8 @@
     --pn-ink-success: #467553;
     --pn-ink-warning: #846700;
     --pn-ink-error: #C13A34;
+    --pn-solid-primary: #0F766E;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2282,6 +2328,8 @@
     --pn-ink-success: #93B478;
     --pn-ink-warning: #C8A957;
     --pn-ink-error: #ED7971;
+    --pn-solid-primary: #2DA88F;
+    --pn-solid-primary-content: #262421;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2324,6 +2372,8 @@
     --pn-ink-success: #2A7942;
     --pn-ink-warning: #886500;
     --pn-ink-error: #C13B35;
+    --pn-solid-primary: #0043CE;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2366,6 +2416,8 @@
     --pn-ink-success: #5FA772;
     --pn-ink-warning: #F1C21B;
     --pn-ink-error: #DD6A66;
+    --pn-solid-primary: #4589FF;
+    --pn-solid-primary-content: #10141F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2408,6 +2460,8 @@
     --pn-ink-success: #0A7738;
     --pn-ink-warning: #896000;
     --pn-ink-error: #BC3732;
+    --pn-solid-primary: #D08F00;
+    --pn-solid-primary-content: #101010;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2450,6 +2504,8 @@
     --pn-ink-success: #52D97A;
     --pn-ink-warning: #FBC548;
     --pn-ink-error: #D0605A;
+    --pn-solid-primary: #FFB000;
+    --pn-solid-primary-content: #090909;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2492,6 +2548,8 @@
     --pn-ink-success: #007849;
     --pn-ink-warning: #816500;
     --pn-ink-error: #C92152;
+    --pn-solid-primary: #C41CA8;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2534,6 +2592,8 @@
     --pn-ink-success: #4CE5A0;
     --pn-ink-warning: #C4A654;
     --pn-ink-error: #FF5A7A;
+    --pn-solid-primary: #FF3DDC;
+    --pn-solid-primary-content: #09090B;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2576,6 +2636,8 @@
     --pn-ink-success: #26763F;
     --pn-ink-warning: #886100;
     --pn-ink-error: #C43A2E;
+    --pn-solid-primary: #1F8F3A;
+    --pn-solid-primary-content: #0F1410;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2618,6 +2680,8 @@
     --pn-ink-success: #5EA66F;
     --pn-ink-warning: #F5C831;
     --pn-ink-error: #FF5C5C;
+    --pn-solid-primary: #33FF6A;
+    --pn-solid-primary-content: #070A08;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2660,6 +2724,8 @@
     --pn-ink-success: #147645;
     --pn-ink-warning: #826200;
     --pn-ink-error: #C7302B;
+    --pn-solid-primary: #D2560A;
+    --pn-solid-primary-content: #17140F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2702,6 +2768,8 @@
     --pn-ink-success: #5FD39A;
     --pn-ink-warning: #F5C841;
     --pn-ink-error: #FF6363;
+    --pn-solid-primary: #FF7A1A;
+    --pn-solid-primary-content: #0C0B0A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2744,6 +2812,8 @@
     --pn-ink-success: #007A44;
     --pn-ink-warning: #836700;
     --pn-ink-error: #D1144C;
+    --pn-solid-primary: #635BFF;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2786,6 +2856,8 @@
     --pn-ink-success: #43CE8B;
     --pn-ink-warning: #C5A859;
     --pn-ink-error: #F86A8F;
+    --pn-solid-primary: #8A84FF;
+    --pn-solid-primary-content: #151929;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2828,6 +2900,8 @@
     --pn-ink-success: #007958;
     --pn-ink-warning: #8B6300;
     --pn-ink-error: #B23A2E;
+    --pn-solid-primary: #8A5A2E;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2870,6 +2944,8 @@
     --pn-ink-success: #4DAB7F;
     --pn-ink-warning: #D9A93F;
     --pn-ink-error: #F17060;
+    --pn-solid-primary: #C89158;
+    --pn-solid-primary-content: #241F17;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2912,6 +2988,8 @@
     --pn-ink-success: #007763;
     --pn-ink-warning: #925E00;
     --pn-ink-error: #BF3934;
+    --pn-solid-primary: #171717;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2954,6 +3032,8 @@
     --pn-ink-success: #50E3C2;
     --pn-ink-warning: #F5A623;
     --pn-ink-error: #D1605B;
+    --pn-solid-primary: #EDEDED;
+    --pn-solid-primary-content: #0E0E0E;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -2996,6 +3076,8 @@
     --pn-ink-success: #28773F;
     --pn-ink-warning: #816600;
     --pn-ink-error: #BE3932;
+    --pn-solid-primary: #1D7A46;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3038,6 +3120,8 @@
     --pn-ink-success: #61A971;
     --pn-ink-warning: #C6A956;
     --pn-ink-error: #E8766D;
+    --pn-solid-primary: #4CAF78;
+    --pn-solid-primary-content: #1B211A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3080,6 +3164,8 @@
     --pn-ink-success: #007B3E;
     --pn-ink-warning: #836700;
     --pn-ink-error: #C92B3B;
+    --pn-solid-primary: #1D3461;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3122,6 +3208,8 @@
     --pn-ink-success: #4FCF8D;
     --pn-ink-warning: #C4A859;
     --pn-ink-error: #F07A7A;
+    --pn-solid-primary: #4F79C7;
+    --pn-solid-primary-content: #0D1526;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3164,6 +3252,8 @@
     --pn-ink-success: #2C7942;
     --pn-ink-warning: #846700;
     --pn-ink-error: #C13A34;
+    --pn-solid-primary: #E65F52;
+    --pn-solid-primary-content: #33261F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3206,6 +3296,8 @@
     --pn-ink-success: #64A971;
     --pn-ink-warning: #C8A855;
     --pn-ink-error: #E7736B;
+    --pn-solid-primary: #F08074;
+    --pn-solid-primary-content: #281C15;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3248,6 +3340,8 @@
     --pn-ink-success: #287A43;
     --pn-ink-warning: #836800;
     --pn-ink-error: #C53537;
+    --pn-solid-primary: #0E8FA3;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3290,6 +3384,8 @@
     --pn-ink-success: #60A973;
     --pn-ink-warning: #C6A958;
     --pn-ink-error: #F07C74;
+    --pn-solid-primary: #3FB7CB;
+    --pn-solid-primary-content: #152325;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3332,6 +3428,8 @@
     --pn-ink-success: #007945;
     --pn-ink-warning: #826600;
     --pn-ink-error: #BF3835;
+    --pn-solid-primary: #8324C9;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3374,6 +3472,8 @@
     --pn-ink-success: #54D98A;
     --pn-ink-warning: #C7A85B;
     --pn-ink-error: #E26F6D;
+    --pn-solid-primary: #BE8FF5;
+    --pn-solid-primary-content: #201430;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3416,6 +3516,8 @@
     --pn-ink-success: #007A42;
     --pn-ink-warning: #935F00;
     --pn-ink-error: #BF3A35;
+    --pn-solid-primary: #0891B2;
+    --pn-solid-primary-content: #0F172A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3458,6 +3560,8 @@
     --pn-ink-success: #3FD980;
     --pn-ink-warning: #F2B822;
     --pn-ink-error: #E2706C;
+    --pn-solid-primary: #22D3EE;
+    --pn-solid-primary-content: #0F172A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3500,6 +3604,8 @@
     --pn-ink-success: #2A7943;
     --pn-ink-warning: #846700;
     --pn-ink-error: #D40151;
+    --pn-solid-primary: #611F69;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3542,6 +3648,8 @@
     --pn-ink-success: #63A873;
     --pn-ink-warning: #C7A858;
     --pn-ink-error: #F06487;
+    --pn-solid-primary: #B366C0;
+    --pn-solid-primary-content: #221726;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3584,6 +3692,8 @@
     --pn-ink-success: #2C7A40;
     --pn-ink-warning: #846900;
     --pn-ink-error: #D11E4B;
+    --pn-solid-primary: #F97316;
+    --pn-solid-primary-content: #331F14;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3626,6 +3736,8 @@
     --pn-ink-success: #64A970;
     --pn-ink-warning: #C8A854;
     --pn-ink-error: #F86E90;
+    --pn-solid-primary: #FB923C;
+    --pn-solid-primary-content: #2A1D10;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3668,6 +3780,8 @@
     --pn-ink-success: #2B7A42;
     --pn-ink-warning: #896600;
     --pn-ink-error: #C13B35;
+    --pn-solid-primary: #E8590C;
+    --pn-solid-primary-content: #2A2620;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3710,6 +3824,8 @@
     --pn-ink-success: #63A971;
     --pn-ink-warning: #D6B060;
     --pn-ink-error: #E8736C;
+    --pn-solid-primary: #FB8A3C;
+    --pn-solid-primary-content: #241E17;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3752,6 +3868,8 @@
     --pn-ink-success: #287942;
     --pn-ink-warning: #836700;
     --pn-ink-error: #C03C36;
+    --pn-solid-primary: #2563EB;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3794,6 +3912,8 @@
     --pn-ink-success: #5FA975;
     --pn-ink-warning: #C5A95B;
     --pn-ink-error: #E47470;
+    --pn-solid-primary: #5B8DEF;
+    --pn-solid-primary-content: #131C33;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3836,6 +3956,8 @@
     --pn-ink-success: #277261;
     --pn-ink-warning: #836600;
     --pn-ink-error: #C03934;
+    --pn-solid-primary: #6B1F2A;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3878,6 +4000,8 @@
     --pn-ink-success: #4FA898;
     --pn-ink-warning: #C7A956;
     --pn-ink-error: #E5726B;
+    --pn-solid-primary: #C05A6A;
+    --pn-solid-primary-content: #211D1B;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3920,6 +4044,8 @@
     --pn-ink-success: #26763F;
     --pn-ink-warning: #846300;
     --pn-ink-error: #BD3732;
+    --pn-solid-primary: #465B71;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -3962,6 +4088,8 @@
     --pn-ink-success: #60A872;
     --pn-ink-warning: #D8B554;
     --pn-ink-error: #E5736D;
+    --pn-solid-primary: #8FA6BC;
+    --pn-solid-primary-content: #171B20;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4004,6 +4132,8 @@
     --pn-ink-success: #0F7954;
     --pn-ink-warning: #886500;
     --pn-ink-error: #C03B35;
+    --pn-solid-primary: #C41E2F;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4046,6 +4176,8 @@
     --pn-ink-success: #46B98A;
     --pn-ink-warning: #D0AC49;
     --pn-ink-error: #DC6963;
+    --pn-solid-primary: #F0455A;
+    --pn-solid-primary-content: #131313;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4088,6 +4220,8 @@
     --pn-ink-success: #1E7B52;
     --pn-ink-warning: #826600;
     --pn-ink-error: #BF3A34;
+    --pn-solid-primary: #37474F;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4130,6 +4264,8 @@
     --pn-ink-success: #35C78B;
     --pn-ink-warning: #C5A856;
     --pn-ink-error: #DE6D66;
+    --pn-solid-primary: #92A4AE;
+    --pn-solid-primary-content: #10171A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4172,6 +4308,8 @@
     --pn-ink-success: #2C793F;
     --pn-ink-warning: #816800;
     --pn-ink-error: #C13B33;
+    --pn-solid-primary: #339AF0;
+    --pn-solid-primary-content: #35302E;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4214,6 +4352,8 @@
     --pn-ink-success: #63AA72;
     --pn-ink-warning: #EBCC50;
     --pn-ink-error: #F47F77;
+    --pn-solid-primary: #4DABF7;
+    --pn-solid-primary-content: #2B2820;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4256,6 +4396,8 @@
     --pn-ink-success: #2A7941;
     --pn-ink-warning: #836700;
     --pn-ink-error: #C03A34;
+    --pn-solid-primary: #7C8F62;
+    --pn-solid-primary-content: #2E2F27;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4298,6 +4440,8 @@
     --pn-ink-success: #62A972;
     --pn-ink-warning: #C7A956;
     --pn-ink-error: #ED7A71;
+    --pn-solid-primary: #A5BC85;
+    --pn-solid-primary-content: #22241D;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4340,6 +4484,8 @@
     --pn-ink-success: #097A4C;
     --pn-ink-warning: #836700;
     --pn-ink-error: #C03A36;
+    --pn-solid-primary: #145DA0;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4382,6 +4528,8 @@
     --pn-ink-success: #43BC8B;
     --pn-ink-warning: #C5A858;
     --pn-ink-error: #E2716C;
+    --pn-solid-primary: #4F94D4;
+    --pn-solid-primary-content: #121A22;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4424,6 +4572,8 @@
     --pn-ink-success: #2A7942;
     --pn-ink-warning: #846700;
     --pn-ink-error: #C13A34;
+    --pn-solid-primary: #33261C;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4466,6 +4616,8 @@
     --pn-ink-success: #61A871;
     --pn-ink-warning: #C6A855;
     --pn-ink-error: #E06E66;
+    --pn-solid-primary: #E8E2D8;
+    --pn-solid-primary-content: #1B1815;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4508,6 +4660,8 @@
     --pn-ink-success: #007660;
     --pn-ink-warning: #806500;
     --pn-ink-error: #BD3834;
+    --pn-solid-primary: #1E4F94;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4550,6 +4704,8 @@
     --pn-ink-success: #3FA986;
     --pn-ink-warning: #C5A95A;
     --pn-ink-error: #E87771;
+    --pn-solid-primary: #6BA3DC;
+    --pn-solid-primary-content: #10202F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4592,6 +4748,8 @@
     --pn-ink-success: #2C7B41;
     --pn-ink-warning: #856900;
     --pn-ink-error: #C23D34;
+    --pn-solid-primary: #7E9B12;
+    --pn-solid-primary-content: #333A18;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4634,6 +4792,8 @@
     --pn-ink-success: #37B3A8;
     --pn-ink-warning: #C8AA54;
     --pn-ink-error: #F58076;
+    --pn-solid-primary: #A8C93F;
+    --pn-solid-primary-content: #252A14;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4676,6 +4836,8 @@
     --pn-ink-success: #29781A;
     --pn-ink-warning: #816500;
     --pn-ink-error: #BD3933;
+    --pn-solid-primary: #12A5AB;
+    --pn-solid-primary-content: #1C3335;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4718,6 +4880,8 @@
     --pn-ink-success: #7BC060;
     --pn-ink-warning: #C5AA58;
     --pn-ink-error: #EC7B73;
+    --pn-solid-primary: #3FC7CD;
+    --pn-solid-primary-content: #0E2528;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4760,6 +4924,8 @@
     --pn-ink-success: #007C3C;
     --pn-ink-warning: #846700;
     --pn-ink-error: #C13B35;
+    --pn-solid-primary: #1A1A1A;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4802,6 +4968,8 @@
     --pn-ink-success: #52E08A;
     --pn-ink-warning: #C5A755;
     --pn-ink-error: #DC6A63;
+    --pn-solid-primary: #EFEFE7;
+    --pn-solid-primary-content: #141412;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4844,6 +5012,8 @@
     --pn-ink-success: #297A42;
     --pn-ink-warning: #846800;
     --pn-ink-error: #C03C35;
+    --pn-solid-primary: #00B37E;
+    --pn-solid-primary-content: #1E2A26;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4886,6 +5056,8 @@
     --pn-ink-success: #60A871;
     --pn-ink-warning: #C5A856;
     --pn-ink-error: #E27069;
+    --pn-solid-primary: #2DD49B;
+    --pn-solid-primary-content: #121B18;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4928,6 +5100,8 @@
     --pn-ink-success: #277740;
     --pn-ink-warning: #816500;
     --pn-ink-error: #BE3833;
+    --pn-solid-primary: #C28410;
+    --pn-solid-primary-content: #232A31;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -4970,6 +5144,8 @@
     --pn-ink-success: #60A872;
     --pn-ink-warning: #C5A857;
     --pn-ink-error: #E3726C;
+    --pn-solid-primary: #E8B341;
+    --pn-solid-primary-content: #14181C;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5012,6 +5188,8 @@
     --pn-ink-success: #24753E;
     --pn-ink-warning: #7F6300;
     --pn-ink-error: #BB3631;
+    --pn-solid-primary: #2D2F31;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5054,6 +5232,8 @@
     --pn-ink-success: #5FA670;
     --pn-ink-warning: #C4A654;
     --pn-ink-error: #D1605B;
+    --pn-solid-primary: #BFC1C3;
+    --pn-solid-primary-content: #0C0D0E;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5096,6 +5276,8 @@
     --pn-ink-success: #2C7B43;
     --pn-ink-warning: #856900;
     --pn-ink-error: #C23D37;
+    --pn-solid-primary: #0B0B0B;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5138,6 +5320,8 @@
     --pn-ink-success: #5EA56E;
     --pn-ink-warning: #C3A553;
     --pn-ink-error: #CF5F59;
+    --pn-solid-primary: #D3D3D3;
+    --pn-solid-primary-content: #050505;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5180,6 +5364,8 @@
     --pn-ink-success: #22723A;
     --pn-ink-warning: #7B6000;
     --pn-ink-error: #B8322C;
+    --pn-solid-primary: #372F2A;
+    --pn-solid-primary-content: #FAF6EF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5222,6 +5408,8 @@
     --pn-ink-success: #60A66F;
     --pn-ink-warning: #C5A653;
     --pn-ink-error: #D1605A;
+    --pn-solid-primary: #C5BBAD;
+    --pn-solid-primary-content: #110D0A;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5264,6 +5452,8 @@
     --pn-ink-success: #596600;
     --pn-ink-warning: #7A5C00;
     --pn-ink-error: #C20A16;
+    --pn-solid-primary: #2C4E57;
+    --pn-solid-primary-content: #FAF4E2;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5306,6 +5496,8 @@
     --pn-ink-success: #8CA82E;
     --pn-ink-warning: #C29500;
     --pn-ink-error: #FF7364;
+    --pn-solid-primary: #8EA3A5;
+    --pn-solid-primary-content: #00232C;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5348,6 +5540,8 @@
     --pn-ink-success: #007455;
     --pn-ink-warning: #836000;
     --pn-ink-error: #C71A30;
+    --pn-solid-primary: #403C45;
+    --pn-solid-primary-content: #FCFAFD;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5390,6 +5584,8 @@
     --pn-ink-success: #2DD4BF;
     --pn-ink-warning: #F0C34E;
     --pn-ink-error: #FF4757;
+    --pn-solid-primary: #C8C0CF;
+    --pn-solid-primary-content: #161120;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5432,6 +5628,8 @@
     --pn-ink-success: #48713B;
     --pn-ink-warning: #8A5F00;
     --pn-ink-error: #BE3A30;
+    --pn-solid-primary: #443F3A;
+    --pn-solid-primary-content: #FDFBF6;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5474,6 +5672,8 @@
     --pn-ink-success: #8FAF7E;
     --pn-ink-warning: #D9A33C;
     --pn-ink-error: #E0806E;
+    --pn-solid-primary: #CAC4B9;
+    --pn-solid-primary-content: #1E1B18;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5516,6 +5716,8 @@
     --pn-ink-success: #377125;
     --pn-ink-warning: #805F00;
     --pn-ink-error: #B8412F;
+    --pn-solid-primary: #353931;
+    --pn-solid-primary-content: #F6F7F1;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5558,6 +5760,8 @@
     --pn-ink-success: #8DBA72;
     --pn-ink-warning: #D2A83C;
     --pn-ink-error: #E0705D;
+    --pn-solid-primary: #C2C5BB;
+    --pn-solid-primary-content: #111410;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5600,6 +5804,8 @@
     --pn-ink-success: #30703C;
     --pn-ink-warning: #805E00;
     --pn-ink-error: #B33832;
+    --pn-solid-primary: #393336;
+    --pn-solid-primary-content: #F9F6F7;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5642,6 +5848,8 @@
     --pn-ink-success: #86BC8E;
     --pn-ink-warning: #D4AB48;
     --pn-ink-error: #E27A70;
+    --pn-solid-primary: #CAC2C6;
+    --pn-solid-primary-content: #171214;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5684,6 +5892,8 @@
     --pn-ink-success: #237043;
     --pn-ink-warning: #805D00;
     --pn-ink-error: #B72F32;
+    --pn-solid-primary: #2B3342;
+    --pn-solid-primary-content: #F4F6F9;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5726,6 +5936,8 @@
     --pn-ink-success: #6FC08C;
     --pn-ink-warning: #E2B44A;
     --pn-ink-error: #EF6E6E;
+    --pn-solid-primary: #BEC4D0;
+    --pn-solid-primary-content: #0A1020;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5768,6 +5980,8 @@
     --pn-ink-success: #207149;
     --pn-ink-warning: #7F5F00;
     --pn-ink-error: #B83230;
+    --pn-solid-primary: #26363A;
+    --pn-solid-primary-content: #F2F9FA;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5810,6 +6024,8 @@
     --pn-ink-success: #6CC49A;
     --pn-ink-warning: #E3B94F;
     --pn-ink-error: #F07070;
+    --pn-solid-primary: #BDCCCF;
+    --pn-solid-primary-content: #061417;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5852,6 +6068,8 @@
     --pn-ink-success: #25763F;
     --pn-ink-warning: #806400;
     --pn-ink-error: #CD1818;
+    --pn-solid-primary: #292928;
+    --pn-solid-primary-content: #FAFAF8;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5894,6 +6112,8 @@
     --pn-ink-success: #5FA66F;
     --pn-ink-warning: #C4A654;
     --pn-ink-error: #F5483D;
+    --pn-solid-primary: #CBCBC8;
+    --pn-solid-primary-content: #0D0D0C;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5936,6 +6156,8 @@
     --pn-ink-success: #387345;
     --pn-ink-warning: #846200;
     --pn-ink-error: #B9453B;
+    --pn-solid-primary: #3E5F96;
+    --pn-solid-primary-content: #FFFFFF;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;
@@ -5978,6 +6200,8 @@
     --pn-ink-success: #9ED1A4;
     --pn-ink-warning: #E9C75B;
     --pn-ink-error: #F08A80;
+    --pn-solid-primary: #9DBDE6;
+    --pn-solid-primary-content: #2E2A2F;
     --radius-selector: 0.5rem;
     --radius-field: 0.375rem;
     --radius-box: 0.5rem;

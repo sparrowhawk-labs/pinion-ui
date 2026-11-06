@@ -24,6 +24,8 @@ Primary interactive control for actions. Renders `<button>` by default; pass `hr
 | `icon` | `string \| null` | `null` | Pinion-icons name rendered left of the slot. Hidden while `loading`. |
 | `iconRight` | `string \| null` | `null` | Pinion-icons name rendered right of the slot. Hidden while `loading`. |
 
+> **Tonal themes (v0.26.0).** `solid` × `primary` fills with `--pn-solid-primary` (and so does the hover fill of `outline` / `wire` × `primary`). On the tonal themes (`glyph`, `carbon`, `noir`, `signal`, `tide`, …) primary shares the surface's tone, so that fill is the base-content side instead (dark on light, light on dark). On light tonal themes this equals the `neutral` fill. Every other theme uses primary as before.
+
 All other attributes pass through to the root element (`type`, `wire:click`, `@click`, etc.).
 
 ## Slots

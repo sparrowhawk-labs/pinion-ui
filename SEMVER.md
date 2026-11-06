@@ -52,6 +52,16 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.26.0 — 2026-11-06
+
+- **Default flip — `<x-button>` solid × primary fills with `--pn-solid-primary`.** On the 22 tonal theme blocks
+  that is base-content mixed 15% toward base-200 instead of primary (glyph light: `#0B0B0B` was `#EDEDED`); on
+  every other block it equals primary, so nothing changes there. The class string changes from `bg-primary
+  text-primary-content hover:bg-primary/90` to `bg-solid-primary text-solid-primary-content
+  hover:bg-solid-primary/90` — consumers that match the old class string on buttons must update. Opt back to the
+  old tonal look by overriding `--pn-solid-primary: var(--color-primary)` and
+  `--pn-solid-primary-content: var(--color-primary-content)` on the theme.
+
 ### v0.25.2 — 2026-10-18
 
 - **Default flip — the checked toggle fill is ink.** `solid` / `wire` rail `peer-checked:bg-ink-<color>`, `soft`

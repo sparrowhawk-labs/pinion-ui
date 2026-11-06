@@ -7,6 +7,24 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.26.0] — 2026-11-06
+
+### Changed
+- **`<x-button>` solid × primary reads a new `--pn-solid-primary` fill, which is base-content-side on tonal
+  themes.** The 22 tonal blocks (`glyph`, `carbon`, `noir`, `signal`, `tide`, `nocturne`, `moss`, `quartz`,
+  `clay`, `glacier`, `midnight` and their `-dark`) put primary on the surface's own tone (1.05–1.18:1 against
+  base-100 / base-200), so a filled primary button read as a flat chip. Their solid fill is now base-content
+  mixed 15% toward base-200 (dark on light, light on dark), with matching `--pn-solid-primary-content`. The rule
+  is data-driven in `gen-themes.mjs` (primary below 1.3:1 against the surface; the next-lowest theme is 1.51:1).
+  Every other theme block (hand-written `reactive` included) emits `--pn-solid-primary` = primary, so it renders
+  as before. The hover fill of `outline` / `wire` × primary uses the same variable (on tonal themes the old hover
+  fill was invisible). On light tonal themes the solid primary fill equals the `neutral` fill.
+- Only the button changed: badges, soft buttons, links, the active pagination item, the `boxed` tab and other
+  primary uses keep `--color-primary`. A custom theme nested under a tonal parent should set
+  `--pn-solid-primary` itself, or it inherits the parent's.
+- `@sparrowhawk-labs/pinion-ui-css` `dist/pinion-ui.css` regenerated (adds the two `--pn-*` variables to every
+  block). Hand-written CSS reads `var(--pn-solid-primary, var(--color-primary))`.
+
 ## [0.25.4] — 2026-11-06
 
 ### Fixed

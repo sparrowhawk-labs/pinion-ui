@@ -24,7 +24,7 @@
 
     $variantClasses = match("{$appearance}-{$color}") {
         // solid: bg-color + content text
-        'solid-primary'   => 'bg-primary text-primary-content border-transparent hover:bg-primary/90 focus-visible:ring-primary',
+        'solid-primary'   => 'bg-solid-primary text-solid-primary-content border-transparent hover:bg-solid-primary/90 focus-visible:ring-primary',
         'solid-secondary' => 'bg-secondary text-secondary-content border-transparent hover:bg-secondary/90 focus-visible:ring-secondary',
         'solid-accent'    => 'bg-accent text-accent-content border-transparent hover:bg-accent/90 focus-visible:ring-accent',
         'solid-neutral'   => 'bg-neutral text-neutral-content border-transparent hover:bg-neutral/90 focus-visible:ring-neutral',
@@ -34,7 +34,7 @@
         'solid-error'     => 'bg-error text-error-content border-transparent hover:bg-error/90 focus-visible:ring-error',
 
         // outline: transparent bg, colored border/text, invert on hover
-        'outline-primary'   => 'bg-transparent text-primary border-primary hover:bg-primary hover:text-primary-content hover:border-transparent focus-visible:ring-primary',
+        'outline-primary'   => 'bg-transparent text-primary border-primary hover:bg-solid-primary hover:text-solid-primary-content hover:border-transparent focus-visible:ring-primary',
         'outline-secondary' => 'bg-transparent text-secondary border-secondary hover:bg-secondary hover:text-secondary-content hover:border-transparent focus-visible:ring-secondary',
         'outline-accent'    => 'bg-transparent text-accent border-accent hover:bg-accent hover:text-accent-content hover:border-transparent focus-visible:ring-accent',
         'outline-neutral'   => 'bg-transparent text-base-content border-base-content/10 hover:bg-base-content hover:text-base-100 hover:border-transparent focus-visible:ring-base-content',
@@ -45,7 +45,7 @@
 
         // wire (v0.17.2): transparent + neutral hairline, text in base-content; the colour only
         // appears as the fill on hover / active. Minimal, retro-future.
-        'wire-primary'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-primary hover:text-primary-content hover:border-transparent focus-visible:ring-primary',
+        'wire-primary'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-solid-primary hover:text-solid-primary-content hover:border-transparent focus-visible:ring-primary',
         'wire-secondary' => 'bg-transparent text-base-content border-base-content/45 hover:bg-secondary hover:text-secondary-content hover:border-transparent focus-visible:ring-secondary',
         'wire-accent'    => 'bg-transparent text-base-content border-base-content/45 hover:bg-accent hover:text-accent-content hover:border-transparent focus-visible:ring-accent',
         'wire-neutral'   => 'bg-transparent text-base-content border-base-content/45 hover:bg-base-content hover:text-base-100 hover:border-transparent focus-visible:ring-base-content',
@@ -109,7 +109,7 @@
         'ghost-info', 'ghost-success', 'ghost-warning', 'ghost-error'
             => 'bg-transparent text-base-content border-transparent hover:bg-base-200 focus-visible:ring-base-300',
 
-        default => 'bg-primary text-primary-content border-transparent hover:bg-primary/90 focus-visible:ring-primary',
+        default => 'bg-solid-primary text-solid-primary-content border-transparent hover:bg-solid-primary/90 focus-visible:ring-primary',
     };
 
     $stateClasses = ($disabled || $loading) ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer';
