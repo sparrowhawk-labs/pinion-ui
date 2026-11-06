@@ -783,6 +783,12 @@
     --radius-field: 10px 6px 12px 5px / 6px 12px 5px 10px;
     --radius-selector: 18px 12px 20px 10px / 12px 20px 10px 18px;
 }
+/* v0.26.2: <x-textarea> gives the bare textarea calc(--radius-field − --border).
+   A multi-value radius makes that calc invalid (square corners), so draft spells
+   the inner wobble out — the field wobble minus ~1px. */
+[data-tune="draft"] textarea[class*="--radius-field"] {
+    border-radius: 9px 5px 11px 4px / 5px 11px 4px 9px;
+}
 
 /* proto — Nothing-OS flavour (a prototype with its internals showing):
    capsule tiles, pill fields, SQUARE selectors, hairline + flat, airy.

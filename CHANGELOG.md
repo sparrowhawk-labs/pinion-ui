@@ -13,7 +13,8 @@ For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.m
 - **Autofill background no longer pokes out of rounded `<x-textarea>` corners.** The wrapper can't clip
   (`overflow-clip` would cut the resize grip), so the bare `<textarea>` itself now gets the wrapper's inner
   radius (`FieldVariants::innerRadius()` — `--radius-field` minus `--border`; none for `underline`). The resize
-  grip stays visible. Consumers who patched this with their own `textarea { border-radius: … }` rule can drop it.
+  grip stays visible. `draft`'s multi-value wobble radius can't go through that `calc`, so `tune-core.css` spells
+  draft's inner wobble out. Consumers who patched this with their own `textarea { border-radius: … }` rule can drop it.
 
 ## [0.26.1] — 2026-11-06
 
