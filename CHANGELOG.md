@@ -7,6 +7,14 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.26.2] — 2026-11-07
+
+### Fixed
+- **Autofill background no longer pokes out of rounded `<x-textarea>` corners.** The wrapper can't clip
+  (`overflow-clip` would cut the resize grip), so the bare `<textarea>` itself now gets the wrapper's inner
+  radius (`FieldVariants::innerRadius()` — `--radius-field` minus `--border`; none for `underline`). The resize
+  grip stays visible. Consumers who patched this with their own `textarea { border-radius: … }` rule can drop it.
+
 ## [0.26.1] — 2026-11-06
 
 ### Fixed

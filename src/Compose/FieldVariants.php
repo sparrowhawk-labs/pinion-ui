@@ -53,6 +53,16 @@ class FieldVariants
     }
 
     /**
+     * Radius for a bare control that sits inside the bordered wrapper and cannot be
+     * clipped (v0.26.2: <x-textarea>, whose resize grip an overflow clip would cut).
+     * Matching the wrapper's inner curve keeps the autofill background inside the corners.
+     */
+    public static function innerRadius(string $appearance): string
+    {
+        return $appearance === 'underline' ? '' : 'rounded-[max(0px,calc(var(--radius-field)-var(--border,1px)))]';
+    }
+
+    /**
      * Clip for a bordered field wrapper (v0.26.1). The wrapper owns border + radius and
      * the bare control inside is transparent, but the browser's autofill paints the
      * control's own square background past the rounded corners. Clipping at the wrapper

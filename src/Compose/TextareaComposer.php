@@ -19,7 +19,7 @@ class TextareaComposer
 
         return [
             'wrapper'       => self::wrapper($variant, $radius, $disabled),
-            'textareaClass' => self::textareaClass($size, $autoresize),
+            'textareaClass' => self::textareaClass($size, $autoresize, FieldVariants::innerRadius($appearance)),
             'labelColor'    => FieldVariants::labelColor($error),
             'hintColor'     => FieldVariants::hintColor($error),
         ];
@@ -31,7 +31,7 @@ class TextareaComposer
         return FieldVariants::join('block transition-colors', $radius, $variant, $disabledClass);
     }
 
-    private static function textareaClass(string $size, bool $autoresize): string
+    private static function textareaClass(string $size, bool $autoresize, string $innerRadius): string
     {
         $sizeUtil = match ($size) {
             'sm'    => 'tune-textarea-sm',
@@ -39,6 +39,6 @@ class TextareaComposer
             default => 'tune-textarea-md',
         };
         $resize = $autoresize ? 'resize-none overflow-hidden' : 'resize-y';
-        return "block w-full bg-transparent border-0 outline-none placeholder:text-base-content/40 $sizeUtil $resize";
+        return FieldVariants::join('block w-full bg-transparent border-0 outline-none placeholder:text-base-content/40', $innerRadius, $sizeUtil, $resize);
     }
 }

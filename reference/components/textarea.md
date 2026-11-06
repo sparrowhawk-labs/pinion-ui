@@ -76,3 +76,4 @@ Class strings live in [`src/Compose/TextareaComposer.php`](../../src/Compose/Tex
 - The component mounts a small Alpine block only when `autoresize` or counter (`counter` / `maxlength`) is enabled. Plain textareas render without Alpine.
 - `autoresize` flips the textarea to `resize-none overflow-hidden` so the JS-managed height isn't fought by the manual resize handle.
 - `counter` and `maxlength` independently activate the counter UI — `maxlength` alone is enough.
+- The bare `<textarea>` carries the shell's inner radius (v0.26.2) so the browser's autofill background stays inside the rounded corners. The shell itself isn't clipped, because a clip would cut the resize grip.
