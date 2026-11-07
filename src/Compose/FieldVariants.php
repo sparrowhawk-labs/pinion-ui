@@ -59,7 +59,16 @@ class FieldVariants
      */
     public static function innerRadius(string $appearance): string
     {
-        return $appearance === 'underline' ? '' : 'rounded-[max(0px,calc(var(--radius-field)-var(--border,1px)))]';
+        return $appearance === 'underline' ? '' : 'rounded-[max(0px,calc(var(--radius-textarea)-var(--border,1px)))]';
+    }
+
+    /**
+     * Radius for the <x-textarea> shell (v0.26.3). --radius-textarea follows --radius-field,
+     * except under data-tune-radius="pill", where a multi-line box takes the box radius.
+     */
+    public static function textareaRadius(string $appearance): string
+    {
+        return $appearance === 'underline' ? '' : 'rounded-[var(--radius-textarea)]';
     }
 
     /**

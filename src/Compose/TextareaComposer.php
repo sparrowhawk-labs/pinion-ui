@@ -15,7 +15,7 @@ class TextareaComposer
 
         $effectiveColor = $error ? 'error' : $color;
         $variant        = FieldVariants::variant($appearance, $effectiveColor);
-        $radius         = FieldVariants::radius($appearance);
+        $radius         = FieldVariants::textareaRadius($appearance);
 
         return [
             'wrapper'       => self::wrapper($variant, $radius, $disabled),

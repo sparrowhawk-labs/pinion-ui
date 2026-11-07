@@ -7,6 +7,15 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.26.3] — 2026-11-07
+
+### Fixed
+- **`<x-textarea>` under `data-tune-radius="pill"` no longer runs its first line into the left curve.** A 999px
+  field radius suits single-row controls but not a multi-line box. The textarea now rounds with a new token,
+  `--radius-textarea`, which follows `--radius-field` everywhere except the pill override, where it is the box
+  radius (1.5rem, `--ovr-radius-textarea`). `<x-input>` / `<x-select>` stay pills; `draft` keeps its own wobble
+  (also when nested inside a pill page); `<x-input-group>` still squares the seams (its rounded ends still use `--radius-field`).
+
 ## [0.26.2] — 2026-11-07
 
 ### Fixed

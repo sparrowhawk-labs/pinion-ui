@@ -321,6 +321,10 @@
     --radius-selector: max(0px,
         var(--ovr-radius-selector,
             calc(var(--tb-radius-selector) + var(--td-radius-selector) * var(--tune-k))));
+    /* v0.26.3: <x-textarea>'s shell. Follows the field radius, except where an
+       override gives a multi-line box its own (the 999px pill would run the first
+       line into the curve). */
+    --radius-textarea: var(--ovr-radius-textarea, var(--radius-field));
     /* F7: border floor 0.5px (editorial ships 0.5px hairline by design). */
     --border: max(0.5px,
         var(--ovr-border,
@@ -782,11 +786,12 @@
     --radius-box: 14px 8px 16px 6px / 8px 16px 6px 14px;
     --radius-field: 10px 6px 12px 5px / 6px 12px 5px 10px;
     --radius-selector: 18px 12px 20px 10px / 12px 20px 10px 18px;
+    --radius-textarea: var(--radius-field);  /* draft's wobble wins over a radius override */
 }
-/* v0.26.2: <x-textarea> gives the bare textarea calc(--radius-field − --border).
+/* v0.26.2: <x-textarea> gives the bare textarea calc(--radius-textarea − --border).
    A multi-value radius makes that calc invalid (square corners), so draft spells
    the inner wobble out — the field wobble minus ~1px. */
-[data-tune="draft"] textarea[class*="--radius-field"] {
+[data-tune="draft"] textarea[class*="--radius-textarea"] {
     border-radius: 9px 5px 11px 4px / 5px 11px 4px 9px;
 }
 
@@ -918,9 +923,9 @@
 [data-tune-shadow="normal"] { --ovr-shadow-box: 0 1px 2px rgb(0 0 0 / 0.06); }
 [data-tune-shadow="soft"]   { --ovr-shadow-box: 0 6px 18px rgb(0 0 0 / 0.08); }
 
-[data-tune-radius="none"]   { --ovr-radius-box: 0; --ovr-radius-field: 0; --ovr-radius-selector: 0; }
-[data-tune-radius="lg"]     { --ovr-radius-box: 1rem; --ovr-radius-field: 0.5rem; }
-[data-tune-radius="pill"]   { --ovr-radius-box: 1.5rem; --ovr-radius-field: 999px; --ovr-radius-selector: 999px; }
+[data-tune-radius="none"]   { --ovr-radius-box: 0; --ovr-radius-field: 0; --ovr-radius-selector: 0; --ovr-radius-textarea: 0; }
+[data-tune-radius="lg"]     { --ovr-radius-box: 1rem; --ovr-radius-field: 0.5rem; --ovr-radius-textarea: 0.5rem; }
+[data-tune-radius="pill"]   { --ovr-radius-box: 1.5rem; --ovr-radius-field: 999px; --ovr-radius-selector: 999px; --ovr-radius-textarea: 1.5rem; }
 
 [data-tune-density="compact"] { --ovr-space-4xl: 3.5rem; --ovr-space-lg: 1rem; --ovr-space-sm: 0.5rem; }
 [data-tune-density="airy"]    { --ovr-space-4xl: 7rem; --ovr-space-lg: 2.25rem; --ovr-space-sm: 1rem; }
