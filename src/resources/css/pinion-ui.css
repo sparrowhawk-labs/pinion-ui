@@ -116,6 +116,8 @@
    track, see ToggleComposer). Solid keeps the thumb at bg-base-100 so no
    recolour utility is needed for it. */
 @source inline("peer-checked:[&_.xy-thumb]:bg-{primary,secondary,accent,neutral,info,success,warning,error}");
+/* v0.26.4: soft × neutral fills the thumb with base-content (ToggleComposer $fill) — it was missing, so the checked thumb stayed base-100 and read as off. */
+@source inline("peer-checked:[&_.xy-thumb]:bg-base-content");
 @source inline("peer-checked:[&_.xy-thumb]:bg-ink-{primary,secondary,accent,neutral,info,success,warning,error}");
 
 /* Misc: transparent border (soft unchecked), muted label/description text */
@@ -432,6 +434,9 @@
        surface's own tone; every other theme falls back to primary. */
     --color-solid-primary:         var(--pn-solid-primary, var(--color-primary));
     --color-solid-primary-content: var(--pn-solid-primary-content, var(--color-primary-content));
+    /* Text in primary on a solid-primary tint (active pagination page, v0.26.4):
+       the ink of the solid fill — base-content side on tonal themes, ink-primary elsewhere. */
+    --color-solid-ink:             var(--pn-solid-ink, var(--pn-ink, var(--color-primary)));
 }
 @utility text-* { color: --value(--color-ink-*); }
 @utility text-* { color: color-mix(in oklab, --value(--color-ink-*) calc(--modifier(integer) * 1%), transparent); }

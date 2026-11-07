@@ -117,7 +117,7 @@ class PaginationComposer
         // vertical edges render its own border color at exactly one border
         // width. relative z-10 keeps the focus ring painting above siblings.
         return 'relative z-10 '.match ("{$appearance}-{$color}") {
-            'solid-primary'   => 'bg-primary text-primary-content border-transparent focus-visible:ring-primary cursor-default',
+            'solid-primary'   => 'bg-solid-primary text-solid-primary-content border-transparent focus-visible:ring-primary cursor-default',
             'solid-secondary' => 'bg-secondary text-secondary-content border-transparent focus-visible:ring-secondary cursor-default',
             'solid-accent'    => 'bg-accent text-accent-content border-transparent focus-visible:ring-accent cursor-default',
             'solid-neutral'   => 'bg-neutral text-neutral-content border-transparent focus-visible:ring-neutral cursor-default',
@@ -126,7 +126,7 @@ class PaginationComposer
             'solid-warning'   => 'bg-warning text-warning-content border-transparent focus-visible:ring-warning cursor-default',
             'solid-error'     => 'bg-error text-error-content border-transparent focus-visible:ring-error cursor-default',
 
-            'outline-primary'   => 'bg-base-100 text-primary border-primary focus-visible:ring-primary cursor-default',
+            'outline-primary'   => 'bg-base-100 text-solid-ink border-solid-ink focus-visible:ring-primary cursor-default',
             'outline-secondary' => 'bg-base-100 text-secondary border-secondary focus-visible:ring-secondary cursor-default',
             'outline-accent'    => 'bg-base-100 text-accent border-accent focus-visible:ring-accent cursor-default',
             'outline-neutral'   => 'bg-base-100 text-base-content border-base-content focus-visible:ring-base-content cursor-default',
@@ -135,7 +135,7 @@ class PaginationComposer
             'outline-warning'   => 'bg-base-100 text-warning border-warning focus-visible:ring-warning cursor-default',
             'outline-error'     => 'bg-base-100 text-error border-error focus-visible:ring-error cursor-default',
 
-            'soft-primary'   => 'bg-primary/15 text-primary border-primary/40 focus-visible:ring-primary cursor-default',
+            'soft-primary'   => 'bg-solid-ink/15 text-solid-ink border-solid-ink/40 focus-visible:ring-primary cursor-default',
             'soft-secondary' => 'bg-secondary/15 text-secondary border-secondary/40 focus-visible:ring-secondary cursor-default',
             'soft-accent'    => 'bg-accent/15 text-accent border-accent/40 focus-visible:ring-accent cursor-default',
             'soft-neutral'   => 'bg-base-content/15 text-base-content border-base-content/20 focus-visible:ring-base-content cursor-default',
@@ -144,7 +144,7 @@ class PaginationComposer
             'soft-warning'   => 'bg-warning/15 text-warning border-warning/40 focus-visible:ring-warning cursor-default',
             'soft-error'     => 'bg-error/15 text-error border-error/40 focus-visible:ring-error cursor-default',
 
-            default => 'bg-primary/15 text-primary border-primary/40 focus-visible:ring-primary cursor-default',
+            default => 'bg-solid-ink/15 text-solid-ink border-solid-ink/40 focus-visible:ring-primary cursor-default',
         };
     }
 

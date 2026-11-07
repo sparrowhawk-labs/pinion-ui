@@ -7,6 +7,25 @@ carries the authoritative audit trail of intentional default flips during `0.x`)
 
 For releases before `v0.4.0`, see the per-tag GitHub release notes and `SEMVER.md`.
 
+## [0.26.4] — 2026-11-07
+
+### Changed
+- **The active page of `<x-pagination>` (primary) and the active `boxed` tab stay visible on tonal themes.** On the
+  22 tonal blocks primary shares the surface's tone, so the boxed tab chip and the solid active page (`bg-primary`)
+  blended into the page, and the soft / outline active page was the palest number in the row (ink of a pale
+  primary, glyph light `#6D6C6C`). Now: solid × primary and boxed tabs → `bg-solid-primary
+  text-solid-primary-content` (as `<x-button>`, v0.26.0); soft × primary, the default and outline × primary →
+  `bg-solid-ink/15 text-solid-ink border-solid-ink/40` / `text-solid-ink border-solid-ink`. New token
+  `--pn-solid-ink` (as `--color-solid-ink`, falling back to `--pn-ink`, then primary): the ink of the solid fill,
+  emitted for every block and equal to `--pn-ink` except on the tonal ones (glyph light `#0B0B0B`). Every other
+  theme computes the same colors as before.
+
+### Fixed
+- **`<x-toggle appearance="soft" color="neutral">` fills its thumb when checked.** The thumb class
+  `peer-checked:[&_.xy-thumb]:bg-base-content` was missing from the safelist, so the checked thumb stayed
+  base-100 and the switch looked off.
+- The shipped `@sparrowhawk-labs/pinion-ui-css` dist now carries the v0.26.3 `--radius-textarea` tokens (it was not rebuilt then).
+
 ## [0.26.3] — 2026-11-07
 
 ### Fixed

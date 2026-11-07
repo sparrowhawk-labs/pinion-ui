@@ -18,7 +18,7 @@ Tabbed content panel composed of a parent `<x-tabs>` and nested `<x-tab>` childr
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `'underline' \| 'boxed' \| 'pill'` | `'underline'` | Visual style. `underline` shows a baseline rule and a colored underline under the active tab; `boxed` renders each button as a chip and fills the active one with `bg-primary`; `pill` is similar but uses a soft `bg-base-200` chip. |
+| `variant` | `'underline' \| 'boxed' \| 'pill'` | `'underline'` | Visual style. `underline` shows a baseline rule and a colored underline under the active tab; `boxed` renders each button as a chip and fills the active one with the solid primary fill (`bg-solid-primary` — primary itself except on tonal themes, see `button.md`); `pill` is similar but uses a soft `bg-base-200` chip. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Tab button height / horizontal padding / text size via `--h-field-*`, `--px-field-*`, `--text-field-*` tune tokens. Passed down to each `<x-tab>` via `@aware`. |
 | `default` | `string \| null` | `null` | `name` of the tab open on first render. When `null`, the parent picks the first child's `name` at mount via `x-init`. |
 

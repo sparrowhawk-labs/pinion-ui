@@ -47,7 +47,7 @@ class TabsComposer
     private static function tabActive(string $variant): string
     {
         return match ($variant) {
-            'boxed' => 'bg-primary text-primary-content rounded-[var(--radius-field)]',
+            'boxed' => 'bg-solid-primary text-solid-primary-content rounded-[var(--radius-field)]',
             'pill'  => 'bg-base-200 text-base-content rounded-[var(--radius-selector)]',
             default => 'text-primary border-b-2 border-primary',
         };

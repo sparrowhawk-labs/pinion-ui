@@ -25,7 +25,7 @@ Full pagination control — Prev / first / dots / numbered window / dots / last 
 | `onEachSide` | `int` | `1` | How many page numbers to show on each side of the current page before collapsing into ellipses. e.g. `onEachSide=2` with `current=10` shows `8 9 10 11 12`. Minimum `1`. |
 | `showInfo` | `bool` | `true` | Whether to render the "X 件中 Y - Z 件" info line. Hidden automatically when `total=0`. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Item height / padding / text size via `--h-field-*`, `--px-field-*`, `--text-field-*` tune tokens. Also scales the prev/next icon. |
-| `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | Color applied to the active page item. |
+| `color` | `'primary' \| 'secondary' \| 'accent' \| 'neutral' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'primary'` | Color applied to the active page item. With `primary` the active item reads the solid primary fill (`--pn-solid-primary` for solid, `--pn-solid-ink` for soft / outline — v0.26.4), so it stays visible on tonal themes; see `button.md`. |
 | `appearance` | `'solid' \| 'outline' \| 'soft'` | `'soft'` | Visual style for the active page item: `solid` = filled with `*-content` text; `outline` = white bg with colored border + text; `soft` = `15%` tint bg + colored text + `40%` border. |
 | `prevLabel` | `string` | `'前へ'` | `aria-label` for the Previous button (icon-only). |
 | `nextLabel` | `string` | `'次へ'` | `aria-label` for the Next button (icon-only). |

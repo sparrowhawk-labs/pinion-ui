@@ -16,7 +16,7 @@
         "props": { "variant": "boxed" },
         "expected": {
             "root": "w-full flex flex-wrap items-stretch gap-1",
-            "tabActive": "bg-primary text-primary-content rounded-[var(--radius-field)]",
+            "tabActive": "bg-solid-primary text-solid-primary-content rounded-[var(--radius-field)]",
             "tabIdle": "text-base-content/60 hover:text-base-content hover:bg-base-200/50 rounded-[var(--radius-field)]"
         }
     },
@@ -58,7 +58,7 @@
         "expected": {
             "root": "w-full flex flex-wrap items-stretch gap-1",
             "tabBase": "order-0 relative inline-flex items-center font-medium transition-colors cursor-pointer whitespace-nowrap h-[var(--h-field-lg)] px-[var(--px-field-lg)] text-[length:var(--text-field-lg)]",
-            "tabActive": "bg-primary text-primary-content rounded-[var(--radius-field)]"
+            "tabActive": "bg-solid-primary text-solid-primary-content rounded-[var(--radius-field)]"
         }
     },
     {

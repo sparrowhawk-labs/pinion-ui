@@ -52,6 +52,16 @@ If you depend on this package in a production app, pin to a specific patch (`^0.
 
 A non-exhaustive audit trail of intentional breaking changes during `0.x`. Defaults flipped quietly (without a release-note callout) do not appear here; they don't exist.
 
+### v0.26.4 — 2026-11-07
+
+- **Default flip — the active page of `<x-pagination>` (primary) and the active `boxed` tab follow the solid fill.**
+  Only the 22 tonal blocks look different (glyph light: the boxed chip and solid page are `#0B0B0B` instead of
+  `#EDEDED`; the soft / outline page uses `#0B0B0B` instead of `#6D6C6C`). Class strings change: `bg-primary
+  text-primary-content` → `bg-solid-primary text-solid-primary-content` (solid page, boxed tab) and
+  `bg-primary/15 text-primary border-primary/40` / `text-primary border-primary` → `bg-solid-ink/15 text-solid-ink
+  border-solid-ink/40` / `text-solid-ink border-solid-ink` (soft, default, outline). Opt back by overriding
+  `--pn-solid-primary` (see v0.26.0) and `--pn-solid-ink: var(--pn-ink)` on the theme.
+
 ### v0.26.0 — 2026-11-06
 
 - **Default flip — `<x-button>` solid × primary fills with `--pn-solid-primary`.** On the 22 tonal theme blocks

@@ -237,6 +237,9 @@ function block(theme, mode) {
     // primary itself otherwise. <x-button> solid × primary reads it.
     line('--pn-solid-primary', solid),
     line('--pn-solid-primary-content', contentFor(solid, p)),
+    // ink of the solid fill (v0.26.4): text in primary on a solid-primary tint (the active
+    // pagination page). Equals --pn-ink wherever solid == primary.
+    line('--pn-solid-ink', inkFor(solid, p)),
     line('--radius-selector', '0.5rem'),
     line('--radius-field', '0.375rem'),
     line('--radius-box', '0.5rem'),
