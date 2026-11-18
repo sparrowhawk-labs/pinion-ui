@@ -65,9 +65,26 @@ mermaid.initialize({ startOnLoad: false, theme: 'base', themeVariables: MM_THEME
   document.head.appendChild(st);
 }
 
+// ELK 配置は図ごとの選択（既定は変えない）。図の頭の設定に `layout: elk` があるページだけ、
+// 初回に読み込んで登録する。状態遷移や長い流れの図で交差が消える一方、フローチャートや
+// 構成図では悪くなる図もあるので、既定にはしない（比較: ~/project/diagram-design-eval/mmcfg/）。
+// mermaid@11 に合う版（peer ^11）に固定する。
+const MM_ELK_URL = 'https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.3/dist/mermaid-layout-elk.esm.min.mjs';
+let mmElkLoading = null;
+function mmEnsureElk(nodes) {
+  if (!nodes.some((n) => /layout["']?\s*:\s*["']?elk/.test(n.textContent))) return null;
+  if (!mmElkLoading) {
+    mmElkLoading = import(MM_ELK_URL)
+      .then((m) => mermaid.registerLayoutLoaders(m.default))
+      .catch(() => {}); // 読めなければ mermaid の既定の配置で描く
+  }
+  return mmElkLoading;
+}
+
 // 核: 渡されたノード群を 注入 → 描画 → 色置換
 window.__renderMermaidNodes = async (nodes) => {
   if (!nodes.length) return;
+  await mmEnsureElk(nodes);
   // ちらつき抑制: mermaid.run が data-processed を付けた時点ではまだ placeholder 色
   // （#f1〜f6 系の赤）のままで、色置換前に paint が挟まると赤い図が一瞬見える。
   // 置換完了までインラインの visibility で覆う（CSS 側の :not([data-processed]) と二段構え）。
